@@ -1,0 +1,124 @@
+<Anims>
+ <anim name="BUILD" root="swap_hatbrella" numframes="1000" framerate="40">
+  <frame idx="0" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="25" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="50" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="75" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="100" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="125" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="150" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="175" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="200" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="225" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="250" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="275" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="300" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="325" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="350" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="375" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="400" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="425" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="450" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="475" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="500" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="525" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="550" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="575" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="600" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="625" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="650" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="675" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="700" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="725" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="750" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="775" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="800" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="825" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="850" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="875" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="900" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="925" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="950" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+  <frame idx="975" w="154" h="365" x="12.000008" y="-53.499897">
+   <element name="hatbrella" layername="hatbrella" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="8.131783" m_ty="43.739300"/>
+  </frame>
+ </anim>
+</Anims>

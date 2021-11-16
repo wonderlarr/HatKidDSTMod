@@ -1,0 +1,85 @@
+[h1]3.0.0 - Hat Kid Reloaded Overhaul
+
+[h1]2.2.0 - The Hat Kid Update[/h1]
+- Hat Kid's Sanity Aura has been reworked. It now has a much larger radius, covering most of Hat Kid's screen at all times, but is restores much less sanity. (20 per minute)
+- Hat Kid's Sanity Aura is reduced to 50% of it's rate when she is below 50% sanity.
+- Hat Kid's Sanity Aura is disabled when she is below 15% sanity.
+- Hat Kid's Sanity Aura is doubled in sanity rate when she is sleeping.
+- Changed Hat Kid's character select quote again.
+- Hat Kid's character size has been boosted to 85% from 80%, making her easier to click by other players.
+- Hat Kid's base speed has been reduced to 135% from 150%. This will be partly offset due to the character size increase, which increases speed by somewhere around 10%, however it is still a nerf.
+- Hat Kid is now the only character allowed to use any of her hats, though I will only be applying this rule to the hats I rework, as well as the sprint hat and Kid's Hat. This means the other hats are still usable by other sfor the time being.
+- The Sprint Hat now drains 1.75x hunger (from 1.6x) by default.
+- Added mod config options to control the size and sanity rate of the new sanity aura.
+- The Kid's Hat is now crafted out of 4 Beefalo Wool, and 2 Gold. Since other's can nolonger wear it, this is here to make it less expensive to recover your base hat in case of a fire or something else that loses you the hat.
+- Updated about 100 of Hat Kid's speech lines to be unique.
+- Fixed a bug were the Brewing Hat and Ice Hat could be crafted without prototyping.
+- Fixed a bug were the Dweller Mask and Time Stop Hat could be crafted with a Prestihatitator.
+
+**[b]Undocumented Change from 2.1.4[/b]**
+- Hat Kid now loses 30 sanity per minute while not wearing a hat.
+
+
+[h1]2.1.5b Changelog[/h1]
+- The [b]Kid's Potion[/b] now properly sets the thrower as the attacker for structure damage.
+
+[h1]2.1.5 Changelog[/h1]
+- The [b]Kid's Potion[/b] now properly applies aggro to enemies.
+- Reduced the [b]Kid's Potion[/b] explosive radius to more closely match the animation.
+
+[h1]2.1.4 Changelog[/h1]
+- Nerfed the [b]Kid's Potion[/b] damage for enemies to 130 (from 150).
+- Nerfed the [b]Red Umbrella's[/b] Waterproofing to 60% (from 90).
+- Corrected the [b]Blue Umbrella's[/b] Waterproofing to 30%.
+- Nerfed the [b]Red Umbrella[/b] and [b]Blue Umbrella's[/b] summer insulation to 60 (from 120).
+- Added an alternative sound effect for the [b]Kid's Potion[/b] explosion. There is a 33% chance of the new sound happening on each explosion.
+- The [b]Kid's Potion[/b] explosion effect is now purple instead of yellow.
+- The [b]Brewing Hat[/b] is now crafted with a Prestihatinator.
+- The [b]Brewing Hat[/b] now requires 2 purple gems, replacing the 2 frog legs, to craft.
+- The [b]Ice Hat[/b] is now crafted with a Prestihatinator.
+- The [b]Dweller Mask[/b] is now crafted with the Shadow Manipulator.
+- The [b]Time Stop Hat[/b] is now crafted with the Shadow Manipulator.
+- The [b]Kid's Glasses[/b] is now crafted with a repaired Ancient Pseudoscience Station.
+- Removed the old Brewing Hat damage multiplier config entry from the config.
+- Added a new option in the config for controlling the AOE damage from the Kid's Potion.
+- [b]Hat Kid's[/b] favorite food is now [b]Pumpkin Cookies[/b]. They restore an additional 15 hunger, 52.5, compared to the default of 37.5.
+- Added a custom crafting tab for Hat Kid's items. Unlocked at all times, since you are always able to craft some items. Currently has the icon of the Kid's Hat.
+- Moved the craftable skin's to the bottom of the new crafting tab.
+- Updated Hat Kid's Dialogue.
+* [b]This update is likely the last of the 2.1 updates, the next major update is in the works. Stay tuned for 2.2![/b]
+** I am currently aware of the bug that makes Kid Potions count as World Explosions and I'm working on a fix. This will be released as 2.1.5 if I fix it before 2.2 is finished.
+
+
+[h1]2.1.3 Changelog[/h1]
+- Fixed the explosion animation of [b]Kid's Potion[/b] to match the size of the explosion itself.
+- Added an explosion sound based on the original sound from A Hat in Time.
+- Fixed a crash related to Waterproofing and the Dweller Mask and Time Stop Hat.
+
+[h1]2.1.2 Changelog[/h1]
+- Increased the amount of potions you get while crafting the Kid Potion.
+- Adjusted a small portion of Hat Kid's dialogue away from Wilson's and to original writing.
+
+[h1]2.1.1 Changelog[/h1]
+- Fixed a server-side crash involving throwing the Kid Potion
+
+[h1]2.1.0 Changelog[/h1]
+- Added the [b]Kid's Potion[/b], crafted with 1 Nitre and 1 Rope. The Kid's Potion explodes when thrown, but only works with a Brewing Hat on.
+- Reworked the [b]Brewing Hat[/b], now does nothing by itself, but enables the use of the handheld [b]Kid's Potion[/b]s that cause explosions. Causes a sanity drain effect as well.
+(I will add a second tier of potion enabled by the same hat later, possibly with extra effects)
+- Changed the Character Select quote for Hat Kid.
+- [b]Kid Hat[/b] can now be crafted without any crafting station.
+- [b]Sprint Hat[/b], and [b]Non Copyright Infringing Hat[/b] now require science tier 1. (aka. Science Machine)
+- [b]Ice Hat[/b], [b]Brewing Hat[/b], [b]Dweller Mask[/b], [b]Time Stop Hat[/b], [b]Kid Glasses[/b], and [b]Red Umbrella[/b] now require science tier 2. (aka. Alchemy Machine)
+- Reduced the [b]Dweller Mask[/b]'s water proofness, since it's a mask and not a hat, so it doesn't make sense to have a good waterproof value.
+- The [b]Kid's Hat[/b] has waterproofness once again, though reduced from it's previous state.
+
+[h1]2.0.2 Changelog[/h1]
+- Updated Mod Name to [b]Hat Kid Reloaded[/b]
+- Updated Mod Icon
+- Updated the Mod Description to depict [b]Hat Kid[/b] as a support style character, buffing her teammates and such, since that's what I aim to do as I develop her.
+- Added a minor buff to [b]Hat Kid[/b]. [Hat Kid is experienced in being soulless. Hat Kid's ghost movement speed matches that of her normal movement speed.]
+- Added a new minor nerf to [b]Hat Kid[/b]. [Hat Kid doesn't like spirits, not after meeting Queen Vanessa inside her manor. Hat Kid takes double damage from shadow creatures.]
+- Added a unique texture and name to the [b]Red Umbrella[/b] (Formerly known as the [b]Blue Umbrella 2[/b])
+- Added the [b]Dark Umbrella[/b], dealing 63 damage. Currently it shouldn't be obtainable.
+- Nerfed the [b]Red Umbrella[/b]'s default damage to 51, to match that of a tentacle spike.
+- Nerfed the [b]Blue Umbrella[/b]'s water resistance, the Red and Dark Umbrella still are unaffected.

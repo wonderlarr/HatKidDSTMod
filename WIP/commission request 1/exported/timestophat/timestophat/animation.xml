@@ -1,0 +1,246 @@
+<Anims>
+ <anim name="idle" root="timestophat" numframes="1000" framerate="40">
+  <frame idx="0" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="25" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="50" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="75" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="100" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="125" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="150" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="175" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="200" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="225" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="250" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="275" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="300" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="325" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="350" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="375" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="400" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="425" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="450" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="475" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="500" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="525" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="550" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="575" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="600" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="625" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="650" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="675" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="700" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="725" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="750" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="775" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="800" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="825" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="850" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="875" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="900" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="925" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="950" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="975" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+ </anim>
+ <anim name="idle_water" root="timestophat" numframes="1000" framerate="40">
+  <frame idx="0" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="25" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="50" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="75" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="100" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="125" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="150" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="175" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="200" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="225" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="250" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="275" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="300" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="325" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="350" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="375" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="400" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="425" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="450" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="475" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="500" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="525" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="550" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="575" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="600" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="625" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="650" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="675" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="700" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="725" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="750" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="775" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="800" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="825" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="850" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="875" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="900" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="925" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="950" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+  <frame idx="975" w="303" h="220" x="-18.746498" y="-42.134743">
+   <element name="swap_hat" layername="swap_hat_3" frame="3" z_index="2" m_a="0.705292" m_b="0.000000" m_c="0.000000" m_d="0.705292" m_tx="21.000000" m_ty="4.700000"/>
+  </frame>
+ </anim>
+</Anims>

@@ -1,0 +1,7 @@
+20:56:40 c:\anthill_jobs\job504524\fmod4\tools\fmod_designer\src\bankform.ui.h:1006 AB: Add Sound Bank
+20:56:53 ..\..\src\propertyeditor.cpp:1508 EM: Set Name
+20:57:02 c:\anthill_jobs\job504524\fmod4\tools\fmod_designer\src\bankform.ui.h:1121 AD: Move Sound Files
+20:57:07 ..\..\src\simpleeventcontroller.cpp:526 HT: Reset Build Options for Sounds
+20:57:13 ..\..\src\simpleeventcontroller.cpp:1381 IL: Set Bank
+20:57:33 ..\..\src\simpleeventcontroller.cpp:1310 IR: Remove Sounds from Playlist
+20:57:36 ..\..\src\simpleeventcontroller.cpp:1734 IS: Add Sounds to Playlist

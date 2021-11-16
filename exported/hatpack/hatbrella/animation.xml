@@ -1,0 +1,124 @@
+<Anims>
+ <anim name="idle" root="hatpack" numframes="1000" framerate="40">
+  <frame idx="0" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="25" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="50" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="75" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="100" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="125" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="150" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="175" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="200" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="225" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="250" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="275" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="300" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="325" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="350" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="375" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="400" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="425" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="450" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="475" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="500" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="525" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="550" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="575" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="600" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="625" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="650" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="675" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="700" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="725" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="750" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="775" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="800" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="825" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="850" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="875" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="900" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="925" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="950" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+  <frame idx="975" w="308" h="387" x="-26.000000" y="-98.500000">
+   <element name="wand" layername="hatpack" frame="0" z_index="1" m_a="1.000000" m_b="0.000000" m_c="0.000000" m_d="1.000000" m_tx="-128.000000" m_ty="-194.000000"/>
+  </frame>
+ </anim>
+</Anims>

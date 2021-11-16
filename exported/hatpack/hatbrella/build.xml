@@ -1,0 +1,5 @@
+<Build name="hatpack.scml">
+ <Symbol name="wand">
+  <Frame framenum="0" duration="1" image="hatpack" w="256" h="256" x="128.000000" y="128.000000"/>
+ </Symbol>
+</Build>

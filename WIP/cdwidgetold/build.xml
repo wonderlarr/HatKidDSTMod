@@ -1,0 +1,52 @@
+<Build name="cdmeter.scml">
+ <Symbol name="cdmeter">
+  <Frame framenum="0" duration="1" image="0" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="1" duration="1" image="1" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="2" duration="1" image="2" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="3" duration="1" image="3" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="4" duration="1" image="4" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="5" duration="1" image="5" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="6" duration="1" image="6" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="7" duration="1" image="7" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="8" duration="1" image="8" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="9" duration="1" image="9" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="10" duration="1" image="10" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="11" duration="1" image="11" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="12" duration="1" image="12" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="13" duration="1" image="13" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="14" duration="1" image="14" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="15" duration="1" image="15" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="16" duration="1" image="16" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="17" duration="1" image="17" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="18" duration="1" image="18" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="19" duration="1" image="19" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="20" duration="1" image="20" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="21" duration="1" image="21" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="22" duration="1" image="22" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="23" duration="1" image="23" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="24" duration="1" image="24" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="25" duration="1" image="25" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="26" duration="1" image="26" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="27" duration="1" image="27" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="28" duration="1" image="28" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="29" duration="1" image="29" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="30" duration="1" image="30" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="31" duration="1" image="31" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="32" duration="1" image="32" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="33" duration="1" image="33" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="34" duration="1" image="34" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="35" duration="1" image="35" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="36" duration="1" image="36" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="37" duration="1" image="37" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="38" duration="1" image="38" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="39" duration="1" image="39" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="40" duration="1" image="40" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="41" duration="1" image="41" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="42" duration="1" image="42" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="43" duration="1" image="43" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="44" duration="1" image="44" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="45" duration="1" image="45" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="46" duration="1" image="46" w="64" h="64" x="32.000000" y="32.000000"/>
+  <Frame framenum="47" duration="1" image="47" w="64" h="64" x="32.000000" y="32.000000"/>
+ </Symbol>
+</Build>
