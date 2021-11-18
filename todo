@@ -1,10 +1,3 @@
-finish cooldown widget -- add default option to look like game
-sprinthat particles
-make sprinthat only use hunger while moving.
-rework kidglasses.
-fix global hat effect sounds
+
 update character strings
-make umbrella's openable properly, or remove.
-modinfo updates (config and description)
 workshop page
-fix timestop hat client simspeed bug (currently the client speed only effects loaded entites around the hat)

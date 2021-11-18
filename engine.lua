@@ -1,4 +1,4 @@
---[[	Copyright © 2015 Ysovuka/Kzisor	 ]]
+--[[	Copyright ï¿½ 2015 Ysovuka/Kzisor	 ]]
 local _G = _G or GLOBAL
 local _M = _M or env
 

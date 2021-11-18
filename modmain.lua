@@ -220,10 +220,10 @@ TUNING.FUNNYMODE = GetModConfigData("funnymode")
 
 
 
-TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.HATKID = {"kidhat", "hatbrella"} 
+TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.HATKID = {"kidhat"--[[, "hatbrella"]]} 
 local mymodstartingitems = {
 	kidhat = {atlas = "images/inventoryimages/kidhat.xml"},
-	hatbrella = {atlas = "images/inventoryimages/hatbrella.xml"},
+	-- hatbrella = {atlas = "images/inventoryimages/hatbrella.xml"},
 }
 TUNING.STARTING_ITEM_IMAGE_OVERRIDE = type(TUNING.STARTING_ITEM_IMAGE_OVERRIDE) == "table" and GLOBAL.MergeMaps(TUNING.STARTING_ITEM_IMAGE_OVERRIDE, mymodstartingitems) or mymodstartingitems
 GLOBAL.STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Smol"
@@ -273,7 +273,6 @@ STRINGS.CHARACTERS.HATKID.DESCRIBE.HATKID =
 }
 
 STRINGS.NAMES.KIDHAT = "Kid's Hat"
-STRINGS.NAMES.KIDHAT2 = "Insulated Kid's Hat"
 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.KIDHAT = "It's a short and stout tophat."
 STRINGS.CHARACTERS.HATKID.DESCRIBE.KIDHAT = "What a good hat."
