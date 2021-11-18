@@ -268,7 +268,6 @@ local function OnEquip(inst, owner)
 	-- if inst.components.container ~= nil then
 		-- inst.components.container:Open(owner)
 	-- end
-	owner.maxcooldown = 90
 end
  
  
@@ -299,7 +298,6 @@ local function OnUnequip(inst, owner)
 	-- if inst.components.container ~= nil then
         -- inst.components.container:Close()
     -- end
-	owner.maxcooldown = nil
 end
 
 -- local function OnBadgeLoaded(inst, data)

@@ -134,41 +134,7 @@ Assets = {
 	
     Asset("ATLAS", "images/gui/timepiece.xml"),
     Asset("IMAGE", "images/gui/timepiece.tex"),
-	
-    Asset("ATLAS", "images/gui/face_sleep.xml"),
-    Asset("IMAGE", "images/gui/face_sleep.tex"),
-	
-    Asset("ATLAS", "images/gui/face_ready.xml"),
-    Asset("IMAGE", "images/gui/face_ready.tex"),
-	
-	Asset("ATLAS", "images/gui/cd0.xml"),
-    Asset("IMAGE", "images/gui/cd0.tex"),
-	
-	Asset("ATLAS", "images/gui/cd1.xml"),
-    Asset("IMAGE", "images/gui/cd1.tex"),
-	
-	Asset("ATLAS", "images/gui/cd2.xml"),
-    Asset("IMAGE", "images/gui/cd2.tex"),
-	
-	Asset("ATLAS", "images/gui/cd3.xml"),
-    Asset("IMAGE", "images/gui/cd3.tex"),
-	
-	Asset("ATLAS", "images/gui/cd4.xml"),
-    Asset("IMAGE", "images/gui/cd4.tex"),
-	
-	Asset("ATLAS", "images/gui/cd5.xml"),
-    Asset("IMAGE", "images/gui/cd5.tex"),
-	
-	Asset("ATLAS", "images/gui/cd6.xml"),
-    Asset("IMAGE", "images/gui/cd6.tex"),
-	
-	Asset("ATLAS", "images/gui/cd7.xml"),
-    Asset("IMAGE", "images/gui/cd7.tex"),
-	
-	Asset("ATLAS", "images/gui/cd8.xml"),
-    Asset("IMAGE", "images/gui/cd8.tex"),
-	
-	Asset("ANIM", "anim/cdmeter.zip"),
+
 }
 
 modimport("engine.lua") --Keyhandler engine

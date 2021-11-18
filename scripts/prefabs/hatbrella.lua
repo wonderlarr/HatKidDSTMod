@@ -49,39 +49,6 @@ local function OnUnequip(inst, owner)
     -- end
 end
  
-local function Closefn(inst)
-	local owner = inst.components.inventoryitem:GetGrandOwner()
-
-	-- inst:RemoveTag("open")
-	
-	-- Change the texture
-	-- owner.AnimState:OverrideSymbol("swap_object", "swap_hatbrella", "hatbrella")
-	-- inst.components.inventoryitem.imagename = "hatbrella"
-	-- inst.components.inventoryitem.atlasname = "images/inventoryimages/hatbrella.xml"
-	
-	-- And the properties
-	-- inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_SMALL * 0.5)
-	-- inst.components.weapon:SetDamage(34)
-	-- inst.components.insulator:SetInsulation(TUNING.INSULATION_SMALL * 0.5)
-end
-
-local function Openfn(inst)
-	local owner = inst.components.inventoryitem:GetGrandOwner()
-	
-	-- inst:AddTag("open")
-	
-	-- Change the texture
-	-- owner.AnimState:OverrideSymbol("swap_object", "swap_hatbrellaopen", "hatbrellaopen")
-	-- inst.components.inventoryitem.imagename = "hatbrellaopen"
-	-- inst.components.inventoryitem.atlasname = "images/inventoryimages/hatbrellaopen.xml"
-	
-	-- And the properties
-	-- inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_SMALL * 3)
-	-- inst.components.weapon:SetDamage(17)
-	-- inst.components.insulator:SetInsulation(TUNING.INSULATION_SMALL * 2)
-end
- 
- 
 local function OnUse(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 	

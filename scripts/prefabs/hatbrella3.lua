@@ -4,10 +4,6 @@ local assets =
     Asset("ANIM", "anim/swap_hatbrella3.zip"),
     Asset("ATLAS", "images/inventoryimages/hatbrella3.xml"),
     Asset("IMAGE", "images/inventoryimages/hatbrella3.tex"),
-    Asset("ANIM", "anim/hatbrellaopen.zip"),
-    Asset("ANIM", "anim/swap_hatbrellaopen.zip"),
-    Asset("ATLAS", "images/inventoryimages/hatbrellaopen.xml"),
-    Asset("IMAGE", "images/inventoryimages/hatbrellaopen.tex"),
 }
 
 local prefabs =
