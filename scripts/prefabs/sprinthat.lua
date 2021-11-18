@@ -22,21 +22,25 @@ end
 
 local function onLocomote(inst)
 	local isrunning = inst.components.locomotor.isrunning or inst.components.locomotor.wantstorun
+	local hat = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD) -- known as inst throughout the rest of this file
+	
 
 	if sprinting ~= isrunning then -- This is here so we don't retrigger the sound event when we aren't doing anything, so it only triggers if the state is different
 
 		sprinting = isrunning
 
-		if inst.components.hunger then
-			inst.components.hunger.burnrate = TUNING.SPRINTHAT_HUNGER_BURNRATE
-		end
 
 		if sprinting then
 			MakeDirt(inst) --To start us off
 
-			inst.sprintfx = inst:DoPeriodicTask(0.25/2, function(inst)
+			inst.sprintfx = inst:DoPeriodicTask(0.25/2, function(inst) -- 2 every footstep ( i think )
 				MakeDirt(inst)
 			end)
+
+			if inst.components.hunger then
+				inst.components.hunger.burnratemodifiers:SetModifier(hat, TUNING.SPRINTHAT_HUNGER_BURNRATE)
+				-- inst.components.hunger.burnratemodifiers:SetModifier(hat, 10)
+			end
 
 			if TUNING.SPRINTHAT_SFX then
 				inst.SoundEmitter:PlaySound("sprinthat/sound/sprintloop", "sprintloop")
@@ -45,7 +49,7 @@ local function onLocomote(inst)
 		elseif not sprinting then --If we aren't sprinting
 
 			if inst.components.hunger then
-				inst.components.hunger.burnrate = 1
+				inst.components.hunger.burnratemodifiers:RemoveModifier(hat)
 			end
 
 			if inst.sprintfx then
@@ -111,6 +115,10 @@ local function OnUnequip(inst, owner)
 	owner:RemoveEventCallback("locomote", onLocomote)
 	if owner.sprintfx then
 		owner.sprintfx:Cancel()
+	end
+
+	if owner.components.hunger then
+		owner.components.hunger.burnratemodifiers:RemoveModifier(inst)
 	end
 
 	if TUNING.SPRINTHAT_SFX then

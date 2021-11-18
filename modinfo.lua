@@ -163,8 +163,8 @@ configuration_options =
 			{description = "x0.5", data = 0.5},
 			{description = "x0.6", data = 0.6},
 			{description = "x0.7", data = 0.7},
-			{description = "x0.8 (Default)", data = 0.8},
-			{description = "x0.85", data = 0.85},
+			{description = "x0.8", data = 0.8},
+			{description = "x0.85 (Default)", data = 0.85},
 			{description = "x0.9", data = 0.9},
 			{description = "x1", data = 1},
 			{description = "x1.25", data = 1.25},
@@ -180,7 +180,7 @@ configuration_options =
 			{description = "x9", data = 9},
 			{description = "x10", data = 10},
 		},
-		default = 0.8,
+		default = 0.85,
 	},
 	
 		{
@@ -429,8 +429,8 @@ configuration_options =
 			{description = "x1", data = 1},
 			{description = "x1.25", data = 1.25},
 			{description = "x1.5", data = 1.5},
-			{description = "x1.6 (Default)", data = 1.6},
-			{description = "x1.75", data = 1.75},
+			{description = "x1.6s", data = 1.6},
+			{description = "x1.75 (Default)", data = 1.75},
 			{description = "x2", data = 2},
 			{description = "x3", data = 3},
 			{description = "x4", data = 4},
@@ -441,13 +441,13 @@ configuration_options =
 			{description = "x9", data = 9},
 			{description = "x10", data = 10},
 		},
-		default = 1.6,
+		default = 1.75,
 	},
 
 	{
 		name = "sprinthatsfx",
 		label = "Sprint SFX",
-		hover = "Whether or not moving while wearing the sprint hat will produce a sound effect. It can be disabled if you find it annoying, but it effects all players.",
+		hover = "Whether or not moving while wearing the sprint hat will produce a sound effect. It can be disabled if you find it annoying.",
 		options =
 		{
 			{description = "Disabled", data = false},
@@ -636,6 +636,35 @@ configuration_options =
 			{description = "10", data = 10},
 		},
 		default = 3,
+	},
+
+	{
+		name = "polartemp",
+		label = "Temp Reduction",
+		hover = "Determines how much the Ice Hat cools players inside the radius down by when activated.",
+		options =
+		{
+			{description = "None", data = 0},
+			{description = "-2.5", data = 2.5},
+			{description = "-5", data = 5},
+			{description = "-10", data = 10},
+			{description = "-15 (Default)", data = 15},
+			{description = "-20", data = 20},
+			{description = "-25", data = 25},
+			{description = "-30", data = 30},
+			{description = "-35", data = 35},
+			{description = "-40", data = 40},
+			{description = "-50", data = 50},
+			{description = "-60", data = 60},
+			{description = "-70", data = 70},
+			{description = "-80", data = 80},
+			{description = "-90", data = 90},
+			{description = "-100", data = 100},
+
+
+
+		},
+		default = -15,
 	},
 
 	{

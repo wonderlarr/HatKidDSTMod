@@ -231,7 +231,9 @@ TUNING.BREWINGHAT_RADIUS  = GetModConfigData("brewradius")
 --Polar
 TUNING.POLARHAT_COOLDOWN = GetModConfigData("polarcooldown")
 TUNING.POLARHAT_LEVEL = GetModConfigData("polarlevel")
+TUNING.POLARHAT_TEMP = GetModConfigData("polartemp")
 TUNING.POLARHAT_RADIUS = GetModConfigData("polarradius")
+
 
 --Dweller
 TUNING.DWELLERMASK_COOLDOWN = GetModConfigData("dwellercooldown")
@@ -709,7 +711,7 @@ AddComponentPostInit("combat", function(self)
     end
   end
 )
----
+
 
 -- Character Skins -- Removed, will be added later as a customization option before you spawn in.
 

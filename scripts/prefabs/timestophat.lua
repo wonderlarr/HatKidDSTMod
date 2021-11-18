@@ -25,7 +25,7 @@ local function SlowNear(inst)
 	local owner = inst.components.inventoryitem.owner
 	local pt = owner:GetPosition()
 	local range = 32  -- range of spell	
-	local nags = { "character", "timeslowed" }
+	local nags = { "character", "player" }
 	local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, nil)
 	for _,ent in ipairs(targets) do
 		-- if ent.components.combat and ent.components.locomotor then
@@ -33,14 +33,15 @@ local function SlowNear(inst)
 			-- ent.OPeriod = ent.components.combat.min_attack_period
 			-- ent.components.locomotor:SetExternalSpeedMultiplier(ent, "timeslow_speed_mod", 0.5)
 			-- ent.components.combat:SetAttackPeriod(ent.OPeriod * 2)
-			-- ent:AddTag("timeslowed")
+			ent:AddTag("timeslowed")
 			SetLocalTimeScale(nil, ent, TUNING.TIMESTOPHAT_TIMESCALE)
 			if ent.slowed ~= nil then
 				ent.slowed:Cancel()
 			end
 			
-			-- The task below clears the nightvision, hopefully set in the config
-			ent.slowed = ent:DoTaskInTime(.25, function(ent)
+			-- The task below clears the TIME SLOW
+			ent.slowed = ent:DoTaskInTime(.1, function(ent)
+				ent:RemoveTag("timeslowed")
 				SetLocalTimeScale(nil, ent, 1)
 				ent.slowed = nil
 			end)
@@ -73,7 +74,6 @@ local function OnUse(inst)
 	local rechargeable = inst.components.rechargeable
 	
 	if not rechargeable:IsCharged() and rechargeable:GetRechargeTime() == TUNING.TIMESTOPHAT_COOLDOWN then -- If charging and the time is the cooldown
-		local cooldown = owner.components.timer:GetTimeLeft("hat_cooldown")
 		-- If in cooldown
 		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
 			inst.components.useableitem:StopUsingItem()
@@ -84,8 +84,8 @@ local function OnUse(inst)
 		
 	elseif not inst.components.timer:TimerExists("timehat_duration") then
 		--Start duration cooldown
-		inst.components.timer:StartTimer("timehat_duration", 12)
-		rechargeable:Discharge(12)
+		inst.components.timer:StartTimer("timehat_duration", TUNING.TIMESTOPHAT_DURATION)
+		rechargeable:Discharge(TUNING.TIMESTOPHAT_DURATION)
 		
 		-- Add tag
 		-- owner:AddTag("timeimmune")
@@ -103,7 +103,7 @@ local function OnUse(inst)
 		-- ent.components.locomotor:SetExternalSpeedMultiplier(ent, "timeslow_speed_mod", 0.5)
 		-- owner.components.combat:SetAttackPeriod(owner.OPeriod / 2)
 		-- Slow code
-		inst.TimeSlow = inst:DoPeriodicTask(0.1, SlowNear, nil)
+		inst.TimeSlow = inst:DoPeriodicTask(0, SlowNear, nil)
 		
 	end
 end
@@ -126,10 +126,6 @@ local function OnStopUse(inst)
 		-- SetLocalTimeScale(nil, owner, 1)
 		-- owner.OPeriod = owner.components.combat.min_attack_period	
 		-- owner.components.combat:SetAttackPeriod(owner.OPeriod * 2)
-
-		
-		-- Return entities to normal
-		-- SpeedUp(inst)
 	
 		-- Start cooldown timer
 		--owner.components.timer:StartTimer("hat_cooldown", (60 * 0.1))

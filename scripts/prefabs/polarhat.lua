@@ -166,40 +166,50 @@ local function OnUse(inst)
 		
 		-- owner:AddChild(fx)
 
-	owner:DoTaskInTime(0.5, function(owner)
-		FakeReveal(inst)
-		inst.components.useableitem:StopUsingItem()
-		
-		owner:RemoveTag("alwaysblock")
-		
-		for i, v in ipairs(AllPlayers) do
-			local distSq = v:GetDistanceSqToInst(owner)
-			local k = math.max(0, math.min(1, distSq / 400))
-			local intensity = k * 0.75 * (k - 2) + 0.75 --easing.outQuad(k, 1, -1, 1)
-			if intensity > 0 then
-				v:ShakeCamera(CAMERASHAKE.FULL, .7, .02, intensity / 2)
+		owner:DoTaskInTime(0.5, function(owner)
+			FakeReveal(inst)
+			inst.components.useableitem:StopUsingItem()
+			
+			owner:RemoveTag("alwaysblock")
+			
+			for i, v in ipairs(AllPlayers) do
+				local distSq = v:GetDistanceSqToInst(owner)
+				local k = math.max(0, math.min(1, distSq / 400))
+				local intensity = k * 0.75 * (k - 2) + 0.75 --easing.outQuad(k, 1, -1, 1)
+				if intensity > 0 then
+					v:ShakeCamera(CAMERASHAKE.FULL, .7, .02, intensity / 2)
+				end
 			end
-		end
-		
-		SpawnPrefab("icecloud").Transform:SetPosition(owner.Transform:GetWorldPosition())
-		owner.SoundEmitter:PlaySound("icestomp/sound/stomp")
-		
-		if not owner.components.health:IsDead() and not owner:HasTag("playerghost") then
-			local pt = owner:GetPosition()
-			local range = TUNING.POLARHAT_RADIUS
-			local tags = { "monster", "hostile", "smallcreature", "insect", "animal", "largecreature", "character" }
-			local nags = { "player", "ghost", "noauradamage", "notraptrigger" }
-			local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, tags)	
-			for _,ent in ipairs(targets) do
-				if ent.components.freezable ~= nil then
-					ent.components.freezable:AddColdness(TUNING.POLARHAT_LEVEL)
-					ent.components.freezable:SpawnShatterFX()
+			
+			SpawnPrefab("icecloud").Transform:SetPosition(owner.Transform:GetWorldPosition())
+			owner.SoundEmitter:PlaySound("icestomp/sound/stomp")
+			
+			if not owner.components.health:IsDead() and not owner:HasTag("playerghost") then
+				local pt = owner:GetPosition()
+				local range = TUNING.POLARHAT_RADIUS
+				local tags = { "monster", "hostile", "smallcreature", "insect", "animal", "largecreature", "character" }
+				local nags = { "player", "ghost", "noauradamage", "notraptrigger" }
+				local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, tags)	
+				for _,ent in ipairs(targets) do
+					if ent.components.freezable ~= nil then
+						ent.components.freezable:AddColdness(TUNING.POLARHAT_LEVEL)
+						ent.components.freezable:SpawnShatterFX()
+
+					end
+				end
+
+				local tags = { "player" }
+				local nags = { "ghost" }
+				local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, tags)	
+				for _,ent in ipairs(targets) do
+					if ent.components.temperature ~= nil then
+						--stuff
+						ent.components.temperature:SetTemperature(ent.components.temperature:GetCurrent() - TUNING.POLARHAT_TEMP)
 					end
 				end
 			end
 		end)
 	end
-	
 end
 
 local function OnStopUse(inst)
