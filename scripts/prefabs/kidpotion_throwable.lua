@@ -4,6 +4,9 @@ local kidpotion_assets = {
 	
     Asset("ATLAS", "images/inventoryimages/kidpotion.xml"),
     Asset("IMAGE", "images/inventoryimages/kidpotion.tex"),
+
+    Asset("SOUNDPACKAGE", "sound/brewinghat.fev"),
+    Asset("SOUND", "sound/brewinghat.fsb"),
 }
 
 local holder = {
@@ -11,9 +14,7 @@ local holder = {
 }
 
 local kidpotion_prefabs = {
-    "reticule",
-    "reticuleaoe",
-    "reticuleaoeping",
+    
 } 
 
 --I heavily dislike how I wrote this code, but it works so I'm gonna leave it for now.

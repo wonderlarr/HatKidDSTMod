@@ -8,6 +8,9 @@ local assets=
 	
 	Asset("IMAGE", resolvefilepath("images/cc/dwellervision.tex")),
 	Asset("IMAGE", "images/inventoryimages/dwellermask.tex"),
+
+	Asset("SOUNDPACKAGE", "sound/dwellermask.fev"),
+    Asset("SOUND", "sound/dwellermask.fsb"),
 }
 
 local prefabs = 

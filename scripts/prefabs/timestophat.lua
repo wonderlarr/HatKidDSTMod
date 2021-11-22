@@ -224,14 +224,14 @@ end
 local function OnCharged(inst)
 	local rechargeable = inst.components.rechargeable
 	
-	print(inst.components.rechargeable:GetRechargeTime())
+	-- print(inst.components.rechargeable:GetRechargeTime())
 end
 
 
 local function OnDischarged(inst)
 	local rechargeable = inst.components.rechargeable
 	
-	print(rechargeable:GetRechargeTime())
+	-- print(rechargeable:GetRechargeTime())
 end
  
 local function fn(Sim) 

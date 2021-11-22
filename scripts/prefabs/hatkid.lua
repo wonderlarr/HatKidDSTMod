@@ -81,6 +81,59 @@ end
 -- 	end
 -- end
 
+local function MakeDirt(inst)
+	local scale = 0.4
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local dirt = SpawnPrefab("sprint_puff")
+	dirt.Transform:SetPosition(x, y, z)
+	dirt.Transform:SetScale(scale, scale, scale)
+end
+
+local hat = nil
+
+local function CleanSprintParticles(inst)
+	inst.sprintfx = nil
+end
+
+local function onLocomote(inst)
+	local isrunning = inst.components.locomotor.wantstorun
+
+	if not TheWorld.ismastersim and inst.replica.inventory then
+
+		hat = inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+
+	elseif inst.components.inventory then
+
+		hat = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+
+	end
+	
+
+	if hat then
+		print("DEBUG: if ".. tostring(hat.prefab) .. " then \nDEBUG: running: " .. tostring(isrunning)) -- DEBUG PRINT
+		print("DEBUG: " .. tostring(inst.sprintfx))
+
+		if isrunning and hat.prefab == "sprinthat" then
+			print("DEBUG: if true == " .. tostring(isrunning) .. " and sprinthat == " .. tostring(hat.prefab) .. " then") -- DEBUG PRINT
+			-- MakeDirt(inst) --To start us off
+
+			if not inst.sprintfx then
+				
+				
+				inst.sprintfx = inst:DoTaskInTime(0.25/2, function(inst)
+					inst.sprintfx:Cancel()
+					inst.sprintfx = nil
+					MakeDirt(inst)
+					print("DEBUG: inst.sprintfx = nil") -- DEBUG PRINT
+				end)
+
+			end
+		end
+		
+	end
+end
+
+
 local function OnEquip(inst)
 	--Remove hat sanity drain upon wearing something in the head slot
 	local head = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
@@ -92,6 +145,7 @@ end
 
 local function OnUnequip(inst, data)
 	-- Detect if the slot is empty, apply a big sanity drain
+
     if data.eslot == EQUIPSLOTS.HEAD then
 		inst.components.sanity.dapperness = (-TUNING.DAPPERNESS_MED)
     end
@@ -99,7 +153,6 @@ end
 
 -- When loading the character
 local function onload(inst)
-	-- inst:ListenForEvent("hatcooldown", oncooldown)
     -- inst:ListenForEvent("ms_respawnedfromghost", onbecamehuman)
     -- inst:ListenForEvent("ms_becameghost", onbecameghost)
 	
@@ -131,6 +184,9 @@ local function onnewspawn(inst)
 	SpawnWithStuff(inst)
 end
 
+
+
+
 -- Server and client
 -- Thanks Kzisor/Ysovuka for the Key Handling code.
 -- Key Handling guide https://forums.kleientertainment.com/forums/topic/63754-tutorial-character-transformation/
@@ -155,7 +211,9 @@ local common_postinit = function(inst)
 	--Client Only
 
 	-- if not TheWorld.ismastersim then
-	-- 	inst:ListenForEvent("hatcooldowndirty", OnHatCooldownDirty)
+	inst:ListenForEvent("locomote", onLocomote)
+	inst:ListenForEvent("UpdateSprintParticles", onLocomote)
+	inst:ListenForEvent("CleanSprintParticles", CleanSprintParticles)
 	-- end
 	
 end

@@ -1,7 +1,7 @@
 name = "Hat Kid Reloaded (Internal)" -- Edit this title depending on branch.
 description = "The Overhaul update! So much to do, and so much to try!"
 author = "Skylarr"
-version = "3.0.0b15"
+version = "3.0.0b16"
 
 forumthread = ""
 

@@ -5,6 +5,9 @@ local assets=
 
     Asset("ATLAS", "images/inventoryimages/sprinthat.xml"),
     Asset("IMAGE", "images/inventoryimages/sprinthat.tex"),
+
+	Asset("SOUNDPACKAGE", "sound/sprinthat.fev"),
+    Asset("SOUND", "sound/sprinthat.fsb"),
 }
 
 local prefabs = 
@@ -13,13 +16,6 @@ local prefabs =
 
 local sprinting = nil
 
-local function MakeDirt(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local dirt = SpawnPrefab("dirt_puff")
-	dirt.Transform:SetPosition(x, y, z)
-	dirt.Transform:SetScale(0.5, 0.5, 0.5)
-end
-
 local function onLocomote(inst)
 	local isrunning = inst.components.locomotor.isrunning or inst.components.locomotor.wantstorun
 	local hat = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD) -- known as inst throughout the rest of this file
@@ -27,35 +23,31 @@ local function onLocomote(inst)
 
 	if sprinting ~= isrunning then -- This is here so we don't retrigger the sound event when we aren't doing anything, so it only triggers if the state is different
 
-		sprinting = isrunning
-
+		sprinting = isrunning -- this is a hacky way of tracking state changes,
 
 		if sprinting then
-			MakeDirt(inst) --To start us off
 
-			inst.sprintfx = inst:DoPeriodicTask(0.25/2, function(inst) -- 2 every footstep ( i think )
-				MakeDirt(inst)
-			end)
-
-			if inst.components.hunger then
+			--Modify hunger rate
+			if inst.components.hunger and hat.components.fueled then
 				inst.components.hunger.burnratemodifiers:SetModifier(hat, TUNING.SPRINTHAT_HUNGER_BURNRATE)
-				-- inst.components.hunger.burnratemodifiers:SetModifier(hat, 10)
+				hat.components.fueled:StartConsuming()
+				print(TUNING.TOPHAT_PERISHTIME)
 			end
 
+			--Start the sound loop
 			if TUNING.SPRINTHAT_SFX then
 				inst.SoundEmitter:PlaySound("sprinthat/sound/sprintloop", "sprintloop")
 			end
 
-		elseif not sprinting then --If we aren't sprinting
+		elseif not sprinting then
 
-			if inst.components.hunger then
+			-- Remove modified hunger rate 
+			if inst.components.hunger and hat.components.fueled then
 				inst.components.hunger.burnratemodifiers:RemoveModifier(hat)
-			end
-
-			if inst.sprintfx then
-				inst.sprintfx:Cancel()
+				hat.components.fueled:StopConsuming()
 			end
 			
+			--Cancel sound loop, and play the release sfx
 			if TUNING.SPRINTHAT_SFX then
 				inst.SoundEmitter:KillSound("sprintloop")
 				inst.SoundEmitter:PlaySound("sprinthat/sound/sprintrelease")
@@ -87,6 +79,7 @@ local function OnEquip(inst, owner)
 	sprinting = nil
 	-- Config controls if we do the sound or not
 	owner:ListenForEvent("locomote", onLocomote)
+	owner:PushEvent("UpdateSprintParticles")
 
 	--Hat Badge Slot
 	-- if inst.components.container ~= nil then
@@ -113,12 +106,19 @@ local function OnUnequip(inst, owner)
 	sprinting = nil
 
 	owner:RemoveEventCallback("locomote", onLocomote)
+	
 	if owner.sprintfx then
-		owner.sprintfx:Cancel()
+		owner.sprintfx:Cancel() -- If we remove this the game crashes. Simple as that. 
+		                        -- Don't remove it. I don't feel like dealing with it.
+								-- Someone else can fix it if they want but I'm not doing it.
 	end
 
 	if owner.components.hunger then
 		owner.components.hunger.burnratemodifiers:RemoveModifier(inst)
+	end
+
+	if inst.components.fueled then
+		inst.components.fueled:StopConsuming()
 	end
 
 	if TUNING.SPRINTHAT_SFX then
@@ -127,6 +127,10 @@ local function OnUnequip(inst, owner)
 			owner.SoundEmitter:PlaySound("sprinthat/sound/sprintrelease")
 		end)
 	end
+
+	owner:PushEvent("CleanSprintParticles") -- Stops particles properly on unequip. Particles still work sometimes without this but this makes it consistent and prevents glitches.
+	-- If you wanna know what it does, check out the listener in hatkid.lua
+	
 
 end
  
@@ -170,6 +174,10 @@ local function fn(Sim)
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
+
+	inst:AddComponent("fueled")
+	inst.components.fueled.fueltype = FUELTYPE.USAGE
+	inst.components.fueled:InitializeFuelLevel( TUNING.TOPHAT_PERISHTIME ) -- 3840 is tophat perish time
 	
 	inst.components.equippable.walkspeedmult = TUNING.SPRINTHAT_SPEED_MULT
  

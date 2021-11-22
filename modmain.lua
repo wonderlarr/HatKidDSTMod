@@ -16,15 +16,15 @@
           |___/                     |___/                           
 
 
-	To be clear, I AM NOT GOOD AT CODING! However, I am good at using search engines, and copy pasting.
+	To be clear, I AM NOT GOOD AT CODING! However, I am good at using search engines, logic, and copy pasting.
 
 	A lot of the stuff written in this mod is absolutely disgusting, but it WORKS, and that's what matters.
 
 	If you are for whatever reason using part of my mod to learn something, or as an example, feel free, but also try to improve it, 
-	improving already existing code is a lot of what I did in this mod, be it code that was already in the mod, or snippets I borrowed from other people.
+	improving already existing code is a lot of what I did in this mod, be it code that was already in the mod, or snippets I "borrowed" from somewhere else.
 
 	Also, if you're looking to help me with my mod in any way, be it textures or code, or you just wanna chat,  join my super secret private and epic discord https://discord.gg/ysJRjaVUmu
-	and make sure to give me an @, (I should just be named Skylarr).
+	and make sure to give me an @. I'm Skylarr#9203.
 ]]
 
 PrefabFiles = {
@@ -61,6 +61,7 @@ PrefabFiles = {
 	
 	--fx prefabs
 	"brewinghat_explode",
+	"sprint_puff",
 	-- "hkr_aoerange",
 	"hkr_icerange",
 	"icecloud",
@@ -104,39 +105,17 @@ Assets = {
 	
     Asset( "IMAGE", "bigportraits/hatkid_none.tex" ),
     Asset( "ATLAS", "bigportraits/hatkid_none.xml" ),
-	
-	Asset("SOUNDPACKAGE", "sound/kidpotion.fev"),
-    Asset("SOUND", "sound/kidpotion.fsb"),
 
 	Asset( "IMAGE", "images/gui/craftingtabicon.tex" ),
 	Asset( "ATLAS", "images/gui/craftingtabicon.xml" ),
 	
-	Asset("SOUNDPACKAGE", "sound/icestomp.fev"),
-    Asset("SOUND", "sound/icestomp.fsb"),
+	-- Asset("ANIM", "anim/kidhat.zip"),
+    -- Asset("ANIM", "anim/kidhat_swap.zip"), 
 
-	Asset("SOUNDPACKAGE", "sound/sprinthat.fev"),
-    Asset("SOUND", "sound/sprinthat.fsb"),
-	
-	Asset("SOUNDPACKAGE", "sound/dwellermask.fev"),
-    Asset("SOUND", "sound/dwellermask.fsb"),
-	
-	Asset("SOUNDPACKAGE", "sound/timestophat.fev"),
-    Asset("SOUND", "sound/timestophat.fsb"),
-	
-	Asset("SOUNDPACKAGE", "sound/brewinghat.fev"),
-    Asset("SOUND", "sound/brewinghat.fsb"),
-	
-	Asset("ANIM", "anim/kidhat.zip"),
-    Asset("ANIM", "anim/kidhat_swap.zip"), 
-
-    Asset("ATLAS", "images/inventoryimages/kidhat.xml"),
-    Asset("IMAGE", "images/inventoryimages/kidhat.tex"),
-	
-    Asset("ATLAS", "images/gui/timepiece.xml"),
-    Asset("IMAGE", "images/gui/timepiece.tex"),
+    -- Asset("ATLAS", "images/inventoryimages/kidhat.xml"),
+    -- Asset("IMAGE", "images/inventoryimages/kidhat.tex"),
 
 }
-
 modimport("engine.lua") --Keyhandler engine
 
 -- modimport("scripts/libs/skins_api.lua") -- Skins API, waiting for another update here.
@@ -146,7 +125,7 @@ Load "chatinputscreen"
 Load "consolescreen"
 Load "textedit"
 
---TUNING STUFF ----------- THESE ARE CONFIG VALUES! SET THESE UP!
+--TUNING STUFF
 TUNING.HATKID_ABILITYKEY = GetModConfigData("hatkid_polarhatkey")
 
 GLOBAL.STRINGS.SKIN_NAMES.hatkid_none = "Hat Kid" -- (why is this here lol)
@@ -497,16 +476,16 @@ local HatTab = AddRecipeTab("Hats", 998, "images/gui/craftingtabicon.xml", "craf
 
 
 hatbrellarecipe = AddRecipe("hatbrella", 
-{Ingredient("spear", 1), Ingredient("silk",4), Ingredient("twigs",6)},
+{Ingredient("spear", 1), Ingredient("silk",4), Ingredient("goldnugget",3)}, --
 HatTab,
-TECH.SCIENCE_ONE, 
+TECH.SCIENCE_ONE, --Required crafting level, this one is sciene machine
+nil, --placer, prefab MUST be a placer prefab or the game will crash
 nil, 
-nil, 
-nil, 
-nil, 
-"hatkidcrafter", 
-"images/inventoryimages/hatbrella.xml", 
-"hatbrella.tex")
+nil, --not sure what this one does
+nil, --amount to give (nil is one, but 1 is one as well, not sure about the difference)
+"hatkidcrafter", -- Characters need this tag in their common_postinit to craft this item
+"images/inventoryimages/hatbrella.xml", 	--xml path
+"hatbrella.tex") --tex name
 
 
 
@@ -514,9 +493,9 @@ nil,
 
 
 hatbrella2recipe = AddRecipe("hatbrella2", 
-{Ingredient("hatbrella", 1, "images/inventoryimages/hatbrella.xml"), Ingredient("tentaclespike",1), Ingredient("nightmarefuel",4)},
+{Ingredient("hatbrella", 1, "images/inventoryimages/hatbrella.xml"), Ingredient("tentaclespike",1), Ingredient("nightmarefuel",5)},
 HatTab,
-TECH.SCIENCE_TWO, 
+TECH.MAGIC_TWO, --prestihatitator
 nil, 
 nil, 
 nil, 
@@ -531,7 +510,7 @@ nil,
 kidhatrecipe = AddRecipe("kidhat", 
 {Ingredient("beefalowool", 4), Ingredient("goldnugget", 2)},
 HatTab,
-TECH.NONE, 
+TECH.NONE, -- no crafting station
 nil, 
 nil, 
 nil, 
@@ -563,7 +542,7 @@ nil,
 polarhatrecipe = AddRecipe("polarhat", 
 {Ingredient("winterhat", 1), Ingredient("ice", 10), Ingredient("bluegem",2)},
 HatTab,
-TECH.MAGIC_TWO, 
+TECH.MAGIC_TWO, -- Prestihatitator
 nil, 
 nil, 
 nil, 
@@ -578,7 +557,7 @@ nil,
 brewinghatrecipe = AddRecipe("brewinghat", 
 {Ingredient("strawhat", 1), Ingredient("slurtleslime", 4), Ingredient("purplegem",1)},
 HatTab,
-TECH.MAGIC_TWO, 
+TECH.MAGIC_THREE, --shadow manipulator
 nil, 
 nil, 
 nil, 
@@ -592,7 +571,7 @@ nil,
 
 
 dwellermaskrecipe = AddRecipe("dwellermask", 
-{Ingredient("wormlight", 2), Ingredient("papyrus", 2), Ingredient("nightmarefuel",4)},
+{Ingredient("wormlight", 1), Ingredient("papyrus", 2), Ingredient("nightmarefuel",4)},
 HatTab,
 TECH.MAGIC_THREE, 
 nil, 
@@ -610,7 +589,7 @@ nil,
 timestophatrecipe = AddRecipe("timestophat", 
 {Ingredient("moonglass", 8), Ingredient("silk", 12), Ingredient("greengem",1)},
 HatTab,
-TECH.MOON_ALTAR_TWO, 
+TECH.MOON_ALTAR_TWO, --celestial altar
 nil, 
 nil, 
 nil, 
@@ -620,15 +599,19 @@ nil,
 "timestophat.tex")
 
 
+-- Sort keys determine how recipes are ordered in the crafting menu.
+-- Lower values are shown first.
 hatbrellarecipe.sortkey = 0
 hatbrella2recipe.sortkey = 1
 
+-- Leave room in case I wanna add any more craftables before the hats easily.
 kidhatrecipe.sortkey = 5
 sprinthatrecipe.sortkey = 6
 brewinghatrecipe.sortkey = 7
 polarhatrecipe.sortkey = 8
 dwellermaskrecipe.sortkey = 9
 timestophatrecipe.sortkey = 10
+-- timepiece.sortkey = 15
 
 
 --*****************************************************************************************************************************************--
@@ -805,21 +788,105 @@ end)
 -- Actually, no more. Damage nerf is enough.
 
 -- AddStategraphPostInit("wilson", function(sg)
--- 	local _attack = sg.states["attack"] -- This specifies which state we're adding to
+-- 	local _run_start = sg.states["run_start"] -- This specifies which state we're adding to
+-- 	local _onenter = _run_start.onenter
+-- 	_run_start.onenter = function(inst,...)
+-- 		_onenter(inst,...)
+-- 		local hat = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HEAD)
+-- 		if hat.prefab == "sprinthat" then
+
+-- 			local x, y, z = inst.Transform:GetWorldPosition()
+-- 			local dirt = SpawnPrefab("dirt_puff")
+-- 			dirt.Transform:SetPosition(x, y, z)
+-- 			dirt.Transform:SetScale(0.5, 0.5, 0.5)
+
+-- 			inst.footstep = inst:DoPeriodicTask(0.25/2, function(inst)
+-- 				local x, y, z = inst.Transform:GetWorldPosition()
+-- 				local dirt = SpawnPrefab("dirt_puff")
+-- 				dirt.Transform:SetPosition(x, y, z)
+-- 				dirt.Transform:SetScale(0.5, 0.5, 0.5)
+-- 			end)
+			
+-- 		end
+-- 	end
+-- end)
+
+-- AddStategraphPostInit("wilson", function(sg)
+-- 	local _run_stop = sg.states["run_stop"] -- This specifies which state we're adding to
+-- 	local _onenter = _run_stop.onenter
+-- 	_run_stop.onenter = function(inst,...)
+-- 		_onenter(inst,...)
+-- 		-- local hat = inst.components.inventory_replica:GetEquippedItem(GLOBAL.EQUIPSLOTS.HEAD)
+-- 		-- if hat.prefab == "sprinthat" then
+-- 			if inst.footstep then
+-- 				inst.footstep:Cancel()
+-- 			end
+			
+-- 		-- end
+-- 	end
+-- end)
+
+-- ---------
+
+-- AddStategraphPostInit("wilson_client", function(sg)
+-- 	local _run_start = sg.states["run_start"] -- This specifies which state we're adding to
+-- 	local _onenter = _run_start.onenter
+-- 	_run_start.onenter = function(inst,...)
+-- 		_onenter(inst,...)
+-- 		local hat = inst.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HEAD)
+-- 		if hat.prefab == "sprinthat" then
+
+-- 			local x, y, z = inst.Transform:GetWorldPosition()
+-- 			local dirt = SpawnPrefab("dirt_puff")
+-- 			dirt.Transform:SetPosition(x, y, z)
+-- 			dirt.Transform:SetScale(0.5, 0.5, 0.5)
+
+-- 			inst.footstep = inst:DoPeriodicTask(0.25/2, function(inst)
+-- 				local x, y, z = inst.Transform:GetWorldPosition()
+-- 				local dirt = SpawnPrefab("dirt_puff")
+-- 				dirt.Transform:SetPosition(x, y, z)
+-- 				dirt.Transform:SetScale(0.5, 0.5, 0.5)
+-- 			end)
+			
+-- 		end
+-- 	end
+-- end)
+
+-- AddStategraphPostInit("wilson_client", function(sg)
+-- 	local _run_stop = sg.states["run_stop"] -- This specifies which state we're adding to
+-- 	local _onenter = _run_stop.onenter
+-- 	_run_stop.onenter = function(inst,...)
+-- 		_onenter(inst,...)
+-- 		-- local hat = inst.components.inventory_replica:GetEquippedItem(GLOBAL.EQUIPSLOTS.HEAD)
+-- 		-- if hat.prefab == "sprinthat" then
+-- 			if inst.footstep then
+-- 				inst.footstep:Cancel()
+-- 			end
+			
+-- 		-- end
+-- 	end
+-- end)
+
+-- AddStategraphPostInit("wilson_client", function(sg) -- This adds code to the client side stategraph, but it's only used if the client has Movement Prediction enabled.
+-- 	local _attack = sg.states["attack"]
 -- 	local _onenter = _attack.onenter
 -- 	_attack.onenter = function(inst,...)
 -- 		_onenter(inst,...)
--- 		local hand = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
--- 		if inst.prefab == "hatkid" and hand == nil then
--- 			-- if not hand and hand.prefab == nil then
--- 				-- inst:ClearBufferedAction() -- Cancel the attack after the initial animation.
--- 				inst.sg:RemoveStateTag("abouttoattack")
---                 inst:ClearBufferedAction()
---                 inst.sg:GoToState("idle", true)
--- 				-- inst.sg:GoToState("idle", true) -- Simulate getting hit, can't really do the weird jumping she does in the game anyway.
--- 				-- inst.components.combat:BlankOutAttacks(2)
--- 				inst.components.talker:Say(GetString(inst, "ACTIONFAIL_GENERIC")) -- Normally I encourage using preset lines in your speech file, but I'm lazy.
--- 			-- end
+-- 		if inst.prefab == "wilba" then --Change it here again!
+-- 			local speed = 2 -- Make sure to set your speed here as well, so the client knows.
+-- 			inst.sg:SetTimeout(inst.sg.timeout/speed)
+-- 			inst.AnimState:SetDeltaTimeMultiplier(speed)
+-- 			for k, v in pairs(_attack.timeline) do
+-- 				v.time = v.time/speed
+-- 			end
 -- 		end
+-- 		return
+-- 	end
+-- 	local _onexit = _attack.onexit
+-- 	_attack.onexit = function(inst,...)
+-- 		if inst.prefab == "wilba" then  -- Final change here, to your characters prefab again.
+-- 			inst.AnimState:SetDeltaTimeMultiplier(1)
+-- 		end
+-- 		return _onexit(inst,...)
 -- 	end
 -- end)

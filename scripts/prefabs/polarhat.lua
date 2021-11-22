@@ -5,6 +5,9 @@ local assets=
 
     Asset("ATLAS", "images/inventoryimages/polarhat.xml"),
     Asset("IMAGE", "images/inventoryimages/polarhat.tex"),
+
+	Asset("SOUNDPACKAGE", "sound/icestomp.fev"),
+    Asset("SOUND", "sound/icestomp.fsb"), 
 }
 
 --Scratch the previous stuff, new idea
@@ -204,7 +207,9 @@ local function OnUse(inst)
 				for _,ent in ipairs(targets) do
 					if ent.components.temperature ~= nil then
 						--stuff
-						ent.components.temperature:SetTemperature(ent.components.temperature:GetCurrent() - TUNING.POLARHAT_TEMP)
+						ent.components.temperature:SetTemperature(ent.components.temperature:GetCurrent() + TUNING.POLARHAT_TEMP) -- For whatever reason temp values are REVERSED?! 
+																																	-- We have to add to it in order to make the in game temperature go down
+						print( tostring( ent.components.temperature:GetCurrent() ) )
 					end
 				end
 			end

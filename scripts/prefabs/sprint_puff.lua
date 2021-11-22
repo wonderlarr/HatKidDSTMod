@@ -1,9 +1,7 @@
 local assets =
 {
-    Asset("ANIM", "anim/brewinghat_explode.zip"),
-
-    Asset("SOUNDPACKAGE", "sound/kidpotion.fev"),
-    Asset("SOUND", "sound/kidpotion.fsb"),
+    -- Asset("ANIM", "anim/sprint_puff.zip"),
+    Asset("ANIM", "anim/smoke_puff_small.zip"),
 }
 
 local function MakeExplosion(data)
@@ -20,15 +18,15 @@ local function MakeExplosion(data)
         inst.entity:AddSoundEmitter()
 
         inst.Transform:SetFromProxy(proxy.GUID)
-		
-		inst.Transform:SetScale(2, 2, 2)
 
-        inst.AnimState:SetBank("brewinghat_explode")
-        inst.AnimState:SetBuild("brewinghat_explode")
-        inst.AnimState:PlayAnimation("small")
+        -- inst.AnimState:SetBank("sprint_puff")
+        -- inst.AnimState:SetBuild("sprint_puff")
+        -- inst.AnimState:PlayAnimation("puff_90s")
+        inst.AnimState:SetBank("small_puff")
+        inst.AnimState:SetBuild("smoke_puff_small")
+        inst.AnimState:PlayAnimation("puff")
+        inst.AnimState:SetAddColour(1, 1, 1, 1)
 		-- inst.AnimState:SetDeltaTimeMultiplier(2)
-
-        inst.SoundEmitter:PlaySound("kidpotion/sound/explode")
 
         inst:ListenForEvent("animover", inst.Remove)
     end
@@ -57,7 +55,7 @@ local function MakeExplosion(data)
         end
 
         inst.persists = false
-        inst:DoTaskInTime(1, inst.Remove)
+        inst:DoTaskInTime(1, inst.Remove) -- Remove after 1 second. This will only apply to the dedicated server, or host.
 
         return inst
     end
@@ -66,4 +64,4 @@ local function MakeExplosion(data)
 end
 
 
-return Prefab("brewinghat_explode", MakeExplosion(), assets)
+return Prefab("sprint_puff", MakeExplosion(), assets)
