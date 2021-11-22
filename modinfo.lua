@@ -373,6 +373,32 @@ configuration_options =
 	},	
 	
 	{
+		name = "sprinthatdurability",
+		label = "Durability",
+		hover = "How long the sprinthat lasts while sprinting. Durabiltiy does not reduce while standing still and wearing the Sprint Hat.",
+		options =
+		{
+			{description = "Forever", data = false},
+			{description = "1 minute", data = 60},
+			{description = "5 minutes", data = 5 * 60},
+			{description = "10 minutes", data = 10 * 60},
+			{description = "15 minutes", data = 15 * 60},
+			{description = "30 minutes", data = 30 * 60},
+			{description = "45 minutes", data = 45 * 60},
+			{description = "60 minutes", data = 60 * 60},
+			{description = "75 minutes", data = 75 * 60},
+			{description = "90 minutes (Default)", data = 90 * 60},
+			{description = "2 hours", data = 2 * 60 * 60},
+			{description = "3 hours", data = 3 * 60 * 60},
+			{description = "4 hours", data = 4 * 60 * 60},
+			{description = "6 hours", data = 6 * 60 * 60},
+			{description = "12 hours", data = 12 * 60 * 60},
+			{description = "Forever", data = false},
+		},
+		default = 90 * 60,
+	},
+
+	{
 		name = "sprinthatspeedmult",
 		label = "Speed Multiplier",
 		hover = "How much faster the Sprint Hat makes Hat Kid run.",

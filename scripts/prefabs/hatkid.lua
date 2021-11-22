@@ -110,21 +110,16 @@ local function onLocomote(inst)
 	
 
 	if hat then
-		print("DEBUG: if ".. tostring(hat.prefab) .. " then \nDEBUG: running: " .. tostring(isrunning)) -- DEBUG PRINT
-		print("DEBUG: " .. tostring(inst.sprintfx))
 
 		if isrunning and hat.prefab == "sprinthat" then
-			print("DEBUG: if true == " .. tostring(isrunning) .. " and sprinthat == " .. tostring(hat.prefab) .. " then") -- DEBUG PRINT
 			-- MakeDirt(inst) --To start us off
 
 			if not inst.sprintfx then
-				
 				
 				inst.sprintfx = inst:DoTaskInTime(0.25/2, function(inst)
 					inst.sprintfx:Cancel()
 					inst.sprintfx = nil
 					MakeDirt(inst)
-					print("DEBUG: inst.sprintfx = nil") -- DEBUG PRINT
 				end)
 
 			end

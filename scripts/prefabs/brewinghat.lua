@@ -110,6 +110,10 @@ local function OnStopUse(inst)
 		-- If not in cooldown, or doing nothing, put it on cooldown!
 		
 		rechargeable:Discharge(TUNING.BREWINGHAT_COOLDOWN) -- Cooldown
+
+		if inst.components.fueled then
+			inst.components.fueled:DoDelta(-1, owner)
+		end
 	end
 end
 
@@ -165,6 +169,14 @@ local function fn(Sim)
 	inst:AddComponent("useableitem")
     inst.components.useableitem:SetOnUseFn(OnUse)
     inst.components.useableitem:SetOnStopUseFn(OnStopUse)
+
+	-- inst:AddComponent("fueled")
+	-- -- inst.components.fueled.fueltype = FUELTYPE.USAGE
+	-- inst.components.fueled:InitializeFuelLevel( 25 ) -- add tuning
+
+	inst:AddComponent("finiteuses")
+    inst.components.finiteuses:SetMaxUses(25)
+    inst.components.finiteuses:SetUses(25)
 	
 	inst:ListenForEvent("AbilityKey", KeybindUse)
 

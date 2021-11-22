@@ -121,12 +121,16 @@ local function OnUse(inst)
 		--Deal with timings
 		inst.components.timer:StartTimer("dwellmask_duration", TUNING.DWELLERMASK_DURATION) -- Internal timer, used for the actual ability.
 		inst.components.rechargeable:Discharge(TUNING.DWELLERMASK_DURATION) -- Visual Timer
-		
+
+		if inst.components.fueled then
+			inst.components.fueled:StartConsuming()
+		end
+
 		--inst:PushEvent("down") -- WHY DID I DO THIS BEFORE? WHAT WAS I THINKING THIS IS LITERALLY JUST A WORSE WAY TO CALL A FUNCTION
 		
 		DwellerAbility(inst)
 
-		inst.components.equippable.dapperness = -TUNING.DAPPERNESS_LARGE
+		inst.components.equippable.dapperness = -TUNING.DAPPERNESS_MED
 		
 		--Then play sounds
 		inst.SoundEmitter:PlaySound("dwellermask/sound/activate")
@@ -158,7 +162,13 @@ local function OnStopUse(inst)
 		
 		-- owner.components.timer:StartTimer("hat_cooldown", 6)
 		
+		-- inst.components.fueled:DoDelta(-1, owner) -- Use once
+
 		rechargeable:Discharge(TUNING.DWELLERMASK_COOLDOWN) -- Cooldown
+
+		if inst.components.fueled then
+			inst.components.fueled:StopConsuming()
+		end
 
 		inst.SoundEmitter:PlaySound("dwellermask/sound/deactivate")
 		inst.SoundEmitter:KillSound("dwellermaskloop")
@@ -288,7 +298,7 @@ local function fn(Sim)
     inst:AddComponent("timer")
 
     local function ontimerdone(inst)
-		inst:AddTag("disabledwell")
+		inst:AddTag("disabledwell") -- This sucks but I wrote this code like 8 months ago and don't wanna fix it.
 		inst.components.useableitem:StopUsingItem()
 	end
 
@@ -309,8 +319,11 @@ local function fn(Sim)
     inst.components.equippable:SetOnUnequip( OnUnequip )
 	
 	inst:AddComponent("rechargeable")
-	-- inst.components.rechargeable:SetOnDischargedFn(OnDischarged)
-	-- inst.components.rechargeable:SetOnChargedFn(OnCharged)
+
+	inst:AddComponent("fueled")
+	-- inst.components.fueled.fueltype = FUELTYPE.USAGE
+	inst.components.fueled:InitializeFuelLevel( 300 ) -- add tuning
+	
 
 	-- inst:AddComponent("container")
     -- inst.components.container:WidgetSetup("hkr_badgeslot")

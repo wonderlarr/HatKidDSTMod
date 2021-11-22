@@ -82,6 +82,10 @@ local function fn()
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
 
+    inst:AddComponent("finiteuses")
+    inst.components.finiteuses:SetMaxUses(100)
+    inst.components.finiteuses:SetUses(100)
+
     inst:AddComponent("useableitem")
 	inst.components.useableitem:SetOnUseFn(OnUse)
 	

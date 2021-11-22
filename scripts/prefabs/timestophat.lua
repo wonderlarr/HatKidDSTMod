@@ -86,6 +86,10 @@ local function OnUse(inst)
 		--Start duration cooldown
 		inst.components.timer:StartTimer("timehat_duration", TUNING.TIMESTOPHAT_DURATION)
 		rechargeable:Discharge(TUNING.TIMESTOPHAT_DURATION)
+
+		if inst.components.fueled then
+			inst.components.fueled:StartConsuming()
+		end
 		
 		-- Add tag
 		-- owner:AddTag("timeimmune")
@@ -130,7 +134,11 @@ local function OnStopUse(inst)
 		-- Start cooldown timer
 		--owner.components.timer:StartTimer("hat_cooldown", (60 * 0.1))
 		rechargeable:Discharge(TUNING.TIMESTOPHAT_COOLDOWN)
-		
+
+		if inst.components.fueled then
+			inst.components.fueled:StopConsuming()
+		end
+
 		--Remove tag
 		-- owner:RemoveTag("timeimmune")
 		
@@ -297,6 +305,10 @@ local function fn(Sim)
 	inst:AddComponent("rechargeable")
 	inst.components.rechargeable:SetOnDischargedFn(OnDischarged)
 	inst.components.rechargeable:SetOnChargedFn(OnCharged)
+
+	inst:AddComponent("fueled")
+	-- inst.components.fueled.fueltype = FUELTYPE.USAGE
+	inst.components.fueled:InitializeFuelLevel( 300 ) -- add tuning
 	
 	-- inst:AddComponent("container")
     -- inst.components.container:WidgetSetup("hkr_badgeslot")

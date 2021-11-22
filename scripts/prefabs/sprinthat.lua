@@ -31,7 +31,6 @@ local function onLocomote(inst)
 			if inst.components.hunger and hat.components.fueled then
 				inst.components.hunger.burnratemodifiers:SetModifier(hat, TUNING.SPRINTHAT_HUNGER_BURNRATE)
 				hat.components.fueled:StartConsuming()
-				print(TUNING.TOPHAT_PERISHTIME)
 			end
 
 			--Start the sound loop
@@ -174,12 +173,11 @@ local function fn(Sim)
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
+	inst.components.equippable.walkspeedmult = TUNING.SPRINTHAT_SPEED_MULT
 
 	inst:AddComponent("fueled")
 	inst.components.fueled.fueltype = FUELTYPE.USAGE
-	inst.components.fueled:InitializeFuelLevel( TUNING.TOPHAT_PERISHTIME ) -- 3840 is tophat perish time
-	
-	inst.components.equippable.walkspeedmult = TUNING.SPRINTHAT_SPEED_MULT
+	inst.components.fueled:InitializeFuelLevel( TUNING.SPRINTHAT_DURABILITY ) -- 90 minutes by default
  
     return inst
 end

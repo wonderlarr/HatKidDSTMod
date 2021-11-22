@@ -73,7 +73,6 @@ local function FakeReveal(inst)
 	local owner = inst.components.inventoryitem.owner
 	
 	owner:DoTaskInTime(0, function(owner)
-		inst:RemoveTag("inuse")
 		owner.sg:GoToState("idle")
 		owner.AnimState:PlayAnimation("idle")
 		owner.AnimState:ClearOverrideSymbol("swap_frozen")
@@ -95,8 +94,6 @@ end
 
 local function FakeFreeze(inst)
 	local owner = inst.components.inventoryitem.owner
-	
-	inst:AddTag("inuse")
 
 	if owner.components.pinnable ~= nil and owner.components.pinnable:IsStuck() then
 		owner.components.pinnable:Unstick()
@@ -207,9 +204,9 @@ local function OnUse(inst)
 				for _,ent in ipairs(targets) do
 					if ent.components.temperature ~= nil then
 						--stuff
-						ent.components.temperature:SetTemperature(ent.components.temperature:GetCurrent() + TUNING.POLARHAT_TEMP) -- For whatever reason temp values are REVERSED?! 
+						ent.components.temperature:SetTemperature(ent.components.temperature:GetCurrent() - TUNING.POLARHAT_TEMP) -- For whatever reason temp values are REVERSED?! 
 																																	-- We have to add to it in order to make the in game temperature go down
-						print( tostring( ent.components.temperature:GetCurrent() ) )
+						-- print( tostring( ent.components.temperature:GetCurrent() ) )
 					end
 				end
 			end
@@ -229,7 +226,11 @@ local function OnStopUse(inst)
 		-- If not in cooldown, or doing nothing, put it on cooldown!
 		
 		rechargeable:Discharge(TUNING.POLARHAT_COOLDOWN) -- We use the rechargeable component to track cooldowns
-		
+
+		if inst.components.fueled then
+			inst.components.fueled:DoDelta(-1, owner) -- Use once
+		end
+			
 	end
 end
 
@@ -251,10 +252,6 @@ local function OnEquip(inst, owner)
 	if owner:HasTag("player") then
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Hide("HEAD_HAT")
-	end
-	
-	if inst:HasTag("inuse") then
-		inst:RemoveTag("inuse")
 	end
 	
 	-- if owner.components.timer ~= nil then
@@ -381,6 +378,14 @@ local function fn(Sim)
 	inst:AddComponent("rechargeable")
 	-- inst.components.rechargeable:SetOnDischargedFn(OnDischarged)
 	inst.components.rechargeable:SetOnChargedFn(OnCharged)
+
+	-- inst:AddComponent("fueled")
+	-- -- inst.components.fueled.fueltype = FUELTYPE.USAGE
+	-- inst.components.fueled:InitializeFuelLevel( 20 ) -- add tuning
+
+	inst:AddComponent("finiteuses")
+    inst.components.finiteuses:SetMaxUses(20)
+    inst.components.finiteuses:SetUses(20)
 
 	-- inst:AddComponent("container")
     -- inst.components.container:WidgetSetup("hkr_badgeslot")

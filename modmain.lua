@@ -161,11 +161,13 @@ TUNING.HATKID_AURASIZE = GetModConfigData("hatkidaurasize")
 --Hat stuff
 
 --Sprint (old but still used stuff)
+TUNING.SPRINTHAT_DURABILITY = GetModConfigData("sprinthatdurability")
 TUNING.SPRINTHAT_SPEED_MULT = GetModConfigData("sprinthatspeedmult")
 TUNING.SPRINTHAT_HUNGER_BURNRATE = GetModConfigData("sprinthathungerburnrate")
 TUNING.SPRINTHAT_SFX = GetModConfigData("sprinthatsfx")
 
 --Brewing
+-- TUNING.BREWINGHAT_DURABILITY = GetModConfigData("brewdurability")
 TUNING.BREWINGHAT_COOLDOWN = GetModConfigData("brewcooldown")
 TUNING.BREWINGHAT_CHARGETIME = GetModConfigData("brewcharge")
 TUNING.BREWINGHAT_SLOWDOWN  = GetModConfigData("brewslow")
@@ -174,6 +176,7 @@ TUNING.BREWINGHAT_RADIUS  = GetModConfigData("brewradius")
 
 
 --Polar
+-- TUNING.POLARHAT_DURABILITY = GetModConfigData("polardurability")
 TUNING.POLARHAT_COOLDOWN = GetModConfigData("polarcooldown")
 TUNING.POLARHAT_LEVEL = GetModConfigData("polarlevel")
 TUNING.POLARHAT_TEMP = GetModConfigData("polartemp")
@@ -181,12 +184,14 @@ TUNING.POLARHAT_RADIUS = GetModConfigData("polarradius")
 
 
 --Dweller
+-- TUNING.DWELLERMASK_DURABILITY = GetModConfigData("dwellerdurability")
 TUNING.DWELLERMASK_COOLDOWN = GetModConfigData("dwellercooldown")
 TUNING.DWELLERMASK_DURATION = GetModConfigData("dwelleractive")
 TUNING.DWELLERMASK_LINGER = GetModConfigData("dwellerlinger")
 TUNING.DWELLERMASK_RADIUS = GetModConfigData("dwellerradius")
 
 --Time Stop
+-- TUNING.TIMESTOPHAT_DURABILITY = GetModConfigData("timestopdurability")
 TUNING.TIMESTOPHAT_COOLDOWN = GetModConfigData("timestopcooldown")
 TUNING.TIMESTOPHAT_DURATION = GetModConfigData("timestopactive")
 TUNING.TIMESTOPHAT_TIMESCALE = GetModConfigData("timestopscale")

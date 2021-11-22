@@ -42,6 +42,10 @@ local function OnEquip(inst, owner)
 		owner.AnimState:Hide("HEAD_HAT")
 	end
 
+	if inst.components.fueled then
+		inst.components.fueled:StartConsuming()
+	end
+
 	inst:AddComponent("sanityaura")
 	inst.components.sanityaura.max_distsq = TUNING.HATKID_AURASIZE
     inst.components.sanityaura.aura = -TUNING.HATKID_AURARATE
@@ -63,6 +67,10 @@ local function OnUnequip(inst, owner)
 	if owner:HasTag("player") then
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Hide("HEAD_HAT")
+	end
+
+	if inst.components.fueled then
+		inst.components.fueled:StopConsuming()
 	end
 
 	inst:RemoveComponent("sanityaura")
@@ -126,10 +134,14 @@ local function fn(Sim)
 	 
     inst:AddComponent("equippable")
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
-	inst.components.equippable.dapperness = TUNING.DAPPERNESS_TINY
+	inst.components.equippable.dapperness = TUNING.DAPPERNESS_TINY * 1.5
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
-	
+
+	inst:AddComponent("fueled")
+	-- inst.components.fueled.fueltype = FUELTYPE.USAGE
+	inst.components.fueled:InitializeFuelLevel( 7200 ) -- add tuning
+
 	-- inst:AddComponent("insulator")
     -- inst.components.insulator:SetWinter()
     -- inst.components.insulator:SetInsulation(TUNING.INSULATION_TINY * TUNING.KIDHAT_INSULATION)
