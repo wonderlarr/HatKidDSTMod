@@ -52,7 +52,13 @@ end
 local function OnUse(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 	
-	owner.components.inventory:Equip(SpawnPrefab("hatbrellaopen"))
+    local brella = SpawnPrefab("hatbrellaopen")
+    
+    if brella.components.fueled and inst.components.finiteuses then
+        brella.components.fueled:SetPercent(inst.components.finiteuses:GetPercent())
+    end
+
+	owner.components.inventory:Equip(brella)
 
 	inst:DoTaskInTime(0, inst.Remove)
 end
@@ -125,8 +131,8 @@ local function fn()
     inst.components.equippable:SetOnUnequip( OnUnequip )
 
     inst:AddComponent("finiteuses")
-    inst.components.finiteuses:SetMaxUses(100)
-    inst.components.finiteuses:SetUses(100)
+    inst.components.finiteuses:SetMaxUses(300)
+    inst.components.finiteuses:SetUses(300)
 	-- Maybe translate the amount of uses to the open umbrella when opened, and only go down if it's raining on that end. Otherwise treat as a normal weapon.
     -- We may have to translate numbers between finiteuses and fueled, but it should be okay.
 

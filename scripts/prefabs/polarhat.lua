@@ -227,8 +227,12 @@ local function OnStopUse(inst)
 		
 		rechargeable:Discharge(TUNING.POLARHAT_COOLDOWN) -- We use the rechargeable component to track cooldowns
 
-		if inst.components.fueled then
-			inst.components.fueled:DoDelta(-1, owner) -- Use once
+		-- if inst.components.fueled then
+		-- 	inst.components.fueled:DoDelta(-1, owner) -- Use once
+		-- end
+
+		if inst.components.finiteuses then
+			inst.components.finiteuses:Use(1)
 		end
 			
 	end

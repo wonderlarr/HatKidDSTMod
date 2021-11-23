@@ -9,7 +9,13 @@ local assets =
 local function OnUse(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 	
-	owner.components.inventory:Equip(SpawnPrefab("hatbrella2open"))
+    local brella = SpawnPrefab("hatbrella2open")
+    
+    if brella.components.fueled and inst.components.finiteuses then
+        brella.components.fueled:SetPercent(inst.components.finiteuses:GetPercent())
+    end
+
+	owner.components.inventory:Equip(brella)
 
 	inst:DoTaskInTime(0, inst.Remove)
 end
@@ -79,12 +85,12 @@ local function fn()
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
 
-    inst:AddComponent("finiteuses")
-    inst.components.finiteuses:SetMaxUses(100)
-    inst.components.finiteuses:SetUses(100)
-
     inst:AddComponent("useableitem")
 	inst.components.useableitem:SetOnUseFn(OnUse)
+
+    inst:AddComponent("finiteuses")
+    inst.components.finiteuses:SetMaxUses(200)
+    inst.components.finiteuses:SetUses(200)
 	
 	MakeHauntableLaunch(inst)
 	

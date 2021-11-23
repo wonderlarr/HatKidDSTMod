@@ -111,8 +111,8 @@ local function OnStopUse(inst)
 		
 		rechargeable:Discharge(TUNING.BREWINGHAT_COOLDOWN) -- Cooldown
 
-		if inst.components.fueled then
-			inst.components.fueled:DoDelta(-1, owner)
+		if inst.components.finiteuses then
+			inst.components.finiteuses:Use(1)
 		end
 	end
 end

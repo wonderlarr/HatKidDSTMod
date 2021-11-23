@@ -17,7 +17,13 @@ local assets =
 local function OnUse(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 	
-	owner.components.inventory:Equip(SpawnPrefab("hatbrella2"))
+    local brella = SpawnPrefab("hatbrella2")
+    
+    if brella.components.finiteuses and inst.components.fueled then
+        brella.components.finiteuses:SetPercent(inst.components.fueled:GetPercent())
+    end
+
+	owner.components.inventory:Equip(brella)
 	
 	inst:DoTaskInTime(0, inst.Remove)
 end
@@ -35,11 +41,19 @@ local function OnEquip(inst, owner)
 	owner.AnimState:OverrideSymbol("swap_object", "swap_hatbrella2open", "hatbrella2open")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
+
+    if inst.components.fueled then
+        inst.components.fueled:StartConsuming()
+    end
 end
   
 local function OnUnequip(inst, owner)
     owner.AnimState:Hide("ARM_carry")
     owner.AnimState:Show("ARM_normal")
+
+    if inst.components.fueled then
+        inst.components.fueled:StopConsuming()
+    end
 end
  
 local function fn()
@@ -82,19 +96,23 @@ local function fn()
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
 
-    inst:AddComponent("finiteuses")
-    inst.components.finiteuses:SetMaxUses(100)
-    inst.components.finiteuses:SetUses(100)
+    -- inst:AddComponent("finiteuses")
+    -- inst.components.finiteuses:SetMaxUses(100)
+    -- inst.components.finiteuses:SetUses(100)
 
     inst:AddComponent("useableitem")
 	inst.components.useableitem:SetOnUseFn(OnUse)
 	
-	inst:AddComponent("waterproofer")
+    inst:AddComponent("fueled")
+    inst.components.fueled.fueltype = FUELTYPE.USAGE
+    inst.components.fueled:InitializeFuelLevel(8640)
+
+    inst:AddComponent("waterproofer")
     inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_HUGE)
-	
+
     inst:AddComponent("insulator")
-    inst.components.insulator:SetSummer()
     inst.components.insulator:SetInsulation(TUNING.INSULATION_MED)
+    inst.components.insulator:SetSummer()
 	
 	MakeHauntableLaunch(inst)
 	

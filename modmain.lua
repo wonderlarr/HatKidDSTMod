@@ -207,7 +207,7 @@ TUNING.FUNNYMODE = GetModConfigData("funnymode")
 TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.HATKID = {"kidhat"--[[, "hatbrella"]]} 
 local mymodstartingitems = {
 	kidhat = {atlas = "images/inventoryimages/kidhat.xml"},
-	-- hatbrella = {atlas = "images/inventoryimages/hatbrella.xml"},
+	-- hatbrella = {atlas = "images/inventoryimages/hatbrella.xml"}, -- Removed for balance
 }
 TUNING.STARTING_ITEM_IMAGE_OVERRIDE = type(TUNING.STARTING_ITEM_IMAGE_OVERRIDE) == "table" and GLOBAL.MergeMaps(TUNING.STARTING_ITEM_IMAGE_OVERRIDE, mymodstartingitems) or mymodstartingitems
 GLOBAL.STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Smol"
@@ -480,13 +480,15 @@ STRINGS.CHARACTERS.WARLY.DESCRIBE.HATBRELLA2OPEN = "I will try to remember not t
 local HatTab = AddRecipeTab("Hats", 998, "images/gui/craftingtabicon.xml", "craftingtabicon.tex", "hatkidcrafter")
 
 
+--function(self, name, ingredients, tab, level, placer_or_more_data, min_spacing, nounlock, numtogive, builder_tag, atlas, image, testfn, product, build_mode, build_distance)
+
 hatbrellarecipe = AddRecipe("hatbrella", 
-{Ingredient("spear", 1), Ingredient("silk",4), Ingredient("goldnugget",3)}, --
+{Ingredient("spear", 1), Ingredient("silk",2), Ingredient("goldnugget",2)}, --
 HatTab,
 TECH.SCIENCE_ONE, --Required crafting level, this one is sciene machine
-nil, --placer, prefab MUST be a placer prefab or the game will crash
-nil, 
-nil, --not sure what this one does
+nil, --placer prefab, or additional data if needed. placer prefab must be valid or the client will crash.
+nil, --minimum spacing, presumably from other buildings/entity's
+nil, --whether the recipe is unlockable or not. nil is default, true means unlearnable/no unlock.
 nil, --amount to give (nil is one, but 1 is one as well, not sure about the difference)
 "hatkidcrafter", -- Characters need this tag in their common_postinit to craft this item
 "images/inventoryimages/hatbrella.xml", 	--xml path
