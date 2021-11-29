@@ -14,13 +14,14 @@ local holder = {
 }
 
 local kidpotion_prefabs = {
-    
+    "burntground"
 } 
 
 --I heavily dislike how I wrote this code, but it works so I'm gonna leave it for now.
 
 local function DoExplode(self)
     local explosiverange = TUNING.BREWINGHAT_RADIUS
+    -- local explosiverange = 10
 	-- Sounds taken and combined from A Hat in Time, I used ChemicalLowLevel.ogg and Glass_Shatter_Big.ogg. They sounded similar enough lol
 	-- Sounds moved to the explosion prefab
  
@@ -33,12 +34,15 @@ local function DoExplode(self)
 
     for i, v in ipairs(ents) do
         if v ~= self.inst and v:IsValid() and not v:IsInLimbo() then
-            if v.components.workable ~= nil and v.components.workable:CanBeWorked() and v:HasTag("structure") then
-                v.components.workable:WorkedBy(holder, 2)
-				v:PushEvent("attacked", { attacker = holder, damage = 0})
-			elseif v.components.workable ~= nil and v.components.workable:CanBeWorked() then
-				v.components.workable:WorkedBy(holder, self.buildingdamage)
-				v:PushEvent("attacked", { attacker = holder, damage = 0})
+
+            if v.components.workable ~= nil and v.components.workable:CanBeWorked() then
+                if v:HasTag("structure") then -- If we're a structure
+                    v.components.workable:WorkedBy(holder, 2)
+                    v:PushEvent("attacked", { attacker = holder, damage = 0})
+                else -- Otherwise
+                    v.components.workable:WorkedBy(holder, self.buildingdamage)
+                    v:PushEvent("attacked", { attacker = holder, damage = 0})
+                end
             end
 
            if v:IsValid() and not v:IsInLimbo() then
@@ -58,13 +62,19 @@ end
  
 local function OnExplodeFn(inst)
 	SpawnPrefab("brewinghat_explode").Transform:SetPosition(inst.Transform:GetWorldPosition())
+
+    local mark = SpawnPrefab("burntground")
+        mark.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        mark.Transform:SetScale(1.5, 1.5, 1.5)
+
+
     DoExplode(inst.components.explosive)
+
+    holder:PushEvent("PotionThrown")
 end
  
 local function OnHitSomething(inst, attacker, target)
-	if inst:HasTag("NOCLICK") then
-		inst.components.explosive:OnBurnt()
-	end
+    inst.components.explosive:OnBurnt()
 end
 
 
@@ -91,14 +101,9 @@ end
 local function onunequip(inst, owner)
     owner.AnimState:Hide("ARM_carry")
     owner.AnimState:Show("ARM_normal")
-	
-	inst:DoTaskInTime(0, function()
-		if not inst:HasTag("NOCLICK") then
-			inst:Remove()
-		end
-	end)
 
     local head = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+    
     if head and head.prefab == "brewinghat" then
         head:PushEvent("prevequip")
     end
@@ -110,29 +115,27 @@ local function onthrown(inst)
 	if holder ~= nil and holder:HasTag("hatkid") then
 		local headslot = holder.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
 	
-		if headslot ~= nil and headslot.prefab == "brewinghat" then
-			inst:AddTag("NOCLICK")
-			inst.persists = false
-			
-			inst.AnimState:PlayAnimation("spin_loop", true)
+        inst:AddTag("NOCLICK")
+        inst.persists = false
+        
+        inst.AnimState:PlayAnimation("spin_loop", true)
 
-			inst.entity:AddDynamicShadow()
-			inst.DynamicShadow:SetSize(1, 1)
-			
-			inst.Physics:SetMass(1)
-			inst.Physics:SetCapsule(0.2, 0.2)
-			inst.Physics:SetFriction(0)
-			inst.Physics:SetDamping(0)
-			inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
-			inst.Physics:ClearCollisionMask()
-			inst.Physics:CollidesWith(COLLISION.WORLD)
-			inst.Physics:CollidesWith(COLLISION.OBSTACLES)
-			inst.Physics:CollidesWith(COLLISION.ITEMS)
-			
-			if holder.SoundEmitter ~= nil then
-				holder.SoundEmitter:PlaySound("brewinghat/sound/throw")
-			end
-		end
+        inst.entity:AddDynamicShadow()
+        inst.DynamicShadow:SetSize(1, 1)
+        
+        inst.Physics:SetMass(1)
+        inst.Physics:SetCapsule(0.2, 0.2)
+        inst.Physics:SetFriction(0)
+        inst.Physics:SetDamping(0)
+        inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
+        inst.Physics:ClearCollisionMask()
+        inst.Physics:CollidesWith(COLLISION.WORLD)
+        inst.Physics:CollidesWith(COLLISION.OBSTACLES)
+        inst.Physics:CollidesWith(COLLISION.ITEMS)
+        
+        if holder.SoundEmitter ~= nil then
+            holder.SoundEmitter:PlaySound("brewinghat/sound/throw")
+        end
 	end
 end
 

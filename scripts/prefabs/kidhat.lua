@@ -139,7 +139,7 @@ local function fn(Sim)
     inst.components.equippable:SetOnUnequip( OnUnequip )
 
 	inst:AddComponent("fueled")
-	-- inst.components.fueled.fueltype = FUELTYPE.USAGE
+	inst.components.fueled.fueltype = FUELTYPE.USAGE
 	inst.components.fueled:InitializeFuelLevel( 7200 ) -- add tuning
 
 	-- inst:AddComponent("insulator")

@@ -133,26 +133,9 @@ local function fn()
     inst:AddComponent("finiteuses")
     inst.components.finiteuses:SetMaxUses(300)
     inst.components.finiteuses:SetUses(300)
-	-- Maybe translate the amount of uses to the open umbrella when opened, and only go down if it's raining on that end. Otherwise treat as a normal weapon.
-    -- We may have to translate numbers between finiteuses and fueled, but it should be okay.
 
-
-    -- inst:AddComponent("waterproofer")	
-    -- inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_SMALL * 1.5)
-
-    -- inst:AddComponent("insulator")
-    -- inst.components.insulator:SetSummer()
-    -- inst.components.insulator:SetInsulation(TUNING.INSULATION_SMALL)
-	
 	inst:AddComponent("useableitem")
 	inst.components.useableitem:SetOnUseFn(OnUse)
-	-- inst.components.useableitem:StopUsingItem(OnStop)
-	
-	-- inst:AddComponent("container")
-    -- inst.components.container:WidgetSetup("hkr_wbadgeslot")
-	-- inst.components.container.canbeopened = false
-    -- inst:ListenForEvent("itemget", OnBadgeLoaded)
-    -- inst:ListenForEvent("itemlose", OnBadgeUnloaded)
 	
 	MakeHauntableLaunch(inst)
 	

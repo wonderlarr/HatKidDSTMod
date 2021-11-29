@@ -1,0 +1,36 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\..\\data\\scripts"
+		}
+	],
+	"settings": {
+		"Lua.diagnostics.globals": [
+			"Load",
+			"modimport",
+			"TUNING",
+			"AddMinimapAtlas",
+			"AddModCharacter",
+			"GLOBAL",
+			"AddComponentPostInit",
+			"AddClassPostConstruct",
+			"AddModRPCHandler",
+			"AddStategraphPostInit",
+			"AddPrefabPostInit",
+			"GetString",
+			"SetSkinsOnAnim",
+			"CreateEntity",
+			"MakeInventoryPhysics",
+			"TheWorld",
+			"MakeHauntableLaunch",
+			"Prefab"
+		],
+		"Lua.diagnostics.disable": [
+			"undefined-global",
+			"lowercase-global"
+		]
+	}
+}

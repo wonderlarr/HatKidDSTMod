@@ -307,7 +307,7 @@ local function fn(Sim)
 	inst.components.rechargeable:SetOnChargedFn(OnCharged)
 
 	inst:AddComponent("fueled")
-	-- inst.components.fueled.fueltype = FUELTYPE.USAGE
+	inst.components.fueled.fueltype = FUELTYPE.MAGIC
 	inst.components.fueled:InitializeFuelLevel( 300 ) -- add tuning
 	
 	-- inst:AddComponent("container")

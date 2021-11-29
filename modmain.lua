@@ -223,8 +223,8 @@ local TUNING = GLOBAL.TUNING
 -- The character select screen lines
 STRINGS.CHARACTER_TITLES.hatkid = "The Hat Explorer"
 STRINGS.CHARACTER_NAMES.hatkid = "Hat Kid"
-STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Has all her cool hats\n*Sports her umbrella\n*A little weak\n*Slight sanity aura"
-STRINGS.CHARACTER_QUOTES.hatkid = "\"Oh hi there!\""
+STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Makes cool hats, for herself\n*Might go insane without a hat\n*Doesn't hit hard without her umbrella\n*Is Extremely cute"
+STRINGS.CHARACTER_QUOTES.hatkid = "\"Oh, hi there!\""
 
 -- Custom speech strings
 STRINGS.CHARACTERS.HATKID = require "speech_hatkid"
@@ -240,7 +240,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATKID =
 {
 	GENERIC = "It's Hat Kid!",
 	ATTACKER = "That Hat Kid looks shifty...",
-	MURDERER = "Murderer!",
+	MURDERER = "MYURRDERR!",
 	REVIVER = "Hat Kid, friend of ghosts.",
 	GHOST = "Hat Kid could use a heart.",
 	FIRESTARTER = "That Hat Kid is starting fires!",
@@ -547,7 +547,7 @@ nil,
 
 
 polarhatrecipe = AddRecipe("polarhat", 
-{Ingredient("winterhat", 1), Ingredient("ice", 10), Ingredient("bluegem",2)},
+{Ingredient("winterhat", 1), Ingredient("ice", 10), Ingredient("bluegem",1)},
 HatTab,
 TECH.MAGIC_TWO, -- Prestihatitator
 nil, 
@@ -562,7 +562,7 @@ nil,
 
 
 brewinghatrecipe = AddRecipe("brewinghat", 
-{Ingredient("strawhat", 1), Ingredient("slurtleslime", 4), Ingredient("purplegem",1)},
+{Ingredient("strawhat", 1), Ingredient("slurtleslime", 3), Ingredient("purplegem",1)},
 HatTab,
 TECH.MAGIC_THREE, --shadow manipulator
 nil, 
@@ -594,7 +594,7 @@ nil,
 
 
 timestophatrecipe = AddRecipe("timestophat", 
-{Ingredient("moonglass", 8), Ingredient("silk", 12), Ingredient("greengem",1)},
+{Ingredient("moonglass", 8), Ingredient("silk", 8), Ingredient("greengem",1)},
 HatTab,
 TECH.MOON_ALTAR_TWO, --celestial altar
 nil, 
@@ -897,3 +897,14 @@ end)
 -- 		return _onexit(inst,...)
 -- 	end
 -- end)
+
+
+
+
+AddPrefabPostInit("ice", function(inst)
+    -- inst:AddComponent("fuel")
+    -- inst.components.fuel.fueltype = "POLAR"
+    -- inst.components.fuel.fuelvalue = 4
+	inst:AddComponent("fuel")
+    inst.components.fuel.fuelvalue = 1
+end)

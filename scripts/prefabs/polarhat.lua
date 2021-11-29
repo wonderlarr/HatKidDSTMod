@@ -326,6 +326,10 @@ local function OnCharged()
 
 end
 
+local function nofuel(inst)
+	print("Hat Kid: " .. tostring(inst.prefab) .. " out of fuel")
+end
+
 
 local function KeybindUse(inst)
 	local owner = inst.components.inventoryitem.owner
@@ -384,8 +388,11 @@ local function fn(Sim)
 	inst.components.rechargeable:SetOnChargedFn(OnCharged)
 
 	-- inst:AddComponent("fueled")
-	-- -- inst.components.fueled.fueltype = FUELTYPE.USAGE
 	-- inst.components.fueled:InitializeFuelLevel( 20 ) -- add tuning
+
+	-- inst.components.fueled.fueltype = FUELTYPE.MAGIC
+    -- inst.components.fueled:SetDepletedFn(nofuel)
+    -- inst.components.fueled.accepting = true
 
 	inst:AddComponent("finiteuses")
     inst.components.finiteuses:SetMaxUses(20)

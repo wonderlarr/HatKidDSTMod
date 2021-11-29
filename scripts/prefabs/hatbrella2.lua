@@ -25,12 +25,10 @@ local function OnEquip(inst, owner)
 	-- drop the item, and say a fail message.
 	if owner:HasTag("player") and not owner:HasTag("hatkid") then
 		inst:DoTaskInTime(0, function()
-			owner.components.inventory:DropItem(inst)
 			owner.components.talker:Say(GetString(player, "ACTIONFAIL_GENERIC"))
 		end)
 	end
 	
-    --owner.AnimState:OverrideSymbol("swap_object", "swap_wands", "purplestaff")
 	owner.AnimState:OverrideSymbol("swap_object", "swap_hatbrella2", "swap_hatbrella2")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")

@@ -26,6 +26,8 @@ local function MakeExplosion(data)
         inst.AnimState:SetBank("brewinghat_explode")
         inst.AnimState:SetBuild("brewinghat_explode")
         inst.AnimState:PlayAnimation("small")
+        inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+        -- inst.AnimState:SetFinalOffset(10)
 		-- inst.AnimState:SetDeltaTimeMultiplier(2)
 
         inst.SoundEmitter:PlaySound("kidpotion/sound/explode")

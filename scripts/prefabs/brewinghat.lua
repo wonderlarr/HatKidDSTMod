@@ -37,6 +37,16 @@ local function equiprev(inst)
 	end
 end
 
+local function OnEmpty(inst)
+	local owner = inst.components.inventoryitem:GetGrandOwner()
+	
+    local drop = SpawnPrefab("strawhat")
+
+	owner.components.inventory:Equip(drop) -- We can assume the hat we're replacing was equipped, since there's no other way to use durability.
+
+	inst:DoTaskInTime(0, inst.Remove)
+end
+
 local function OnEquip(inst, owner)
 	-- If the equiper doesn't have the Hat Kid tag (which only hat kid has for now) then
 	-- drop the item, and say a fail message.
@@ -112,8 +122,12 @@ local function OnStopUse(inst)
 		rechargeable:Discharge(TUNING.BREWINGHAT_COOLDOWN) -- Cooldown
 
 		if inst.components.finiteuses then
-			inst.components.finiteuses:Use(1)
+			inst.components.finiteuses:Use(11)
 		end
+
+		-- if inst.components.fueled then
+		-- 	inst.components.fueled:DoDelta(-1, owner)
+		-- end
 	end
 end
 
@@ -171,12 +185,15 @@ local function fn(Sim)
     inst.components.useableitem:SetOnStopUseFn(OnStopUse)
 
 	-- inst:AddComponent("fueled")
-	-- -- inst.components.fueled.fueltype = FUELTYPE.USAGE
-	-- inst.components.fueled:InitializeFuelLevel( 25 ) -- add tuning
+	-- inst.components.fueled.fueltype = FUELTYPE.USAGE
+	-- inst.components.fueled:InitializeFuelLevel( 100 ) -- add tuning
+	-- inst.components.fueled.fueltype = FUELTYPE.CAVE
+	-- inst.components.fueled.accepting = true
 
 	inst:AddComponent("finiteuses")
-    inst.components.finiteuses:SetMaxUses(25)
-    inst.components.finiteuses:SetUses(25)
+	inst.components.finiteuses:SetOnFinished(OnEmpty)
+    inst.components.finiteuses:SetMaxUses(50)
+    inst.components.finiteuses:SetUses(50)
 	
 	inst:ListenForEvent("AbilityKey", KeybindUse)
 

@@ -6,8 +6,8 @@ local assets=
     Asset("ATLAS", "images/inventoryimages/dwellermask.xml"),
     Asset("IMAGE", "images/inventoryimages/dwellermask.tex"),
 	
-	Asset("IMAGE", resolvefilepath("images/cc/dwellervision.tex")),
-	Asset("IMAGE", "images/inventoryimages/dwellermask.tex"),
+	Asset("IMAGE", softresolvefilepath("images/cc/dwellervision.tex")),
+	Asset("IMAGE", softresolvefilepath("images/cc/nd.tex")),
 
 	Asset("SOUNDPACKAGE", "sound/dwellermask.fev"),
     Asset("SOUND", "sound/dwellermask.fsb"),
@@ -20,21 +20,35 @@ local prefabs =
 local DWELLERVISION_COLOURCUBES_2 =
 {
 	-- this took SO LONG to get working, wasn't sure how resolvefilepath worked.
-    day = resolvefilepath("images/cc/dwellervision.tex"),
-    dusk = resolvefilepath("images/cc/dwellervision.tex"),
-    night = resolvefilepath("images/cc/dwellervision.tex"),
-    full_moon = resolvefilepath("images/cc/dwellervision.tex"),
+    day = softresolvefilepath("images/cc/dwellervision.tex"),
+    dusk = softresolvefilepath("images/cc/dwellervision.tex"),
+    night = softresolvefilepath("images/cc/dwellervision.tex"),
+    full_moon = softresolvefilepath("images/cc/dwellervision.tex"),
+}
+
+local DWELLERVISION_COLOURCUBES_3 =
+{
+	-- These new cubes are easier on the eyes, previous ones were very harsh green.
+    day = resolvefilepath("images/cc/nd.tex"),
+    dusk = resolvefilepath("images/cc/nd.tex"),
+    night = resolvefilepath("images/cc/nd.tex"),
+    full_moon = resolvefilepath("images/cc/nd.tex"),
 }
 
 local function aura()
 	return 1
 end
 
+
+
 local function dwellmaskclient(ent)
 
 	-- Change the colour cube on the client to allow seeing in the dark client side.
 	ent.components.playervision:ForceNightVision(true)
 	ent.components.playervision:SetCustomCCTable(DWELLERVISION_COLOURCUBES_2)
+
+	-- ent.AnimState:SetHaunted(true)
+	ent.AnimState:SetMultColour(1, 1, 1, 0.1)
 	
 	-- Prevent the 5 second linger from taking nightvision away while in the aura
 	if ent.NVLinger ~= nil then
@@ -45,6 +59,8 @@ local function dwellmaskclient(ent)
 	ent.NVLinger = ent:DoTaskInTime(5, function(ent)
 		ent.components.playervision:ForceNightVision(false)
 		ent.components.playervision:SetCustomCCTable(nil)
+		-- ent.AnimState:SetHaunted(false)
+		ent.AnimState:SetMultColour(1, 1, 1, 1)
 		ent.NVLinger = nil
 	end)
 end
@@ -62,11 +78,13 @@ local function DwellerAbility(inst)
 		local owner = inst.components.inventoryitem.owner
 		--Enable dweller light
 		--Edit character light settings temporarily, we redo it each cast to keep it consistant on a log in. There's a better way to do this, but this is easier.
-		owner.Light:SetFalloff(1)
-		owner.Light:SetIntensity(0.99)
-		owner.Light:SetRadius(7/8 * TUNING.DWELLERMASK_RADIUS)
-		owner.Light:SetColour(8/255, 248/255, 12/255)
-		owner.Light:Enable(true)
+		-- owner.Light:SetFalloff(1)
+		-- owner.Light:SetIntensity(0.99)
+		-- owner.Light:SetRadius(7/8 * TUNING.DWELLERMASK_RADIUS)
+		-- owner.Light:SetColour(8/255, 248/255, 12/255)
+		inst.Light:Enable(true)
+		
+		inst.net_hunt_kills:set(1)
 
 		local pt = owner:GetPosition()
 		local range = TUNING.DWELLERMASK_RADIUS  -- range of spell	
@@ -80,6 +98,8 @@ local function DwellerAbility(inst)
 				
 				-- Change the colour cube on the server to prevent charlie attacks and stuff
 				ent.components.playervision:ForceNightVision(true)
+				-- ent.AnimState:SetHaunted(true)
+				ent.AnimState:SetMultColour(1, 1, 1, 0.1)
 				
 				-- Prevent the 5 second linger from taking nightvision away while in the aura
 				if ent.NVLinger ~= nil then
@@ -90,6 +110,9 @@ local function DwellerAbility(inst)
 				ent.NVLinger = ent:DoTaskInTime(TUNING.DWELLERMASK_LINGER, function(ent)
 					ent.components.playervision:ForceNightVision(false)
 					ent.NVLinger = nil
+					-- ent.AnimState:SetHaunted(false)
+					ent.AnimState:SetMultColour(1, 1, 1, 1)
+					
 				end)
 			end
 		end
@@ -150,11 +173,13 @@ local function OnStopUse(inst)
 		-- If not in cooldown, or doing nothing, put it on cooldown!
 
 		--Reset light values to lightning strike values, which are normally the defaults.
-		owner.Light:SetIntensity(.8)
-        owner.Light:SetRadius(.5)
-        owner.Light:SetFalloff(.65)
-        owner.Light:SetColour(255 / 255, 255 / 255, 236 / 255)
-        owner.Light:Enable(false)
+		-- owner.Light:SetIntensity(.8)
+        -- owner.Light:SetRadius(.5)
+        -- owner.Light:SetFalloff(.65)
+        -- owner.Light:SetColour(255 / 255, 255 / 255, 236 / 255)
+        -- inst.Light:Enable(false)
+
+		inst.net_hunt_kills:set(0)
 
 		inst.components.equippable.dapperness = 0
 		
@@ -263,6 +288,59 @@ end
 	-- end
 -- end
 
+local mult = 0
+
+
+local function OnUpdateFade(inst)
+	-- mult = inst.hunt_kills
+
+	if inst.hunt_kills == 1 then
+		mult = mult + FRAMES * 10
+		if (math.min(mult, 1)) >= 1 then -- Once we've blown up
+			inst.lightroll:Cancel()
+			inst.lightroll = nil
+			mult = 1
+		end
+	elseif inst.hunt_kills == 0 then
+		mult = mult - FRAMES * 10
+		if (math.min(mult, 1)) <= 0 then -- Once we've come down
+			inst.lightroll:Cancel()
+			inst.lightroll = nil
+			mult = 0
+		end
+	end
+
+	-- if inst.Light:GetRadius() <= 0 then
+		inst.Light:SetRadius(7/8 * TUNING.DWELLERMASK_RADIUS * (math.min(mult, 1))) -- Burst out
+
+		if mult <= 0 then
+			inst.Light:Enable(false)
+		else
+			inst.Light:Enable(true)
+		end
+	-- end
+
+
+
+
+
+
+end
+
+local function OnHuntKillsDirty(inst)
+	inst.hunt_kills = inst.net_hunt_kills:value()
+	-- print(inst.hunt_kills)
+
+	-- mult = inst.hunt_kills
+
+	if inst.lightroll == nil then
+		inst.lightroll = inst:DoPeriodicTask(FRAMES, OnUpdateFade)
+	end
+	OnUpdateFade(inst)
+end
+
+
+
 local function fn(Sim) 
     local inst = CreateEntity()
 
@@ -270,14 +348,28 @@ local function fn(Sim)
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
+	inst.entity:AddLight()
 	
 	
     MakeInventoryPhysics(inst)
- 
+
+	inst.Light:SetFalloff(1)
+	inst.Light:SetIntensity(0.99)
+	inst.Light:SetRadius(7/8 * TUNING.DWELLERMASK_RADIUS)
+	inst.Light:SetColour(8/255, 248/255, 12/255)
+	inst.Light:Enable(true)
+
+	inst.Light:EnableClientModulation(true)
+
+	inst.hunt_kills = 0
+	inst.net_hunt_kills = net_ushortint(inst.GUID, "hunt_kills", "hunt_killsdirty" )
+
+
     inst:AddTag("hat")
 	inst:AddTag("hatkidhat")
 	
     if not TheWorld.ismastersim then
+		inst:ListenForEvent("hunt_killsdirty", OnHuntKillsDirty)
 		-- inst.OnEntityReplicated = function(inst) inst.replica.container:WidgetSetup("hkr_badgeslot") end
         return inst
     end
@@ -298,7 +390,7 @@ local function fn(Sim)
     inst:AddComponent("timer")
 
     local function ontimerdone(inst)
-		inst:AddTag("disabledwell") -- This sucks but I wrote this code like 8 months ago and don't wanna fix it.
+		inst:AddTag("disabledwell") -- This sucks but I wrote this code like 8 months ago and don't wanna fix it. By that I mean the related code to this, not just this.
 		inst.components.useableitem:StopUsingItem()
 	end
 
@@ -321,8 +413,8 @@ local function fn(Sim)
 	inst:AddComponent("rechargeable")
 
 	inst:AddComponent("fueled")
-	-- inst.components.fueled.fueltype = FUELTYPE.USAGE
-	inst.components.fueled:InitializeFuelLevel( 300 ) -- add tuning
+	inst.components.fueled.fueltype = FUELTYPE.MAGIC
+	inst.components.fueled:InitializeFuelLevel( 450 ) -- add tuning
 	
 
 	-- inst:AddComponent("container")

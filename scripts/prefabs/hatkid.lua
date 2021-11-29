@@ -81,6 +81,23 @@ end
 -- 	end
 -- end
 
+local function OnPotionThrow(inst)
+
+	local lines = {
+		"Bam!",
+		"Ba-bam!",
+		"Blammo!",
+		"Boo-ya" ,
+	}
+	
+	if math.random(1, 2) == 1 and inst.components.talker then
+
+		inst.components.talker:Say(lines[math.random(1, 4)])
+
+	end
+
+end
+
 local function MakeDirt(inst)
 	local scale = 0.4
 	local x, y, z = inst.Transform:GetWorldPosition()
@@ -112,7 +129,7 @@ local function onLocomote(inst)
 	if hat then
 
 		if isrunning and hat.prefab == "sprinthat" then
-			-- MakeDirt(inst) --To start us off
+
 
 			if not inst.sprintfx then
 				
@@ -123,6 +140,7 @@ local function onLocomote(inst)
 				end)
 
 			end
+
 		end
 		
 	end
@@ -193,7 +211,7 @@ local common_postinit = function(inst)
 	inst:AddComponent("keyhandler")
     inst.components.keyhandler:AddActionListener("HatKidRPC", TUNING["HATKID"].KEY, "AbilityKeyDown", "KEYDOWN")
 	
-	--Default light for Dweller Mask, will probably change in the future and add them to the Hat prefabs instead, but for now this works.
+	--light for Dweller Mask, will probably change in the future and add them to the Hat prefabs instead, but for now this works.
     inst.entity:AddLight()
 	
 	
@@ -209,6 +227,7 @@ local common_postinit = function(inst)
 	inst:ListenForEvent("locomote", onLocomote)
 	inst:ListenForEvent("UpdateSprintParticles", onLocomote)
 	inst:ListenForEvent("CleanSprintParticles", CleanSprintParticles)
+	inst:ListenForEvent("PotionThrown", OnPotionThrow)
 	-- end
 	
 end
