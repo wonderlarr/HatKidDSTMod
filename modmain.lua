@@ -62,7 +62,7 @@ PrefabFiles = {
 	--fx prefabs
 	"brewinghat_explode",
 	"sprint_puff",
-	-- "hkr_aoerange",
+	"hkr_aoe",
 	"hkr_icerange",
 	"icecloud",
 	"hatshatter",
@@ -160,6 +160,9 @@ TUNING.HATKID_AURASIZE = GetModConfigData("hatkidaurasize")
 
 --Hat stuff
 
+--Kid Hat
+TUNING.KIDHAT_DURABILITY = GetModConfigData("kidhatdurability")
+
 --Sprint (old but still used stuff)
 TUNING.SPRINTHAT_DURABILITY = GetModConfigData("sprinthatdurability")
 TUNING.SPRINTHAT_SPEED_MULT = GetModConfigData("sprinthatspeedmult")
@@ -167,7 +170,7 @@ TUNING.SPRINTHAT_HUNGER_BURNRATE = GetModConfigData("sprinthathungerburnrate")
 TUNING.SPRINTHAT_SFX = GetModConfigData("sprinthatsfx")
 
 --Brewing
--- TUNING.BREWINGHAT_DURABILITY = GetModConfigData("brewdurability")
+TUNING.BREWINGHAT_DURABILITY = GetModConfigData("brewdurability")
 TUNING.BREWINGHAT_COOLDOWN = GetModConfigData("brewcooldown")
 TUNING.BREWINGHAT_CHARGETIME = GetModConfigData("brewcharge")
 TUNING.BREWINGHAT_SLOWDOWN  = GetModConfigData("brewslow")
@@ -176,7 +179,7 @@ TUNING.BREWINGHAT_RADIUS  = GetModConfigData("brewradius")
 
 
 --Polar
--- TUNING.POLARHAT_DURABILITY = GetModConfigData("polardurability")
+TUNING.POLARHAT_DURABILITY = GetModConfigData("polardurability")
 TUNING.POLARHAT_COOLDOWN = GetModConfigData("polarcooldown")
 TUNING.POLARHAT_LEVEL = GetModConfigData("polarlevel")
 TUNING.POLARHAT_TEMP = GetModConfigData("polartemp")
@@ -184,14 +187,14 @@ TUNING.POLARHAT_RADIUS = GetModConfigData("polarradius")
 
 
 --Dweller
--- TUNING.DWELLERMASK_DURABILITY = GetModConfigData("dwellerdurability")
+TUNING.DWELLERMASK_DURABILITY = GetModConfigData("dwellerdurability")
 TUNING.DWELLERMASK_COOLDOWN = GetModConfigData("dwellercooldown")
 TUNING.DWELLERMASK_DURATION = GetModConfigData("dwelleractive")
 TUNING.DWELLERMASK_LINGER = GetModConfigData("dwellerlinger")
 TUNING.DWELLERMASK_RADIUS = GetModConfigData("dwellerradius")
 
 --Time Stop
--- TUNING.TIMESTOPHAT_DURABILITY = GetModConfigData("timestopdurability")
+TUNING.TIMESTOPHAT_DURABILITY = GetModConfigData("timestopdurability")
 TUNING.TIMESTOPHAT_COOLDOWN = GetModConfigData("timestopcooldown")
 TUNING.TIMESTOPHAT_DURATION = GetModConfigData("timestopactive")
 TUNING.TIMESTOPHAT_TIMESCALE = GetModConfigData("timestopscale")
@@ -296,7 +299,7 @@ STRINGS.CHARACTERS.WORTOX.DESCRIBE.KIDHAT = "Feathers and horns go well together
 STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.KIDHAT = "Fast hat"
 STRINGS.CHARACTERS.WARLY.DESCRIBE.KIDHAT = "You could forage at lightning speeds with a hat like that."
 
-STRINGS.RECIPE_DESC.SPRINTHAT = "Run a bit faster!"
+STRINGS.RECIPE_DESC.SPRINTHAT = "This hat looks ready to sprint!"
 
 STRINGS.NAMES.BREWINGHAT = "Brewing Hat"
 
@@ -317,7 +320,7 @@ STRINGS.CHARACTERS.WORTOX.DESCRIBE.BREWINGHAT = "I hope the chemicals don't get 
 STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.BREWINGHAT = "Hurty hat"
 STRINGS.CHARACTERS.WARLY.DESCRIBE.BREWINGHAT = "This hat'd go great with my spices!"
 
-STRINGS.RECIPE_DESC.BREWINGHAT = "Brew and throw explosive potions!"
+STRINGS.RECIPE_DESC.BREWINGHAT = "Cook up mad concoctions!"
 
 STRINGS.NAMES.POLARHAT = "Ice Hat"
 
@@ -338,9 +341,9 @@ STRINGS.CHARACTERS.WORTOX.DESCRIBE.POLARHAT = "This hat's pretty 'cool'."
 STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.POLARHAT = "Cold hat"
 STRINGS.CHARACTERS.WARLY.DESCRIBE.POLARHAT = "It gives me chills!"
 
-STRINGS.RECIPE_DESC.POLARHAT = "Freeze the bad guys around you!"
+STRINGS.RECIPE_DESC.POLARHAT = "It's so cold!"
 
-STRINGS.NAMES.DWELLERMASK = "Dweller Mask"
+STRINGS.NAMES.DWELLERMASK = "Dweller's Mask"
 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DWELLERMASK = "It somehow acts as a light."
 STRINGS.CHARACTERS.HATKID.DESCRIBE.DWELLERMASK = "This has changed just a little bit"
@@ -359,7 +362,7 @@ STRINGS.CHARACTERS.WORTOX.DESCRIBE.DWELLERMASK = "Visions! Specters! I can see i
 STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.DWELLERMASK = "Scary mask"
 STRINGS.CHARACTERS.WARLY.DESCRIBE.DWELLERMASK = "I must be crazy to fool around with this."
 
-STRINGS.RECIPE_DESC.DWELLERMASK = "See through spirit's eyes."
+STRINGS.RECIPE_DESC.DWELLERMASK = "See through a Dweller's eyes!"
 
 STRINGS.NAMES.TIMESTOPHAT = "Time Stop Hat"
 
@@ -380,28 +383,7 @@ STRINGS.CHARACTERS.WORTOX.DESCRIBE.TIMESTOPHAT = "How much time did it take for 
 STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.TIMESTOPHAT = "Clock hat"
 STRINGS.CHARACTERS.WARLY.DESCRIBE.TIMESTOPHAT = "Time waits for no one, except the person wearing this."
 
-STRINGS.RECIPE_DESC.TIMESTOPHAT = "Slow everything down!"
-
-STRINGS.NAMES.KIDGLASSES = "Celebrity Glasses"
-
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.KIDGLASSES = "That's a bit excessive."
-STRINGS.CHARACTERS.HATKID.DESCRIBE.KIDGLASSES = "Fashionable!"
-STRINGS.CHARACTERS.WILLOW.DESCRIBE.KIDGLASSES = "Let it burn!"
-STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.KIDGLASSES = "Wolfgang will be mighty superstar!"
-STRINGS.CHARACTERS.WENDY.DESCRIBE.KIDGLASSES = "If only Abagail could see me now..."
-STRINGS.CHARACTERS.WX78.DESCRIBE.KIDGLASSES = "THIS IS A MISTAKE"
-STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.KIDGLASSES = "The gem must be the source of the light."
-STRINGS.CHARACTERS.WOODIE.DESCRIBE.KIDGLASSES = "The life of stardom ain't for me."
-STRINGS.CHARACTERS.WAXWELL.DESCRIBE.KIDGLASSES = "It makes me feel as if I'm being watched."
-STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.KIDGLASSES = "What's a show without an audience?"
-STRINGS.CHARACTERS.WEBBER.DESCRIBE.KIDGLASSES = "Now which one of us is the cool guy?"
-STRINGS.CHARACTERS.WINONA.DESCRIBE.KIDGLASSES = "It's something special, all right."
---dlc characters
-STRINGS.CHARACTERS.WORTOX.DESCRIBE.KIDGLASSES = "A style ahead of our time."
-STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.KIDGLASSES = "Shiny glasses"
-STRINGS.CHARACTERS.WARLY.DESCRIBE.KIDGLASSES = "Quite the fashion statement."
-
-STRINGS.RECIPE_DESC.KIDGLASSES = "Simply stylin'."
+STRINGS.RECIPE_DESC.TIMESTOPHAT = "Death is inevitable. Your time is valuable."
 
 STRINGS.NAMES.HATBRELLA = "Blue Umbrella"
 STRINGS.NAMES.HATBRELLA2 = "Red Umbrella"
@@ -424,8 +406,8 @@ STRINGS.CHARACTERS.WORTOX.DESCRIBE.HATBRELLA = "No soggy imps on this fine day!"
 STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.HATBRELLA = "Rain Taker"
 STRINGS.CHARACTERS.WARLY.DESCRIBE.HATBRELLA = "I will try to remember not to open indoors."
 
-STRINGS.RECIPE_DESC.HATBRELLA = "Great for fending off crows and mafia."
-STRINGS.RECIPE_DESC.HATBRELLA2 = "Getting an upgrade! 51 damage."
+STRINGS.RECIPE_DESC.HATBRELLA = "Diplomacy didn't work, time for action."
+STRINGS.RECIPE_DESC.HATBRELLA2 = "A little more action, shall we?"
 STRINGS.RECIPE_DESC.HATBRELLA3 = "A temporary weapon, with very high damage."
 
 STRINGS.NAMES.HATBRELLAOPEN = "Open Blue Umbrella"
@@ -490,7 +472,7 @@ nil, --placer prefab, or additional data if needed. placer prefab must be valid 
 nil, --minimum spacing, presumably from other buildings/entity's
 nil, --whether the recipe is unlockable or not. nil is default, true means unlearnable/no unlock.
 nil, --amount to give (nil is one, but 1 is one as well, not sure about the difference)
-"hatkidcrafter", -- Characters need this tag in their common_postinit to craft this item
+"hatkidcrafter", -- Characters need this tag on the server and client to craft this item.
 "images/inventoryimages/hatbrella.xml", 	--xml path
 "hatbrella.tex") --tex name
 

@@ -241,6 +241,12 @@ local function OnDischarged(inst)
 	
 	-- print(rechargeable:GetRechargeTime())
 end
+
+local function OnEmpty(inst)
+	inst.components.useableitem:StopUsingItem() -- And we'll make sure to stop the dweller effect
+
+	inst:DoTaskInTime(0, inst.Remove)
+end
  
 local function fn(Sim) 
     local inst = CreateEntity()
@@ -306,9 +312,12 @@ local function fn(Sim)
 	inst.components.rechargeable:SetOnDischargedFn(OnDischarged)
 	inst.components.rechargeable:SetOnChargedFn(OnCharged)
 
-	inst:AddComponent("fueled")
-	inst.components.fueled.fueltype = FUELTYPE.MAGIC
-	inst.components.fueled:InitializeFuelLevel( 300 ) -- add tuning
+	if TUNING.TIMESTOPHAT_DURABILITY then
+		inst:AddComponent("fueled")
+		inst.components.fueled.fueltype = FUELTYPE.MAGIC
+		inst.components.fueled:InitializeFuelLevel( TUNING.TIMESTOPHAT_DURABILITY ) -- add tuning 300
+		inst.components.fueled:SetDepletedFn(OnEmpty)
+	end
 	
 	-- inst:AddComponent("container")
     -- inst.components.container:WidgetSetup("hkr_badgeslot")

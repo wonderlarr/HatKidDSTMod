@@ -132,6 +132,10 @@ local function OnUnequip(inst, owner)
 	
 
 end
+
+local function OnEmpty(inst)
+	inst:DoTaskInTime(0, inst.Remove)
+end
  
 local function fn(Sim) 
     local inst = CreateEntity()
@@ -175,9 +179,12 @@ local function fn(Sim)
     inst.components.equippable:SetOnUnequip( OnUnequip )
 	inst.components.equippable.walkspeedmult = TUNING.SPRINTHAT_SPEED_MULT
 
-	inst:AddComponent("fueled")
-	inst.components.fueled.fueltype = FUELTYPE.USAGE
-	inst.components.fueled:InitializeFuelLevel( TUNING.SPRINTHAT_DURABILITY ) -- 90 minutes by default
+	if TUNING.SPRINTHAT_DURABILITY then
+		inst:AddComponent("fueled")
+		inst.components.fueled.fueltype = FUELTYPE.USAGE
+		inst.components.fueled:InitializeFuelLevel( TUNING.SPRINTHAT_DURABILITY ) -- 90 minutes by default
+		inst.components.fueled:SetDepletedFn(OnEmpty)
+	end
  
     return inst
 end

@@ -160,7 +160,7 @@ local function OnUnequip(inst, data)
 	-- Detect if the slot is empty, apply a big sanity drain
 
     if data.eslot == EQUIPSLOTS.HEAD then
-		inst.components.sanity.dapperness = (-TUNING.DAPPERNESS_MED)
+		inst.components.sanity.dapperness = (-TUNING.DAPPERNESS_LARGE)
     end
 end
 

@@ -336,6 +336,10 @@ local function KeybindUse(inst)
 	inst.components.useableitem:StartUsingItem()
 end
 
+local function OnEmpty(inst)
+	inst:DoTaskInTime(0, inst.Remove)
+end
+
 local function fn(Sim) 
     local inst = CreateEntity()
     local trans = inst.entity:AddTransform()
@@ -394,9 +398,12 @@ local function fn(Sim)
     -- inst.components.fueled:SetDepletedFn(nofuel)
     -- inst.components.fueled.accepting = true
 
-	inst:AddComponent("finiteuses")
-    inst.components.finiteuses:SetMaxUses(20)
-    inst.components.finiteuses:SetUses(20)
+	if TUNING.POLARHAT_DURABILITY then
+		inst:AddComponent("finiteuses")
+		inst.components.finiteuses:SetMaxUses(TUNING.POLARHAT_DURABILITY) -- add tuning 33
+		inst.components.finiteuses:SetUses(TUNING.POLARHAT_DURABILITY)
+		inst.components.finiteuses:SetOnFinished(OnEmpty)
+	end
 
 	-- inst:AddComponent("container")
     -- inst.components.container:WidgetSetup("hkr_badgeslot")

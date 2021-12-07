@@ -50,8 +50,8 @@ configuration_options =
 			{description = "50", data = 50},
 			{description = "75", data = 75},
 			{description = "100", data = 100},
-			{description = "120 (Default)", data = 120},
-			{description = "125", data = 125},
+			{description = "120", data = 120},
+			{description = "125 (Default)", data = 125},
 			{description = "150", data = 150},
 			{description = "175", data = 175},
 			{description = "200", data = 200},
@@ -60,7 +60,7 @@ configuration_options =
 			{description = "275", data = 275},				
 			{description = "300", data = 300},
 		},
-		default = 120,
+		default = 125,
 	},
 	
 	{
@@ -97,9 +97,10 @@ configuration_options =
 			{description = "100", data = 100},
 			{description = "105", data = 105},
 			{description = "110", data = 110},
-			{description = "115 (Default)", data = 115},
+			{description = "115", data = 115},
 			{description = "120", data = 120},
 			{description = "125", data = 125},
+			{description = "135 (Default)", data = 135},
 			{description = "150", data = 150},
 			{description = "175", data = 175},
 			{description = "200", data = 200},
@@ -108,7 +109,7 @@ configuration_options =
 			{description = "275", data = 275},				
 			{description = "300", data = 300},
 		},
-		default = 115,
+		default = 135,
 	},
 	
 	{
@@ -189,8 +190,8 @@ configuration_options =
 			{description = "x0.6", data = 0.6},
 			{description = "x0.7", data = 0.7},
 			{description = "x0.8", data = 0.8},
-			{description = "x0.85 (Default)", data = 0.85},
-			{description = "x0.9", data = 0.9},
+			{description = "x0.85", data = 0.85},
+			{description = "x0.9 (Default)", data = 0.9},
 			{description = "x1", data = 1},
 			{description = "x1.25", data = 1.25},
 			{description = "x1.5", data = 1.5},
@@ -205,7 +206,7 @@ configuration_options =
 			{description = "x9", data = 9},
 			{description = "x10", data = 10},
 		},
-		default = 0.85,
+		default = 0.9,
 	},
 	
 	{
@@ -319,6 +320,33 @@ configuration_options =
 	},	
 
 	{
+		name = "kidhatdurability",
+		label = "Durability",
+		hover = "How long the Kid's Hat lasts. Durability goes down while the hat is being worn.",
+		options =
+		{
+			{description = "Forever", data = false},
+			{description = "30 seconds", data = 30},
+			{description = "1 minute", data = 60},
+			{description = "5 minutes", data = 5 * 60},
+			{description = "10 minutes", data = 10 * 60},
+			{description = "15 minutes", data = 15 * 60},
+			{description = "30 minutes", data = 30 * 60},
+			{description = "45 minutes", data = 45 * 60},
+			{description = "60 minutes", data = 60 * 60},
+			{description = "75 minutes", data = 75 * 60},
+			{description = "90 minutes", data = 90 * 60},
+			{description = "2 hours (Default)", data = 2 * 60 * 60},
+			{description = "3 hours", data = 3 * 60 * 60},
+			{description = "4 hours", data = 4 * 60 * 60},
+			{description = "6 hours", data = 6 * 60 * 60},
+			{description = "12 hours", data = 12 * 60 * 60},
+			{description = "Forever", data = false},
+		},
+		default = 2 * 60 * 60,
+	},
+
+	{
 		name = "hatkidaurasize",
 		label = "Sanity Aura Size",
 		hover = "How big Hat Kid's sanity aura will be.",
@@ -370,6 +398,7 @@ configuration_options =
 		options =
 		{
 			{description = "Forever", data = false},
+			{description = "30 seconds", data = 30},
 			{description = "1 minute", data = 60},
 			{description = "5 minutes", data = 5 * 60},
 			{description = "10 minutes", data = 10 * 60},
@@ -471,6 +500,40 @@ configuration_options =
 		hover = "",
 		default = 0,
 	},	
+
+	{
+		name = "brewdurability",
+		label = "Durability",
+		hover = "How many uses the Brewing Hat has. One use per concoction brewed.",
+		options =
+		{
+			{description = "Infinite", data = false},
+			{description = "1", data = 1},
+			{description = "3", data = 3},
+			{description = "5", data = 5},
+			{description = "10", data = 10},
+			{description = "15", data = 15},
+			{description = "20", data = 20},
+			{description = "25", data = 25},
+			{description = "30", data = 30},
+			{description = "35", data = 35},
+			{description = "40 (Default)", data = 40},
+			{description = "45", data = 45},
+			{description = "50", data = 50},
+			{description = "55", data = 55},
+			{description = "60", data = 60},
+			{description = "70", data = 70},
+			{description = "80", data = 80},
+			{description = "90", data = 90},
+			{description = "100", data = 100},
+			{description = "150", data = 150},
+			{description = "250", data = 250},
+			{description = "500", data = 500},
+			{description = "1000", data = 1000},
+			{description = "Infinite", data = false},
+		},
+		default = 40,
+	},
 	
 	{
 		name = "brewcooldown",
@@ -499,8 +562,8 @@ configuration_options =
 	
 	{
 		name = "brewcharge",
-		label = "Potion Charge Time",
-		hover = "How long it takes for the potion to brew before Hat Kid can throw it.",
+		label = "Concoction Brewing Time",
+		hover = "How long it takes for the concoction to brew before Hat Kid can throw it.",
 		options =
 		{
 			{description = "Instant", data = 0},
@@ -519,8 +582,8 @@ configuration_options =
 	
 	{
 		name = "brewslow",
-		label = "Potion Charge Slowness",
-		hover = "Hat Kid's speed multiplier while holding a potion.",
+		label = "Concoction Slowness",
+		hover = "Hat Kid's speed multiplier while holding a concoction.",
 		options =
 		{
 			{description = "-100%", data = 0},
@@ -552,8 +615,8 @@ configuration_options =
 	
 	{
 		name = "brewdamage",
-		label = "Potion Explosion Damage",
-		hover = "How much damage the thrown potion's explosion will deal.",
+		label = "Concoction Explosion Damage",
+		hover = "How much damage the thrown concoction's explosion will deal.",
 		options =
 		{
 			{description = "1", data = 1},
@@ -576,8 +639,8 @@ configuration_options =
 	
 	{
 		name = "brewradius",
-		label = "Potion Explosion Radius",
-		hover = "How big the thrown potion's explosions will be. This value is mostly arbitrary, but still effective to the range.",
+		label = "Concoction Explosion Radius",
+		hover = "How big the thrown concoction's explosions will be. This value is mostly arbitrary, but still effective to the range.",
 		options =
 		{
 			{description = "0 (Disabled)", data = 0},
@@ -599,6 +662,40 @@ configuration_options =
 		hover = "",
 		default = 0,
 	},	
+
+	{
+		name = "polardurability",
+		label = "Durability",
+		hover = "How many uses the Ice Hat has. One use per ground slam.",
+		options =
+		{
+			{description = "Infinite", data = false},
+			{description = "1", data = 1},
+			{description = "3", data = 3},
+			{description = "5", data = 5},
+			{description = "10", data = 10},
+			{description = "15", data = 15},
+			{description = "20", data = 20},
+			{description = "25", data = 25},
+			{description = "30 (Default)", data = 30},
+			{description = "35", data = 35},
+			{description = "40", data = 40},
+			{description = "45", data = 45},
+			{description = "50", data = 50},
+			{description = "55", data = 55},
+			{description = "60", data = 60},
+			{description = "70", data = 70},
+			{description = "80", data = 80},
+			{description = "90", data = 90},
+			{description = "100", data = 100},
+			{description = "150", data = 150},
+			{description = "250", data = 250},
+			{description = "500", data = 500},
+			{description = "1000", data = 1000},
+			{description = "Infinite", data = false},
+		},
+		default = 30,
+	},
 	
 	{
 		name = "polarcooldown",
@@ -707,6 +804,33 @@ configuration_options =
 		hover = "",
 		default = 0,
 	},	
+
+	{
+		name = "dwellerdurability",
+		label = "Durability",
+		hover = "How long the Dweller Mask lasts. Durability goes down while the hat is active.",
+		options =
+		{
+			{description = "Forever", data = false},
+			{description = "30 seconds", data = 30},
+			{description = "1 minute", data = 60},
+			{description = "5 minutes", data = 5 * 60},
+			{description = "10 minutes (Default)", data = 10 * 60},
+			{description = "15 minutes", data = 15 * 60},
+			{description = "30 minutes", data = 30 * 60},
+			{description = "45 minutes", data = 45 * 60},
+			{description = "60 minutes", data = 60 * 60},
+			{description = "75 minutes", data = 75 * 60},
+			{description = "90 minutes", data = 90 * 60},
+			{description = "2 hours", data = 2 * 60 * 60},
+			{description = "3 hours", data = 3 * 60 * 60},
+			{description = "4 hours", data = 4 * 60 * 60},
+			{description = "6 hours", data = 6 * 60 * 60},
+			{description = "12 hours", data = 12 * 60 * 60},
+			{description = "Forever", data = false},
+		},
+		default = 10 * 60,
+	},
 	
 	{
 		name = "dwellercooldown",
@@ -816,6 +940,33 @@ configuration_options =
 		hover = "",
 		default = 0,
 	},	
+
+	{
+		name = "timestopdurability",
+		label = "Durability",
+		hover = "How long the Time Stop Hat lasts. Durability goes down while the hat is active.",
+		options =
+		{
+			{description = "Forever", data = false},
+			{description = "30 seconds", data = 30},
+			{description = "1 minute", data = 60},
+			{description = "5 minutes (Default)", data = 5 * 60},
+			{description = "10 minutes", data = 10 * 60},
+			{description = "15 minutes", data = 15 * 60},
+			{description = "30 minutes", data = 30 * 60},
+			{description = "45 minutes", data = 45 * 60},
+			{description = "60 minutes", data = 60 * 60},
+			{description = "75 minutes", data = 75 * 60},
+			{description = "90 minutes", data = 90 * 60},
+			{description = "2 hours", data = 2 * 60 * 60},
+			{description = "3 hours", data = 3 * 60 * 60},
+			{description = "4 hours", data = 4 * 60 * 60},
+			{description = "6 hours", data = 6 * 60 * 60},
+			{description = "12 hours", data = 12 * 60 * 60},
+			{description = "Forever", data = false},
+		},
+		default = 5 * 60,
+	},
 	
 	{
 		name = "timestopcooldown",

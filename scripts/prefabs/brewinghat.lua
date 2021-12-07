@@ -38,12 +38,6 @@ local function equiprev(inst)
 end
 
 local function OnEmpty(inst)
-	local owner = inst.components.inventoryitem:GetGrandOwner()
-	
-    local drop = SpawnPrefab("strawhat")
-
-	owner.components.inventory:Equip(drop) -- We can assume the hat we're replacing was equipped, since there's no other way to use durability.
-
 	inst:DoTaskInTime(0, inst.Remove)
 end
 
@@ -190,10 +184,12 @@ local function fn(Sim)
 	-- inst.components.fueled.fueltype = FUELTYPE.CAVE
 	-- inst.components.fueled.accepting = true
 
-	inst:AddComponent("finiteuses")
-	inst.components.finiteuses:SetOnFinished(OnEmpty)
-    inst.components.finiteuses:SetMaxUses(50)
-    inst.components.finiteuses:SetUses(50)
+	if TUNING.BREWINGHAT_DURABILITY then
+		inst:AddComponent("finiteuses")
+		inst.components.finiteuses:SetOnFinished(OnEmpty)
+		inst.components.finiteuses:SetMaxUses(TUNING.BREWINGHAT_DURABILITY) -- add tuning 50
+		inst.components.finiteuses:SetUses(TUNING.BREWINGHAT_DURABILITY)
+	end
 	
 	inst:ListenForEvent("AbilityKey", KeybindUse)
 

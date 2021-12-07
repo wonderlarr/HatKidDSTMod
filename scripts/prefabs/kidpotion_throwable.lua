@@ -227,8 +227,8 @@ end
 -- That was written when I planned on rewriting this hat, now I'm just adjusting it... sadly this item still exists.
 
 -- Checking in again, I've decided it's for the best that this item exists, at most I might rework it to just be ammo instead of a whole item, but it's fine for now.
-STRINGS.NAMES.KIDPOTION_THROWABLE = "Kid's Potion"
+STRINGS.NAMES.KIDPOTION_THROWABLE = "Brewed Concoction"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.KIDPOTION_THROWABLE = "Throwing these will be fun!"
-STRINGS.RECIPE_DESC.KIDPOTION_THROWABLE = "Explody Potion, deals AOE damage"
+STRINGS.RECIPE_DESC.KIDPOTION_THROWABLE = "Explody Concoction, deals AOE damage"
  
 return Prefab("kidpotion_throwable", kidpotion_fn, kidpotion_assets, kidpotion_prefabs)
