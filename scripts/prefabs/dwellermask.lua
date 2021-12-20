@@ -1,7 +1,7 @@
 local assets=
 { 
     Asset("ANIM", "anim/dwellermask.zip"),
-    Asset("ANIM", "anim/dwellermask_swap.zip"), 
+	Asset("ANIM", "anim/dwellermask_on.zip"),
 
     Asset("ATLAS", "images/inventoryimages/dwellermask.xml"),
     Asset("IMAGE", "images/inventoryimages/dwellermask.tex"),
@@ -13,11 +13,11 @@ local assets=
     Asset("SOUND", "sound/dwellermask.fsb"),
 }
 
+RegisterInventoryItemAtlas("images/inventoryimages/dwellermask.xml","dwellermask.tex")
+
 local prefabs = 
 {
-	"reticuleaoe",
-	"hkr_icerange",
-	"researchlab",
+
 }
 
 local DWELLERVISION_COLOURCUBES_2 =
@@ -32,15 +32,13 @@ local DWELLERVISION_COLOURCUBES_2 =
 -- local DWELLERVISION_COLOURCUBES_3 =
 -- {
 -- 	-- These new cubes are easier on the eyes, previous ones were very harsh green.
+
+--  Playtesters actually missed the harsher green, reverting.
 --     day = resolvefilepath("images/cc/nd.tex"),
 --     dusk = resolvefilepath("images/cc/nd.tex"),
 --     night = resolvefilepath("images/cc/nd.tex"),
 --     full_moon = resolvefilepath("images/cc/nd.tex"),
 -- }
-
-local function aura()
-	return 1
-end
 
 local tweentime = 0.1
 
@@ -91,7 +89,8 @@ local function DwellerAbility(inst)
 		-- owner.Light:SetColour(8/255, 248/255, 12/255)
 		inst.Light:Enable(true)
 		
-		inst.net_light_roll:set(1)
+		inst.net_light_roll:set(true)
+		owner.AnimState:OverrideSymbol("swap_hat", "dwellermask_on", "swap_hat")
 
 		inst.components.lighttweener:StartTween(inst.Light, TUNING.DWELLERMASK_RADIUS, nil, nil, nil, tweentime, OnTweenDone)
 
@@ -190,7 +189,8 @@ local function OnStopUse(inst)
         -- owner.Light:SetColour(255 / 255, 255 / 255, 236 / 255)
         -- inst.Light:Enable(false)
 
-		inst.net_light_roll:set(0)
+		inst.net_light_roll:set(false)
+		owner.AnimState:OverrideSymbol("swap_hat", "dwellermask", "swap_hat")
 
 		inst.components.lighttweener:StartTween(inst.Light, 0, nil, nil, nil, tweentime)
 
@@ -229,38 +229,24 @@ local function KeybindUse(inst)
 end
 
 local function OnEquip(inst, owner)
-	-- If the equiper doesn't have the Hat Kid tag (which only hat kid has for now) then
-	-- drop the item, and say a fail message.
-	if owner:HasTag("player") and not owner:HasTag("hatkid") then
-		inst:DoTaskInTime(0, function()
-			owner.components.inventory:DropItem(inst)
-			owner.components.talker:Say(GetString(player, "ACTIONFAIL_GENERIC"))
-		end)
-	end
-	
 	owner.AnimState:OverrideSymbol("swap_hat", "dwellermask", "swap_hat")
-	
+
 	--Legacy code, nolonger needed.
-	
+
 	-- if owner.components.sanity ~= nil then
 		-- owner.components.sanity:SetInducedInsanity(inst, true)
 	-- end
-	
+
 	owner.AnimState:Show("HAT")
 	owner.AnimState:Show("HAT_HAIR")
-	
+
 	if owner:HasTag("player") then
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Hide("HEAD_HAT")
 	end
-	
-	-- if inst.components.container ~= nil then
-		-- inst.components.container:Open(owner)
-	-- end
 end
  
 local function OnUnequip(inst, owner)
-
 	if inst.components.timer:TimerExists("dwellmask_duration") then
 		inst:AddTag("disabledwell")
 		inst.components.useableitem:StopUsingItem()
@@ -275,96 +261,30 @@ local function OnUnequip(inst, owner)
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Hide("HEAD_HAT")
 	end
-	
-	-- if owner.components.sanity ~= nil then
-		-- owner.components.sanity:SetInducedInsanity(inst, false)
-	-- end
-	
-	-- if inst.components.container ~= nil then
-        -- inst.components.container:Close()
-    -- end
-end
-
--- local function OnBadgeLoaded(inst, data)
-	-- if data ~= nil and data.item ~= nil then
-		-- if data.item.prefab == "hkr_badge_football" then
-			-- inst:AddComponent("armor")
-			-- inst.components.armor:InitIndestructible(TUNING.ARMORWOOD_ABSORPTION)
-			-- badge = data.item
-		-- end
-	-- end
--- end
-
--- local function OnBadgeUnloaded(inst)
-	-- if inst.components.armor ~= nil then
-		-- inst:RemoveComponent("armor")
-	-- end
--- end
-
-local mult = 0
-
-
-local function OnUpdateFade(inst)
-	-- mult = inst.light_roll
-
-	if inst.light_roll == 1 then
-		mult = mult + FRAMES * 10
-		if (math.min(mult, 1)) >= 1 then -- Once we've blown up
-			inst.lightroll:Cancel()
-			inst.lightroll = nil
-			mult = 1
-		end
-	elseif inst.light_roll == 0 then
-		mult = mult - FRAMES * 10
-		if (math.min(mult, 1)) <= 0 then -- Once we've come down
-			inst.lightroll:Cancel()
-			inst.lightroll = nil
-			mult = 0
-		end
-	end
-
-	-- if inst.Light:GetRadius() <= 0 then
-		inst.Light:SetRadius(TUNING.DWELLERMASK_RADIUS * (math.min(mult, 1))) -- Burst out
-
-		if mult <= 0 then
-			inst.Light:Enable(false)
-		else
-			inst.Light:Enable(true)
-		end
-	-- end
-
-
-
-
-
-
 end
 
 local function OnLightDirty(inst)
 	inst.light_roll = inst.net_light_roll:value()
-	-- print(inst.light_roll)
-
-	-- mult = inst.light_roll
-
-	local radius = inst.Light:GetRadius()
 	
-	if inst.light_roll == 0 then
+	if inst.light_roll == false then
 
+		--off
+		inst.AnimState:SetBank("dwellermask")
+		inst.AnimState:SetBuild("dwellermask")
+		inst.AnimState:PlayAnimation("idle")
 
-		-- print(inst.Light:GetCalculatedRadius())
 		inst.components.lighttweener:StartTween(inst.Light, 0, nil, nil, nil, tweentime)
 		
 	else
-		-- inst.aoe = SpawnPrefab("hkr_aoe")
-		-- inst.aoe.entity:SetParent(inst.entity)
-		-- print(inst.Light:GetCalculatedRadius())
-		inst.components.lighttweener:StartTween(inst.Light, TUNING.DWELLERMASK_RADIUS, nil, nil, nil, tweentime, OnTweenDone)
-	end
 
-	-- if inst.lightroll == nil then
-	-- 	inst.lightroll = inst:DoPeriodicTask(FRAMES, OnUpdateFade)
-	-- end
-	-- OnUpdateFade(inst)
+		--on
+		inst.AnimState:SetBank("dwellermask_on")
+		inst.AnimState:SetBuild("dwellermask_on")
+		inst.AnimState:PlayAnimation("idle")
+		
+		inst.components.lighttweener:StartTween(inst.Light, TUNING.DWELLERMASK_RADIUS, nil, nil, nil, tweentime, OnTweenDone)
+
+	end
 end
 
 local function OnEmpty(inst)
@@ -396,7 +316,7 @@ local function fn(Sim)
 	inst.Light:EnableClientModulation(true)
 
 	inst.light_roll = 0
-	inst.net_light_roll = net_ushortint(inst.GUID, "light_roll", "light_rolldirty" )
+	inst.net_light_roll = net_bool(inst.GUID, "light_roll", "light_rolldirty" )
 
 
     inst:AddTag("hat")
@@ -406,7 +326,6 @@ local function fn(Sim)
 	
     if not TheWorld.ismastersim then
 		inst:ListenForEvent("light_rolldirty", OnLightDirty)
-		-- inst.OnEntityReplicated = function(inst) inst.replica.container:WidgetSetup("hkr_badgeslot") end
         return inst
     end
 	
@@ -440,10 +359,11 @@ local function fn(Sim)
 
 	
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.imagename = "dwellermask"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/dwellermask.xml"
+    -- inst.components.inventoryitem.imagename = "dwellermask"
+    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/dwellermask.xml"
 	 
     inst:AddComponent("equippable")
+	inst.components.equippable.restrictedtag = "hatkid"
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )

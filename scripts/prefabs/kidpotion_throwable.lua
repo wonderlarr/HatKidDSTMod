@@ -9,6 +9,8 @@ local kidpotion_assets = {
     Asset("SOUND", "sound/brewinghat.fsb"),
 }
 
+RegisterInventoryItemAtlas("images/inventoryimages/kidpotion.xml","kidpotion.tex")
+
 local holder = {
     nil,
 }
@@ -40,6 +42,16 @@ local function DoExplode(self)
                     v.components.workable:WorkedBy(holder, 2)
                     v:PushEvent("attacked", { attacker = holder, damage = 0})
                 else -- Otherwise
+                    if v.components.lootdropper then
+                        -- chance 
+                        for i = v.components.workable.workleft + 1 or 1, 0, -1
+                        do
+                            v.components.lootdropper:AddChanceLoot("pon", 0.75)
+                        end
+            
+                        v:AddTag("pons")
+                    end
+
                     v.components.workable:WorkedBy(holder, self.buildingdamage)
                     v:PushEvent("attacked", { attacker = holder, damage = 0})
                 end
@@ -48,9 +60,10 @@ local function DoExplode(self)
            if v:IsValid() and not v:IsInLimbo() then
  
                 if v.components.combat ~= nil then
-                    v.components.combat:GetAttacked(self.inst, totaldamage, nil)
+                    holder:PushEvent("onattackother", {target = v})
+                    v.components.combat:GetAttacked(holder, totaldamage, nil)
 					
-					v.components.combat:SuggestTarget(holder)
+					-- v.components.combat:SuggestTarget(holder)
                 end
  
                 v:PushEvent("explosion", { explosive = self.inst })
@@ -80,20 +93,9 @@ end
 
  
 local function onequip(inst, owner)
-	-- If the equiper doesn't have the Hat Kid tag (which only hat kid has for now) then
-	-- drop the item, and say a fail message.
-	if owner:HasTag("player") and not owner:HasTag("hatkid") then
-		inst:DoTaskInTime(0, function()
-			owner.components.inventory:DropItem(inst)
-			owner.components.talker:Say(GetString(player, "ACTIONFAIL_GENERIC"))
-		end)
-	end
-	
     owner.AnimState:OverrideSymbol("swap_object", "swap_kidpotion", "swap_kidpotion")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
-
-    -- inst.components.aoetargeting:StartTargeting()
 	
 	holder = inst.components.inventoryitem.owner
 end
@@ -204,8 +206,8 @@ local function kidpotion_fn()
     inst:AddComponent("inspectable")
  
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.imagename = "kidpotion"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/kidpotion.xml"
+    -- inst.components.inventoryitem.imagename = "kidpotion"
+    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/kidpotion.xml"
 	inst.components.inventoryitem.cangoincontainer = false
 	
 	inst.components.complexprojectile:SetHorizontalSpeed(18)
@@ -215,6 +217,7 @@ local function kidpotion_fn()
 	inst.components.complexprojectile:SetOnHit(OnHitSomething)
 	
     inst:AddComponent("equippable")
+    inst.components.equippable.restrictedtag = "hatkid"
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
 	inst.components.equippable.walkspeedmult = TUNING.BREWINGHAT_SLOWDOWN

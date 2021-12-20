@@ -3,7 +3,6 @@
 local assets=
 { 
     Asset("ANIM", "anim/timestophat.zip"),
-    Asset("ANIM", "anim/timestophat_swap.zip"), 
 
     Asset("ATLAS", "images/inventoryimages/timestophat.xml"),
     Asset("IMAGE", "images/inventoryimages/timestophat.tex"),
@@ -13,6 +12,11 @@ local assets=
 	
 	Asset( "ANIM", "anim/hatkid_timestop.zip" ),
 }
+
+
+RegisterInventoryItemAtlas("images/inventoryimages/timestophat.xml","timestophat.tex")
+
+
 
 
 local prefabs = 
@@ -50,24 +54,6 @@ local function SlowNear(inst)
 	end
 end
 
-local function SpeedUp(inst)
-	local owner = inst.components.inventoryitem.owner
-	local pt = owner:GetPosition()
-	local nags = { "character" }
-	local tags = { "timeslowed" }
-	local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, 64, nil, nags, tags)
-	for _,ent in ipairs(targets) do
-		if ent.components.combat and ent.components.locomotor then
-			local OPeriod = ent.components.combat.min_attack_period
-			
-			ent.components.combat:SetAttackPeriod(ent.OPeriod / 2)
-			ent.components.locomotor:RemoveExternalSpeedMultiplier(ent, "timeslow_speed_mod")
-			
-		end
-	end
-end
-
-
 local function OnUse(inst)
 
 	local owner = inst.components.inventoryitem.owner
@@ -100,8 +86,13 @@ local function OnUse(inst)
 		inst.SoundEmitter:PlaySound("timestophat/sound/loop", "timestoploop")
 		
 		--Set Skin to TimeStop skin
+		-- print("Before: ".. tostring(owner.AnimState:GetBuild()))
+
+
+		owner.oldskin = owner.AnimState:GetBuild()
+
 		SetSkinsOnAnim(owner.AnimState, "hatkid_timestop", "hatkid_timestop", owner.components.skinner:GetClothing(), nil, "hatkid_timestop")
-		
+		-- print("After: " .. tostring(owner.AnimState:GetBuild()))
 		-- SetLocalTimeScale(nil, owner, 2)
 		-- owner.OPeriod = owner.components.combat.min_attack_period
 		-- ent.components.locomotor:SetExternalSpeedMultiplier(ent, "timeslow_speed_mod", 0.5)
@@ -147,7 +138,8 @@ local function OnStopUse(inst)
 		inst.SoundEmitter:KillSound("timestoploop")
 		
 		--Revert back to default skin
-		SetSkinsOnAnim(owner.AnimState, "hatkid_copy", "hatkid_copy", owner.components.skinner:GetClothing(), nil, "hatkid_copy")
+		local default = owner.oldskin or "hatkid"
+		SetSkinsOnAnim(owner.AnimState, default, default, owner.components.skinner:GetClothing(), nil, default)
 		
 		-- Stop the duration timer, if it exists
 		if inst.components.timer:TimerExists("timehat_duration") then
@@ -167,15 +159,6 @@ local function KeybindUse(inst)
 end
 
 local function OnEquip(inst, owner)
-	-- If the equiper doesn't have the Hat Kid tag (which only hat kid has for now) then
-	-- drop the item, and say a fail message.
-	if owner:HasTag("player") and not owner:HasTag("hatkid") then
-		inst:DoTaskInTime(0, function()
-			owner.components.inventory:DropItem(inst)
-			owner.components.talker:Say(GetString(player, "ACTIONFAIL_GENERIC"))
-		end)
-	end
-	
 	owner.AnimState:OverrideSymbol("swap_hat", "timestophat", "swap_hat")
 			
 	owner.AnimState:Show("HAT")
@@ -185,10 +168,6 @@ local function OnEquip(inst, owner)
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Hide("HEAD_HAT")
 	end
-	
-	-- if inst.components.container ~= nil then
-		-- inst.components.container:Open(owner)
-	-- end
 end
  
 local function OnUnequip(inst, owner)
@@ -207,27 +186,7 @@ local function OnUnequip(inst, owner)
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Hide("HEAD_HAT")
 	end
-	
-	-- if inst.components.container ~= nil then
-        -- inst.components.container:Close()
-    -- end
 end
- 
--- local function OnBadgeLoaded(inst, data)
-	-- if data ~= nil and data.item ~= nil then
-		-- if data.item.prefab == "hkr_badge_football" then
-			-- inst:AddComponent("armor")
-			-- inst.components.armor:InitIndestructible(TUNING.ARMORWOOD_ABSORPTION)
-			-- badge = data.item
-		-- end
-	-- end
--- end
-
--- local function OnBadgeUnloaded(inst)
-	-- if inst.components.armor ~= nil then
-		-- inst:RemoveComponent("armor")
-	-- end
--- end
 
 local function OnCharged(inst)
 	local rechargeable = inst.components.rechargeable
@@ -263,7 +222,6 @@ local function fn(Sim)
     inst:AddTag("hatkidhat")
 	
     if not TheWorld.ismastersim then
-		-- inst.OnEntityReplicated = function(inst) inst.replica.container:WidgetSetup("hkr_badgeslot") end
         return inst
     end
 	
@@ -300,10 +258,11 @@ local function fn(Sim)
     inst.components.insulator:SetInsulation(TUNING.INSULATION_SMALL)
 	
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.imagename = "timestophat"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/timestophat.xml"
+    -- inst.components.inventoryitem.imagename = "timestophat"
+    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/timestophat.xml"
 	
     inst:AddComponent("equippable")
+	inst.components.equippable.restrictedtag = "hatkid"
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )

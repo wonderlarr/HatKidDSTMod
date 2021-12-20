@@ -6,21 +6,15 @@ local kidpotion_assets = {
     Asset("IMAGE", "images/inventoryimages/kidpotion.tex"),
 }
 
+RegisterInventoryItemAtlas("images/inventoryimages/kidpotion.xml","kidpotion.tex")
+
+
 local kidpotion_prefabs = 
 {
     "kidpotion_throwable",
 }
  
 local function onequip(inst, owner)
-	-- If the equiper doesn't have the Hat Kid tag (which only hat kid has for now) then
-	-- drop the item, and say a fail message.
-	if owner:HasTag("player") and not owner:HasTag("hatkid") then
-		inst:DoTaskInTime(0, function()
-			owner.components.inventory:DropItem(inst)
-			owner.components.talker:Say(GetString(player, "ACTIONFAIL_GENERIC"))
-		end)
-	end
-	
     owner.AnimState:OverrideSymbol("swap_object", "swap_kidpotion", "swap_kidpotion")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
@@ -53,7 +47,6 @@ local function OnCharged(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 	local slot = owner.components.inventory:GetItemSlot(inst)
 	
-	-- owner.components.inventory:GiveItem(SpawnPrefab("kidpotion_throwable"), slot)
 	inst:AddTag("used")
 	owner.components.inventory:Equip(SpawnPrefab("kidpotion_throwable"))
 	
@@ -74,19 +67,6 @@ local function kidpotion_fn()
     inst.AnimState:SetBuild("kidpotion")
     inst.AnimState:PlayAnimation("idle")
 
-    -- inst:AddComponent("reticule")
-    -- inst.components.reticule.targetfn = ReticuleTargetFn
-    -- inst.components.reticule.ease = true
-	
-    -- inst:AddComponent("aoetargeting")
-    -- inst.components.aoetargeting.reticule.reticuleprefab = "reticuleaoe"
-    -- inst.components.aoetargeting.reticule.pingprefab = "reticuleaoeping"
-    -- inst.components.aoetargeting.reticule.targetfn = ReticuleTargetFn
-    -- inst.components.aoetargeting.reticule.validcolour = { 1, .75, 0, 1 }
-    -- inst.components.aoetargeting.reticule.invalidcolour = { .5, 0, 0, 1 }
-    -- inst.components.aoetargeting.reticule.ease = true
-    -- inst.components.aoetargeting.reticule.mouseenabled = true
- 
     if not TheWorld.ismastersim then
         return inst
     end
@@ -98,12 +78,13 @@ local function kidpotion_fn()
     inst:AddComponent("inspectable")
  
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.imagename = "kidpotion"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/kidpotion.xml"
+    -- inst.components.inventoryitem.imagename = "kidpotion"
+    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/kidpotion.xml"
 	inst.components.inventoryitem:SetOnDroppedFn(onDrop)
 	inst.components.inventoryitem.cangoincontainer = false
 	
     inst:AddComponent("equippable")
+    inst.components.equippable.restrictedtag = "hatkid"
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
 	inst.components.equippable.walkspeedmult = TUNING.BREWINGHAT_SLOWDOWN

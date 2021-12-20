@@ -1,26 +1,26 @@
 --[[
-  _    _           _         _  __  _       _       _____           _                       _              _ 
+  _    _           _         _  __  _       _       _____           _                       _              _
  | |  | |         | |       | |/ / (_)     | |     |  __ \         | |                     | |            | |
  | |__| |   __ _  | |_      | ' /   _    __| |     | |__) |   ___  | |   ___     __ _    __| |   ___    __| |
  |  __  |  / _` | | __|     |  <   | |  / _` |     |  _  /   / _ \ | |  / _ \   / _` |  / _` |  / _ \  / _` |
  | |  | | | (_| | | |_      | . \  | | | (_| |     | | \ \  |  __/ | | | (_) | | (_| | | (_| | |  __/ | (_| |
- |_|  |_|  \__,_|  \__|     |_|\_\ |_|  \__,_|     |_|  \_\  \___| |_|  \___/   \__,_|  \__,_|  \___|  \__,_|                
+ |_|  |_|  \__,_|  \__|     |_|\_\ |_|  \__,_|     |_|  \_\  \___| |_|  \___/   \__,_|  \__,_|  \___|  \__,_|
 
-  _                  _____   _              _                       
- | |                / ____| | |            | |                      
- | |__    _   _    | (___   | | __  _   _  | |   __ _   _ __   _ __ 
+  _                  _____   _              _
+ | |                / ____| | |            | |
+ | |__    _   _    | (___   | | __  _   _  | |   __ _   _ __   _ __
  | '_ \  | | | |    \___ \  | |/ / | | | | | |  / _` | | '__| | '__|
- | |_) | | |_| |    ____) | |   <  | |_| | | | | (_| | | |    | |   
- |_.__/   \__, |   |_____/  |_|\_\  \__, | |_|  \__,_| |_|    |_|   
-           __/ |                     __/ |                          
-          |___/                     |___/                           
+ | |_) | | |_| |    ____) | |   <  | |_| | | | | (_| | | |    | |
+ |_.__/   \__, |   |_____/  |_|\_\  \__, | |_|  \__,_| |_|    |_|
+           __/ |                     __/ |
+          |___/                     |___/
 
 
 	To be clear, I AM NOT GOOD AT CODING! However, I am good at using search engines, logic, and copy pasting.
 
 	A lot of the stuff written in this mod is absolutely disgusting, but it WORKS, and that's what matters.
 
-	If you are for whatever reason using part of my mod to learn something, or as an example, feel free, but also try to improve it, 
+	If you are for whatever reason using part of my mod to learn something, or as an example, feel free, but also try to improve it,
 	improving already existing code is a lot of what I did in this mod, be it code that was already in the mod, or snippets I "borrowed" from somewhere else.
 
 	Also, if you're looking to help me with my mod in any way, be it textures or code, or you just wanna chat,  join my super secret private and epic discord https://discord.gg/ysJRjaVUmu
@@ -30,6 +30,9 @@
 PrefabFiles = {
 	"hatkid",
 	"hatkid_none",
+
+	--player skins
+	"hatkid_copy", -- default clothes
 
 	--hats
     "kidhat",
@@ -47,10 +50,6 @@ PrefabFiles = {
 	"hatbrellaopen",
 	"hatbrella2open",
 
-	--player skins
-	"hatkid_skin1",
-	"hatkid_copy",
-
 	--throwables
 	"kidpotion",
 	"kidpotion_throwable",
@@ -58,18 +57,25 @@ PrefabFiles = {
 	--badges (not implemented yet)
 	-- "hkr_badge_football",
 	-- "hkr_badge_winter",
-	
+
+	--collectables
+	"pon",
+	-- "timepiece",
+
 	--fx prefabs
 	"brewinghat_explode",
 	"sprint_puff",
-	"hkr_aoe",
+	-- "hkr_aoe",
 	"hkr_icerange",
 	"icecloud",
 	"hatshatter",
 	"hatshatter2",
 
+	--misc
+	"inv_pons",
+
 	--testing
-	"cooltarget",
+	"cooltarget", -- This is a dummytarget prefab, but it only regens health when it is low.
 }
 
 Assets = {
@@ -78,42 +84,49 @@ Assets = {
 
     Asset( "IMAGE", "images/selectscreen_portraits/hatkid.tex" ),
     Asset( "ATLAS", "images/selectscreen_portraits/hatkid.xml" ),
-	
+
     Asset( "IMAGE", "images/selectscreen_portraits/hatkid_silho.tex" ),
     Asset( "ATLAS", "images/selectscreen_portraits/hatkid_silho.xml" ),
 
-    Asset( "IMAGE", "bigportraits/hatkid.tex" ),
-    Asset( "ATLAS", "bigportraits/hatkid.xml" ),
-	
 	Asset( "IMAGE", "images/map_icons/hatkid.tex" ),
 	Asset( "ATLAS", "images/map_icons/hatkid.xml" ),
-	
+
 	Asset( "IMAGE", "images/avatars/avatar_hatkid.tex" ),
     Asset( "ATLAS", "images/avatars/avatar_hatkid.xml" ),
-	
+
 	Asset( "IMAGE", "images/avatars/avatar_ghost_hatkid.tex" ),
     Asset( "ATLAS", "images/avatars/avatar_ghost_hatkid.xml" ),
-	
+
 	Asset( "IMAGE", "images/avatars/self_inspect_hatkid.tex" ),
     Asset( "ATLAS", "images/avatars/self_inspect_hatkid.xml" ),
-	
+
+	-- Big names
 	Asset( "IMAGE", "images/names_hatkid.tex" ),
     Asset( "ATLAS", "images/names_hatkid.xml" ),
-	
+
 	Asset( "IMAGE", "images/names_gold_hatkid.tex" ),
     Asset( "ATLAS", "images/names_gold_hatkid.xml" ),
-	
-    Asset( "IMAGE", "bigportraits/hatkid_none.tex" ),
+
+	-- Crafting tabs
+	Asset( "IMAGE", "images/gui/craftingtabicon.tex" ), -- Reused texture from Kid Hat, first swap image.
+	Asset( "ATLAS", "images/gui/craftingtabicon.xml" ),
+
+	-- Pon inventory
+	Asset("ANIM", "anim/status_pons.zip"),
+	Asset("ANIM", "anim/pons_icon.zip"),
+
+	-- Skin bigportraits
+    Asset( "IMAGE", "bigportraits/hatkid.tex" ), -- Base, not sure where this is used tbh. 
+    Asset( "ATLAS", "bigportraits/hatkid.xml" ),
+
+	Asset( "IMAGE", "bigportraits/hatkid_none.tex" ), -- Default, texture is same as base.
     Asset( "ATLAS", "bigportraits/hatkid_none.xml" ),
 
-	Asset( "IMAGE", "images/gui/craftingtabicon.tex" ),
-	Asset( "ATLAS", "images/gui/craftingtabicon.xml" ),
-	
-	-- Asset("ANIM", "anim/kidhat.zip"),
-    -- Asset("ANIM", "anim/kidhat_swap.zip"), 
+    Asset( "IMAGE", "bigportraits/hatkid_cat.tex" ), -- Nyakuza
+    Asset( "ATLAS", "bigportraits/hatkid_cat.xml" ),
 
-    -- Asset("ATLAS", "images/inventoryimages/kidhat.xml"),
-    -- Asset("IMAGE", "images/inventoryimages/kidhat.tex"),
+	Asset( "IMAGE", "bigportraits/hatkid_detective.tex" ), -- Detective
+    Asset( "ATLAS", "bigportraits/hatkid_detective.xml" ),
 
 }
 modimport("engine.lua") --Keyhandler engine
@@ -129,6 +142,7 @@ Load "textedit"
 TUNING.HATKID_ABILITYKEY = GetModConfigData("hatkid_polarhatkey")
 
 GLOBAL.STRINGS.SKIN_NAMES.hatkid_none = "Hat Kid" -- (why is this here lol)
+GLOBAL.CHARACTER_INGREDIENT.PON = "pon_cost"
 
 
 --Character stat config
@@ -155,8 +169,8 @@ TUNING.HATBRELLA2_DAMAGE = GetModConfigData("hatbrella2damage")
 
 
 --Sanity Aura configs
-TUNING.HATKID_AURARATE = GetModConfigData("hatkidaurarate")
-TUNING.HATKID_AURASIZE = GetModConfigData("hatkidaurasize")
+-- TUNING.HATKID_AURARATE = GetModConfigData("hatkidaurarate")
+-- TUNING.HATKID_AURASIZE = GetModConfigData("hatkidaurasize")
 
 --Hat stuff
 
@@ -207,12 +221,12 @@ TUNING.FUNNYMODE = GetModConfigData("funnymode")
 
 
 
-TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.HATKID = {"kidhat"--[[, "hatbrella"]]} 
-local mymodstartingitems = {
-	kidhat = {atlas = "images/inventoryimages/kidhat.xml"},
-	-- hatbrella = {atlas = "images/inventoryimages/hatbrella.xml"}, -- Removed for balance
-}
-TUNING.STARTING_ITEM_IMAGE_OVERRIDE = type(TUNING.STARTING_ITEM_IMAGE_OVERRIDE) == "table" and GLOBAL.MergeMaps(TUNING.STARTING_ITEM_IMAGE_OVERRIDE, mymodstartingitems) or mymodstartingitems
+TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.HATKID = {"kidhat"--[[, "hatbrella"]]}
+-- local mymodstartingitems = {
+-- 	kidhat = {atlas = "images/inventoryimages/kidhat.xml"},
+-- 	-- hatbrella = {atlas = "images/inventoryimages/hatbrella.xml"}, -- Removed for balance
+-- }
+-- TUNING.STARTING_ITEM_IMAGE_OVERRIDE = type(TUNING.STARTING_ITEM_IMAGE_OVERRIDE) == "table" and GLOBAL.MergeMaps(TUNING.STARTING_ITEM_IMAGE_OVERRIDE, mymodstartingitems) or mymodstartingitems
 GLOBAL.STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Smol"
 
 local require = GLOBAL.require
@@ -226,7 +240,7 @@ local TUNING = GLOBAL.TUNING
 -- The character select screen lines
 STRINGS.CHARACTER_TITLES.hatkid = "The Hat Explorer"
 STRINGS.CHARACTER_NAMES.hatkid = "Hat Kid"
-STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Makes cool hats, for herself\n*Might go insane without a hat\n*Doesn't hit hard without her umbrella\n*Is Extremely cute"
+STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Makes cool hats, for herself\n*Might go insane without a hat\n*Prefers to fight with her umbrella\n*Collects all kinds of things\n*Is extremely cute"
 STRINGS.CHARACTER_QUOTES.hatkid = "\"Oh, hi there!\""
 
 -- Custom speech strings
@@ -239,7 +253,7 @@ AddMinimapAtlas("images/map_icons/hatkid.xml")
 -- Add mod character to mod character list. Also specify a gender. Possible genders are MALE, FEMALE, ROBOT, NEUTRAL, and PLURAL.
 AddModCharacter("hatkid", "FEMALE")
 
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATKID = 
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATKID =
 {
 	GENERIC = "It's Hat Kid!",
 	ATTACKER = "That Hat Kid looks shifty...",
@@ -249,7 +263,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATKID =
 	FIRESTARTER = "That Hat Kid is starting fires!",
 }
 
-STRINGS.CHARACTERS.HATKID.DESCRIBE.HATKID = 
+STRINGS.CHARACTERS.HATKID.DESCRIBE.HATKID =
 {
 	GENERIC = "It's, uh... Is that me?",
 	ATTACKER = "I don't like the way I look at myself.",
@@ -450,21 +464,21 @@ STRINGS.CHARACTERS.WARLY.DESCRIBE.HATBRELLA2OPEN = "I will try to remember not t
 
 
 --[[
-   _____                   __   _     _                        _____   _              __    __ 
+   _____                   __   _     _                        _____   _              __    __
   / ____|                 / _| | |   (_)                      / ____| | |            / _|  / _|
- | |       _ __    __ _  | |_  | |_   _   _ __     __ _      | (___   | |_   _   _  | |_  | |_ 
+ | |       _ __    __ _  | |_  | |_   _   _ __     __ _      | (___   | |_   _   _  | |_  | |_
  | |      | '__|  / _` | |  _| | __| | | | '_ \   / _` |      \___ \  | __| | | | | |  _| |  _|
- | |____  | |    | (_| | | |   | |_  | | | | | | | (_| |      ____) | | |_  | |_| | | |   | |  
-  \_____| |_|     \__,_| |_|    \__| |_| |_| |_|  \__, |     |_____/   \__|  \__,_| |_|   |_|  
-                                                   __/ |                                       
-                                                  |___/                                        
+ | |____  | |    | (_| | | |   | |_  | | | | | | | (_| |      ____) | | |_  | |_| | | |   | |
+  \_____| |_|     \__,_| |_|    \__| |_| |_| |_|  \__, |     |_____/   \__|  \__,_| |_|   |_|
+                                                   __/ |
+                                                  |___/
 ]]
 local HatTab = AddRecipeTab("Hats", 998, "images/gui/craftingtabicon.xml", "craftingtabicon.tex", "hatkidcrafter")
 
 
 --function(self, name, ingredients, tab, level, placer_or_more_data, min_spacing, nounlock, numtogive, builder_tag, atlas, image, testfn, product, build_mode, build_distance)
 
-hatbrellarecipe = AddRecipe("hatbrella", 
+hatbrellarecipe = AddRecipe("hatbrella",
 {Ingredient("spear", 1), Ingredient("silk",2), Ingredient("goldnugget",2)}, --
 HatTab,
 TECH.SCIENCE_ONE, --Required crafting level, this one is sciene machine
@@ -480,32 +494,32 @@ nil, --amount to give (nil is one, but 1 is one as well, not sure about the diff
 
 
 
-
-hatbrella2recipe = AddRecipe("hatbrella2", 
-{Ingredient("hatbrella", 1, "images/inventoryimages/hatbrella.xml"), Ingredient("tentaclespike",1), Ingredient("nightmarefuel",5)},
-HatTab,
-TECH.MAGIC_TWO, --prestihatitator
-nil, 
-nil, 
-nil, 
-nil, 
-"hatkidcrafter", 
-"images/inventoryimages/hatbrella2.xml", 
-"hatbrella2.tex")
-
-
+-- Removed, in favor of badges, a system more faithful to the original game. It also just didn't make sense to have different colored umbrella's.
+-- hatbrella2recipe = AddRecipe("hatbrella2",
+-- {Ingredient("hatbrella", 1, "images/inventoryimages/hatbrella.xml"), Ingredient("tentaclespike",1), Ingredient("nightmarefuel",5)},
+-- HatTab,
+-- TECH.MAGIC_TWO, --prestihatitator
+-- nil,
+-- nil,
+-- nil,
+-- nil,
+-- "hatkidcrafter",
+-- "images/inventoryimages/hatbrella2.xml",
+-- "hatbrella2.tex")
 
 
-kidhatrecipe = AddRecipe("kidhat", 
+
+
+kidhatrecipe = AddRecipe("kidhat",
 {Ingredient("beefalowool", 4), Ingredient("goldnugget", 2)},
 HatTab,
 TECH.NONE, -- no crafting station
-nil, 
-nil, 
-nil, 
-nil, 
-"hatkidcrafter", 
-"images/inventoryimages/kidhat.xml", 
+nil,
+nil,
+nil,
+nil,
+"hatkidcrafter",
+"images/inventoryimages/kidhat.xml",
 "kidhat.tex")
 
 
@@ -515,7 +529,7 @@ nil,
 sprinthatrecipe = AddRecipe("sprinthat",
 {Ingredient("feather_robin", 2), Ingredient("papyrus", 1), Ingredient("silk",4)},
 HatTab,
-TECH.SCIENCE_ONE,
+TECH.SCIENCE_ONE, -- science machine
 nil,
 nil,
 nil,
@@ -528,70 +542,70 @@ nil,
 
 
 
-polarhatrecipe = AddRecipe("polarhat", 
-{Ingredient("winterhat", 1), Ingredient("ice", 10), Ingredient("bluegem",1)},
+polarhatrecipe = AddRecipe("polarhat",
+{Ingredient("winterhat", 1), Ingredient("ice", 8), Ingredient("bluegem",1)},
 HatTab,
 TECH.MAGIC_TWO, -- Prestihatitator
-nil, 
-nil, 
-nil, 
-nil, 
-"hatkidcrafter", 
-"images/inventoryimages/polarhat.xml", 
+nil,
+nil,
+nil,
+nil,
+"hatkidcrafter",
+"images/inventoryimages/polarhat.xml",
 "polarhat.tex")
 
 
 
 
-brewinghatrecipe = AddRecipe("brewinghat", 
-{Ingredient("strawhat", 1), Ingredient("slurtleslime", 3), Ingredient("purplegem",1)},
+brewinghatrecipe = AddRecipe("brewinghat",
+{Ingredient("strawhat", 1), Ingredient("slurtleslime", 2), Ingredient("purplegem",1)},
 HatTab,
-TECH.MAGIC_THREE, --shadow manipulator
-nil, 
-nil, 
-nil, 
-nil, 
-"hatkidcrafter", 
-"images/inventoryimages/brewinghat.xml", 
+TECH.MAGIC_TWO,
+nil,
+nil,
+nil,
+nil,
+"hatkidcrafter",
+"images/inventoryimages/brewinghat.xml",
 "brewinghat.tex")
 
 
 
 
 
-dwellermaskrecipe = AddRecipe("dwellermask", 
+dwellermaskrecipe = AddRecipe("dwellermask",
 {Ingredient("wormlight", 1), Ingredient("papyrus", 2), Ingredient("nightmarefuel",4)},
 HatTab,
-TECH.MAGIC_THREE, 
-nil, 
-nil, 
-nil, 
-nil, 
-"hatkidcrafter", 
-"images/inventoryimages/dwellermask.xml", 
+TECH.MAGIC_THREE, --shadow manipulator
+nil,
+nil,
+nil,
+nil,
+"hatkidcrafter",
+"images/inventoryimages/dwellermask.xml",
 "dwellermask.tex")
 
 
 
 
 
-timestophatrecipe = AddRecipe("timestophat", 
-{Ingredient("moonglass", 8), Ingredient("silk", 8), Ingredient("greengem",1)},
+timestophatrecipe = AddRecipe("timestophat",
+{Ingredient("moonglass", 8), Ingredient("greengem",1), Ingredient("silk", 8)},
 HatTab,
 TECH.MOON_ALTAR_TWO, --celestial altar
-nil, 
-nil, 
-nil, 
-nil, 
-"hatkidcrafter", 
-"images/inventoryimages/timestophat.xml", 
+nil,
+nil,
+nil,
+nil,
+"hatkidcrafter",
+"images/inventoryimages/timestophat.xml",
 "timestophat.tex")
 
 
 -- Sort keys determine how recipes are ordered in the crafting menu.
 -- Lower values are shown first.
 hatbrellarecipe.sortkey = 0
-hatbrella2recipe.sortkey = 1
+-- hatbrella2recipe.sortkey = 1
 
 -- Leave room in case I wanna add any more craftables before the hats easily.
 kidhatrecipe.sortkey = 5
@@ -605,7 +619,7 @@ timestophatrecipe.sortkey = 10
 
 --*****************************************************************************************************************************************--
 ------------------------------------------------- Combat Component Adjustments by ZupaleX --------------------------------------------------------------
--------------------------------------------------------- to add/remove damagemodifier ------------------------------------------------- 
+-------------------------------------------------------- to add/remove damagemodifier -------------------------------------------------
 --*****************************************************************************************************************************************--
 
 local function AddDamageModifier(self, key, mod)
@@ -649,90 +663,18 @@ AddComponentPostInit("combat", function(self)
   end
 )
 
-
--- Character Skins -- Removed, will be added later as a customization option before you spawn in.
-
--- local hatkid_skin1 = AddRecipe("hatkid_skin1",
--- {},
--- HatTab,
--- TECH.NONE,
--- nil,
--- nil,
--- nil,
--- nil,
--- "hatkidcrafter",
--- "images/inventoryimages/hatkid_skin1.xml", "hatkid_skin1.tex")
--- hatkid_skin1.sortkey = 1
-
--- STRINGS.NAMES.HATKID_SKIN1 = "Margin of Night"
--- STRINGS.RECIPE_DESC.HATKID_SKIN1 = "Dye your clothes!"
-
--- local hatkid_copy = AddRecipe("hatkid_copy",
--- {},
--- HatTab,
--- TECH.NONE,
--- nil,
--- nil,
--- nil,
--- nil,
--- "hatkidcrafter",
--- "images/inventoryimages/hatkid_copy.xml", "hatkid_copy.tex")
--- hatkid_copy.sortkey = 1
-
--- STRINGS.NAMES.HATKID_COPY = "Default"
--- STRINGS.RECIPE_DESC.HATKID_COPY = "Your regular look."
-
--- Kid's Hat Skins
---[[
- local kidhat_skin1 = AddRecipe("kidhat_skin1",
-{Ingredient("kidhat", 1, "images/inventoryimages/kidhat.xml")},
-HatTab,
-TECH.NONE,
-nil,
-nil,
-nil,
-nil,
-"hatkidcrafter",
-"images/inventoryimages/kidhat_skin1.xml", "kidhat_skin1.tex")
-kidhat_skin1.sortkey = 1
-
- local kidhat_hks1 = AddRecipe("kidhat_hks1",
-{Ingredient("kidhat", 1, "images/inventoryimages/kidhat.xml")},
-HatTab,
-TECH.NONE,
-nil,
-nil,
-nil,
-nil,
-"hatkidcrafter",
-"images/inventoryimages/kidhat_hks1.xml", "kidhat_hks1.tex")
-kidhat_hks1.sortkey = 1
-
- local kidhat_hks1_skin1 = AddRecipe("kidhat_hks1_skin1",
-{Ingredient("kidhat", 1, "images/inventoryimages/kidhat.xml")},
-HatTab,
-TECH.NONE,
-nil,
-nil,
-nil,
-nil,
-"hatkidcrafter",
-"images/inventoryimages/kidhat_hks1_skin1.xml", "kidhat_hks1_skin1.tex")
-kidhat_hks1_skin1.sortkey = 1
-]]
-
 table.insert(GLOBAL.CHARACTER_GENDERS.FEMALE, "hatkid")
 
 
 --[[
-  _    _           _                    _       _   _   _   _                  _____               _          
- | |  | |         | |           /\     | |     (_) | | (_) | |                / ____|             | |         
- | |__| |   __ _  | |_         /  \    | |__    _  | |  _  | |_   _   _      | |        ___     __| |   ___   
- |  __  |  / _` | | __|       / /\ \   | '_ \  | | | | | | | __| | | | |     | |       / _ \   / _` |  / _ \  
- | |  | | | (_| | | |_       / ____ \  | |_) | | | | | | | | |_  | |_| |     | |____  | (_) | | (_| | |  __/  
- |_|  |_|  \__,_|  \__|     /_/    \_\ |_.__/  |_| |_| |_|  \__|  \__, |      \_____|  \___/   \__,_|  \___|  
-                                                                   __/ |                                      
-                                                                  |___/                                       
+  _    _           _                    _       _   _   _   _                  _____               _
+ | |  | |         | |           /\     | |     (_) | | (_) | |                / ____|             | |
+ | |__| |   __ _  | |_         /  \    | |__    _  | |  _  | |_   _   _      | |        ___     __| |   ___
+ |  __  |  / _` | | __|       / /\ \   | '_ \  | | | | | | | __| | | | |     | |       / _ \   / _` |  / _ \
+ | |  | | | (_| | | |_       / ____ \  | |_) | | | | | | | | |_  | |_| |     | |____  | (_) | | (_| | |  __/
+ |_|  |_|  \__,_|  \__|     /_/    \_\ |_.__/  |_| |_| |_|  \__|  \__, |      \_____|  \___/   \__,_|  \___|
+                                                                   __/ |
+                                                                  |___/
 ]]
 
 --CURRENTLY BEING OBSOLSTED! IF THIS SOMEHOW MAKES IT OUT IN IT'S CURRENT STATE SOMETHING IS WRONG!
@@ -759,19 +701,109 @@ end
 AddModRPCHandler("HatKidRPC", "AbilityKeyDown", Ability)
 
 
--- Helps with sizing hat kid correctly in the character select
-AddClassPostConstruct("widgets/redux/loadoutselect", function(self)
-if self.puppet == nil or self.currentcharacter ~= "hatkid" then
-    return
-end
-local puppet = self.puppet 
+AddClassPostConstruct("widgets/statusdisplays", function(self)
+	if self.owner:HasTag("hatkid") then
+		if self.ponbadge == nil then
+			local PonBadge      = require "widgets/ponbadge"
 
-        puppet.animstate:OverrideSymbol("swap_hat", "kidhat", "swap_hat")
-        puppet.animstate:Show("HAT")
-        puppet.animstate:Show("HAIR_HAT")
-        puppet.animstate:Hide("HAIR_NOHAT")
-        puppet.animstate:Hide("HAIR")
+			self.ponbadge = self:AddChild(PonBadge(self.owner))
+			self.ponbadge:SetPosition(-120, 20, 0)
+			self.ponbadge:SetPercent(self.owner.pons / 500, 500)
+			self.owner:ListenForEvent("UpdatePons", function()
+				self.ponbadge:SetPercent(self.owner.pons / 500, 500)
+			end)
+		end
+	end
 end)
+
+local function BuilderPostInit( self )
+	local _Open = self.Open
+
+	self.Open = function( inst, doer )
+		_Open(doer)
+		-- dumptable(doer)
+	end
+end
+
+-- AddComponentPostInit("container", BuilderPostInit)
+
+--Hornet: I am currently using wilba as an example, youll want to change all instances of "wilba" to the prefab name of your character!
+--Skins
+local _G = GLOBAL
+local PREFAB_SKINS = _G.PREFAB_SKINS
+local PREFAB_SKINS_IDS = _G.PREFAB_SKINS_IDS
+local SKIN_AFFINITY_INFO = GLOBAL.require("skin_affinity_info")
+
+modimport("skins_api") --Hornet: We import the file! If you named your file something else other than skins_api then youll want to rename this function to the name of the file
+
+SKIN_AFFINITY_INFO.hatkid = {
+	"hatkid_cat",
+	"hatkid_detective",
+
+	"hatkid_dye_niko",
+	"hatkid_dye_toonlink",
+	"hatkid_dye_pinkdanger",
+}
+
+--Hornet: The table of skins youre going to have, You can have as many skins as you want!
+
+PREFAB_SKINS["hatkid"] = {
+	--outfits
+	"hatkid_none", 
+	"hatkid_cat",
+	"hatkid_detective",
+	--"hatkid_raincoat",
+	--"hatkid_snatcher",
+
+	--dyes
+	"hatkid_dye_niko",
+	"hatkid_dye_toonlink",
+	"hatkid_dye_pinkdanger",
+
+} 
+
+PREFAB_SKINS_IDS = {} --Make sure this is after you  change the PREFAB_SKINS["character"] table
+for prefab,skins in pairs(PREFAB_SKINS) do
+    PREFAB_SKINS_IDS[prefab] = {}
+    for k,v in pairs(skins) do
+      	  PREFAB_SKINS_IDS[prefab][v] = k
+    end
+end
+
+
+
+AddSkinnableCharacter("hatkid") --Hornet: The character youd like to skin, make sure you use the prefab name. And MAKE sure you run this function AFTER you import the skins_api file
+
+--Skin STRINGS
+
+STRINGS.SKIN_NAMES.hatkid_none = "Hat Kid"
+STRINGS.SKIN_NAMES.hatkid_cat = "The Nyakuza"
+STRINGS.SKIN_NAMES.hatkid_detective = "The Detective"
+
+STRINGS.SKIN_NAMES.hatkid_dye_niko = "Margin of the Night"
+STRINGS.SKIN_NAMES.hatkid_dye_toonlink = "The Forest Critter"
+STRINGS.SKIN_NAMES.hatkid_dye_pinkdanger = "Cute 'n Dangerous"
+
+
+STRINGS.SKIN_QUOTES.hatkid_none = "\"Oh, hi there!\"" -- Redundant, mostly here for organization's sake. I believe the game uses the default quote with no skin selected, not this one.
+STRINGS.SKIN_DESCRIPTIONS.hatkid_none = "A royal purple and gold outfit, best fit for a cute adventurer. Complete with a cape and a giant, very necessary, zipper."
+
+STRINGS.SKIN_QUOTES.hatkid_cat = "\"Cat crime!\""
+STRINGS.SKIN_DESCRIPTIONS.hatkid_cat = "A cat themed varsity outfit, complete with mask and tail, which also may or may not be directly tied to countless illegal acts."
+
+STRINGS.SKIN_QUOTES.hatkid_detective = "\"MYURDER!\""
+STRINGS.SKIN_DESCRIPTIONS.hatkid_detective = "A detective outfit, worn by only the most SERIOUS of detectives! Unfortunately, your detective themed hat didn't make it to The Constant."
+
+STRINGS.SKIN_QUOTES.hatkid_dye_niko = "\"Oh, hi there!\""
+STRINGS.SKIN_DESCRIPTIONS.hatkid_niko = "An outfit reminding you, that you only have one shot."
+
+STRINGS.SKIN_QUOTES.hatkid_dye_toonlink = "\"Oh, hi there!\""
+STRINGS.SKIN_DESCRIPTIONS.hatkid_toonlink = "An outfit which seems to always wave in the wind, even when there is no wind."
+
+STRINGS.SKIN_QUOTES.hatkid_dye_pinkdanger = "\"Oh, hi there!\""
+STRINGS.SKIN_DESCRIPTIONS.hatkid_pinkdanger = "An cute, pink, and obviously lethal outfit."
+
+-- AddReplicableComponent("ponholder")
 
 -- Prevent Hat Kid from using her fist
 -- Actually, no more. Damage nerf is enough.
@@ -795,7 +827,7 @@ end)
 -- 				dirt.Transform:SetPosition(x, y, z)
 -- 				dirt.Transform:SetScale(0.5, 0.5, 0.5)
 -- 			end)
-			
+
 -- 		end
 -- 	end
 -- end)
@@ -810,7 +842,7 @@ end)
 -- 			if inst.footstep then
 -- 				inst.footstep:Cancel()
 -- 			end
-			
+
 -- 		-- end
 -- 	end
 -- end)
@@ -836,7 +868,7 @@ end)
 -- 				dirt.Transform:SetPosition(x, y, z)
 -- 				dirt.Transform:SetScale(0.5, 0.5, 0.5)
 -- 			end)
-			
+
 -- 		end
 -- 	end
 -- end)
@@ -851,7 +883,7 @@ end)
 -- 			if inst.footstep then
 -- 				inst.footstep:Cancel()
 -- 			end
-			
+
 -- 		-- end
 -- 	end
 -- end)
@@ -880,13 +912,45 @@ end)
 -- 	end
 -- end)
 
+-- AddGlobalClassPostConstruct("widgets/inventorybar", "Inv", function()
+-- end)
+
+
+-- AddPrefabPostInitAny(function(inst)
+-- 	if inst.components.lootdropper and inst.components.health and not inst:HasTag("player") then
 
 
 
-AddPrefabPostInit("ice", function(inst)
-    -- inst:AddComponent("fuel")
-    -- inst.components.fuel.fueltype = "POLAR"
-    -- inst.components.fuel.fuelvalue = 4
-	inst:AddComponent("fuel")
-    inst.components.fuel.fuelvalue = 1
-end)
+
+-- 		for i = inst.components.health.maxhealth,0,-250
+-- 		do
+-- 			inst.components.lootdropper:AddChanceLoot("pon", 0.75)
+-- 		end
+
+-- 	end
+-- end)
+
+-- local r_s = GLOBAL.require("components/stackable_replica")
+-- r_s._ctor = function(self, inst)
+-- 	self.inst = inst
+-- 	self._stacksize = GLOBAL.net_shortint(inst.GUID, "stackable._stacksize", "stacksizedirty")
+-- 	self._maxsize = GLOBAL.net_tinybyte(inst.GUID, "stackable._maxsize")
+-- end
+
+
+--[[
+local function GetTableFromFunction(tablename, func)
+	local debug = GLOBAL.debug
+	local i = 1
+	while true do
+		local n, v = debug.getupvalue(func, i)
+		if not n then
+			return nil
+		end
+		if n == tablename then
+			return v
+		end
+		i = i + 1
+	end
+end
+]]

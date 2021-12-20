@@ -1,7 +1,6 @@
 local assets=
 { 
     Asset("ANIM", "anim/polarhat.zip"),
-    Asset("ANIM", "anim/polarhat_swap.zip"), 
 
     Asset("ATLAS", "images/inventoryimages/polarhat.xml"),
     Asset("IMAGE", "images/inventoryimages/polarhat.tex"),
@@ -9,6 +8,9 @@ local assets=
 	Asset("SOUNDPACKAGE", "sound/icestomp.fev"),
     Asset("SOUND", "sound/icestomp.fsb"), 
 }
+
+RegisterInventoryItemAtlas("images/inventoryimages/polarhat.xml","polarhat.tex")
+
 
 --Scratch the previous stuff, new idea
 --I'm going to implement an ability key, probably LSHIFT by default, this will activate the Hat Ability, like slamming with ice hat, sprinting, throwing a potion with brewing hat, etc.
@@ -239,15 +241,6 @@ local function OnStopUse(inst)
 end
 
 local function OnEquip(inst, owner)
-	-- If the equiper doesn't have the Hat Kid tag (which only hat kid has for now) then
-	-- drop the item, and say a fail message.
-	if owner:HasTag("player") and not owner:HasTag("hatkid") then
-		inst:DoTaskInTime(0, function()
-			owner.components.inventory:DropItem(inst)
-			owner.components.talker:Say(GetString(player, "ACTIONFAIL_GENERIC"))
-		end)
-	end
-	
 	owner.AnimState:OverrideSymbol("swap_hat", "polarhat", "swap_hat")
 	
 	owner.AnimState:Show("HAT")
@@ -258,22 +251,8 @@ local function OnEquip(inst, owner)
 		owner.AnimState:Hide("HEAD_HAT")
 	end
 	
-	-- if owner.components.timer ~= nil then
-		-- if not owner.components.timer:TimerExists("hat_cooldown") then
-			Indicator(owner, true, 0.15 * TUNING.POLARHAT_RADIUS)
-		-- end
-	-- end
-	
-	-- owner:ListenForEvent("timerdone", function(inst)
-		-- Indicator(owner, true, 0.15 * 7)
-	-- end)
-	
-	-- Don't show the indicator when it's on cooldown, but let's start a task to re enable it once cooldown is over.
-	-- inst.indcheck = inst:DoPeriodicTask(0.5, IndicatorCheck, nil, inst)
-	
-	-- if inst.components.container ~= nil then
-		-- inst.components.container:Open(owner)
-	-- end
+
+	Indicator(owner, true, 0.15 * TUNING.POLARHAT_RADIUS)
 end
  
  
@@ -296,31 +275,8 @@ local function OnUnequip(inst, owner)
 	if inst:HasTag("inuse") then
 		inst:RemoveTag("inuse")
 	end
-
-	-- owner:RemoveEventCallback("timerdone", function(inst)
-		-- Indicator(owner, true, 0.15 * 7)
-	-- end)
-	
-	-- if inst.components.container ~= nil then
-        -- inst.components.container:Close()
-    -- end
 end
 
--- local function OnBadgeLoaded(inst, data)
-	-- if data ~= nil and data.item ~= nil then
-		-- if data.item.prefab == "hkr_badge_football" then
-			-- inst:AddComponent("armor")
-			-- inst.components.armor:InitIndestructible(TUNING.ARMORWOOD_ABSORPTION)
-			-- badge = data.item
-		-- end
-	-- end
--- end
-
--- local function OnBadgeUnloaded(inst)
-	-- if inst.components.armor ~= nil then
-		-- inst:RemoveComponent("armor")
-	-- end
--- end
 
 local function OnCharged()
 
@@ -355,7 +311,6 @@ local function fn(Sim)
     inst:AddTag("hatkidhat")
 	
     if not TheWorld.ismastersim then
-		-- inst.OnEntityReplicated = function(inst) inst.replica.container:WidgetSetup("hkr_badgeslot") end
         return inst
     end
 	
@@ -376,10 +331,11 @@ local function fn(Sim)
     inst:AddComponent("inspectable") 
 	
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.imagename = "polarhat"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/polarhat.xml"
+    -- inst.components.inventoryitem.imagename = "polarhat"
+    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/polarhat.xml"
 	 
     inst:AddComponent("equippable")
+	inst.components.equippable.restrictedtag = "hatkid"
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )

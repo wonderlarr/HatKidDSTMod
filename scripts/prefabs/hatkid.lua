@@ -2,6 +2,7 @@ local MakePlayerCharacter = require "prefabs/player_common"
 
 local assets = {
     Asset("SCRIPT", "scripts/prefabs/player_common.lua"),
+	Asset("ANIM", "anim/ui_chest_3x3.zip"),
 }
 local prefabs = {}
 
@@ -64,8 +65,15 @@ end
 local function SpawnWithStuff(inst)
     local kidhat = SpawnPrefab("kidhat")
     inst.components.inventory:Equip(kidhat)
+	
 	-- local hatbrella = SpawnPrefab("hatbrella")
     -- inst.components.inventory:Equip(hatbrella)
+end
+
+local function LoadPonInv(inst)
+	if inst.lab then
+		inst.lab.components.container:Open(inst)
+	end
 end
 
 -- When the character is revived
@@ -90,8 +98,10 @@ local function OnPotionThrow(inst)
 		"Boo-ya" ,
 	}
 	
+	-- Possibly overcomplicated way to make things happen 50% of the time. 
 	if math.random(1, 2) == 1 and inst.components.talker then
 
+		-- Say one of the 4 lines defined above.
 		inst.components.talker:Say(lines[math.random(1, 4)])
 
 	end
@@ -172,6 +182,10 @@ local function onload(inst)
 -- Listens for taking off hat, sanity drains without hat
 	inst:ListenForEvent("equip", OnEquip)
     inst:ListenForEvent("unequip", OnUnequip)
+
+
+
+	
 	
 	
     -- if inst:HasTag("playerghost") then
@@ -179,11 +193,18 @@ local function onload(inst)
     -- else
     --     onbecamehuman(inst)
     -- end
+
+	inst:DoTaskInTime(0, function(inst)
+		inst.skin = inst.AnimState:GetBuild()
+		if inst.lab then
+			inst.lab.components.container:Open(inst)
+		end
+	end)
+	
 end
 
 -- When spawning the character
 local function onnewspawn(inst)
-	-- inst:ListenForEvent("hatcooldown", oncooldown)
     -- inst:ListenForEvent("ms_respawnedfromghost", onbecamehuman)
     -- inst:ListenForEvent("ms_becameghost", onbecameghost)
 -- Listens for taking off hat, sanity drains without hat
@@ -194,15 +215,137 @@ local function onnewspawn(inst)
     -- else
     --     onbecamehuman(inst)
     -- end
+
+	inst:DoTaskInTime(0, function(inst)
+		inst.skin = inst.AnimState:GetBuild()
+	end)
+
+	
 	SpawnWithStuff(inst)
+	LoadPonInv(inst)
 end
 
+local function ApplyPons(inst, data)
+	if data.target:IsValid() and not data.target:IsInLimbo() and not data.target:HasTag("pons")  then
+		-- Apply pons to attackable things
+		if data.target.components.lootdropper and data.target.components.health then
+			data.target.components.lootdropper:AddChanceLoot("pon", 1)
+			data.target.components.lootdropper:AddChanceLoot("pon", 0.2)
+
+			-- Add additional pons to slightly stronger enemies
+			if data.target.components.health.maxhealth >= 100 then
+				
+				data.target.components.lootdropper:AddChanceLoot("pon", 0.9)
+				data.target.components.lootdropper:AddChanceLoot("pon", 0.2)
+			end
+
+			-- Additonal pon chance for every 250 health above the first 250. Enemies that have a multiple of 250 health will get an additional pon chance but that's okay.
+			if data.target.components.health.maxhealth >= 250 then
+				
+				for i = data.target.components.health.maxhealth,0,-250 
+				do 
+					data.target.components.lootdropper:AddChanceLoot("pon", 1)
+					data.target.components.lootdropper:AddChanceLoot("pon", 0.3)
+				end
+			end
+
+			data.target:AddTag("pons")
+		end
+
+		if data.target.components.workable and data.target.components.lootdropper then
+
+			-- chance 
+			for i = data.target.components.workable.workleft / 2 + 1 or 1, 0, -1
+			do
+				data.target.components.lootdropper:AddChanceLoot("pon", 0.75)
+			end
+
+			data.target:AddTag("pons")
+		end
+		
+
+	end
+end
+
+widgetsetup =
+{
+    widget =
+    {
+        slotpos = {},
+        animbank = "ui_chest_3x3",
+        animbuild = "ui_chest_3x3",
+        pos = Vector3(0, 200, 0),
+        side_align_tip = 160,
+    },
+    type = "chest",
+}
+
+for y = 2, 0, -1 do
+    for x = 0, 2 do
+        table.insert(widgetsetup.widget.slotpos, Vector3(80 * x - 80 * 2 + 80, 80 * y - 80 * 2 + 80, 0))
+    end
+end
+
+local function OnPonsDirty(inst)
+	inst.pons = inst.net_pons:value()
+	inst:PushEvent("UpdatePons")
+end
+
+local function OnGetPon(inst, data)
+	local num = data.count or 1
+
+	inst.pons = inst.pons + num
+
+	inst.net_pons:set(inst.pons)
+end
+
+local function OnSave(inst, data)
+	data.pons = inst.pons or 0
+end
+
+local function OnLoad(inst, data)
+	if data.pons ~= nil then
+		inst.pons = data.pons
+		inst.net_pons:set(data.pons)
+	end
+
+	LoadPonInv(inst)
 
 
+	inst:ListenForEvent("equip", OnEquip)
+    inst:ListenForEvent("unequip", OnUnequip)
+
+
+
+	
+	
+	
+    -- if inst:HasTag("playerghost") then
+    --     onbecameghost(inst)
+    -- else
+    --     onbecamehuman(inst)
+    -- end
+
+	inst:DoTaskInTime(0, function(inst)
+		inst.skin = inst.AnimState:GetBuild()
+	end)
+
+end
+
+local function OnClosePon(inst)
+	inst.tryopen = inst:DoPeriodicTask(0.5, function(inst)
+		if inst.components.inventory.isvisible == true then
+			LoadPonInv(inst)
+			
+			inst.tryopen:Cancel()
+			inst.tryopen = nil
+		end
+	end)
+end
 
 -- Server and client
 -- Thanks Kzisor/Ysovuka for the Key Handling code.
--- Key Handling guide https://forums.kleientertainment.com/forums/topic/63754-tutorial-character-transformation/
+-- Key Handling info https://forums.kleientertainment.com/forums/topic/63754-tutorial-character-transformation/
 local common_postinit = function(inst) 
 	inst.MiniMapEntity:SetIcon( "hatkid.tex" )
 	inst:AddTag("hatkidcrafter")
@@ -210,51 +353,28 @@ local common_postinit = function(inst)
 	
 	inst:AddComponent("keyhandler")
     inst.components.keyhandler:AddActionListener("HatKidRPC", TUNING["HATKID"].KEY, "AbilityKeyDown", "KEYDOWN")
-	
-	--light for Dweller Mask, will probably change in the future and add them to the Hat prefabs instead, but for now this works.
-    inst.entity:AddLight()
-	
-	
-	-- Time to learn net variables
-	
-	--Delcaration
-	-- inst.hatcooldown = 0
-	-- inst.net_hatcooldown = net_ushortint(inst.GUID, "hatcooldown", "hatcooldowndirty" )
-	
-	--Client Only
 
-	-- if not TheWorld.ismastersim then
+	-- sprint hat stuff
 	inst:ListenForEvent("locomote", onLocomote)
 	inst:ListenForEvent("UpdateSprintParticles", onLocomote)
 	inst:ListenForEvent("CleanSprintParticles", CleanSprintParticles)
+
+	-- 50% chance of quote on potion explode
 	inst:ListenForEvent("PotionThrown", OnPotionThrow)
-	-- end
 	
+	if not TheWorld.ismastersim then
+		-- inst.OnEntityReplicated = function(inst) inst.replica.container:WidgetSetup("treasurechest", widgetsetup) end
+	end
+
+	-- inst.Physics:CollidesWith(2017)
+
+	inst.pons = 0
+	inst.net_pons = net_ushortint(inst.GUID, "pons", "pons_dirty" )
+
+	if not TheWorld.ismastersim then
+		inst:ListenForEvent("pons_dirty", OnPonsDirty)
+	end
 end
-
--- local function OnStep(inst)
-	-- if TheWorld.ismastersim then
-		-- print("test1")
-		-- print(inst)
-	-- else
-		-- print("test2")
-		-- print(inst)
-	-- end
--- end
-
--- local function OnTimerDone(inst, data)
--- 	local hat = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
--- 	hat:PushEvent("cooldown_over")
--- end
--- local function OnHealthDelta(inst, data)
-	-- if data.oldpercent > data.newpercent then
-		
-	-- end
--- end
-
-
--- REMEMBER TO CHANGE THIS IF YOU BOOST CHARACTER SIZE AGAIN!
-CHARACTER_BUTTON_SCALE.hatkid = (1 / TUNING.HATKIDSIZE * 0.23)
 
 -- Server only, add comonents here.
 local master_postinit = function(inst, data)
@@ -291,18 +411,41 @@ local master_postinit = function(inst, data)
 	-- inst:ListenForEvent("healthdelta", OnHealthDelta)
 	
 	-- inst:AddComponent("timer")
-	
-	inst.OnLoad = onload
+
     inst.OnNewSpawn = onnewspawn
 	
 	inst.components.sanity.dapperness = 0
 	
-	-- Hat Kid likes cookies, unfortunately there's only 1 cookie in the game
+	-- Hat Kid likes cookies, unfortunately there's only pumpkin cookies. We'll make do.
     inst.components.foodaffinity:AddPrefabAffinity  ("pumpkincookie", 1.4)
 	
 	-- inst:DoPeriodicTask(0.1, OnHatCooldownServer, nil)
+
+	-- inst.components.combat:SetOnHit(ApplyPons)
+
+	inst:ListenForEvent("onattackother", ApplyPons)
+	inst:ListenForEvent("working", ApplyPons)
+
+	-- inst:AddComponent("container")
+	-- inst.components.container:WidgetSetup("treasurechest", widgetsetup)
+	-- inst.components.container.skipclosesnd = true
+    -- inst.components.container.skipopensnd = true
+
+	inst:ListenForEvent("GetPon", OnGetPon)
+	inst:ListenForEvent("closepon", OnClosePon)
+
+
+	inst.OnLoad = OnLoad
+	inst.OnSave = OnSave
+
+	inst.lab = SpawnPrefab("inv_pons")
+	inst.lab.entity:SetParent(inst.entity)
+
+	-- inst:AddComponent("ponholder")
+
+	-- inst.pon_inv = SpawnPrefab("hatpack")
+	-- local hatpack = inst.pon_inv
+	-- inst.components.container.canbeopened = false
 end
 
 return MakePlayerCharacter("hatkid", prefabs, assets, common_postinit, master_postinit, start_inv)
-
-

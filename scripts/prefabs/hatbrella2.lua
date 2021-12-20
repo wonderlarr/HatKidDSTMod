@@ -6,6 +6,8 @@ local assets =
     Asset("IMAGE", "images/inventoryimages/hatbrella2.tex"),
 }
 
+RegisterInventoryItemAtlas("images/inventoryimages/hatbrella2.xml","hatbrella2.tex")
+
 local function OnUse(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 	
@@ -20,15 +22,7 @@ local function OnUse(inst)
 	inst:DoTaskInTime(0, inst.Remove)
 end
 
-local function OnEquip(inst, owner)
-	-- If the equiper doesn't have the Hat Kid tag (which only hat kid has for now) then
-	-- drop the item, and say a fail message.
-	if owner:HasTag("player") and not owner:HasTag("hatkid") then
-		inst:DoTaskInTime(0, function()
-			owner.components.talker:Say(GetString(player, "ACTIONFAIL_GENERIC"))
-		end)
-	end
-	
+local function OnEquip(inst, owner)	
 	owner.AnimState:OverrideSymbol("swap_object", "swap_hatbrella2", "swap_hatbrella2")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
@@ -55,15 +49,7 @@ local function fn()
     inst.AnimState:PlayAnimation("idle")
 	
     inst:AddTag("sharp")
-	-- inst:AddTag("waterproofer")
-	
-    -- inst:AddComponent("waterproofer")	
-    -- inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_SMALL * 3)
 
-    -- inst:AddComponent("insulator")
-    -- inst.components.insulator:SetSummer()
-    -- inst.components.insulator:SetInsulation(TUNING.INSULATION_SMALL)
-	
     if not TheWorld.ismastersim then
         return inst
     end
@@ -76,10 +62,11 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.imagename = "hatbrella2"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hatbrella2.xml"
+    -- inst.components.inventoryitem.imagename = "hatbrella2"
+    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/hatbrella2.xml"
 	
     inst:AddComponent("equippable")
+    inst.components.equippable.restrictedtag = "hatkid"
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
 

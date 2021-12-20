@@ -22,7 +22,8 @@ server_filter_tags = {
 "hat",
 "time",
 "hatkid",
-"skylarr",
+"a hat in time",
+"hat kid",
 }
 
 local null_options = {
@@ -100,7 +101,9 @@ configuration_options =
 			{description = "115", data = 115},
 			{description = "120", data = 120},
 			{description = "125", data = 125},
-			{description = "135 (Default)", data = 135},
+			{description = "130", data = 130},
+			{description = "135", data = 135},
+			{description = "140 (Default)", data = 140},
 			{description = "150", data = 150},
 			{description = "175", data = 175},
 			{description = "200", data = 200},
@@ -108,6 +111,7 @@ configuration_options =
 			{description = "250", data = 250},
 			{description = "275", data = 275},				
 			{description = "300", data = 300},
+			{description = "400", data = 400},
 		},
 		default = 135,
 	},
@@ -346,43 +350,43 @@ configuration_options =
 		default = 2 * 60 * 60,
 	},
 
-	{
-		name = "hatkidaurasize",
-		label = "Sanity Aura Size",
-		hover = "How big Hat Kid's sanity aura will be.",
-		options =
-		{
-			{description = "Disabled", data = 0},
-			{description = "Smol", data = 16},
-			{description = "Small", data = 32},
-			{description = "Medium", data = 64},
-			{description = "Large (Default)", data = 128},
-			{description = "Huge! (seriously)", data = 512},
+	-- {
+	-- 	name = "hatkidaurasize",
+	-- 	label = "Sanity Aura Size",
+	-- 	hover = "How big Hat Kid's sanity aura will be.",
+	-- 	options =
+	-- 	{
+	-- 		{description = "Disabled", data = 0},
+	-- 		{description = "Smol", data = 16},
+	-- 		{description = "Small", data = 32},
+	-- 		{description = "Medium", data = 64},
+	-- 		{description = "Large (Default)", data = 128},
+	-- 		{description = "Huge! (seriously)", data = 512},
 			
-		},
-		default = 128,
-	},
+	-- 	},
+	-- 	default = 128,
+	-- },
 
-	{
-		name = "hatkidaurarate",
-		label = "Sanity Aura Rate",
-		hover = "How powerful Hat Kid's sanity aura is, in sanity per minute",
-		options =
-		{
-			{description = "1", data = 0.0167},
-			{description = "1.5", data = 0.025},
-			{description = "3 (Default)", data = 0.05},
-			{description = "6", data = 0.1},
-			{description = "15", data = 0.25},
-			{description = "20", data = 0.334},
-			{description = "30", data = 0.5},
-			{description = "60", data = 1},
-			{description = "120", data = 2},
-			{description = "240", data = 4},
-			{description = "600", data = 10},
-		},
-		default = 0.05,
-	},
+	-- {
+	-- 	name = "hatkidaurarate",
+	-- 	label = "Sanity Aura Rate",
+	-- 	hover = "How powerful Hat Kid's sanity aura is, in sanity per minute",
+	-- 	options =
+	-- 	{
+	-- 		{description = "1", data = 0.0167},
+	-- 		{description = "1.5", data = 0.025},
+	-- 		{description = "3 (Default)", data = 0.05},
+	-- 		{description = "6", data = 0.1},
+	-- 		{description = "15", data = 0.25},
+	-- 		{description = "20", data = 0.334},
+	-- 		{description = "30", data = 0.5},
+	-- 		{description = "60", data = 1},
+	-- 		{description = "120", data = 2},
+	-- 		{description = "240", data = 4},
+	-- 		{description = "600", data = 10},
+	-- 	},
+	-- 	default = 0.05,
+	-- },
 
 	{
 		name = "Sprint Hat Options",
@@ -1028,10 +1032,11 @@ configuration_options =
 			{description = "x0.1", data = 0.1},
 			{description = "x0.2", data = 0.2},
 			{description = "x0.3", data = 0.3},
-			{description = "x0.334 (Default)", data = 1/3},
+			{description = "x0.334", data = 1/3},
 			{description = "x0.4", data = 0.4},
-			{description = "x0.5", data = 0.5},
+			{description = "x0.5 (Default)", data = 0.5},
 			{description = "x0.6", data = 0.6},
+			{description = "x0.667", data = 2/3},
 			{description = "x0.7", data = 0.7},
 			{description = "x0.8", data = 0.8},
 			{description = "x0.9", data = 0.9},
@@ -1042,7 +1047,7 @@ configuration_options =
 			{description = "x2", data = 2},
 			{description = "x3", data = 3},
 		},
-		default = 1/3,
+		default = 0.5,
 	},
 	
 	{
@@ -1055,15 +1060,15 @@ configuration_options =
 	{
 		name = "hatbrelladamage",
 		label = "Blue Umbrella Damage",
-		hover = "How much damage Hat Kid's umbrella deals.",
+		hover = "How much damage Hat Kid's umbrella deals. This is considered after the damage modifier, which is 85% by default.",
 		options =
 		{
 			{description = "1", data = 1},
 			{description = "9", data = 9},
 			{description = "14", data = 14},
 			{description = "27", data = 27},
-			{description = "32 (Default)", data = 32},
 			{description = "34", data = 34},
+			{description = "40 (Default)", data = 40},
 			{description = "51", data = 51},
 			{description = "63", data = 63},
 			{description = "72", data = 72},
@@ -1073,13 +1078,13 @@ configuration_options =
 			{description = "500", data = 500},
 			{description = "KILLER QUEEN!!!", data = 999999, hover = "999,999"},
 		},
-		default = 32,
+		default = 40,
 	},
 	
 	{
 		name = "hatbrella2damage",
 		label = "Red Umbrella Damage",
-		hover = "How much damage Hat Kid's Red umbrella deals.",
+		hover = "How much damage Hat Kid's Red umbrella deals. This is considered after the damage modifier, which is 85% by default.",
 		options =
 		{
 			{description = "1", data = 1},

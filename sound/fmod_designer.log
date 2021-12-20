@@ -3,206 +3,62 @@ Warning: QPainter::setPen: Painter not active
 Warning: QPainter::setBrush: Painter not active
 Warning: QPainter::setRenderHint: Painter must be active to set rendering hints
 Warning: QPainter::setPen: Painter not active
-Debug: "00:39:14 ..\..\src\propertyeditor.cpp:1508 EM: Set Name" 
-Debug: "00:40:31 c:\anthill_jobs\job504524\fmod4\tools\fmod_designer\src\eventform.ui.h:1529 HH: Add Simple Event" 
-Debug: "00:40:33 c:\anthill_jobs\job504524\fmod4\tools\fmod_designer\src\eventform.ui.h:2202 CH: Delete Events/Event Groups/Event Categories" 
-Debug: "00:40:58 ..\..\src\simpleeventcontroller.cpp:1734 IS: Add Sounds to Playlist" 
-Debug: "00:41:03 ..\..\src\simpleeventcontroller.cpp:1006 IE: Set Allow Sounds to be Repeated" 
-Debug: "00:41:07 ..\..\src\simpleeventcontroller.cpp:1006 IE: Set Allow Sounds to be Repeated" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:17 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:18 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:19 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:19 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:19 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:20 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:20 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:25 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:26 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:26 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "00:41:30 ..\..\src\propertyeditor.cpp:2619 EO: Set Volume" 
-Debug: "00:41:32 ..\..\src\propertyeditor.cpp:2619 EO: Set Volume" 
-Debug: "01:34:00 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "01:34:00 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "01:34:00 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "01:34:00 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "01:34:00 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "01:34:00 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "01:34:00 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "01:34:00 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "01:34:00 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "01:34:00 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "01:34:00 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "01:34:01 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "01:34:01 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "01:34:01 ..\..\src\propertyslider.cpp:315 EV: Set Volume" 
-Debug: "01:34:03 ..\..\src\propertyeditor.cpp:2619 EO: Set Volume" 
-Debug: "01:34:15 ..\..\src\propertyeditor.cpp:1508 EM: Set Name" 
+Debug: "01:09:04 ..\..\src\categorylistview.cpp:409 CD: Move Multiple Events to Category" 
 Debug: 
-Building project 'brewinghat'...
-Debug: Building project E:\SteamLibrary\steamapps\common\Don't Starve Together\mods\3.0.0\sound\brewinghat.fev...
-Debug: Unique sound defs 1/1
+Building project 'pon'...
+Debug: Building project D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon.fev...
+Debug: Unique sound defs 1/20
 Debug: Retrieving sound file info...
 Debug: Retrieving reverb info...
 Debug: FEV file written ok
 Debug: Unique Envelope Points: 0 of 0
-Debug: Unique Strings: 47 characters of 47
+Debug: Unique Strings: 1007 characters of 1007
 Debug: Caching sound file details for ''...
-Debug: brewinghat\Item_Throw_Swoosh_2.ogg
-Debug: brewinghat\Item_Throw_Swoosh_3.ogg
-Debug: Building 'brewinghat.fsb'
-Debug: Encoded E:\SteamLibrary\steamapps\common\Don't Starve Together\mods\3.0.0\sound\brewinghat\Item_Throw_Swoosh_2.ogg
-Debug: Encoded E:\SteamLibrary\steamapps\common\Don't Starve Together\mods\3.0.0\sound\brewinghat\Item_Throw_Swoosh_3.ogg
+Debug: pon\Pon_Chain1.ogg
+Debug: pon\Pon_Chain10.ogg
+Debug: pon\Pon_Chain11.ogg
+Debug: pon\Pon_Chain12.ogg
+Debug: pon\Pon_Chain13.ogg
+Debug: pon\Pon_Chain14.ogg
+Debug: pon\Pon_Chain15.ogg
+Debug: pon\Pon_Chain16.ogg
+Debug: pon\Pon_Chain17.ogg
+Debug: pon\Pon_Chain18.ogg
+Debug: pon\Pon_Chain19.ogg
+Debug: pon\Pon_Chain2.ogg
+Debug: pon\Pon_Chain20.ogg
+Debug: pon\Pon_Chain3.ogg
+Debug: pon\Pon_Chain4.ogg
+Debug: pon\Pon_Chain5.ogg
+Debug: pon\Pon_Chain6.ogg
+Debug: pon\Pon_Chain7.ogg
+Debug: pon\Pon_Chain8.ogg
+Debug: pon\Pon_Chain9.ogg
+Debug: Building 'pon_bank01.fsb'
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain1.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain10.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain11.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain12.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain13.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain14.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain15.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain16.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain18.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain17.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain2.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain19.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain3.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain20.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain4.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain5.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain7.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain6.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain9.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain8.ogg
 Debug: Writing FSB...
 Debug: Finished building FSB
 Debug: 
 Debug: 
 Summary of build:
-SUCCESS: E:/SteamLibrary/steamapps/common/Don't Starve Together/mods/3.0.0/sound/brewinghat.fev
-SUCCESS: brewinghat.fsb
-Debug: 
-Building project 'brewinghat'...
-Debug: Building project E:\SteamLibrary\steamapps\common\Don't Starve Together\mods\3.0.0\sound\brewinghat.fev...
-Debug: Unique sound defs 1/1
-Debug: Retrieving sound file info...
-Debug: Retrieving reverb info...
-Debug: FEV file written ok
-Debug: Unique Envelope Points: 0 of 0
-Debug: Unique Strings: 47 characters of 47
-Debug: Caching sound file details for ''...
-Debug: brewinghat\Item_Throw_Swoosh_2.ogg
-Debug: brewinghat\Item_Throw_Swoosh_3.ogg
-Debug: Building 'brewinghat.fsb'
-Debug: Encoded E:\SteamLibrary\steamapps\common\Don't Starve Together\mods\3.0.0\sound\brewinghat\Item_Throw_Swoosh_3.ogg
-Debug: Encoded E:\SteamLibrary\steamapps\common\Don't Starve Together\mods\3.0.0\sound\brewinghat\Item_Throw_Swoosh_2.ogg
-Debug: Writing FSB...
-Debug: Finished building FSB
-Debug: 
-Debug: 
-Summary of build:
-SUCCESS: E:/SteamLibrary/steamapps/common/Don't Starve Together/mods/3.0.0/sound/brewinghat.fev
-SUCCESS: brewinghat.fsb
+SUCCESS: D:/SteamLibrary/steamapps/common/Don't Starve Together/mods/HatKidDSTMod/sound/pon.fev
+SUCCESS: pon_bank01.fsb

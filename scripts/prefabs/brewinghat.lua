@@ -1,11 +1,12 @@
 local assets=
 { 
     Asset("ANIM", "anim/brewinghat.zip"),
-    Asset("ANIM", "anim/brewinghat_swap.zip"), 
 
     Asset("ATLAS", "images/inventoryimages/brewinghat.xml"),
     Asset("IMAGE", "images/inventoryimages/brewinghat.tex"),
 }
+
+RegisterInventoryItemAtlas("images/inventoryimages/brewinghat.xml","brewinghat.tex")
 
 local prefabs =
 {
@@ -42,17 +43,7 @@ local function OnEmpty(inst)
 end
 
 local function OnEquip(inst, owner)
-	-- If the equiper doesn't have the Hat Kid tag (which only hat kid has for now) then
-	-- drop the item, and say a fail message.
-	if owner:HasTag("player") and not owner:HasTag("hatkid") then
-		inst:DoTaskInTime(0, function()
-			owner.components.inventory:DropItem(inst)
-			owner.components.talker:Say(GetString(player, "ACTIONFAIL_GENERIC"))
-		end)
-	end
-	
-	owner.AnimState:OverrideSymbol("swap_hat", "brewinghat", "swap_hat")		
-	
+	owner.AnimState:OverrideSymbol("swap_hat", "brewinghat", "swap_hat")
 
 	owner.AnimState:Show("HAT")
 	owner.AnimState:Show("HAT_HAIR")
@@ -116,7 +107,7 @@ local function OnStopUse(inst)
 		rechargeable:Discharge(TUNING.BREWINGHAT_COOLDOWN) -- Cooldown
 
 		if inst.components.finiteuses then
-			inst.components.finiteuses:Use(11)
+			inst.components.finiteuses:Use(1)
 		end
 
 		-- if inst.components.fueled then
@@ -160,10 +151,11 @@ local function fn(Sim)
     inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_SMALL) 
 	
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.imagename = "brewinghat"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/brewinghat.xml"
+    -- inst.components.inventoryitem.imagename = "brewinghat"
+    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/brewinghat.xml"
 	
     inst:AddComponent("equippable")
+	inst.components.equippable.restrictedtag = "hatkid"
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )

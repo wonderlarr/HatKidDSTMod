@@ -6,6 +6,8 @@ local assets =
     Asset("IMAGE", "images/inventoryimages/hatbrellaopen.tex"),
 }
 
+RegisterInventoryItemAtlas("images/inventoryimages/hatbrellaopen.xml","hatbrellaopen.tex")
+
 -- This item exists and I'm not sure why, as it seems unused in the original mod, I'm gonna make it used. 
 -- I'll make it so you don't get the rain protection unless you open the umbrella, or probably you'll only get SMALL or TINY protection
 
@@ -24,16 +26,7 @@ local function OnUse(inst)
 end
 
 local function OnEquip(inst, owner)
-	-- If the equiper doesn't have the Hat Kid tag (which only hat kid has for now) then
-	-- drop the item, and say a fail message.
-	if owner:HasTag("player") and not owner:HasTag("hatkid") then
-		inst:DoTaskInTime(0, function()
-			owner.components.inventory:DropItem(inst)
-			owner.components.talker:Say(GetString(player, "ACTIONFAIL_GENERIC"))
-		end)
-	end
-
-	owner.AnimState:OverrideSymbol("swap_object", "swap_hatbrellaopen", "hatbrellaopen")
+	owner.AnimState:OverrideSymbol("swap_object", "hatbrellaopen", "swap_object")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
 
@@ -62,9 +55,11 @@ local function fn()
      
     MakeInventoryPhysics(inst)   
       
-    inst.AnimState:SetBank("hatbrellaopen")
-    inst.AnimState:SetBuild("hatbrellaopen")
+    inst.AnimState:SetBank("hatbrellaopen_ground")
+    inst.AnimState:SetBuild("hatbrellaopen_ground")
     inst.AnimState:PlayAnimation("idle")
+    inst.AnimState:SetScale(0.6, 0.6)
+    inst.AnimState:SetFinalOffset(2)
 	
     inst:AddTag("nopunch")
     inst:AddTag("umbrella")
@@ -85,10 +80,11 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.imagename = "hatbrellaopen"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hatbrellaopen.xml"
+    -- inst.components.inventoryitem.imagename = "hatbrellaopen"
+    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/hatbrellaopen.xml"
 	
     inst:AddComponent("equippable")
+    inst.components.equippable.restrictedtag = "hatkid"
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
 
@@ -97,7 +93,7 @@ local function fn()
 	
     inst:AddComponent("fueled")
     inst.components.fueled.fueltype = FUELTYPE.USAGE
-    inst.components.fueled:InitializeFuelLevel(5760)
+    inst.components.fueled:InitializeFuelLevel(2880)
 
     inst:AddComponent("waterproofer")
     inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_LARGE)

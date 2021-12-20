@@ -1,7 +1,6 @@
 local assets=
 { 
     Asset("ANIM", "anim/sprinthat.zip"),
-    Asset("ANIM", "anim/sprinthat_swap.zip"), 
 
     Asset("ATLAS", "images/inventoryimages/sprinthat.xml"),
     Asset("IMAGE", "images/inventoryimages/sprinthat.tex"),
@@ -9,6 +8,9 @@ local assets=
 	Asset("SOUNDPACKAGE", "sound/sprinthat.fev"),
     Asset("SOUND", "sound/sprinthat.fsb"),
 }
+
+RegisterInventoryItemAtlas("images/inventoryimages/sprinthat.xml","sprinthat.tex")
+
 
 local prefabs = 
 {
@@ -56,15 +58,6 @@ local function onLocomote(inst)
 end
 
 local function OnEquip(inst, owner)
-	-- If the equiper doesn't have the Hat Kid tag (which only hat kid has for now) then
-	-- drop the item, and say a fail message.
-	if owner:HasTag("player") and not owner:HasTag("hatkid") then
-		inst:DoTaskInTime(0, function()
-			owner.components.inventory:DropItem(inst)
-			owner.components.talker:Say(GetString(player, "ACTIONFAIL_GENERIC"))
-		end)
-	end
-	
 	owner.AnimState:OverrideSymbol("swap_hat", "sprinthat", "swap_hat")
 	
 	owner.AnimState:Show("HAT")
@@ -79,11 +72,6 @@ local function OnEquip(inst, owner)
 	-- Config controls if we do the sound or not
 	owner:ListenForEvent("locomote", onLocomote)
 	owner:PushEvent("UpdateSprintParticles")
-
-	--Hat Badge Slot
-	-- if inst.components.container ~= nil then
-		-- inst.components.container:Open(owner)
-	-- end
 end
  
 local function OnUnequip(inst, owner)
@@ -170,10 +158,11 @@ local function fn(Sim)
     inst.components.insulator:SetInsulation(TUNING.INSULATION_SMALL)
 	
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.imagename = "sprinthat"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/sprinthat.xml"
+    -- inst.components.inventoryitem.imagename = "sprinthat"
+    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/sprinthat.xml"
 	 
     inst:AddComponent("equippable")
+	inst.components.equippable.restrictedtag = "hatkid"
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )

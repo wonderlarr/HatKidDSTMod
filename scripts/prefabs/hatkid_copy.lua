@@ -3,8 +3,8 @@ local assets =
 	Asset( "ANIM", "anim/hatkid_copy.zip" ),
 	Asset( "ANIM", "anim/ghost_hatkid_build.zip" ),
 	
-    Asset("ATLAS", "images/inventoryimages/hatkid_copy.xml"),
-    Asset("IMAGE", "images/inventoryimages/hatkid_copy.tex"),
+    -- Asset("ATLAS", "images/inventoryimages/hatkid_copy.xml"),
+    -- Asset("IMAGE", "images/inventoryimages/hatkid_copy.tex"),
 }
 
 local function onbuilt(inst, builder)
@@ -29,8 +29,8 @@ local function fn()
 	end
 	
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.imagename = "hatkid_copy"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hatkid_copy.xml"
+    -- inst.components.inventoryitem.imagename = "hatkid_copy"
+    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/hatkid_copy.xml"
 
 	inst.OnBuiltFn = onbuilt
 

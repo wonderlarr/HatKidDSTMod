@@ -1,11 +1,14 @@
 local assets=
 { 
     Asset("ANIM", "anim/kidhat.zip"),
-    Asset("ANIM", "anim/kidhat_swap.zip"), 
-
+	
     Asset("ATLAS", "images/inventoryimages/kidhat.xml"),
     Asset("IMAGE", "images/inventoryimages/kidhat.tex"),
 }
+
+
+RegisterInventoryItemAtlas("images/inventoryimages/kidhat.xml","kidhat.tex")
+
 
 local badge = nil
 
@@ -35,15 +38,6 @@ local function aura()
 end
 
 local function OnEquip(inst, owner)
-	-- If the equiper doesn't have the Hat Kid tag (which only hat kid has for now) then
-	-- drop the item, and say a fail message.
-	if owner:HasTag("player") and not owner:HasTag("hatkid") then
-		inst:DoTaskInTime(0, function()
-			owner.components.inventory:DropItem(inst)
-			owner.components.talker:Say(GetString(player, "ACTIONFAIL_GENERIC"))
-		end)
-	end
-	
 	owner.AnimState:OverrideSymbol("swap_hat", "kidhat", "swap_hat")
 	
 	owner.AnimState:Show("HAT")
@@ -58,20 +52,19 @@ local function OnEquip(inst, owner)
 		inst.components.fueled:StartConsuming()
 	end
 
-	inst:AddComponent("sanityaura")
-	inst.components.sanityaura.max_distsq = TUNING.HATKID_AURASIZE
-    inst.components.sanityaura.aura = -TUNING.HATKID_AURARATE
-	inst.components.sanityaura.fallofffn = aura
+	-- inst:AddComponent("sanityaura")
+	-- inst.components.sanityaura.max_distsq = TUNING.HATKID_AURASIZE
+    -- inst.components.sanityaura.aura = -TUNING.HATKID_AURARATE
+	-- inst.components.sanityaura.fallofffn = aura
 
 	holder = owner
 
 	inst.lab = SpawnPrefab("researchlab")
-	inst.lab.Transform:SetScale(1, 1, 1)
+	inst.lab.Transform:SetScale(0, 0, 0)
 	inst.lab.Physics:ClearCollisionMask()
+	inst.lab.SoundEmitter:SetMute(true)
 
 	inst.lab.entity:SetParent(inst.entity)
-
-	inst.connectedPrefab = SpawnPrefab("researchlab2")
 
 	-- inst.test = "asdf"
 
@@ -83,6 +76,7 @@ local function OnEquip(inst, owner)
 	-- if inst.components.container ~= nil then
 		-- inst.components.container:Open(owner)
 	-- end
+	print(owner.AnimState:GetSkinBuild())
 end
  
 local function OnUnequip(inst, owner)
@@ -101,7 +95,7 @@ local function OnUnequip(inst, owner)
 		inst.components.fueled:StopConsuming()
 	end
 
-	inst:RemoveComponent("sanityaura")
+	-- inst:RemoveComponent("sanityaura")
 
 	inst:DoTaskInTime(0, function(inst)
 		inst.lab:Remove()
@@ -113,56 +107,14 @@ local function OnUnequip(inst, owner)
     -- end
 end
  
--- local function OnBadgeLoaded(inst, data)
-	-- if data ~= nil and data.item ~= nil then
-		-- if data.item.prefab == "hkr_badge_football" then
-			-- inst:AddComponent("armor")
-			-- inst.components.armor:InitIndestructible(TUNING.ARMORWOOD_ABSORPTION)
-			-- badge = data.item
-		-- end
-	-- end
--- end
 
--- local function OnBadgeUnloaded(inst)
-	-- if inst.components.armor ~= nil then
-		-- inst:RemoveComponent("armor")
-	-- end
--- end
  
 local function OnEmpty(inst)
 	inst:DoTaskInTime(0, inst.Remove)
 end
 
 local function onDrop(inst)
-	-- if holder ~= nil then
-	-- 	inst:DoTaskInTime(1, function(inst)
-	-- 		local new = SpawnPrefab("strawhat")
-	-- 		local speed = math.sqrt(math.sqrt(new:GetDistanceSqToInst(inst)))
 
-	-- 		LaunchAt(inst, inst, new, speed)
-	-- 		holder.components.talker:Say(tostring(speed))
-	-- 	end)
-	-- end
-
-	print("SaveRecordTable--")
-	print(inst:GetSaveRecord())
-	-- dumptable(inst:GetSaveRecord(), 1,1)
-	print("Holder--")
-	print(holder)
-	-- print("test--")
-	-- print(inst.test)
-	-- print("persist2--")
-	-- local test = SpawnSaveRecord(inst.test)
-	-- print(test)
-	-- local _test = SpawnSaveRecord(inst._test)
-	-- print(_test)
-	-- THis crashes
-	-- print("Record--")
-	-- print(SpawnSaveRecord())
-	
-	-- if inst:GetPersistData().prefab == "hatkid" then
-	-- 	GetPersistData().components.talker:Say("Success!")
-	-- end
 end
 
 -- local function OnLoad(inst, data)
@@ -170,9 +122,6 @@ end
 -- end
 
 local function OnSave(inst, data)
-	if inst.connectedPrefab then
-		data.PrevOwner = inst.connectedPrefab:GetSaveRecord()
-	end
 end
 
 local function fn(Sim) 
@@ -190,7 +139,6 @@ local function fn(Sim)
 	inst:AddTag("hatkidhat")
 	
     if not TheWorld.ismastersim then
-		-- inst.OnEntityReplicated = function(inst) inst.replica.container:WidgetSetup("hkr_badgeslot") end
         return inst
     end
 	
@@ -208,11 +156,12 @@ local function fn(Sim)
     inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_SMALL)
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.imagename = "kidhat"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/kidhat.xml"
+    -- inst.components.inventoryitem.imagename = "kidhat"
+    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/kidhat.xml"
 	inst.components.inventoryitem:SetOnDroppedFn(onDrop)
 	 
     inst:AddComponent("equippable")
+	inst.components.equippable.restrictedtag = "hatkid"
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
 	inst.components.equippable.dapperness = TUNING.DAPPERNESS_TINY * 1.5
     inst.components.equippable:SetOnEquip( OnEquip )
@@ -236,6 +185,11 @@ local function fn(Sim)
     -- inst:ListenForEvent("itemlose", OnBadgeUnloaded)
 	
 	-- inst:ListenForEvent("armordamaged", OnBlocked, inst)
+
+	inst:DoPeriodicTask(0.1, function(inst)
+		-- inst.AnimState:SetMultColour(1,1,1,1)
+		print(inst.AnimState:GetMultColour())
+	end)
 
 	inst.OnLoad = onload
 	inst.OnSave = OnSave
