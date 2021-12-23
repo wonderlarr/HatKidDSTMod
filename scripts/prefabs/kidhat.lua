@@ -27,9 +27,9 @@ local prefabs =
 
 local function onload(inst, data) 
 	if data.PrevOwner then 
-		print("Previous Owner found")
-		print(data.PrevOwner.prefab)
-		dumptable(data.PrevOwner,1,1)
+		-- print("Previous Owner found")
+		-- print(data.PrevOwner.prefab)
+		-- dumptable(data.PrevOwner,1,1)
 	end
 end
 
@@ -59,12 +59,12 @@ local function OnEquip(inst, owner)
 
 	holder = owner
 
-	inst.lab = SpawnPrefab("researchlab")
-	inst.lab.Transform:SetScale(0, 0, 0)
-	inst.lab.Physics:ClearCollisionMask()
-	inst.lab.SoundEmitter:SetMute(true)
+	-- inst.lab = SpawnPrefab("researchlab")
+	-- inst.lab.Transform:SetScale(0, 0, 0)
+	-- inst.lab.Physics:ClearCollisionMask()
+	-- inst.lab.SoundEmitter:SetMute(true)
 
-	inst.lab.entity:SetParent(inst.entity)
+	-- inst.lab.entity:SetParent(inst.entity)
 
 	-- inst.test = "asdf"
 
@@ -76,7 +76,7 @@ local function OnEquip(inst, owner)
 	-- if inst.components.container ~= nil then
 		-- inst.components.container:Open(owner)
 	-- end
-	print(owner.AnimState:GetSkinBuild())
+	-- print(owner.AnimState:GetSkinBuild())
 end
  
 local function OnUnequip(inst, owner)
@@ -97,9 +97,9 @@ local function OnUnequip(inst, owner)
 
 	-- inst:RemoveComponent("sanityaura")
 
-	inst:DoTaskInTime(0, function(inst)
-		inst.lab:Remove()
-	end)
+	-- inst:DoTaskInTime(0, function(inst)
+	-- 	inst.lab:Remove()
+	-- end)
 	
 	
 	-- if inst.components.container ~= nil then
@@ -186,13 +186,13 @@ local function fn(Sim)
 	
 	-- inst:ListenForEvent("armordamaged", OnBlocked, inst)
 
-	inst:DoPeriodicTask(0.1, function(inst)
-		-- inst.AnimState:SetMultColour(1,1,1,1)
-		print(inst.AnimState:GetMultColour())
-	end)
+	-- inst:DoPeriodicTask(0.1, function(inst)
+	-- 	-- inst.AnimState:SetMultColour(1,1,1,1)
+	-- 	print(inst.AnimState:GetMultColour())
+	-- end)
 
-	inst.OnLoad = onload
-	inst.OnSave = OnSave
+	-- inst.OnLoad = onload
+	-- inst.OnSave = OnSave
 	
     return inst
 end

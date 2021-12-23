@@ -3,7 +3,7 @@
     <folder id="0" name="swap_object_ground">
         <file id="0" name="swap_object_ground/swap_object_ground-0.png" width="399" height="415" pivot_x="0.112832" pivot_y="0.0499547"/>
     </folder>
-    <entity id="0" name="hatbrella_ground">
+    <entity id="0" name="hatbrellaopen_ground">
         <animation id="0" name="idle" length="1000" interval="100">
             <mainline>
                 <key id="0">

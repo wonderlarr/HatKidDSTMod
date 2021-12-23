@@ -216,9 +216,17 @@ local function onnewspawn(inst)
     --     onbecamehuman(inst)
     -- end
 
-	inst:DoTaskInTime(0, function(inst)
-		inst.skin = inst.AnimState:GetBuild()
-	end)
+	-- inst:DoTaskInTime(0, function(inst)
+	-- 	inst.skin = inst.AnimState:GetBuild()
+	-- end)
+
+	if TheWorld.hatannounced == nil then
+		inst:DoTaskInTime(10, function(inst)
+			print("Hat Kid Unlisted: This mod is a WORK IN PROGRESS, please be sure to reset your config often, and report bugs to the workshop page or Skylarr#9203 on Discord.")
+			TheNet:Announce("Hat Kid Unlisted: This mod is a WORK IN PROGRESS, please be sure to reset your config often, and report bugs to the workshop page or Skylarr#9203 on Discord.")
+			TheWorld.hatannounced = true
+		end)
+	end
 
 	
 	SpawnWithStuff(inst)
@@ -226,7 +234,7 @@ local function onnewspawn(inst)
 end
 
 local function ApplyPons(inst, data)
-	if data.target:IsValid() and not data.target:IsInLimbo() and not data.target:HasTag("pons")  then
+	if data.target:IsValid() and not data.target:IsInLimbo() and not data.target:HasTag("pons") and TUNING.ENABLE_PONS then
 		-- Apply pons to attackable things
 		if data.target.components.lootdropper and data.target.components.health then
 			data.target.components.lootdropper:AddChanceLoot("pon", 1)
@@ -316,6 +324,13 @@ local function OnLoad(inst, data)
     inst:ListenForEvent("unequip", OnUnequip)
 
 
+	if TheWorld.hatannounced == nil then
+		inst:DoTaskInTime(10, function(inst)
+			print("Hat Kid Unlisted: This mod is a WORK IN PROGRESS, please be sure to reset your config often, and report bugs to the workshop page or Skylarr#9203 on Discord.")
+			TheNet:Announce("Hat Kid Unlisted: This mod is a WORK IN PROGRESS, please be sure to reset your config often, and report bugs to the workshop page or Skylarr#9203 on Discord.")
+			TheWorld.hatannounced = true
+		end)
+	end
 
 	
 	

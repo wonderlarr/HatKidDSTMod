@@ -98,7 +98,12 @@ local function OnUse(inst)
 		-- ent.components.locomotor:SetExternalSpeedMultiplier(ent, "timeslow_speed_mod", 0.5)
 		-- owner.components.combat:SetAttackPeriod(owner.OPeriod / 2)
 		-- Slow code
-		inst.TimeSlow = inst:DoPeriodicTask(0, SlowNear, nil)
+		if owner.components.timebound ~= nil then
+			inst.TimeSlow = inst:DoPeriodicTask(0, SlowNear, nil)
+		else
+			print("CRITICAL: Time Control API not enabled! Time Stop Hat can't slow time!")
+			TheNet:Announce("CRITICAL: Time Control API not enabled! Time Stop Hat can't slow time!")
+		end
 		
 	end
 end

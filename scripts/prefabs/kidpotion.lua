@@ -104,8 +104,5 @@ end
 -- Checking in again, I've decided it's for the best that this item exists, at most I might rework it to just be ammo instead of a whole item, but it's fine for now.
 
 -- Hey guess what, checking in one more time months later and I found a way to make this item awesome! Check it out by playing with it, lol.
-STRINGS.NAMES.KIDPOTION = "Brewing Concoction"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.KIDPOTION = "Throwing these will be fun!"
-STRINGS.RECIPE_DESC.KIDPOTION = "Explody Concoction, deals AOE damage"
  
 return Prefab("kidpotion", kidpotion_fn, kidpotion_assets, kidpotion_prefabs)

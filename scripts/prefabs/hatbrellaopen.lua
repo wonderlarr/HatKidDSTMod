@@ -1,7 +1,8 @@
 local assets =
 {
     Asset("ANIM", "anim/hatbrellaopen.zip"),
-    Asset("ANIM", "anim/swap_hatbrellaopen.zip"),
+    Asset("ANIM", "anim/hatbrellaopen_ground.zip"),
+    
     Asset("ATLAS", "images/inventoryimages/hatbrellaopen.xml"),
     Asset("IMAGE", "images/inventoryimages/hatbrellaopen.tex"),
 }

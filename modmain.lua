@@ -32,7 +32,7 @@ PrefabFiles = {
 	"hatkid_none",
 
 	--player skins
-	"hatkid_copy", -- default clothes
+	-- "hatkid_copy", -- default clothes
 
 	--hats
     "kidhat",
@@ -44,11 +44,11 @@ PrefabFiles = {
 
 	--hatbrellas
 	"hatbrella",
-	"hatbrella2",
+	-- "hatbrella2",
 
 	--open hatbrellas
 	"hatbrellaopen",
-	"hatbrella2open",
+	-- "hatbrella2open",
 
 	--throwables
 	"kidpotion",
@@ -74,7 +74,7 @@ PrefabFiles = {
 	--misc
 	"inv_pons",
 
-	--testing
+	--testing (disable in final)
 	"cooltarget", -- This is a dummytarget prefab, but it only regens health when it is low.
 }
 
@@ -116,7 +116,7 @@ Assets = {
 	Asset("ANIM", "anim/pons_icon.zip"),
 
 	-- Skin bigportraits
-    Asset( "IMAGE", "bigportraits/hatkid.tex" ), -- Base, not sure where this is used tbh. 
+    Asset( "IMAGE", "bigportraits/hatkid.tex" ), -- Base, not sure where this is used tbh.
     Asset( "ATLAS", "bigportraits/hatkid.xml" ),
 
 	Asset( "IMAGE", "bigportraits/hatkid_none.tex" ), -- Default, texture is same as base.
@@ -127,22 +127,39 @@ Assets = {
 
 	Asset( "IMAGE", "bigportraits/hatkid_detective.tex" ), -- Detective
     Asset( "ATLAS", "bigportraits/hatkid_detective.xml" ),
+	
+	-- For the dyes we don't have custom portraits, so we just point the atlas at the default portrait.
+	-- This means we don't need to load a ton of duplicate textures, though I'm not sure how this works in memory
+	-- At the very least it saves disk space
+    Asset( "ATLAS", "bigportraits/hatkid_dye_niko.xml" ), --nightmargin is awesome i love oneshot
+    Asset( "ATLAS", "bigportraits/hatkid_dye_toonlink.xml" ), -- toonlink is pretty cool tool, my smash main
+    Asset( "ATLAS", "bigportraits/hatkid_dye_pinkdanger.xml" ), -- pink dye
+
+    Asset( "ATLAS", "bigportraits/hatkid_timestop.xml" ), -- redundant bigportrait for time stop skin. This shouldn't display but it keeps the client log happy.
+
 
 }
-modimport("engine.lua") --Keyhandler engine
 
--- modimport("scripts/libs/skins_api.lua") -- Skins API, waiting for another update here.
+modimport("engine.lua") --Keyhandler engine
 
 -- Imports to keep the keyhandler from working while typing into various things.
 Load "chatinputscreen"
 Load "consolescreen"
 Load "textedit"
 
+-- Add Hat Kid to css
+AddModCharacter("hatkid", "FEMALE")
+
+
+
+-- Global declarations
+GLOBAL.CHARACTER_INGREDIENT.PON = "pon_cost"
+
+
 --TUNING STUFF
 TUNING.HATKID_ABILITYKEY = GetModConfigData("hatkid_polarhatkey")
 
-GLOBAL.STRINGS.SKIN_NAMES.hatkid_none = "Hat Kid" -- (why is this here lol)
-GLOBAL.CHARACTER_INGREDIENT.PON = "pon_cost"
+
 
 
 --Character stat config
@@ -160,24 +177,14 @@ TUNING.HATKIDSANITYDRAIN = GetModConfigData("hatkidsanitydrain")
 TUNING.HATBRELLA_DAMAGE = GetModConfigData("hatbrelladamage")
 TUNING.HATBRELLA2_DAMAGE = GetModConfigData("hatbrella2damage")
 
---Open umbrellas
--- TUNING.HATBRELLAOPEN_DAMAGE = GetModConfigData("hatbrellaopendamage")
--- TUNING.HATBRELLA2OPEN_DAMAGE = GetModConfigData("hatbrella2opendamage")
-
-
---Old, but still used sprint hat config values.
-
-
---Sanity Aura configs
--- TUNING.HATKID_AURARATE = GetModConfigData("hatkidaurarate")
--- TUNING.HATKID_AURASIZE = GetModConfigData("hatkidaurasize")
+--Togglables
+TUNING.ENABLE_PONS = GetModConfigData("enablepons")
 
 --Hat stuff
-
 --Kid Hat
 TUNING.KIDHAT_DURABILITY = GetModConfigData("kidhatdurability")
 
---Sprint (old but still used stuff)
+--Sprint
 TUNING.SPRINTHAT_DURABILITY = GetModConfigData("sprinthatdurability")
 TUNING.SPRINTHAT_SPEED_MULT = GetModConfigData("sprinthatspeedmult")
 TUNING.SPRINTHAT_HUNGER_BURNRATE = GetModConfigData("sprinthathungerburnrate")
@@ -217,250 +224,8 @@ TUNING.TIMESTOPHAT_TIMESCALE = GetModConfigData("timestopscale")
 TUNING.FUNNYMODE = GetModConfigData("funnymode")
 
 
+TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.HATKID = {"kidhat"}
 
-
-
-
-TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.HATKID = {"kidhat"--[[, "hatbrella"]]}
--- local mymodstartingitems = {
--- 	kidhat = {atlas = "images/inventoryimages/kidhat.xml"},
--- 	-- hatbrella = {atlas = "images/inventoryimages/hatbrella.xml"}, -- Removed for balance
--- }
--- TUNING.STARTING_ITEM_IMAGE_OVERRIDE = type(TUNING.STARTING_ITEM_IMAGE_OVERRIDE) == "table" and GLOBAL.MergeMaps(TUNING.STARTING_ITEM_IMAGE_OVERRIDE, mymodstartingitems) or mymodstartingitems
-GLOBAL.STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Smol"
-
-local require = GLOBAL.require
-local STRINGS = GLOBAL.STRINGS
-local Ingredient = GLOBAL.Ingredient
-local RECIPETABS = GLOBAL.RECIPETABS
-local TECH = GLOBAL.TECH
-local resolvefilepath = GLOBAL.resolvefilepath
-local TUNING = GLOBAL.TUNING
-
--- The character select screen lines
-STRINGS.CHARACTER_TITLES.hatkid = "The Hat Explorer"
-STRINGS.CHARACTER_NAMES.hatkid = "Hat Kid"
-STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Makes cool hats, for herself\n*Might go insane without a hat\n*Prefers to fight with her umbrella\n*Collects all kinds of things\n*Is extremely cute"
-STRINGS.CHARACTER_QUOTES.hatkid = "\"Oh, hi there!\""
-
--- Custom speech strings
-STRINGS.CHARACTERS.HATKID = require "speech_hatkid"
-
-STRINGS.NAMES.HATKID = "Hat Kid"
-
-AddMinimapAtlas("images/map_icons/hatkid.xml")
-
--- Add mod character to mod character list. Also specify a gender. Possible genders are MALE, FEMALE, ROBOT, NEUTRAL, and PLURAL.
-AddModCharacter("hatkid", "FEMALE")
-
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATKID =
-{
-	GENERIC = "It's Hat Kid!",
-	ATTACKER = "That Hat Kid looks shifty...",
-	MURDERER = "MYURRDERR!",
-	REVIVER = "Hat Kid, friend of ghosts.",
-	GHOST = "Hat Kid could use a heart.",
-	FIRESTARTER = "That Hat Kid is starting fires!",
-}
-
-STRINGS.CHARACTERS.HATKID.DESCRIBE.HATKID =
-{
-	GENERIC = "It's, uh... Is that me?",
-	ATTACKER = "I don't like the way I look at myself.",
-	MURDERER = "MYURRDERR!",
-	REVIVER = "Nice job, me.",
-	GHOST = "How am I dead?",
-	FIRESTARTER = "Oh come on! We're better than this!",
-}
-
-STRINGS.NAMES.KIDHAT = "Kid's Hat"
-
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.KIDHAT = "It's a short and stout tophat."
-STRINGS.CHARACTERS.HATKID.DESCRIBE.KIDHAT = "What a good hat."
-STRINGS.CHARACTERS.WILLOW.DESCRIBE.KIDHAT = "A top hat and a lighter, a perfect combination."
-STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.KIDHAT = "Is tiny hat, but still good!"
-STRINGS.CHARACTERS.WENDY.DESCRIBE.KIDHAT = "A piece of finery to help forget the inescapable wild."
-STRINGS.CHARACTERS.WX78.DESCRIBE.KIDHAT = "INFERIOR TOP HAT"
-STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.KIDHAT = "How bourgeois."
-STRINGS.CHARACTERS.WOODIE.DESCRIBE.KIDHAT = "It's the right amount of fancy."
-STRINGS.CHARACTERS.WAXWELL.DESCRIBE.KIDHAT = "Some fine haberdashery."
-STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.KIDHAT = "It can't even fit me!"
-STRINGS.CHARACTERS.WEBBER.DESCRIBE.KIDHAT = "Like father used to wear."
-STRINGS.CHARACTERS.WINONA.DESCRIBE.KIDHAT = "How bourgeoisie."
---dlc characters
-STRINGS.CHARACTERS.WORTOX.DESCRIBE.KIDHAT = "Would you look at that, it's a hat!"
-STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.KIDHAT = "Hat."
-STRINGS.CHARACTERS.WARLY.DESCRIBE.KIDHAT = "It's not my style."
-
-STRINGS.RECIPE_DESC.KIDHAT = "Hat Kid's pride and joy."
-
-STRINGS.NAMES.SPRINTHAT = "Sprint Hat"
-
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPRINTHAT = "It's a tennis cap with wings on it."
-STRINGS.CHARACTERS.HATKID.DESCRIBE.SPRINTHAT = "Gotta go fast, right?"
-STRINGS.CHARACTERS.WILLOW.DESCRIBE.SPRINTHAT = "You could start a fire going that fast!"
-STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.SPRINTHAT = "Hat is fast!"
-STRINGS.CHARACTERS.WENDY.DESCRIBE.SPRINTHAT = "It will still come, no matter how fast you run."
-STRINGS.CHARACTERS.WX78.DESCRIBE.SPRINTHAT = "FAST HEADWEAR MOVING AT EXTREMELY HIGH SPEED"
-STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.SPRINTHAT = "It makes me feel young again."
-STRINGS.CHARACTERS.WOODIE.DESCRIBE.SPRINTHAT = "Looks like those birds were good for something after all."
-STRINGS.CHARACTERS.WAXWELL.DESCRIBE.SPRINTHAT = "This hat holds an indescribable power."
-STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.SPRINTHAT = "The feathers fill me with energy!"
-STRINGS.CHARACTERS.WEBBER.DESCRIBE.SPRINTHAT = "Weeeee!"
-STRINGS.CHARACTERS.WINONA.DESCRIBE.SPRINTHAT = "That's quite the pair of feathers."
---dlc characters
-STRINGS.CHARACTERS.WORTOX.DESCRIBE.KIDHAT = "Feathers and horns go well together."
-STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.KIDHAT = "Fast hat"
-STRINGS.CHARACTERS.WARLY.DESCRIBE.KIDHAT = "You could forage at lightning speeds with a hat like that."
-
-STRINGS.RECIPE_DESC.SPRINTHAT = "This hat looks ready to sprint!"
-
-STRINGS.NAMES.BREWINGHAT = "Brewing Hat"
-
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BREWINGHAT = "It's some sort of witch hat."
-STRINGS.CHARACTERS.HATKID.DESCRIBE.BREWINGHAT = "It's spooky!"
-STRINGS.CHARACTERS.WILLOW.DESCRIBE.BREWINGHAT = "Potions are just another way to start fires!"
-STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.BREWINGHAT = "Wolfgang is not scared of hat."
-STRINGS.CHARACTERS.WENDY.DESCRIBE.BREWINGHAT = "It is as festive as it is lavender."
-STRINGS.CHARACTERS.WX78.DESCRIBE.BREWINGHAT = "IT IS OUTDATED HARDWARE"
-STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.BREWINGHAT = "This hat appears to be imbued with a magic power."
-STRINGS.CHARACTERS.WOODIE.DESCRIBE.BREWINGHAT = "That hat's giving me the creeps."
-STRINGS.CHARACTERS.WAXWELL.DESCRIBE.BREWINGHAT = "A hat befitting of a novice alchemist."
-STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.BREWINGHAT = "I prefer unicorns over potions."
-STRINGS.CHARACTERS.WEBBER.DESCRIBE.BREWINGHAT = "That's a fancy traffic cone!"
-STRINGS.CHARACTERS.WINONA.DESCRIBE.BREWINGHAT = "You don't suppose there's toxic chemicals in this hat, is there?"
---dlc characters
-STRINGS.CHARACTERS.WORTOX.DESCRIBE.BREWINGHAT = "I hope the chemicals don't get into my horns."
-STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.BREWINGHAT = "Hurty hat"
-STRINGS.CHARACTERS.WARLY.DESCRIBE.BREWINGHAT = "This hat'd go great with my spices!"
-
-STRINGS.RECIPE_DESC.BREWINGHAT = "Cook up mad concoctions!"
-
-STRINGS.NAMES.POLARHAT = "Ice Hat"
-
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.POLARHAT = "A hat with ears."
-STRINGS.CHARACTERS.HATKID.DESCRIBE.POLARHAT = "This hat is chill."
-STRINGS.CHARACTERS.WILLOW.DESCRIBE.POLARHAT = "Boo to this hat."
-STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.POLARHAT = "Hat would make good ice cube!"
-STRINGS.CHARACTERS.WENDY.DESCRIBE.POLARHAT = "A familiar chilling embrace."
-STRINGS.CHARACTERS.WX78.DESCRIBE.POLARHAT = "A GREAT EXTERNAL HEATSINK"
-STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.POLARHAT = "This hat appears to suck out energy from anything it touches."
-STRINGS.CHARACTERS.WOODIE.DESCRIBE.POLARHAT = "Now I can keep a cool head."
-STRINGS.CHARACTERS.WAXWELL.DESCRIBE.POLARHAT = "It's frosted around the sides."
-STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.POLARHAT = "The power of the teddy bear is a frigid one."
-STRINGS.CHARACTERS.WEBBER.DESCRIBE.POLARHAT = "I guess it's nice."
-STRINGS.CHARACTERS.WINONA.DESCRIBE.POLARHAT = "Now I don't have to take any breaks to cool off."
---dlc characters
-STRINGS.CHARACTERS.WORTOX.DESCRIBE.POLARHAT = "This hat's pretty 'cool'."
-STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.POLARHAT = "Cold hat"
-STRINGS.CHARACTERS.WARLY.DESCRIBE.POLARHAT = "It gives me chills!"
-
-STRINGS.RECIPE_DESC.POLARHAT = "It's so cold!"
-
-STRINGS.NAMES.DWELLERMASK = "Dweller's Mask"
-
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DWELLERMASK = "It somehow acts as a light."
-STRINGS.CHARACTERS.HATKID.DESCRIBE.DWELLERMASK = "This has changed just a little bit"
-STRINGS.CHARACTERS.WILLOW.DESCRIBE.DWELLERMASK = "Has science gone too far?"
-STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.DWELLERMASK = "Mask light up Wolfgang"
-STRINGS.CHARACTERS.WENDY.DESCRIBE.DWELLERMASK = "It's oozing."
-STRINGS.CHARACTERS.WX78.DESCRIBE.DWELLERMASK = "MASK DEFIES LOGIC"
-STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.DWELLERMASK = "I can almost sense it beckoning to something."
-STRINGS.CHARACTERS.WOODIE.DESCRIBE.DWELLERMASK = "Now I can keep a cool head."
-STRINGS.CHARACTERS.WAXWELL.DESCRIBE.DWELLERMASK = "It speaks with the shadow."
-STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.DWELLERMASK = "A mask of dark powers."
-STRINGS.CHARACTERS.WEBBER.DESCRIBE.DWELLERMASK = "Did you hear something?"
-STRINGS.CHARACTERS.WINONA.DESCRIBE.DWELLERMASK = "It's, uh, a mask."
---dlc characters
-STRINGS.CHARACTERS.WORTOX.DESCRIBE.DWELLERMASK = "Visions! Specters! I can see it all!"
-STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.DWELLERMASK = "Scary mask"
-STRINGS.CHARACTERS.WARLY.DESCRIBE.DWELLERMASK = "I must be crazy to fool around with this."
-
-STRINGS.RECIPE_DESC.DWELLERMASK = "See through a Dweller's eyes!"
-
-STRINGS.NAMES.TIMESTOPHAT = "Time Stop Hat"
-
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIMESTOPHAT = "A stylish rubber band."
-STRINGS.CHARACTERS.HATKID.DESCRIBE.TIMESTOPHAT = "Totally not overpowered!"
-STRINGS.CHARACTERS.WILLOW.DESCRIBE.TIMESTOPHAT = "Can't touch this!"
-STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.TIMESTOPHAT = "Hit Wolfgang! That is right... You can't."
-STRINGS.CHARACTERS.WENDY.DESCRIBE.TIMESTOPHAT = "Death is inevitable, but this'll help."
-STRINGS.CHARACTERS.WX78.DESCRIBE.TIMESTOPHAT = "IT CAN HIDE HUMAN MISTAKES"
-STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.TIMESTOPHAT = "This hat appears to put it's wearers in a different plane."
-STRINGS.CHARACTERS.WOODIE.DESCRIBE.TIMESTOPHAT = "Looks like a watch for your head."
-STRINGS.CHARACTERS.WAXWELL.DESCRIBE.TIMESTOPHAT = "It's above time to a disrespectful degree."
-STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.TIMESTOPHAT = "It could turn anyone into an artful dodger."
-STRINGS.CHARACTERS.WEBBER.DESCRIBE.TIMESTOPHAT = "Is this for time traveling?"
-STRINGS.CHARACTERS.WINONA.DESCRIBE.TIMESTOPHAT = "Smells like concentrated caffeine."
---dlc characters
-STRINGS.CHARACTERS.WORTOX.DESCRIBE.TIMESTOPHAT = "How much time did it take for the creator to come up with that name?"
-STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.TIMESTOPHAT = "Clock hat"
-STRINGS.CHARACTERS.WARLY.DESCRIBE.TIMESTOPHAT = "Time waits for no one, except the person wearing this."
-
-STRINGS.RECIPE_DESC.TIMESTOPHAT = "Death is inevitable. Your time is valuable."
-
-STRINGS.NAMES.HATBRELLA = "Blue Umbrella"
-STRINGS.NAMES.HATBRELLA2 = "Red Umbrella"
-STRINGS.NAMES.HATBRELLA3 = "Dark Umbrella"
-
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATBRELLA = "It's jammed shut."
-STRINGS.CHARACTERS.HATKID.DESCRIBE.HATBRELLA = "It has a good swing."
-STRINGS.CHARACTERS.WILLOW.DESCRIBE.HATBRELLA = "I don't like the color."
-STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.HATBRELLA = "The rain hurts my mighty skin."
-STRINGS.CHARACTERS.WENDY.DESCRIBE.HATBRELLA = "The clouds weep."
-STRINGS.CHARACTERS.WX78.DESCRIBE.HATBRELLA = "THIS WONT KEEP ME RUST FREE."
-STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.HATBRELLA = "A simple apparatus for keeping dry."
-STRINGS.CHARACTERS.WOODIE.DESCRIBE.HATBRELLA = "This will keep my beard dry, eh?"
-STRINGS.CHARACTERS.WAXWELL.DESCRIBE.HATBRELLA = "So hard to find a straightened around here."
-STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.HATBRELLA = "This is an otherworldly umbrella."
-STRINGS.CHARACTERS.WEBBER.DESCRIBE.HATBRELLA = "This should keep some of the rain off of us."
-STRINGS.CHARACTERS.WINONA.DESCRIBE.HATBRELLA = "It serves its purpose."
---dlc characters
-STRINGS.CHARACTERS.WORTOX.DESCRIBE.HATBRELLA = "No soggy imps on this fine day!"
-STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.HATBRELLA = "Rain Taker"
-STRINGS.CHARACTERS.WARLY.DESCRIBE.HATBRELLA = "I will try to remember not to open indoors."
-
-STRINGS.RECIPE_DESC.HATBRELLA = "Diplomacy didn't work, time for action."
-STRINGS.RECIPE_DESC.HATBRELLA2 = "A little more action, shall we?"
-STRINGS.RECIPE_DESC.HATBRELLA3 = "A temporary weapon, with very high damage."
-
-STRINGS.NAMES.HATBRELLAOPEN = "Open Blue Umbrella"
-
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATBRELLAOPEN = "What a cute umbrella."
-STRINGS.CHARACTERS.HATKID.DESCRIBE.HATBRELLAOPEN = "Good for rain, I guess."
-STRINGS.CHARACTERS.WILLOW.DESCRIBE.HATBRELLAOPEN = "I don't like the color."
-STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.HATBRELLAOPEN = "The rain hurts my mighty skin."
-STRINGS.CHARACTERS.WENDY.DESCRIBE.HATBRELLAOPEN = "The clouds weep."
-STRINGS.CHARACTERS.WX78.DESCRIBE.HATBRELLAOPEN = "THIS WILL KEEP ME RUST FREE."
-STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.HATBRELLAOPEN = "A simple apparatus for keeping dry."
-STRINGS.CHARACTERS.WOODIE.DESCRIBE.HATBRELLAOPEN = "This will keep my beard dry, eh?"
-STRINGS.CHARACTERS.WAXWELL.DESCRIBE.HATBRELLAOPEN = "So hard to find a straightened around here."
-STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.HATBRELLAOPEN = "This is an otherworldly umbrella."
-STRINGS.CHARACTERS.WEBBER.DESCRIBE.HATBRELLAOPEN = "This should keep some of the rain off of us."
-STRINGS.CHARACTERS.WINONA.DESCRIBE.HATBRELLAOPEN = "It serves its purpose."
---dlc characters
-STRINGS.CHARACTERS.WORTOX.DESCRIBE.HATBRELLAOPEN = "No soggy imps on this fine day!"
-STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.HATBRELLAOPEN = "Rain Taker"
-STRINGS.CHARACTERS.WARLY.DESCRIBE.HATBRELLAOPEN = "I will try to remember not to open indoors."
-
-STRINGS.NAMES.HATBRELLA2OPEN = "Open Red Umbrella"
-
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATBRELLA2OPEN = "What a cute umbrella."
-STRINGS.CHARACTERS.HATKID.DESCRIBE.HATBRELLA2OPEN = "Good for rain, I guess."
-STRINGS.CHARACTERS.WILLOW.DESCRIBE.HATBRELLA2OPEN = "I don't like the color."
-STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.HATBRELLA2OPEN = "The rain hurts my mighty skin."
-STRINGS.CHARACTERS.WENDY.DESCRIBE.HATBRELLA2OPEN = "The clouds weep."
-STRINGS.CHARACTERS.WX78.DESCRIBE.HATBRELLA2OPEN = "THIS WILL KEEP ME RUST FREE."
-STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.HATBRELLA2OPEN = "A simple apparatus for keeping dry."
-STRINGS.CHARACTERS.WOODIE.DESCRIBE.HATBRELLA2OPEN = "This will keep my beard dry, eh?"
-STRINGS.CHARACTERS.WAXWELL.DESCRIBE.HATBRELLA2OPEN = "So hard to find a straightened around here."
-STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.HATBRELLA2OPEN = "This is an otherworldly umbrella."
-STRINGS.CHARACTERS.WEBBER.DESCRIBE.HATBRELLA2OPEN = "This should keep some of the rain off of us."
-STRINGS.CHARACTERS.WINONA.DESCRIBE.HATBRELLA2OPEN = "It serves its purpose."
---dlc characters
-STRINGS.CHARACTERS.WORTOX.DESCRIBE.HATBRELLA2OPEN = "No soggy imps on this fine day!"
-STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.HATBRELLA2OPEN = "Rain Taker"
-STRINGS.CHARACTERS.WARLY.DESCRIBE.HATBRELLA2OPEN = "I will try to remember not to open indoors."
 
 
 --[[
@@ -473,139 +238,137 @@ STRINGS.CHARACTERS.WARLY.DESCRIBE.HATBRELLA2OPEN = "I will try to remember not t
                                                    __/ |
                                                   |___/
 ]]
-local HatTab = AddRecipeTab("Hats", 998, "images/gui/craftingtabicon.xml", "craftingtabicon.tex", "hatkidcrafter")
+local HAT_TAB = AddRecipeTab("Hats", 998, "images/gui/craftingtabicon.xml", "craftingtabicon.tex", "hatkidcrafter")
 
-
---function(self, name, ingredients, tab, level, placer_or_more_data, min_spacing, nounlock, numtogive, builder_tag, atlas, image, testfn, product, build_mode, build_distance)
 
 hatbrellarecipe = AddRecipe("hatbrella",
-{Ingredient("spear", 1), Ingredient("silk",2), Ingredient("goldnugget",2)}, --
-HatTab,
-TECH.SCIENCE_ONE, --Required crafting level, this one is sciene machine
-nil, --placer prefab, or additional data if needed. placer prefab must be valid or the client will crash.
-nil, --minimum spacing, presumably from other buildings/entity's
-nil, --whether the recipe is unlockable or not. nil is default, true means unlearnable/no unlock.
-nil, --amount to give (nil is one, but 1 is one as well, not sure about the difference)
-"hatkidcrafter", -- Characters need this tag on the server and client to craft this item.
-"images/inventoryimages/hatbrella.xml", 	--xml path
-"hatbrella.tex") --tex name
-
-
-
-
-
--- Removed, in favor of badges, a system more faithful to the original game. It also just didn't make sense to have different colored umbrella's.
--- hatbrella2recipe = AddRecipe("hatbrella2",
--- {Ingredient("hatbrella", 1, "images/inventoryimages/hatbrella.xml"), Ingredient("tentaclespike",1), Ingredient("nightmarefuel",5)},
--- HatTab,
--- TECH.MAGIC_TWO, --prestihatitator
--- nil,
--- nil,
--- nil,
--- nil,
--- "hatkidcrafter",
--- "images/inventoryimages/hatbrella2.xml",
--- "hatbrella2.tex")
-
-
+	{
+		GLOBAL.Ingredient("twigs", 3),
+		GLOBAL.Ingredient("silk", 5),
+		GLOBAL.Ingredient("goldnugget", 2),
+	},
+	HAT_TAB, -- crafting tab
+	GLOBAL.TECH.SCIENCE_ONE, -- crafting level
+	nil, -- placer
+	nil, -- min_spacing
+	nil, -- nounlock
+	nil, -- numtogive
+	"hatkidcrafter", -- builder_tag
+	"images/inventoryimages/hatbrella.xml", -- atlas
+	"hatbrella.tex" -- image
+)
 
 
 kidhatrecipe = AddRecipe("kidhat",
-{Ingredient("beefalowool", 4), Ingredient("goldnugget", 2)},
-HatTab,
-TECH.NONE, -- no crafting station
-nil,
-nil,
-nil,
-nil,
-"hatkidcrafter",
-"images/inventoryimages/kidhat.xml",
-"kidhat.tex")
-
-
-
+	{
+		GLOBAL.Ingredient("silk", 3),
+		GLOBAL.Ingredient("goldnugget", 1),
+	},
+	HAT_TAB, -- crafting tab
+	GLOBAL.TECH.SCIENCE_ONE, -- crafting level
+	nil, -- placer
+	nil, -- min_spacing
+	nil, -- nounlock
+	nil, -- numtogive
+	"hatkidcrafter", -- builder_tag
+	"images/inventoryimages/kidhat.xml", -- atlas
+	"kidhat.tex" -- image
+)
 
 
 sprinthatrecipe = AddRecipe("sprinthat",
-{Ingredient("feather_robin", 2), Ingredient("papyrus", 1), Ingredient("silk",4)},
-HatTab,
-TECH.SCIENCE_ONE, -- science machine
-nil,
-nil,
-nil,
-nil,
-"hatkidcrafter",
-"images/inventoryimages/sprinthat.xml",
-"sprinthat.tex")
-
-
-
-
-
-polarhatrecipe = AddRecipe("polarhat",
-{Ingredient("winterhat", 1), Ingredient("ice", 8), Ingredient("bluegem",1)},
-HatTab,
-TECH.MAGIC_TWO, -- Prestihatitator
-nil,
-nil,
-nil,
-nil,
-"hatkidcrafter",
-"images/inventoryimages/polarhat.xml",
-"polarhat.tex")
-
-
+	{
+		GLOBAL.Ingredient("silk", 4),
+		GLOBAL.Ingredient("papyrus", 1),
+		GLOBAL.Ingredient("feather_robin", 2),
+	},
+	HAT_TAB, -- crafting tab
+	GLOBAL.TECH.SCIENCE_ONE, -- crafting level
+	nil, -- placer
+	nil, -- min_spacing
+	nil, -- nounlock
+	nil, -- numtogive
+	"hatkidcrafter", -- builder_tag
+	"images/inventoryimages/sprinthat.xml", -- atlas
+	"sprinthat.tex" -- image
+)
 
 
 brewinghatrecipe = AddRecipe("brewinghat",
-{Ingredient("strawhat", 1), Ingredient("slurtleslime", 2), Ingredient("purplegem",1)},
-HatTab,
-TECH.MAGIC_TWO,
-nil,
-nil,
-nil,
-nil,
-"hatkidcrafter",
-"images/inventoryimages/brewinghat.xml",
-"brewinghat.tex")
+	{
+		GLOBAL.Ingredient("silk", 6),
+		GLOBAL.Ingredient("slurtleslime", 3),
+		GLOBAL.Ingredient("purplegem", 1),
+	},
+	HAT_TAB, -- crafting tab
+	GLOBAL.TECH.MAGIC_TWO, -- crafting level
+	nil, -- placer
+	nil, -- min_spacing
+	nil, -- nounlock
+	nil, -- numtogive
+	"hatkidcrafter", -- builder_tag
+	"images/inventoryimages/brewinghat.xml", -- atlas
+	"brewinghat.tex" -- image
+)
 
 
-
+polarhatrecipe = AddRecipe("polarhat",
+	{
+		GLOBAL.Ingredient("winterhat", 1),
+		GLOBAL.Ingredient("ice", 5),
+		GLOBAL.Ingredient("bluegem", 1),
+	},
+	HAT_TAB, -- crafting tab
+	GLOBAL.TECH.MAGIC_TWO, -- crafting level
+	nil, -- placer
+	nil, -- min_spacing
+	nil, -- nounlock
+	nil, -- numtogive
+	"hatkidcrafter", -- builder_tag
+	"images/inventoryimages/polarhat.xml", -- atlas
+	"polarhat.tex" -- image
+)
 
 
 dwellermaskrecipe = AddRecipe("dwellermask",
-{Ingredient("wormlight", 1), Ingredient("papyrus", 2), Ingredient("nightmarefuel",4)},
-HatTab,
-TECH.MAGIC_THREE, --shadow manipulator
-nil,
-nil,
-nil,
-nil,
-"hatkidcrafter",
-"images/inventoryimages/dwellermask.xml",
-"dwellermask.tex")
-
-
-
+	{
+		GLOBAL.Ingredient("papyrus", 2),
+		GLOBAL.Ingredient("nightmarefuel", 4),
+		GLOBAL.Ingredient("greengem", 1),
+	},
+	HAT_TAB, -- crafting tab
+	GLOBAL.TECH.MAGIC_THREE, -- crafting level
+	nil, -- placer
+	nil, -- min_spacing
+	nil, -- nounlock
+	nil, -- numtogive
+	"hatkidcrafter", -- builder_tag
+	"images/inventoryimages/dwellermask.xml", -- atlas
+	"dwellermask.tex" -- image
+)
 
 
 timestophatrecipe = AddRecipe("timestophat",
-{Ingredient("moonglass", 8), Ingredient("greengem",1), Ingredient("silk", 8)},
-HatTab,
-TECH.MOON_ALTAR_TWO, --celestial altar
-nil,
-nil,
-nil,
-nil,
-"hatkidcrafter",
-"images/inventoryimages/timestophat.xml",
-"timestophat.tex")
+	{
+		GLOBAL.Ingredient("silk", 8),	
+		GLOBAL.Ingredient("moonglass", 9),
+		GLOBAL.Ingredient("greengem", 1),
+	},
+	HAT_TAB, -- crafting tab
+	GLOBAL.TECH.MOON_ALTAR_TWO, -- crafting level
+	nil, -- placer
+	nil, -- min_spacing
+	nil, -- nounlock
+	nil, -- numtogive
+	"hatkidcrafter", -- builder_tag
+	"images/inventoryimages/timestophat.xml", -- atlas
+	"timestophat.tex" -- image
+)
 
 
 -- Sort keys determine how recipes are ordered in the crafting menu.
 -- Lower values are shown first.
 hatbrellarecipe.sortkey = 0
--- hatbrella2recipe.sortkey = 1
 
 -- Leave room in case I wanna add any more craftables before the hats easily.
 kidhatrecipe.sortkey = 5
@@ -666,21 +429,6 @@ AddComponentPostInit("combat", function(self)
 table.insert(GLOBAL.CHARACTER_GENDERS.FEMALE, "hatkid")
 
 
---[[
-  _    _           _                    _       _   _   _   _                  _____               _
- | |  | |         | |           /\     | |     (_) | | (_) | |                / ____|             | |
- | |__| |   __ _  | |_         /  \    | |__    _  | |  _  | |_   _   _      | |        ___     __| |   ___
- |  __  |  / _` | | __|       / /\ \   | '_ \  | | | | | | | __| | | | |     | |       / _ \   / _` |  / _ \
- | |  | | | (_| | | |_       / ____ \  | |_) | | | | | | | | |_  | |_| |     | |____  | (_) | | (_| | |  __/
- |_|  |_|  \__,_|  \__|     /_/    \_\ |_.__/  |_| |_| |_|  \__|  \__, |      \_____|  \___/   \__,_|  \___|
-                                                                   __/ |
-                                                                  |___/
-]]
-
---CURRENTLY BEING OBSOLSTED! IF THIS SOMEHOW MAKES IT OUT IN IT'S CURRENT STATE SOMETHING IS WRONG!
--- UPDATE (about 6 months later, after tons of burnout and other crap) THIS HAS BEEN "OBSOLSTED" SUCCESSFULLY!!!!!!
--- i know its spelled incorrectly i just realized now.
-
 -- Thanks Kzisor/Ysovuka for the Key Handling code.
 -- Key Handling guide https://forums.kleientertainment.com/forums/topic/63754-tutorial-character-transformation/
 local mod_option = "hatkid_polarhatkey"
@@ -689,7 +437,7 @@ GLOBAL.TUNING[GLOBAL.string.upper(character)] = {}
 GLOBAL.TUNING[GLOBAL.string.upper(character)].KEY = GetModConfigData(mod_option) or 122
 
 local function Ability(inst)
-	local hat = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+	local hat = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HEAD)
 	if hat ~= nil then
 		hat:PushEvent("AbilityKey")
 	end
@@ -715,17 +463,6 @@ AddClassPostConstruct("widgets/statusdisplays", function(self)
 		end
 	end
 end)
-
-local function BuilderPostInit( self )
-	local _Open = self.Open
-
-	self.Open = function( inst, doer )
-		_Open(doer)
-		-- dumptable(doer)
-	end
-end
-
--- AddComponentPostInit("container", BuilderPostInit)
 
 --Hornet: I am currently using wilba as an example, youll want to change all instances of "wilba" to the prefab name of your character!
 --Skins
@@ -774,6 +511,26 @@ end
 
 AddSkinnableCharacter("hatkid") --Hornet: The character youd like to skin, make sure you use the prefab name. And MAKE sure you run this function AFTER you import the skins_api file
 
+
+
+--Item and character strings
+
+GLOBAL.STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Smol"
+
+
+-- String declarations
+local require = GLOBAL.require
+local STRINGS = GLOBAL.STRINGS
+
+STRINGS.NAMES.HATKID = "Hat Kid"
+STRINGS.CHARACTERS.HATKID = require "speech_hatkid" -- speech file
+
+-- The character select screen lines
+STRINGS.CHARACTER_TITLES.hatkid = "The Hatty Explorer"
+STRINGS.CHARACTER_NAMES.hatkid = "Hat Kid"
+STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Makes cool hats, for herself\n*Might go insane without a hat\n*Prefers to fight with her umbrella\n*Collects all kinds of things\n*Is extremely cute"
+STRINGS.CHARACTER_QUOTES.hatkid = "\"Oh, hi there!\""
+
 --Skin STRINGS
 
 STRINGS.SKIN_NAMES.hatkid_none = "Hat Kid"
@@ -795,162 +552,244 @@ STRINGS.SKIN_QUOTES.hatkid_detective = "\"MYURDER!\""
 STRINGS.SKIN_DESCRIPTIONS.hatkid_detective = "A detective outfit, worn by only the most SERIOUS of detectives! Unfortunately, your detective themed hat didn't make it to The Constant."
 
 STRINGS.SKIN_QUOTES.hatkid_dye_niko = "\"Oh, hi there!\""
-STRINGS.SKIN_DESCRIPTIONS.hatkid_niko = "An outfit reminding you, that you only have one shot."
+STRINGS.SKIN_DESCRIPTIONS.hatkid_dye_niko = "An outfit reminding you, that you only have one shot."
 
 STRINGS.SKIN_QUOTES.hatkid_dye_toonlink = "\"Oh, hi there!\""
-STRINGS.SKIN_DESCRIPTIONS.hatkid_toonlink = "An outfit which seems to always wave in the wind, even when there is no wind."
+STRINGS.SKIN_DESCRIPTIONS.hatkid_dye_toonlink = "An outfit which seems to always wave in the wind, even when there is no wind."
 
 STRINGS.SKIN_QUOTES.hatkid_dye_pinkdanger = "\"Oh, hi there!\""
-STRINGS.SKIN_DESCRIPTIONS.hatkid_pinkdanger = "An cute, pink, and obviously lethal outfit."
-
--- AddReplicableComponent("ponholder")
-
--- Prevent Hat Kid from using her fist
--- Actually, no more. Damage nerf is enough.
-
--- AddStategraphPostInit("wilson", function(sg)
--- 	local _run_start = sg.states["run_start"] -- This specifies which state we're adding to
--- 	local _onenter = _run_start.onenter
--- 	_run_start.onenter = function(inst,...)
--- 		_onenter(inst,...)
--- 		local hat = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HEAD)
--- 		if hat.prefab == "sprinthat" then
-
--- 			local x, y, z = inst.Transform:GetWorldPosition()
--- 			local dirt = SpawnPrefab("dirt_puff")
--- 			dirt.Transform:SetPosition(x, y, z)
--- 			dirt.Transform:SetScale(0.5, 0.5, 0.5)
-
--- 			inst.footstep = inst:DoPeriodicTask(0.25/2, function(inst)
--- 				local x, y, z = inst.Transform:GetWorldPosition()
--- 				local dirt = SpawnPrefab("dirt_puff")
--- 				dirt.Transform:SetPosition(x, y, z)
--- 				dirt.Transform:SetScale(0.5, 0.5, 0.5)
--- 			end)
-
--- 		end
--- 	end
--- end)
-
--- AddStategraphPostInit("wilson", function(sg)
--- 	local _run_stop = sg.states["run_stop"] -- This specifies which state we're adding to
--- 	local _onenter = _run_stop.onenter
--- 	_run_stop.onenter = function(inst,...)
--- 		_onenter(inst,...)
--- 		-- local hat = inst.components.inventory_replica:GetEquippedItem(GLOBAL.EQUIPSLOTS.HEAD)
--- 		-- if hat.prefab == "sprinthat" then
--- 			if inst.footstep then
--- 				inst.footstep:Cancel()
--- 			end
-
--- 		-- end
--- 	end
--- end)
-
--- ---------
-
--- AddStategraphPostInit("wilson_client", function(sg)
--- 	local _run_start = sg.states["run_start"] -- This specifies which state we're adding to
--- 	local _onenter = _run_start.onenter
--- 	_run_start.onenter = function(inst,...)
--- 		_onenter(inst,...)
--- 		local hat = inst.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HEAD)
--- 		if hat.prefab == "sprinthat" then
-
--- 			local x, y, z = inst.Transform:GetWorldPosition()
--- 			local dirt = SpawnPrefab("dirt_puff")
--- 			dirt.Transform:SetPosition(x, y, z)
--- 			dirt.Transform:SetScale(0.5, 0.5, 0.5)
-
--- 			inst.footstep = inst:DoPeriodicTask(0.25/2, function(inst)
--- 				local x, y, z = inst.Transform:GetWorldPosition()
--- 				local dirt = SpawnPrefab("dirt_puff")
--- 				dirt.Transform:SetPosition(x, y, z)
--- 				dirt.Transform:SetScale(0.5, 0.5, 0.5)
--- 			end)
-
--- 		end
--- 	end
--- end)
-
--- AddStategraphPostInit("wilson_client", function(sg)
--- 	local _run_stop = sg.states["run_stop"] -- This specifies which state we're adding to
--- 	local _onenter = _run_stop.onenter
--- 	_run_stop.onenter = function(inst,...)
--- 		_onenter(inst,...)
--- 		-- local hat = inst.components.inventory_replica:GetEquippedItem(GLOBAL.EQUIPSLOTS.HEAD)
--- 		-- if hat.prefab == "sprinthat" then
--- 			if inst.footstep then
--- 				inst.footstep:Cancel()
--- 			end
-
--- 		-- end
--- 	end
--- end)
-
--- AddStategraphPostInit("wilson_client", function(sg) -- This adds code to the client side stategraph, but it's only used if the client has Movement Prediction enabled.
--- 	local _attack = sg.states["attack"]
--- 	local _onenter = _attack.onenter
--- 	_attack.onenter = function(inst,...)
--- 		_onenter(inst,...)
--- 		if inst.prefab == "wilba" then --Change it here again!
--- 			local speed = 2 -- Make sure to set your speed here as well, so the client knows.
--- 			inst.sg:SetTimeout(inst.sg.timeout/speed)
--- 			inst.AnimState:SetDeltaTimeMultiplier(speed)
--- 			for k, v in pairs(_attack.timeline) do
--- 				v.time = v.time/speed
--- 			end
--- 		end
--- 		return
--- 	end
--- 	local _onexit = _attack.onexit
--- 	_attack.onexit = function(inst,...)
--- 		if inst.prefab == "wilba" then  -- Final change here, to your characters prefab again.
--- 			inst.AnimState:SetDeltaTimeMultiplier(1)
--- 		end
--- 		return _onexit(inst,...)
--- 	end
--- end)
-
--- AddGlobalClassPostConstruct("widgets/inventorybar", "Inv", function()
--- end)
+STRINGS.SKIN_DESCRIPTIONS.hatkid_dye_pinkdanger = "An outfit with lethal amounts of pink."
 
 
--- AddPrefabPostInitAny(function(inst)
--- 	if inst.components.lootdropper and inst.components.health and not inst:HasTag("player") then
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATKID =
+{
+	GENERIC = "It's Hat Kid!",
+	ATTACKER = "I hope she didn't mean to do that.",
+	MURDERER = "A murder? On MY owl express?",
+	REVIVER = "She must like ghosts.",
+	GHOST = "We should help the poor kid.",
+	FIRESTARTER = "Should she have matches?",
+}
+
+STRINGS.CHARACTERS.HATKID.DESCRIBE.HATKID =
+{
+	GENERIC = "Oh hi there!",
+	ATTACKER = "I don't like her.",
+	MURDERER = "MYURDER!",
+	REVIVER = "Nice job, me.",
+	GHOST = "How am I dead?",
+	FIRESTARTER = "Oh come on! We're better than this!",
+}
 
 
+-- Item names
+STRINGS.NAMES.KIDHAT = "Kid's Hat"
+STRINGS.NAMES.SPRINTHAT = "Sprint Hat"
+STRINGS.NAMES.BREWINGHAT = "Brewing Hat"
+STRINGS.NAMES.POLARHAT = "Ice Hat"
+STRINGS.NAMES.DWELLERMASK = "Dweller's Mask"
+STRINGS.NAMES.TIMESTOPHAT = "Time Stop Hat"
+
+STRINGS.NAMES.HATBRELLA = "Blue Umbrella"
+STRINGS.NAMES.HATBRELLAOPEN = "Open Blue Umbrella"
+STRINGS.NAMES.KIDPOTION_THROWABLE = "Mad Concoction"
+STRINGS.NAMES.KIDPOTION = "Brewing Concoction"
+
+--Recipe Descriptions
+STRINGS.RECIPE_DESC.KIDHAT = "Hat Kid's pride and joy."
+STRINGS.RECIPE_DESC.SPRINTHAT = "This hat looks ready to sprint!"
+STRINGS.RECIPE_DESC.BREWINGHAT = "Cook up mad concoctions!"
+STRINGS.RECIPE_DESC.POLARHAT = "It's so cold!"
+STRINGS.RECIPE_DESC.DWELLERMASK = "See through a Dweller's eyes!"
+STRINGS.RECIPE_DESC.TIMESTOPHAT = "Death is inevitable. Your time is valuable."
+
+STRINGS.RECIPE_DESC.HATBRELLA = "Diplomacy didn't work, time for action."
+
+-- temporary
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.KIDPOTION_THROWABLE = "Throwing these will be fun!"
 
 
--- 		for i = inst.components.health.maxhealth,0,-250
--- 		do
--- 			inst.components.lootdropper:AddChanceLoot("pon", 0.75)
--- 		end
+--Describe strings, by order of css screen, but Hat Kid first.
+-- generic is wilson, as well as any other undefined characters (modded, future releases)
 
--- 	end
--- end)
+-- Hat Kid
+STRINGS.CHARACTERS.HATKID.DESCRIBE.KIDHAT = "What a good hat."
+STRINGS.CHARACTERS.HATKID.DESCRIBE.SPRINTHAT = "Gotta go fast, right?"
+STRINGS.CHARACTERS.HATKID.DESCRIBE.BREWINGHAT = "It's spooky!"
+STRINGS.CHARACTERS.HATKID.DESCRIBE.POLARHAT = "This hat is chill."
+STRINGS.CHARACTERS.HATKID.DESCRIBE.DWELLERMASK = "This has changed just a little bit"
+STRINGS.CHARACTERS.HATKID.DESCRIBE.TIMESTOPHAT = "Totally not overpowered!"
+STRINGS.CHARACTERS.HATKID.DESCRIBE.HATBRELLA = "It has a good swing."
+STRINGS.CHARACTERS.HATKID.DESCRIBE.HATBRELLAOPEN = "Good for rain, I guess."
 
--- local r_s = GLOBAL.require("components/stackable_replica")
--- r_s._ctor = function(self, inst)
--- 	self.inst = inst
--- 	self._stacksize = GLOBAL.net_shortint(inst.GUID, "stackable._stacksize", "stacksizedirty")
--- 	self._maxsize = GLOBAL.net_tinybyte(inst.GUID, "stackable._maxsize")
--- end
+-- Wilson/Generic
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.KIDHAT = "It's a short and stout tophat."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPRINTHAT = "It's a tennis cap with wings on it."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BREWINGHAT = "It's some sort of witch hat."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.POLARHAT = "A hat with ears."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.DWELLERMASK = "It somehow acts as a light."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIMESTOPHAT = "A stylish rubber band."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATBRELLA = "It's jammed shut."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATBRELLAOPEN = "What a cute umbrella."
+
+-- Willow
+STRINGS.CHARACTERS.WILLOW.DESCRIBE.KIDHAT = "A top hat and a lighter, a perfect combination."
+STRINGS.CHARACTERS.WILLOW.DESCRIBE.SPRINTHAT = "You could start a fire going that fast!"
+STRINGS.CHARACTERS.WILLOW.DESCRIBE.BREWINGHAT = "Potions are just another way to start fires!"
+STRINGS.CHARACTERS.WILLOW.DESCRIBE.POLARHAT = "Boo to this hat."
+STRINGS.CHARACTERS.WILLOW.DESCRIBE.DWELLERMASK = "Has science gone too far?"
+STRINGS.CHARACTERS.WILLOW.DESCRIBE.TIMESTOPHAT = "Can't touch this!"
+STRINGS.CHARACTERS.WILLOW.DESCRIBE.HATBRELLA = "I don't like the color."
+STRINGS.CHARACTERS.WILLOW.DESCRIBE.HATBRELLAOPEN = "I don't like the color."
+
+-- Wolfgang
+STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.KIDHAT = "Is tiny hat, but still good!"
+STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.SPRINTHAT = "Hat is fast!"
+STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.BREWINGHAT = "Wolfgang is not scared of hat."
+STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.POLARHAT = "Hat would make good ice cube!"
+STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.DWELLERMASK = "Mask light up Wolfgang"
+STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.TIMESTOPHAT = "Hit Wolfgang! That is right... You can't."
+STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.HATBRELLA = "The rain hurts my mighty skin."
+STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.HATBRELLAOPEN = "The rain hurts my mighty skin."
+
+-- Wendy
+STRINGS.CHARACTERS.WENDY.DESCRIBE.KIDHAT = "A piece of finery to help forget the inescapable wild."
+STRINGS.CHARACTERS.WENDY.DESCRIBE.SPRINTHAT = "It will still come, no matter how fast you run."
+STRINGS.CHARACTERS.WENDY.DESCRIBE.BREWINGHAT = "It is as festive as it is lavender."
+STRINGS.CHARACTERS.WENDY.DESCRIBE.POLARHAT = "A familiar chilling embrace."
+STRINGS.CHARACTERS.WENDY.DESCRIBE.DWELLERMASK = "It's oozing."
+STRINGS.CHARACTERS.WENDY.DESCRIBE.TIMESTOPHAT = "Death is inevitable, but this'll help."
+STRINGS.CHARACTERS.WENDY.DESCRIBE.HATBRELLA = "The clouds weep."
+STRINGS.CHARACTERS.WENDY.DESCRIBE.HATBRELLAOPEN = "The clouds weep."
+
+-- WX78
+STRINGS.CHARACTERS.WX78.DESCRIBE.KIDHAT = "INFERIOR TOP HAT"
+STRINGS.CHARACTERS.WX78.DESCRIBE.SPRINTHAT = "FAST HEADWEAR MOVING AT EXTREMELY HIGH SPEED"
+STRINGS.CHARACTERS.WX78.DESCRIBE.BREWINGHAT = "IT IS OUTDATED HARDWARE"
+STRINGS.CHARACTERS.WX78.DESCRIBE.POLARHAT = "A GREAT EXTERNAL HEATSINK"
+STRINGS.CHARACTERS.WX78.DESCRIBE.DWELLERMASK = "MASK DEFIES LOGIC"
+STRINGS.CHARACTERS.WX78.DESCRIBE.TIMESTOPHAT = "IT CAN HIDE HUMAN MISTAKES"
+STRINGS.CHARACTERS.WX78.DESCRIBE.HATBRELLA = "THIS WONT KEEP ME RUST FREE."
+STRINGS.CHARACTERS.WX78.DESCRIBE.HATBRELLAOPEN = "THIS WILL KEEP ME RUST FREE."
+
+-- Wickerbottom
+STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.KIDHAT = "How bourgeois."
+STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.SPRINTHAT = "It makes me feel young again."
+STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.BREWINGHAT = "This hat appears to be imbued with a magic power."
+STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.POLARHAT = "This hat appears to suck out energy from anything it touches."
+STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.DWELLERMASK = "I can almost sense it beckoning to something."
+STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.TIMESTOPHAT = "This hat appears to put it's wearers in a different plane."
+STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.HATBRELLA = "A simple apparatus for keeping dry."
+STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.HATBRELLAOPEN = "A simple apparatus for keeping dry."
+
+-- Woodie
+STRINGS.CHARACTERS.WOODIE.DESCRIBE.KIDHAT = "It's the right amount of fancy."
+STRINGS.CHARACTERS.WOODIE.DESCRIBE.SPRINTHAT = "Looks like those birds were good for something after all."
+STRINGS.CHARACTERS.WOODIE.DESCRIBE.BREWINGHAT = "That hat's giving me the creeps."
+STRINGS.CHARACTERS.WOODIE.DESCRIBE.POLARHAT = "Now I can keep a cool head."
+STRINGS.CHARACTERS.WOODIE.DESCRIBE.DWELLERMASK = "Now I can keep a cool head."
+STRINGS.CHARACTERS.WOODIE.DESCRIBE.TIMESTOPHAT = "Looks like a watch for your head."
+STRINGS.CHARACTERS.WOODIE.DESCRIBE.HATBRELLA = "This will keep my beard dry, eh?"
+STRINGS.CHARACTERS.WOODIE.DESCRIBE.HATBRELLAOPEN = "This will keep my beard dry, eh?"
+
+-- Maxwell (Waxwell)
+STRINGS.CHARACTERS.WAXWELL.DESCRIBE.KIDHAT = "Some fine haberdashery."
+STRINGS.CHARACTERS.WAXWELL.DESCRIBE.SPRINTHAT = "This hat holds an indescribable power."
+STRINGS.CHARACTERS.WAXWELL.DESCRIBE.BREWINGHAT = "A hat befitting of a novice alchemist."
+STRINGS.CHARACTERS.WAXWELL.DESCRIBE.POLARHAT = "It's frosted around the sides."
+STRINGS.CHARACTERS.WAXWELL.DESCRIBE.DWELLERMASK = "It speaks with the shadow."
+STRINGS.CHARACTERS.WAXWELL.DESCRIBE.TIMESTOPHAT = "It's above time to a disrespectful degree."
+STRINGS.CHARACTERS.WAXWELL.DESCRIBE.HATBRELLA = "So hard to find a straightened around here."
+STRINGS.CHARACTERS.WAXWELL.DESCRIBE.HATBRELLAOPEN = "So hard to find a straightened around here."
+
+-- Wigfrid (Wathgrithr)
+STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.KIDHAT = "It can't even fit me!"
+STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.SPRINTHAT = "The feathers fill me with energy!"
+STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.BREWINGHAT = "I prefer unicorns over potions."
+STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.POLARHAT = "The power of the teddy bear is a frigid one."
+STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.DWELLERMASK = "A mask of dark powers."
+STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.TIMESTOPHAT = "It could turn anyone into an artful dodger."
+STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.HATBRELLA = "This is an otherworldly umbrella."
+STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.HATBRELLAOPEN = "This is an otherworldly umbrella."
+
+-- Webber
+STRINGS.CHARACTERS.WEBBER.DESCRIBE.KIDHAT = "Like father used to wear."
+STRINGS.CHARACTERS.WEBBER.DESCRIBE.SPRINTHAT = "Weeeee!"
+STRINGS.CHARACTERS.WEBBER.DESCRIBE.BREWINGHAT = "That's a fancy traffic cone!"
+STRINGS.CHARACTERS.WEBBER.DESCRIBE.POLARHAT = "I guess it's nice."
+STRINGS.CHARACTERS.WEBBER.DESCRIBE.DWELLERMASK = "Did you hear something?"
+STRINGS.CHARACTERS.WEBBER.DESCRIBE.TIMESTOPHAT = "Is this for time traveling?"
+STRINGS.CHARACTERS.WEBBER.DESCRIBE.HATBRELLA = "This should keep some of the rain off of us."
+STRINGS.CHARACTERS.WEBBER.DESCRIBE.HATBRELLAOPEN = "This should keep some of the rain off of us."
+
+-- Winona
+STRINGS.CHARACTERS.WINONA.DESCRIBE.KIDHAT = "How bourgeoisie."
+STRINGS.CHARACTERS.WINONA.DESCRIBE.SPRINTHAT = "That's quite the pair of feathers."
+STRINGS.CHARACTERS.WINONA.DESCRIBE.BREWINGHAT = "You don't suppose there's toxic chemicals in this hat, is there?"
+STRINGS.CHARACTERS.WINONA.DESCRIBE.POLARHAT = "Now I don't have to take any breaks to cool off."
+STRINGS.CHARACTERS.WINONA.DESCRIBE.DWELLERMASK = "It's, uh, a mask."
+STRINGS.CHARACTERS.WINONA.DESCRIBE.TIMESTOPHAT = "Smells like concentrated caffeine."
+STRINGS.CHARACTERS.WINONA.DESCRIBE.HATBRELLA = "It serves its purpose."
+STRINGS.CHARACTERS.WINONA.DESCRIBE.HATBRELLAOPEN = "It serves its purpose."
+
+-- Start DLC
+-- Warly
+STRINGS.CHARACTERS.WARLY.DESCRIBE.KIDHAT = "It's not my style."
+STRINGS.CHARACTERS.WARLY.DESCRIBE.SPRINTHAT = "You could forage at lightning speeds with a hat like that."
+STRINGS.CHARACTERS.WARLY.DESCRIBE.BREWINGHAT = "This hat'd go great with my spices!"
+STRINGS.CHARACTERS.WARLY.DESCRIBE.POLARHAT = "It gives me chills!"
+STRINGS.CHARACTERS.WARLY.DESCRIBE.DWELLERMASK = "I must be crazy to fool around with this."
+STRINGS.CHARACTERS.WARLY.DESCRIBE.TIMESTOPHAT = "Time waits for no one, except the person wearing this."
+STRINGS.CHARACTERS.WARLY.DESCRIBE.HATBRELLA = "I will try to remember not to open indoors."
+STRINGS.CHARACTERS.WARLY.DESCRIBE.HATBRELLAOPEN = "I will try to remember not to open indoors."
 
 
---[[
-local function GetTableFromFunction(tablename, func)
-	local debug = GLOBAL.debug
-	local i = 1
-	while true do
-		local n, v = debug.getupvalue(func, i)
-		if not n then
-			return nil
-		end
-		if n == tablename then
-			return v
-		end
-		i = i + 1
-	end
-end
-]]
+-- Wortox
+STRINGS.CHARACTERS.WORTOX.DESCRIBE.KIDHAT = "Would you look at that, it's a hat!"
+STRINGS.CHARACTERS.WORTOX.DESCRIBE.SPRINTHAT = "Feathers and horns go well together."
+STRINGS.CHARACTERS.WORTOX.DESCRIBE.BREWINGHAT = "I hope the chemicals don't get into my horns."
+STRINGS.CHARACTERS.WORTOX.DESCRIBE.POLARHAT = "This hat's pretty 'cool'."
+STRINGS.CHARACTERS.WORTOX.DESCRIBE.DWELLERMASK = "Visions! Specters! I can see it all!"
+STRINGS.CHARACTERS.WORTOX.DESCRIBE.TIMESTOPHAT = "How much time did it take for the creator to come up with that name?"
+STRINGS.CHARACTERS.WORTOX.DESCRIBE.HATBRELLA = "No soggy imps on this fine day!"
+STRINGS.CHARACTERS.WORTOX.DESCRIBE.HATBRELLAOPEN = "No soggy imps on this fine day!"
+
+-- Wormwood
+STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.KIDHAT = "Hat."
+STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.SPRINTHAT = "Fast hat."
+STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.BREWINGHAT = "Hurty hat."
+STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.POLARHAT = "Cold hat."
+STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.DWELLERMASK = "Greeeeeen."
+STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.TIMESTOPHAT = "Clock hat"
+STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.HATBRELLA = "Pain Bringer"
+STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.HATBRELLAOPEN = "Rain Taker"
+
+-- Wurt
+STRINGS.CHARACTERS.WURT.DESCRIBE.KIDHAT = "Nice hat."
+STRINGS.CHARACTERS.WURT.DESCRIBE.SPRINTHAT = "Make kid go fast."
+STRINGS.CHARACTERS.WURT.DESCRIBE.BREWINGHAT = "GLORPT! I don't wanna explode!"
+STRINGS.CHARACTERS.WURT.DESCRIBE.POLARHAT = "Very cold, florp."
+STRINGS.CHARACTERS.WURT.DESCRIBE.DWELLERMASK = "We see at night with scary mask."
+STRINGS.CHARACTERS.WURT.DESCRIBE.TIMESTOPHAT = "Won't slow ME down, florp."
+STRINGS.CHARACTERS.WURT.DESCRIBE.HATBRELLA = "Umbrella is closed."
+STRINGS.CHARACTERS.WURT.DESCRIBE.HATBRELLAOPEN = "No more wet!"
+
+-- Walter
+STRINGS.CHARACTERS.WALTER.DESCRIBE.KIDHAT = "A respectable hat for a respectable kid!"
+STRINGS.CHARACTERS.WALTER.DESCRIBE.SPRINTHAT = "Woah! That's gotta make you go fast, Hat Kid!"
+STRINGS.CHARACTERS.WALTER.DESCRIBE.BREWINGHAT = "Seems dangerous, I think I'll leave it alone."
+STRINGS.CHARACTERS.WALTER.DESCRIBE.POLARHAT = "Not my style, like I care anyway."
+STRINGS.CHARACTERS.WALTER.DESCRIBE.DWELLERMASK = "Oooooo! I love scary stuff!"
+STRINGS.CHARACTERS.WALTER.DESCRIBE.TIMESTOPHAT = "As long as it doesn't slow down Woby."
+STRINGS.CHARACTERS.WALTER.DESCRIBE.HATBRELLA = "What a small umbrella"
+STRINGS.CHARACTERS.WALTER.DESCRIBE.HATBRELLAOPEN = "Does that thing work well?"
+
+-- Wanda
+STRINGS.CHARACTERS.WANDA.DESCRIBE.KIDHAT = "A cute hat for a time keeping alien."
+STRINGS.CHARACTERS.WANDA.DESCRIBE.SPRINTHAT = "The less time spent running, the better."
+STRINGS.CHARACTERS.WANDA.DESCRIBE.BREWINGHAT = "Such destruction."
+STRINGS.CHARACTERS.WANDA.DESCRIBE.POLARHAT = "Looks cold."
+STRINGS.CHARACTERS.WANDA.DESCRIBE.DWELLERMASK = "Not this time."
+STRINGS.CHARACTERS.WANDA.DESCRIBE.TIMESTOPHAT = "The time child and I think alike."
+STRINGS.CHARACTERS.WANDA.DESCRIBE.HATBRELLA = "Seems small, but it must hurt."
+STRINGS.CHARACTERS.WANDA.DESCRIBE.HATBRELLAOPEN = "Time and umbrellas?"

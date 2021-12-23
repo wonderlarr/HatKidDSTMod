@@ -113,7 +113,7 @@ configuration_options =
 			{description = "300", data = 300},
 			{description = "400", data = 400},
 		},
-		default = 135,
+		default = 140,
 	},
 	
 	{
@@ -772,7 +772,7 @@ configuration_options =
 
 
 		},
-		default = -15,
+		default = 15,
 	},
 
 	{
@@ -1083,8 +1083,8 @@ configuration_options =
 	
 	{
 		name = "hatbrella2damage",
-		label = "Red Umbrella Damage",
-		hover = "How much damage Hat Kid's Red umbrella deals. This is considered after the damage modifier, which is 85% by default.",
+		label = "UNIMPLEMENTED",
+		hover = "",
 		options =
 		{
 			{description = "1", data = 1},
@@ -1106,7 +1106,7 @@ configuration_options =
 	},		
 
 	{
-		name = "Ability Option",
+		name = "Misc Options",
 		options = null_options,
 		hover = "",
 		default = 0,
@@ -1218,7 +1218,26 @@ configuration_options =
 	{
 		name = "funnymode",
 		label = "Funny Mode",
-		hover = "Introduces intentional glitches that are pretty funny, if maybe a bit overpowered, to play with. Please tell me if you have this enabled while reporting bugs.",
+		hover = "Introduces intentional glitches that are pretty funny, if maybe a bit overpowered, to play with. Please tell me if you have this enabled while reporting bugs. You may not notice anything if you enable this as well.",
+		options =
+		{
+			{description = "Disabled (Default)", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = false,
+	},
+	
+	{
+		name = "Experimental",
+		options = null_options,
+		hover = "",
+		default = 0,
+	},	
+
+	{
+		name = "enablepons",
+		label = "Pons",
+		hover = "Enables the Pon Count Meter, as well as the spawning of Green Pons through various actions (eg. mining, chopping, killing)",
 		options =
 		{
 			{description = "Disabled (Default)", data = false},

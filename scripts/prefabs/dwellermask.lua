@@ -163,7 +163,29 @@ local function OnUse(inst)
 		
 		DwellerAbility(inst)
 
+		owner.Physics:ClearCollisionMask()
+		owner.Physics:CollidesWith(COLLISION.GROUND)
+		owner.Physics:CollidesWith(COLLISION.OBSTACLES)
+		owner.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
+		owner.Physics:CollidesWith(COLLISION.CHARACTERS)
+		owner.Physics:CollidesWith(COLLISION.GIANTS)
+
 		inst.components.equippable.dapperness = -TUNING.DAPPERNESS_MED
+
+		-----
+
+		-- owner.Physics:Teleport(0,0,0)
+		-- if owner.components.complexprojectile == nil then
+		-- 	owner:AddComponent("complexprojectile")
+		-- end
+		-- owner.components.complexprojectile:SetHorizontalSpeed(owner.s or 10)
+		-- owner.components.complexprojectile:Launch(Vector3(500,0,0), owner)
+		-- owner.components.complexprojectile:SetOnHit(function(owner)
+		-- 	TheNet:Announce(tostring(math.sqrt(owner:GetDistanceSqToPoint(0,0,0))))
+		-- end)
+		-----
+
+
 		
 		--Then play sounds
 		inst.SoundEmitter:PlaySound("dwellermask/sound/activate")
@@ -197,6 +219,13 @@ local function OnStopUse(inst)
 		inst.components.equippable.dapperness = 0
 		
 		inst:RemoveTag("disabledwell")
+
+		owner.Physics:ClearCollisionMask()
+		owner.Physics:CollidesWith(COLLISION.WORLD)
+		owner.Physics:CollidesWith(COLLISION.OBSTACLES)
+		owner.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
+		owner.Physics:CollidesWith(COLLISION.CHARACTERS)
+		owner.Physics:CollidesWith(COLLISION.GIANTS) 
 		
 		-- owner.components.timer:StartTimer("hat_cooldown", 6)
 		
