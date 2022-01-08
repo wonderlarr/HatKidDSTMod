@@ -400,8 +400,7 @@ local master_postinit = function(inst, data)
 	-- SciFi synth might also be good.
 	-- Possibly a filtered version of willow
 	inst.soundsname = "hatkidvoice"
-	
-	inst.entity:AddPhysics()
+	inst.talker_path_override = "hatkidvoice/"
 	
 	inst.components.health:SetMaxHealth(TUNING.HATKID_HEALTH)
 	inst.components.hunger:SetMax(TUNING.HATKID_HUNGER)
@@ -452,20 +451,14 @@ local master_postinit = function(inst, data)
 	inst:ListenForEvent("GetPon", OnGetPon)
 	inst:ListenForEvent("closepon", OnClosePon)
 
-	inst.maxslotsinv = 2
-
-
 	inst.OnLoad = OnLoad
 	inst.OnSave = OnSave
 
 	inst.lab = SpawnPrefab("inv_pons")
 	inst.lab.entity:SetParent(inst.entity)
 
-	-- inst:AddComponent("ponholder")
-
-	-- inst.pon_inv = SpawnPrefab("hatpack")
-	-- local hatpack = inst.pon_inv
-	-- inst.components.container.canbeopened = false
+	-- testing
+	-- inst.maxslotsinv = 2
 end
 
 return MakePlayerCharacter("hatkid", prefabs, assets, common_postinit, master_postinit, start_inv)

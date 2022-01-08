@@ -167,17 +167,17 @@ Load "textedit"
 AddModCharacter("hatkid", "FEMALE")
 AddMinimapAtlas("images/map_icons/hatkid.xml")
 
--- Sound remaps for custom voice
-RemapSoundEvent( "dontstarve/characters/hatkidvoice/talk_LP", "hatkidvoice/hatkidvoice/talk_LP" ) 
-RemapSoundEvent( "dontstarve/characters/hatkidvoice/yawn", "hatkidvoice/hatkidvoice/yawn" ) 
-RemapSoundEvent( "dontstarve/characters/hatkidvoice/pose", "hatkidvoice/hatkidvoice/pose" )
-RemapSoundEvent( "dontstarve/characters/hatkidvoice/ghost_LP", "hatkidvoice/hatkidvoice/ghost_LP" )
-RemapSoundEvent( "dontstarve/characters/hatkidvoice/emote", "hatkidvoice/hatkidvoice/emote" )
-RemapSoundEvent( "dontstarve/characters/hatkidvoice/death_voice", "hatkidvoice/hatkidvoice/death_voice" )
-RemapSoundEvent( "dontstarve/characters/hatkidvoice/hurt", "hatkidvoice/hatkidvoice/hurt" ) 
-RemapSoundEvent( "dontstarve/characters/hatkidvoice/eye_rub_vo", "hatkidvoice/hatkidvoice/eye_rub_vo" ) 
-RemapSoundEvent( "dontstarve/characters/hatkidvoice/sinking", "hatkidvoice/hatkidvoice/sinking" ) 
-RemapSoundEvent( "dontstarve/characters/hatkidvoice/carol", "hatkidvoice/hatkidvoice/carol" ) 
+-- Sound remaps for custom voice -- Overridden in hatkid.lua, using better method.
+-- RemapSoundEvent( "dontstarve/characters/hatkidvoice/talk_LP", "hatkidvoice/hatkidvoice/talk_LP" ) 
+-- RemapSoundEvent( "dontstarve/characters/hatkidvoice/yawn", "hatkidvoice/hatkidvoice/yawn" ) 
+-- RemapSoundEvent( "dontstarve/characters/hatkidvoice/pose", "hatkidvoice/hatkidvoice/pose" )
+-- RemapSoundEvent( "dontstarve/characters/hatkidvoice/ghost_LP", "hatkidvoice/hatkidvoice/ghost_LP" )
+-- RemapSoundEvent( "dontstarve/characters/hatkidvoice/emote", "hatkidvoice/hatkidvoice/emote" )
+-- RemapSoundEvent( "dontstarve/characters/hatkidvoice/death_voice", "hatkidvoice/hatkidvoice/death_voice" )
+-- RemapSoundEvent( "dontstarve/characters/hatkidvoice/hurt", "hatkidvoice/hatkidvoice/hurt" ) 
+-- RemapSoundEvent( "dontstarve/characters/hatkidvoice/eye_rub_vo", "hatkidvoice/hatkidvoice/eye_rub_vo" ) 
+-- RemapSoundEvent( "dontstarve/characters/hatkidvoice/sinking", "hatkidvoice/hatkidvoice/sinking" ) 
+-- RemapSoundEvent( "dontstarve/characters/hatkidvoice/carol", "hatkidvoice/hatkidvoice/carol" ) 
 
 
 
