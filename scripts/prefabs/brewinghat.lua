@@ -88,8 +88,10 @@ local function OnUse(inst)
 		prevequip = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 
 		owner.components.inventory:Equip(SpawnPrefab("kidpotion"))
-		
-		inst.components.useableitem:StopUsingItem()
+
+		inst:DoTaskInTime(TUNING.BREWINGHAT_CHARGETIME, function(inst) -- Wait 1 frame or else things get weird
+			inst.components.useableitem:StopUsingItem()
+		end)
 	end
 end
 

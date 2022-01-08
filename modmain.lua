@@ -62,8 +62,15 @@ PrefabFiles = {
 	"pon",
 	-- "timepiece",
 
+	-- Dweller Placeables
+	"dwellerplatform",
+	-- "dwellerplatform_player_collision",
+	-- "dwellerplatform_item_collision",
+	-- "dwellerplatform_item",
+
 	--fx prefabs
 	"brewinghat_explode",
+	"polarhat_explode",
 	"sprint_puff",
 	-- "hkr_aoe",
 	"hkr_icerange",
@@ -99,6 +106,10 @@ Assets = {
 
 	Asset( "IMAGE", "images/avatars/self_inspect_hatkid.tex" ),
     Asset( "ATLAS", "images/avatars/self_inspect_hatkid.xml" ),
+
+	-- Hat Kid's voice
+	Asset( "SOUNDPACKAGE", "sound/hatkidvoice.fev"),
+    Asset( "SOUND", "sound/hatkidvoice.fsb"),
 
 	-- Big names
 	Asset( "IMAGE", "images/names_hatkid.tex" ),
@@ -140,6 +151,11 @@ Assets = {
 
 }
 
+-- Constants
+GLOBAL.ABILITY_LIGHTRAD = 0.9403 -- This value is how light units translate to in game units while using specific settings with lights. Make sure you know what you're doing with this if you use it.
+
+-- End Constants
+
 modimport("engine.lua") --Keyhandler engine
 
 -- Imports to keep the keyhandler from working while typing into various things.
@@ -147,8 +163,21 @@ Load "chatinputscreen"
 Load "consolescreen"
 Load "textedit"
 
--- Add Hat Kid to css
+-- Add Hat Kid to css and minimap
 AddModCharacter("hatkid", "FEMALE")
+AddMinimapAtlas("images/map_icons/hatkid.xml")
+
+-- Sound remaps for custom voice
+RemapSoundEvent( "dontstarve/characters/hatkidvoice/talk_LP", "hatkidvoice/hatkidvoice/talk_LP" ) 
+RemapSoundEvent( "dontstarve/characters/hatkidvoice/yawn", "hatkidvoice/hatkidvoice/yawn" ) 
+RemapSoundEvent( "dontstarve/characters/hatkidvoice/pose", "hatkidvoice/hatkidvoice/pose" )
+RemapSoundEvent( "dontstarve/characters/hatkidvoice/ghost_LP", "hatkidvoice/hatkidvoice/ghost_LP" )
+RemapSoundEvent( "dontstarve/characters/hatkidvoice/emote", "hatkidvoice/hatkidvoice/emote" )
+RemapSoundEvent( "dontstarve/characters/hatkidvoice/death_voice", "hatkidvoice/hatkidvoice/death_voice" )
+RemapSoundEvent( "dontstarve/characters/hatkidvoice/hurt", "hatkidvoice/hatkidvoice/hurt" ) 
+RemapSoundEvent( "dontstarve/characters/hatkidvoice/eye_rub_vo", "hatkidvoice/hatkidvoice/eye_rub_vo" ) 
+RemapSoundEvent( "dontstarve/characters/hatkidvoice/sinking", "hatkidvoice/hatkidvoice/sinking" ) 
+RemapSoundEvent( "dontstarve/characters/hatkidvoice/carol", "hatkidvoice/hatkidvoice/carol" ) 
 
 
 
@@ -173,9 +202,10 @@ TUNING.HATKIDSPEED = GetModConfigData("hatkidspeed")
 TUNING.HATKIDNIGHTDRAIN = GetModConfigData("hatkidnightdrain")
 TUNING.HATKIDSANITYDRAIN = GetModConfigData("hatkidsanitydrain")
 
---Hatbrella damage stuff
+--Hatbrella stuff
 TUNING.HATBRELLA_DAMAGE = GetModConfigData("hatbrelladamage")
-TUNING.HATBRELLA2_DAMAGE = GetModConfigData("hatbrella2damage")
+TUNING.HATBRELLA_OPENDURABILITY = GetModConfigData("hatbrellaopendurability")
+TUNING.HATBRELLA_DURABILITY = GetModConfigData("hatbrelladurability")
 
 --Togglables
 TUNING.ENABLE_PONS = GetModConfigData("enablepons")
@@ -238,14 +268,29 @@ TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.HATKID = {"kidhat"}
                                                    __/ |
                                                   |___/
 ]]
-local HAT_TAB = AddRecipeTab("Hats", 998, "images/gui/craftingtabicon.xml", "craftingtabicon.tex", "hatkidcrafter")
+local HAT_TAB = AddRecipeTab("Hats", 994, "images/gui/craftingtabicon.xml", "craftingtabicon.tex", "hatkidcrafter")
 
 
 hatbrellarecipe = AddRecipe("hatbrella",
 	{
-		GLOBAL.Ingredient("twigs", 3),
-		GLOBAL.Ingredient("silk", 5),
+		GLOBAL.Ingredient("twigs", 4),
+		GLOBAL.Ingredient("silk", 1),
 		GLOBAL.Ingredient("goldnugget", 2),
+	},
+	HAT_TAB, -- crafting tab
+	GLOBAL.TECH.SCIENCE_ONE, -- crafting level
+	nil, -- placer
+	nil, -- min_spacing
+	nil, -- nounlock
+	nil, -- numtogive
+	"hatkidcrafter", -- builder_tag
+	"images/inventoryimages/hatbrella.xml", -- atlas
+	"hatbrella.tex" -- image
+)
+
+hatbrellarecipe2 = AddRecipe("hatbrella",
+	{
+		GLOBAL.Ingredient(CHARACTER_INGREDIENT.PON, 5),
 	},
 	HAT_TAB, -- crafting tab
 	GLOBAL.TECH.SCIENCE_ONE, -- crafting level
@@ -261,11 +306,11 @@ hatbrellarecipe = AddRecipe("hatbrella",
 
 kidhatrecipe = AddRecipe("kidhat",
 	{
-		GLOBAL.Ingredient("silk", 3),
+		GLOBAL.Ingredient("beefalowool", 4),
 		GLOBAL.Ingredient("goldnugget", 1),
 	},
 	HAT_TAB, -- crafting tab
-	GLOBAL.TECH.SCIENCE_ONE, -- crafting level
+	GLOBAL.TECH.NONE, -- crafting level
 	nil, -- placer
 	nil, -- min_spacing
 	nil, -- nounlock
@@ -278,7 +323,7 @@ kidhatrecipe = AddRecipe("kidhat",
 
 sprinthatrecipe = AddRecipe("sprinthat",
 	{
-		GLOBAL.Ingredient("silk", 4),
+		GLOBAL.Ingredient("silk", 3),
 		GLOBAL.Ingredient("papyrus", 1),
 		GLOBAL.Ingredient("feather_robin", 2),
 	},
@@ -334,7 +379,8 @@ dwellermaskrecipe = AddRecipe("dwellermask",
 	{
 		GLOBAL.Ingredient("papyrus", 2),
 		GLOBAL.Ingredient("nightmarefuel", 4),
-		GLOBAL.Ingredient("greengem", 1),
+		GLOBAL.Ingredient("wormlight_lesser", 2)
+		-- GLOBAL.Ingredient("greengem", 1),
 	},
 	HAT_TAB, -- crafting tab
 	GLOBAL.TECH.MAGIC_THREE, -- crafting level
@@ -350,8 +396,8 @@ dwellermaskrecipe = AddRecipe("dwellermask",
 
 timestophatrecipe = AddRecipe("timestophat",
 	{
-		GLOBAL.Ingredient("silk", 8),	
-		GLOBAL.Ingredient("moonglass", 9),
+		GLOBAL.Ingredient("silk", 6),	
+		GLOBAL.Ingredient("moonglass", 8),
 		GLOBAL.Ingredient("greengem", 1),
 	},
 	HAT_TAB, -- crafting tab
@@ -369,6 +415,7 @@ timestophatrecipe = AddRecipe("timestophat",
 -- Sort keys determine how recipes are ordered in the crafting menu.
 -- Lower values are shown first.
 hatbrellarecipe.sortkey = 0
+hatbrellarecipe2.sortkey = 1
 
 -- Leave room in case I wanna add any more craftables before the hats easily.
 kidhatrecipe.sortkey = 5
@@ -436,6 +483,7 @@ local character = "HATKID"
 GLOBAL.TUNING[GLOBAL.string.upper(character)] = {}
 GLOBAL.TUNING[GLOBAL.string.upper(character)].KEY = GetModConfigData(mod_option) or 122
 
+-- This is gross.
 local function Ability(inst)
 	local hat = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HEAD)
 	if hat ~= nil then
@@ -457,6 +505,7 @@ AddClassPostConstruct("widgets/statusdisplays", function(self)
 			self.ponbadge = self:AddChild(PonBadge(self.owner))
 			self.ponbadge:SetPosition(-120, 20, 0)
 			self.ponbadge:SetPercent(self.owner.pons / 500, 500)
+			self.ponbadge:SetClickable(true)
 			self.owner:ListenForEvent("UpdatePons", function()
 				self.ponbadge:SetPercent(self.owner.pons / 500, 500)
 			end)
@@ -464,8 +513,7 @@ AddClassPostConstruct("widgets/statusdisplays", function(self)
 	end
 end)
 
---Hornet: I am currently using wilba as an example, youll want to change all instances of "wilba" to the prefab name of your character!
---Skins
+--Skins API stuff, comments left in case you wanna learn stuff., and for when I forget. Thanks hornet.
 local _G = GLOBAL
 local PREFAB_SKINS = _G.PREFAB_SKINS
 local PREFAB_SKINS_IDS = _G.PREFAB_SKINS_IDS
@@ -596,11 +644,11 @@ STRINGS.NAMES.KIDPOTION_THROWABLE = "Mad Concoction"
 STRINGS.NAMES.KIDPOTION = "Brewing Concoction"
 
 --Recipe Descriptions
-STRINGS.RECIPE_DESC.KIDHAT = "Hat Kid's pride and joy."
+STRINGS.RECIPE_DESC.KIDHAT = "Your pride and joy."
 STRINGS.RECIPE_DESC.SPRINTHAT = "This hat looks ready to sprint!"
 STRINGS.RECIPE_DESC.BREWINGHAT = "Cook up mad concoctions!"
 STRINGS.RECIPE_DESC.POLARHAT = "It's so cold!"
-STRINGS.RECIPE_DESC.DWELLERMASK = "See through a Dweller's eyes!"
+STRINGS.RECIPE_DESC.DWELLERMASK = "See the world through a Dweller's eyes!"
 STRINGS.RECIPE_DESC.TIMESTOPHAT = "Death is inevitable. Your time is valuable."
 
 STRINGS.RECIPE_DESC.HATBRELLA = "Diplomacy didn't work, time for action."
@@ -610,7 +658,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.KIDPOTION_THROWABLE = "Throwing these will b
 
 
 --Describe strings, by order of css screen, but Hat Kid first.
--- generic is wilson, as well as any other undefined characters (modded, future releases)
+-- generic is wilson, as well as any other undefined characters (eg. modded, future dlc's)
 
 -- Hat Kid
 STRINGS.CHARACTERS.HATKID.DESCRIBE.KIDHAT = "What a good hat."

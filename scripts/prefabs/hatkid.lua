@@ -386,6 +386,9 @@ local common_postinit = function(inst)
 	inst.pons = 0
 	inst.net_pons = net_ushortint(inst.GUID, "pons", "pons_dirty" )
 
+	inst.maxslotsinv = 2
+
+
 	if not TheWorld.ismastersim then
 		inst:ListenForEvent("pons_dirty", OnPonsDirty)
 	end
@@ -396,7 +399,7 @@ local master_postinit = function(inst, data)
 	--Custom sound idea, recorder? It (sortof) makes sense. It's better than using Willow assets regardless.
 	-- SciFi synth might also be good.
 	-- Possibly a filtered version of willow
-	inst.soundsname = "willow"
+	inst.soundsname = "hatkidvoice"
 	
 	inst.entity:AddPhysics()
 	
@@ -448,6 +451,8 @@ local master_postinit = function(inst, data)
 
 	inst:ListenForEvent("GetPon", OnGetPon)
 	inst:ListenForEvent("closepon", OnClosePon)
+
+	inst.maxslotsinv = 2
 
 
 	inst.OnLoad = OnLoad

@@ -7,6 +7,9 @@ local kidpotion_assets = {
 
     Asset("SOUNDPACKAGE", "sound/brewinghat.fev"),
     Asset("SOUND", "sound/brewinghat.fsb"),
+
+    Asset("SOUNDPACKAGE", "sound/kidpotion.fev"),
+    Asset("SOUND", "sound/kidpotion.fsb"),
 }
 
 RegisterInventoryItemAtlas("images/inventoryimages/kidpotion.xml","kidpotion.tex")
@@ -16,7 +19,11 @@ local holder = {
 }
 
 local kidpotion_prefabs = {
-    "burntground"
+    "burntground",
+    "reticuleaoe",
+    "reticuleaoeping",
+    "reticuleaoehostiletarget",
+    "reticule"
 } 
 
 --I heavily dislike how I wrote this code, but it works so I'm gonna leave it for now.
@@ -42,7 +49,7 @@ local function DoExplode(self)
                     v.components.workable:WorkedBy(holder, 2)
                     v:PushEvent("attacked", { attacker = holder, damage = 0})
                 else -- Otherwise
-                    if v.components.lootdropper then
+                    if v.components.lootdropper and TUNING.ENABLE_PONS and not v:HasTag("pons") then
                         -- chance 
                         for i = v.components.workable.workleft + 1 or 1, 0, -1
                         do
@@ -78,8 +85,16 @@ local function OnExplodeFn(inst)
 
     local mark = SpawnPrefab("burntground")
         mark.Transform:SetPosition(inst.Transform:GetWorldPosition())
-        mark.Transform:SetScale(1.5, 1.5, 1.5)
+        mark.Transform:SetScale(1.4, 1.4, 1.4)
+    
+    local b = SpawnPrefab("fx_boat_pop")
+        b.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        
+    local c = SpawnPrefab("superjump_fx")
+        c.Transform:SetPosition(inst.Transform:GetWorldPosition())
 
+    local d = SpawnPrefab("hatshatter2")
+        d.Transform:SetPosition(inst.Transform:GetWorldPosition())
 
     DoExplode(inst.components.explosive)
 
@@ -90,12 +105,27 @@ local function OnHitSomething(inst, attacker, target)
     inst.components.explosive:OnBurnt()
 end
 
+local function RefreshReticule(inst)
+    local owner = ThePlayer
+    if owner ~= nil then
+        local inventoryitem = inst.replica.inventoryitem
+        if inventoryitem ~= nil and inventoryitem:IsHeldBy(owner) and owner.components.playercontroller ~= nil then
+            owner.components.playercontroller:RefreshReticule()
+        end
+    end
+end
 
  
 local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_object", "swap_kidpotion", "swap_kidpotion")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
+
+    -- inst.components.aoetargeting:StartTargeting()
+    -- inst:AddComponent("reticule")
+    -- RefreshReticule(inst)
+
+    -- inst.components.reticule:CreateReticule()
 	
 	holder = inst.components.inventoryitem.owner
 end
@@ -103,6 +133,8 @@ end
 local function onunequip(inst, owner)
     owner.AnimState:Hide("ARM_carry")
     owner.AnimState:Show("ARM_normal")
+
+    -- inst.components.aoetargeting:StopTargeting()
 
     local head = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
     
@@ -139,6 +171,21 @@ local function onthrown(inst)
             holder.SoundEmitter:PlaySound("brewinghat/sound/throw")
         end
 	end
+end
+
+local function ReticuleTargetFn()
+    local player = ThePlayer
+    local ground = TheWorld.Map
+    local pos = Vector3()
+    --Cast range is 8, leave room for error
+    --4 is the aoe range
+    for r = 7, 0, -.25 do
+        pos.x, pos.y, pos.z = player.entity:LocalToWorldSpace(r, 0, 0)
+        if ground:IsPassableAtPoint(pos:Get()) and not ground:IsGroundTargetBlocked(pos) then
+            return pos
+        end
+    end
+    return pos
 end
 
 local function common_fn(bank, build, anim, tag, isinventoryitem)
@@ -179,15 +226,13 @@ local function common_fn(bank, build, anim, tag, isinventoryitem)
     inst:AddComponent("locomotor")
  
 	inst:AddComponent("complexprojectile")
-	
-	
  
     return inst
 end
 
 local function kidpotion_fn()
     local inst = common_fn("kidpotion", "kidpotion", "idle", "projectile", true)
- 
+
     if not TheWorld.ismastersim then
         return inst
     end
@@ -206,8 +251,8 @@ local function kidpotion_fn()
     inst:AddComponent("inspectable")
  
     inst:AddComponent("inventoryitem")
-    -- inst.components.inventoryitem.imagename = "kidpotion"
-    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/kidpotion.xml"
+    inst.components.inventoryitem.imagename = "kidpotion"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/kidpotion.xml"
 	inst.components.inventoryitem.cangoincontainer = false
 	
 	inst.components.complexprojectile:SetHorizontalSpeed(18)

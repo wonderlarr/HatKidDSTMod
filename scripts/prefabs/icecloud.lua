@@ -23,6 +23,8 @@ local function MakeExplosion(data)
         inst.AnimState:SetBuild("icecloud")
         inst.AnimState:PlayAnimation("explode")
 		inst.AnimState:SetDeltaTimeMultiplier(1.7)
+        inst.AnimState:SetMultColour(151/255, 255/255, 255/255, 1)
+        inst.AnimState:SetAddColour(0, 0, 255/255, 1)
 
         -- inst.SoundEmitter:PlaySound("kidpotion/sound/explode")
 

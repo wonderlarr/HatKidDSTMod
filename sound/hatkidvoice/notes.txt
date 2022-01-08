@@ -1,0 +1,1 @@
+Voice made using a custom preset in the Mirage64 VST, preset included in the WIP folder as hatkid_voice.mirage-music-box-free

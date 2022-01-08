@@ -22,7 +22,7 @@ local function MakeExplosion(data)
         inst.AnimState:SetBank("frexplosion")
         inst.AnimState:SetBuild("frexplosion")
         inst.AnimState:PlayAnimation("explode")
-		inst.AnimState:SetDeltaTimeMultiplier(1 + 1/3)
+		inst.AnimState:SetDeltaTimeMultiplier(2/3)
 
         -- inst.SoundEmitter:PlaySound("kidpotion/sound/explode")
 

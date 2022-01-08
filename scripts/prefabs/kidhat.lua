@@ -1,6 +1,7 @@
 local assets=
 { 
     Asset("ANIM", "anim/kidhat.zip"),
+	Asset("ANIM", "anim/quagmire_ui_pot_1x3.zip"),
 	
     Asset("ATLAS", "images/inventoryimages/kidhat.xml"),
     Asset("IMAGE", "images/inventoryimages/kidhat.tex"),
@@ -12,7 +13,7 @@ RegisterInventoryItemAtlas("images/inventoryimages/kidhat.xml","kidhat.tex")
 
 local badge = nil
 
-local holder = nil
+-- local holder = nil
 
 local testfab = nil
 
@@ -57,7 +58,7 @@ local function OnEquip(inst, owner)
     -- inst.components.sanityaura.aura = -TUNING.HATKID_AURARATE
 	-- inst.components.sanityaura.fallofffn = aura
 
-	holder = owner
+	-- holder = owner
 
 	-- inst.lab = SpawnPrefab("researchlab")
 	-- inst.lab.Transform:SetScale(0, 0, 0)
@@ -117,11 +118,62 @@ local function onDrop(inst)
 
 end
 
+local function OnUse(inst)
+	local owner = inst.components.inventoryitem.owner
+
+	if inst.components.container then 
+		if inst.components.container:IsOpenedBy(owner) then
+			inst.components.container:Close(owner)
+		else
+			inst.components.container:Open(owner)
+		end
+
+	end
+
+	inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
+		inst.components.useableitem:StopUsingItem()
+	end)
+end
+
 -- local function OnLoad(inst, data)
 
 -- end
 
 local function OnSave(inst, data)
+end
+
+local function KeybindUse(inst)
+	-- local owner = inst.components.inventoryitem.owner
+	inst.components.useableitem:StartUsingItem()
+end
+
+local containers = require("containers")
+
+-- local oldwidgetsetup = containers.widgetsetup
+
+params = containers.params
+
+params.badge_chest =
+{
+    widget =
+    {
+        slotpos =
+        {
+            Vector3(0, 64 + 8, 0),
+            Vector3(0, 0, 0),
+            Vector3(0, -(64 + 8), 0),
+        },
+        animbank = "quagmire_ui_pot_1x3",
+        animbuild = "quagmire_ui_pot_1x3",
+        pos = Vector3(200, 0, 0),
+        side_align_tip = 100,
+    },
+    acceptsstacks = false,
+    type = "chest",
+}
+
+local function OnPickedUp(inst)
+	print("it's time woooo 7 grand dad")
 end
 
 local function fn(Sim) 
@@ -139,6 +191,10 @@ local function fn(Sim)
 	inst:AddTag("hatkidhat")
 	
     if not TheWorld.ismastersim then
+        inst.OnEntityReplicated = function(inst) 
+            inst.replica.container:WidgetSetup("badge_chest") 
+        end
+
         return inst
     end
 	
@@ -158,7 +214,8 @@ local function fn(Sim)
     inst:AddComponent("inventoryitem")
     -- inst.components.inventoryitem.imagename = "kidhat"
     -- inst.components.inventoryitem.atlasname = "images/inventoryimages/kidhat.xml"
-	inst.components.inventoryitem:SetOnDroppedFn(onDrop)
+	-- inst.components.inventoryitem:SetOnDroppedFn(onDrop)
+	inst.components.inventoryitem:SetOnPutInInventoryFn(OnPickedUp)
 	 
     inst:AddComponent("equippable")
 	inst.components.equippable.restrictedtag = "hatkid"
@@ -167,12 +224,23 @@ local function fn(Sim)
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
 
+	inst:AddComponent("container")
+	inst.components.container:WidgetSetup("badge_chest")
+	inst.components.container.canbeopened = false
+
+	inst:AddComponent("useableitem")
+    inst.components.useableitem:SetOnUseFn(OnUse)
+    -- inst.components.useableitem:SetOnStopUseFn(OnStopUse)
+
 	if TUNING.KIDHAT_DURABILITY then
 		inst:AddComponent("fueled")
 		inst.components.fueled.fueltype = FUELTYPE.USAGE
 		inst.components.fueled:InitializeFuelLevel( TUNING.KIDHAT_DURABILITY ) -- add tuning 2 hours 7200
 		inst.components.fueled:SetDepletedFn(OnEmpty)
 	end
+
+	inst:ListenForEvent("AbilityKey", KeybindUse)
+
 	
 	-- inst:AddComponent("insulator")
     -- inst.components.insulator:SetWinter()

@@ -30,6 +30,9 @@ local null_options = {
 	{ description = "", data = 0 }
 }
 
+-- Set some vars for config
+local seg_time = 30
+local total_day_time = seg_time*16
 
 configuration_options =
 {
@@ -160,9 +163,9 @@ configuration_options =
 			{description = "x0.6", data = 0.6},
 			{description = "x0.7", data = 0.7},
 			{description = "x0.8", data = 0.8},
-			{description = "x0.85 (Default)", data = 0.85},
+			{description = "x0.85", data = 0.85},
 			{description = "x0.9", data = 0.9},
-			{description = "x1", data = 1},
+			{description = "x1 (Default)", data = 1},
 			{description = "x1.25", data = 1.25},
 			{description = "x1.5", data = 1.5},
 			{description = "x1.75", data = 1.75},
@@ -176,7 +179,7 @@ configuration_options =
 			{description = "x9", data = 9},
 			{description = "x10", data = 10},
 		},
-		default = 0.85,
+		default = 1,
 	},
 	
 		{
@@ -548,9 +551,10 @@ configuration_options =
 			{description = "1 Second", data = 1},
 			{description = "5 Seconds", data = 5},
 			{description = "10 Seconds", data = 10},
+			{description = "12 Seconds (Default)", data = 12},
 			{description = "15 Seconds", data = 15},
 			{description = "20 Seconds", data = 20},
-			{description = "30 Seconds (Default)", data = 30},
+			{description = "30 Seconds", data = 30},
 			{description = "45 Seconds", data = 45},
 			{description = "60 Seconds", data = 60},
 			{description = "90 Seconds", data = 90},
@@ -561,7 +565,7 @@ configuration_options =
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 30,
+		default = 12,
 	},
 	
 	{
@@ -570,7 +574,7 @@ configuration_options =
 		hover = "How long it takes for the concoction to brew before Hat Kid can throw it.",
 		options =
 		{
-			{description = "Instant", data = 0},
+			{description = "No charge time", data = 0},
 			{description = "1/4 of a Second", data = 0.25},
 			{description = "1/2 of a Second", data = 0.5},
 			{description = "3/4 of a Second", data = 0.75},
@@ -628,17 +632,18 @@ configuration_options =
 			{description = "14", data = 14},
 			{description = "27", data = 27},
 			{description = "34", data = 34},
-			{description = "46 (Default)", data = 46},
+			{description = "46", data = 46},
 			{description = "51", data = 51},
 			{description = "63", data = 63},
 			{description = "72", data = 72},
+			{description = "80 (Default)", data = 80},
 			{description = "89", data = 89},
 			{description = "100", data = 100},
 			{description = "200", data = 200},
 			{description = "500", data = 500},
 			{description = "KILLER QUEEN!!!", data = 999999, hover = "999,999"},
 		},
-		default = 46,
+		default = 80,
 	},
 	
 	{
@@ -679,9 +684,9 @@ configuration_options =
 			{description = "5", data = 5},
 			{description = "10", data = 10},
 			{description = "15", data = 15},
-			{description = "20", data = 20},
+			{description = "20 (Default)", data = 20},
 			{description = "25", data = 25},
-			{description = "30 (Default)", data = 30},
+			{description = "30", data = 30},
 			{description = "35", data = 35},
 			{description = "40", data = 40},
 			{description = "45", data = 45},
@@ -698,7 +703,7 @@ configuration_options =
 			{description = "1000", data = 1000},
 			{description = "Infinite", data = false},
 		},
-		default = 30,
+		default = 20,
 	},
 	
 	{
@@ -714,16 +719,16 @@ configuration_options =
 			{description = "20 Seconds", data = 20},
 			{description = "30 Seconds", data = 30},
 			{description = "45 Seconds", data = 45},
-			{description = "60 Seconds", data = 60},
+			{description = "60 Seconds (Default)", data = 60},
 			{description = "90 Seconds", data = 90},
-			{description = "2 Minutes (Default)", data = 120},
+			{description = "2 Minutes", data = 120},
 			{description = "3 Minutes", data = 180},
 			{description = "4 Minutes", data = 240},
 			{description = "5 Minutes", data = 300},
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 120,
+		default = 60,
 	},
 
 	{
@@ -756,8 +761,8 @@ configuration_options =
 			{description = "-2.5", data = 2.5},
 			{description = "-5", data = 5},
 			{description = "-10", data = 10},
-			{description = "-15 (Default)", data = 15},
-			{description = "-20", data = 20},
+			{description = "-15", data = 15},
+			{description = "-20 (Default)", data = 20},
 			{description = "-25", data = 25},
 			{description = "-30", data = 30},
 			{description = "-35", data = 35},
@@ -772,7 +777,7 @@ configuration_options =
 
 
 		},
-		default = 15,
+		default = 20,
 	},
 
 	{
@@ -786,8 +791,8 @@ configuration_options =
 			{description = "3", data = 3},
 			{description = "4", data = 4},
 			{description = "5", data = 5},
-			{description = "6", data = 6},
-			{description = "7 (Default)", data = 7},
+			{description = "6 (Default)", data = 6},
+			{description = "7", data = 7},
 			{description = "8", data = 8},
 			{description = "9", data = 9},
 			{description = "10", data = 10},
@@ -799,7 +804,7 @@ configuration_options =
 			{description = "16 (Very Large)", data = 16},
 
 		},
-		default = 7,
+		default = 6,
 	},
 
 	{
@@ -819,9 +824,9 @@ configuration_options =
 			{description = "30 seconds", data = 30},
 			{description = "1 minute", data = 60},
 			{description = "5 minutes", data = 5 * 60},
-			{description = "10 minutes (Default)", data = 10 * 60},
+			{description = "10 minutes", data = 10 * 60},
 			{description = "15 minutes", data = 15 * 60},
-			{description = "30 minutes", data = 30 * 60},
+			{description = "30 minutes (Default)", data = 30 * 60},
 			{description = "45 minutes", data = 45 * 60},
 			{description = "60 minutes", data = 60 * 60},
 			{description = "75 minutes", data = 75 * 60},
@@ -833,7 +838,7 @@ configuration_options =
 			{description = "12 hours", data = 12 * 60 * 60},
 			{description = "Forever", data = false},
 		},
-		default = 10 * 60,
+		default = 30 * 60,
 	},
 	
 	{
@@ -849,8 +854,8 @@ configuration_options =
 			{description = "20 Seconds", data = 20},
 			{description = "30 Seconds", data = 30},
 			{description = "45 Seconds", data = 45},
-			{description = "60 Seconds", data = 60},
-			{description = "90 Seconds (Default)", data = 90},
+			{description = "60 Seconds (Default)", data = 60},
+			{description = "90 Seconds", data = 90},
 			{description = "2 Minutes", data = 120},
 			{description = "3 Minutes", data = 180},
 			{description = "4 Minutes", data = 240},
@@ -858,7 +863,7 @@ configuration_options =
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 90,
+		default = 60,
 	},
 	
 		{
@@ -900,13 +905,6 @@ configuration_options =
 			{description = "30 Seconds", data = 30},
 			{description = "45 Seconds", data = 45},
 			{description = "60 Seconds", data = 60},
-			{description = "90 Seconds", data = 90},
-			{description = "2 Minutes", data = 120},
-			{description = "3 Minutes", data = 180},
-			{description = "4 Minutes", data = 240},
-			{description = "5 Minutes", data = 300},
-			{description = "10 Minutes", data = 600},
-			{description = "15 Minutes", data = 900},
 		},
 		default = 5,
 	},
@@ -914,7 +912,7 @@ configuration_options =
 	{
 		name = "dwellerradius",
 		label = "Radius",
-		hover = "How big the Dweller Mask's night vision raidus will be. This value is mostly arbitrary, but still effective to the range.",
+		hover = "How big the Dweller Mask's effect radius will be. This value is mostly arbitrary, but still effective to the range.",
 		options =
 		{
 			{description = "1", data = 1},
@@ -954,8 +952,8 @@ configuration_options =
 			{description = "Forever", data = false},
 			{description = "30 seconds", data = 30},
 			{description = "1 minute", data = 60},
-			{description = "5 minutes (Default)", data = 5 * 60},
-			{description = "10 minutes", data = 10 * 60},
+			{description = "5 minutes", data = 5 * 60},
+			{description = "10 minutes (Default)", data = 10 * 60},
 			{description = "15 minutes", data = 15 * 60},
 			{description = "30 minutes", data = 30 * 60},
 			{description = "45 minutes", data = 45 * 60},
@@ -969,7 +967,7 @@ configuration_options =
 			{description = "12 hours", data = 12 * 60 * 60},
 			{description = "Forever", data = false},
 		},
-		default = 5 * 60,
+		default = 10 * 60,
 	},
 	
 	{
@@ -1006,8 +1004,8 @@ configuration_options =
 			{description = "1 Second", data = 1},
 			{description = "5 Seconds", data = 5},
 			{description = "10 Seconds", data = 10},
-			{description = "12 Seconds (Default)", data = 12},
-			{description = "15 Seconds", data = 15},
+			{description = "12 Seconds", data = 12},
+			{description = "15 Seconds (Default)", data = 15},
 			{description = "20 Seconds", data = 20},
 			{description = "30 Seconds", data = 30},
 			{description = "45 Seconds", data = 45},
@@ -1020,7 +1018,7 @@ configuration_options =
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 12,
+		default = 15,
 	},
 
 	{
@@ -1059,12 +1057,12 @@ configuration_options =
 	
 	{
 		name = "hatbrelladamage",
-		label = "Blue Umbrella Damage",
-		hover = "How much damage Hat Kid's umbrella deals. This is considered after the damage modifier, which is 85% by default.",
+		label = "Umbrella Damage",
+		hover = "How much damage Hat Kid's umbrella deals.",
 		options =
 		{
 			{description = "1", data = 1},
-			{description = "9", data = 9},
+			{description = "10", data = 9},
 			{description = "14", data = 14},
 			{description = "27", data = 27},
 			{description = "34", data = 34},
@@ -1080,30 +1078,60 @@ configuration_options =
 		},
 		default = 40,
 	},
-	
+
 	{
-		name = "hatbrella2damage",
-		label = "UNIMPLEMENTED",
-		hover = "",
+		name = "hatbrelladurability",
+		label = "Closed Umbrella Durability",
+		hover = "How many times you can hit something with the closed variant of Hat Kid's umbrella, before it breaks.",
 		options =
 		{
-			{description = "1", data = 1},
-			{description = "9", data = 9},
-			{description = "14", data = 14},
-			{description = "27", data = 27},
-			{description = "34", data = 34},
-			{description = "51", data = 51},
-			{description = "60 (Default)", data = 60},
-			{description = "68", data = 68},
-			{description = "76", data = 76},
-			{description = "84", data = 84},
+			{description = "Disabled", data = false},
+			
+			{description = "10", data = 10},
+			{description = "25", data = 25},
+			{description = "50", data = 180},
+			{description = "75", data = 75},
 			{description = "100", data = 100},
+			{description = "150", data = 150},
+			{description = "185 (Default)", data = 185},
 			{description = "200", data = 200},
+			{description = "250", data = 250},
+			{description = "300", data = 300},
+			{description = "400", data = 400},
 			{description = "500", data = 500},
-			{description = "KILLER QUEEN!!!", data = 999999, hover = "999,999"},
+
+			{description = "Disabled", data = false},
+
 		},
-		default		= 60,
-	},		
+		default = 185,
+	},
+
+	{
+		name = "hatbrellaopendurability",
+		label = "Open Umbrella Durability",
+		hover = "How long Hat Kid's umbrella lasts while open, using in game time.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			
+			{description = "1 segment", data = seg_time},
+			{description = "4 segments", data = seg_time * 4},
+			{description = "8 segments", data = seg_time * 8},
+			{description = "1 day", data = total_day_time * 1},
+			{description = "2 days", data = total_day_time * 2},
+			{description = "4 days", data = total_day_time * 4},
+			{description = "6 days", data = total_day_time * 6},			
+			{description = "8 days (Default)", data = total_day_time * 8},
+			{description = "10 days", data = total_day_time * 10},
+			{description = "12 days", data = total_day_time * 12},
+			{description = "15 days", data = total_day_time * 15},
+			{description = "20 days", data = total_day_time * 20},
+
+			{description = "Disabled", data = false},
+
+		},
+		default = total_day_time * 8,
+	},
 
 	{
 		name = "Misc Options",

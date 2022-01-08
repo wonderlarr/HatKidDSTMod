@@ -7,7 +7,7 @@ local assets=
     Asset("IMAGE", "images/inventoryimages/dwellermask.tex"),
 	
 	Asset("IMAGE", resolvefilepath("images/cc/dwellervision.tex")),
-	-- Asset("IMAGE", resolvefilepath("images/cc/nd.tex")),
+	Asset("IMAGE", resolvefilepath("images/cc/nd.tex")),
 
 	Asset("SOUNDPACKAGE", "sound/dwellermask.fev"),
     Asset("SOUND", "sound/dwellermask.fsb"),
@@ -29,16 +29,19 @@ local DWELLERVISION_COLOURCUBES_2 =
     full_moon = resolvefilepath("images/cc/dwellervision.tex"),
 }
 
--- local DWELLERVISION_COLOURCUBES_3 =
--- {
--- 	-- These new cubes are easier on the eyes, previous ones were very harsh green.
+local DWELLERVISION_COLOURCUBES_3 =
+{
+	-- These new cubes are easier on the eyes, previous ones were very harsh green.
 
---  Playtesters actually missed the harsher green, reverting.
---     day = resolvefilepath("images/cc/nd.tex"),
---     dusk = resolvefilepath("images/cc/nd.tex"),
---     night = resolvefilepath("images/cc/nd.tex"),
---     full_moon = resolvefilepath("images/cc/nd.tex"),
--- }
+--  Playtesters actually missed the harsher green, but I think I'll go more faithful to the original with this one
+    day = resolvefilepath("images/cc/nd.tex"),
+    dusk = resolvefilepath("images/cc/nd.tex"),
+    night = resolvefilepath("images/cc/nd.tex"),
+    full_moon = resolvefilepath("images/cc/nd.tex"),
+}
+
+-- This was one of the first items I wrote after I took over this mod and looking back it at, IT IS DISGUSTING! IT'S SUCH A RATS NEST THAT I NEVER WANNA TOUCH IT AGAIN
+-- inb4 i need to come back to this and edit it in a few months 
 
 local tweentime = 0.1
 
@@ -46,7 +49,7 @@ local function dwellmaskclient(ent)
 
 	-- Change the colour cube on the client to allow seeing in the dark client side.
 	ent.components.playervision:ForceNightVision(true)
-	ent.components.playervision:SetCustomCCTable(DWELLERVISION_COLOURCUBES_2)
+	ent.components.playervision:SetCustomCCTable(DWELLERVISION_COLOURCUBES_3)
 
 	ent.AnimState:SetHaunted(true)
 	-- ent.AnimState:SetMultColour(1, 1, 1, 0.1)
@@ -163,12 +166,12 @@ local function OnUse(inst)
 		
 		DwellerAbility(inst)
 
-		owner.Physics:ClearCollisionMask()
-		owner.Physics:CollidesWith(COLLISION.GROUND)
-		owner.Physics:CollidesWith(COLLISION.OBSTACLES)
-		owner.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
-		owner.Physics:CollidesWith(COLLISION.CHARACTERS)
-		owner.Physics:CollidesWith(COLLISION.GIANTS)
+		-- owner.Physics:ClearCollisionMask()
+		-- owner.Physics:CollidesWith(COLLISION.GROUND)
+		-- owner.Physics:CollidesWith(COLLISION.OBSTACLES)
+		-- owner.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
+		-- owner.Physics:CollidesWith(COLLISION.CHARACTERS)
+		-- owner.Physics:CollidesWith(COLLISION.GIANTS)
 
 		inst.components.equippable.dapperness = -TUNING.DAPPERNESS_MED
 
@@ -220,12 +223,12 @@ local function OnStopUse(inst)
 		
 		inst:RemoveTag("disabledwell")
 
-		owner.Physics:ClearCollisionMask()
-		owner.Physics:CollidesWith(COLLISION.WORLD)
-		owner.Physics:CollidesWith(COLLISION.OBSTACLES)
-		owner.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
-		owner.Physics:CollidesWith(COLLISION.CHARACTERS)
-		owner.Physics:CollidesWith(COLLISION.GIANTS) 
+		-- owner.Physics:ClearCollisionMask()
+		-- owner.Physics:CollidesWith(COLLISION.WORLD)
+		-- owner.Physics:CollidesWith(COLLISION.OBSTACLES)
+		-- owner.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
+		-- owner.Physics:CollidesWith(COLLISION.CHARACTERS)
+		-- owner.Physics:CollidesWith(COLLISION.GIANTS) 
 		
 		-- owner.components.timer:StartTimer("hat_cooldown", 6)
 		
@@ -339,7 +342,7 @@ local function fn(Sim)
 	inst.Light:SetIntensity(0.99)
 	-- inst.Light:SetRadius(7/8 * TUNING.DWELLERMASK_RADIUS)
 	inst.Light:SetRadius(0)
-	inst.Light:SetColour(8/255, 248/255, 12/255)
+	inst.Light:SetColour(0/255, 255/255, 175/255)
 	inst.Light:Enable(true)
 
 	inst.Light:EnableClientModulation(true)

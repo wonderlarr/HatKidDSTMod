@@ -94,7 +94,7 @@ table.insert(prefabs, CreatePrefabSkin("hatkid_dye_niko", --Now heres the fun pa
 	build_name_override = "hatkid_dye_niko", --The build name of your new skin,
 	type = "base",
 	rarity = "Spiffy", --I did the Elegant Rarity, but you can do whatever rarity you want!
-	-- rarity_modifier = "Woven", --Ive put the rarity_modifier to Woven, Doesnt make a difference other than say youve woven the skin
+	-- rarity_modifier = "Woven", -- Can be removed to not have a modifier
 	skip_item_gen = true,
 	skip_giftable_gen = true,
 	skin_tags = { "BASE", "HATKID" }, --Notice in this skin_tags table I have "VICTORIAN", This tag actually makes the little gorge icon show up on the skin! Other tags will do the same thing such as forge, yotc, yotp, yotv, yog and so on!
@@ -116,7 +116,7 @@ table.insert(prefabs, CreatePrefabSkin("hatkid_dye_toonlink", --Now heres the fu
 	build_name_override = "hatkid_dye_toonlink", --The build name of your new skin,
 	type = "base",
 	rarity = "Spiffy", --I did the Elegant Rarity, but you can do whatever rarity you want!
-	-- rarity_modifier = "Woven", --Ive put the rarity_modifier to Woven, Doesnt make a difference other than say youve woven the skin
+	-- rarity_modifier = "Woven", -- Can be removed to not have a modifier
 	skip_item_gen = true,
 	skip_giftable_gen = true,
 	skin_tags = { "BASE", "HATKID" }, --Notice in this skin_tags table I have "VICTORIAN", This tag actually makes the little gorge icon show up on the skin! Other tags will do the same thing such as forge, yotc, yotp, yotv, yog and so on!
@@ -138,7 +138,7 @@ table.insert(prefabs, CreatePrefabSkin("hatkid_dye_pinkdanger", --Now heres the 
 	build_name_override = "hatkid_dye_pinkdanger", --The build name of your new skin,
 	type = "base",
 	rarity = "Spiffy", --I did the Elegant Rarity, but you can do whatever rarity you want!
-	-- rarity_modifier = "Woven", --Ive put the rarity_modifier to Woven, Doesnt make a difference other than say youve woven the skin
+	-- rarity_modifier = "Woven", -- Can be removed to not have a modifier
 	skip_item_gen = true,
 	skip_giftable_gen = true,
 	skin_tags = { "BASE", "HATKID" }, --Notice in this skin_tags table I have "VICTORIAN", This tag actually makes the little gorge icon show up on the skin! Other tags will do the same thing such as forge, yotc, yotp, yotv, yog and so on!
@@ -153,7 +153,5 @@ table.insert(prefabs, CreatePrefabSkin("hatkid_dye_pinkdanger", --Now heres the 
 	},
 
 }))
-
---If youd like to make more skins, simply copy the CreatePrefabSkin function and accordingly make new skins you want!
 
 return unpack(prefabs)

@@ -40,6 +40,10 @@ params.inv_pons =
     type = "inv_pons",
 }
 
+function params.inv_pons.itemtestfn(container, item, slot)
+    return item:HasTag("pon")
+end
+
 local parent = nil
 
 local function OnOpen(inst)

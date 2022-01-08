@@ -17,23 +17,24 @@ end
 
 local function OnDrop(inst)
 
-
     -- There's gotta be a cleaner way to do this.
-    inst.Physics:ClearCollisionMask()
-    inst.Physics:CollidesWith(COLLISION.WORLD)
-    inst.Physics:CollidesWith(COLLISION.OBSTACLES)
+    -- inst.Physics:ClearCollisionMask()
+    -- inst.Physics:CollidesWith(COLLISION.WORLD)
+    -- inst.Physics:CollidesWith(COLLISION.OBSTACLES)
+    inst.Physics:ClearCollidesWith(COLLISION.CHARACTERS)
 
     -- Make it possible to drop pons by clearing the pickup collision for 1.5 seconds on drop.
     inst:DoTaskInTime(1.5, function(inst)
         inst.Physics:CollidesWith(COLLISION.CHARACTERS)
     end)
+
 end
 
 local function OnCollide(inst, owner)
     if owner == nil then
         -- Sometimes it seems the collission callback doesn't return the right entity, instead returning nil. We'll just return in this case
         -- It's not great that it does this but can we do much better?
-        print("Hat Kid: CRITICAL: Pon owner does not exist!")
+        print("CRITICAL: Pon owner does not exist!")
         return
     end
     
@@ -63,7 +64,7 @@ local function OnCollide(inst, owner)
 
 
         else
-            owner.components.inventory:GiveItem(inst, nil, inst:Position())
+            owner.components.inventory:GiveItem(inst, nil, inst:GetPosition())
         end
         
         -- if owner.components.ponholder then
@@ -125,6 +126,8 @@ local function fn()
     inst.AnimState:SetBank("pon")
     inst.AnimState:SetBuild("pon")
     inst.AnimState:PlayAnimation("idle")
+
+    inst:AddTag("pon")
 	
     if not TheWorld.ismastersim then
         return inst
@@ -142,7 +145,7 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.canbepickedup = false
+    -- inst.components.inventoryitem.canbepickedup = false
 	inst.components.inventoryitem:SetOnPickupFn(OnPickup)
     inst.components.inventoryitem:SetOnDroppedFn(OnDrop)
 	

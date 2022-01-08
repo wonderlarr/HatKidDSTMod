@@ -1,1 +1,12 @@
-01:09:04 ..\..\src\categorylistview.cpp:409 CD: Move Multiple Events to Category
+00:40:57 ..\..\src\simpleeventcontroller.cpp:1310 IR: Remove Sounds from Playlist
+00:48:59 ..\..\src\simpleeventcontroller.cpp:1734 IS: Add Sound to Playlist
+01:02:47 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance
+01:02:50 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance
+01:02:52 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance
+01:02:56 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance
+01:03:00 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance
+01:03:03 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance
+01:03:07 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance
+01:03:10 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance
+01:03:13 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance
+01:03:17 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance

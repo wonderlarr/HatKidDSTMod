@@ -3,62 +3,355 @@ Warning: QPainter::setPen: Painter not active
 Warning: QPainter::setBrush: Painter not active
 Warning: QPainter::setRenderHint: Painter must be active to set rendering hints
 Warning: QPainter::setPen: Painter not active
-Debug: "01:09:04 ..\..\src\categorylistview.cpp:409 CD: Move Multiple Events to Category" 
+Debug: "00:40:57 ..\..\src\simpleeventcontroller.cpp:1310 IR: Remove Sounds from Playlist" 
+Debug: "00:48:59 ..\..\src\simpleeventcontroller.cpp:1734 IS: Add Sound to Playlist" 
 Debug: 
-Building project 'pon'...
-Debug: Building project D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon.fev...
-Debug: Unique sound defs 1/20
+Building project 'hatkidvoice'...
+Debug: Building project D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice.fev...
+Debug: Unique sound defs 2/10
 Debug: Retrieving sound file info...
 Debug: Retrieving reverb info...
 Debug: FEV file written ok
 Debug: Unique Envelope Points: 0 of 0
-Debug: Unique Strings: 1007 characters of 1007
+Debug: Unique Strings: 487 characters of 487
 Debug: Caching sound file details for ''...
-Debug: pon\Pon_Chain1.ogg
-Debug: pon\Pon_Chain10.ogg
-Debug: pon\Pon_Chain11.ogg
-Debug: pon\Pon_Chain12.ogg
-Debug: pon\Pon_Chain13.ogg
-Debug: pon\Pon_Chain14.ogg
-Debug: pon\Pon_Chain15.ogg
-Debug: pon\Pon_Chain16.ogg
-Debug: pon\Pon_Chain17.ogg
-Debug: pon\Pon_Chain18.ogg
-Debug: pon\Pon_Chain19.ogg
-Debug: pon\Pon_Chain2.ogg
-Debug: pon\Pon_Chain20.ogg
-Debug: pon\Pon_Chain3.ogg
-Debug: pon\Pon_Chain4.ogg
-Debug: pon\Pon_Chain5.ogg
-Debug: pon\Pon_Chain6.ogg
-Debug: pon\Pon_Chain7.ogg
-Debug: pon\Pon_Chain8.ogg
-Debug: pon\Pon_Chain9.ogg
-Debug: Building 'pon_bank01.fsb'
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain1.ogg
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain10.ogg
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain11.ogg
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain12.ogg
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain13.ogg
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain14.ogg
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain15.ogg
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain16.ogg
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain18.ogg
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain17.ogg
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain2.ogg
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain19.ogg
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain3.ogg
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain20.ogg
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain4.ogg
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain5.ogg
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain7.ogg
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain6.ogg
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain9.ogg
-Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\pon\Pon_Chain8.ogg
+Debug: hatkidvoice\carol.wav
+Debug: hatkidvoice\death.wav
+Debug: hatkidvoice\emote.wav
+Debug: hatkidvoice\ghost_alpine.wav
+Debug: hatkidvoice\ghost_fileselect.wav
+Debug: hatkidvoice\ghost_manhole.wav
+Debug: hatkidvoice\ghost_snatcherhouse.wav
+Debug: hatkidvoice\ghost_spaceship.wav
+Debug: hatkidvoice\ghost_timepiece.wav
+Debug: hatkidvoice\ghost_timerift.wav
+Debug: hatkidvoice\hurt_1.wav
+Debug: hatkidvoice\hurt_2.wav
+Debug: hatkidvoice\hurt_3.wav
+Debug: hatkidvoice\hurt_4.wav
+Debug: hatkidvoice\hurt_5.wav
+Debug: hatkidvoice\hurt_6.wav
+Debug: hatkidvoice\sleepy.wav
+Debug: hatkidvoice\talk_alpine.wav
+Debug: hatkidvoice\talk_fileselect.wav
+Debug: hatkidvoice\talk_manhole.wav
+Debug: hatkidvoice\talk_snatcherhouse.wav
+Debug: hatkidvoice\talk_spaceship.wav
+Debug: hatkidvoice\talk_timepiece.wav
+Debug: hatkidvoice\talk_timerift.wav
+Debug: hatkidvoice\yawn.wav
+Debug: Building 'hatkidvoice.fsb'
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\death.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\carol.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_alpine.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\emote.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_fileselect.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_manhole.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_spaceship.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_snatcherhouse.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_timepiece.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_timerift.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_2.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_1.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_3.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_4.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_5.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_6.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\sleepy.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_alpine.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_fileselect.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_manhole.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_spaceship.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_snatcherhouse.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_timerift.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\yawn.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_timepiece.wav
 Debug: Writing FSB...
 Debug: Finished building FSB
 Debug: 
 Debug: 
 Summary of build:
-SUCCESS: D:/SteamLibrary/steamapps/common/Don't Starve Together/mods/HatKidDSTMod/sound/pon.fev
-SUCCESS: pon_bank01.fsb
+SUCCESS: D:/SteamLibrary/steamapps/common/Don't Starve Together/mods/HatKidDSTMod/sound/hatkidvoice.fev
+SUCCESS: hatkidvoice.fsb
+Debug: 
+Building project 'hatkidvoice'...
+Debug: Building project D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice.fev...
+Debug: Unique sound defs 2/10
+Debug: Retrieving sound file info...
+Debug: Retrieving reverb info...
+Debug: FEV file written ok
+Debug: Unique Envelope Points: 0 of 0
+Debug: Unique Strings: 487 characters of 487
+Debug: Caching sound file details for ''...
+Debug: hatkidvoice\carol.wav
+Debug: hatkidvoice\death.wav
+Debug: hatkidvoice\emote.wav
+Debug: hatkidvoice\ghost_alpine.wav
+Debug: hatkidvoice\ghost_fileselect.wav
+Debug: hatkidvoice\ghost_manhole.wav
+Debug: hatkidvoice\ghost_snatcherhouse.wav
+Debug: hatkidvoice\ghost_spaceship.wav
+Debug: hatkidvoice\ghost_timepiece.wav
+Debug: hatkidvoice\ghost_timerift.wav
+Debug: hatkidvoice\hurt_1.wav
+Debug: hatkidvoice\hurt_2.wav
+Debug: hatkidvoice\hurt_3.wav
+Debug: hatkidvoice\hurt_4.wav
+Debug: hatkidvoice\hurt_5.wav
+Debug: hatkidvoice\hurt_6.wav
+Debug: hatkidvoice\sleepy.wav
+Debug: hatkidvoice\talk_alpine.wav
+Debug: hatkidvoice\talk_fileselect.wav
+Debug: hatkidvoice\talk_manhole.wav
+Debug: hatkidvoice\talk_snatcherhouse.wav
+Debug: hatkidvoice\talk_spaceship.wav
+Debug: hatkidvoice\talk_timepiece.wav
+Debug: hatkidvoice\talk_timerift.wav
+Debug: hatkidvoice\yawn.wav
+Debug: Building 'hatkidvoice.fsb'
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\carol.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\death.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\emote.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_alpine.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_fileselect.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_manhole.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_snatcherhouse.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_spaceship.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_timepiece.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_timerift.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_1.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_2.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_3.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_4.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_5.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_6.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\sleepy.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_alpine.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_fileselect.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_manhole.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_snatcherhouse.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_spaceship.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_timepiece.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_timerift.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\yawn.wav
+Debug: Writing FSB...
+Debug: Finished building FSB
+Debug: 
+Debug: 
+Summary of build:
+SUCCESS: D:/SteamLibrary/steamapps/common/Don't Starve Together/mods/HatKidDSTMod/sound/hatkidvoice.fev
+SUCCESS: hatkidvoice.fsb
+Debug: 
+Building project 'hatkidvoice'...
+Debug: Building project D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice.fev...
+Debug: Unique sound defs 2/10
+Debug: Retrieving sound file info...
+Debug: Retrieving reverb info...
+Debug: FEV file written ok
+Debug: Unique Envelope Points: 0 of 0
+Debug: Unique Strings: 487 characters of 487
+Debug: Caching sound file details for ''...
+Debug: hatkidvoice\carol.wav
+Debug: hatkidvoice\death.wav
+Debug: hatkidvoice\emote.wav
+Debug: hatkidvoice\ghost_alpine.wav
+Debug: hatkidvoice\ghost_fileselect.wav
+Debug: hatkidvoice\ghost_manhole.wav
+Debug: hatkidvoice\ghost_snatcherhouse.wav
+Debug: hatkidvoice\ghost_spaceship.wav
+Debug: hatkidvoice\ghost_timepiece.wav
+Debug: hatkidvoice\ghost_timerift.wav
+Debug: hatkidvoice\hurt_1.wav
+Debug: hatkidvoice\hurt_2.wav
+Debug: hatkidvoice\hurt_3.wav
+Debug: hatkidvoice\hurt_4.wav
+Debug: hatkidvoice\hurt_5.wav
+Debug: hatkidvoice\hurt_6.wav
+Debug: hatkidvoice\sleepy.wav
+Debug: hatkidvoice\talk_alpine.wav
+Debug: hatkidvoice\talk_fileselect.wav
+Debug: hatkidvoice\talk_manhole.wav
+Debug: hatkidvoice\talk_snatcherhouse.wav
+Debug: hatkidvoice\talk_spaceship.wav
+Debug: hatkidvoice\talk_timepiece.wav
+Debug: hatkidvoice\talk_timerift.wav
+Debug: hatkidvoice\yawn.wav
+Debug: Building 'hatkidvoice.fsb'
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\death.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\carol.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\emote.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_alpine.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_manhole.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_fileselect.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_spaceship.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_snatcherhouse.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_timepiece.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_timerift.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_2.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_1.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_3.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_4.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_6.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_5.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_alpine.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\sleepy.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_fileselect.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_manhole.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_snatcherhouse.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_spaceship.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_timerift.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\yawn.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_timepiece.wav
+Debug: Writing FSB...
+Debug: Finished building FSB
+Debug: 
+Debug: 
+Summary of build:
+SUCCESS: D:/SteamLibrary/steamapps/common/Don't Starve Together/mods/HatKidDSTMod/sound/hatkidvoice.fev
+SUCCESS: hatkidvoice.fsb
+Debug: "01:02:47 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance" 
+Debug: "01:02:50 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance" 
+Debug: "01:02:52 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance" 
+Debug: "01:02:56 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance" 
+Debug: "01:03:00 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance" 
+Debug: "01:03:03 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance" 
+Debug: "01:03:07 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance" 
+Debug: "01:03:10 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance" 
+Debug: "01:03:13 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance" 
+Debug: "01:03:17 ..\..\src\propertyeditor.cpp:2619 EO: Set x 3D Max Distance" 
+Debug: 
+Building project 'hatkidvoice'...
+Debug: Building project D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice.fev...
+Debug: Unique sound defs 2/10
+Debug: Retrieving sound file info...
+Debug: Retrieving reverb info...
+Debug: FEV file written ok
+Debug: Unique Envelope Points: 0 of 0
+Debug: Unique Strings: 487 characters of 487
+Debug: Caching sound file details for ''...
+Debug: hatkidvoice\carol.wav
+Debug: hatkidvoice\death.wav
+Debug: hatkidvoice\emote.wav
+Debug: hatkidvoice\ghost_alpine.wav
+Debug: hatkidvoice\ghost_fileselect.wav
+Debug: hatkidvoice\ghost_manhole.wav
+Debug: hatkidvoice\ghost_snatcherhouse.wav
+Debug: hatkidvoice\ghost_spaceship.wav
+Debug: hatkidvoice\ghost_timepiece.wav
+Debug: hatkidvoice\ghost_timerift.wav
+Debug: hatkidvoice\hurt_1.wav
+Debug: hatkidvoice\hurt_2.wav
+Debug: hatkidvoice\hurt_3.wav
+Debug: hatkidvoice\hurt_4.wav
+Debug: hatkidvoice\hurt_5.wav
+Debug: hatkidvoice\hurt_6.wav
+Debug: hatkidvoice\sleepy.wav
+Debug: hatkidvoice\talk_alpine.wav
+Debug: hatkidvoice\talk_fileselect.wav
+Debug: hatkidvoice\talk_manhole.wav
+Debug: hatkidvoice\talk_snatcherhouse.wav
+Debug: hatkidvoice\talk_spaceship.wav
+Debug: hatkidvoice\talk_timepiece.wav
+Debug: hatkidvoice\talk_timerift.wav
+Debug: hatkidvoice\yawn.wav
+Debug: Building 'hatkidvoice.fsb'
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\carol.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\death.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\emote.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_alpine.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_fileselect.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_manhole.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_snatcherhouse.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_spaceship.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_timepiece.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_timerift.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_1.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_2.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_3.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_4.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_5.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_6.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\sleepy.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_alpine.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_fileselect.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_manhole.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_spaceship.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_snatcherhouse.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_timepiece.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_timerift.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\yawn.wav
+Debug: Writing FSB...
+Debug: Finished building FSB
+Debug: 
+Debug: 
+Summary of build:
+SUCCESS: D:/SteamLibrary/steamapps/common/Don't Starve Together/mods/HatKidDSTMod/sound/hatkidvoice.fev
+SUCCESS: hatkidvoice.fsb
+Debug: 
+Building project 'hatkidvoice'...
+Debug: Building project D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice.fev...
+Debug: Unique sound defs 2/10
+Debug: Retrieving sound file info...
+Debug: Retrieving reverb info...
+Debug: FEV file written ok
+Debug: Unique Envelope Points: 0 of 0
+Debug: Unique Strings: 487 characters of 487
+Debug: Caching sound file details for ''...
+Debug: hatkidvoice\carol.wav
+Debug: hatkidvoice\death.wav
+Debug: hatkidvoice\emote.wav
+Debug: hatkidvoice\ghost_alpine.wav
+Debug: hatkidvoice\ghost_fileselect.wav
+Debug: hatkidvoice\ghost_manhole.wav
+Debug: hatkidvoice\ghost_snatcherhouse.wav
+Debug: hatkidvoice\ghost_spaceship.wav
+Debug: hatkidvoice\ghost_timepiece.wav
+Debug: hatkidvoice\ghost_timerift.wav
+Debug: hatkidvoice\hurt_1.wav
+Debug: hatkidvoice\hurt_2.wav
+Debug: hatkidvoice\hurt_3.wav
+Debug: hatkidvoice\hurt_4.wav
+Debug: hatkidvoice\hurt_5.wav
+Debug: hatkidvoice\hurt_6.wav
+Debug: hatkidvoice\sleepy.wav
+Debug: hatkidvoice\talk_alpine.wav
+Debug: hatkidvoice\talk_fileselect.wav
+Debug: hatkidvoice\talk_manhole.wav
+Debug: hatkidvoice\talk_snatcherhouse.wav
+Debug: hatkidvoice\talk_spaceship.wav
+Debug: hatkidvoice\talk_timepiece.wav
+Debug: hatkidvoice\talk_timerift.wav
+Debug: hatkidvoice\yawn.wav
+Debug: Building 'hatkidvoice.fsb'
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\death.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\carol.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\emote.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_alpine.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_fileselect.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_manhole.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_snatcherhouse.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_spaceship.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_timepiece.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\ghost_timerift.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_2.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_1.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_3.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_4.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_6.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\hurt_5.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\sleepy.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_alpine.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_fileselect.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_manhole.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_snatcherhouse.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_spaceship.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_timerift.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\yawn.wav
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\hatkidvoice\talk_timepiece.wav
+Debug: Writing FSB...
+Debug: Finished building FSB
+Debug: 
+Debug: 
+Summary of build:
+SUCCESS: D:/SteamLibrary/steamapps/common/Don't Starve Together/mods/HatKidDSTMod/sound/hatkidvoice.fev
+SUCCESS: hatkidvoice.fsb

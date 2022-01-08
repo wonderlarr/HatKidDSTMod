@@ -183,7 +183,9 @@ local function OnUse(inst)
 				end
 			end
 			
-			SpawnPrefab("icecloud").Transform:SetPosition(owner.Transform:GetWorldPosition())
+			-- SpawnPrefab("icecloud").Transform:SetPosition(owner.Transform:GetWorldPosition())
+			SpawnPrefab("polarhat_explode").Transform:SetPosition(owner.Transform:GetWorldPosition())
+
 			owner.SoundEmitter:PlaySound("icestomp/sound/stomp")
 			
 			if not owner.components.health:IsDead() and not owner:HasTag("playerghost") then
@@ -252,7 +254,7 @@ local function OnEquip(inst, owner)
 	end
 	
 
-	Indicator(owner, true, 0.15 * TUNING.POLARHAT_RADIUS)
+	-- Indicator(owner, true, 0.15 * TUNING.POLARHAT_RADIUS)
 end
  
  
@@ -269,12 +271,8 @@ local function OnUnequip(inst, owner)
 		owner.AnimState:Hide("HEAD_HAT")
 	end
 	
-	Indicator(owner, false, 0.15 * TUNING.POLARHAT_RADIUS)
+	-- Indicator(owner, false, 0.15 * TUNING.POLARHAT_RADIUS)
 	-- inst.indcheck:Cancel()
-	
-	if inst:HasTag("inuse") then
-		inst:RemoveTag("inuse")
-	end
 end
 
 
@@ -288,7 +286,7 @@ end
 
 
 local function KeybindUse(inst)
-	local owner = inst.components.inventoryitem.owner
+	-- local owner = inst.components.inventoryitem.owner
 	inst.components.useableitem:StartUsingItem()
 end
 

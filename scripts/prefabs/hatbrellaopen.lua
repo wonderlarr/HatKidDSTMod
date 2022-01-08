@@ -44,6 +44,10 @@ local function OnUnequip(inst, owner)
         inst.components.fueled:StopConsuming()
     end
 end
+
+local function OnEmpty(inst)
+    inst:DoTaskInTime(0, inst.Remove)
+end
  
 local function fn()
   
@@ -92,9 +96,12 @@ local function fn()
     inst:AddComponent("useableitem")
 	inst.components.useableitem:SetOnUseFn(OnUse)
 	
-    inst:AddComponent("fueled")
-    inst.components.fueled.fueltype = FUELTYPE.USAGE
-    inst.components.fueled:InitializeFuelLevel(2880)
+    if TUNING.HATBRELLA_OPENDURABILITY then
+        inst:AddComponent("fueled")
+        inst.components.fueled.fueltype = FUELTYPE.USAGE
+        inst.components.fueled:InitializeFuelLevel(TUNING.HATBRELLA_OPENDURABILITY)
+        inst.components.fueled:SetDepletedFn(OnEmpty)
+    end
 
     inst:AddComponent("waterproofer")
     inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_LARGE)

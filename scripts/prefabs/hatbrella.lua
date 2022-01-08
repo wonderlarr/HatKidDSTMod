@@ -37,6 +37,10 @@ local function OnUse(inst)
 	inst:DoTaskInTime(0, inst.Remove)
 end
 
+local function OnEmpty(inst)
+    inst:DoTaskInTime(0, inst.Remove)
+end
+
 
 local function fn()
   
@@ -52,7 +56,7 @@ local function fn()
     inst.AnimState:SetBank("hatbrella_ground")
     inst.AnimState:SetBuild("hatbrella_ground")
     inst.AnimState:PlayAnimation("idle")
-    inst.AnimState:SetScale(0.6, 0.6)
+    inst.AnimState:SetScale(0.65, 0.65)
 	
     inst:AddTag("sharp")
 	
@@ -76,9 +80,12 @@ local function fn()
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
 
-    inst:AddComponent("finiteuses")
-    inst.components.finiteuses:SetMaxUses(300)
-    inst.components.finiteuses:SetUses(300)
+    if TUNING.HATBRELLA_DURABILITY then
+        inst:AddComponent("finiteuses")
+        inst.components.finiteuses:SetMaxUses(TUNING.HATBRELLA_DURABILITY)
+        inst.components.finiteuses:SetUses(TUNING.HATBRELLA_DURABILITY)
+        inst.components.finiteuses:SetOnFinished(OnEmpty)
+    end
 
 	inst:AddComponent("useableitem")
 	inst.components.useableitem:SetOnUseFn(OnUse)
