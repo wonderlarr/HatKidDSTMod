@@ -107,10 +107,6 @@ Assets = {
 	Asset( "IMAGE", "images/avatars/self_inspect_hatkid.tex" ),
     Asset( "ATLAS", "images/avatars/self_inspect_hatkid.xml" ),
 
-	-- Hat Kid's voice
-	Asset( "SOUNDPACKAGE", "sound/hatkidvoice.fev"),
-    Asset( "SOUND", "sound/hatkidvoice.fsb"),
-
 	-- Big names
 	Asset( "IMAGE", "images/names_hatkid.tex" ),
     Asset( "ATLAS", "images/names_hatkid.xml" ),
@@ -166,20 +162,6 @@ Load "textedit"
 -- Add Hat Kid to css and minimap
 AddModCharacter("hatkid", "FEMALE")
 AddMinimapAtlas("images/map_icons/hatkid.xml")
-
--- Sound remaps for custom voice -- Overridden in hatkid.lua, using better method.
--- RemapSoundEvent( "dontstarve/characters/hatkidvoice/talk_LP", "hatkidvoice/hatkidvoice/talk_LP" ) 
--- RemapSoundEvent( "dontstarve/characters/hatkidvoice/yawn", "hatkidvoice/hatkidvoice/yawn" ) 
--- RemapSoundEvent( "dontstarve/characters/hatkidvoice/pose", "hatkidvoice/hatkidvoice/pose" )
--- RemapSoundEvent( "dontstarve/characters/hatkidvoice/ghost_LP", "hatkidvoice/hatkidvoice/ghost_LP" )
--- RemapSoundEvent( "dontstarve/characters/hatkidvoice/emote", "hatkidvoice/hatkidvoice/emote" )
--- RemapSoundEvent( "dontstarve/characters/hatkidvoice/death_voice", "hatkidvoice/hatkidvoice/death_voice" )
--- RemapSoundEvent( "dontstarve/characters/hatkidvoice/hurt", "hatkidvoice/hatkidvoice/hurt" ) 
--- RemapSoundEvent( "dontstarve/characters/hatkidvoice/eye_rub_vo", "hatkidvoice/hatkidvoice/eye_rub_vo" ) 
--- RemapSoundEvent( "dontstarve/characters/hatkidvoice/sinking", "hatkidvoice/hatkidvoice/sinking" ) 
--- RemapSoundEvent( "dontstarve/characters/hatkidvoice/carol", "hatkidvoice/hatkidvoice/carol" ) 
-
-
 
 -- Global declarations
 GLOBAL.CHARACTER_INGREDIENT.PON = "pon_cost"
@@ -537,8 +519,8 @@ PREFAB_SKINS["hatkid"] = {
 	"hatkid_none", 
 	"hatkid_cat",
 	"hatkid_detective",
-	--"hatkid_raincoat",
-	--"hatkid_snatcher",
+	--"hatkid_raincoat", -- plan on adding eventually
+	--"hatkid_snatcher", -- plan on adding eventually
 
 	--dyes
 	"hatkid_dye_niko",
@@ -554,7 +536,6 @@ for prefab,skins in pairs(PREFAB_SKINS) do
       	  PREFAB_SKINS_IDS[prefab][v] = k
     end
 end
-
 
 
 AddSkinnableCharacter("hatkid") --Hornet: The character youd like to skin, make sure you use the prefab name. And MAKE sure you run this function AFTER you import the skins_api file
@@ -603,7 +584,7 @@ STRINGS.SKIN_QUOTES.hatkid_dye_niko = "\"Oh, hi there!\""
 STRINGS.SKIN_DESCRIPTIONS.hatkid_dye_niko = "An outfit reminding you, that you only have one shot."
 
 STRINGS.SKIN_QUOTES.hatkid_dye_toonlink = "\"Oh, hi there!\""
-STRINGS.SKIN_DESCRIPTIONS.hatkid_dye_toonlink = "An outfit which seems to always wave in the wind, even when there is no wind."
+STRINGS.SKIN_DESCRIPTIONS.hatkid_dye_toonlink = "Why would you ever want to wake up the wind? How would you even do that?"
 
 STRINGS.SKIN_QUOTES.hatkid_dye_pinkdanger = "\"Oh, hi there!\""
 STRINGS.SKIN_DESCRIPTIONS.hatkid_dye_pinkdanger = "An outfit with lethal amounts of pink."

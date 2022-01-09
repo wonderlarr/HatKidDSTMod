@@ -1761,7 +1761,7 @@
 <pitch_randomization_units>Octaves</pitch_randomization_units>
 <volume_randomization>0</volume_randomization>
 <priority>128</priority>
-<maxplaybacks>8</maxplaybacks>
+<maxplaybacks>1</maxplaybacks>
 <maxplaybacks_behavior>Steal_oldest</maxplaybacks_behavior>
 <stealpriority>10000</stealpriority>
 <mode>x_3d</mode>

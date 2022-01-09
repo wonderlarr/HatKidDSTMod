@@ -1,26 +1,3 @@
--- local assets =
--- {
--- 	Asset( "ANIM", "anim/hatkid.zip" ),
--- 	Asset( "ANIM", "anim/ghost_hatkid_build.zip" ),
--- }
-
--- local skins =
--- {
--- 	normal_skin = "hatkid",
--- 	ghost_skin = "ghost_hatkid_build",
--- }
-
--- return CreatePrefabSkin("hatkid_none",
--- {
--- 	base_prefab = "hatkid",
--- 	type = "base",
--- 	assets = assets,
--- 	skins = skins, 
--- 	skin_tags = {"HATKID", "CHARACTER", "BASE"},
--- 	build_name_override = "hatkid",
--- 	rarity = "Common",
--- })
-
 --Hornet: This is how I did my skins prefab file!, Obviously youll need to change all instances of wilba to your characters prefab name
 local prefabs = {}
 
@@ -93,7 +70,7 @@ table.insert(prefabs, CreatePrefabSkin("hatkid_dye_niko", --Now heres the fun pa
 	base_prefab = "hatkid",
 	build_name_override = "hatkid_dye_niko", --The build name of your new skin,
 	type = "base",
-	rarity = "Spiffy", --I did the Elegant Rarity, but you can do whatever rarity you want!
+	rarity = "Spiffy",
 	-- rarity_modifier = "Woven", -- Can be removed to not have a modifier
 	skip_item_gen = true,
 	skip_giftable_gen = true,
@@ -115,7 +92,7 @@ table.insert(prefabs, CreatePrefabSkin("hatkid_dye_toonlink", --Now heres the fu
 	base_prefab = "hatkid",
 	build_name_override = "hatkid_dye_toonlink", --The build name of your new skin,
 	type = "base",
-	rarity = "Spiffy", --I did the Elegant Rarity, but you can do whatever rarity you want!
+	rarity = "Spiffy",
 	-- rarity_modifier = "Woven", -- Can be removed to not have a modifier
 	skip_item_gen = true,
 	skip_giftable_gen = true,
@@ -137,11 +114,11 @@ table.insert(prefabs, CreatePrefabSkin("hatkid_dye_pinkdanger", --Now heres the 
 	base_prefab = "hatkid",
 	build_name_override = "hatkid_dye_pinkdanger", --The build name of your new skin,
 	type = "base",
-	rarity = "Spiffy", --I did the Elegant Rarity, but you can do whatever rarity you want!
+	rarity = "Spiffy",
 	-- rarity_modifier = "Woven", -- Can be removed to not have a modifier
 	skip_item_gen = true,
 	skip_giftable_gen = true,
-	skin_tags = { "BASE", "HATKID" }, --Notice in this skin_tags table I have "VICTORIAN", This tag actually makes the little gorge icon show up on the skin! Other tags will do the same thing such as forge, yotc, yotp, yotv, yog and so on!
+	skin_tags = { "BASE", "HATKID" }, 
 	skins = {
 		normal_skin = "hatkid_dye_pinkdanger", --Rename your "normal_skin" accordingly
 		ghost_skin = "ghost_hatkid_build", 
