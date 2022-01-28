@@ -9,7 +9,9 @@ local assets=
 
 
 RegisterInventoryItemAtlas("images/inventoryimages/kidhat.xml","kidhat.tex")
-
+RegisterInventoryItemAtlas("images/inventoryimages/kidhat_dye_niko.xml","kidhat_dye_niko.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/kidhat_dye_toonlink.xml","kidhat_dye_toonlink.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/kidhat_dye_pinkdanger.xml","kidhat_dye_pinkdanger.tex")
 
 local badge = nil
 
@@ -39,7 +41,7 @@ local function aura()
 end
 
 local function OnEquip(inst, owner)
-	owner.AnimState:OverrideSymbol("swap_hat", "kidhat", "swap_hat")
+	owner.AnimState:OverrideSymbol("swap_hat", inst.AnimState:GetBuild(), "swap_hat")
 	
 	owner.AnimState:Show("HAT")
 	owner.AnimState:Show("HAT_HAIR")
@@ -264,4 +266,86 @@ local function fn(Sim)
 	
     return inst
 end
-return  Prefab("kidhat", fn, assets, prefabs)
+
+local function fn_dye_niko()
+	local inst = fn()
+
+	inst.AnimState:SetBuild("kidhat_dye_niko")
+
+	return inst
+
+end
+
+local function fn_dye_toonlink()
+	local inst = fn()
+
+	inst.AnimState:SetBuild("kidhat_dye_toonlink")
+
+	return inst
+
+end
+
+local function fn_dye_pinkdanger()
+	local inst = fn()
+
+	inst.AnimState:SetBuild("kidhat_dye_pinkdanger")
+
+	return inst
+
+end
+
+return  Prefab("kidhat", fn, assets, prefabs),
+CreateModPrefabSkin("kidhat_dye_niko",
+{
+	assets = {
+		Asset("ANIM", "anim/kidhat_dye_niko.zip"),
+		Asset("ATLAS", "images/inventoryimages/kidhat_dye_niko.xml"),
+		Asset("IMAGE", "images/inventoryimages/kidhat_dye_niko.tex"),
+	},
+	base_prefab = "kidhat",
+	fn = fn_dye_niko,
+	rarity = "Timeless",
+	reskinable = true,
+	
+	build_name_override = "kidhat_dye_niko",
+	
+	type = "item",
+	skin_tags = { },
+	release_group = 0,
+}),
+CreateModPrefabSkin("kidhat_dye_toonlink",
+{
+	assets = {
+		Asset("ANIM", "anim/kidhat_dye_toonlink.zip"),
+		Asset("ATLAS", "images/inventoryimages/kidhat_dye_toonlink.xml"),
+		Asset("IMAGE", "images/inventoryimages/kidhat_dye_toonlink.tex"),
+	},
+	base_prefab = "kidhat",
+	fn = fn_dye_toonlink,
+	rarity = "Timeless",
+	reskinable = true,
+	
+	build_name_override = "kidhat_dye_toonlink",
+	
+	type = "item",
+	skin_tags = { },
+	release_group = 0,
+}),
+CreateModPrefabSkin("kidhat_dye_pinkdanger",
+{
+	assets = {
+		Asset("ANIM", "anim/kidhat_dye_pinkdanger.zip"),
+		Asset("ATLAS", "images/inventoryimages/kidhat_dye_pinkdanger.xml"),
+		Asset("IMAGE", "images/inventoryimages/kidhat_dye_pinkdanger.tex"),
+	},
+	base_prefab = "kidhat",
+	fn = fn_dye_pinkdanger,
+	rarity = "Timeless",
+	reskinable = true,
+	
+	build_name_override = "kidhat_dye_pinkdanger",
+	
+	type = "item",
+	skin_tags = { },
+	release_group = 0,
+})

@@ -76,22 +76,27 @@ end
 
 local function LoadPonInv(inst)
 	if inst.lab then
-		inst.lab.components.container:Open(inst)
+		-- inst.lab.components.container:Open(inst)
 	end
 end
 
 -- When the character is revived
--- local function onbecamehuman(inst)
--- 	if TUNING.HATKIDSPEED ~= "1" then
--- 		inst.components.locomotor:SetExternalSpeedMultiplier(inst, "hatkid_speed_config", TUNING.HATKIDSPEED)
--- 	end
--- end
+local function onbecamehuman(inst)
+	if TUNING.HATKIDSPEED ~= "1" then
+		inst.components.locomotor:SetExternalSpeedMultiplier(inst, "hatkid_speed_config", TUNING.HATKIDSPEED)
+	end
+	inst.AnimState:SetScale(TUNING.HATKIDSIZE, TUNING.HATKIDSIZE) 
+end
 
--- local function onbecameghost(inst)
--- 	if TUNING.HATKIDSPEED ~= "1" then
--- 		inst.components.locomotor:SetExternalSpeedMultiplier(inst, "hatkid_speed_config", TUNING.HATKIDSPEED)
--- 	end
--- end
+-- when he died
+local function onbecameghost(inst)
+	if TUNING.HATKIDSPEED ~= "1" then
+		inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "hatkid_speed_config")
+	end
+	
+	-- HACK, overriding size manually on death so the ghost isn't unreasonably tiny. This won't look right if the player has the character size turned up higher than normal.
+	inst.AnimState:SetScale(1, 1) 
+end
 
 local function OnPotionThrow(inst)
 
@@ -167,6 +172,9 @@ local function OnEquip(inst)
 	
 	if head ~= nil then
 		inst.components.sanity.dapperness = 0
+
+		inst.components.sanity.neg_aura_mult = TUNING.HATKIDSANITYDRAIN
+		inst.components.sanity.night_drain_mult = TUNING.HATKIDNIGHTDRAIN
 	end
 end
 
@@ -174,56 +182,23 @@ local function OnUnequip(inst, data)
 	-- Detect if the slot is empty, apply a big sanity drain
 
     if data.eslot == EQUIPSLOTS.HEAD then
-		inst.components.sanity.dapperness = (-TUNING.DAPPERNESS_LARGE)
+		inst.components.sanity.dapperness = -TUNING.DAPPERNESS_MED
+
+		inst.components.sanity.neg_aura_mult = TUNING.HATKIDSANITYDRAIN * 3
+		inst.components.sanity.night_drain_mult = TUNING.HATKIDNIGHTDRAIN * 3
     end
-end
-
--- When loading the character
-local function onload(inst)
-    -- inst:ListenForEvent("ms_respawnedfromghost", onbecamehuman)
-    -- inst:ListenForEvent("ms_becameghost", onbecameghost)
-	
--- Listens for taking off hat, sanity drains without hat
-	inst:ListenForEvent("equip", OnEquip)
-    inst:ListenForEvent("unequip", OnUnequip)
-
-
-
-	
-	
-	
-    -- if inst:HasTag("playerghost") then
-    --     onbecameghost(inst)
-    -- else
-    --     onbecamehuman(inst)
-    -- end
-
-	inst:DoTaskInTime(0, function(inst)
-		inst.skin = inst.AnimState:GetBuild()
-		if inst.lab then
-			inst.lab.components.container:Open(inst)
-		end
-	end)
-	
 end
 
 -- When spawning the character
 local function onnewspawn(inst)
-    -- inst:ListenForEvent("ms_respawnedfromghost", onbecamehuman)
-    -- inst:ListenForEvent("ms_becameghost", onbecameghost)
 -- Listens for taking off hat, sanity drains without hat
 	inst:ListenForEvent("equip", OnEquip)
     inst:ListenForEvent("unequip", OnUnequip)
-    -- if inst:HasTag("playerghost") then
-    --     onbecameghost(inst)
-    -- else
-    --     onbecamehuman(inst)
-    -- end
 
-	-- inst:DoTaskInTime(0, function(inst)
-	-- 	inst.skin = inst.AnimState:GetBuild()
-	-- end)
+	inst:ListenForEvent("ms_respawnedfromghost", onbecamehuman)
+    inst:ListenForEvent("ms_becameghost", onbecameghost)
 
+	-- REMOVE IN FINAL
 	if TheWorld.hatannounced == nil then
 		inst:DoTaskInTime(10, function(inst)
 			print("Hat Kid Unlisted: This mod is a WORK IN PROGRESS, please be sure to reset your config often, and report bugs to the workshop page or Skylarr#9203 on Discord.")
@@ -279,24 +254,24 @@ local function ApplyPons(inst, data)
 	end
 end
 
-widgetsetup =
-{
-    widget =
-    {
-        slotpos = {},
-        animbank = "ui_chest_3x3",
-        animbuild = "ui_chest_3x3",
-        pos = Vector3(0, 200, 0),
-        side_align_tip = 160,
-    },
-    type = "chest",
-}
+-- widgetsetup =
+-- {
+--     widget =
+--     {
+--         slotpos = {},
+--         animbank = "ui_chest_3x3",
+--         animbuild = "ui_chest_3x3",
+--         pos = Vector3(0, 200, 0),
+--         side_align_tip = 160,
+--     },
+--     type = "chest",
+-- }
 
-for y = 2, 0, -1 do
-    for x = 0, 2 do
-        table.insert(widgetsetup.widget.slotpos, Vector3(80 * x - 80 * 2 + 80, 80 * y - 80 * 2 + 80, 0))
-    end
-end
+-- for y = 2, 0, -1 do
+--     for x = 0, 2 do
+--         table.insert(widgetsetup.widget.slotpos, Vector3(80 * x - 80 * 2 + 80, 80 * y - 80 * 2 + 80, 0))
+--     end
+-- end
 
 local function OnPonsDirty(inst)
 	inst.pons = inst.net_pons:value()
@@ -326,6 +301,9 @@ local function OnLoad(inst, data)
 
 	inst:ListenForEvent("equip", OnEquip)
     inst:ListenForEvent("unequip", OnUnequip)
+
+	inst:ListenForEvent("ms_respawnedfromghost", onbecamehuman)
+    inst:ListenForEvent("ms_becameghost", onbecameghost)
 
 
 	if TheWorld.hatannounced == nil then
@@ -390,12 +368,16 @@ local common_postinit = function(inst)
 	inst.pons = 0
 	inst.net_pons = net_ushortint(inst.GUID, "pons", "pons_dirty" )
 
-	inst.maxslotsinv = 2
+	-- inst.maxslotsinv = 18
 
 
 	if not TheWorld.ismastersim then
 		inst:ListenForEvent("pons_dirty", OnPonsDirty)
 	end
+
+	
+	inst.lab = SpawnPrefab("inv_pons")
+	inst.lab.entity:SetParent(inst.entity)
 end
 
 -- Server only, add comonents here.
@@ -427,7 +409,6 @@ local master_postinit = function(inst, data)
 	
 	--Sanity Aura
 
-	
 	-- inst:ListenForEvent("timerdone", OnTimerDone)
 	-- inst:ListenForEvent("healthdelta", OnHealthDelta)
 	
@@ -439,18 +420,9 @@ local master_postinit = function(inst, data)
 	
 	-- Hat Kid likes cookies, unfortunately there's only pumpkin cookies. We'll make do.
     inst.components.foodaffinity:AddPrefabAffinity  ("pumpkincookie", 1.4)
-	
-	-- inst:DoPeriodicTask(0.1, OnHatCooldownServer, nil)
-
-	-- inst.components.combat:SetOnHit(ApplyPons)
 
 	inst:ListenForEvent("onattackother", ApplyPons)
 	inst:ListenForEvent("working", ApplyPons)
-
-	-- inst:AddComponent("container")
-	-- inst.components.container:WidgetSetup("treasurechest", widgetsetup)
-	-- inst.components.container.skipclosesnd = true
-    -- inst.components.container.skipopensnd = true
 
 	inst:ListenForEvent("GetPon", OnGetPon)
 	inst:ListenForEvent("closepon", OnClosePon)
@@ -458,11 +430,11 @@ local master_postinit = function(inst, data)
 	inst.OnLoad = OnLoad
 	inst.OnSave = OnSave
 
-	inst.lab = SpawnPrefab("inv_pons")
-	inst.lab.entity:SetParent(inst.entity)
 
 	-- testing
-	-- inst.maxslotsinv = 2
+	-- inst.maxslotsinv = 18
+	-- inst.components.inventory.maxslots = 18
+
 end
 
 return MakePlayerCharacter("hatkid", prefabs, assets, common_postinit, master_postinit, start_inv)

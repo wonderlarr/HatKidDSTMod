@@ -51,12 +51,15 @@ local function OnCollide(inst, owner)
             inst.removetimer = inst:DoTaskInTime(0.5, function(inst)
                 -- This is a bit scuffed imo
                 -- Picking up more than 1 stack worth of pons at once will cause visual issues.
-                -- But this shouldn't happen without cheats hopefully.
+                -- But this shouldn't happen without cheats hopefully. 
+
+                -- IT CAN HAPPEN NOW OH NO
+                -- Let's hope nobody notices
                 inst:Remove()
             end)
 
-            if owner.pons < 500 then
-                owner:PushEvent("GetPon", {count = 1})
+            if owner.pons < TUNING.PONS_MAX then
+                owner:PushEvent("GetPon", {count = inst.components.stackable:StackSize()})
             else
                 inst.removetimer:Cancel()
                 inst.removetimer = nil

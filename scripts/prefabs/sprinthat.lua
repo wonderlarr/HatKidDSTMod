@@ -18,7 +18,7 @@ local prefabs =
 
 local sprinting = nil
 
-local function onLocomote(inst)
+local function onLocomote(inst) -- Perhaps rewrite this?
 	local isrunning = inst.components.locomotor.isrunning or inst.components.locomotor.wantstorun
 	local hat = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD) -- known as inst throughout the rest of this file
 	

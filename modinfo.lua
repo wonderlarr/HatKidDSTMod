@@ -1273,4 +1273,27 @@ configuration_options =
 		},
 		default = false,
 	},
+
+	{
+		name = "ponsmax",
+		label = "Max Pons",
+		hover = "How many Pons Hat Kid can hold at once.",
+		options =
+		{
+			{description = "1,000", data = 1000},
+			{description = "1,500", data = 1500},
+			{description = "2,000", data = 2000},
+			{description = "2,500", data = 2500},
+			{description = "2,500 (Default)", data = 2500},
+			{description = "3,000", data = 3000},
+			{description = "3,500", data = 3500},
+			{description = "4,000", data = 4000},
+			{description = "4,500", data = 4500},
+			{description = "5,000", data = 5000},
+			{description = "10,000", data = 10000},
+			
+
+		},
+		default = 2500,
+	},
 }

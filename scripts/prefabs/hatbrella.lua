@@ -9,11 +9,10 @@ local assets =
     Asset("IMAGE", "images/inventoryimages/hatbrellaopen.tex"),
 }
 
-RegisterInventoryItemAtlas("images/inventoryimages/hatbrella.xml","hatbrella.tex")
 
 
 local function OnEquip(inst, owner)
-	owner.AnimState:OverrideSymbol("swap_object", "hatbrella", "swap_object")
+	owner.AnimState:OverrideSymbol("swap_object", inst.prefab, "swap_object")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
 end
@@ -21,6 +20,7 @@ end
 local function OnUnequip(inst, owner)
     owner.AnimState:Hide("ARM_carry")
     owner.AnimState:Show("ARM_normal")
+    
 end
  
 local function OnUse(inst)
@@ -52,11 +52,15 @@ local function fn()
 	inst.entity:AddMiniMapEntity()
      
     MakeInventoryPhysics(inst)   
+    RegisterInventoryItemAtlas("images/inventoryimages/hatbrella.xml","hatbrella.tex")
+
       
     inst.AnimState:SetBank("hatbrella_ground")
     inst.AnimState:SetBuild("hatbrella_ground")
     inst.AnimState:PlayAnimation("idle")
     inst.AnimState:SetScale(0.65, 0.65)
+
+    inst.handname = "hatbrella"
 	
     inst:AddTag("sharp")
 	
@@ -95,5 +99,36 @@ local function fn()
     return inst
 end
 
+local function fn_bowkid()
+	local inst = fn()
 
-return  Prefab("hatbrella", fn, assets) 
+	inst.AnimState:SetBuild("hatbrella_bowkid_ground")
+    RegisterInventoryItemAtlas("images/inventoryimages/hatbrella_bowkid.xml","hatbrella_bowkid.tex")
+
+    inst.handname = "hatbrella_bowkid"
+
+	return inst
+
+end
+
+
+return  Prefab("hatbrella", fn, assets) ,
+CreateModPrefabSkin("hatbrella_bowkid",
+{
+	assets = {
+		Asset("ANIM", "anim/hatbrella_bowkid.zip"),
+		Asset("ANIM", "anim/hatbrella_bowkid_ground.zip"),
+		Asset("ATLAS", "images/inventoryimages/hatbrella_bowkid.xml"),
+		Asset("IMAGE", "images/inventoryimages/hatbrella_bowkid.tex"),
+	},
+	base_prefab = "hatbrella",
+	fn = fn_bowkid,
+	rarity = "Timeless",
+	reskinable = true,
+	
+	build_name_override = "hatbrella_bowkid",
+	
+	type = "item",
+	skin_tags = { },
+	release_group = 0,
+})

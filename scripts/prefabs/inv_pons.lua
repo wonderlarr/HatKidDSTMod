@@ -54,7 +54,7 @@ local function OnClose(inst)
     if parent ~= nil then
         parent:PushEvent("closepon")
     else
-        print("WARNING: Pon Inventory was closed without a valid inventory!")
+        print("WARNING: Pon Inventory was closed incorrectly!")
     end
 end
 
@@ -82,7 +82,7 @@ local function fn()
         return inst
     end
 
-    inst.entity:SetPristine()    
+    inst.entity:SetPristine()
 
     inst:AddComponent("inspectable")
 

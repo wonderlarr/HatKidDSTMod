@@ -24,15 +24,15 @@ table.insert(prefabs, CreatePrefabSkin("hatkid_none", --This skin is the regular
 table.insert(prefabs, CreatePrefabSkin("hatkid_cat", --Now heres the fun part, Our skin! I did "wilba_victorian" but you can do whatever skin set you want!
 {
 	base_prefab = "hatkid",
-	build_name_override = "hatkid_cat", --The build name of your new skin,
+	build_name_override = "hatkid_cat",
 	type = "base",
-	rarity = "Elegant", --I did the Elegant Rarity, but you can do whatever rarity you want!
-	rarity_modifier = "Woven", --Ive put the rarity_modifier to Woven, Doesnt make a difference other than say youve woven the skin
+	rarity = "Elegant",
+	rarity_modifier = "Woven",
 	skip_item_gen = true,
 	skip_giftable_gen = true,
-	skin_tags = { "BASE", "HATKID" }, --Notice in this skin_tags table I have "VICTORIAN", This tag actually makes the little gorge icon show up on the skin! Other tags will do the same thing such as forge, yotc, yotp, yotv, yog and so on!
+	skin_tags = { "BASE", "HATKID" }, 
 	skins = {
-		normal_skin = "hatkid_cat", --Rename your "normal_skin" accordingly
+		normal_skin = "hatkid_cat",
 		ghost_skin = "ghost_hatkid_build", 
 	},
 

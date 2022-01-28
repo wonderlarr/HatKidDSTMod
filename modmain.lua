@@ -27,6 +27,9 @@
 	and make sure to give me an @. I'm Skylarr#9203.
 ]]
 
+
+-- Currently incompatible with Insight. sadly.
+
 PrefabFiles = {
 	"hatkid",
 	"hatkid_none",
@@ -60,6 +63,7 @@ PrefabFiles = {
 
 	--collectables
 	"pon",
+	"pon_heart",
 	-- "timepiece",
 
 	-- Dweller Placeables
@@ -118,6 +122,9 @@ Assets = {
 	Asset( "IMAGE", "images/gui/craftingtabicon.tex" ), -- Reused texture from Kid Hat, first swap image.
 	Asset( "ATLAS", "images/gui/craftingtabicon.xml" ),
 
+	Asset( "IMAGE", "images/gui/pontab.tex" ), -- Reused texture from Kid Hat, first swap image.
+	Asset( "ATLAS", "images/gui/pontab.xml" ),
+
 	-- Pon inventory
 	Asset("ANIM", "anim/status_pons.zip"),
 	Asset("ANIM", "anim/pons_icon.zip"),
@@ -144,8 +151,18 @@ Assets = {
 
     Asset( "ATLAS", "bigportraits/hatkid_timestop.xml" ), -- redundant bigportrait for time stop skin. This shouldn't display but it keeps the client log happy.
 
+	-- Item skins
+	-- Asset("ATLAS", "images/inventoryimages/kidhat_dye_niko.xml"),
+    -- Asset("IMAGE", "images/inventoryimages/kidhat_dye_niko.tex"),
+
+	-- Asset("ANIM", "anim/kidhat_dye_niko.zip"),
+
+
+
 
 }
+
+
 
 -- Constants
 GLOBAL.ABILITY_LIGHTRAD = 0.9403 -- This value is how light units translate to in game units while using specific settings with lights. Make sure you know what you're doing with this if you use it.
@@ -163,14 +180,176 @@ Load "textedit"
 AddModCharacter("hatkid", "FEMALE")
 AddMinimapAtlas("images/map_icons/hatkid.xml")
 
--- Global declarations
-GLOBAL.CHARACTER_INGREDIENT.PON = "pon_cost"
+
+----------------------------------
+-- Skin Stuff --------------------
+----------------------------------
+
+-- CHARACTER skins section, NOT item skins
+--Thanks hornet
+local _G = GLOBAL
+local PREFAB_SKINS = _G.PREFAB_SKINS
+local PREFAB_SKINS_IDS = _G.PREFAB_SKINS_IDS
+local SKIN_AFFINITY_INFO = GLOBAL.require("skin_affinity_info")
+
+modimport("skins_api") --Hornet: We import the file! If you named your file something else other than skins_api then youll want to rename this function to the name of the file
+
+SKIN_AFFINITY_INFO.hatkid = {
+	"hatkid_cat",
+	"hatkid_detective",
+
+	"hatkid_dye_niko",
+	"hatkid_dye_toonlink",
+	"hatkid_dye_pinkdanger",
+}
+
+--Hornet: The table of skins youre going to have, You can have as many skins as you want!
+
+PREFAB_SKINS["hatkid"] = {
+	--outfits
+	"hatkid_none", 
+	"hatkid_cat",
+	"hatkid_detective",
+	--"hatkid_raincoat", -- plan on adding eventually
+	--"hatkid_snatcher", -- plan on adding eventually
+
+	--dyes
+	"hatkid_dye_niko",
+	"hatkid_dye_toonlink",
+	"hatkid_dye_pinkdanger",
+
+} 
+
+PREFAB_SKINS_IDS = {} --Make sure this is after you  change the PREFAB_SKINS["character"] table
+for prefab,skins in pairs(PREFAB_SKINS) do
+    PREFAB_SKINS_IDS[prefab] = {}
+    for k,v in pairs(skins) do
+      	  PREFAB_SKINS_IDS[prefab][v] = k
+    end
+end
+
+
+AddSkinnableCharacter("hatkid") --Hornet: The character youd like to skin, make sure you use the prefab name. And MAKE sure you run this function AFTER you import the skins_api file
+
+-- ITEM skins section, NOT CHARACTER SKINS
+-- Thanks Cunning Fox
+modimport("scripts/libs/skins_api.lua")
+
+
+
+-- Character ingredient hack
+-- Apparently making new character ingredients is either not easy as I thought when I started,
+-- or I overlooked some simple function or method that does this all for me. Either way, I've done this mess now,
+-- and it works.
+
+
+-- We start by adding pon as a global constant
+GLOBAL.CHARACTER_INGREDIENT.PON = "pon"
+
+
+-- Here we hook into a function that tells things our ingredient IS a character ingredient
+local _IsCharacterIngredient = GLOBAL.IsCharacterIngredient
+
+ -- We must replace IsCharacterIngredient, for some reason we can't add Pon to CHARACTER_INGREDIENT properly ourselves.
+GLOBAL.IsCharacterIngredient = function(ingredienttype)
+	if ingredienttype == "pon" then
+		return ingredienttype ~= nil
+	end
+
+	local ret = _IsCharacterIngredient(ingredienttype)
+	return ret
+end
+
+
+-- Here we replace some stuff in Builder so we can use pon properly in recipes
+AddComponentPostInit("builder", function(self)
+	-- Remove Ingredients
+	local _RemoveIngredients = self.RemoveIngredients
+
+	self.RemoveIngredients = function(self, ingredients, recname)
+		local recipe = GLOBAL.AllRecipes[recname]
+
+		if recipe then
+			for k,v in pairs(recipe.character_ingredients) do
+				if v.type == GLOBAL.CHARACTER_INGREDIENT.PON then
+					-- print("-------------------------------------------------------------------------")
+	
+					-- print(self.inst.prefab)
+					self.inst.pons = math.max(self.inst.pons - v.amount, 0)
+				end
+			end
+		end
+		local ret = _RemoveIngredients(self, ingredients, recname)
+		return ret
+	end
+
+
+
+	-- Has Ingredients
+	local _HasCharacterIngredient = self.HasCharacterIngredient
+
+	self.HasCharacterIngredient = function(self, ingredient)
+		if ingredient.type == GLOBAL.CHARACTER_INGREDIENT.PON then
+			if self.inst.pons ~= nil then
+				local current = math.ceil(self.inst.pons)
+				return current >= ingredient.amount, current
+			end
+		end
+
+
+		local ret = _HasCharacterIngredient(self, ingredient)
+		return ret
+	end
+end)
+
+AddClassPostConstruct("components/builder_replica", function(self)
+	local _HasCharacterIngredient = self.HasCharacterIngredient
+
+	self.HasCharacterIngredient = function(self, ingredient)
+		if self.inst.components.builder ~= nil then
+			return self.inst.components.builder:HasCharacterIngredient(ingredient)
+		elseif self.classified ~= nil then
+			-- print("local hook success")
+			if ingredient.type == GLOBAL.CHARACTER_INGREDIENT.PON then
+				-- print("-------------------------------------------------------------------------")
+				local pons = self.inst.pons
+				-- print(self.inst.prefab)
+				if pons ~= nil then
+					local current = math.ceil(pons)
+					return current >= ingredient.amount, current
+				end
+			end  
+		end	
+		local ret = _HasCharacterIngredient(self, ingredient)
+		return ret
+	end
+end)
+
+
+AddClassPostConstruct("components/inventory_replica", function(self)
+	local _GetNumSlotsreplica = self.GetNumSlots
+	function self:GetNumSlots(...)
+		if self.inst.components.inventory ~= nil then
+			return self.inst.components.inventory:GetNumSlots()
+		else
+			return self.inst.maxslotsinv or _GetNumSlotsreplica(self, ...)
+		end
+	end	
+end)
+
+local _makereadonly = GLOBAL.makereadonly
+function GLOBAL.makereadonly(t, k)
+	if k == "maxslots" then
+		return
+	end
+	
+	_makereadonly(t, k)
+end
+
 
 
 --TUNING STUFF
 TUNING.HATKID_ABILITYKEY = GetModConfigData("hatkid_polarhatkey")
-
-
 
 
 --Character stat config
@@ -232,6 +411,9 @@ TUNING.TIMESTOPHAT_COOLDOWN = GetModConfigData("timestopcooldown")
 TUNING.TIMESTOPHAT_DURATION = GetModConfigData("timestopactive")
 TUNING.TIMESTOPHAT_TIMESCALE = GetModConfigData("timestopscale")
 
+-- Pons and Badges
+TUNING.PONS_MAX = GetModConfigData("ponsmax")
+
 --funny mode
 TUNING.FUNNYMODE = GetModConfigData("funnymode")
 
@@ -250,12 +432,13 @@ TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.HATKID = {"kidhat"}
                                                    __/ |
                                                   |___/
 ]]
-local HAT_TAB = AddRecipeTab("Hats", 994, "images/gui/craftingtabicon.xml", "craftingtabicon.tex", "hatkidcrafter")
+local HAT_TAB = AddRecipeTab("Hats", 993, "images/gui/craftingtabicon.xml", "craftingtabicon.tex", "hatkidcrafter")
+local PON_TAB = AddRecipeTab("Pons", 994, "images/gui/pontab.xml", "pontab.tex", "hatkidcrafter")
 
 
 hatbrellarecipe = AddRecipe("hatbrella",
 	{
-		GLOBAL.Ingredient("twigs", 4),
+		GLOBAL.Ingredient("twigs", 3),
 		GLOBAL.Ingredient("silk", 1),
 		GLOBAL.Ingredient("goldnugget", 2),
 	},
@@ -270,20 +453,27 @@ hatbrellarecipe = AddRecipe("hatbrella",
 	"hatbrella.tex" -- image
 )
 
-hatbrellarecipe2 = AddRecipe("hatbrella",
-	{
-		GLOBAL.Ingredient(CHARACTER_INGREDIENT.PON, 5),
+-- hatbrellarecipe2 = AddRecipe("hatbrella",
+-- 	{
+-- 		GLOBAL.Ingredient(CHARACTER_INGREDIENT.PON, 600),
+-- 	},
+-- 	PON_TAB, -- crafting tab
+-- 	GLOBAL.TECH.SCIENCE_ONE, -- crafting level
+-- 	nil, -- placer
+-- 	nil, -- min_spacing
+-- 	nil, -- nounlock
+-- 	nil, -- numtogive
+-- 	"hatkidcrafter", -- builder_tag
+-- 	"images/inventoryimages/hatbrella.xml", -- atlas
+-- 	"hatbrella.tex" -- image
+-- )
+
+MadeRecipeSkinnable("hatbrella", {
+	hatbrella_bowkid = {
+		atlas = "images/inventoryimages/hatbrella_bowkid.xml",
+		image = "hatbrella_bowkid.tex",
 	},
-	HAT_TAB, -- crafting tab
-	GLOBAL.TECH.SCIENCE_ONE, -- crafting level
-	nil, -- placer
-	nil, -- min_spacing
-	nil, -- nounlock
-	nil, -- numtogive
-	"hatkidcrafter", -- builder_tag
-	"images/inventoryimages/hatbrella.xml", -- atlas
-	"hatbrella.tex" -- image
-)
+})
 
 
 kidhatrecipe = AddRecipe("kidhat",
@@ -301,6 +491,24 @@ kidhatrecipe = AddRecipe("kidhat",
 	"images/inventoryimages/kidhat.xml", -- atlas
 	"kidhat.tex" -- image
 )
+
+
+MadeRecipeSkinnable("kidhat", {
+	kidhat_dye_niko = {
+		atlas = "images/inventoryimages/kidhat_dye_niko.xml",
+		image = "kidhat_dye_niko.tex",
+	},
+
+	kidhat_dye_toonlink = {
+		atlas = "images/inventoryimages/kidhat_dye_toonlink.xml",
+		image = "kidhat_dye_toonlink.tex",
+	},
+
+	kidhat_dye_pinkdanger = {
+		atlas = "images/inventoryimages/kidhat_dye_pinkdanger.xml",
+		image = "kidhat_dye_pinkdanger.tex",
+	},
+})
 
 
 sprinthatrecipe = AddRecipe("sprinthat",
@@ -397,7 +605,7 @@ timestophatrecipe = AddRecipe("timestophat",
 -- Sort keys determine how recipes are ordered in the crafting menu.
 -- Lower values are shown first.
 hatbrellarecipe.sortkey = 0
-hatbrellarecipe2.sortkey = 1
+-- hatbrellarecipe2.sortkey = 1
 
 -- Leave room in case I wanna add any more craftables before the hats easily.
 kidhatrecipe.sortkey = 5
@@ -484,61 +692,25 @@ AddClassPostConstruct("widgets/statusdisplays", function(self)
 		if self.ponbadge == nil then
 			local PonBadge      = require "widgets/ponbadge"
 
-			self.ponbadge = self:AddChild(PonBadge(self.owner))
-			self.ponbadge:SetPosition(-120, 20, 0)
-			self.ponbadge:SetPercent(self.owner.pons / 500, 500)
+			self.ponbadge = self.heart:AddChild(PonBadge(self.owner))
+			self.ponbadge:SetPosition(0, -130, 0)
+			self.ponbadge:SetPercent(self.owner.pons / TUNING.PONS_MAX, TUNING.PONS_MAX)
 			self.ponbadge:SetClickable(true)
 			self.owner:ListenForEvent("UpdatePons", function()
-				self.ponbadge:SetPercent(self.owner.pons / 500, 500)
+				self.ponbadge:SetPercent(self.owner.pons / TUNING.PONS_MAX, TUNING.PONS_MAX)
 			end)
 		end
 	end
 end)
 
---Skins API stuff, comments left in case you wanna learn stuff., and for when I forget. Thanks hornet.
-local _G = GLOBAL
-local PREFAB_SKINS = _G.PREFAB_SKINS
-local PREFAB_SKINS_IDS = _G.PREFAB_SKINS_IDS
-local SKIN_AFFINITY_INFO = GLOBAL.require("skin_affinity_info")
-
-modimport("skins_api") --Hornet: We import the file! If you named your file something else other than skins_api then youll want to rename this function to the name of the file
-
-SKIN_AFFINITY_INFO.hatkid = {
-	"hatkid_cat",
-	"hatkid_detective",
-
-	"hatkid_dye_niko",
-	"hatkid_dye_toonlink",
-	"hatkid_dye_pinkdanger",
-}
-
---Hornet: The table of skins youre going to have, You can have as many skins as you want!
-
-PREFAB_SKINS["hatkid"] = {
-	--outfits
-	"hatkid_none", 
-	"hatkid_cat",
-	"hatkid_detective",
-	--"hatkid_raincoat", -- plan on adding eventually
-	--"hatkid_snatcher", -- plan on adding eventually
-
-	--dyes
-	"hatkid_dye_niko",
-	"hatkid_dye_toonlink",
-	"hatkid_dye_pinkdanger",
-
-} 
-
-PREFAB_SKINS_IDS = {} --Make sure this is after you  change the PREFAB_SKINS["character"] table
-for prefab,skins in pairs(PREFAB_SKINS) do
-    PREFAB_SKINS_IDS[prefab] = {}
-    for k,v in pairs(skins) do
-      	  PREFAB_SKINS_IDS[prefab][v] = k
-    end
-end
 
 
-AddSkinnableCharacter("hatkid") --Hornet: The character youd like to skin, make sure you use the prefab name. And MAKE sure you run this function AFTER you import the skins_api file
+
+
+
+
+
+
 
 
 
@@ -550,14 +722,22 @@ GLOBAL.STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Smol"
 -- String declarations
 local require = GLOBAL.require
 local STRINGS = GLOBAL.STRINGS
+---- Item skin strings ----
+STRINGS.SKIN_NAMES.kidhat_dye_niko = "Margin of the Night"
+STRINGS.SKIN_NAMES.kidhat_dye_toonlink = "The Forest Critter"
+STRINGS.SKIN_NAMES.kidhat_dye_pinkdanger = "Cute `n Dangerous"
 
+STRINGS.SKIN_NAMES.hatbrella_bowkid = "Bow Kid's Favorite"
+
+
+---- Character skin strings ----
 STRINGS.NAMES.HATKID = "Hat Kid"
 STRINGS.CHARACTERS.HATKID = require "speech_hatkid" -- speech file
 
 -- The character select screen lines
 STRINGS.CHARACTER_TITLES.hatkid = "The Hatty Explorer"
 STRINGS.CHARACTER_NAMES.hatkid = "Hat Kid"
-STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Makes cool hats, for herself\n*Might go insane without a hat\n*Prefers to fight with her umbrella\n*Collects all kinds of things\n*Is extremely cute"
+STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Makes cool hats, for herself\\n*Collects all kinds of things\n*Mentally vulnerable without a hat\n*Is extremely cute"
 STRINGS.CHARACTER_QUOTES.hatkid = "\"Oh, hi there!\""
 
 --Skin STRINGS
@@ -572,13 +752,13 @@ STRINGS.SKIN_NAMES.hatkid_dye_pinkdanger = "Cute 'n Dangerous"
 
 
 STRINGS.SKIN_QUOTES.hatkid_none = "\"Oh, hi there!\"" -- Redundant, mostly here for organization's sake. I believe the game uses the default quote with no skin selected, not this one.
-STRINGS.SKIN_DESCRIPTIONS.hatkid_none = "A royal purple and gold outfit, best fit for a cute adventurer. Complete with a cape and a giant, very necessary, zipper."
+STRINGS.SKIN_DESCRIPTIONS.hatkid_none = "A royal purple and gold outfit, best fit for a cute adventurer. Complete with a cape and a giant, very necessary zipper."
 
 STRINGS.SKIN_QUOTES.hatkid_cat = "\"Cat crime!\""
 STRINGS.SKIN_DESCRIPTIONS.hatkid_cat = "A cat themed varsity outfit, complete with mask and tail, which also may or may not be directly tied to countless illegal acts."
 
 STRINGS.SKIN_QUOTES.hatkid_detective = "\"MYURDER!\""
-STRINGS.SKIN_DESCRIPTIONS.hatkid_detective = "A detective outfit, worn by only the most SERIOUS of detectives! Unfortunately, your detective themed hat didn't make it to The Constant."
+STRINGS.SKIN_DESCRIPTIONS.hatkid_detective = "A detective outfit, worn by only the most SERIOUS of detectives!"
 
 STRINGS.SKIN_QUOTES.hatkid_dye_niko = "\"Oh, hi there!\""
 STRINGS.SKIN_DESCRIPTIONS.hatkid_dye_niko = "An outfit reminding you, that you only have one shot."
@@ -587,7 +767,7 @@ STRINGS.SKIN_QUOTES.hatkid_dye_toonlink = "\"Oh, hi there!\""
 STRINGS.SKIN_DESCRIPTIONS.hatkid_dye_toonlink = "Why would you ever want to wake up the wind? How would you even do that?"
 
 STRINGS.SKIN_QUOTES.hatkid_dye_pinkdanger = "\"Oh, hi there!\""
-STRINGS.SKIN_DESCRIPTIONS.hatkid_dye_pinkdanger = "An outfit with lethal amounts of pink."
+STRINGS.SKIN_DESCRIPTIONS.hatkid_dye_pinkdanger = "An outfit with lethal amounts of lightish red."
 
 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATKID =
@@ -613,6 +793,12 @@ STRINGS.CHARACTERS.HATKID.DESCRIBE.HATKID =
 
 -- Item names
 STRINGS.NAMES.KIDHAT = "Kid's Hat"
+	-- STRINGS.NAMES.KIDHAT_CAT = STRINGS.NAMES.KIDHAT -- Does not exist
+	STRINGS.NAMES.KIDHAT_DETECTIVE = "Detective's Cap"
+	STRINGS.NAMES.KIDHAT_DYE_NIKO = STRINGS.NAMES.KIDHAT
+	STRINGS.NAMES.KIDHAT_DYE_TOONLINK = STRINGS.NAMES.KIDHAT
+	STRINGS.NAMES.KIDHAT_DYE_PINKDANGER = STRINGS.NAMES.KIDHAT
+
 STRINGS.NAMES.SPRINTHAT = "Sprint Hat"
 STRINGS.NAMES.BREWINGHAT = "Brewing Hat"
 STRINGS.NAMES.POLARHAT = "Ice Hat"
@@ -620,7 +806,11 @@ STRINGS.NAMES.DWELLERMASK = "Dweller's Mask"
 STRINGS.NAMES.TIMESTOPHAT = "Time Stop Hat"
 
 STRINGS.NAMES.HATBRELLA = "Blue Umbrella"
+	STRINGS.NAMES.HATBRELLA_BOWKID = "Pink Umbrella"
+
 STRINGS.NAMES.HATBRELLAOPEN = "Open Blue Umbrella"
+	STRINGS.NAMES.HATBRELLAOPEN_BOWKID = "Open Pink Umbrella"
+
 STRINGS.NAMES.KIDPOTION_THROWABLE = "Mad Concoction"
 STRINGS.NAMES.KIDPOTION = "Brewing Concoction"
 
