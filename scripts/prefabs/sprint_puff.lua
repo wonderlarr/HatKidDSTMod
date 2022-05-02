@@ -26,7 +26,10 @@ local function MakeExplosion(data)
         inst.AnimState:SetBuild("smoke_puff_small")
         inst.AnimState:PlayAnimation("puff")
         inst.AnimState:SetAddColour(1, 1, 1, 1)
-		-- inst.AnimState:SetDeltaTimeMultiplier(2)
+
+        if math.random(1, 2) == 1 then -- flip 50% of spawns
+            inst.AnimState:SetScale(-1, 1, 1)
+        end
 
         inst:ListenForEvent("animover", inst.Remove)
     end

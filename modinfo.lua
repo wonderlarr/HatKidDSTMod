@@ -24,6 +24,7 @@ server_filter_tags = {
 "hatkid",
 "a hat in time",
 "hat kid",
+"cute",
 }
 
 local null_options = {
@@ -55,8 +56,8 @@ configuration_options =
 			{description = "75", data = 75},
 			{description = "100", data = 100},
 			{description = "120", data = 120},
-			{description = "125 (Default)", data = 125},
-			{description = "150", data = 150},
+			{description = "130", data = 130},
+			{description = "150 (Default)", data = 150},
 			{description = "175", data = 175},
 			{description = "200", data = 200},
 			{description = "225", data = 225},
@@ -64,7 +65,7 @@ configuration_options =
 			{description = "275", data = 275},				
 			{description = "300", data = 300},
 		},
-		default = 125,
+		default = 150,
 	},
 	
 	{
@@ -75,18 +76,19 @@ configuration_options =
 		{
 			{description = "25", data = 25},
 			{description = "50", data = 50},
-			{description = "75", data = 75},
-			{description = "100 (Default)", data = 100},
+			{description = "75 (Wes)", data = 75},
+			{description = "100 (Low Norm)", data = 100},
+			{description = "120 (Default)", data = 120},
 			{description = "125", data = 125},
-			{description = "150", data = 150},
+			{description = "150 (Average)", data = 150},
 			{description = "175", data = 175},
-			{description = "200", data = 200},
+			{description = "200 (High Norm)", data = 200},
 			{description = "225", data = 225},
-			{description = "250", data = 250},
+			{description = "250 (Wicker)", data = 250},
 			{description = "275", data = 275},				
 			{description = "300", data = 300},
 		},
-		default = 100,
+		default = 120,
 	},
 	
 	{
@@ -106,8 +108,8 @@ configuration_options =
 			{description = "125", data = 125},
 			{description = "130", data = 130},
 			{description = "135", data = 135},
-			{description = "140 (Default)", data = 140},
-			{description = "150", data = 150},
+			{description = "140", data = 140},
+			{description = "150 (Default)", data = 150},
 			{description = "175", data = 175},
 			{description = "200", data = 200},
 			{description = "225", data = 225},
@@ -116,7 +118,7 @@ configuration_options =
 			{description = "300", data = 300},
 			{description = "400", data = 400},
 		},
-		default = 140,
+		default = 150,
 	},
 	
 	{
@@ -184,7 +186,7 @@ configuration_options =
 	
 		{
 		name = "hatkidbasesize",
-		label = "Size Scale",
+		label = "Character Size",
 		hover = "How big Hat Kid will be",
 		options =
 		{
@@ -253,7 +255,7 @@ configuration_options =
 	{
 		name = "hatkidnightdrain",
 		label = "Night Drain",
-		hover = "How badly Hat Kid's sanity will be impacted by nighttime.",
+		hover = "How much Hat Kid's sanity will be impacted by nighttime.",
 		options =
 		{
 			{description = "x0.001", data = 0.001},
@@ -287,7 +289,7 @@ configuration_options =
 	{
 		name = "hatkidsanitydrain",
 		label = "Sanity Drain",
-		hover = "How badly Hat Kid's sanity will be impacted in general.",
+		hover = "How much Hat Kid's sanity will be impacted in general.",
 		options =
 		{
 			{description = "x0.001", data = 0.001},

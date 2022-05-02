@@ -34,7 +34,7 @@ params.inv_pons =
             -- { image = "kidpotion.tex", atlas = "images/hud2.xml" }, -- WHAT why did this work?! (turns out it didn't, texture fails to load.)
             { image = "emptyslot.tex", atlas = "images/gui/emptyslot.xml" }, -- blank slot background. This slot is not meant to be seen.
         },
-        pos = Vector3(675, 335, 0), --(675, 335, 0)
+        pos = Vector3(1100, 650 , 0), --(675, 335, 0)
     },
     issidewidget = false,
     type = "inv_pons",
