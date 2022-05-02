@@ -276,6 +276,7 @@ AddComponentPostInit("builder", function(self)
 	
 					-- print(self.inst.prefab)
 					self.inst.pons = math.max(self.inst.pons - v.amount, 0)
+					-- self.inst:PushEvent("")
 				end
 			end
 		end
@@ -455,7 +456,7 @@ hatbrellarecipe = AddRecipe("hatbrella",
 
 -- hatbrellarecipe2 = AddRecipe("hatbrella",
 -- 	{
--- 		GLOBAL.Ingredient(CHARACTER_INGREDIENT.PON, 600),
+-- 		GLOBAL.Ingredient(CHARACTER_INGREDIENT.PON, 50),
 -- 	},
 -- 	PON_TAB, -- crafting tab
 -- 	GLOBAL.TECH.SCIENCE_ONE, -- crafting level
@@ -686,23 +687,34 @@ end
 -- it will call the function, AbilityDown, above, with the correct player information on the server side.
 AddModRPCHandler("HatKidRPC", "AbilityKeyDown", Ability)
 
+if TUNING.ENABLE_PONS then
+	AddClassPostConstruct("widgets/statusdisplays", function(self)
+		if self.owner:HasTag("hatkid") then
+			if self.ponbadge == nil then
+				local PonBadge      = require "widgets/ponbadge"
 
-AddClassPostConstruct("widgets/statusdisplays", function(self)
-	if self.owner:HasTag("hatkid") then
-		if self.ponbadge == nil then
-			local PonBadge      = require "widgets/ponbadge"
+				self.ponbadge = self:AddChild(PonBadge(self.owner))
+				
 
-			self.ponbadge = self.heart:AddChild(PonBadge(self.owner))
-			self.ponbadge:SetPosition(0, -130, 0)
-			self.ponbadge:SetPercent(self.owner.pons / TUNING.PONS_MAX, TUNING.PONS_MAX)
-			self.ponbadge:SetClickable(true)
-			self.owner:ListenForEvent("UpdatePons", function()
+				-- Checks for combined status from the workshop. We should reposition if it's enabled.
+				local cs_enabled = GLOBAL.KnownModIndex:IsModEnabled("workshop-376333686")
+
+				if cs_enabled then -- if using cs
+					self.ponbadge:SetPosition(0, -52)
+				else -- If we're using vanilla hud
+					self.ponbadge:SetPosition(0, -130, 0)
+				end
+
 				self.ponbadge:SetPercent(self.owner.pons / TUNING.PONS_MAX, TUNING.PONS_MAX)
-			end)
-		end
-	end
-end)
+				self.ponbadge:SetClickable(true)
 
+				self.owner:ListenForEvent("UpdatePons", function()
+					self.ponbadge:SetPercent(self.owner.pons / TUNING.PONS_MAX, TUNING.PONS_MAX)
+				end)
+			end
+		end
+	end)
+end
 
 
 
@@ -735,20 +747,21 @@ STRINGS.NAMES.HATKID = "Hat Kid"
 STRINGS.CHARACTERS.HATKID = require "speech_hatkid" -- speech file
 
 -- The character select screen lines
-STRINGS.CHARACTER_TITLES.hatkid = "The Hatty Explorer"
+STRINGS.CHARACTER_TITLES.hatkid = "The Homesick Hatter"
 STRINGS.CHARACTER_NAMES.hatkid = "Hat Kid"
-STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Makes cool hats, for herself\\n*Collects all kinds of things\n*Mentally vulnerable without a hat\n*Is extremely cute"
+STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Knits cool hats\n*Is selfish and obsessive over them\n*Mentally vulnerable without a hat\n*Considered extremely cute"
 STRINGS.CHARACTER_QUOTES.hatkid = "\"Oh, hi there!\""
 
 --Skin STRINGS
 
+	--Outfits
 STRINGS.SKIN_NAMES.hatkid_none = "Hat Kid"
 STRINGS.SKIN_NAMES.hatkid_cat = "The Nyakuza"
 STRINGS.SKIN_NAMES.hatkid_detective = "The Detective"
-
-STRINGS.SKIN_NAMES.hatkid_dye_niko = "Margin of the Night"
-STRINGS.SKIN_NAMES.hatkid_dye_toonlink = "The Forest Critter"
-STRINGS.SKIN_NAMES.hatkid_dye_pinkdanger = "Cute 'n Dangerous"
+	--Dyes
+STRINGS.SKIN_NAMES.hatkid_dye_niko = "Margin of the Night" --Oneshot
+STRINGS.SKIN_NAMES.hatkid_dye_toonlink = "The Forest Critter" -- Wind Waker
+STRINGS.SKIN_NAMES.hatkid_dye_pinkdanger = "Cute 'n Dangerous" -- Extremely Pink
 
 
 STRINGS.SKIN_QUOTES.hatkid_none = "\"Oh, hi there!\"" -- Redundant, mostly here for organization's sake. I believe the game uses the default quote with no skin selected, not this one.
@@ -758,10 +771,10 @@ STRINGS.SKIN_QUOTES.hatkid_cat = "\"Cat crime!\""
 STRINGS.SKIN_DESCRIPTIONS.hatkid_cat = "A cat themed varsity outfit, complete with mask and tail, which also may or may not be directly tied to countless illegal acts."
 
 STRINGS.SKIN_QUOTES.hatkid_detective = "\"MYURDER!\""
-STRINGS.SKIN_DESCRIPTIONS.hatkid_detective = "A detective outfit, worn by only the most SERIOUS of detectives!"
+STRINGS.SKIN_DESCRIPTIONS.hatkid_detective = "A detective outfit, worn by only the most mature of detectives!"
 
 STRINGS.SKIN_QUOTES.hatkid_dye_niko = "\"Oh, hi there!\""
-STRINGS.SKIN_DESCRIPTIONS.hatkid_dye_niko = "An outfit reminding you, that you only have one shot."
+STRINGS.SKIN_DESCRIPTIONS.hatkid_dye_niko = "An outfit that you oddly associate with cats and lightbulbs."
 
 STRINGS.SKIN_QUOTES.hatkid_dye_toonlink = "\"Oh, hi there!\""
 STRINGS.SKIN_DESCRIPTIONS.hatkid_dye_toonlink = "Why would you ever want to wake up the wind? How would you even do that?"
@@ -969,7 +982,7 @@ STRINGS.CHARACTERS.WORTOX.DESCRIBE.SPRINTHAT = "Feathers and horns go well toget
 STRINGS.CHARACTERS.WORTOX.DESCRIBE.BREWINGHAT = "I hope the chemicals don't get into my horns."
 STRINGS.CHARACTERS.WORTOX.DESCRIBE.POLARHAT = "This hat's pretty 'cool'."
 STRINGS.CHARACTERS.WORTOX.DESCRIBE.DWELLERMASK = "Visions! Specters! I can see it all!"
-STRINGS.CHARACTERS.WORTOX.DESCRIBE.TIMESTOPHAT = "How much time did it take for the creator to come up with that name?"
+STRINGS.CHARACTERS.WORTOX.DESCRIBE.TIMESTOPHAT = "Seems a little scary. I like it."
 STRINGS.CHARACTERS.WORTOX.DESCRIBE.HATBRELLA = "No soggy imps on this fine day!"
 STRINGS.CHARACTERS.WORTOX.DESCRIBE.HATBRELLAOPEN = "No soggy imps on this fine day!"
 
@@ -985,7 +998,7 @@ STRINGS.CHARACTERS.WORMWOOD.DESCRIBE.HATBRELLAOPEN = "Rain Taker"
 
 -- Wurt
 STRINGS.CHARACTERS.WURT.DESCRIBE.KIDHAT = "Nice hat."
-STRINGS.CHARACTERS.WURT.DESCRIBE.SPRINTHAT = "Make kid go fast."
+STRINGS.CHARACTERS.WURT.DESCRIBE.SPRINTHAT = "Make girl go fast."
 STRINGS.CHARACTERS.WURT.DESCRIBE.BREWINGHAT = "GLORPT! I don't wanna explode!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.POLARHAT = "Very cold, florp."
 STRINGS.CHARACTERS.WURT.DESCRIBE.DWELLERMASK = "We see at night with scary mask."
@@ -1000,15 +1013,24 @@ STRINGS.CHARACTERS.WALTER.DESCRIBE.BREWINGHAT = "Seems dangerous, I think I'll l
 STRINGS.CHARACTERS.WALTER.DESCRIBE.POLARHAT = "Not my style, like I care anyway."
 STRINGS.CHARACTERS.WALTER.DESCRIBE.DWELLERMASK = "Oooooo! I love scary stuff!"
 STRINGS.CHARACTERS.WALTER.DESCRIBE.TIMESTOPHAT = "As long as it doesn't slow down Woby."
-STRINGS.CHARACTERS.WALTER.DESCRIBE.HATBRELLA = "What a small umbrella"
+STRINGS.CHARACTERS.WALTER.DESCRIBE.HATBRELLA = "What a small umbrella."
 STRINGS.CHARACTERS.WALTER.DESCRIBE.HATBRELLAOPEN = "Does that thing work well?"
 
 -- Wanda
-STRINGS.CHARACTERS.WANDA.DESCRIBE.KIDHAT = "A cute hat for a time keeping alien."
+STRINGS.CHARACTERS.WANDA.DESCRIBE.KIDHAT = "A tiny little hat for a homesick hatter."
 STRINGS.CHARACTERS.WANDA.DESCRIBE.SPRINTHAT = "The less time spent running, the better."
 STRINGS.CHARACTERS.WANDA.DESCRIBE.BREWINGHAT = "Such destruction."
 STRINGS.CHARACTERS.WANDA.DESCRIBE.POLARHAT = "Looks cold."
 STRINGS.CHARACTERS.WANDA.DESCRIBE.DWELLERMASK = "Not this time."
-STRINGS.CHARACTERS.WANDA.DESCRIBE.TIMESTOPHAT = "The time child and I think alike."
+STRINGS.CHARACTERS.WANDA.DESCRIBE.TIMESTOPHAT = "I'd love to try THAT out!"
 STRINGS.CHARACTERS.WANDA.DESCRIBE.HATBRELLA = "Seems small, but it must hurt."
 STRINGS.CHARACTERS.WANDA.DESCRIBE.HATBRELLAOPEN = "Time and umbrellas?"
+
+AddClassPostConstruct("widgets/redux/craftingmenu_skinselector", function(self)
+	local _GetSkinsList = self.GetSkinsList
+	
+    self.GetSkinsList = function(self, ...)
+		print("hook!-------------------------")
+        return _GetSkinsList(self, ...)
+    end
+end)

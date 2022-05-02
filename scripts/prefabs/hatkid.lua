@@ -76,7 +76,7 @@ end
 
 local function LoadPonInv(inst)
 	if inst.lab then
-		-- inst.lab.components.container:Open(inst)
+		inst.lab.components.container:Open(inst)
 	end
 end
 
@@ -184,8 +184,8 @@ local function OnUnequip(inst, data)
     if data.eslot == EQUIPSLOTS.HEAD then
 		inst.components.sanity.dapperness = -TUNING.DAPPERNESS_MED
 
-		inst.components.sanity.neg_aura_mult = TUNING.HATKIDSANITYDRAIN * 3
-		inst.components.sanity.night_drain_mult = TUNING.HATKIDNIGHTDRAIN * 3
+		inst.components.sanity.neg_aura_mult = TUNING.HATKIDSANITYDRAIN * 4
+		inst.components.sanity.night_drain_mult = TUNING.HATKIDNIGHTDRAIN * 4
     end
 end
 

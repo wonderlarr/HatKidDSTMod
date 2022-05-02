@@ -48,6 +48,10 @@ local function OnCollide(inst, owner)
         if owner:HasTag("hatkid") then
             owner.lab.components.container:GiveItem(inst, nil, inst:GetPosition())
             
+
+            -- local im = Image(data.item.replica.inventoryitem:GetAtlas(), data.item.replica.inventoryitem:GetImage())
+            -- im:MoveTo(Vector3(TheSim:GetScreenPos(data.src_pos:Get())), dest_pos, .3, function() tile:Show() im:Kill() end)
+
             inst.removetimer = inst:DoTaskInTime(0.5, function(inst)
                 -- This is a bit scuffed imo
                 -- Picking up more than 1 stack worth of pons at once will cause visual issues.

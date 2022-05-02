@@ -171,7 +171,7 @@ local function BuilderSkinPostInit(self)
     end
 end
 
-env.AddClassPostConstruct("widgets/recipepopup", RecipePopupPostConstruct)
+env.AddClassPostConstruct("widgets/redux/craftingmenu_skinselector", RecipePopupPostConstruct)
 env.AddComponentPostInit("builder", BuilderSkinPostInit)
 
 -- Apply item's skin to placer

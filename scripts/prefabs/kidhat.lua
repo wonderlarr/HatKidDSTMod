@@ -175,7 +175,7 @@ params.badge_chest =
 }
 
 local function OnPickedUp(inst)
-	print("it's time woooo 7 grand dad")
+	-- print("it's time woooo 7 grand dad")
 end
 
 local function fn(Sim) 
@@ -241,7 +241,7 @@ local function fn(Sim)
 		inst.components.fueled:SetDepletedFn(OnEmpty)
 	end
 
-	inst:ListenForEvent("AbilityKey", KeybindUse)
+	-- inst:ListenForEvent("AbilityKey", KeybindUse)
 
 	
 	-- inst:AddComponent("insulator")

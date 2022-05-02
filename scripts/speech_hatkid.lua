@@ -1569,13 +1569,13 @@ return {
         --RUINSRELIC_PLATE = "I find the shards get in my food.",
         RESEARCHLAB =
         {
-            GENERIC = "Cool sciency stuff!",
+            GENERIC = "Cool sciency thing!",
             BURNT = "Burnt sciency stuff isn't as cool.",
         },
         RESEARCHLAB2 =
         {
-            GENERIC = "Just as round as Snatcher Ball.",
-            BURNT = "Do you like mudkips?",
+            GENERIC = "Rounder and cooler sciency thing!",
+            BURNT = "I hope we can make a new one!",
         },
         RESEARCHLAB3 =
         {
@@ -1822,43 +1822,43 @@ return {
 		},
 		TREECLUMP = "It's almost like someone is trying to prevent me from going somewhere.",
 		
-		TRINKET_1 = "Melted. Maybe Willow had some fun with them?", --Melted Marbles
+		TRINKET_1 = "They used to be fun.", --Melted Marbles
 		TRINKET_2 = "What's kazoo with you?", --Fake Kazoo
-		TRINKET_3 = "The knot is stuck. Forever.", --Gord's Knot
-		TRINKET_4 = "It must be some kind of religious artifact.", --Gnome
-		TRINKET_5 = "Sadly it's too small for me to escape on.", --Toy Rocketship
-		TRINKET_6 = "Their electricity carrying days are over.", --Frazzled Wires
-		TRINKET_7 = "There's no time for fun and games!", --Ball and Cup
-		TRINKET_8 = "Great. All of my tub stopping needs are met.", --Rubber Bung
-		TRINKET_9 = "I'm more of a zipper person, myself.", --Mismatched Buttons
-		TRINKET_10 = "They've quickly become Wes' favorite prop.", --Dentures
-		TRINKET_11 = "Hal whispers beautiful lies to me.", --Lying Robot
-		TRINKET_12 = "That's just asking to be experimented on.", --Dessicated Tentacle
-		TRINKET_13 = "It must be some kind of religious artifact.", --Gnomette
-		TRINKET_14 = "Now if I only had some tea...", --Leaky Teacup
-		TRINKET_15 = "...Maxwell left his stuff out again.", --Pawn
-		TRINKET_16 = "...Maxwell left his stuff out again.", --Pawn
-		TRINKET_17 = "Cool relic, I'll take you.", --Bent Spork
-		TRINKET_18 = "I wonder what it's hiding?", --Trojan Horse
-		TRINKET_19 = "It doesn't spin very well.", --Unbalanced Top
-		TRINKET_20 = "Wigfrid keeps jumping out and hitting me with it?!", --Backscratcher
-		TRINKET_21 = "This egg beater is all bent out of shape.", --Egg Beater
-		TRINKET_22 = "I have a few theories about this string.", --Frayed Yarn
-		TRINKET_23 = "I can put my shoes on without help, thanks.", --Shoehorn
-		TRINKET_24 = "I think Wickerbottom had a cat.", --Lucky Cat Jar
-		TRINKET_25 = "It smells kind of stale.", --Air Unfreshener
-		TRINKET_26 = "Food and a cup! The ultimate survival container.", --Potato Cup
-		TRINKET_27 = "If you unwound it you could poke someone from really far away.", --Coat Hanger
-		TRINKET_28 = "How Machiavellian.", --Rook
-        TRINKET_29 = "How Machiavellian.", --Rook
-        TRINKET_30 = "Honestly, he just leaves them out wherever.", --Knight
-        TRINKET_31 = "Honestly, he just leaves them out wherever.", --Knight
-        TRINKET_32 = "I know someone who'd have a ball with this!", --Cubic Zirconia Ball
-        TRINKET_33 = "I hope this doesn't attract spiders.", --Spider Ring
-        TRINKET_34 = "Creepy! Let's be careful with this thing.", --Monkey Paw
-        TRINKET_35 = "Hard to find a good flask around here.", --Empty Elixir
-        TRINKET_36 = "I might need these after all that candy.", --Faux fangs
-        TRINKET_37 = "I don't believe in the supernatural.", --Broken Stake
+		TRINKET_3 = "Woah, how did someone tie this?!", --Gord's Knot
+		TRINKET_4 = "Mafia-like construction. This must be a relic!", --Gnome
+		TRINKET_5 = "No time to play, sadly.", --Toy Rocketship
+		TRINKET_6 = "I'll keep my hands away from the ends.", --Frazzled Wires
+		TRINKET_7 = "Interesting... toy thing?", --Ball and Cup
+		TRINKET_8 = "Perfect for bath time!", --Rubber Bung
+		TRINKET_9 = "I prefer my giant zipper.", --Mismatched Buttons
+		TRINKET_10 = "Gross.", --Dentures
+		TRINKET_11 = "Telling lies?", --Lying Robot
+		TRINKET_12 = "Mushy and gross.", --Dessicated Tentacle
+		TRINKET_13 = "Mafia-like construction. This must be a relic!", --Gnomette
+		TRINKET_14 = "It doesn't work very well.", --Leaky Teacup
+		TRINKET_15 = "Silver, sunny memories.", --Pawn
+		TRINKET_16 = "Silver, sunny memories. ", --Pawn
+		TRINKET_17 = "I'll take you.", --Bent Spork
+		TRINKET_18 = "It could have been prevented...", --Trojan Horse
+		TRINKET_19 = "Not a very fun toy.", --Unbalanced Top
+		TRINKET_20 = "Woah, I can finally scratch myself!", --Backscratcher
+		TRINKET_21 = "What is this relic?", --Egg Beater
+		TRINKET_22 = "Plenty of fun for a cat!", --Frayed Yarn
+		TRINKET_23 = "My feet fit just fine in my boots.", --Shoehorn
+		TRINKET_24 = "Kitty!", --Lucky Cat Jar
+		TRINKET_25 = "My nose doesn't like this thing.", --Air Unfreshener
+		TRINKET_26 = "A little sticky.", --Potato Cup
+		TRINKET_27 = "I keep these above the skeletons.", --Coat Hanger
+		TRINKET_28 = "Is this for a game?", --Rook
+        TRINKET_29 = "Is this for a game?", --Rook
+        TRINKET_30 = "Horse to C-4.", --Knight
+        TRINKET_31 = "Horse to C-4.", --Knight
+        TRINKET_32 = "Strange thing. What does it do?", --Cubic Zirconia Ball
+        TRINKET_33 = "I wonder if Webber would like this?", --Spider Ring
+        TRINKET_34 = "You better not touch my hat!", --Monkey Paw
+        TRINKET_35 = "I could brew up a mad concoction!", --Empty Elixir
+        TRINKET_36 = "No tricks, only treats!", --Faux fangs
+        TRINKET_37 = "I probably shouldn't have this.", --Broken Stake
 
         HALLOWEENCANDY_1 = "The cavities are probably worth it, right?",
         HALLOWEENCANDY_2 = "Tasty, I hope.",
@@ -1871,7 +1871,7 @@ return {
         HALLOWEENCANDY_9 = "Sticks to your teeth.",
         HALLOWEENCANDY_10 = "Only a sucker wouldn't love this.",
         HALLOWEENCANDY_11 = "Much better tasting than the real thing.",
-        CANDYBAG = "It's some sort of delicious pocket dimension for sugary treats.",
+        CANDYBAG = "No tricks. Only treats!",
 
         DRAGONHEADHAT = "So who gets to be the head?",
         DRAGONBODYHAT = "I'm middling on this middle piece.",
@@ -2038,7 +2038,7 @@ return {
         YELLOWMOONEYE = "That ought to show everyone the way.",
         BLUEMOONEYE = "It's always smart to keep an eye out.",
 	},
-	DESCRIBE_GENERIC = "What's that?",
+	DESCRIBE_GENERIC = "Woah, What's that?",
 	DESCRIBE_TOODARK = "I wish I could see in the dark.",
 	DESCRIBE_SMOLDERING = "Is that smoking?",
 	EAT_FOOD =
@@ -2046,5 +2046,5 @@ return {
 		TALLBIRDEGG_CRACKED = "Mmm. Beaky.",
 	},
 	
-	HAT_ONCOOLDOWN = "Too hot to use!"
+	HAT_ONCOOLDOWN = "Not yet!"
 }

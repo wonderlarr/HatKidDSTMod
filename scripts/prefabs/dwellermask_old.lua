@@ -22,6 +22,15 @@ local prefabs =
 
 }
 
+-- local DWELLERVISION_COLOURCUBES_2 =
+-- {
+-- 	-- this took SO LONG to get working, wasn't sure how resolvefilepath worked.
+--     day = resolvefilepath("images/cc/dwellervision.tex"),
+--     dusk = resolvefilepath("images/cc/dwellervision.tex"),
+--     night = resolvefilepath("images/cc/dwellervision.tex"),
+--     full_moon = resolvefilepath("images/cc/dwellervision.tex"),
+-- }
+
 local DWELLERVISION_COLOURCUBES_3 =
 {
 	-- These new cubes are easier on the eyes, previous ones were very harsh green.
@@ -33,6 +42,10 @@ local DWELLERVISION_COLOURCUBES_3 =
     full_moon = resolvefilepath("images/cc/nd.tex"),
 }
 
+-- This was one of the first items I wrote after I took over this mod and looking back it at, IT IS DISGUSTING! IT'S SUCH A RATS NEST THAT I NEVER WANNA TOUCH IT AGAIN
+-- inb4 i need to come back to this and edit it in a few months 
+-- edit 5/1/22: Yeah turns out I gotta redo a bunch of this. Dang.
+
 local tweentime = 0.1
 
 local function dwellmaskclient(ent)
@@ -42,6 +55,7 @@ local function dwellmaskclient(ent)
 	ent.components.playervision:SetCustomCCTable(DWELLERVISION_COLOURCUBES_3)
 
 	ent.AnimState:SetHaunted(true)
+	-- ent.AnimState:SetMultColour(1, 1, 1, 0.1)
 	
 	-- Prevent the 5 second linger from taking nightvision away while in the aura
 	if ent.NVLinger ~= nil then
@@ -53,7 +67,7 @@ local function dwellmaskclient(ent)
 		ent.components.playervision:ForceNightVision(false)
 		ent.components.playervision:SetCustomCCTable(nil)
 		ent.AnimState:SetHaunted(false)
-
+		-- ent.AnimState:SetMultColour(1, 1, 1, 1)
 		ent.NVLinger = nil
 	end)
 end
@@ -69,10 +83,10 @@ local function DwellerAbility(inst)
 		-- About 5 times a second, DwellerAbility gets ran, if the dwellmask timer exists, then it continues the function.
 		local owner = inst.components.inventoryitem.owner
 		--Enable dweller light
-		-- inst.Light:Enable(true)
+		inst.Light:Enable(true)
 		
-		-- inst.net_light_roll:set(true)
-		-- owner.AnimState:OverrideSymbol("swap_hat", "dwellermask_on", "swap_hat")
+		inst.net_light_roll:set(true)
+		owner.AnimState:OverrideSymbol("swap_hat", "dwellermask_on", "swap_hat")
 
 		inst.components.lighttweener:StartTween(inst.Light, TUNING.DWELLERMASK_RADIUS, nil, nil, nil, tweentime, OnTweenDone)
 
@@ -121,6 +135,7 @@ local function OnUse(inst)
 		--Cooldown line
 		owner.components.talker:Say(GetString(owner, "HAT_ONCOOLDOWN"))
 		
+		-- print(owner.components.timer:GetTimeLeft("hat_cooldown"))
 	elseif rechargeable:IsCharged() and not inst.components.timer:TimerExists("dwellmask_duration") then
 		-- If not in cooldown
 		
@@ -128,17 +143,17 @@ local function OnUse(inst)
 		inst.components.timer:StartTimer("dwellmask_duration", TUNING.DWELLERMASK_DURATION) -- Internal timer, used for the actual ability.
 		inst.components.rechargeable:Discharge(TUNING.DWELLERMASK_DURATION) -- Visual Timer
 
-		-- Light
-		inst.Light:Enable(true)
-		inst.net_light_roll:set(true)
+		-- Durability
+		if inst.components.fueled then
+			inst.components.fueled:StartConsuming()
+		end
+		
+		DwellerAbility(inst)
 
-		-- Texture
-		owner.AnimState:OverrideSymbol("swap_hat", "dwellermask_on", "swap_hat")
-
-		-- Sanity
+		-- Apply -Sanity
 		inst.components.equippable.dapperness = -TUNING.DAPPERNESS_MED
 		
-		-- Sound
+		-- Then play sounds
 		inst.SoundEmitter:PlaySound("dwellermask/sound/activate")
 		inst.SoundEmitter:PlaySound("dwellermask/sound/loop", "dwellermaskloop") --This is the same sound as the Time Stop hat loop, but I wanted it label it differently.
 	end
@@ -151,37 +166,54 @@ local function OnStopUse(inst)
 	
 	if not rechargeable:IsCharged() and rechargeable:GetRechargeTime() == TUNING.DWELLERMASK_COOLDOWN then
 		-- If in cooldown
-		owner.components.talker:Say("I've commited many crimes.")
 
-	else
+	elseif inst:HasTag("disabledwell") then
 		-- If not in cooldown, or doing nothing, put it on cooldown!
 
-		-- Light
-		inst.components.lighttweener:StartTween(inst.Light, 0, nil, nil, nil, tweentime)
+
 		inst.net_light_roll:set(false)
-		
-		-- Change texture
 		owner.AnimState:OverrideSymbol("swap_hat", "dwellermask", "swap_hat")
 
-		-- Sanity
-		inst.components.equippable.dapperness = 0
+		inst.components.lighttweener:StartTween(inst.Light, 0, nil, nil, nil, tweentime)
 
-		-- Sound
+		inst.components.equippable.dapperness = 0
+		
+		inst:RemoveTag("disabledwell")
+
+		rechargeable:Discharge(TUNING.DWELLERMASK_COOLDOWN) -- Cooldown
+
+		if inst.components.fueled then
+			inst.components.fueled:StopConsuming()
+		end
+
 		inst.SoundEmitter:PlaySound("dwellermask/sound/deactivate")
 		inst.SoundEmitter:KillSound("dwellermaskloop")
+		
+		if inst.components.timer:TimerExists("dwellmask_duration") then
+			inst.components.timer:StopTimer("dwellmask_duration")
+		end
 	end
 end
 
+-------------------------------------------------------------------------------------------------------------
+
 local function KeybindUse(inst)
-	if not inst:HasTag("inuse") then
+	if not inst.components.timer:TimerExists("dwellmask_duration") then
 		inst.components.useableitem:StartUsingItem()
 	else
+		inst:AddTag("disabledwell")
 		inst.components.useableitem:StopUsingItem()
 	end
 end
 
 local function OnEquip(inst, owner)
 	owner.AnimState:OverrideSymbol("swap_hat", "dwellermask", "swap_hat")
+
+	--Legacy code, nolonger needed.
+
+	-- if owner.components.sanity ~= nil then
+		-- owner.components.sanity:SetInducedInsanity(inst, true)
+	-- end
 
 	owner.AnimState:Show("HAT")
 	owner.AnimState:Show("HAT_HAIR")
@@ -254,6 +286,7 @@ local function fn(Sim)
 
 	inst.Light:SetFalloff(1)
 	inst.Light:SetIntensity(0.99)
+	-- inst.Light:SetRadius(7/8 * TUNING.DWELLERMASK_RADIUS)
 	inst.Light:SetRadius(0)
 	inst.Light:SetColour(0/255, 255/255, 175/255)
 	inst.Light:Enable(true)
@@ -289,11 +322,12 @@ local function fn(Sim)
 
     inst:AddComponent("timer")
 
-    -- local function ontimerdone(inst)
-	-- 	inst.components.useableitem:StopUsingItem()
-	-- end
+    local function ontimerdone(inst)
+		inst:AddTag("disabledwell") -- This sucks but I wrote this code like 8 months ago and don't wanna fix it. By that I mean the related code to this, not just this.
+		inst.components.useableitem:StopUsingItem()
+	end
 
-    -- inst:ListenForEvent("timerdone", ontimerdone)
+    inst:ListenForEvent("timerdone", ontimerdone)
  
 	-- inst:AddComponent("waterproofer")
     -- inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_SMALL) 
@@ -303,6 +337,8 @@ local function fn(Sim)
 
 	
     inst:AddComponent("inventoryitem")
+    -- inst.components.inventoryitem.imagename = "dwellermask"
+    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/dwellermask.xml"
 	 
     inst:AddComponent("equippable")
 	inst.components.equippable.restrictedtag = "hatkid"
@@ -320,6 +356,17 @@ local function fn(Sim)
 		inst.components.fueled:SetDepletedFn(OnEmpty)
 	end
 
+    
+
+	
+
+	-- inst:AddComponent("container")
+    -- inst.components.container:WidgetSetup("hkr_badgeslot")
+	-- inst.components.container.canbeopened = false
+    -- inst:ListenForEvent("itemget", OnBadgeLoaded)
+    -- inst:ListenForEvent("itemlose", OnBadgeUnloaded)
+	
+	-- inst:ListenForEvent("armordamaged", OnBlocked, inst)
 	inst:ListenForEvent("AbilityKey", KeybindUse)
 	
 	inst:DoPeriodicTask(0, DwellerAbility, nil, inst)
