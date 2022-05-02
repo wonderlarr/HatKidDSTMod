@@ -67,7 +67,7 @@ PrefabFiles = {
 	-- "timepiece",
 
 	-- Dweller Placeables
-	"dwellerplatform",
+	-- "dwellerplatform",
 	-- "dwellerplatform_player_collision",
 	-- "dwellerplatform_item_collision",
 	-- "dwellerplatform_item",
@@ -143,7 +143,7 @@ Assets = {
     Asset( "ATLAS", "bigportraits/hatkid_detective.xml" ),
 	
 	-- For the dyes we don't have custom portraits, so we just point the atlas at the default portrait.
-	-- This means we don't need to load a ton of duplicate textures, though I'm not sure how this works in memory
+	-- This means we don't load a ton of duplicate textures theoretically, though I'm not sure how this works in memory
 	-- At the very least it saves disk space
     Asset( "ATLAS", "bigportraits/hatkid_dye_niko.xml" ), --nightmargin is awesome i love oneshot
     Asset( "ATLAS", "bigportraits/hatkid_dye_toonlink.xml" ), -- toonlink is pretty cool tool, my smash main
@@ -151,21 +151,13 @@ Assets = {
 
     Asset( "ATLAS", "bigportraits/hatkid_timestop.xml" ), -- redundant bigportrait for time stop skin. This shouldn't display but it keeps the client log happy.
 
-	-- Item skins
-	-- Asset("ATLAS", "images/inventoryimages/kidhat_dye_niko.xml"),
-    -- Asset("IMAGE", "images/inventoryimages/kidhat_dye_niko.tex"),
-
-	-- Asset("ANIM", "anim/kidhat_dye_niko.zip"),
-
-
-
 
 }
 
 
 
 -- Constants
-GLOBAL.ABILITY_LIGHTRAD = 0.9403 -- This value is how light units translate to in game units while using specific settings with lights. Make sure you know what you're doing with this if you use it.
+GLOBAL.ABILITY_LIGHTRAD = 0.9403 -- This value is how light units translate to in game units while using specific settings with lights. Make sure you know what you're doing with this if you use it, it's not always accurate.
 
 -- End Constants
 
@@ -233,7 +225,9 @@ AddSkinnableCharacter("hatkid") --Hornet: The character youd like to skin, make 
 
 -- ITEM skins section, NOT CHARACTER SKINS
 -- Thanks Cunning Fox
-modimport("scripts/libs/skins_api.lua")
+
+-- BROKEN as of the crafting menu update! 
+-- modimport("scripts/libs/skins_api.lua")
 
 
 
@@ -433,190 +427,129 @@ TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.HATKID = {"kidhat"}
                                                    __/ |
                                                   |___/
 ]]
-local HAT_TAB = AddRecipeTab("Hats", 993, "images/gui/craftingtabicon.xml", "craftingtabicon.tex", "hatkidcrafter")
-local PON_TAB = AddRecipeTab("Pons", 994, "images/gui/pontab.xml", "pontab.tex", "hatkidcrafter")
 
-
-hatbrellarecipe = AddRecipe("hatbrella",
-	{
-		GLOBAL.Ingredient("twigs", 3),
-		GLOBAL.Ingredient("silk", 1),
-		GLOBAL.Ingredient("goldnugget", 2),
-	},
-	HAT_TAB, -- crafting tab
-	GLOBAL.TECH.SCIENCE_ONE, -- crafting level
-	nil, -- placer
-	nil, -- min_spacing
-	nil, -- nounlock
-	nil, -- numtogive
-	"hatkidcrafter", -- builder_tag
-	"images/inventoryimages/hatbrella.xml", -- atlas
-	"hatbrella.tex" -- image
-)
-
--- hatbrellarecipe2 = AddRecipe("hatbrella",
--- 	{
--- 		GLOBAL.Ingredient(CHARACTER_INGREDIENT.PON, 50),
--- 	},
--- 	PON_TAB, -- crafting tab
--- 	GLOBAL.TECH.SCIENCE_ONE, -- crafting level
--- 	nil, -- placer
--- 	nil, -- min_spacing
--- 	nil, -- nounlock
--- 	nil, -- numtogive
--- 	"hatkidcrafter", -- builder_tag
--- 	"images/inventoryimages/hatbrella.xml", -- atlas
--- 	"hatbrella.tex" -- image
--- )
-
-MadeRecipeSkinnable("hatbrella", {
-	hatbrella_bowkid = {
-		atlas = "images/inventoryimages/hatbrella_bowkid.xml",
-		image = "hatbrella_bowkid.tex",
-	},
-})
-
-
-kidhatrecipe = AddRecipe("kidhat",
-	{
-		GLOBAL.Ingredient("beefalowool", 4),
+AddCharacterRecipe("hatbrella",
+	{ -- ingredients
+		GLOBAL.Ingredient("silk", 1),	
+		GLOBAL.Ingredient("twigs", 2),
 		GLOBAL.Ingredient("goldnugget", 1),
 	},
-	HAT_TAB, -- crafting tab
-	GLOBAL.TECH.NONE, -- crafting level
-	nil, -- placer
-	nil, -- min_spacing
-	nil, -- nounlock
-	nil, -- numtogive
-	"hatkidcrafter", -- builder_tag
-	"images/inventoryimages/kidhat.xml", -- atlas
-	"kidhat.tex" -- image
+	GLOBAL.TECH.SCIENCE_ONE, -- tech level
+	{ -- config
+		builder_tag = "hatkid"
+	}, 
+	{ -- crafting filters
+		"MODS",
+		"WEAPONS",
+		"RAIN",
+		"SUMMER"
+	}
 )
 
 
-MadeRecipeSkinnable("kidhat", {
-	kidhat_dye_niko = {
-		atlas = "images/inventoryimages/kidhat_dye_niko.xml",
-		image = "kidhat_dye_niko.tex",
+AddCharacterRecipe("kidhat",
+	{ -- ingredients
+	GLOBAL.Ingredient("beefalowool", 4),
+	GLOBAL.Ingredient("goldnugget", 1),
 	},
+	GLOBAL.TECH.NONE, -- tech level
+	{ -- config
+		builder_tag = "hatkid"
+	}, 
+	{ -- crafting filters
+		"MODS",
+		"CLOTHING"
+	}
+)
 
-	kidhat_dye_toonlink = {
-		atlas = "images/inventoryimages/kidhat_dye_toonlink.xml",
-		image = "kidhat_dye_toonlink.tex",
+
+AddCharacterRecipe("sprinthat",
+	{ -- ingredients
+	GLOBAL.Ingredient("silk", 1),	
+	GLOBAL.Ingredient("beefalowool", 4),
+	GLOBAL.Ingredient("feather_robin", 2),
 	},
+	GLOBAL.TECH.SCIENCE_ONE, -- tech level
+	{ -- config
+		builder_tag = "hatkid"
+	}, 
+	{ -- crafting filters
+		"MODS",
+		"CLOTHING"
+	}
+)
 
-	kidhat_dye_pinkdanger = {
-		atlas = "images/inventoryimages/kidhat_dye_pinkdanger.xml",
-		image = "kidhat_dye_pinkdanger.tex",
-	},
-})
 
-
-sprinthatrecipe = AddRecipe("sprinthat",
-	{
+AddCharacterRecipe("brewinghat",
+	{ -- ingredients
 		GLOBAL.Ingredient("silk", 3),
-		GLOBAL.Ingredient("papyrus", 1),
-		GLOBAL.Ingredient("feather_robin", 2),
-	},
-	HAT_TAB, -- crafting tab
-	GLOBAL.TECH.SCIENCE_ONE, -- crafting level
-	nil, -- placer
-	nil, -- min_spacing
-	nil, -- nounlock
-	nil, -- numtogive
-	"hatkidcrafter", -- builder_tag
-	"images/inventoryimages/sprinthat.xml", -- atlas
-	"sprinthat.tex" -- image
-)
-
-
-brewinghatrecipe = AddRecipe("brewinghat",
-	{
-		GLOBAL.Ingredient("silk", 6),
-		GLOBAL.Ingredient("slurtleslime", 3),
+		GLOBAL.Ingredient("slurtleslime", 2),
 		GLOBAL.Ingredient("purplegem", 1),
 	},
-	HAT_TAB, -- crafting tab
-	GLOBAL.TECH.MAGIC_TWO, -- crafting level
-	nil, -- placer
-	nil, -- min_spacing
-	nil, -- nounlock
-	nil, -- numtogive
-	"hatkidcrafter", -- builder_tag
-	"images/inventoryimages/brewinghat.xml", -- atlas
-	"brewinghat.tex" -- image
+	GLOBAL.TECH.MAGIC_TWO, -- tech level
+	{ -- config
+		builder_tag = "hatkid"
+	}, 
+	{ -- crafting filters
+		"MODS",
+		"WEAPONS",
+		"TOOLS",
+		"CLOTHING"
+	}
 )
 
-
-polarhatrecipe = AddRecipe("polarhat",
-	{
+AddCharacterRecipe("polarhat",
+	{ -- ingredients
 		GLOBAL.Ingredient("winterhat", 1),
-		GLOBAL.Ingredient("ice", 5),
+		GLOBAL.Ingredient("ice", 3),
 		GLOBAL.Ingredient("bluegem", 1),
 	},
-	HAT_TAB, -- crafting tab
-	GLOBAL.TECH.MAGIC_TWO, -- crafting level
-	nil, -- placer
-	nil, -- min_spacing
-	nil, -- nounlock
-	nil, -- numtogive
-	"hatkidcrafter", -- builder_tag
-	"images/inventoryimages/polarhat.xml", -- atlas
-	"polarhat.tex" -- image
+	GLOBAL.TECH.MAGIC_TWO, -- tech level
+	{ -- config
+		builder_tag = "hatkid"
+	}, 
+	{ -- crafting filters
+		"MODS",
+		"WINTER",
+		"SUMMER",
+		"CLOTHING"
+	}
 )
 
-
-dwellermaskrecipe = AddRecipe("dwellermask",
-	{
-		GLOBAL.Ingredient("papyrus", 2),
+AddCharacterRecipe("dwellermask",
+	{ -- ingredients
 		GLOBAL.Ingredient("nightmarefuel", 4),
-		GLOBAL.Ingredient("wormlight_lesser", 2)
-		-- GLOBAL.Ingredient("greengem", 1),
+		GLOBAL.Ingredient("wormlight_lesser", 2),
+		GLOBAL.Ingredient("orangegem", 1)
 	},
-	HAT_TAB, -- crafting tab
-	GLOBAL.TECH.MAGIC_THREE, -- crafting level
-	nil, -- placer
-	nil, -- min_spacing
-	nil, -- nounlock
-	nil, -- numtogive
-	"hatkidcrafter", -- builder_tag
-	"images/inventoryimages/dwellermask.xml", -- atlas
-	"dwellermask.tex" -- image
+	GLOBAL.TECH.MAGIC_THREE, -- tech level
+	{ -- config
+		builder_tag = "hatkid"
+	}, 
+	{ -- crafting filters
+		"MODS",
+		"LIGHT",
+		"RESTORATION",
+		"ARMOUR",
+		"CLOTHING"
+	}
 )
 
-
-timestophatrecipe = AddRecipe("timestophat",
-	{
-		GLOBAL.Ingredient("silk", 6),	
-		GLOBAL.Ingredient("moonglass", 8),
+AddCharacterRecipe("timestophat",
+	{ -- ingredients
+		GLOBAL.Ingredient("silk", 4),	
+		GLOBAL.Ingredient("moonglass", 6),
 		GLOBAL.Ingredient("greengem", 1),
 	},
-	HAT_TAB, -- crafting tab
-	GLOBAL.TECH.MOON_ALTAR_TWO, -- crafting level
-	nil, -- placer
-	nil, -- min_spacing
-	nil, -- nounlock
-	nil, -- numtogive
-	"hatkidcrafter", -- builder_tag
-	"images/inventoryimages/timestophat.xml", -- atlas
-	"timestophat.tex" -- image
+	GLOBAL.TECH.MOON_ALTAR_TWO, -- tech level
+	{ -- config
+		builder_tag = "hatkid"
+	}, 
+	{ -- crafting filters
+		"MODS",
+		"CLOTHING"
+	}
 )
-
-
--- Sort keys determine how recipes are ordered in the crafting menu.
--- Lower values are shown first.
-hatbrellarecipe.sortkey = 0
--- hatbrellarecipe2.sortkey = 1
-
--- Leave room in case I wanna add any more craftables before the hats easily.
-kidhatrecipe.sortkey = 5
-sprinthatrecipe.sortkey = 6
-brewinghatrecipe.sortkey = 7
-polarhatrecipe.sortkey = 8
-dwellermaskrecipe.sortkey = 9
-timestophatrecipe.sortkey = 10
--- timepiece.sortkey = 15
-
 
 --*****************************************************************************************************************************************--
 ------------------------------------------------- Combat Component Adjustments by ZupaleX --------------------------------------------------------------

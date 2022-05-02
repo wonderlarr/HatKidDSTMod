@@ -294,58 +294,58 @@ local function fn_dye_pinkdanger()
 
 end
 
-return  Prefab("kidhat", fn, assets, prefabs),
-CreateModPrefabSkin("kidhat_dye_niko",
-{
-	assets = {
-		Asset("ANIM", "anim/kidhat_dye_niko.zip"),
-		Asset("ATLAS", "images/inventoryimages/kidhat_dye_niko.xml"),
-		Asset("IMAGE", "images/inventoryimages/kidhat_dye_niko.tex"),
-	},
-	base_prefab = "kidhat",
-	fn = fn_dye_niko,
-	rarity = "Timeless",
-	reskinable = true,
+return  Prefab("kidhat", fn, assets, prefabs)
+-- CreateModPrefabSkin("kidhat_dye_niko",
+-- {
+-- 	assets = {
+-- 		Asset("ANIM", "anim/kidhat_dye_niko.zip"),
+-- 		Asset("ATLAS", "images/inventoryimages/kidhat_dye_niko.xml"),
+-- 		Asset("IMAGE", "images/inventoryimages/kidhat_dye_niko.tex"),
+-- 	},
+-- 	base_prefab = "kidhat",
+-- 	fn = fn_dye_niko,
+-- 	rarity = "Timeless",
+-- 	reskinable = true,
 	
-	build_name_override = "kidhat_dye_niko",
+-- 	build_name_override = "kidhat_dye_niko",
 	
-	type = "item",
-	skin_tags = { },
-	release_group = 0,
-}),
-CreateModPrefabSkin("kidhat_dye_toonlink",
-{
-	assets = {
-		Asset("ANIM", "anim/kidhat_dye_toonlink.zip"),
-		Asset("ATLAS", "images/inventoryimages/kidhat_dye_toonlink.xml"),
-		Asset("IMAGE", "images/inventoryimages/kidhat_dye_toonlink.tex"),
-	},
-	base_prefab = "kidhat",
-	fn = fn_dye_toonlink,
-	rarity = "Timeless",
-	reskinable = true,
+-- 	type = "item",
+-- 	skin_tags = { },
+-- 	release_group = 0,
+-- }),
+-- CreateModPrefabSkin("kidhat_dye_toonlink",
+-- {
+-- 	assets = {
+-- 		Asset("ANIM", "anim/kidhat_dye_toonlink.zip"),
+-- 		Asset("ATLAS", "images/inventoryimages/kidhat_dye_toonlink.xml"),
+-- 		Asset("IMAGE", "images/inventoryimages/kidhat_dye_toonlink.tex"),
+-- 	},
+-- 	base_prefab = "kidhat",
+-- 	fn = fn_dye_toonlink,
+-- 	rarity = "Timeless",
+-- 	reskinable = true,
 	
-	build_name_override = "kidhat_dye_toonlink",
+-- 	build_name_override = "kidhat_dye_toonlink",
 	
-	type = "item",
-	skin_tags = { },
-	release_group = 0,
-}),
-CreateModPrefabSkin("kidhat_dye_pinkdanger",
-{
-	assets = {
-		Asset("ANIM", "anim/kidhat_dye_pinkdanger.zip"),
-		Asset("ATLAS", "images/inventoryimages/kidhat_dye_pinkdanger.xml"),
-		Asset("IMAGE", "images/inventoryimages/kidhat_dye_pinkdanger.tex"),
-	},
-	base_prefab = "kidhat",
-	fn = fn_dye_pinkdanger,
-	rarity = "Timeless",
-	reskinable = true,
+-- 	type = "item",
+-- 	skin_tags = { },
+-- 	release_group = 0,
+-- }),
+-- CreateModPrefabSkin("kidhat_dye_pinkdanger",
+-- {
+-- 	assets = {
+-- 		Asset("ANIM", "anim/kidhat_dye_pinkdanger.zip"),
+-- 		Asset("ATLAS", "images/inventoryimages/kidhat_dye_pinkdanger.xml"),
+-- 		Asset("IMAGE", "images/inventoryimages/kidhat_dye_pinkdanger.tex"),
+-- 	},
+-- 	base_prefab = "kidhat",
+-- 	fn = fn_dye_pinkdanger,
+-- 	rarity = "Timeless",
+-- 	reskinable = true,
 	
-	build_name_override = "kidhat_dye_pinkdanger",
+-- 	build_name_override = "kidhat_dye_pinkdanger",
 	
-	type = "item",
-	skin_tags = { },
-	release_group = 0,
-})
+-- 	type = "item",
+-- 	skin_tags = { },
+-- 	release_group = 0,
+-- })
