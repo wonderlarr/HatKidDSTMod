@@ -127,7 +127,7 @@ local function onequip(inst, owner)
 
     -- inst.components.reticule:CreateReticule()
 	
-	holder = inst.components.inventoryitem.owner
+	holder = inst.components.inventoryitem:GetGrandOwner()
 end
  
 local function onunequip(inst, owner)

@@ -23,7 +23,7 @@ local function onequip(inst, owner)
 	
 	inst.components.rechargeable:Discharge(TUNING.BREWINGHAT_CHARGETIME)
 	
-	-- holder = inst.components.inventoryitem.owner
+	-- holder = inst.components.inventoryitem:GetGrandOwner()
 end
  
 local function onunequip(inst, owner)

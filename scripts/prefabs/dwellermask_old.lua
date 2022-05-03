@@ -81,7 +81,7 @@ end
 local function DwellerAbility(inst)
 	if inst.components.timer:TimerExists("dwellmask_duration") then
 		-- About 5 times a second, DwellerAbility gets ran, if the dwellmask timer exists, then it continues the function.
-		local owner = inst.components.inventoryitem.owner
+		local owner = inst.components.inventoryitem:GetGrandOwner()
 		--Enable dweller light
 		inst.Light:Enable(true)
 		
@@ -124,7 +124,7 @@ end
 
 local function OnUse(inst)
 
-	local owner = inst.components.inventoryitem.owner
+	local owner = inst.components.inventoryitem:GetGrandOwner()
 	local rechargeable = inst.components.rechargeable
 	
 	if not rechargeable:IsCharged() and rechargeable:GetRechargeTime() == TUNING.DWELLERMASK_COOLDOWN then
@@ -161,7 +161,7 @@ end
 
 local function OnStopUse(inst)
 
-	local owner = inst.components.inventoryitem.owner
+	local owner = inst.components.inventoryitem:GetGrandOwner()
 	local rechargeable = inst.components.rechargeable
 	
 	if not rechargeable:IsCharged() and rechargeable:GetRechargeTime() == TUNING.DWELLERMASK_COOLDOWN then
@@ -302,12 +302,12 @@ local function fn(Sim)
 
 	inst:AddComponent("lighttweener")
 	
+	inst.entity:SetPristine()
+
     if not TheWorld.ismastersim then
 		inst:ListenForEvent("light_rolldirty", OnLightDirty)
         return inst
     end
-	
-	inst.entity:SetPristine()
 	
     inst.AnimState:SetBank("dwellermask")
     inst.AnimState:SetBuild("dwellermask")

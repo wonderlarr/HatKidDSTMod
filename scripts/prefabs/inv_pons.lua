@@ -72,7 +72,7 @@ local function fn()
     -- inst.AnimState:SetBuild("kidpotion")
     -- inst.AnimState:PlayAnimation("idle")
 
-
+    inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         inst.OnEntityReplicated = function(inst) 
@@ -81,8 +81,6 @@ local function fn()
 
         return inst
     end
-
-    inst.entity:SetPristine()
 
     inst:AddComponent("inspectable")
 

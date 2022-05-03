@@ -65,20 +65,20 @@ local function OnTweenDone(inst)
 end
 
 local function DwellerAbility(inst)
-	if inst.components.timer:TimerExists("dwellmask_duration") then
+	print(inst:HasTag("inuse"))
+	if inst:HasTag("dwelleractive") then
 		-- About 5 times a second, DwellerAbility gets ran, if the dwellmask timer exists, then it continues the function.
-		local owner = inst.components.inventoryitem.owner
-		--Enable dweller light
-		-- inst.Light:Enable(true)
-		
-		-- inst.net_light_roll:set(true)
-		-- owner.AnimState:OverrideSymbol("swap_hat", "dwellermask_on", "swap_hat")
+		local owner = inst.components.inventoryitem:GetGrandOwner()
 
-		inst.components.lighttweener:StartTween(inst.Light, TUNING.DWELLERMASK_RADIUS, nil, nil, nil, tweentime, OnTweenDone)
+		if owner.components.sanity.current == 0 then
+			inst.components.useableitem:StopUsingItem()
+		end
 
 		local pt = owner:GetPosition()
-		local range = inst.Light:GetCalculatedRadius() -- Use the radius of the light instead of setting one ourselves, that way it's visually consistent.
+		local range = inst.Light:GetCalculatedRadius() 
+		-- Use the radius of the light instead of setting one ourselves, that way it's visually consistent.
 		--Light seems to use it's own radius system that's close but not quite in game units.
+
 		local tags = { "player" }
 		local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nil, tags)
 		for _,ent in ipairs(targets) do
@@ -110,73 +110,82 @@ end
 
 local function OnUse(inst)
 
-	local owner = inst.components.inventoryitem.owner
-	local rechargeable = inst.components.rechargeable
+	local owner = inst.components.inventoryitem:GetGrandOwner()
 	
-	if not rechargeable:IsCharged() and rechargeable:GetRechargeTime() == TUNING.DWELLERMASK_COOLDOWN then
-	
-		-- If in cooldown
+	if not inst.components.rechargeable:IsCharged() or owner.components.sanity.current < 5 then
+
 		inst:DoTaskInTime(0, inst.components.useableitem:StopUsingItem()) -- Wait 1 frame or else things get weird
-		
-		--Cooldown line
+	
 		owner.components.talker:Say(GetString(owner, "HAT_ONCOOLDOWN"))
 		
-	elseif rechargeable:IsCharged() and not inst.components.timer:TimerExists("dwellmask_duration") then
+	else
 		-- If not in cooldown
-		
-		--Deal with timings
-		inst.components.timer:StartTimer("dwellmask_duration", TUNING.DWELLERMASK_DURATION) -- Internal timer, used for the actual ability.
-		inst.components.rechargeable:Discharge(TUNING.DWELLERMASK_DURATION) -- Visual Timer
+
+		-- Tag
+		inst:AddTag("dwelleractive")
 
 		-- Light
 		inst.Light:Enable(true)
+		inst.components.lighttweener:StartTween(inst.Light, TUNING.DWELLERMASK_RADIUS, nil, nil, nil, tweentime, OnTweenDone)
 		inst.net_light_roll:set(true)
 
 		-- Texture
 		owner.AnimState:OverrideSymbol("swap_hat", "dwellermask_on", "swap_hat")
 
 		-- Sanity
-		inst.components.equippable.dapperness = -TUNING.DAPPERNESS_MED
+		inst.components.equippable.dapperness = -TUNING.DAPPERNESS_MED_LARGE * 4
+		owner.components.sanity:DoDelta(-5)
 		
 		-- Sound
 		inst.SoundEmitter:PlaySound("dwellermask/sound/activate")
-		inst.SoundEmitter:PlaySound("dwellermask/sound/loop", "dwellermaskloop") --This is the same sound as the Time Stop hat loop, but I wanted it label it differently.
+		inst.SoundEmitter:PlaySound("dwellermask/sound/loop", "dwellermaskloop")
 	end
 end
 
 local function OnStopUse(inst)
 
-	local owner = inst.components.inventoryitem.owner
-	local rechargeable = inst.components.rechargeable
-	
-	if not rechargeable:IsCharged() and rechargeable:GetRechargeTime() == TUNING.DWELLERMASK_COOLDOWN then
-		-- If in cooldown
-		owner.components.talker:Say("I've commited many crimes.")
-
-	else
-		-- If not in cooldown, or doing nothing, put it on cooldown!
-
-		-- Light
-		inst.components.lighttweener:StartTween(inst.Light, 0, nil, nil, nil, tweentime)
-		inst.net_light_roll:set(false)
-		
-		-- Change texture
-		owner.AnimState:OverrideSymbol("swap_hat", "dwellermask", "swap_hat")
-
-		-- Sanity
-		inst.components.equippable.dapperness = 0
-
-		-- Sound
-		inst.SoundEmitter:PlaySound("dwellermask/sound/deactivate")
-		inst.SoundEmitter:KillSound("dwellermaskloop")
+	-- Don't run the stop code if we got here without being activated first
+	if not inst:HasTag("dwelleractive") then
+		return
 	end
+
+	local owner = inst.components.inventoryitem:GetGrandOwner()
+
+	-- Ending effects (revive players)
+	local pt = owner:GetPosition()
+	local range = inst.Light:GetCalculatedRadius() 
+	local tags = { "playerghost" }
+	local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nil, tags)
+	for _,ent in ipairs(targets) do
+		ent:PushEvent("respawnfromghost", { source = inst })
+	end
+	
+	-- Tags
+	inst:RemoveTag("dwelleractive")
+
+	-- Cooldown (prevents spam and sanity drain abuse)
+	inst.components.rechargeable:Discharge(5)
+
+	-- Light
+	inst.components.lighttweener:StartTween(inst.Light, 0, nil, nil, nil, tweentime)
+	inst.net_light_roll:set(false)
+	
+	-- Change texture
+	owner.AnimState:OverrideSymbol("swap_hat", "dwellermask", "swap_hat")
+
+	-- Sanity
+	inst.components.equippable.dapperness = 0
+
+	-- Sound
+	inst.SoundEmitter:PlaySound("dwellermask/sound/deactivate")
+	inst.SoundEmitter:KillSound("dwellermaskloop")
 end
 
 local function KeybindUse(inst)
-	if not inst:HasTag("inuse") then
-		inst.components.useableitem:StartUsingItem()
-	else
+	if inst:HasTag("inuse") then
 		inst.components.useableitem:StopUsingItem()
+	else
+		inst.components.useableitem:StartUsingItem()
 	end
 end
 
@@ -193,8 +202,7 @@ local function OnEquip(inst, owner)
 end
  
 local function OnUnequip(inst, owner)
-	if inst.components.timer:TimerExists("dwellmask_duration") then
-		inst:AddTag("disabledwell")
+	if inst:HasTag("dwelleractive") then
 		inst.components.useableitem:StopUsingItem()
 	end
 
@@ -234,10 +242,13 @@ local function OnLightDirty(inst)
 end
 
 local function OnEmpty(inst)
-	inst:AddTag("disabledwell")
 	inst.components.useableitem:StopUsingItem() -- And we'll make sure to stop the dweller effect
 
 	inst:DoTaskInTime(0.5, inst:Remove())
+end
+
+local function OnCharged(inst)
+	inst.components.useableitem:StopUsingItem()
 end
 
 local function fn(Sim) 
@@ -311,6 +322,7 @@ local function fn(Sim)
     inst.components.equippable:SetOnUnequip( OnUnequip )
 	
 	inst:AddComponent("rechargeable")
+	inst.components.rechargeable:SetOnChargedFn(OnCharged)
 
 	if TUNING.DWELLERMASK_DURABILITY then
 		inst:AddComponent("fueled")

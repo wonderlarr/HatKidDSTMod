@@ -66,13 +66,13 @@ AddClientModRPCHandler("HatKidRPC", "polarhatclient", polarhatclient)
 AddClientModRPCHandler("HatKidRPC", "polarhatclient2", polarhatclient2)
 
 function UpdateTint(inst)
-	local owner = inst.components.inventoryitem.owner
+	local owner = inst.components.inventoryitem:GetGrandOwner()
 	local r, g, b, a
 	PushColour(owner, FREEZE_COLOUR[1], FREEZE_COLOUR[2], FREEZE_COLOUR[3], FREEZE_COLOUR[4])
 end
 
 local function FakeReveal(inst)
-	local owner = inst.components.inventoryitem.owner
+	local owner = inst.components.inventoryitem:GetGrandOwner()
 	
 	owner:DoTaskInTime(0, function(owner)
 		owner.sg:GoToState("idle")
@@ -95,7 +95,7 @@ local function FakeReveal(inst)
 end
 
 local function FakeFreeze(inst)
-	local owner = inst.components.inventoryitem.owner
+	local owner = inst.components.inventoryitem:GetGrandOwner()
 
 	if owner.components.pinnable ~= nil and owner.components.pinnable:IsStuck() then
 		owner.components.pinnable:Unstick()
@@ -144,7 +144,7 @@ end
 
 local function OnUse(inst)
 
-	local owner = inst.components.inventoryitem.owner
+	local owner = inst.components.inventoryitem:GetGrandOwner()
 	local rechargeable = inst.components.rechargeable
 	
 	if not rechargeable:IsCharged() then
@@ -220,7 +220,7 @@ end
 
 local function OnStopUse(inst)
 
-	local owner = inst.components.inventoryitem.owner
+	local owner = inst.components.inventoryitem:GetGrandOwner()
 	local rechargeable = inst.components.rechargeable
 	
 	if not rechargeable:IsCharged() then
@@ -286,7 +286,7 @@ end
 
 
 local function KeybindUse(inst)
-	-- local owner = inst.components.inventoryitem.owner
+	-- local owner = inst.components.inventoryitem:GetGrandOwner()
 	inst.components.useableitem:StartUsingItem()
 end
 
@@ -307,12 +307,12 @@ local function fn(Sim)
  
     inst:AddTag("hat")
     inst:AddTag("hatkidhat")
+
+	inst.entity:SetPristine()
 	
     if not TheWorld.ismastersim then
         return inst
     end
-	
-	inst.entity:SetPristine()
 	
     inst.AnimState:SetBank("polarhat")
     inst.AnimState:SetBuild("polarhat")
@@ -329,8 +329,6 @@ local function fn(Sim)
     inst:AddComponent("inspectable") 
 	
     inst:AddComponent("inventoryitem")
-    -- inst.components.inventoryitem.imagename = "polarhat"
-    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/polarhat.xml"
 	 
     inst:AddComponent("equippable")
 	inst.components.equippable.restrictedtag = "hatkid"

@@ -136,11 +136,11 @@ local function fn()
 
     inst:AddTag("pon")
 	
+    inst.entity:SetPristine()
+
     if not TheWorld.ismastersim then
         return inst
     end
- 
-    inst.entity:SetPristine()
 
     -- Clever way to do a pickup when near
     inst.Physics:SetCollisionCallback(OnCollide)

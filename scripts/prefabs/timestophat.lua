@@ -26,7 +26,7 @@ local prefabs =
 
 -------------------------------------------------------------------------------------------------------
 local function SlowNear(inst)
-	local owner = inst.components.inventoryitem.owner
+	local owner = inst.components.inventoryitem:GetGrandOwner()
 	local pt = owner:GetPosition()
 	local range = 32  -- range of spell	
 	local nags = { "character", "player" }
@@ -56,7 +56,7 @@ end
 
 local function OnUse(inst)
 
-	local owner = inst.components.inventoryitem.owner
+	local owner = inst.components.inventoryitem:GetGrandOwner()
 	local rechargeable = inst.components.rechargeable
 	
 	if not rechargeable:IsCharged() and rechargeable:GetRechargeTime() == TUNING.TIMESTOPHAT_COOLDOWN then -- If charging and the time is the cooldown
@@ -110,7 +110,7 @@ end
 
 local function OnStopUse(inst)
 
-	local owner = inst.components.inventoryitem.owner
+	local owner = inst.components.inventoryitem:GetGrandOwner()
 	local rechargeable = inst.components.rechargeable
 	
 	if not rechargeable:IsCharged() and rechargeable:GetRechargeTime() == TUNING.TIMESTOPHAT_COOLDOWN then
@@ -226,11 +226,11 @@ local function fn(Sim)
     inst:AddTag("hat")
     inst:AddTag("hatkidhat")
 	
+	inst.entity:SetPristine()
+
     if not TheWorld.ismastersim then
         return inst
     end
-	
-	inst.entity:SetPristine()
 	
     inst.AnimState:SetBank("timestophat")
     inst.AnimState:SetBuild("timestophat")

@@ -15,7 +15,7 @@ local prefabs =
 local prevequip = nil
 
 local function equiprev(inst)
-	local owner = inst.components.inventoryitem.owner
+	local owner = inst.components.inventoryitem:GetGrandOwner()
 
 	if TUNING.FUNNYMODE then --Just a funny item teleportation mechanics we can do here.
 
@@ -28,7 +28,7 @@ local function equiprev(inst)
 
 	else
 
-		if prevequip and prevequip.components.inventoryitem and prevequip.components.inventoryitem.owner == owner then
+		if prevequip and prevequip.components.inventoryitem and prevequip.components.inventoryitem:GetGrandOwner() == owner then
 			inst:DoTaskInTime(0, function(inst)
 				owner.components.inventory:Equip(prevequip)
 				prevequip = nil
@@ -70,7 +70,7 @@ end
  
 local function OnUse(inst)
 
-	local owner = inst.components.inventoryitem.owner
+	local owner = inst.components.inventoryitem:GetGrandOwner()
 	local rechargeable = inst.components.rechargeable
 	
 	if not rechargeable:IsCharged() then
@@ -97,7 +97,7 @@ end
 
 local function OnStopUse(inst)
 
-	local owner = inst.components.inventoryitem.owner
+	local owner = inst.components.inventoryitem:GetGrandOwner()
 	local rechargeable = inst.components.rechargeable
 	
 	if not rechargeable:IsCharged() then
@@ -135,11 +135,11 @@ local function fn(Sim)
     inst:AddTag("hat")
 	inst:AddTag("hatkidhat")
 	
+	inst.entity:SetPristine()
+
     if not TheWorld.ismastersim then
         return inst
     end
-	
-	inst.entity:SetPristine()
 	
     inst.AnimState:SetBank("brewinghat")
     inst.AnimState:SetBuild("brewinghat")

@@ -64,12 +64,12 @@ local function fn()
     inst.handname = "hatbrella"
 	
     inst:AddTag("sharp")
+
+    inst.entity:SetPristine()
 	
     if not TheWorld.ismastersim then
         return inst
     end
- 
-    inst.entity:SetPristine()
 
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE)

@@ -50,12 +50,12 @@ local function fn(Sim)
     MakeInventoryPhysics(inst)
  
     inst:AddTag("hatkidbadge")
+
+    inst.entity:SetPristine()
 	
 	if not TheWorld.ismastersim then
         return inst
     end
-	
-	inst.entity:SetPristine()
 	
     inst.AnimState:SetBank("kidhat")
     inst.AnimState:SetBuild("kidhat")

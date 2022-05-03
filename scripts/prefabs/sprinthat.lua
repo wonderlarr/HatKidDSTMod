@@ -138,12 +138,12 @@ local function fn(Sim)
     MakeInventoryPhysics(inst)
  
     inst:AddTag("hat")
+
+	inst.entity:SetPristine()
 	
 	if not TheWorld.ismastersim then
         return inst
     end
-	
-	inst.entity:SetPristine()
 	
     inst.AnimState:SetBank("sprinthat")
     inst.AnimState:SetBuild("sprinthat")

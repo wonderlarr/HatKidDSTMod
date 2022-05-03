@@ -104,12 +104,12 @@ configuration_options =
 			{description = "105", data = 105},
 			{description = "110", data = 110},
 			{description = "115", data = 115},
-			{description = "120", data = 120},
+			{description = "120 (Default)", data = 120},
 			{description = "125", data = 125},
 			{description = "130", data = 130},
 			{description = "135", data = 135},
 			{description = "140", data = 140},
-			{description = "150 (Default)", data = 150},
+			{description = "150", data = 150},
 			{description = "175", data = 175},
 			{description = "200", data = 200},
 			{description = "225", data = 225},
@@ -118,7 +118,7 @@ configuration_options =
 			{description = "300", data = 300},
 			{description = "400", data = 400},
 		},
-		default = 150,
+		default = 120,
 	},
 	
 	{
