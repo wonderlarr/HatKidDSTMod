@@ -175,6 +175,8 @@ local function OnEquip(inst)
 
 		inst.components.sanity.neg_aura_mult = TUNING.HATKIDSANITYDRAIN
 		inst.components.sanity.night_drain_mult = TUNING.HATKIDNIGHTDRAIN
+
+		--inst.components.hunger.burnratemodifiers:SetModifier(hat, TUNING.SPRINTHAT_HUNGER_BURNRATE)
 	end
 end
 

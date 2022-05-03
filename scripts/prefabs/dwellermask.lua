@@ -49,7 +49,7 @@ local function dwellmaskclient(ent)
 	end
 	
 	-- The task below clears the nightvision, hopefully set in the config
-	ent.NVLinger = ent:DoTaskInTime(5, function(ent)
+	ent.NVLinger = ent:DoTaskInTime(4, function(ent)
 		ent.components.playervision:ForceNightVision(false)
 		ent.components.playervision:SetCustomCCTable(nil)
 		ent.AnimState:SetHaunted(false)
@@ -65,7 +65,7 @@ local function OnTweenDone(inst)
 end
 
 local function DwellerAbility(inst)
-	print(inst:HasTag("inuse"))
+	-- print(inst:HasTag("inuse"))
 	if inst:HasTag("dwelleractive") then
 		-- About 5 times a second, DwellerAbility gets ran, if the dwellmask timer exists, then it continues the function.
 		local owner = inst.components.inventoryitem:GetGrandOwner()
@@ -84,20 +84,20 @@ local function DwellerAbility(inst)
 		for _,ent in ipairs(targets) do
 			if ent.components.playervision ~= nil then
 			
-				--Loop Code for Players
+				-- Apply colour cube for clients
 				SendModRPCToClient(GetClientModRPC("HatKidRPC", "dwellmaskclient"), nil, ent)
 				
-				-- Change the colour cube on the server to prevent charlie attacks and stuff
+				-- Apply night vision on server
 				ent.components.playervision:ForceNightVision(true)
 				ent.AnimState:SetHaunted(true)
 				
-				-- Prevent the 5 second linger from taking nightvision away while in the aura
+				-- Prevent the linger from taking nightvision away while in the aura
 				if ent.NVLinger ~= nil then
 					ent.NVLinger:Cancel()
 				end
 				
-				-- The task below clears the nightvision after 5 secs
-				ent.NVLinger = ent:DoTaskInTime(TUNING.DWELLERMASK_LINGER, function(ent)
+				-- The task below clears the nightvision after a time
+				ent.NVLinger = ent:DoTaskInTime(4, function(ent)
 					ent.components.playervision:ForceNightVision(false)
 					ent.NVLinger = nil
 					ent.AnimState:SetHaunted(false)
@@ -133,8 +133,8 @@ local function OnUse(inst)
 		owner.AnimState:OverrideSymbol("swap_hat", "dwellermask_on", "swap_hat")
 
 		-- Sanity
-		inst.components.equippable.dapperness = -TUNING.DAPPERNESS_MED_LARGE * 4
-		owner.components.sanity:DoDelta(-5)
+		inst.components.equippable.dapperness = -TUNING.DAPPERNESS_LARGE
+		owner.components.sanity:DoDelta(-4)
 		
 		-- Sound
 		inst.SoundEmitter:PlaySound("dwellermask/sound/activate")
@@ -155,9 +155,27 @@ local function OnStopUse(inst)
 	local pt = owner:GetPosition()
 	local range = inst.Light:GetCalculatedRadius() 
 	local tags = { "playerghost" }
-	local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nil, tags)
+	local nags = { "reviving" }
+	local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, tags)
 	for _,ent in ipairs(targets) do
-		ent:PushEvent("respawnfromghost", { source = inst })
+		-- if ent ~= owner then
+			ent:PushEvent("respawnfromghost", { source = inst, user = owner })
+
+			local function PostPenalty(ent)
+				ent.components.sanity:DoDelta(ent.components.sanity.max * -0.2) -- Sanity 30% on respawn (norm 50%)
+				ent:RemoveEventCallback("ms_respawnedfromghost", PostPenalty)
+			end
+
+			-- Apply dweller revive penalties
+			ent.components.health:DeltaPenalty(TUNING.REVIVE_HEALTH_PENALTY) -- Max health -25%
+
+			-- In order to apply stats differently than default, we have to do it AFTER the player respawns, and not during
+			-- This is a sorta gross way to do this imo but I don't feel like hooking into a function that would do this correctly at the moment.
+			ent:ListenForEvent("ms_respawnedfromghost", PostPenalty)
+
+			-- Grant owner sanity
+			owner.components.sanity:DoDelta(TUNING.REVIVE_OTHER_SANITY_BONUS / 4)
+		-- end
 	end
 	
 	-- Tags

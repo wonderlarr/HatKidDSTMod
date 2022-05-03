@@ -518,9 +518,9 @@ AddCharacterRecipe("polarhat",
 
 AddCharacterRecipe("dwellermask",
 	{ -- ingredients
-		GLOBAL.Ingredient("nightmarefuel", 4),
-		GLOBAL.Ingredient("wormlight_lesser", 2),
-		GLOBAL.Ingredient("orangegem", 1)
+		GLOBAL.Ingredient("nightmarefuel", 6),
+		GLOBAL.Ingredient("thulecite", 2),
+		GLOBAL.Ingredient("greengem", 1)
 	},
 	GLOBAL.TECH.MAGIC_THREE, -- tech level
 	{ -- config
@@ -538,7 +538,7 @@ AddCharacterRecipe("dwellermask",
 AddCharacterRecipe("timestophat",
 	{ -- ingredients
 		GLOBAL.Ingredient("silk", 4),	
-		GLOBAL.Ingredient("moonglass", 6),
+		GLOBAL.Ingredient("moonglass", 3),
 		GLOBAL.Ingredient("greengem", 1),
 	},
 	GLOBAL.TECH.MOON_ALTAR_TWO, -- tech level
@@ -682,7 +682,7 @@ STRINGS.CHARACTERS.HATKID = require "speech_hatkid" -- speech file
 -- The character select screen lines
 STRINGS.CHARACTER_TITLES.hatkid = "The Homesick Hatter"
 STRINGS.CHARACTER_NAMES.hatkid = "Hat Kid"
-STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Knits cool hats\n*Is selfish and obsessive over them\n*Mentally vulnerable without a hat\n*Considered extremely cute"
+STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Knits cool hats\n*Is selfish and obsessive over them\n*Has a vulnerable mind\n*Considered extremely cute"
 STRINGS.CHARACTER_QUOTES.hatkid = "\"Oh, hi there!\""
 
 --Skin STRINGS
