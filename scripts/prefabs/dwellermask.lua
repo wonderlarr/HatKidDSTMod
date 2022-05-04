@@ -134,7 +134,7 @@ local function OnUse(inst)
 
 		-- Sanity
 		inst.components.equippable.dapperness = -TUNING.DAPPERNESS_LARGE
-		owner.components.sanity:DoDelta(-4)
+		owner.components.sanity:DoDelta(-3)
 		
 		-- Sound
 		inst.SoundEmitter:PlaySound("dwellermask/sound/activate")
@@ -182,7 +182,7 @@ local function OnStopUse(inst)
 	inst:RemoveTag("dwelleractive")
 
 	-- Cooldown (prevents spam and sanity drain abuse)
-	inst.components.rechargeable:Discharge(5)
+	inst.components.rechargeable:Discharge(1)
 
 	-- Light
 	inst.components.lighttweener:StartTween(inst.Light, 0, nil, nil, nil, tweentime)

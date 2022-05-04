@@ -57,13 +57,13 @@ PrefabFiles = {
 	"kidpotion",
 	"kidpotion_throwable",
 
-	--badges (not implemented yet)
+	--badges (not implemented)
 	-- "hkr_badge_football",
 	-- "hkr_badge_winter",
 
-	--collectables
-	"pon",
-	"pon_heart",
+	--collectables (disabled)
+	-- "pon",
+	-- "pon_heart",
 	-- "timepiece",
 
 	-- Dweller Placeables
@@ -83,7 +83,7 @@ PrefabFiles = {
 	"hatshatter2",
 
 	--misc
-	"inv_pons",
+	-- "inv_pons",
 
 	--testing (disable in final)
 	"cooltarget", -- This is a dummytarget prefab, but it only regens health when it is low.
@@ -353,10 +353,14 @@ TUNING.HATKID_HEALTH = GetModConfigData("hatkidbasehp")
 TUNING.HATKID_SANITY = GetModConfigData("hatkidbasesanity")
 TUNING.HATKID_HUNGER = GetModConfigData("hatkidbasehunger")
 TUNING.HATKIDRATE = GetModConfigData("hatkidrate")
-TUNING.HATKIDDAMAGE = GetModConfigData("hatkiddamage")
+TUNING.HATKIDDAMAGEDEALT = GetModConfigData("hatkiddamagedealt")
+TUNING.HATKIDDAMAGETAKEN = GetModConfigData("hatkiddamagetaken")
 TUNING.HATKIDSPEED = GetModConfigData("hatkidspeed")
 TUNING.HATKIDNIGHTDRAIN = GetModConfigData("hatkidnightdrain")
 TUNING.HATKIDSANITYDRAIN = GetModConfigData("hatkidsanitydrain")
+TUNING.HATKIDSANITYMULT = GetModConfigData("hatkidsanitymult")
+
+
 
 --Hatbrella stuff
 TUNING.HATBRELLA_DAMAGE = GetModConfigData("hatbrelladamage")
@@ -551,54 +555,7 @@ AddCharacterRecipe("timestophat",
 	}
 )
 
---*****************************************************************************************************************************************--
-------------------------------------------------- Combat Component Adjustments by ZupaleX --------------------------------------------------------------
--------------------------------------------------------- to add/remove damagemodifier -------------------------------------------------
---*****************************************************************************************************************************************--
-
-local function AddDamageModifier(self, key, mod)
-  self.attack_damage_modifiers[key] = mod
-end
-
-local function RemoveDamageModifier(self, key)
-  self.attack_damage_modifiers[key] = nil
-end
-
-local function GetDamageModifier(self)
-  local mod = 1
-  for k,v in pairs(self.attack_damage_modifiers) do
-    mod = mod * v
-  end
-  return mod
-end
-
-local function RegisterNewCombatMembers(self)
-
-  self.attack_damage_modifiers = {} -- % modifiers on self:CalcDamage()
-
-  self.AddDamageModifier = AddDamageModifier
-  self.RemoveDamageModifier = RemoveDamageModifier
-  self.GetDamageModifier = GetDamageModifier
-end
-
-AddComponentPostInit("combat", function(self)
-    if self.attack_damage_modifiers == nil then -- check if another mod already added this. cause we should not add this twice
-        RegisterNewCombatMembers(self)
-
-        local CalcDamageOld = self.CalcDamage
-
-        self.CalcDamage = function(self, target, weapon, multiplier)
-          local dmg = CalcDamageOld(self, target, weapon, multiplier)
-          local bonus = self.damagebonus or 0 --not affected by multipliers
-
-          return (dmg-bonus) * self:GetDamageModifier() + bonus
-        end
-    end
-  end
-)
-
-table.insert(GLOBAL.CHARACTER_GENDERS.FEMALE, "hatkid")
-
+-- End crafting
 
 -- Thanks Kzisor/Ysovuka for the Key Handling code.
 -- Key Handling guide https://forums.kleientertainment.com/forums/topic/63754-tutorial-character-transformation/
@@ -648,14 +605,6 @@ if TUNING.ENABLE_PONS then
 		end
 	end)
 end
-
-
-
-
-
-
-
-
 
 
 

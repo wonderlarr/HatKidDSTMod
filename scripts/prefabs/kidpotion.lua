@@ -23,7 +23,7 @@ local function onequip(inst, owner)
 	
 	inst.components.rechargeable:Discharge(TUNING.BREWINGHAT_CHARGETIME)
 	
-	-- holder = inst.components.inventoryitem:GetGrandOwner()
+	inst.lastowner = inst.components.inventoryitem:GetGrandOwner()
 end
  
 local function onunequip(inst, owner)
@@ -31,25 +31,23 @@ local function onunequip(inst, owner)
     owner.AnimState:Show("ARM_normal")
 	
     inst.SoundEmitter:PlaySound("kidpotion/sound/shake", "flask_shake")
-	-- inst:DoTaskInTime(0, owner.components.inventory:DropItem(inst))
-	
 end
 
 local function onDrop(inst)
-	-- if not inst:HasTag("used") then
-		-- put hat into cooldown
-	-- end
+    if inst.lastowner:IsValid() and not inst:HasTag("donebrewing") then
+        inst.lastowner.components.sanity:DoDelta(6)
+    end
+    
 	inst:Remove()
 end
  
 
 local function OnCharged(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
-	local slot = owner.components.inventory:GetItemSlot(inst)
-	
-	inst:AddTag("used")
+
+    inst:AddTag("donebrewing")
+
 	owner.components.inventory:Equip(SpawnPrefab("kidpotion_throwable"))
-	
 end
 
 local function kidpotion_fn()

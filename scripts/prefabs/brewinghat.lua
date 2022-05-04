@@ -73,7 +73,7 @@ local function OnUse(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 	local rechargeable = inst.components.rechargeable
 	
-	if not rechargeable:IsCharged() then
+	if not rechargeable:IsCharged() or owner.components.sanity.current < 6 then
 	
 		-- If in cooldown
 		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
@@ -87,7 +87,12 @@ local function OnUse(inst)
 		-- If not in cooldown
 		prevequip = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 
+		rechargeable:Discharge(4) -- Cooldown
+
+		owner.components.sanity:DoDelta(-6)
+
 		owner.components.inventory:Equip(SpawnPrefab("kidpotion"))
+
 
 		inst:DoTaskInTime(TUNING.BREWINGHAT_CHARGETIME, function(inst) -- Wait 1 frame or else things get weird
 			inst.components.useableitem:StopUsingItem()
@@ -105,8 +110,6 @@ local function OnStopUse(inst)
 
 	else
 		-- If not in cooldown, or doing nothing, put it on cooldown!
-		
-		rechargeable:Discharge(TUNING.BREWINGHAT_COOLDOWN) -- Cooldown
 
 		if inst.components.finiteuses then
 			inst.components.finiteuses:Use(1)

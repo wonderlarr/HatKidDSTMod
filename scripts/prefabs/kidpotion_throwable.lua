@@ -14,9 +14,9 @@ local kidpotion_assets = {
 
 RegisterInventoryItemAtlas("images/inventoryimages/kidpotion.xml","kidpotion.tex")
 
-local holder = {
-    nil,
-}
+-- local holder = {
+--     nil,
+-- }
 
 local kidpotion_prefabs = {
     "burntground",
@@ -30,12 +30,9 @@ local kidpotion_prefabs = {
 
 local function DoExplode(self)
     local explosiverange = TUNING.BREWINGHAT_RADIUS
-    -- local explosiverange = 10
-	-- Sounds taken and combined from A Hat in Time, I used ChemicalLowLevel.ogg and Glass_Shatter_Big.ogg. They sounded similar enough lol
-	-- Sounds moved to the explosion prefab
- 
-    local stacksize = self.inst.components.stackable ~= nil and self.inst.components.stackable:StackSize() or 1
-    local totaldamage = self.explosivedamage * stacksize
+    local totaldamage = self.explosivedamage
+
+    local holder = self.inst.lastowner
  
     local x, y, z = self.inst.Transform:GetWorldPosition()
     -- Players are off limits now
@@ -49,15 +46,15 @@ local function DoExplode(self)
                     v.components.workable:WorkedBy(holder, 2)
                     v:PushEvent("attacked", { attacker = holder, damage = 0})
                 else -- Otherwise
-                    if v.components.lootdropper and TUNING.ENABLE_PONS and not v:HasTag("pons") then
-                        -- chance 
-                        for i = v.components.workable.workleft + 1 or 1, 0, -1
-                        do
-                            v.components.lootdropper:AddChanceLoot("pon", 0.75)
-                        end
+                    -- if v.components.lootdropper and TUNING.ENABLE_PONS and not v:HasTag("pons") then
+                    --     -- chance 
+                    --     for i = v.components.workable.workleft + 1 or 1, 0, -1
+                    --     do
+                    --         v.components.lootdropper:AddChanceLoot("pon", 0.75)
+                    --     end
             
-                        v:AddTag("pons")
-                    end
+                    --     v:AddTag("pons")
+                    -- end
 
                     v.components.workable:WorkedBy(holder, self.buildingdamage)
                     v:PushEvent("attacked", { attacker = holder, damage = 0})
@@ -96,9 +93,10 @@ local function OnExplodeFn(inst)
     local d = SpawnPrefab("hatshatter2")
         d.Transform:SetPosition(inst.Transform:GetWorldPosition())
 
-    DoExplode(inst.components.explosive)
+    DoExplode(inst.components.explosive, inst)
 
-    holder:PushEvent("PotionThrown")
+
+    inst.lastowner:PushEvent("PotionThrown")
 end
  
 local function OnHitSomething(inst, attacker, target)
@@ -121,33 +119,25 @@ local function onequip(inst, owner)
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
 
-    -- inst.components.aoetargeting:StartTargeting()
-    -- inst:AddComponent("reticule")
-    -- RefreshReticule(inst)
-
-    -- inst.components.reticule:CreateReticule()
+    inst.lastowner = owner
 	
-	holder = inst.components.inventoryitem:GetGrandOwner()
+	-- holder = inst.components.inventoryitem:GetGrandOwner()
 end
  
 local function onunequip(inst, owner)
     owner.AnimState:Hide("ARM_carry")
     owner.AnimState:Show("ARM_normal")
 
-    -- inst.components.aoetargeting:StopTargeting()
-
     local head = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
     
     if head and head.prefab == "brewinghat" then
         head:PushEvent("prevequip")
     end
-
-    -- inst.components.aoetargeting:StopTargeting()
 end
  
 local function onthrown(inst)
-	if holder ~= nil and holder:HasTag("hatkid") then
-		local headslot = holder.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+	if inst.lastowner ~= nil and inst.lastowner:HasTag("hatkid") then
+		local headslot = inst.lastowner.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
 	
         inst:AddTag("NOCLICK")
         inst.persists = false
@@ -167,8 +157,8 @@ local function onthrown(inst)
         inst.Physics:CollidesWith(COLLISION.OBSTACLES)
         inst.Physics:CollidesWith(COLLISION.ITEMS)
         
-        if holder.SoundEmitter ~= nil then
-            holder.SoundEmitter:PlaySound("brewinghat/sound/throw")
+        if inst.lastowner.SoundEmitter ~= nil then
+            inst.lastowner.SoundEmitter:PlaySound("brewinghat/sound/throw")
         end
 	end
 end
@@ -186,6 +176,17 @@ local function ReticuleTargetFn()
         end
     end
     return pos
+end
+
+local function onDrop(inst)
+    inst:DoTaskInTime(0, function(inst)
+        if not inst:IsInLimbo() and inst:IsValid() and not inst:HasTag("NOCLICK") then
+            if inst.lastowner:IsValid() then
+                inst.lastowner.components.sanity:DoDelta(6)
+            end
+            inst:Remove()
+        end
+    end)
 end
 
 local function common_fn(bank, build, anim, tag, isinventoryitem)
@@ -254,6 +255,7 @@ local function kidpotion_fn()
     inst.components.inventoryitem.imagename = "kidpotion"
     inst.components.inventoryitem.atlasname = "images/inventoryimages/kidpotion.xml"
 	inst.components.inventoryitem.cangoincontainer = false
+    inst.components.inventoryitem:SetOnDroppedFn(onDrop)
 	
 	inst.components.complexprojectile:SetHorizontalSpeed(18)
 	inst.components.complexprojectile:SetGravity(-65)

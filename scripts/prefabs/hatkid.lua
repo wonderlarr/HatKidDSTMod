@@ -74,25 +74,22 @@ local function SpawnWithStuff(inst)
     -- inst.components.inventory:Equip(hatbrella)
 end
 
-local function LoadPonInv(inst)
-	if inst.lab then
-		inst.lab.components.container:Open(inst)
-	end
-end
+-- local function LoadPonInv(inst)
+-- 	if inst.lab then
+-- 		inst.lab.components.container:Open(inst)
+-- 	end
+-- end
 
 -- When the character is revived
 local function onbecamehuman(inst)
-	if TUNING.HATKIDSPEED ~= "1" then
-		inst.components.locomotor:SetExternalSpeedMultiplier(inst, "hatkid_speed_config", TUNING.HATKIDSPEED)
-	end
+	inst.components.locomotor:SetExternalSpeedMultiplier(inst, "hatkid_speed_config", TUNING.HATKIDSPEED)
+
 	inst.AnimState:SetScale(TUNING.HATKIDSIZE, TUNING.HATKIDSIZE) 
 end
 
 -- when he died
 local function onbecameghost(inst)
-	if TUNING.HATKIDSPEED ~= "1" then
-		inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "hatkid_speed_config")
-	end
+	inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "hatkid_speed_config")
 	
 	-- HACK, overriding size manually on death so the ghost isn't unreasonably tiny. This won't look right if the player has the character size turned up higher than normal.
 	inst.AnimState:SetScale(1, 1) 
@@ -109,12 +106,9 @@ local function OnPotionThrow(inst)
 	
 	-- Possibly overcomplicated way to make things happen 50% of the time. 
 	if math.random(1, 2) == 1 and inst.components.talker then
-
 		-- Say one of the 4 lines defined above.
 		inst.components.talker:Say(lines[math.random(1, 4)])
-
 	end
-
 end
 
 local function MakeDirt(inst)
@@ -149,7 +143,6 @@ local function onLocomote(inst)
 
 		if isrunning and hat.prefab == "sprinthat" then
 
-
 			if not inst.sprintfx then
 				
 				inst.sprintfx = inst:DoTaskInTime(0.25/2, function(inst)
@@ -157,37 +150,25 @@ local function onLocomote(inst)
 					inst.sprintfx = nil
 					MakeDirt(inst)
 				end)
-
 			end
-
 		end
-		
 	end
 end
 
 
-local function OnEquip(inst)
-	--Remove hat sanity drain upon wearing something in the head slot
-	local head = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
-	
-	if head ~= nil then
+local function OnEquip(inst, data) -- Remove hat sanity modifer when wearing a hat
+    if data.eslot == EQUIPSLOTS.HEAD then
 		inst.components.sanity.dapperness = 0
 
-		inst.components.sanity.neg_aura_mult = TUNING.HATKIDSANITYDRAIN
-		inst.components.sanity.night_drain_mult = TUNING.HATKIDNIGHTDRAIN
-
-		--inst.components.hunger.burnratemodifiers:SetModifier(hat, TUNING.SPRINTHAT_HUNGER_BURNRATE)
+		inst.components.sanity.neg_aura_modifiers:RemoveModifier(inst, "hat_sanity_vuln")
 	end
 end
 
-local function OnUnequip(inst, data)
-	-- Detect if the slot is empty, apply a big sanity drain
-
+local function OnUnequip(inst, data) -- Add a sanity modifier if the head slot is unequipped
     if data.eslot == EQUIPSLOTS.HEAD then
-		inst.components.sanity.dapperness = -TUNING.DAPPERNESS_MED
+		inst.components.sanity.dapperness = -TUNING.DAPPERNESS_SMALL
 
-		inst.components.sanity.neg_aura_mult = TUNING.HATKIDSANITYDRAIN * 4
-		inst.components.sanity.night_drain_mult = TUNING.HATKIDNIGHTDRAIN * 4
+		inst.components.sanity.neg_aura_modifiers:SetModifier(inst, TUNING.HATKIDSANITYDRAIN, "hat_sanity_vuln")
     end
 end
 
@@ -200,18 +181,8 @@ local function onnewspawn(inst)
 	inst:ListenForEvent("ms_respawnedfromghost", onbecamehuman)
     inst:ListenForEvent("ms_becameghost", onbecameghost)
 
-	-- REMOVE IN FINAL
-	if TheWorld.hatannounced == nil then
-		inst:DoTaskInTime(10, function(inst)
-			print("Hat Kid Unlisted: This mod is a WORK IN PROGRESS, please be sure to reset your config often, and report bugs to the workshop page or Skylarr#9203 on Discord.")
-			TheNet:Announce("Hat Kid Unlisted: This mod is a WORK IN PROGRESS, please be sure to reset your config often, and report bugs to the workshop page or Skylarr#9203 on Discord.")
-			TheWorld.hatannounced = true
-		end)
-	end
-
-	
 	SpawnWithStuff(inst)
-	LoadPonInv(inst)
+	-- LoadPonInv(inst)
 end
 
 local function ApplyPons(inst, data)
@@ -275,30 +246,30 @@ end
 --     end
 -- end
 
-local function OnPonsDirty(inst)
-	inst.pons = inst.net_pons:value()
-	inst:PushEvent("UpdatePons")
-end
+-- local function OnPonsDirty(inst)
+-- 	inst.pons = inst.net_pons:value()
+-- 	inst:PushEvent("UpdatePons")
+-- end
 
-local function OnGetPon(inst, data)
-	local num = data.count or 1
+-- local function OnGetPon(inst, data)
+-- 	local num = data.count or 1
 
-	inst.pons = inst.pons + num
+-- 	inst.pons = inst.pons + num
 
-	inst.net_pons:set(inst.pons)
-end
+-- 	inst.net_pons:set(inst.pons)
+-- end
 
 local function OnSave(inst, data)
-	data.pons = inst.pons or 0
+	-- data.pons = inst.pons or 0
 end
 
 local function OnLoad(inst, data)
-	if data.pons ~= nil then
-		inst.pons = data.pons
-		inst.net_pons:set(data.pons)
-	end
+	-- if data.pons ~= nil then
+	-- 	inst.pons = data.pons
+	-- 	inst.net_pons:set(data.pons)
+	-- end
 
-	LoadPonInv(inst)
+	-- LoadPonInv(inst)
 
 
 	inst:ListenForEvent("equip", OnEquip)
@@ -306,18 +277,6 @@ local function OnLoad(inst, data)
 
 	inst:ListenForEvent("ms_respawnedfromghost", onbecamehuman)
     inst:ListenForEvent("ms_becameghost", onbecameghost)
-
-
-	if TheWorld.hatannounced == nil then
-		inst:DoTaskInTime(10, function(inst)
-			print("Hat Kid Unlisted: This mod is a WORK IN PROGRESS, please be sure to reset your config often, and report bugs to the workshop page or Skylarr#9203 on Discord.")
-			TheNet:Announce("Hat Kid Unlisted: This mod is a WORK IN PROGRESS, please be sure to reset your config often, and report bugs to the workshop page or Skylarr#9203 on Discord.")
-			TheWorld.hatannounced = true
-		end)
-	end
-
-	
-	
 	
     -- if inst:HasTag("playerghost") then
     --     onbecameghost(inst)
@@ -325,22 +284,22 @@ local function OnLoad(inst, data)
     --     onbecamehuman(inst)
     -- end
 
-	inst:DoTaskInTime(0, function(inst)
-		inst.skin = inst.AnimState:GetBuild()
-	end)
+	-- inst:DoTaskInTime(0, function(inst)
+	-- 	inst.skin = inst.AnimState:GetBuild()
+	-- end)
 
 end
 
-local function OnClosePon(inst)
-	inst.tryopen = inst:DoPeriodicTask(0.5, function(inst)
-		if inst.components.inventory.isvisible == true then
-			LoadPonInv(inst)
+-- local function OnClosePon(inst)
+-- 	inst.tryopen = inst:DoPeriodicTask(0.5, function(inst)
+-- 		if inst.components.inventory.isvisible == true then
+-- 			-- LoadPonInv(inst)
 			
-			inst.tryopen:Cancel()
-			inst.tryopen = nil
-		end
-	end)
-end
+-- 			inst.tryopen:Cancel()
+-- 			inst.tryopen = nil
+-- 		end
+-- 	end)
+-- end
 
 -- Server and client
 -- Thanks Kzisor/Ysovuka for the Key Handling code.
@@ -361,82 +320,69 @@ local common_postinit = function(inst)
 	-- 50% chance of quote on potion explode
 	inst:ListenForEvent("PotionThrown", OnPotionThrow)
 	
-	if not TheWorld.ismastersim then
+	-- if not TheWorld.ismastersim then
 		-- inst.OnEntityReplicated = function(inst) inst.replica.container:WidgetSetup("treasurechest", widgetsetup) end
-	end
+	-- end
 
 	-- inst.Physics:CollidesWith(2017)
 
-	inst.pons = 0
-	inst.net_pons = net_ushortint(inst.GUID, "pons", "pons_dirty" )
+	-- inst.pons = 0
+	-- inst.net_pons = net_ushortint(inst.GUID, "pons", "pons_dirty" )
 
-	-- inst.maxslotsinv = 18
-
-
-	if not TheWorld.ismastersim then
-		inst:ListenForEvent("pons_dirty", OnPonsDirty)
-	end
+-- 	if not TheWorld.ismastersim then
+-- 		inst:ListenForEvent("pons_dirty", OnPonsDirty)
+-- 	end
 
 	
-	inst.lab = SpawnPrefab("inv_pons")
-	inst.lab.entity:SetParent(inst.entity)
+-- 	inst.lab = SpawnPrefab("inv_pons")
+-- 	inst.lab.entity:SetParent(inst.entity)
 end
 
--- Server only, add comonents here.
+-- Server only, most components go here.
 local master_postinit = function(inst, data)
-	--Custom sound idea, recorder? It (sortof) makes sense. It's better than using Willow assets regardless.
-	-- SciFi synth might also be good.
-	-- Possibly a filtered version of willow
+	-- If anything below is hard coded and not configurable, I did my job wrong. Please yell at me if that's the case.
+
+	-- Health
+	inst.components.health:SetMaxHealth(TUNING.HATKID_HEALTH)
+
+	-- Hunger
+	inst.components.hunger:SetMax(TUNING.HATKID_HUNGER)
+	inst.components.hunger.burnratemodifiers:SetModifier(inst, TUNING.HATKIDRATE * TUNING.WILSON_HUNGER_RATE, "base")
+
+	-- Sanity
+	inst.components.sanity:SetMax(TUNING.HATKID_SANITY)
+	inst.components.sanity.rate_modifier = TUNING.HATKIDSANITYMULT
+	inst.components.sanity.night_drain_mult = TUNING.HATKIDNIGHTDRAIN
+	inst.components.sanity.neg_aura_modifiers:SetModifier(inst, TUNING.HATKIDSANITYDRAIN, "base")
+
+	-- Combat
+	inst.components.combat.externaldamagemultipliers:SetModifier(inst, TUNING.HATKIDDAMAGEDEALT, "base")
+	inst.components.combat.externaldamagetakenmultipliers:SetModifier(inst, TUNING.HATKIDDAMAGETAKEN, "base")
+
+	-- Movement
+	inst.components.locomotor:SetExternalSpeedMultiplier(inst, "hatkid_speed_config", TUNING.HATKIDSPEED)
+
+	-- Flavor/Misc
+	inst.components.foodaffinity:AddPrefabAffinity("pumpkincookie", TUNING.AFFINITY_15_CALORIES_LARGE) -- Favorite food
+	inst.AnimState:SetScale(TUNING.HATKIDSIZE, TUNING.HATKIDSIZE) -- Character size
+
+	-- Custom voice made by myself, Skylarr!
 	inst.soundsname = "hatkidvoice"
 	inst.talker_path_override = "hatkidvoice/"
-	
-	inst.components.health:SetMaxHealth(TUNING.HATKID_HEALTH)
-	inst.components.hunger:SetMax(TUNING.HATKID_HUNGER)
-	inst.components.sanity:SetMax(TUNING.HATKID_SANITY)
-	
-    inst.components.combat.damagemultiplier = TUNING.HATKIDDAMAGE
-	-- inst.components.combat:SetAttackPeriod(10)
-	
-	inst.components.hunger.hungerrate = TUNING.HATKIDRATE * TUNING.WILSON_HUNGER_RATE
-	
-	-- Sanity drain
-	inst.components.sanity.night_drain_mult = TUNING.HATKIDNIGHTDRAIN
-	inst.components.sanity.neg_aura_mult = TUNING.HATKIDSANITYDRAIN
-	
-	--Size reduction
-	-- inst.Transform:SetScale(TUNING.HATKIDSIZE, TUNING.HATKIDSIZE, TUNING.HATKIDSIZE) OLD DO NOT USE
-	
-	-- This is a better way to set character scale, it doesn't change your walk speed, so no need to set an external speed modifier.
-	inst.AnimState:SetScale(TUNING.HATKIDSIZE, TUNING.HATKIDSIZE) 
-	
-	--Sanity Aura
 
-	-- inst:ListenForEvent("timerdone", OnTimerDone)
-	-- inst:ListenForEvent("healthdelta", OnHealthDelta)
-	
-	-- inst:AddComponent("timer")
-
+	-- Listeners/Generics
     inst.OnNewSpawn = onnewspawn
-	
-	inst.components.sanity.dapperness = 0
-	
-	-- Hat Kid likes cookies, unfortunately there's only pumpkin cookies. We'll make do.
-    inst.components.foodaffinity:AddPrefabAffinity  ("pumpkincookie", 1.4)
-
-	inst:ListenForEvent("onattackother", ApplyPons)
-	inst:ListenForEvent("working", ApplyPons)
-
-	inst:ListenForEvent("GetPon", OnGetPon)
-	inst:ListenForEvent("closepon", OnClosePon)
 
 	inst.OnLoad = OnLoad
 	inst.OnSave = OnSave
 
+	-- Pon stuff, currently disabled altgoether
 
-	-- testing
-	-- inst.maxslotsinv = 18
-	-- inst.components.inventory.maxslots = 18
+	-- inst:ListenForEvent("onattackother", ApplyPons)
+	-- inst:ListenForEvent("working", ApplyPons)
 
+	-- inst:ListenForEvent("GetPon", OnGetPon)
+	-- inst:ListenForEvent("closepon", OnClosePon)
 end
 
 return MakePlayerCharacter("hatkid", prefabs, assets, common_postinit, master_postinit, start_inv)

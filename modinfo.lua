@@ -149,9 +149,9 @@ configuration_options =
 		default = 1,
 	},
 	
-		{
-		name = "hatkiddamage",
-		label = "Damage",
+	{
+		name = "hatkiddamagedealt",
+		label = "Damage Dealt",
 		hover = "Hat Kid's damage multiplier",
 		options =
 		{
@@ -184,7 +184,44 @@ configuration_options =
 		default = 1,
 	},
 	
+	{
+		name = "hatkiddamagetaken",
+		label = "Damage Taken",
+		hover = "Hat Kid's damage taken multiplier",
+		options =
 		{
+			{description = "x0.001", data = 0.001},
+			{description = "x0.01", data = 0.01},
+			{description = "x0.1", data = 0.1},
+			{description = "x0.2", data = 0.2},
+			{description = "x0.3", data = 0.3},
+			{description = "x0.4", data = 0.4},
+			{description = "x0.5", data = 0.5},
+			{description = "x0.6", data = 0.6},
+			{description = "x0.7", data = 0.7},
+			{description = "x0.8", data = 0.8},
+			{description = "x0.85", data = 0.85},
+			{description = "x0.9", data = 0.9},
+			{description = "x1 (Default)", data = 1},
+			{description = "x1.25", data = 1.25},
+			{description = "x1.5", data = 1.5},
+			{description = "x1.75", data = 1.75},
+			{description = "x2", data = 2},
+			{description = "x3", data = 3},
+			{description = "x4", data = 4},
+			{description = "x5", data = 5},
+			{description = "x6", data = 6},
+			{description = "x7", data = 7},
+			{description = "x8", data = 8},
+			{description = "x9", data = 9},
+			{description = "x10", data = 10},
+		},
+		default = 1,
+	},
+
+	
+	
+	{
 		name = "hatkidbasesize",
 		label = "Character Size",
 		hover = "How big Hat Kid will be",
@@ -288,8 +325,42 @@ configuration_options =
 
 	{
 		name = "hatkidsanitydrain",
-		label = "Sanity Drain",
-		hover = "How much Hat Kid's sanity will be impacted in general.",
+		label = "Sanity Aura Drain",
+		hover = "How much Hat Kid's sanity will be negatively impacted by auras.",
+		options =
+		{
+			{description = "x0.001", data = 0.001},
+			{description = "x0.01", data = 0.01},
+			{description = "x0.1", data = 0.1},
+			{description = "x0.2", data = 0.2},
+			{description = "x0.3", data = 0.3},
+			{description = "x0.4", data = 0.4},
+			{description = "x0.5", data = 0.5},
+			{description = "x0.6", data = 0.6},
+			{description = "x0.7", data = 0.7},
+			{description = "x0.8", data = 0.8},
+			{description = "x0.9", data = 0.9},
+			{description = "x1 (Default)", data = 1},
+			{description = "x1.25", data = 1.25},
+			{description = "x1.5", data = 1.5},
+			{description = "x1.75", data = 1.75},
+			{description = "x2", data = 2},
+			{description = "x3", data = 3},
+			{description = "x4", data = 4},
+			{description = "x5", data = 5},
+			{description = "x6", data = 6},
+			{description = "x7", data = 7},
+			{description = "x8", data = 8},
+			{description = "x9", data = 9},
+			{description = "x10", data = 10},
+		},
+		default = 1,
+	},	
+
+	{
+		name = "hatkidsanitymult",
+		label = "Sanity Mult",
+		hover = "How much Hat Kid's sanity will be impacted by both positive and negative sources.",
 		options =
 		{
 			{description = "x0.001", data = 0.001},
@@ -638,14 +709,14 @@ configuration_options =
 			{description = "51", data = 51},
 			{description = "63", data = 63},
 			{description = "72", data = 72},
-			{description = "80 (Default)", data = 80},
-			{description = "89", data = 89},
+			{description = "80", data = 80},
+			{description = "89 (Default)", data = 89},
 			{description = "100", data = 100},
 			{description = "200", data = 200},
 			{description = "500", data = 500},
 			{description = "KILLER QUEEN!!!", data = 999999, hover = "999,999"},
 		},
-		default = 80,
+		default = 89,
 	},
 	
 	{
