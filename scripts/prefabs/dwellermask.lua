@@ -35,30 +35,28 @@ local DWELLERVISION_COLOURCUBES_3 =
 
 local tweentime = 0.1
 
-local function dwellmaskclient(ent)
+local function DwellmaskClient(ent, val)
+	local enable = val or false -- For some reason sometimes the rpc gets pushed without the bool
 
-	-- Change the colour cube on the client to allow seeing in the dark client side.
-	ent.components.playervision:ForceNightVision(true)
-	ent.components.playervision:SetCustomCCTable(DWELLERVISION_COLOURCUBES_3)
+	ent.components.playervision:ForceNightVision(enable)
+	-- ent.AnimState:SetHaunted(enable) -- Don't know why I need to do this here, SetHaunted just refuses to work from the server for whatever reason
 
-	ent.AnimState:SetHaunted(true)
-	
-	-- Prevent the 5 second linger from taking nightvision away while in the aura
-	if ent.NVLinger ~= nil then
-		ent.NVLinger:Cancel()
-	end
-	
-	-- The task below clears the nightvision, hopefully set in the config
-	ent.NVLinger = ent:DoTaskInTime(4, function(ent)
-		ent.components.playervision:ForceNightVision(false)
+	if enable then
+		ent.components.playervision:SetCustomCCTable(DWELLERVISION_COLOURCUBES_3)
+	else
 		ent.components.playervision:SetCustomCCTable(nil)
-		ent.AnimState:SetHaunted(false)
-
-		ent.NVLinger = nil
-	end)
+	end
 end
 
-AddClientModRPCHandler("HatKidRPC", "dwellmaskclient", dwellmaskclient)
+AddClientModRPCHandler("HatKidRPC", "dwellmaskclient", DwellmaskClient)
+
+
+local function HauntedClient(ent, val)
+	local enable = val or false
+	ent.AnimState:SetHaunted(enable)
+end
+
+AddClientModRPCHandler("HatKidRPC", "hauntedclient", HauntedClient)
 
 local function OnTweenDone(inst)
 	
@@ -77,19 +75,33 @@ local function DwellerAbility(inst)
 		local pt = owner:GetPosition()
 		local range = inst.Light:GetCalculatedRadius() 
 		-- Use the radius of the light instead of setting one ourselves, that way it's visually consistent.
-		--Light seems to use it's own radius system that's close but not quite in game units.
+		-- Light seems to use it's own radius system that's close but not quite in game units.
 
 		local tags = { "player" }
 		local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nil, tags)
 		for _,ent in ipairs(targets) do
 			if ent.components.playervision ~= nil then
 			
-				-- Apply colour cube for clients
-				SendModRPCToClient(GetClientModRPC("HatKidRPC", "dwellmaskclient"), nil, ent)
-				
-				-- Apply night vision on server
-				ent.components.playervision:ForceNightVision(true)
-				ent.AnimState:SetHaunted(true)
+				if not ent:HasTag("dwelling") then
+					-- Server side init
+					ent.components.playervision:ForceNightVision(true)
+					ent.AnimState:SetHaunted(true)
+
+					ent.components.health.externalabsorbmodifiers:SetModifier(inst, 0.9, "DwellerArmor")
+
+					local function OnHealthDelta(ent)
+							
+					end
+
+					ent:ListenForEvent("healthdelta", OnHealthDelta)
+
+					-- Client side init
+					SendModRPCToClient(GetClientModRPC("HatKidRPC", "dwellmaskclient"), nil, ent, true)
+					SendModRPCToClient(GetClientModRPC("HatKidRPC", "hauntedclient"), nil, ent, true)
+
+					-- Declare effect as initialized
+					ent:AddTag("dwelling")
+				end
 				
 				-- Prevent the linger from taking nightvision away while in the aura
 				if ent.NVLinger ~= nil then
@@ -98,9 +110,17 @@ local function DwellerAbility(inst)
 				
 				-- The task below clears the nightvision after a time
 				ent.NVLinger = ent:DoTaskInTime(4, function(ent)
+					-- Only executed at effect end
+					SendModRPCToClient(GetClientModRPC("HatKidRPC", "dwellmaskclient"), nil, ent, false)
+					SendModRPCToClient(GetClientModRPC("HatKidRPC", "hauntedclient"), nil, ent, false)
 					ent.components.playervision:ForceNightVision(false)
-					ent.NVLinger = nil
 					ent.AnimState:SetHaunted(false)
+
+					ent.components.health.externalabsorbmodifiers:RemoveModifier(inst, "DwellerArmor")
+
+					ent:RemoveTag("dwelling")
+
+					ent.NVLinger = nil	
 				end)
 			end
 		end
@@ -129,12 +149,14 @@ local function OnUse(inst)
 		inst.components.lighttweener:StartTween(inst.Light, TUNING.DWELLERMASK_RADIUS, nil, nil, nil, tweentime, OnTweenDone)
 		inst.net_light_roll:set(true)
 
+
+
 		-- Texture
 		owner.AnimState:OverrideSymbol("swap_hat", "dwellermask_on", "swap_hat")
 
 		-- Sanity
 		inst.components.equippable.dapperness = -TUNING.DAPPERNESS_LARGE
-		owner.components.sanity:DoDelta(-3)
+		owner.components.sanity:DoDelta(-5)
 		
 		-- Sound
 		inst.SoundEmitter:PlaySound("dwellermask/sound/activate")
@@ -161,16 +183,18 @@ local function OnStopUse(inst)
 		-- if ent ~= owner then
 			ent:PushEvent("respawnfromghost", { source = inst, user = owner })
 
-			local function PostPenalty(ent)
-				ent.components.sanity:DoDelta(ent.components.sanity.max * -0.2) -- Sanity 30% on respawn (norm 50%)
-				ent:RemoveEventCallback("ms_respawnedfromghost", PostPenalty)
-			end
+
 
 			-- Apply dweller revive penalties
 			ent.components.health:DeltaPenalty(TUNING.REVIVE_HEALTH_PENALTY) -- Max health -25%
 
 			-- In order to apply stats differently than default, we have to do it AFTER the player respawns, and not during
 			-- This is a sorta gross way to do this imo but I don't feel like hooking into a function that would do this correctly at the moment.
+			local function PostPenalty(ent)
+				ent.components.sanity:DoDelta(ent.components.sanity.max * -0.2) -- Sanity 30% on respawn (norm 50%)
+				ent:RemoveEventCallback("ms_respawnedfromghost", PostPenalty)
+			end
+
 			ent:ListenForEvent("ms_respawnedfromghost", PostPenalty)
 
 			-- Grant owner sanity
@@ -217,6 +241,9 @@ local function OnEquip(inst, owner)
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Hide("HEAD_HAT")
 	end
+
+	inst.AnimState:SetHaunted(true)
+
 end
  
 local function OnUnequip(inst, owner)
@@ -233,6 +260,9 @@ local function OnUnequip(inst, owner)
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Hide("HEAD_HAT")
 	end
+
+	inst.AnimState:SetHaunted(false)
+
 end
 
 local function OnLightDirty(inst)
@@ -262,7 +292,7 @@ end
 local function OnEmpty(inst)
 	inst.components.useableitem:StopUsingItem() -- And we'll make sure to stop the dweller effect
 
-	inst:DoTaskInTime(0.5, inst:Remove())
+	-- inst:DoTaskInTime(0.5, inst:Remove())
 end
 
 local function OnCharged(inst)
