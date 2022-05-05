@@ -25,8 +25,7 @@ local prefabs =
 local DWELLERVISION_COLOURCUBES_3 =
 {
 	-- These new cubes are easier on the eyes, previous ones were very harsh green.
-
---  Playtesters actually missed the harsher green, but I think I'll go more faithful to the original with this one
+	-- Playtesters actually missed the harsher green, but I think I'll go more faithful to the original with this one
     day = resolvefilepath("images/cc/nd.tex"),
     dusk = resolvefilepath("images/cc/nd.tex"),
     night = resolvefilepath("images/cc/nd.tex"),
@@ -39,7 +38,7 @@ local function DwellmaskClient(ent, val)
 	local enable = val or false -- For some reason sometimes the rpc gets pushed without the bool
 
 	ent.components.playervision:ForceNightVision(enable)
-	-- ent.AnimState:SetHaunted(enable) -- Don't know why I need to do this here, SetHaunted just refuses to work from the server for whatever reason
+	ent.AnimState:SetHaunted(enable) -- Don't know why I need to do this here, SetHaunted just refuses to work from the server for whatever reason
 
 	if enable then
 		ent.components.playervision:SetCustomCCTable(DWELLERVISION_COLOURCUBES_3)
@@ -49,18 +48,6 @@ local function DwellmaskClient(ent, val)
 end
 
 AddClientModRPCHandler("HatKidRPC", "dwellmaskclient", DwellmaskClient)
-
-
-local function HauntedClient(ent, val)
-	local enable = val or false
-	ent.AnimState:SetHaunted(enable)
-end
-
-AddClientModRPCHandler("HatKidRPC", "hauntedclient", HauntedClient)
-
-local function OnTweenDone(inst)
-	
-end
 
 local function DwellerAbility(inst)
 	-- print(inst:HasTag("inuse"))
@@ -72,32 +59,46 @@ local function DwellerAbility(inst)
 			inst.components.useableitem:StopUsingItem()
 		end
 
+		local function OnHealthDelta(ent, data)
+			if ent.components.health == nil then return end
+
+			local amount = data.amount
+			local current = ent.components.health.currenthealth
+			local max = ent.components.health.maxhealth
+			local penalty = ent.components.health:GetPenaltyPercent()
+
+			if amount < 0 and current <= 1 then
+				ent.components.health:DeltaPenalty(-amount / max / 2) -- 50% of damage taken is dealt to max health
+
+				if penalty == TUNING.MAXIMUM_HEALTH_PENALTY then
+					ent.components.health:SetMinHealth(0)
+				end
+			end
+		end
+
 		local pt = owner:GetPosition()
 		local range = inst.Light:GetCalculatedRadius() 
 		-- Use the radius of the light instead of setting one ourselves, that way it's visually consistent.
-		-- Light seems to use it's own radius system that's close but not quite in game units.
-
 		local tags = { "player" }
-		local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nil, tags)
+		local nags = { "playerghost" }
+		local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, tags)
 		for _,ent in ipairs(targets) do
-			if ent.components.playervision ~= nil then
+			if ent.components.playervision then
 			
 				if not ent:HasTag("dwelling") then
 					-- Server side init
 					ent.components.playervision:ForceNightVision(true)
 					ent.AnimState:SetHaunted(true)
 
-					ent.components.health.externalabsorbmodifiers:SetModifier(inst, 0.9, "DwellerArmor")
-
-					local function OnHealthDelta(ent)
-							
+					-- Prevent death if we have any max health buffer left
+					if ent.components.health and ent.components.health:GetPenaltyPercent() ~= TUNING.MAXIMUM_HEALTH_PENALTY then
+						ent.components.health:SetMinHealth(1)
 					end
 
 					ent:ListenForEvent("healthdelta", OnHealthDelta)
 
 					-- Client side init
 					SendModRPCToClient(GetClientModRPC("HatKidRPC", "dwellmaskclient"), nil, ent, true)
-					SendModRPCToClient(GetClientModRPC("HatKidRPC", "hauntedclient"), nil, ent, true)
 
 					-- Declare effect as initialized
 					ent:AddTag("dwelling")
@@ -112,11 +113,14 @@ local function DwellerAbility(inst)
 				ent.NVLinger = ent:DoTaskInTime(4, function(ent)
 					-- Only executed at effect end
 					SendModRPCToClient(GetClientModRPC("HatKidRPC", "dwellmaskclient"), nil, ent, false)
-					SendModRPCToClient(GetClientModRPC("HatKidRPC", "hauntedclient"), nil, ent, false)
 					ent.components.playervision:ForceNightVision(false)
 					ent.AnimState:SetHaunted(false)
 
-					ent.components.health.externalabsorbmodifiers:RemoveModifier(inst, "DwellerArmor")
+					if ent.components.health then
+						ent.components.health:SetMinHealth(0)
+					end
+
+					ent:RemoveEventCallback("healthdelta", OnHealthDelta)
 
 					ent:RemoveTag("dwelling")
 
@@ -144,9 +148,14 @@ local function OnUse(inst)
 		-- Tag
 		inst:AddTag("dwelleractive")
 
+		-- Start consuming
+		if inst.components.fueled then
+			inst.components.fueled:StartConsuming()
+		end
+
 		-- Light
 		inst.Light:Enable(true)
-		inst.components.lighttweener:StartTween(inst.Light, TUNING.DWELLERMASK_RADIUS, nil, nil, nil, tweentime, OnTweenDone)
+		inst.components.lighttweener:StartTween(inst.Light, TUNING.DWELLERMASK_RADIUS, nil, nil, nil, tweentime)
 		inst.net_light_roll:set(true)
 
 
@@ -199,6 +208,7 @@ local function OnStopUse(inst)
 
 			-- Grant owner sanity
 			owner.components.sanity:DoDelta(TUNING.REVIVE_OTHER_SANITY_BONUS / 4)
+			inst.components.fueled:DoDelta(-300, owner)
 		-- end
 	end
 	
@@ -206,7 +216,12 @@ local function OnStopUse(inst)
 	inst:RemoveTag("dwelleractive")
 
 	-- Cooldown (prevents spam and sanity drain abuse)
-	inst.components.rechargeable:Discharge(1)
+	inst.components.rechargeable:Discharge(4)
+
+	-- Stop consuming
+	if inst.components.fueled then
+		inst.components.fueled:StopConsuming()
+	end
 
 	-- Light
 	inst.components.lighttweener:StartTween(inst.Light, 0, nil, nil, nil, tweentime)
@@ -284,7 +299,7 @@ local function OnLightDirty(inst)
 		inst.AnimState:SetBuild("dwellermask_on")
 		inst.AnimState:PlayAnimation("idle")
 		
-		inst.components.lighttweener:StartTween(inst.Light, TUNING.DWELLERMASK_RADIUS, nil, nil, nil, tweentime, OnTweenDone)
+		inst.components.lighttweener:StartTween(inst.Light, TUNING.DWELLERMASK_RADIUS, nil, nil, nil, tweentime)
 
 	end
 end
