@@ -348,7 +348,6 @@ TUNING.HATKID_ABILITYKEY = GetModConfigData("hatkid_polarhatkey")
 
 
 --Character stat config
-TUNING.HATKIDSIZE = GetModConfigData("hatkidbasesize")
 TUNING.HATKID_HEALTH = GetModConfigData("hatkidbasehp")
 TUNING.HATKID_SANITY = GetModConfigData("hatkidbasesanity")
 TUNING.HATKID_HUNGER = GetModConfigData("hatkidbasehunger")
@@ -359,6 +358,10 @@ TUNING.HATKIDSPEED = GetModConfigData("hatkidspeed")
 TUNING.HATKIDNIGHTDRAIN = GetModConfigData("hatkidnightdrain")
 TUNING.HATKIDSANITYDRAIN = GetModConfigData("hatkidsanitydrain")
 TUNING.HATKIDSANITYMULT = GetModConfigData("hatkidsanitymult")
+-- Other character stuff
+TUNING.HATKIDSIZE = GetModConfigData("hatkidbasesize")
+TUNING.HATKIDVOICE = GetModConfigData("hatkidvoice")
+
 
 
 
@@ -370,15 +373,18 @@ TUNING.HATBRELLA_DURABILITY = GetModConfigData("hatbrelladurability")
 --Togglables
 -- TUNING.ENABLE_PONS = GetModConfigData("enablepons")
 
---Hat stuff
 --Kid Hat
 TUNING.KIDHAT_DURABILITY = GetModConfigData("kidhatdurability")
+TUNING.KIDHAT_SANITY = GetModConfigData("kidhatsanity")
+TUNING.KIDHAT_WATERPROOFNESS = GetModConfigData("kidhatwaterproofness")
 
 --Sprint
 TUNING.SPRINTHAT_DURABILITY = GetModConfigData("sprinthatdurability")
+TUNING.SPRINTHAT_INSULATION = GetModConfigData("sprinthatinsulation")
 TUNING.SPRINTHAT_SPEED_MULT = GetModConfigData("sprinthatspeedmult")
 TUNING.SPRINTHAT_HUNGER_BURNRATE = GetModConfigData("sprinthathungerburnrate")
 TUNING.SPRINTHAT_SFX = GetModConfigData("sprinthatsfx")
+TUNING.SPRINTHAT_VFX = GetModConfigData("sprinthatvfx")
 
 --Brewing
 TUNING.BREWINGHAT_DURABILITY = GetModConfigData("brewdurability")
@@ -400,17 +406,17 @@ TUNING.POLARHAT_RADIUS = GetModConfigData("polarradius")
 --Dweller
 TUNING.DWELLERMASK_DURABILITY = GetModConfigData("dwellerdurability")
 TUNING.DWELLERMASK_COOLDOWN = GetModConfigData("dwellercooldown")
--- TUNING.DWELLERMASK_DURATION = GetModConfigData("dwelleractive")
 TUNING.DWELLERMASK_LINGER = GetModConfigData("dwellerlinger")
 TUNING.DWELLERMASK_RADIUS = GetModConfigData("dwellerradius")
-TUNING.DWELLERMASK_SANITYDRAIN = GetModConfigData("dwellersanitydrain")
+TUNING.DWELLERMASK_SANITY = GetModConfigData("dwellersanitydrain")
 TUNING.DWELLERMASK_THRESHHOLD = GetModConfigData("dwellerthreshhold")
 TUNING.DWELLERMASK_SANITYPENALTY = GetModConfigData("dwellersanitypenalty")
 TUNING.DWELLERMASK_FUELPENALTY = GetModConfigData("dwellerfuelpenalty")
 TUNING.DWELLERMASK_HEALTHPENALTY = GetModConfigData("dwellerhealthpenalty")
 TUNING.DWELLERMASK_REVIVEPENALTY = GetModConfigData("dwellerrevivepenalty")
-TUNING.DWELLERMASK_REVIVESANITY = GetModConfigData("dwellerrevivesanity")
+TUNING.DWELLERMASK_REVIVERSANITY = GetModConfigData("dwellerreviversanity")
 TUNING.DWELLERMASK_REVIVEFUEL = GetModConfigData("dwellerrevivefuel")
+TUNING.DWELLERMASK_SFX = GetModConfigData("dwellersfx")
 TUNING.DWELLERMASK_VFX = GetModConfigData("dwellervfx")
 
 --Time Stop

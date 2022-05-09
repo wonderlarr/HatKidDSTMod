@@ -17,7 +17,7 @@ local prevequip = nil
 local function equiprev(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 
-	if TUNING.FUNNYMODE then --Just a funny item teleportation mechanics we can do here.
+	if TUNING.FUNNYMODE then --Just a funny item teleportation mechanic we can do here.
 
 		if prevequip then
 			inst:DoTaskInTime(0, function(inst)

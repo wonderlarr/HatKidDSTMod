@@ -4,74 +4,19 @@ local assets = {
     Asset("SCRIPT", "scripts/prefabs/player_common.lua"),
 	Asset("ANIM", "anim/ui_chest_3x3.zip"),
 
-		-- Hat Kid's voice
+	-- Hat Kid's voice
 	Asset( "SOUNDPACKAGE", "sound/hatkidvoice.fev"),
     Asset( "SOUND", "sound/hatkidvoice.fsb"),
 }
+
 local prefabs = {}
 
--- Custom starting items
+local start_inv = { "kidhat" }
 
-local start_inv = {
-}
-
--- local function round(num) --Stole this from an official lua guide, not just DST. Very useful.
--- 	if num then
--- 		if num >= 0 then 
--- 			return math.ceil(num) 
--- 		else
--- 			return math.floor(num) 
--- 		end
--- 	end
--- end
-
---[[
-local function oncooldown(inst)
-	local cdnum = round(inst.components.timer:GetTimeLeft("hat_cooldown"))
-	local cdstring = "COOLDOWN VALUE MISSING"
-	if cdnum ~= nil then
-
-		if cdnum <= 60 then -- If 60 seconds or under, only say seconds.
-			cdstring = "Only " .. cdnum .. " seconds left!"
-		elseif cdnum < 120 then -- If less than 2 minutes, say seconds and "minute"
-			local cds = cdnum % 60
-			local cdm = (cdnum - cds) / 60
-			cdstring = cdm .. " minute and " .. cds .. " seconds left!"
-		else --Otherwise, say seconds and "minutes"
-			local cds = cdnum % 60
-			local cdm = (cdnum - cds) / 60
-			cdstring = cdm .. " minutes and " .. cds .. " seconds left!"
-		end
-	end
-	inst.components.talker:Say(cdstring)
-end
-
--- Fires on client
-local function OnHatCooldownDirty(inst)
-	inst.hatcooldown = inst.net_hatcooldown:value()
-	-- inst.maxcooldown = inst.net_maxcooldown:value()
-end
-
-local function OnHatCooldownServer(inst)
-	local l = inst.components.timer:GetTimeLeft("hat_cooldown")
-	local e = inst.components.timer:GetTimeElapsed("hat_cooldown")
-	
-	if l and e then
-		--print("Hat max cooldown")
-		--print(l + e) -- WE GOT IT! l + e always equals max cooldown
-	end
-	inst.hatcooldown = round(inst.components.timer:GetTimeLeft("hat_cooldown")) or 0
-	inst.net_hatcooldown:set(inst.hatcooldown)
-end
-]]
-
---When Hat Kid spawns in, she is given these items.
+-- Spawn with Kid's Hat
 local function SpawnWithStuff(inst)
-    local kidhat = SpawnPrefab("kidhat")
-    inst.components.inventory:Equip(kidhat)
-	
-	-- local hatbrella = SpawnPrefab("hatbrella")
-    -- inst.components.inventory:Equip(hatbrella)
+    -- local kidhat = SpawnPrefab("kidhat")
+    -- inst.components.inventory:Equip(kidhat)
 end
 
 -- local function LoadPonInv(inst)
@@ -111,51 +56,6 @@ local function OnPotionThrow(inst)
 	end
 end
 
-local function MakeDirt(inst)
-	local scale = 0.4
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local dirt = SpawnPrefab("sprint_puff")
-	dirt.Transform:SetPosition(x, y, z)
-	dirt.Transform:SetScale(scale, scale, scale)
-end
-
-local hat = nil
-
-local function CleanSprintParticles(inst)
-	inst.sprintfx = nil
-end
-
-local function onLocomote(inst)
-	local isrunning = inst.components.locomotor.wantstorun
-
-	if not TheWorld.ismastersim and inst.replica.inventory then
-
-		hat = inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
-
-	elseif inst.components.inventory then
-
-		hat = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
-
-	end
-	
-
-	if hat then
-
-		if isrunning and hat.prefab == "sprinthat" then
-
-			if not inst.sprintfx then
-				
-				inst.sprintfx = inst:DoTaskInTime(0.25/2, function(inst)
-					inst.sprintfx:Cancel()
-					inst.sprintfx = nil
-					MakeDirt(inst)
-				end)
-			end
-		end
-	end
-end
-
-
 local function OnEquip(inst, data) -- Remove hat sanity modifer when wearing a hat
     if data.eslot == EQUIPSLOTS.HEAD then
 		inst.components.sanity.dapperness = 0
@@ -185,47 +85,47 @@ local function onnewspawn(inst)
 	-- LoadPonInv(inst)
 end
 
-local function ApplyPons(inst, data)
-	if data.target:IsValid() and not data.target:IsInLimbo() and not data.target:HasTag("pons") and TUNING.ENABLE_PONS then
-		-- Apply pons to attackable things
-		if data.target.components.lootdropper and data.target.components.health then
-			data.target.components.lootdropper:AddChanceLoot("pon", 1)
-			data.target.components.lootdropper:AddChanceLoot("pon", 0.2)
+-- local function ApplyPons(inst, data)
+-- 	if data.target:IsValid() and not data.target:IsInLimbo() and not data.target:HasTag("pons") and TUNING.ENABLE_PONS then
+-- 		-- Apply pons to attackable things
+-- 		if data.target.components.lootdropper and data.target.components.health then
+-- 			data.target.components.lootdropper:AddChanceLoot("pon", 1)
+-- 			data.target.components.lootdropper:AddChanceLoot("pon", 0.2)
 
-			-- Add additional pons to slightly stronger enemies
-			if data.target.components.health.maxhealth >= 100 then
+-- 			-- Add additional pons to slightly stronger enemies
+-- 			if data.target.components.health.maxhealth >= 100 then
 				
-				data.target.components.lootdropper:AddChanceLoot("pon", 0.9)
-				data.target.components.lootdropper:AddChanceLoot("pon", 0.2)
-			end
+-- 				data.target.components.lootdropper:AddChanceLoot("pon", 0.9)
+-- 				data.target.components.lootdropper:AddChanceLoot("pon", 0.2)
+-- 			end
 
-			-- Additonal pon chance for every 250 health above the first 250. Enemies that have a multiple of 250 health will get an additional pon chance but that's okay.
-			if data.target.components.health.maxhealth >= 250 then
+-- 			-- Additonal pon chance for every 250 health above the first 250. Enemies that have a multiple of 250 health will get an additional pon chance but that's okay.
+-- 			if data.target.components.health.maxhealth >= 250 then
 				
-				for i = data.target.components.health.maxhealth,0,-250 
-				do 
-					data.target.components.lootdropper:AddChanceLoot("pon", 1)
-					data.target.components.lootdropper:AddChanceLoot("pon", 0.3)
-				end
-			end
+-- 				for i = data.target.components.health.maxhealth,0,-250 
+-- 				do 
+-- 					data.target.components.lootdropper:AddChanceLoot("pon", 1)
+-- 					data.target.components.lootdropper:AddChanceLoot("pon", 0.3)
+-- 				end
+-- 			end
 
-			data.target:AddTag("pons")
-		end
+-- 			data.target:AddTag("pons")
+-- 		end
 
-		if data.target.components.workable and data.target.components.lootdropper then
+-- 		if data.target.components.workable and data.target.components.lootdropper then
 
-			-- chance 
-			for i = data.target.components.workable.workleft / 2 + 1 or 1, 0, -1
-			do
-				data.target.components.lootdropper:AddChanceLoot("pon", 0.75)
-			end
+-- 			-- chance 
+-- 			for i = data.target.components.workable.workleft / 2 + 1 or 1, 0, -1
+-- 			do
+-- 				data.target.components.lootdropper:AddChanceLoot("pon", 0.75)
+-- 			end
 
-			data.target:AddTag("pons")
-		end
+-- 			data.target:AddTag("pons")
+-- 		end
 		
 
-	end
-end
+-- 	end
+-- end
 
 -- widgetsetup =
 -- {
@@ -271,7 +171,6 @@ local function OnLoad(inst, data)
 
 	-- LoadPonInv(inst)
 
-
 	inst:ListenForEvent("equip", OnEquip)
     inst:ListenForEvent("unequip", OnUnequip)
 
@@ -311,11 +210,6 @@ local common_postinit = function(inst)
 	
 	inst:AddComponent("keyhandler")
     inst.components.keyhandler:AddActionListener("HatKidRPC", TUNING["HATKID"].KEY, "AbilityKeyDown", "KEYDOWN")
-
-	-- sprint hat stuff
-	-- inst:ListenForEvent("locomote", onLocomote)
-	-- inst:ListenForEvent("UpdateSprintParticles", onLocomote)
-	inst:ListenForEvent("CleanSprintParticles", CleanSprintParticles)
 
 	-- 50% chance of quote on potion explode
 	inst:ListenForEvent("PotionThrown", OnPotionThrow)
@@ -366,15 +260,20 @@ local master_postinit = function(inst, data)
 	inst.components.foodaffinity:AddPrefabAffinity("pumpkincookie", TUNING.AFFINITY_15_CALORIES_LARGE) -- Favorite food
 	inst.AnimState:SetScale(TUNING.HATKIDSIZE, TUNING.HATKIDSIZE) -- Character size
 
-	-- Custom voice made by myself, Skylarr!
-	inst.soundsname = "hatkidvoice"
-	inst.talker_path_override = "hatkidvoice/"
+	-- Voice
+	if TUNING.HATKIDVOICE == "hatkidvoice" then
+		-- Custom voice made by myself, Skylarr!
+		inst.soundsname = "hatkidvoice"
+		inst.talker_path_override = "hatkidvoice/"
+	else
+		inst.soundsname = TUNING.HATKIDVOICE
+	end
 
 	-- Listeners/Generics
     inst.OnNewSpawn = onnewspawn
 
 	inst.OnLoad = OnLoad
-	inst.OnSave = OnSave
+	-- inst.OnSave = OnSave
 
 	-- Pon stuff, currently disabled altgoether
 

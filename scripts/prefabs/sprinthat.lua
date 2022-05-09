@@ -102,6 +102,8 @@ end
 local function Enabler(inst, enable)
 	if TheWorld.ismastersim or TheNet:IsDedicated() then return end
 
+	if not TUNING.SPRINTHAT_VFX then return end
+
 	if enable then
 		inst.components.updatelooper:AddOnUpdateFn(PLoop)
 	else
@@ -196,7 +198,7 @@ local function fn(Sim)
 	
 	inst:AddComponent("insulator")
     inst.components.insulator:SetSummer()
-    inst.components.insulator:SetInsulation(TUNING.INSULATION_SMALL)
+    inst.components.insulator:SetInsulation(TUNING.SPRINTHAT_INSULATION)
 	
     inst:AddComponent("inventoryitem")
 	 

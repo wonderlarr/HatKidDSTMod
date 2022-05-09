@@ -39,7 +39,7 @@ configuration_options =
 {
 
 	{
-		name = "Character Options",
+		name = "Hat Kid Options",
 		options = null_options,
 		hover = "",
 		default = 0,
@@ -47,7 +47,7 @@ configuration_options =
 
 	{
 		name = "hatkidbasehp",
-		label = "Health",
+		label = "Maximum Health",
 		hover = "How much health Hat Kid will have.",
 		options =
 		{
@@ -70,21 +70,21 @@ configuration_options =
 	
 	{
 		name = "hatkidbasesanity",
-		label = "Sanity",
+		label = "Maximum Sanity",
 		hover = "How much sanity Hat Kid will have.",
 		options =
 		{
 			{description = "25", data = 25},
 			{description = "50", data = 50},
-			{description = "75 (Wes)", data = 75},
-			{description = "100 (Low Norm)", data = 100},
+			{description = "75", data = 75},
+			{description = "100", data = 100},
 			{description = "120 (Default)", data = 120},
 			{description = "125", data = 125},
-			{description = "150 (Average)", data = 150},
+			{description = "150", data = 150},
 			{description = "175", data = 175},
-			{description = "200 (High Norm)", data = 200},
+			{description = "200", data = 200},
 			{description = "225", data = 225},
-			{description = "250 (Wicker)", data = 250},
+			{description = "250", data = 250},
 			{description = "275", data = 275},				
 			{description = "300", data = 300},
 		},
@@ -93,7 +93,7 @@ configuration_options =
 	
 	{
 		name = "hatkidbasehunger",
-		label = "Hunger",
+		label = "Maximum Hunger",
 		hover = "How much hunger Hat Kid will have.",
 		options =
 		{
@@ -123,8 +123,8 @@ configuration_options =
 	
 	{
 		name = "hatkidspeed",
-		label = "Run Speed",
-		hover = "How fast Hat Kid will go.",
+		label = "Movement Speed Multiplier",
+		hover = "How fast Hat Kid will go under normal conditions.",
 		options =
 		{
 			{description = "x0.001", data = 0.001},
@@ -151,8 +151,8 @@ configuration_options =
 	
 	{
 		name = "hatkiddamagedealt",
-		label = "Damage Dealt",
-		hover = "Hat Kid's damage multiplier",
+		label = "Damage Dealt Multiplier",
+		hover = "How much Hat Kid's damage dealt will be multiplied.",
 		options =
 		{
 			{description = "x0.001", data = 0.001},
@@ -186,8 +186,8 @@ configuration_options =
 	
 	{
 		name = "hatkiddamagetaken",
-		label = "Damage Taken",
-		hover = "Hat Kid's damage taken multiplier",
+		label = "Damage Taken Multiplier",
+		hover = "How much Hat Kid's damage taken will be multiplied.",
 		options =
 		{
 			{description = "x0.001", data = 0.001},
@@ -223,8 +223,8 @@ configuration_options =
 	
 	{
 		name = "hatkidbasesize",
-		label = "Character Size",
-		hover = "How big Hat Kid will be",
+		label = "Character Size Multiplier",
+		hover = "How big Hat Kid will be.",
 		options =
 		{
 			{description = "x0.01", data = 0.01},
@@ -257,8 +257,8 @@ configuration_options =
 	
 	{
 		name = "hatkidrate",
-		label = "Hunger Rate",
-		hover = "How fast Hat Kid's hunger drains.",
+		label = "Hunger Rate Multiplier",
+		hover = "How fast Hat Kid's hunger drains. This multiplies with any other hunger draining over time effects.",
 		options =
 		{
 			{description = "x0.001", data = 0.001},
@@ -291,7 +291,7 @@ configuration_options =
 	
 	{
 		name = "hatkidnightdrain",
-		label = "Night Drain",
+		label = "Night Sanity Drain Multiplier",
 		hover = "How much Hat Kid's sanity will be impacted by nighttime.",
 		options =
 		{
@@ -325,7 +325,7 @@ configuration_options =
 
 	{
 		name = "hatkidsanitydrain",
-		label = "Sanity Aura Drain",
+		label = "Sanity Drain Multiplier",
 		hover = "How much Hat Kid's sanity will be negatively impacted by auras.",
 		options =
 		{
@@ -359,8 +359,8 @@ configuration_options =
 
 	{
 		name = "hatkidsanitymult",
-		label = "Sanity Mult",
-		hover = "How much Hat Kid's sanity will be impacted by both positive and negative sources.",
+		label = "Sanity Rate Multiplier",
+		hover = "How much Hat Kid's sanity will be impacted by all sources excluding direct changes.",
 		options =
 		{
 			{description = "x0.001", data = 0.001},
@@ -391,6 +391,20 @@ configuration_options =
 		default = 1.5,
 	},	
 
+	{
+		name = "hatkidvoice",
+		label = "Voice Type",
+		hover = "Which sounds Hat Kid will make while talking.",
+		options =
+		{
+			{description = "Hat Kid (Default)", data = "hatkidvoice"},
+			{description = "Willow", data = "willow"},
+			{description = "Wanda", data = "wanda"},
+			{description = "Wendy", data = "wendy"},
+		},
+		default = "hatkidvoice",
+	},	
+
 
 	{
 		name = "Kid's Hat Options",
@@ -402,7 +416,7 @@ configuration_options =
 	{
 		name = "kidhatdurability",
 		label = "Durability",
-		hover = "How long the Kid's Hat lasts. Durability goes down while the hat is being worn.",
+		hover = "How long the Kid's Hat lasts while worn.",
 		options =
 		{
 			{description = "Forever (Default)", data = false},
@@ -425,6 +439,51 @@ configuration_options =
 		},
 		default = false,
 	},
+
+	{
+		name = "kidhatsanity",
+		label = "Sanity Impact",
+		hover = "How much sanity is passively restored or drained while wearing the Kid's Hat.",
+		options =
+		{
+			{description = "-60/min", data = -60 / 60},
+			{description = "-20/min", data = -20 / 60},
+			{description = "-10/min", data = -10 / 60},
+			{description = "-6.7/min", data = -6.7 / 60},
+			{description = "-4.5/min", data = -4.5 / 60},
+			{description = "-3.4/min", data = -3.4 / 60},
+			{description = "-2/min", data = -2 / 60},
+			{description = "-1.4/min", data = -1.4 / 60},
+			{description = "None", data = 0},
+			{description = "1.4/min", data = 1.4 / 60},
+			{description = "2/min", data = 2 / 60},
+			{description = "3.4/min (Default)", data = 3.4 / 60},
+			{description = "4.5/min", data = 4.5 / 60},
+			{description = "6.7/min", data = 6.7 / 60},
+			{description = "10/min", data = 10 / 60},
+			{description = "20/min", data = 20 / 60},
+			{description = "60/min", data = 1},
+		},
+		default = 3.4 / 60,
+	},	
+
+	{
+		name = "kidhatwaterproofness",
+		label = "Water Resistance",
+		hover = "How much water resistance this hat provides while worn.",
+		options =
+		{
+			{description = "None", data = 0},
+			{description = "20% (Default)", data = 0.2},
+			{description = "35%", data = 0.35},
+			{description = "50%", data = 0.5},
+			{description = "70%", data = 0.7},
+			{description = "90%", data = 0.9},
+			{description = "100%", data = 1},
+		},
+		default = 0.2,
+	},	
+
 
 	-- {
 	-- 	name = "hatkidaurasize",
@@ -499,9 +558,25 @@ configuration_options =
 	},
 
 	{
+		name = "sprinthatinsulation",
+		label = "Overheat Resistance",
+		hover = "How much overheating resistance the Sprint Hat provides while worn.",
+		options =
+		{
+			{description = "None", data = false},
+			{description = "30", data = 30},
+			{description = "60 (Default)", data = 60},
+			{description = "120", data = 120},
+			{description = "180", data = 180},
+			{description = "240", data = 240},
+		},
+		default = 60,
+	},
+
+	{
 		name = "sprinthatspeedmult",
 		label = "Speed Multiplier",
-		hover = "How much faster the Sprint Hat makes Hat Kid run.",
+		hover = "How much Hat Kid's speed will be effected by wearing the Sprint Hat.",
 		options =
 		{
 			{description = "x0.001", data = 0.001},
@@ -518,19 +593,19 @@ configuration_options =
 			{description = "x1", data = 1},
 			{description = "x1.1", data = 1.1},
 			{description = "x1.25", data = 1.25},
-			{description = "x1.3", data = 1.3},
-			{description = "x1.35 (Default)", data = 1.35},
+			{description = "x1.3 (Default)", data = 1.3},
+			{description = "x1.35", data = 1.35},
 			{description = "x1.5", data = 1.5},
 			{description = "x1.75", data = 1.75},
 			{description = "x2", data = 2},
 		},
-		default = 1.35,
+		default = 1.3,
 	},
 	
 	{
 		name = "sprinthathungerburnrate",
 		label = "Hunger Multiplier",
-		hover = "How much faster the Sprint Hat makes Hat Kid starve, while running.",
+		hover = "How much faster the Sprint Hat makes Hat Kid starve, while sprinting.",
 		options =
 		{
 			{description = "x0.001", data = 0.001},
@@ -564,8 +639,20 @@ configuration_options =
 
 	{
 		name = "sprinthatsfx",
-		label = "Sprint SFX",
-		hover = "Whether or not moving while wearing the sprint hat will produce a sound effect. It can be disabled if you find it annoying.",
+		label = "SFX",
+		hover = "Whether or not moving while wearing the sprint hat will produce a sound effect.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled (Default)", data = true},
+		},
+		default = true,
+	},
+
+	{
+		name = "sprinthatvfx",
+		label = "Sprint VFX",
+		hover = "Whether or not moving while wearing the sprint hat will produce a particle trail.",
 		options =
 		{
 			{description = "Disabled", data = false},
@@ -618,7 +705,7 @@ configuration_options =
 	{
 		name = "brewcooldown",
 		label = "Cooldown",
-		hover = "How long the hat will take to recharge.",
+		hover = "How long the Brewing Hat takes to recharge once a potion has started brewing.",
 		options =
 		{
 			{description = "1 Second", data = 1},
@@ -647,7 +734,7 @@ configuration_options =
 	{
 		name = "brewcharge",
 		label = "Concoction Brewing Time",
-		hover = "How long it takes for the concoction to brew before Hat Kid can throw it.",
+		hover = "How long a Brewing Concoction takes to charge before it can be thrown.",
 		options =
 		{
 			{description = "No charge time", data = 0},
@@ -665,7 +752,7 @@ configuration_options =
 	{
 		name = "brewslow",
 		label = "Concoction Slowness",
-		hover = "Hat Kid's speed multiplier while holding a concoction.",
+		hover = "How much Hat Kid's speed is effected while holding a concoction.",
 		options =
 		{
 			{description = "-100%", data = 0},
@@ -723,18 +810,18 @@ configuration_options =
 	{
 		name = "brewradius",
 		label = "Concoction Explosion Radius",
-		hover = "How big the thrown concoction's explosions will be. This value is mostly arbitrary, but still effective to the range.",
+		hover = "How big the thrown concoction's explosions will be. The radius can be observed by the circle shown during the explosion.",
 		options =
 		{
-			{description = "0 (Disabled)", data = 0},
-			{description = "1", data = 1},
-			{description = "2", data = 2},
-			{description = "3 (Default)", data = 3},
-			{description = "4", data = 4},
-			{description = "5", data = 5},
-			{description = "6", data = 6},
-			{description = "7", data = 7},
-			{description = "8 (Very Large)", data = 8},
+			{description = "x0 (Disabled)", data = 0},
+			{description = "x1", data = 1},
+			{description = "x2", data = 2},
+			{description = "x3 (Default)", data = 3},
+			{description = "x4", data = 4},
+			{description = "x5", data = 5},
+			{description = "x6", data = 6},
+			{description = "x7", data = 7},
+			{description = "x8 (Very Large)", data = 8},
 		},
 		default = 3,
 	},
@@ -783,7 +870,7 @@ configuration_options =
 	{
 		name = "polarcooldown",
 		label = "Cooldown",
-		hover = "How long the hat will take to recharge.",
+		hover = "How long the Ice Hat takes to recharge after exiting it's effect.",
 		options =
 		{
 			{description = "1 Second", data = 1},
@@ -811,7 +898,7 @@ configuration_options =
 	{
 		name = "polarlevel",
 		label = "Freeze Level",
-		hover = "Sets which level of freeze the Ice Hat will use in it's radius. Each level is equivelant to 1 hit from the Ice Staff.",
+		hover = "How much things within the radius will be frozen. Each level is equivelant to 1 hit from the Ice Staff.",
 		options =
 		{
 			{description = "1", data = 1},
@@ -857,25 +944,25 @@ configuration_options =
 	{
 		name = "polarradius",
 		label = "Radius",
-		hover = "How big the Ice Hat's freeze radius will be. This value is mostly arbitrary, but still effective to the range.",
+		hover = "How big the Ice Hat's freeze radius will be. The radius can be observed by the circle shown after ground slamming.",
 		options =
 		{
-			{description = "1", data = 1},
-			{description = "2", data = 2},
-			{description = "3", data = 3},
-			{description = "4", data = 4},
-			{description = "5", data = 5},
-			{description = "6 (Default)", data = 6},
-			{description = "7", data = 7},
-			{description = "8", data = 8},
-			{description = "9", data = 9},
-			{description = "10", data = 10},
-			{description = "11", data = 11},
-			{description = "12", data = 12},
-			{description = "13", data = 13},
-			{description = "14", data = 14},
-			{description = "15", data = 15},
-			{description = "16 (Very Large)", data = 16},
+			{description = "x1", data = 1},
+			{description = "x2", data = 2},
+			{description = "x3", data = 3},
+			{description = "x4", data = 4},
+			{description = "x5", data = 5},
+			{description = "x6 (Default)", data = 6},
+			{description = "x7", data = 7},
+			{description = "x8", data = 8},
+			{description = "x9", data = 9},
+			{description = "x10", data = 10},
+			{description = "x11", data = 11},
+			{description = "x12", data = 12},
+			{description = "x13", data = 13},
+			{description = "x14", data = 14},
+			{description = "x15", data = 15},
+			{description = "x16 (Very Large)", data = 16},
 
 		},
 		default = 6,
@@ -891,7 +978,7 @@ configuration_options =
 	{
 		name = "dwellerdurability",
 		label = "Durability",
-		hover = "How long the Dweller Mask lasts while active. Nightmare Fuel refuels 1.5 minutes at all settings.",
+		hover = "How long the Dweller Mask lasts while active. Nightmare Fuel refuels 1.5 minutes worth at all settings.",
 		options =
 		{
 			-- nightmarefuel refules up to 180 regardless of this setting.
@@ -913,7 +1000,7 @@ configuration_options =
 	{
 		name = "dwellercooldown",
 		label = "Cooldown",
-		hover = "How long the hat will take to recharge.",
+		hover = "How long the Dweller's Mask takes to recharge once deactivated by any means.",
 		options =
 		{
 			{description = "1 Second", data = 1},
@@ -938,35 +1025,10 @@ configuration_options =
 		default = 4,
 	},
 	
-	-- 	{
-	-- 	name = "dwelleractive",
-	-- 	label = "Duration",
-	-- 	hover = "How long the dweller mask can remain active. It can be cancelled early regardless of what this value is set to.",
-	-- 	options =
-	-- 	{
-	-- 		{description = "1 Second", data = 1},
-	-- 		{description = "5 Seconds", data = 5},
-	-- 		{description = "10 Seconds", data = 10},
-	-- 		{description = "15 Seconds", data = 15},
-	-- 		{description = "20 Seconds", data = 20},
-	-- 		{description = "30 Seconds (Default)", data = 30},
-	-- 		{description = "45 Seconds", data = 45},
-	-- 		{description = "60 Seconds", data = 60},
-	-- 		{description = "90 Seconds", data = 90},
-	-- 		{description = "2 Minutes", data = 120},
-	-- 		{description = "3 Minutes", data = 180},
-	-- 		{description = "4 Minutes", data = 240},
-	-- 		{description = "5 Minutes", data = 300},
-	-- 		{description = "10 Minutes", data = 600},
-	-- 		{description = "15 Minutes", data = 900},
-	-- 	},
-	-- 	default = 30,
-	-- },
-	
 	{
 		name = "dwellerlinger",
 		label = "Linger Duration",
-		hover = "How long the nightvision effect will linger for.",
+		hover = "How long the Dweller Mask's nightvision effect will linger for once you're no longer within it's active radius.",
 		options =
 		{
 			{description = "1 Second", data = 1},
@@ -987,7 +1049,7 @@ configuration_options =
 	{
 		name = "dwellerradius",
 		label = "Radius",
-		hover = "How big the Dweller Mask's effect radius will be. This value is mostly arbitrary, but still effective to the range.",
+		hover = "How big the Dweller Mask's effect radius will be. The effective radius is identical to the size of the light generated by the hat.",
 		options =
 		{
 			{description = "1", data = 1},
@@ -1013,27 +1075,35 @@ configuration_options =
 
 	{
 		name = "dwellersanitydrain",
-		label = "Active Sanity Drain",
-		hover = "How much sanity is drained time while the Dweller's Mask is active.",
+		label = "Active Sanity Impact",
+		hover = "How much sanity is restored or drained while using the Dweller Mask",
 		options =
 		{
-			{description = "x0.1", data = 0.1},
-			{description = "x0.25", data = 0.25},
-			{description = "x0.5", data = 0.5},
-			{description = "x0.75", data = 0.75},
-			{description = "x1 (Default)", data = 1},
-			{description = "x1.5", data = 1.5},
-			{description = "x2", data = 2},
-			{description = "x3", data = 3},
-			{description = "x4", data = 4},
+			{description = "-60/min", data = -60 / 60},
+			{description = "-20/min", data = -20 / 60},
+			{description = "-10/min", data = -10 / 60},
+			{description = "-6.7/min", data = -6.7 / 60},
+			{description = "-4.5/min (Default)", data = -4.5 / 60},
+			{description = "-3.4/min", data = -3.4 / 60},
+			{description = "-2/min", data = -2 / 60},
+			{description = "-1.4/min", data = -1.4 / 60},
+			{description = "None", data = 0},
+			{description = "1.4/min", data = 1.4 / 60},
+			{description = "2/min", data = 2 / 60},
+			{description = "3.4/min", data = 3.4 / 60},
+			{description = "4.5/min", data = 4.5 / 60},
+			{description = "6.7/min", data = 6.7 / 60},
+			{description = "10/min", data = 10 / 60},
+			{description = "20/min", data = 20 / 60},
+			{description = "60/min", data = 1},
 		},
-		default = 1,
+		default = -4.5 / 60,
 	},
 
 	{
 		name = "dwellerthreshhold",
 		label = "Sanity Threshhold",
-		hover = "How much sanity is instantly consumed upon activating the hat. Also prevents activation below this amount.",
+		hover = "How much sanity is required to activate the Dweller Mask. This amount is consumed immediately when activated.",
 		options =
 		{
 			{description = "0", data = 0},
@@ -1055,7 +1125,7 @@ configuration_options =
 
 	{
 		name = "dwellersanitypenalty",
-		label = "Sanity Penalty",
+		label = "On-hit Sanity Penalty",
 		hover = "How much sanity is taken away when someone within a Dweller Mask's radius is hit while at 1 hp.",
 		options =
 		{
@@ -1078,7 +1148,7 @@ configuration_options =
 
 	{
 		name = "dwellerfuelpenalty",
-		label = "Usage Penalty",
+		label = "On-hit Fuel Penalty",
 		hover = "How much fuel is taken away when someone within a Dweller Mask's radius is hit while at 1 hp.",
 		options =
 		{
@@ -1087,7 +1157,7 @@ configuration_options =
 			{description = "-2 seconds", data = -4},
 			{description = "-3 seconds", data = -6},
 			{description = "-4 seconds", data = -8},
-			{description = "-5 seconds", data = -10},
+			{description = "-5 seconds (Default)", data = -10},
 			{description = "-10 seconds", data = -20},
 			{description = "-15 seconds", data = -30},
 			{description = "-20 seconds", data = -40},
@@ -1096,13 +1166,13 @@ configuration_options =
 			{description = "-60 seconds", data = -120},
 			{description = "-2 minutes", data = -240},
 		},
-		default = -5,
+		default = -10,
 	},
 
 	{
 		name = "dwellerhealthpenalty",
-		label = "Max Health Penalty Mult",
-		hover = "Controls how damage taken and mitigated by the Dweller's Mask is translated to a max health penalty, via a multiplier.",
+		label = "Max Health Penalty Multiplier",
+		hover = "How damage taken while at 1 HP is translated into a max health penalty. For example, at x0.5, taking 30 damage becomes a 15 max health penalty.",
 		options =
 		{
 			{description = "x0.1", data = 0.1},
@@ -1119,7 +1189,7 @@ configuration_options =
 	{
 		name = "dwellerrevivepenalty",
 		label = "Revivee Penalties",
-		hover = "Whether or not players revived by the Dweller's Mask will have additional stat penalties, similar to the Telltale Heart's revive penalties.",
+		hover = "Whether or not players revived by the Dweller's Mask will have their sanity set to 30%, and max health decreased.",
 		options =
 		{
 			{description = "Enabled (Default)", data = true},
@@ -1129,9 +1199,9 @@ configuration_options =
 	},
 
 	{
-		name = "dwellerrevivesanity",
+		name = "dwellerreviversanity",
 		label = "Reviver Sanity Bonus",
-		hover = "How much sanity will be restored to Hat Kid when a player is revived by the Dweller's Mask.",
+		hover = "How much sanity will be restored to the reviver upon a successful revive by the Dweller Mask",
 		options =
 		{
 			{description = "0", data = 0},
@@ -1163,9 +1233,21 @@ configuration_options =
 	},
 
 	{
+		name = "dwellersfx",
+		label = "SFX",
+		hover = "Whether or not the Dweller's Mask will produce sounds.",
+		options =
+		{
+			{description = "Enabled (Default)", data = true},
+			{description = "Disabled", data = false},
+		},
+		default = true,
+	},
+
+	{
 		name = "dwellervfx",
 		label = "Night Vision Screen Effect",
-		hover = "Whether or not the screen will turn green while under the influence of the Dweller Mask's night vision.",
+		hover = "Whether or not the screen will turn green while under the influence of the Dweller's Mask's night vision.",
 		options =
 		{
 			{description = "Enabled (Default)", data = true},
@@ -1184,7 +1266,7 @@ configuration_options =
 	{
 		name = "timestopdurability",
 		label = "Durability",
-		hover = "How long the Time Stop Hat lasts. Nightmare Fuel refuels 2 uses at all settings.",
+		hover = "How long the Time Stop Hat lasts. Nightmare Fuel refuels (up to) 2 uses at all settings.",
 		options =
 		{
 			-- nightmarefuel refules up to 180 regardless of this setting.
@@ -1208,7 +1290,7 @@ configuration_options =
 	{
 		name = "timestopcooldown",
 		label = "Cooldown",
-		hover = "How long the hat will take to recharge.",
+		hover = "How long the Time Stop Hat takes to recharge once deactivated by any means.",
 		options =
 		{
 			{description = "1 Second", data = 1},
@@ -1219,9 +1301,9 @@ configuration_options =
 			{description = "10 Seconds", data = 10},
 			{description = "15 Seconds", data = 15},
 			{description = "20 Seconds", data = 20},
-			{description = "30 Seconds", data = 30},
+			{description = "30 Seconds (Default)", data = 30},
 			{description = "45 Seconds", data = 45},
-			{description = "60 Seconds (Default)", data = 60},
+			{description = "60 Seconds", data = 60},
 			{description = "90 Seconds", data = 90},
 			{description = "2 Minutes", data = 120},
 			{description = "3 Minutes", data = 180},
@@ -1230,13 +1312,13 @@ configuration_options =
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 60,
+		default = 30,
 	},
 	
 	{
 		name = "timestopactive",
 		label = "Duration",
-		hover = "How long the Time Stop effect can remain active. It can be cancelled early regardless of what this value is set to.",
+		hover = "How long the Time Stop Hat can remain active. It can be cancelled early regardless of what this value is set to.",
 		options =
 		{
 			{description = "1 Second", data = 1},
@@ -1262,17 +1344,17 @@ configuration_options =
 	{
 		name = "timestopscale",
 		label = "Time Speed",
-		hover = "The multiplier applied to the speed of various actions, such as attack, and movement speed.",
+		hover = "How much nearby entities are effected by the Time Stop Hat's effect. Setting this below x0.3 may cause issues.",
 		options =
 		{
-			{description = "x0.1", data = 0.1},
-			{description = "x0.2", data = 0.2},
+			{description = "x0.1 (Careful)", data = 0.1},
+			{description = "x0.2 (Careful)", data = 0.2},
 			{description = "x0.3", data = 0.3},
-			{description = "x0.334", data = 1/3},
+			{description = "x0.34", data = 0.34},
 			{description = "x0.4", data = 0.4},
 			{description = "x0.5 (Default)", data = 0.5},
 			{description = "x0.6", data = 0.6},
-			{description = "x0.667", data = 2/3},
+			{description = "x0.67", data = 0.67},
 			{description = "x0.7", data = 0.7},
 			{description = "x0.8", data = 0.8},
 			{description = "x0.9", data = 0.9},
@@ -1287,7 +1369,7 @@ configuration_options =
 	},
 	
 	{
-		name = "Hatbrella Options",
+		name = "Blue Umbrella Options",
 		options = null_options,
 		hover = "",
 		default = 0,
@@ -1348,7 +1430,7 @@ configuration_options =
 	{
 		name = "hatbrellaopendurability",
 		label = "Open Umbrella Durability",
-		hover = "How long Hat Kid's umbrella lasts while open, using in game time.",
+		hover = "How long you can hold the open variant of Hat Kid's umbrella, before it breaks.",
 		options =
 		{
 			{description = "Disabled", data = false},
@@ -1359,8 +1441,8 @@ configuration_options =
 			{description = "1 day", data = total_day_time * 1},
 			{description = "2 days", data = total_day_time * 2},
 			{description = "4 days", data = total_day_time * 4},
-			{description = "6 days", data = total_day_time * 6},			
-			{description = "8 days (Default)", data = total_day_time * 8},
+			{description = "6 days (Default)", data = total_day_time * 6},			
+			{description = "8 days", data = total_day_time * 8},
 			{description = "10 days", data = total_day_time * 10},
 			{description = "12 days", data = total_day_time * 12},
 			{description = "15 days", data = total_day_time * 15},
@@ -1369,7 +1451,7 @@ configuration_options =
 			{description = "Disabled", data = false},
 
 		},
-		default = total_day_time * 8,
+		default = total_day_time * 6,
 	},
 
 	{
@@ -1382,7 +1464,7 @@ configuration_options =
 	{
         name = "hatkid_polarhatkey",
         label = "Ability Key",
-        hover = "This is the key used to activate hat abilities. Unfortunately this is set globally for all hat kid's, rather than per player.",
+        hover = "This is the key used to activate hat abilities. Unfortunately this is set globally for all Hat Kid's, rather than per player.",
         options =
         {
             {description="TAB", data = 9},
@@ -1494,12 +1576,12 @@ configuration_options =
 		default = false,
 	},
 	
-	{
-		name = "Experimental",
-		options = null_options,
-		hover = "",
-		default = 0,
-	},	
+	-- {
+	-- 	name = "Experimental",
+	-- 	options = null_options,
+	-- 	hover = "",
+	-- 	default = 0,
+	-- },	
 
 	-- {
 	-- 	name = "enablepons",

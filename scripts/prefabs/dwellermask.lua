@@ -8,7 +8,6 @@ local assets=
     Asset("ATLAS", "images/inventoryimages/dwellermask.xml"),
     Asset("IMAGE", "images/inventoryimages/dwellermask.tex"),
 	
-	-- Asset("IMAGE", resolvefilepath("images/cc/dwellervision.tex")),
 	Asset("IMAGE", resolvefilepath("images/cc/nd.tex")),
 
 	Asset("SOUNDPACKAGE", "sound/dwellermask.fev"),
@@ -166,12 +165,14 @@ local function OnUse(inst)
 		owner.AnimState:OverrideSymbol("swap_hat", "dwellermask_on", "swap_hat")
 
 		-- Sanity
-		inst.components.equippable.dapperness = -TUNING.DAPPERNESS_MED * TUNING.DWELLERMASK_SANITYDRAIN
+		inst.components.equippable.dapperness = TUNING.DWELLERMASK_SANITY
 		owner.components.sanity:DoDelta(TUNING.DWELLERMASK_THRESHHOLD)
 		
 		-- Sound
-		inst.SoundEmitter:PlaySound("dwellermask/sound/activate")
-		inst.SoundEmitter:PlaySound("dwellermask/sound/loop", "dwellermaskloop")
+		if TUNING.DWELLERMASK_SFX then
+			inst.SoundEmitter:PlaySound("dwellermask/sound/activate")
+			inst.SoundEmitter:PlaySound("dwellermask/sound/loop", "dwellermaskloop")
+		end
 	end
 end
 
@@ -191,7 +192,7 @@ local function OnStopUse(inst)
 	local nags = { "reviving" }
 	local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, tags)
 	for _,ent in ipairs(targets) do
-		if inst.components.fueled:GetPercent() >= 0.2 then -- If we have enough fuel to revive
+		if inst.components.fueled.currentfuel >= TUNING.DWELLERMASK_DURABILITY / TUNING.DWELLERMASK_REVIVEFUEL then -- If we have enough fuel to revive
 			ent:PushEvent("respawnfromghost", { source = inst, user = owner })
 			-- In order to apply stats differently than default, we have to do it AFTER the player respawns, and not during
 			-- This is a sorta gross way to do this imo but I don't feel like hooking into a function that would do this correctly at the moment.
@@ -208,7 +209,7 @@ local function OnStopUse(inst)
 			end
 
 			-- Grant owner sanity
-			owner.components.sanity:DoDelta(TUNING.DWELLERMASK_REVIVESANITY)
+			owner.components.sanity:DoDelta(TUNING.DWELLERMASK_REVIVERSANITY)
 
 			-- Finally, decrement the fuel
 			inst.components.fueled:DoDelta(math.ceil(-TUNING.DWELLERMASK_DURABILITY / TUNING.DWELLERMASK_REVIVEFUEL), ent)
@@ -237,8 +238,10 @@ local function OnStopUse(inst)
 	inst.components.equippable.dapperness = 0
 
 	-- Sound
-	inst.SoundEmitter:PlaySound("dwellermask/sound/deactivate")
-	inst.SoundEmitter:KillSound("dwellermaskloop")
+	if TUNING.DWELLERMASK_SFX then
+		inst.SoundEmitter:PlaySound("dwellermask/sound/deactivate")
+		inst.SoundEmitter:KillSound("dwellermaskloop")
+	end
 end
 
 local function KeybindUse(inst)
@@ -246,7 +249,7 @@ local function KeybindUse(inst)
 		inst.components.useableitem:StopUsingItem()
 	else
 		inst.components.useableitem:StartUsingItem()
-	end
+	end 
 end
 
 local function OnEquip(inst, owner)

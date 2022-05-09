@@ -17,10 +17,6 @@ local prefabs =
 {
 }
 
-local function aura()
-	return 1
-end
-
 local function OnEquip(inst, owner)
 	owner.AnimState:OverrideSymbol("swap_hat", inst.AnimState:GetBuild(), "swap_hat")
 	
@@ -94,14 +90,14 @@ local function fn(Sim)
     inst:AddComponent("inspectable")
 
 	inst:AddComponent("waterproofer")
-    inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_SMALL)
+    inst.components.waterproofer:SetEffectiveness(TUNING.KIDHAT_WATERPROOFNESS)
 
     inst:AddComponent("inventoryitem")
 	 
     inst:AddComponent("equippable")
 	inst.components.equippable.restrictedtag = "hatkid"
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
-	inst.components.equippable.dapperness = TUNING.DAPPERNESS_MED
+	inst.components.equippable.dapperness = TUNING.KIDHAT_SANITY
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
 
