@@ -40,7 +40,7 @@ local function DwellmaskClient(ent, val)
 	ent.components.playervision:ForceNightVision(enable)
 	ent.AnimState:SetHaunted(enable) -- Don't know why I need to do this here, SetHaunted just refuses to work from the server for whatever reason
 
-	if enable then
+	if enable and TUNING.DWELLERMASK_VFX then
 		ent.components.playervision:SetCustomCCTable(DWELLERVISION_COLOURCUBES_3)
 	else
 		ent.components.playervision:SetCustomCCTable(nil)
@@ -67,8 +67,10 @@ local function DwellerAbility(inst)
 			local max = ent.components.health.maxhealth
 			local penalty = ent.components.health:GetPenaltyPercent()
 
-			if amount < 0 and current <= 1 then
-				ent.components.health:DeltaPenalty(-amount / max / 2) -- 50% of damage taken is dealt to max health
+			if amount < 0 and current <= 1 then -- if we're blocking damage
+				owner.components.sanity:DoDelta(TUNING.DWELLERMASK_SANITYPENALTY)
+				inst.components.fueled:DoDelta(TUNING.DWELLERMASK_FUELPENALTY) 
+				ent.components.health:DeltaPenalty(-amount / max / TUNING.DWELLERMASK_HEALTHPENALTY) -- 50% of damage taken is dealt to max health
 
 				if penalty == TUNING.MAXIMUM_HEALTH_PENALTY then
 					ent.components.health:SetMinHealth(0)
@@ -110,7 +112,7 @@ local function DwellerAbility(inst)
 				end
 				
 				-- The task below clears the nightvision after a time
-				ent.NVLinger = ent:DoTaskInTime(4, function(ent)
+				ent.NVLinger = ent:DoTaskInTime(TUNING.DWELLERMASK_LINGER, function(ent)
 					-- Only executed at effect end
 					SendModRPCToClient(GetClientModRPC("HatKidRPC", "dwellmaskclient"), nil, ent, false)
 					ent.components.playervision:ForceNightVision(false)
@@ -136,7 +138,7 @@ local function OnUse(inst)
 
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 	
-	if not inst.components.rechargeable:IsCharged() or owner.components.sanity.current < 5 then
+	if not inst.components.rechargeable:IsCharged() or owner.components.sanity.current < TUNING.DWELLERMASK_THRESHHOLD and inst.components.fueled:GetPercent() > 0 then
 
 		inst:DoTaskInTime(0, inst.components.useableitem:StopUsingItem()) -- Wait 1 frame or else things get weird
 	
@@ -164,8 +166,8 @@ local function OnUse(inst)
 		owner.AnimState:OverrideSymbol("swap_hat", "dwellermask_on", "swap_hat")
 
 		-- Sanity
-		inst.components.equippable.dapperness = -TUNING.DAPPERNESS_LARGE
-		owner.components.sanity:DoDelta(-5)
+		inst.components.equippable.dapperness = -TUNING.DAPPERNESS_MED * TUNING.DWELLERMASK_SANITYDRAIN
+		owner.components.sanity:DoDelta(TUNING.DWELLERMASK_THRESHHOLD)
 		
 		-- Sound
 		inst.SoundEmitter:PlaySound("dwellermask/sound/activate")
@@ -189,34 +191,35 @@ local function OnStopUse(inst)
 	local nags = { "reviving" }
 	local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, tags)
 	for _,ent in ipairs(targets) do
-		-- if ent ~= owner then
+		if inst.components.fueled:GetPercent() >= 0.2 then -- If we have enough fuel to revive
 			ent:PushEvent("respawnfromghost", { source = inst, user = owner })
-
-
-
-			-- Apply dweller revive penalties
-			ent.components.health:DeltaPenalty(TUNING.REVIVE_HEALTH_PENALTY) -- Max health -25%
-
 			-- In order to apply stats differently than default, we have to do it AFTER the player respawns, and not during
 			-- This is a sorta gross way to do this imo but I don't feel like hooking into a function that would do this correctly at the moment.
 			local function PostPenalty(ent)
-				ent.components.sanity:DoDelta(ent.components.sanity.max * -0.2) -- Sanity 30% on respawn (norm 50%)
+				-- Should only be called if penalty is enabled
+				ent.components.sanity:SetPercent(0.3) -- Sanity 30% on respawn (norm 50%)
 				ent:RemoveEventCallback("ms_respawnedfromghost", PostPenalty)
 			end
-
-			ent:ListenForEvent("ms_respawnedfromghost", PostPenalty)
+			
+			if TUNING.DWELLERMASK_REVIVEPENALTY then
+				-- Apply dweller revive penalties
+				ent.components.health:DeltaPenalty(TUNING.REVIVE_HEALTH_PENALTY) -- Max health -25%
+				ent:ListenForEvent("ms_respawnedfromghost", PostPenalty)
+			end
 
 			-- Grant owner sanity
-			owner.components.sanity:DoDelta(TUNING.REVIVE_OTHER_SANITY_BONUS / 4)
-			inst.components.fueled:DoDelta(-300, owner)
-		-- end
+			owner.components.sanity:DoDelta(TUNING.DWELLERMASK_REVIVESANITY)
+
+			-- Finally, decrement the fuel
+			inst.components.fueled:DoDelta(math.ceil(-TUNING.DWELLERMASK_DURABILITY / TUNING.DWELLERMASK_REVIVEFUEL), ent)
+		end
 	end
 	
 	-- Tags
 	inst:RemoveTag("dwelleractive")
 
 	-- Cooldown (prevents spam and sanity drain abuse)
-	inst.components.rechargeable:Discharge(4)
+	inst.components.rechargeable:Discharge(TUNING.DWELLERMASK_COOLDOWN)
 
 	-- Stop consuming
 	if inst.components.fueled then
@@ -306,8 +309,10 @@ end
 
 local function OnEmpty(inst)
 	inst.components.useableitem:StopUsingItem() -- And we'll make sure to stop the dweller effect
+end
 
-	-- inst:DoTaskInTime(0.5, inst:Remove())
+local function ontakefuel(inst)
+    inst.SoundEmitter:PlaySound("dontstarve/common/nightmareAddFuel")
 end
 
 local function OnCharged(inst)
@@ -362,19 +367,8 @@ local function fn(Sim)
 
 
     inst:AddComponent("timer")
-
-    -- local function ontimerdone(inst)
-	-- 	inst.components.useableitem:StopUsingItem()
-	-- end
-
-    -- inst:ListenForEvent("timerdone", ontimerdone)
- 
-	-- inst:AddComponent("waterproofer")
-    -- inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_SMALL) 
 	
     inst:AddComponent("inspectable")
-	
-
 	
     inst:AddComponent("inventoryitem")
 	 
@@ -389,9 +383,11 @@ local function fn(Sim)
 
 	if TUNING.DWELLERMASK_DURABILITY then
 		inst:AddComponent("fueled")
-		inst.components.fueled.fueltype = FUELTYPE.MAGIC
-		inst.components.fueled:InitializeFuelLevel( TUNING.DWELLERMASK_DURABILITY ) -- add tuning 600
-		-- inst.components.fueled:InitializeFuelLevel( 3 ) -- add tuning 600
+		inst.components.fueled.fueltype = FUELTYPE.NIGHTMARE
+		inst.components.fueled:SetTakeFuelFn(ontakefuel)
+		inst.components.fueled.accepting = true
+		inst.components.fueled:InitializeFuelLevel( TUNING.DWELLERMASK_DURABILITY )
+		inst.components.fueled.rate_modifiers:SetModifier(inst, 2, "base") -- Hard coding this value, configing shouldn't be needed
 		inst.components.fueled:SetDepletedFn(OnEmpty)
 	end
 

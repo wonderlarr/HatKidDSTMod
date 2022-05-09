@@ -11,49 +11,101 @@ local assets=
 
 RegisterInventoryItemAtlas("images/inventoryimages/sprinthat.xml","sprinthat.tex")
 
-
 local prefabs = 
 {
+	-- "sprint_puff"
 }
 
-local sprinting = nil
+local function PLoop(inst)
 
-local function onLocomote(inst) -- Perhaps rewrite this?
-	local isrunning = inst.components.locomotor.isrunning or inst.components.locomotor.wantstorun
-	local hat = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD) -- known as inst throughout the rest of this file
-	
+	if TheWorld.ismastersim or TheNet:IsDedicated() then return end
 
-	if sprinting ~= isrunning then -- This is here so we don't retrigger the sound event when we aren't doing anything, so it only triggers if the state is different
+	if ThePlayer.AnimState:IsCurrentAnimation("run_pre") or 
+	ThePlayer.AnimState:IsCurrentAnimation("run_loop") then
+		if not inst.sprintfx then
+				
+			inst.sprintfx = inst:DoTaskInTime(0.25/2, function(inst)
+				inst.sprintfx:Cancel()
+				inst.sprintfx = nil
+				local x, y, z = ThePlayer.Transform:GetWorldPosition()
+				local dirt = SpawnPrefab("sprint_puff")
+				dirt.Transform:SetPosition(x, y, z)
+				dirt.Transform:SetScale(0.4, 0.4, 0.4)
+			end)
+		end
+	elseif ThePlayer.AnimState:IsCurrentAnimation("run_pst") and inst.sprintfx then
+		inst.sprintfx:Cancel()
+		inst.sprintfx = nil
+	end
+end
 
-		sprinting = isrunning -- this is a hacky way of tracking state changes,
+local function onLocomote(owner)
+	local inst = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+	local isrunning = inst.cansprint and owner.components.locomotor.isrunning or owner.components.locomotor.wantstorun
 
-		if sprinting then
+	if inst.sprinting ~= isrunning then -- This is here so we don't retrigger the sound event when we aren't doing anything, so it only triggers if the state is different
 
-			--Modify hunger rate
-			if inst.components.hunger and hat.components.fueled then
-				inst.components.hunger.burnratemodifiers:SetModifier(hat, TUNING.SPRINTHAT_HUNGER_BURNRATE)
-				hat.components.fueled:StartConsuming()
+		inst.sprinting = isrunning
+
+		if owner.components.inventory:IsHeavyLifting() then
+			-- Remove hunger burn
+			if owner.components.hunger then
+				owner.components.hunger.burnratemodifiers:RemoveModifier(inst)
+			end
+		
+			-- Remove durability burn
+			if inst.components.fueled then
+				inst.components.fueled:StopConsuming()
+			end
+
+			return
+		end
+
+		if inst.sprinting then
+
+			-- Start hunger burn
+			if owner.components.hunger then
+				owner.components.hunger.burnratemodifiers:SetModifier(inst, TUNING.SPRINTHAT_HUNGER_BURNRATE)
+			end
+		
+			-- Start durability burn
+			if inst.components.fueled then
+				inst.components.fueled:StartConsuming()
 			end
 
 			--Start the sound loop
 			if TUNING.SPRINTHAT_SFX then
-				inst.SoundEmitter:PlaySound("sprinthat/sound/sprintloop", "sprintloop")
+				owner.SoundEmitter:PlaySound("sprinthat/sound/sprintloop", "sprintloop")
 			end
 
-		elseif not sprinting then
+		elseif not inst.sprinting then
 
-			-- Remove modified hunger rate 
-			if inst.components.hunger and hat.components.fueled then
-				inst.components.hunger.burnratemodifiers:RemoveModifier(hat)
-				hat.components.fueled:StopConsuming()
+			-- Remove hunger burn
+			if owner.components.hunger then
+				owner.components.hunger.burnratemodifiers:RemoveModifier(inst)
+			end
+		
+			-- Remove durability burn
+			if inst.components.fueled then
+				inst.components.fueled:StopConsuming()
 			end
 			
 			--Cancel sound loop, and play the release sfx
 			if TUNING.SPRINTHAT_SFX then
-				inst.SoundEmitter:KillSound("sprintloop")
-				inst.SoundEmitter:PlaySound("sprinthat/sound/sprintrelease")
+				owner.SoundEmitter:KillSound("sprintloop")
+				owner.SoundEmitter:PlaySound("sprinthat/sound/sprintrelease")
 			end
 		end
+	end
+end
+
+local function Enabler(inst, enable)
+	if TheWorld.ismastersim or TheNet:IsDedicated() then return end
+
+	if enable then
+		inst.components.updatelooper:AddOnUpdateFn(PLoop)
+	else
+		inst.components.updatelooper:RemoveOnUpdateFn(PLoop)
 	end
 end
 
@@ -68,18 +120,13 @@ local function OnEquip(inst, owner)
 		owner.AnimState:Hide("HEAD_HAT")
 	end
 	
-	sprinting = nil
-	-- Config controls if we do the sound or not
+	inst.sprinting = nil
+
 	owner:ListenForEvent("locomote", onLocomote)
-	owner:PushEvent("UpdateSprintParticles")
+	SendModRPCToClient(GetClientModRPC("HatKidRPC", "SprintEquip"), nil, inst, true)
 end
  
 local function OnUnequip(inst, owner)
-
-	if owner.components.hunger then
-		owner.components.hunger.burnrate = 1
-	end
-
 	owner.AnimState:Hide("HAT")
 	owner.AnimState:Hide("HAT_HAIR")
 	owner.AnimState:Show("HAIR_NOHAT")
@@ -90,16 +137,6 @@ local function OnUnequip(inst, owner)
 		owner.AnimState:Hide("HEAD_HAT")
 	end
 
-	sprinting = nil
-
-	owner:RemoveEventCallback("locomote", onLocomote)
-	
-	if owner.sprintfx then
-		owner.sprintfx:Cancel() -- If we remove this the game crashes. Simple as that. 
-		                        -- Don't remove it. I don't feel like dealing with it.
-								-- Someone else can fix it if they want but I'm not doing it.
-	end
-
 	if owner.components.hunger then
 		owner.components.hunger.burnratemodifiers:RemoveModifier(inst)
 	end
@@ -108,18 +145,21 @@ local function OnUnequip(inst, owner)
 		inst.components.fueled:StopConsuming()
 	end
 
-	if TUNING.SPRINTHAT_SFX then
+	-- Cleanup sound if left over
+	if TUNING.SPRINTHAT_SFX and inst.sprinting then
 		inst:DoTaskInTime(0, function(inst)
 			owner.SoundEmitter:KillSound("sprintloop")
 			owner.SoundEmitter:PlaySound("sprinthat/sound/sprintrelease")
 		end)
 	end
 
-	owner:PushEvent("CleanSprintParticles") -- Stops particles properly on unequip. Particles still work sometimes without this but this makes it consistent and prevents glitches.
-	-- If you wanna know what it does, check out the listener in hatkid.lua
-	
+	inst.sprinting = nil
 
+	owner:RemoveEventCallback("locomote", onLocomote)
+	SendModRPCToClient(GetClientModRPC("HatKidRPC", "SprintEquip"), nil, inst, false)
 end
+
+AddClientModRPCHandler("HatKidRPC", "SprintEquip", Enabler)
 
 local function OnEmpty(inst)
 	inst:DoTaskInTime(0, inst.Remove)
@@ -142,6 +182,7 @@ local function fn(Sim)
 	inst.entity:SetPristine()
 	
 	if not TheWorld.ismastersim then
+		inst:AddComponent("updatelooper")
         return inst
     end
 	
@@ -158,8 +199,6 @@ local function fn(Sim)
     inst.components.insulator:SetInsulation(TUNING.INSULATION_SMALL)
 	
     inst:AddComponent("inventoryitem")
-    -- inst.components.inventoryitem.imagename = "sprinthat"
-    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/sprinthat.xml"
 	 
     inst:AddComponent("equippable")
 	inst.components.equippable.restrictedtag = "hatkid"

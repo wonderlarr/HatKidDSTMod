@@ -374,9 +374,9 @@ configuration_options =
 			{description = "x0.7", data = 0.7},
 			{description = "x0.8", data = 0.8},
 			{description = "x0.9", data = 0.9},
-			{description = "x1 (Default)", data = 1},
+			{description = "x1", data = 1},
 			{description = "x1.25", data = 1.25},
-			{description = "x1.5", data = 1.5},
+			{description = "x1.5 (Default)", data = 1.5},
 			{description = "x1.75", data = 1.75},
 			{description = "x2", data = 2},
 			{description = "x3", data = 3},
@@ -388,7 +388,7 @@ configuration_options =
 			{description = "x9", data = 9},
 			{description = "x10", data = 10},
 		},
-		default = 1,
+		default = 1.5,
 	},	
 
 
@@ -405,7 +405,7 @@ configuration_options =
 		hover = "How long the Kid's Hat lasts. Durability goes down while the hat is being worn.",
 		options =
 		{
-			{description = "Forever", data = false},
+			{description = "Forever (Default)", data = false},
 			{description = "30 seconds", data = 30},
 			{description = "1 minute", data = 60},
 			{description = "5 minutes", data = 5 * 60},
@@ -416,14 +416,14 @@ configuration_options =
 			{description = "60 minutes", data = 60 * 60},
 			{description = "75 minutes", data = 75 * 60},
 			{description = "90 minutes", data = 90 * 60},
-			{description = "2 hours (Default)", data = 2 * 60 * 60},
+			{description = "2 hours", data = 2 * 60 * 60},
 			{description = "3 hours", data = 3 * 60 * 60},
 			{description = "4 hours", data = 4 * 60 * 60},
 			{description = "6 hours", data = 6 * 60 * 60},
 			{description = "12 hours", data = 12 * 60 * 60},
-			{description = "Forever", data = false},
+			{description = "Forever (Default)", data = false},
 		},
-		default = 2 * 60 * 60,
+		default = false,
 	},
 
 	-- {
@@ -474,10 +474,10 @@ configuration_options =
 	{
 		name = "sprinthatdurability",
 		label = "Durability",
-		hover = "How long the sprinthat lasts while sprinting. Durabiltiy does not reduce while standing still and wearing the Sprint Hat.",
+		hover = "How long the sprinthat lasts while sprinting. Durabiltiy only decreases while sprinting.",
 		options =
 		{
-			{description = "Forever", data = false},
+			{description = "Forever (Default)", data = false},
 			{description = "30 seconds", data = 30},
 			{description = "1 minute", data = 60},
 			{description = "5 minutes", data = 5 * 60},
@@ -487,15 +487,15 @@ configuration_options =
 			{description = "45 minutes", data = 45 * 60},
 			{description = "60 minutes", data = 60 * 60},
 			{description = "75 minutes", data = 75 * 60},
-			{description = "90 minutes (Default)", data = 90 * 60},
+			{description = "90 minutes", data = 90 * 60},
 			{description = "2 hours", data = 2 * 60 * 60},
 			{description = "3 hours", data = 3 * 60 * 60},
 			{description = "4 hours", data = 4 * 60 * 60},
 			{description = "6 hours", data = 6 * 60 * 60},
 			{description = "12 hours", data = 12 * 60 * 60},
-			{description = "Forever", data = false},
+			{description = "Forever (Default)", data = false},
 		},
-		default = 90 * 60,
+		default = false,
 	},
 
 	{
@@ -547,8 +547,8 @@ configuration_options =
 			{description = "x1", data = 1},
 			{description = "x1.25", data = 1.25},
 			{description = "x1.5", data = 1.5},
-			{description = "x1.6s", data = 1.6},
-			{description = "x1.75 (Default)", data = 1.75},
+			{description = "x1.67 (Default)", data = 1.67},
+			{description = "x1.75", data = 1.75},
 			{description = "x2", data = 2},
 			{description = "x3", data = 3},
 			{description = "x4", data = 4},
@@ -559,7 +559,7 @@ configuration_options =
 			{description = "x9", data = 9},
 			{description = "x10", data = 10},
 		},
-		default = 1.75,
+		default = 1.67,
 	},
 
 	{
@@ -622,9 +622,12 @@ configuration_options =
 		options =
 		{
 			{description = "1 Second", data = 1},
+			{description = "2 Seconds", data = 2},
+			{description = "3 Seconds", data = 3},
+			{description = "4 Seconds (Default)", data = 4},
 			{description = "5 Seconds", data = 5},
 			{description = "10 Seconds", data = 10},
-			{description = "12 Seconds (Default)", data = 12},
+			{description = "12 Seconds", data = 12},
 			{description = "15 Seconds", data = 15},
 			{description = "20 Seconds", data = 20},
 			{description = "30 Seconds", data = 30},
@@ -638,7 +641,7 @@ configuration_options =
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 12,
+		default = 4,
 	},
 	
 	{
@@ -655,8 +658,6 @@ configuration_options =
 			{description = "2 Seconds", data = 2},
 			{description = "3 Seconds", data = 3},
 			{description = "5 Seconds", data = 5},
-			{description = "10 Seconds", data = 10},
-			{description = "15 Seconds", data = 15},
 		},
 		default = 1,
 	},
@@ -728,14 +729,14 @@ configuration_options =
 			{description = "0 (Disabled)", data = 0},
 			{description = "1", data = 1},
 			{description = "2", data = 2},
-			{description = "3", data = 3},
-			{description = "4 (Default)", data = 4},
+			{description = "3 (Default)", data = 3},
+			{description = "4", data = 4},
 			{description = "5", data = 5},
 			{description = "6", data = 6},
 			{description = "7", data = 7},
 			{description = "8 (Very Large)", data = 8},
 		},
-		default = 4,
+		default = 3,
 	},
 
 	{
@@ -786,13 +787,16 @@ configuration_options =
 		options =
 		{
 			{description = "1 Second", data = 1},
+			{description = "2 Seconds", data = 2},
+			{description = "3 Seconds", data = 3},
+			{description = "4 Seconds (Default)", data = 4},
 			{description = "5 Seconds", data = 5},
 			{description = "10 Seconds", data = 10},
 			{description = "15 Seconds", data = 15},
 			{description = "20 Seconds", data = 20},
 			{description = "30 Seconds", data = 30},
 			{description = "45 Seconds", data = 45},
-			{description = "60 Seconds (Default)", data = 60},
+			{description = "60 Seconds", data = 60},
 			{description = "90 Seconds", data = 90},
 			{description = "2 Minutes", data = 120},
 			{description = "3 Minutes", data = 180},
@@ -801,7 +805,7 @@ configuration_options =
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 60,
+		default = 4,
 	},
 
 	{
@@ -811,8 +815,8 @@ configuration_options =
 		options =
 		{
 			{description = "1", data = 1},
-			{description = "2", data = 2},
-			{description = "3 (Default)", data = 3},
+			{description = "2 (Default)", data = 2},
+			{description = "3", data = 3},
 			{description = "4", data = 4},
 			{description = "5", data = 5},
 			{description = "6", data = 6},
@@ -821,7 +825,7 @@ configuration_options =
 			{description = "9", data = 9},
 			{description = "10", data = 10},
 		},
-		default = 3,
+		default = 2,
 	},
 
 	{
@@ -846,9 +850,6 @@ configuration_options =
 			{description = "-80", data = 80},
 			{description = "-90", data = 90},
 			{description = "-100", data = 100},
-
-
-
 		},
 		default = 20,
 	},
@@ -890,28 +891,23 @@ configuration_options =
 	{
 		name = "dwellerdurability",
 		label = "Durability",
-		hover = "How long the Dweller Mask lasts. Durability goes down while the hat is active.",
+		hover = "How long the Dweller Mask lasts while active. Nightmare Fuel refuels 1.5 minutes at all settings.",
 		options =
 		{
+			-- nightmarefuel refules up to 180 regardless of this setting.
 			{description = "Forever", data = false},
-			{description = "30 seconds", data = 30},
-			{description = "1 minute", data = 60},
-			{description = "5 minutes", data = 5 * 60},
-			{description = "10 minutes", data = 10 * 60},
-			{description = "15 minutes", data = 15 * 60},
-			{description = "30 minutes (Default)", data = 30 * 60},
-			{description = "45 minutes", data = 45 * 60},
-			{description = "60 minutes", data = 60 * 60},
-			{description = "75 minutes", data = 75 * 60},
-			{description = "90 minutes", data = 90 * 60},
-			{description = "2 hours", data = 2 * 60 * 60},
-			{description = "3 hours", data = 3 * 60 * 60},
-			{description = "4 hours", data = 4 * 60 * 60},
-			{description = "6 hours", data = 6 * 60 * 60},
-			{description = "12 hours", data = 12 * 60 * 60},
+			{description = "1.5 minutes", data = 180},
+			{description = "3 minutes", data = 180 * 2},
+			{description = "4.5 minutes", data = 180 * 3},
+			{description = "6 minutes (Default)", data = 180 * 4},
+			{description = "7.5 minutes", data = 180 * 5},
+			{description = "9 minutes", data = 180 * 6},
+			{description = "10.5 minutes", data = 180 * 7},
+			{description = "15 minutes", data = 180 * 10},
+			{description = "30 minutes", data = 180 * 20},
 			{description = "Forever", data = false},
 		},
-		default = 30 * 60,
+		default = 180 * 4,
 	},
 	
 	{
@@ -921,36 +917,14 @@ configuration_options =
 		options =
 		{
 			{description = "1 Second", data = 1},
+			{description = "2 Seconds", data = 2},
+			{description = "3 Seconds", data = 3},
+			{description = "4 Seconds (Default)", data = 4},
 			{description = "5 Seconds", data = 5},
 			{description = "10 Seconds", data = 10},
 			{description = "15 Seconds", data = 15},
 			{description = "20 Seconds", data = 20},
 			{description = "30 Seconds", data = 30},
-			{description = "45 Seconds", data = 45},
-			{description = "60 Seconds (Default)", data = 60},
-			{description = "90 Seconds", data = 90},
-			{description = "2 Minutes", data = 120},
-			{description = "3 Minutes", data = 180},
-			{description = "4 Minutes", data = 240},
-			{description = "5 Minutes", data = 300},
-			{description = "10 Minutes", data = 600},
-			{description = "15 Minutes", data = 900},
-		},
-		default = 60,
-	},
-	
-		{
-		name = "dwelleractive",
-		label = "Duration",
-		hover = "How long the dweller mask can remain active. It can be cancelled early regardless of what this value is set to.",
-		options =
-		{
-			{description = "1 Second", data = 1},
-			{description = "5 Seconds", data = 5},
-			{description = "10 Seconds", data = 10},
-			{description = "15 Seconds", data = 15},
-			{description = "20 Seconds", data = 20},
-			{description = "30 Seconds (Default)", data = 30},
 			{description = "45 Seconds", data = 45},
 			{description = "60 Seconds", data = 60},
 			{description = "90 Seconds", data = 90},
@@ -961,17 +935,45 @@ configuration_options =
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 30,
+		default = 4,
 	},
 	
-		{
+	-- 	{
+	-- 	name = "dwelleractive",
+	-- 	label = "Duration",
+	-- 	hover = "How long the dweller mask can remain active. It can be cancelled early regardless of what this value is set to.",
+	-- 	options =
+	-- 	{
+	-- 		{description = "1 Second", data = 1},
+	-- 		{description = "5 Seconds", data = 5},
+	-- 		{description = "10 Seconds", data = 10},
+	-- 		{description = "15 Seconds", data = 15},
+	-- 		{description = "20 Seconds", data = 20},
+	-- 		{description = "30 Seconds (Default)", data = 30},
+	-- 		{description = "45 Seconds", data = 45},
+	-- 		{description = "60 Seconds", data = 60},
+	-- 		{description = "90 Seconds", data = 90},
+	-- 		{description = "2 Minutes", data = 120},
+	-- 		{description = "3 Minutes", data = 180},
+	-- 		{description = "4 Minutes", data = 240},
+	-- 		{description = "5 Minutes", data = 300},
+	-- 		{description = "10 Minutes", data = 600},
+	-- 		{description = "15 Minutes", data = 900},
+	-- 	},
+	-- 	default = 30,
+	-- },
+	
+	{
 		name = "dwellerlinger",
 		label = "Linger Duration",
 		hover = "How long the nightvision effect will linger for.",
 		options =
 		{
 			{description = "1 Second", data = 1},
-			{description = "5 Seconds (Default)", data = 5},
+			{description = "2 Seconds", data = 2},
+			{description = "3 Seconds", data = 3},
+			{description = "4 Seconds (Default)", data = 4},
+			{description = "5 Seconds", data = 5},
 			{description = "10 Seconds", data = 10},
 			{description = "15 Seconds", data = 15},
 			{description = "20 Seconds", data = 20},
@@ -979,7 +981,7 @@ configuration_options =
 			{description = "45 Seconds", data = 45},
 			{description = "60 Seconds", data = 60},
 		},
-		default = 5,
+		default = 4,
 	},
 
 	{
@@ -1010,6 +1012,169 @@ configuration_options =
 	},
 
 	{
+		name = "dwellersanitydrain",
+		label = "Active Sanity Drain",
+		hover = "How much sanity is drained time while the Dweller's Mask is active.",
+		options =
+		{
+			{description = "x0.1", data = 0.1},
+			{description = "x0.25", data = 0.25},
+			{description = "x0.5", data = 0.5},
+			{description = "x0.75", data = 0.75},
+			{description = "x1 (Default)", data = 1},
+			{description = "x1.5", data = 1.5},
+			{description = "x2", data = 2},
+			{description = "x3", data = 3},
+			{description = "x4", data = 4},
+		},
+		default = 1,
+	},
+
+	{
+		name = "dwellerthreshhold",
+		label = "Sanity Threshhold",
+		hover = "How much sanity is instantly consumed upon activating the hat. Also prevents activation below this amount.",
+		options =
+		{
+			{description = "0", data = 0},
+			{description = "1", data = 1},
+			{description = "2", data = 2},
+			{description = "3 (Default)", data = 3},
+			{description = "4", data = 4},
+			{description = "5", data = 5},
+			{description = "10", data = 10},
+			{description = "15", data = 15},
+			{description = "20", data = 20},
+			{description = "25", data = 25},
+			{description = "30", data = 30},
+			{description = "50", data = 50},
+			{description = "100", data = 100},
+		},
+		default = 3,
+	},
+
+	{
+		name = "dwellersanitypenalty",
+		label = "Sanity Penalty",
+		hover = "How much sanity is taken away when someone within a Dweller Mask's radius is hit while at 1 hp.",
+		options =
+		{
+			{description = "0", data = 0},
+			{description = "-1 (Default)", data = -1},
+			{description = "-2", data = -2},
+			{description = "-3", data = -3},
+			{description = "-4", data = -4},
+			{description = "-5", data = -5},
+			{description = "-10", data = -10},
+			{description = "-15", data = -15},
+			{description = "-20", data = -20},
+			{description = "-25", data = -25},
+			{description = "-30", data = -30},
+			{description = "-50", data = -50},
+			{description = "-100", data = -100},
+		},
+		default = -1,
+	},
+
+	{
+		name = "dwellerfuelpenalty",
+		label = "Usage Penalty",
+		hover = "How much fuel is taken away when someone within a Dweller Mask's radius is hit while at 1 hp.",
+		options =
+		{
+			{description = "0", data = 0},
+			{description = "-1 second", data = -2},
+			{description = "-2 seconds", data = -4},
+			{description = "-3 seconds", data = -6},
+			{description = "-4 seconds", data = -8},
+			{description = "-5 seconds", data = -10},
+			{description = "-10 seconds", data = -20},
+			{description = "-15 seconds", data = -30},
+			{description = "-20 seconds", data = -40},
+			{description = "-25 seconds", data = -50},
+			{description = "-30 seconds", data = -60},
+			{description = "-60 seconds", data = -120},
+			{description = "-2 minutes", data = -240},
+		},
+		default = -5,
+	},
+
+	{
+		name = "dwellerhealthpenalty",
+		label = "Max Health Penalty Mult",
+		hover = "Controls how damage taken and mitigated by the Dweller's Mask is translated to a max health penalty, via a multiplier.",
+		options =
+		{
+			{description = "x0.1", data = 0.1},
+			{description = "x0.25", data = 0.25},
+			{description = "x0.5 (Default)", data = 0.5},
+			{description = "x0.75", data = 0.75},
+			{description = "x1", data = 1},
+			{description = "x1.5", data = 1.5},
+			{description = "x2", data = 2},
+		},
+		default = 0.5,
+	},
+
+	{
+		name = "dwellerrevivepenalty",
+		label = "Revivee Penalties",
+		hover = "Whether or not players revived by the Dweller's Mask will have additional stat penalties, similar to the Telltale Heart's revive penalties.",
+		options =
+		{
+			{description = "Enabled (Default)", data = true},
+			{description = "Disabled", data = false},
+		},
+		default = true,
+	},
+
+	{
+		name = "dwellerrevivesanity",
+		label = "Reviver Sanity Bonus",
+		hover = "How much sanity will be restored to Hat Kid when a player is revived by the Dweller's Mask.",
+		options =
+		{
+			{description = "0", data = 0},
+			{description = "5", data = 5},
+			{description = "10", data = 10},
+			{description = "20", data = 20},
+			{description = "30", data = 30},
+			{description = "40 (Default)", data = 40},
+			{description = "80", data = 80},
+			{description = "120", data = 120},
+		},
+		default = 40,
+	},
+
+	{
+		name = "dwellerrevivefuel",
+		label = "Reviver Fuel Usage",
+		hover = "How much fuel is taken away from the Dweller's Mask when a player is successfully revived.",
+		options =
+		{
+			{description = "0%", data = 1},
+			{description = "-10%", data = 10},
+			{description = "-20%", data = 5},
+			{description = "-25% (Default)", data = 4},
+			{description = "-50%", data = 2},
+			{description = "0%", data = 1},
+		},
+		default = 4,
+	},
+
+	{
+		name = "dwellervfx",
+		label = "Night Vision Screen Effect",
+		hover = "Whether or not the screen will turn green while under the influence of the Dweller Mask's night vision.",
+		options =
+		{
+			{description = "Enabled (Default)", data = true},
+			{description = "Disabled", data = false},
+		},
+		default = true,
+	},
+
+	{
 		name = "Time Stop Hat Options",
 		options = null_options,
 		hover = "",
@@ -1019,28 +1184,25 @@ configuration_options =
 	{
 		name = "timestopdurability",
 		label = "Durability",
-		hover = "How long the Time Stop Hat lasts. Durability goes down while the hat is active.",
+		hover = "How long the Time Stop Hat lasts. Nightmare Fuel refuels 2 uses at all settings.",
 		options =
 		{
+			-- nightmarefuel refules up to 180 regardless of this setting.
 			{description = "Forever", data = false},
-			{description = "30 seconds", data = 30},
-			{description = "1 minute", data = 60},
-			{description = "5 minutes", data = 5 * 60},
-			{description = "10 minutes (Default)", data = 10 * 60},
-			{description = "15 minutes", data = 15 * 60},
-			{description = "30 minutes", data = 30 * 60},
-			{description = "45 minutes", data = 45 * 60},
-			{description = "60 minutes", data = 60 * 60},
-			{description = "75 minutes", data = 75 * 60},
-			{description = "90 minutes", data = 90 * 60},
-			{description = "2 hours", data = 2 * 60 * 60},
-			{description = "3 hours", data = 3 * 60 * 60},
-			{description = "4 hours", data = 4 * 60 * 60},
-			{description = "6 hours", data = 6 * 60 * 60},
-			{description = "12 hours", data = 12 * 60 * 60},
+			{description = "1 use", data = 90},
+			{description = "2 uses", data = 180},
+			{description = "4 uses", data = 180 * 2},
+			{description = "6 uses", data = 180 * 3},
+			{description = "8 uses (Default)", data = 180 * 4},
+			{description = "10 uses", data = 180 * 5},
+			{description = "12 uses", data = 180 * 6},
+			{description = "14 uses", data = 180 * 7},
+			{description = "20 uses", data = 180 * 10},
+			{description = "40 uses", data = 180 * 20},
+			{description = "60 uses", data = 180 * 30},
 			{description = "Forever", data = false},
 		},
-		default = 10 * 60,
+		default = 180 * 4,
 	},
 	
 	{
@@ -1050,25 +1212,28 @@ configuration_options =
 		options =
 		{
 			{description = "1 Second", data = 1},
+			{description = "2 Seconds", data = 2},
+			{description = "3 Seconds", data = 3},
+			{description = "4 Seconds", data = 4},
 			{description = "5 Seconds", data = 5},
 			{description = "10 Seconds", data = 10},
 			{description = "15 Seconds", data = 15},
 			{description = "20 Seconds", data = 20},
 			{description = "30 Seconds", data = 30},
 			{description = "45 Seconds", data = 45},
-			{description = "60 Seconds", data = 60},
+			{description = "60 Seconds (Default)", data = 60},
 			{description = "90 Seconds", data = 90},
 			{description = "2 Minutes", data = 120},
-			{description = "3 Minutes (Default)", data = 180},
+			{description = "3 Minutes", data = 180},
 			{description = "4 Minutes", data = 240},
 			{description = "5 Minutes", data = 300},
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 180,
+		default = 60,
 	},
 	
-		{
+	{
 		name = "timestopactive",
 		label = "Duration",
 		hover = "How long the Time Stop effect can remain active. It can be cancelled early regardless of what this value is set to.",
@@ -1078,8 +1243,8 @@ configuration_options =
 			{description = "5 Seconds", data = 5},
 			{description = "10 Seconds", data = 10},
 			{description = "12 Seconds", data = 12},
-			{description = "15 Seconds (Default)", data = 15},
-			{description = "20 Seconds", data = 20},
+			{description = "15 Seconds", data = 15},
+			{description = "20 Seconds (Default)", data = 20},
 			{description = "30 Seconds", data = 30},
 			{description = "45 Seconds", data = 45},
 			{description = "60 Seconds", data = 60},
@@ -1091,7 +1256,7 @@ configuration_options =
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 15,
+		default = 20,
 	},
 
 	{
@@ -1165,9 +1330,10 @@ configuration_options =
 			{description = "50", data = 180},
 			{description = "75", data = 75},
 			{description = "100", data = 100},
+			{description = "125", data = 125},
 			{description = "150", data = 150},
-			{description = "185 (Default)", data = 185},
-			{description = "200", data = 200},
+			{description = "175", data = 175},
+			{description = "200 (Default)", data = 200},
 			{description = "250", data = 250},
 			{description = "300", data = 300},
 			{description = "400", data = 400},
@@ -1176,7 +1342,7 @@ configuration_options =
 			{description = "Disabled", data = false},
 
 		},
-		default = 185,
+		default = 200,
 	},
 
 	{
@@ -1319,7 +1485,7 @@ configuration_options =
 	{
 		name = "funnymode",
 		label = "Funny Mode",
-		hover = "Introduces intentional glitches that are pretty funny, if maybe a bit overpowered, to play with. Please tell me if you have this enabled while reporting bugs. You may not notice anything if you enable this as well.",
+		hover = "Causes some intentional glitches. You may not notice an effect.",
 		options =
 		{
 			{description = "Disabled (Default)", data = false},
@@ -1335,38 +1501,38 @@ configuration_options =
 		default = 0,
 	},	
 
-	{
-		name = "enablepons",
-		label = "Pons",
-		hover = "Enables the Pon Count Meter, as well as the spawning of Green Pons through various actions (eg. mining, chopping, killing)",
-		options =
-		{
-			{description = "Disabled (Default)", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = false,
-	},
+	-- {
+	-- 	name = "enablepons",
+	-- 	label = "Pons",
+	-- 	hover = "Enables the Pon Count Meter, as well as the spawning of Green Pons through various actions (eg. mining, chopping, killing)",
+	-- 	options =
+	-- 	{
+	-- 		{description = "Disabled (Default)", data = false},
+	-- 		{description = "Enabled", data = true},
+	-- 	},
+	-- 	default = false,
+	-- },
 
-	{
-		name = "ponsmax",
-		label = "Max Pons",
-		hover = "How many Pons Hat Kid can hold at once.",
-		options =
-		{
-			{description = "1,000", data = 1000},
-			{description = "1,500", data = 1500},
-			{description = "2,000", data = 2000},
-			{description = "2,500", data = 2500},
-			{description = "2,500 (Default)", data = 2500},
-			{description = "3,000", data = 3000},
-			{description = "3,500", data = 3500},
-			{description = "4,000", data = 4000},
-			{description = "4,500", data = 4500},
-			{description = "5,000", data = 5000},
-			{description = "10,000", data = 10000},
+	-- {
+	-- 	name = "ponsmax",
+	-- 	label = "Max Pons",
+	-- 	hover = "How many Pons Hat Kid can hold at once.",
+	-- 	options =
+	-- 	{
+	-- 		{description = "1,000", data = 1000},
+	-- 		{description = "1,500", data = 1500},
+	-- 		{description = "2,000", data = 2000},
+	-- 		{description = "2,500", data = 2500},
+	-- 		{description = "2,500 (Default)", data = 2500},
+	-- 		{description = "3,000", data = 3000},
+	-- 		{description = "3,500", data = 3500},
+	-- 		{description = "4,000", data = 4000},
+	-- 		{description = "4,500", data = 4500},
+	-- 		{description = "5,000", data = 5000},
+	-- 		{description = "10,000", data = 10000},
 			
 
-		},
-		default = 2500,
-	},
+	-- 	},
+	-- 	default = 2500,
+	-- },
 }

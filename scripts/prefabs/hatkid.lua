@@ -166,7 +166,7 @@ end
 
 local function OnUnequip(inst, data) -- Add a sanity modifier if the head slot is unequipped
     if data.eslot == EQUIPSLOTS.HEAD then
-		inst.components.sanity.dapperness = -TUNING.DAPPERNESS_SMALL
+		-- inst.components.sanity.dapperness = -TUNING.DAPPERNESS_SMALL
 
 		inst.components.sanity.neg_aura_modifiers:SetModifier(inst, TUNING.HATKIDSANITYDRAIN, "hat_sanity_vuln")
     end
@@ -313,8 +313,8 @@ local common_postinit = function(inst)
     inst.components.keyhandler:AddActionListener("HatKidRPC", TUNING["HATKID"].KEY, "AbilityKeyDown", "KEYDOWN")
 
 	-- sprint hat stuff
-	inst:ListenForEvent("locomote", onLocomote)
-	inst:ListenForEvent("UpdateSprintParticles", onLocomote)
+	-- inst:ListenForEvent("locomote", onLocomote)
+	-- inst:ListenForEvent("UpdateSprintParticles", onLocomote)
 	inst:ListenForEvent("CleanSprintParticles", CleanSprintParticles)
 
 	-- 50% chance of quote on potion explode
@@ -340,7 +340,7 @@ end
 
 -- Server only, most components go here.
 local master_postinit = function(inst, data)
-	-- If anything below is hard coded and not configurable, I did my job wrong. Please yell at me if that's the case.
+	-- If anything below is hard coded 	 and not configurable, I did my job wrong. Please yell at me if that's the case.
 
 	-- Health
 	inst.components.health:SetMaxHealth(TUNING.HATKID_HEALTH)
@@ -350,7 +350,7 @@ local master_postinit = function(inst, data)
 	inst.components.hunger.burnratemodifiers:SetModifier(inst, TUNING.HATKIDRATE * TUNING.WILSON_HUNGER_RATE, "base")
 
 	-- Sanity
-	inst.components.sanity:SetMax(TUNING.HATKID_SANITY)
+	inst.components.sanity:SetMax(TUNING.HATKID_SANITY) 
 	inst.components.sanity.rate_modifier = TUNING.HATKIDSANITYMULT
 	inst.components.sanity.night_drain_mult = TUNING.HATKIDNIGHTDRAIN
 	inst.components.sanity.neg_aura_modifiers:SetModifier(inst, TUNING.HATKIDSANITYDRAIN, "base")
