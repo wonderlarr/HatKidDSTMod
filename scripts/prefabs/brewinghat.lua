@@ -1,3 +1,5 @@
+-- Whooo boy, this is a rat's nest in need of an exterminator. Time to get at it!
+
 local assets=
 { 
     Asset("ANIM", "anim/brewinghat.zip"),
@@ -39,7 +41,7 @@ local function equiprev(inst)
 end
 
 local function OnEmpty(inst)
-	inst:DoTaskInTime(0, inst.Remove)
+	-- inst:DoTaskInTime(0, inst.Remove)
 end
 
 local function OnEquip(inst, owner)
@@ -71,9 +73,10 @@ end
 local function OnUse(inst)
 
 	local owner = inst.components.inventoryitem:GetGrandOwner()
-	local rechargeable = inst.components.rechargeable
 	
-	if not rechargeable:IsCharged() or owner.components.sanity.current < 6 then
+	if not inst.components.rechargeable:IsCharged() 
+	or owner.components.sanity.current < TUNING.BREWINGHAT_THRESHHOLD 
+	or inst.components.fueled:GetPercent() < 0.125 then
 	
 		-- If in cooldown
 		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
@@ -87,14 +90,15 @@ local function OnUse(inst)
 		-- If not in cooldown
 		prevequip = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 
-		rechargeable:Discharge(4) -- Cooldown
-
-		owner.components.sanity:DoDelta(-6)
-
+		-- Player stuff
+		owner.components.sanity:DoDelta(-TUNING.BREWINGHAT_THRESHHOLD)
 		owner.components.inventory:Equip(SpawnPrefab("kidpotion"))
 
+		-- Hat Stuff
+		inst.components.rechargeable:Discharge(TUNING.BREWINGHAT_CHARGETIME) -- Cooldown
+		inst.components.fueled:DoDelta(-90)
 
-		inst:DoTaskInTime(TUNING.BREWINGHAT_CHARGETIME, function(inst) -- Wait 1 frame or else things get weird
+		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
 			inst.components.useableitem:StopUsingItem()
 		end)
 	end
@@ -103,21 +107,12 @@ end
 local function OnStopUse(inst)
 
 	local owner = inst.components.inventoryitem:GetGrandOwner()
-	local rechargeable = inst.components.rechargeable
 	
-	if not rechargeable:IsCharged() then
+	if not inst.components.rechargeable:IsCharged() then
 		-- If in cooldown
 
 	else
-		-- If not in cooldown, or doing nothing, put it on cooldown!
 
-		if inst.components.finiteuses then
-			inst.components.finiteuses:Use(1)
-		end
-
-		-- if inst.components.fueled then
-		-- 	inst.components.fueled:DoDelta(-1, owner)
-		-- end
 	end
 end
 
@@ -156,8 +151,6 @@ local function fn(Sim)
     inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_SMALL) 
 	
     inst:AddComponent("inventoryitem")
-    -- inst.components.inventoryitem.imagename = "brewinghat"
-    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/brewinghat.xml"
 	
     inst:AddComponent("equippable")
 	inst.components.equippable.restrictedtag = "hatkid"
@@ -173,19 +166,14 @@ local function fn(Sim)
 	
 	inst:AddComponent("useableitem")
     inst.components.useableitem:SetOnUseFn(OnUse)
-    inst.components.useableitem:SetOnStopUseFn(OnStopUse)
-
-	-- inst:AddComponent("fueled")
-	-- inst.components.fueled.fueltype = FUELTYPE.USAGE
-	-- inst.components.fueled:InitializeFuelLevel( 100 ) -- add tuning
-	-- inst.components.fueled.fueltype = FUELTYPE.CAVE
-	-- inst.components.fueled.accepting = true
+    -- inst.components.useableitem:SetOnStopUseFn(OnStopUse)
 
 	if TUNING.BREWINGHAT_DURABILITY then
-		inst:AddComponent("finiteuses")
-		inst.components.finiteuses:SetOnFinished(OnEmpty)
-		inst.components.finiteuses:SetMaxUses(TUNING.BREWINGHAT_DURABILITY) -- add tuning 50
-		inst.components.finiteuses:SetUses(TUNING.BREWINGHAT_DURABILITY)
+		inst:AddComponent("fueled")
+		inst.components.fueled:InitializeFuelLevel( 720 ) -- add tuning
+		inst.components.fueled.fueltype = FUELTYPE.CHEMICAL
+		inst.components.fueled.secondaryfueltype = FUELTYPE.NIGHTMARE
+		inst.components.fueled.accepting = true
 	end
 	
 	inst:ListenForEvent("AbilityKey", KeybindUse)

@@ -137,7 +137,9 @@ local function OnUse(inst)
 
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 	
-	if not inst.components.rechargeable:IsCharged() or owner.components.sanity.current < TUNING.DWELLERMASK_THRESHHOLD and inst.components.fueled:GetPercent() > 0 then
+	if not inst.components.rechargeable:IsCharged() 
+	or owner.components.sanity.current < TUNING.DWELLERMASK_THRESHHOLD 
+	or inst.components.fueled:GetPercent() <= 0 then
 
 		inst:DoTaskInTime(0, inst.components.useableitem:StopUsingItem()) -- Wait 1 frame or else things get weird
 	
@@ -166,7 +168,7 @@ local function OnUse(inst)
 
 		-- Sanity
 		inst.components.equippable.dapperness = TUNING.DWELLERMASK_SANITY
-		owner.components.sanity:DoDelta(TUNING.DWELLERMASK_THRESHHOLD)
+		owner.components.sanity:DoDelta(-TUNING.DWELLERMASK_THRESHHOLD)
 		
 		-- Sound
 		if TUNING.DWELLERMASK_SFX then

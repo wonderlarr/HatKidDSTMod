@@ -389,6 +389,7 @@ TUNING.SPRINTHAT_VFX = GetModConfigData("sprinthatvfx")
 --Brewing
 TUNING.BREWINGHAT_DURABILITY = GetModConfigData("brewdurability")
 TUNING.BREWINGHAT_COOLDOWN = GetModConfigData("brewcooldown")
+TUNING.BREWINGHAT_THRESHHOLD = GetModConfigData("brewthreshhold")
 TUNING.BREWINGHAT_CHARGETIME = GetModConfigData("brewcharge")
 TUNING.BREWINGHAT_SLOWDOWN  = GetModConfigData("brewslow")
 TUNING.BREWINGHAT_DAMAGE = GetModConfigData("brewdamage")
@@ -1176,6 +1177,83 @@ if TUNING.DWELLERMASK_DURABILITY then
 
 		inst:AddComponent("container")
 		inst.components.container:WidgetSetup("dwellermask_inv")
+		inst.components.container.canbeopened = false
+
+		inst.tick = inst:DoPeriodicTask(1, OnTick)
+
+		inst:ListenForEvent("equipped", OnEquip)
+		inst:ListenForEvent("unequipped", OnUnequip)
+		inst:ListenForEvent("itemget", OnTick)
+	end)
+end
+
+if TUNING.BREWINGHAT_DURABILITY then
+	AddPrefabPostInit("brewinghat", function(inst)
+		local function OnTick(inst)
+			if inst.components.container and inst.components.container:GetItemInSlot(1) then
+				local owner = inst.components.inventoryitem:GetGrandOwner()
+
+				local fueltogive = inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue
+				local currentfuel = inst.components.fueled.currentfuel
+				local maxfuel = inst.components.fueled.maxfuel
+
+				if (maxfuel - currentfuel) > fueltogive then
+					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
+					inst.components.fueled:TakeFuelItem(fuelitem, owner)
+				end
+			end
+		end
+
+		local function OnEquip(inst, data)
+			local owner = data.owner
+			if inst.components.container ~= nil then
+				inst.components.container:Open(owner)
+			end
+		end
+
+		local function OnUnequip(inst, data)
+			local owner = data.owner
+			if inst.components.container ~= nil then
+				inst.components.container:Close(owner)
+			end
+		end
+		
+		-- Start Container stuff ---------
+		local containers = GLOBAL.require("containers")
+		params = containers.params
+
+		params.brewinghat_inv =
+		{
+			widget =
+			{
+				slotpos =
+				{
+					GLOBAL.Vector3(0,   32 + 4,  0),
+				},
+				animbank = "ui_cookpot_1x2",
+				animbuild = "ui_cookpot_1x2",
+				pos = GLOBAL.Vector3(0, 15, 0),
+			},
+			usespecificslotsforitems = true,
+			type = "head_inv",
+		}
+		
+		function params.brewinghat_inv.itemtestfn(container, item, slot)
+			return item:HasTag("nightmarefuel") or item.prefab == "nitre" -- Tag added by this mod, not in vanilla.
+		end
+		-- End Container -------
+		
+
+		if not GLOBAL.TheWorld.ismastersim then
+			inst.OnEntityReplicated = function(inst) 
+				inst.replica.container:WidgetSetup("brewinghat_inv") 
+			end
+
+			return
+		end
+
+		inst:AddComponent("container")
+		inst.components.container:WidgetSetup("brewinghat_inv")
 		inst.components.container.canbeopened = false
 
 		inst.tick = inst:DoPeriodicTask(1, OnTick)
