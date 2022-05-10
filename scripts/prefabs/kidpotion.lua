@@ -20,7 +20,6 @@ local function onequip(inst, owner)
     owner.AnimState:Hide("ARM_normal")
 
     inst.SoundEmitter:PlaySound("kidpotion/sound/shake", "flask_shake")
-	
 	inst.components.rechargeable:Discharge(TUNING.BREWINGHAT_CHARGETIME)
 	
 	inst.lastowner = inst.components.inventoryitem:GetGrandOwner()
@@ -29,12 +28,10 @@ end
 local function onunequip(inst, owner)
     owner.AnimState:Hide("ARM_carry")
     owner.AnimState:Show("ARM_normal")
-	
-    inst.SoundEmitter:PlaySound("kidpotion/sound/shake", "flask_shake")
 end
 
 local function onDrop(inst)
-    if inst.lastowner:IsValid() and not inst:HasTag("donebrewing") then
+    if inst.lastowner and not inst:HasTag("donebrewing") then
         inst.lastowner.components.sanity:DoDelta(6)
     end
     

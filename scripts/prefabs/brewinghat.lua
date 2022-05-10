@@ -14,26 +14,24 @@ local prefabs =
 {
 }
 
-local prevequip = nil
-
 local function equiprev(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 
 	if TUNING.FUNNYMODE then --Just a funny item teleportation mechanic we can do here.
 
-		if prevequip then
+		if owner.prevequip then
 			inst:DoTaskInTime(0, function(inst)
-				owner.components.inventory:Equip(prevequip)
-				prevequip = nil
+				owner.components.inventory:Equip(owner.prevequip)
+				owner.prevequip = nil
 			end)
 		end
 
 	else
 
-		if prevequip and prevequip.components.inventoryitem and prevequip.components.inventoryitem:GetGrandOwner() == owner then
+		if owner.prevequip and owner.prevequip.components.inventoryitem and owner.prevequip.components.inventoryitem:GetGrandOwner() == owner then
 			inst:DoTaskInTime(0, function(inst)
-				owner.components.inventory:Equip(prevequip)
-				prevequip = nil
+				owner.components.inventory:Equip(owner.prevequip)
+				owner.prevequip = nil
 			end)
 		end
 
@@ -71,7 +69,6 @@ end
  
  
 local function OnUse(inst)
-
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 	
 	if not inst.components.rechargeable:IsCharged() 
@@ -88,7 +85,7 @@ local function OnUse(inst)
 		
 	else
 		-- If not in cooldown
-		prevequip = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+		owner.prevequip = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 
 		-- Player stuff
 		owner.components.sanity:DoDelta(-TUNING.BREWINGHAT_THRESHHOLD)
@@ -96,7 +93,7 @@ local function OnUse(inst)
 
 		-- Hat Stuff
 		inst.components.rechargeable:Discharge(TUNING.BREWINGHAT_CHARGETIME) -- Cooldown
-		inst.components.fueled:DoDelta(-90)
+		inst.components.fueled:DoDelta(-1)
 
 		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
 			inst.components.useableitem:StopUsingItem()
@@ -170,9 +167,10 @@ local function fn(Sim)
 
 	if TUNING.BREWINGHAT_DURABILITY then
 		inst:AddComponent("fueled")
-		inst.components.fueled:InitializeFuelLevel( 720 ) -- add tuning
-		inst.components.fueled.fueltype = FUELTYPE.CHEMICAL
-		inst.components.fueled.secondaryfueltype = FUELTYPE.NIGHTMARE
+		inst.components.fueled:InitializeFuelLevel( 4 ) -- add tuning
+		inst.components.fueled.fueltype = FUELTYPE.CAVE
+		-- inst.components.fueled.secondaryfueltype = FUELTYPE.NIGHTMARE
+		inst.components.fueled.bonusmult = 1 / 45
 		inst.components.fueled.accepting = true
 	end
 	

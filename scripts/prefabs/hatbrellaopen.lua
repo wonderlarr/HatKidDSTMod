@@ -104,7 +104,7 @@ local function fn()
     end
 
     inst:AddComponent("waterproofer")
-    inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_LARGE)
+    inst.components.waterproofer:SetEffectiveness(TUNING.HATBRELLA_WATERPROOFNESS)
 
     inst:AddComponent("insulator")
     inst.components.insulator:SetInsulation(TUNING.INSULATION_MED)

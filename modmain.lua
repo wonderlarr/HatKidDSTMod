@@ -366,9 +366,10 @@ TUNING.HATKIDVOICE = GetModConfigData("hatkidvoice")
 
 
 --Hatbrella stuff
+TUNING.HATBRELLA_DURABILITY = GetModConfigData("hatbrelladurability")
 TUNING.HATBRELLA_DAMAGE = GetModConfigData("hatbrelladamage")
 TUNING.HATBRELLA_OPENDURABILITY = GetModConfigData("hatbrellaopendurability")
-TUNING.HATBRELLA_DURABILITY = GetModConfigData("hatbrelladurability")
+TUNING.HATBRELLA_WATERPROOFNESS = GetModConfigData("hatbrellaopenwaterproofness")
 
 --Togglables
 -- TUNING.ENABLE_PONS = GetModConfigData("enablepons")
@@ -405,18 +406,22 @@ TUNING.POLARHAT_RADIUS = GetModConfigData("polarradius")
 
 
 --Dweller
-TUNING.DWELLERMASK_DURABILITY = GetModConfigData("dwellerdurability")
+TUNING.DWELLERMASK_DURABILITY = GetModConfigData("dwellerfuelcapacity")
+TUNING.DWELLERMASK_VALUE = GetModConfigData("dwellerfuelvalue")
 TUNING.DWELLERMASK_COOLDOWN = GetModConfigData("dwellercooldown")
 TUNING.DWELLERMASK_LINGER = GetModConfigData("dwellerlinger")
 TUNING.DWELLERMASK_RADIUS = GetModConfigData("dwellerradius")
-TUNING.DWELLERMASK_SANITY = GetModConfigData("dwellersanitydrain")
+TUNING.DWELLERMASK_DAPPERNESS = GetModConfigData("dwellersanitydrain")
 TUNING.DWELLERMASK_THRESHHOLD = GetModConfigData("dwellerthreshhold")
-TUNING.DWELLERMASK_SANITYPENALTY = GetModConfigData("dwellersanitypenalty")
-TUNING.DWELLERMASK_FUELPENALTY = GetModConfigData("dwellerfuelpenalty")
-TUNING.DWELLERMASK_HEALTHPENALTY = GetModConfigData("dwellerhealthpenalty")
-TUNING.DWELLERMASK_REVIVEPENALTY = GetModConfigData("dwellerrevivepenalty")
-TUNING.DWELLERMASK_REVIVERSANITY = GetModConfigData("dwellerreviversanity")
-TUNING.DWELLERMASK_REVIVEFUEL = GetModConfigData("dwellerrevivefuel")
+
+TUNING.DWELLERMASK_BLOCK_SANITY = GetModConfigData("dwellerblocksanity")
+TUNING.DWELLERMASK_BLOCK_FUEL = GetModConfigData("dwellerblockfuel")
+TUNING.DWELLERMASK_BLOCK_AMOUNT = GetModConfigData("dwellerblockamount")
+
+TUNING.DWELLERMASK_REVIVE_PENALTIES = GetModConfigData("dwellerrevivepenalties")
+TUNING.DWELLERMASK_REVIVE_REWARD = GetModConfigData("dwellerrevivereward")
+TUNING.DWELLERMASK_REVIVE_FUEL = GetModConfigData("dwellerrevivefuel")
+
 TUNING.DWELLERMASK_SFX = GetModConfigData("dwellersfx")
 TUNING.DWELLERMASK_VFX = GetModConfigData("dwellervfx")
 
@@ -1116,7 +1121,7 @@ if TUNING.DWELLERMASK_DURABILITY then
 			if inst.components.container and inst.components.container:GetItemInSlot(1) then
 				local owner = inst.components.inventoryitem:GetGrandOwner()
 
-				local fueltogive = inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue
+				local fueltogive = TUNING.DWELLERMASK_VALUE / inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue
 				local currentfuel = inst.components.fueled.currentfuel
 				local maxfuel = inst.components.fueled.maxfuel
 
@@ -1193,7 +1198,7 @@ if TUNING.BREWINGHAT_DURABILITY then
 			if inst.components.container and inst.components.container:GetItemInSlot(1) then
 				local owner = inst.components.inventoryitem:GetGrandOwner()
 
-				local fueltogive = inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue
+				local fueltogive = 1 / inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue
 				local currentfuel = inst.components.fueled.currentfuel
 				local maxfuel = inst.components.fueled.maxfuel
 
@@ -1239,7 +1244,7 @@ if TUNING.BREWINGHAT_DURABILITY then
 		}
 		
 		function params.brewinghat_inv.itemtestfn(container, item, slot)
-			return item:HasTag("nightmarefuel") or item.prefab == "nitre" -- Tag added by this mod, not in vanilla.
+			return item.prefab == "slurtleslime" -- Tag added by this mod, not in vanilla.
 		end
 		-- End Container -------
 		

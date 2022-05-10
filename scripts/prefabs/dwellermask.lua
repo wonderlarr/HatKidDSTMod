@@ -61,17 +61,22 @@ local function DwellerAbility(inst)
 		local function OnHealthDelta(ent, data)
 			if ent.components.health == nil then return end
 
-			local amount = data.amount
+			local delta = data.amount
 			local current = ent.components.health.currenthealth
 			local max = ent.components.health.maxhealth
-			local penalty = ent.components.health:GetPenaltyPercent()
+			-- local penalty = ent.components.health:GetPenaltyPercent()
 
-			if amount < 0 and current <= 1 then -- if we're blocking damage
-				owner.components.sanity:DoDelta(TUNING.DWELLERMASK_SANITYPENALTY)
-				inst.components.fueled:DoDelta(TUNING.DWELLERMASK_FUELPENALTY) 
-				ent.components.health:DeltaPenalty(-amount / max / TUNING.DWELLERMASK_HEALTHPENALTY) -- 50% of damage taken is dealt to max health
+			if delta < 0 and current <= 1 and current ~= 0 then -- if we're blocking damage
+				-- Owner
 
-				if penalty == TUNING.MAXIMUM_HEALTH_PENALTY then
+				-- Hat
+				inst.components.fueled:DoDelta(-TUNING.DWELLERMASK_BLOCK_FUEL) 
+
+				-- Entity
+				ent.components.health:DeltaPenalty(-delta / max * TUNING.DWELLERMASK_BLOCK_AMOUNT) -- Mitigate damage once we've reached 1 hp
+				ent.components.sanity:DoDelta(-TUNING.DWELLERMASK_BLOCK_SANITY)
+
+				if ent.components.health:GetPenaltyPercent() == TUNING.MAXIMUM_HEALTH_PENALTY then
 					ent.components.health:SetMinHealth(0)
 				end
 			end
@@ -81,7 +86,7 @@ local function DwellerAbility(inst)
 		local range = inst.Light:GetCalculatedRadius() 
 		-- Use the radius of the light instead of setting one ourselves, that way it's visually consistent.
 		local tags = { "player" }
-		local nags = { "playerghost" }
+		local nags = nil
 		local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, tags)
 		for _,ent in ipairs(targets) do
 			if ent.components.playervision then
@@ -167,7 +172,8 @@ local function OnUse(inst)
 		owner.AnimState:OverrideSymbol("swap_hat", "dwellermask_on", "swap_hat")
 
 		-- Sanity
-		inst.components.equippable.dapperness = TUNING.DWELLERMASK_SANITY
+		inst.components.equippable.dapperness = TUNING.DWELLERMASK_DAPPERNESS
+
 		owner.components.sanity:DoDelta(-TUNING.DWELLERMASK_THRESHHOLD)
 		
 		-- Sound
@@ -194,7 +200,7 @@ local function OnStopUse(inst)
 	local nags = { "reviving" }
 	local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, tags)
 	for _,ent in ipairs(targets) do
-		if inst.components.fueled.currentfuel >= TUNING.DWELLERMASK_DURABILITY / TUNING.DWELLERMASK_REVIVEFUEL then -- If we have enough fuel to revive
+		if inst.components.fueled.currentfuel >= TUNING.DWELLERMASK_REVIVE_FUEL then -- If we have enough fuel to revive
 			ent:PushEvent("respawnfromghost", { source = inst, user = owner })
 			-- In order to apply stats differently than default, we have to do it AFTER the player respawns, and not during
 			-- This is a sorta gross way to do this imo but I don't feel like hooking into a function that would do this correctly at the moment.
@@ -204,17 +210,17 @@ local function OnStopUse(inst)
 				ent:RemoveEventCallback("ms_respawnedfromghost", PostPenalty)
 			end
 			
-			if TUNING.DWELLERMASK_REVIVEPENALTY then
+			if TUNING.DWELLERMASK_REVIVE_PENALTIES then
 				-- Apply dweller revive penalties
 				ent.components.health:DeltaPenalty(TUNING.REVIVE_HEALTH_PENALTY) -- Max health -25%
 				ent:ListenForEvent("ms_respawnedfromghost", PostPenalty)
 			end
 
 			-- Grant owner sanity
-			owner.components.sanity:DoDelta(TUNING.DWELLERMASK_REVIVERSANITY)
+			owner.components.sanity:DoDelta(TUNING.DWELLERMASK_REVIVE_REWARD)
 
 			-- Finally, decrement the fuel
-			inst.components.fueled:DoDelta(math.ceil(-TUNING.DWELLERMASK_DURABILITY / TUNING.DWELLERMASK_REVIVEFUEL), ent)
+			inst.components.fueled:DoDelta(-TUNING.DWELLERMASK_REVIVE_FUEL)
 		end
 	end
 	
@@ -390,10 +396,12 @@ local function fn(Sim)
 		inst:AddComponent("fueled")
 		inst.components.fueled.fueltype = FUELTYPE.NIGHTMARE
 		inst.components.fueled:SetTakeFuelFn(ontakefuel)
-		inst.components.fueled.accepting = true
 		inst.components.fueled:InitializeFuelLevel( TUNING.DWELLERMASK_DURABILITY )
-		inst.components.fueled.rate_modifiers:SetModifier(inst, 2, "base") -- Hard coding this value, configing shouldn't be needed
 		inst.components.fueled:SetDepletedFn(OnEmpty)
+		-- inst.components.fueled.rate_modifiers:SetModifier(inst, 2, "base") -- Hard coding this value, configing shouldn't be needed
+		inst.components.fueled.bonusmult = TUNING.DWELLERMASK_VALUE / 180
+		inst.components.fueled.accepting = true
+
 	end
 
 	inst:ListenForEvent("AbilityKey", KeybindUse)
