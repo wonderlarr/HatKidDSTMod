@@ -19,10 +19,9 @@ local function onequip(inst, owner)
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
 
-    inst.SoundEmitter:PlaySound("kidpotion/sound/shake", "flask_shake")
 	inst.components.rechargeable:Discharge(TUNING.BREWINGHAT_CHARGETIME)
-	
-	inst.lastowner = inst.components.inventoryitem:GetGrandOwner()
+
+    inst.SoundEmitter:PlaySound("kidpotion/sound/shake", "flask_shake")
 end
  
 local function onunequip(inst, owner)
@@ -31,8 +30,15 @@ local function onunequip(inst, owner)
 end
 
 local function onDrop(inst)
-    if inst.lastowner and not inst:HasTag("donebrewing") then
-        inst.lastowner.components.sanity:DoDelta(6)
+    -- If we get dropped but aren't brewed, refund the potion costs
+    if not inst.components.rechargeable:IsCharged() then
+        if inst.brewer and inst.brewer.components.sanity then
+            inst.brewer.components.sanity:DoDelta(5)
+        end
+        
+        if inst.sourceprefab and inst.sourceprefab.components.fueled then
+            inst.sourceprefab.components.fueled:DoDelta(1)
+        end
     end
     
 	inst:Remove()
@@ -41,10 +47,11 @@ end
 
 local function OnCharged(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
-
-    inst:AddTag("donebrewing")
-
-	owner.components.inventory:Equip(SpawnPrefab("kidpotion_throwable"))
+    local throwable = SpawnPrefab("kidpotion_throwable")
+    
+    throwable.sourceprefab = inst.sourceprefab
+    throwable.brewer = inst.brewer
+	owner.components.inventory:Equip(throwable)
 end
 
 local function kidpotion_fn()
@@ -73,8 +80,6 @@ local function kidpotion_fn()
     inst:AddComponent("inspectable")
  
     inst:AddComponent("inventoryitem")
-    -- inst.components.inventoryitem.imagename = "kidpotion"
-    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/kidpotion.xml"
 	inst.components.inventoryitem:SetOnDroppedFn(onDrop)
 	inst.components.inventoryitem.cangoincontainer = false
 	
@@ -91,13 +96,5 @@ local function kidpotion_fn()
 	
     return inst
 end
-
---Hopefully this item doesn't exist when 3.0 is out.
-
--- That was written when I planned on rewriting this hat, now I'm just adjusting it... sadly this item still exists.
-
--- Checking in again, I've decided it's for the best that this item exists, at most I might rework it to just be ammo instead of a whole item, but it's fine for now.
-
--- Hey guess what, checking in one more time months later and I found a way to make this item awesome! Check it out by playing with it, lol.
  
 return Prefab("kidpotion", kidpotion_fn, kidpotion_assets, kidpotion_prefabs)

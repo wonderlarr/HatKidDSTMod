@@ -11,14 +11,19 @@ local assets=
 
 RegisterInventoryItemAtlas("images/inventoryimages/polarhat.xml","polarhat.tex")
 
-
 --Scratch the previous stuff, new idea
 --I'm going to implement an ability key, probably LSHIFT by default, this will activate the Hat Ability, like slamming with ice hat, sprinting, throwing a potion with brewing hat, etc.
 --Ice Hat ability will be a ground slam, knocking things away from Hat Kid and applying 3 layers of freeze, and possibly a little damage. However, this will be put on a cooldown of probably 15 seconds, we'll see.
+-- (Several weeks later) Looking great, let's see if we can polish it up.
 
--- (Several weeks later) looking great, let's see if we can polish it up.
+-- 5/11/22 After taking many breaks and stuff, this is NEEDS a rewrite. I didn't really know how stategraphs worked when I first made this, so I just did everything manually
+-- because I thought it was easier. Boy was I wrong, and boy do I regret it. At least I can fix the rat's nest.
+
 local prefabs = 
 { 
+	"hatshatter",
+	"hatshatter2",
+	"polarhat_explode",
 }
 
 local FREEZE_COLOUR = { 82 / 255, 115 / 255, 124 / 255, 0 }
@@ -30,11 +35,6 @@ local function PushColour(owner, r, g, b, a)
         owner.AnimState:SetAddColour(r, g, b, a)
     end
 end
-
--- local function OnBlocked(inst, data)
-	-- inst.SoundEmitter:PlaySound("dontstarve/wilson/hit_armour")
-	-- badge.components.armor:TakeDamage(data)
--- end
 
 local function polarhatclient(owner)
 	owner:DoTaskInTime(0.1, function(owner)
@@ -57,13 +57,7 @@ local function polarhatclient(owner)
 	end)
 end
 
-local function polarhatclient2(owner)
-	local hfx2 = SpawnPrefab("hatshatter2").Transform:SetPosition(owner.Transform:GetWorldPosition())
-end
-
 AddClientModRPCHandler("HatKidRPC", "polarhatclient", polarhatclient)
-
-AddClientModRPCHandler("HatKidRPC", "polarhatclient2", polarhatclient2)
 
 function UpdateTint(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
@@ -94,7 +88,7 @@ local function FakeReveal(inst)
 	end)
 end
 
-local function FakeFreeze(inst)
+local function FakeFreeze(inst) -- why did I do this
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 
 	if owner.components.pinnable ~= nil and owner.components.pinnable:IsStuck() then
@@ -107,14 +101,13 @@ local function FakeFreeze(inst)
 	end
 	
 	owner.components.locomotor:StopMoving()
-	-- owner:
+
 	owner:ClearBufferedAction()
 
 	owner.AnimState:PlayAnimation("idle")
 	owner.sg:GoToState("idle")
 	
 	SendModRPCToClient(GetClientModRPC("HatKidRPC", "polarhatclient"), nil, owner)
-	local hfxt = SpawnPrefab("hatshatter").Transform:SetPosition(owner.Transform:GetWorldPosition())
 	
 	owner.Transform:SetPosition(owner.Transform:GetWorldPosition())
 	
@@ -231,14 +224,9 @@ local function OnStopUse(inst)
 		
 		rechargeable:Discharge(TUNING.POLARHAT_COOLDOWN) -- We use the rechargeable component to track cooldowns
 
-		-- if inst.components.fueled then
-		-- 	inst.components.fueled:DoDelta(-1, owner) -- Use once
-		-- end
-
-		if inst.components.finiteuses then
-			inst.components.finiteuses:Use(1)
+		if inst.components.fueled then
+			inst.components.fueled:DoDelta(-1, owner) -- Use once
 		end
-			
 	end
 end
 
@@ -278,10 +266,6 @@ end
 
 local function OnCharged()
 
-end
-
-local function nofuel(inst)
-	print("Hat Kid: " .. tostring(inst.prefab) .. " out of fuel")
 end
 
 
@@ -340,21 +324,15 @@ local function fn(Sim)
 	inst.components.insulator:SetInsulation(TUNING.INSULATION_MED)
 	
 	inst:AddComponent("rechargeable")
-	-- inst.components.rechargeable:SetOnDischargedFn(OnDischarged)
 	inst.components.rechargeable:SetOnChargedFn(OnCharged)
 
-	-- inst:AddComponent("fueled")
-	-- inst.components.fueled:InitializeFuelLevel( 20 ) -- add tuning
-
-	-- inst.components.fueled.fueltype = FUELTYPE.MAGIC
-    -- inst.components.fueled:SetDepletedFn(nofuel)
-    -- inst.components.fueled.accepting = true
-
 	if TUNING.POLARHAT_DURABILITY then
-		inst:AddComponent("finiteuses")
-		inst.components.finiteuses:SetMaxUses(TUNING.POLARHAT_DURABILITY) -- add tuning 33
-		inst.components.finiteuses:SetUses(TUNING.POLARHAT_DURABILITY)
-		inst.components.finiteuses:SetOnFinished(OnEmpty)
+		inst:AddComponent("fueled")
+		inst.components.fueled:InitializeFuelLevel( 10 ) -- add tuning
+		inst.components.fueled.fueltype = FUELTYPE.CHEMICAL
+		inst.components.fueled:SetDepletedFn(OnEmpty)
+		inst.components.fueled.bonusmult = 2 / 90
+		inst.components.fueled.accepting = true
 	end
 
 	-- inst:AddComponent("container")

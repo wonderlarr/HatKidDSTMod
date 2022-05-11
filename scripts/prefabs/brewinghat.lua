@@ -70,10 +70,12 @@ end
  
 local function OnUse(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
+	local hands = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 	
-	if not inst.components.rechargeable:IsCharged() 
-	or owner.components.sanity.current < TUNING.BREWINGHAT_THRESHHOLD 
-	or inst.components.fueled:GetPercent() < 0.125 then
+	if not inst.components.rechargeable:IsCharged()  -- if we aren't charged yet
+	or owner.components.sanity.current < TUNING.BREWINGHAT_THRESHHOLD  -- or we don't have enough sanity
+	or inst.components.fueled:GetPercent() < 0.125 -- or we don't have enough fuel
+	or (hands and string.match(hands.prefab, "kidpotion")) then -- Very cool lua
 	
 		-- If in cooldown
 		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
@@ -82,34 +84,25 @@ local function OnUse(inst)
 		
 		--Cooldown line
 		owner.components.talker:Say(GetString(owner, "HAT_ONCOOLDOWN"))
-		
 	else
 		-- If not in cooldown
 		owner.prevequip = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 
-		-- Player stuff
+		-- Player stuffh
 		owner.components.sanity:DoDelta(-TUNING.BREWINGHAT_THRESHHOLD)
-		owner.components.inventory:Equip(SpawnPrefab("kidpotion"))
+
+		local kidpotion = SpawnPrefab("kidpotion")
+		kidpotion.sourceprefab = inst
+		kidpotion.brewer = owner
+		owner.components.inventory:Equip(kidpotion)
 
 		-- Hat Stuff
-		inst.components.rechargeable:Discharge(TUNING.BREWINGHAT_CHARGETIME) -- Cooldown
+		-- inst.components.rechargeable:Discharge(TUNING.BREWINGHAT_CHARGETIME) -- Cooldown
 		inst.components.fueled:DoDelta(-1)
 
 		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
 			inst.components.useableitem:StopUsingItem()
 		end)
-	end
-end
-
-local function OnStopUse(inst)
-
-	local owner = inst.components.inventoryitem:GetGrandOwner()
-	
-	if not inst.components.rechargeable:IsCharged() then
-		-- If in cooldown
-
-	else
-
 	end
 end
 
@@ -170,7 +163,7 @@ local function fn(Sim)
 		inst.components.fueled:InitializeFuelLevel( 4 ) -- add tuning
 		inst.components.fueled.fueltype = FUELTYPE.CAVE
 		-- inst.components.fueled.secondaryfueltype = FUELTYPE.NIGHTMARE
-		inst.components.fueled.bonusmult = 1 / 45
+		inst.components.fueled.bonusmult = 2 / 45
 		inst.components.fueled.accepting = true
 	end
 	

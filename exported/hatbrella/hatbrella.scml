@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="swap_object">
+        <file id="0" name="swap_object/swap_object-0.png" width="113" height="383" pivot_x="0.539472" pivot_y="0.152302"/>
+    </folder>
+    <folder id="1" name="wilson">
+        <file id="0" name="wilson/wilson-0.png" width="244" height="374" pivot_x="0" pivot_y="1"/>
+        <file id="1" name="wilson/wilson-1.png" width="258" height="388" pivot_x="0" pivot_y="1"/>
+        <file id="2" name="wilson/wilson-2.png" width="238" height="381" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <entity id="0" name="hatbrella">
+        <animation id="0" name="BUILD" length="67" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                    <object_ref id="1" timeline="1" key="0" z_index="1"/>
+                    <object_ref id="2" timeline="3" key="0" z_index="2"/>
+                    <object_ref id="3" timeline="2" key="0" z_index="3"/>
+                    <object_ref id="4" timeline="4" key="0" z_index="4"/>
+                    <object_ref id="5" timeline="5" key="0" z_index="5"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="swap_object">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="-259.195446" y="108.688005" angle="353.624"/>
+                </key>
+            </timeline>
+            <timeline id="1" name="wilson-0">
+                <key id="0" spin="0">
+                    <object folder="1" file="0" x="-548.974026" y="364.090909" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="2" name="wilson-1_000">
+                <key id="0" spin="0">
+                    <object folder="1" file="1" x="-146.75325" y="372.42857" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="3" name="swap_object-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="99.399331" y="103.718142" angle="350.699"/>
+                </key>
+            </timeline>
+            <timeline id="4" name="swap_object-0_000">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="289.269719" y="121.424979" angle="7.293"/>
+                </key>
+            </timeline>
+            <timeline id="5" name="wilson-2_000">
+                <key id="0" spin="0">
+                    <object folder="1" file="2" x="371.97403" y="368.58442" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

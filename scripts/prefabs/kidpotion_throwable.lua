@@ -14,25 +14,23 @@ local kidpotion_assets = {
 
 RegisterInventoryItemAtlas("images/inventoryimages/kidpotion.xml","kidpotion.tex")
 
--- local holder = {
---     nil,
--- }
-
 local kidpotion_prefabs = {
+    "brewinghat_explode",
     "burntground",
+    "fx_boat_pop",
+    "superjump_fx",
+    "hatshatter2",
+
+    "reticule",
     "reticuleaoe",
     "reticuleaoeping",
-    "reticuleaoehostiletarget",
-    "reticule"
 } 
-
---I heavily dislike how I wrote this code, but it works so I'm gonna leave it for now.
 
 local function DoExplode(self)
     local explosiverange = TUNING.BREWINGHAT_RADIUS
     local totaldamage = self.explosivedamage
 
-    local holder = self.inst.lastowner
+    local holder = self.inst.brewer
  
     local x, y, z = self.inst.Transform:GetWorldPosition()
     -- Players are off limits now
@@ -46,16 +44,6 @@ local function DoExplode(self)
                     v.components.workable:WorkedBy(holder, 2)
                     v:PushEvent("attacked", { attacker = holder, damage = 0})
                 else -- Otherwise
-                    -- if v.components.lootdropper and TUNING.ENABLE_PONS and not v:HasTag("pons") then
-                    --     -- chance 
-                    --     for i = v.components.workable.workleft + 1 or 1, 0, -1
-                    --     do
-                    --         v.components.lootdropper:AddChanceLoot("pon", 0.75)
-                    --     end
-            
-                    --     v:AddTag("pons")
-                    -- end
-
                     v.components.workable:WorkedBy(holder, self.buildingdamage)
                     v:PushEvent("attacked", { attacker = holder, damage = 0})
                 end
@@ -66,8 +54,6 @@ local function DoExplode(self)
                 if v.components.combat ~= nil then
                     holder:PushEvent("onattackother", {target = v})
                     v.components.combat:GetAttacked(holder, totaldamage, nil)
-					
-					-- v.components.combat:SuggestTarget(holder)
                 end
  
                 v:PushEvent("explosion", { explosive = self.inst })
@@ -93,52 +79,40 @@ local function OnExplodeFn(inst)
     local d = SpawnPrefab("hatshatter2")
         d.Transform:SetPosition(inst.Transform:GetWorldPosition())
 
-    DoExplode(inst.components.explosive, inst)
+    DoExplode(inst.components.explosive)
 
 
-    inst.lastowner:PushEvent("PotionThrown")
+    inst.brewer:PushEvent("PotionThrown")
 end
  
 local function OnHitSomething(inst, attacker, target)
     inst.components.explosive:OnBurnt()
 end
 
-local function RefreshReticule(inst)
-    local owner = ThePlayer
-    if owner ~= nil then
-        local inventoryitem = inst.replica.inventoryitem
-        if inventoryitem ~= nil and inventoryitem:IsHeldBy(owner) and owner.components.playercontroller ~= nil then
-            owner.components.playercontroller:RefreshReticule()
-        end
-    end
-end
+-- local function RefreshReticule(inst)
+--     local owner = ThePlayer
+--     if owner ~= nil then
+--         local inventoryitem = inst.replica.inventoryitem
+--         if inventoryitem ~= nil and inventoryitem:IsHeldBy(owner) and owner.components.playercontroller ~= nil then
+--             owner.components.playercontroller:RefreshReticule()
+--         end
+--     end
+-- end
 
  
 local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_object", "swap_kidpotion", "swap_kidpotion")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
-
-    inst.lastowner = owner
-	
-	-- holder = inst.components.inventoryitem:GetGrandOwner()
 end
  
 local function onunequip(inst, owner)
     owner.AnimState:Hide("ARM_carry")
     owner.AnimState:Show("ARM_normal")
-
-    local head = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
-    
-    if head and head.prefab == "brewinghat" then
-        head:PushEvent("prevequip")
-    end
 end
  
 local function onthrown(inst)
-	if inst.lastowner ~= nil and inst.lastowner:HasTag("hatkid") then
-		local headslot = inst.lastowner.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
-	
+	if inst.brewer ~= nil and inst.brewer:HasTag("hatkid") then
         inst:AddTag("NOCLICK")
         inst.persists = false
         
@@ -157,8 +131,8 @@ local function onthrown(inst)
         inst.Physics:CollidesWith(COLLISION.OBSTACLES)
         inst.Physics:CollidesWith(COLLISION.ITEMS)
         
-        if inst.lastowner.SoundEmitter ~= nil then
-            inst.lastowner.SoundEmitter:PlaySound("brewinghat/sound/throw")
+        if inst.brewer.SoundEmitter ~= nil then
+            inst.brewer.SoundEmitter:PlaySound("brewinghat/sound/throw")
         end
 	end
 end
@@ -179,11 +153,21 @@ local function ReticuleTargetFn()
 end
 
 local function onDrop(inst)
+    if inst.sourceprefab then
+        inst.sourceprefab:PushEvent("prevequip")
+    end
+
+    -- If we get dropped but aren't thrown, refund the potion costs
     inst:DoTaskInTime(0, function(inst)
-        if not inst:IsInLimbo() and inst:IsValid() and not inst:HasTag("NOCLICK") then
-            if inst.lastowner:IsValid() then
-                inst.lastowner.components.sanity:DoDelta(6)
+        if not inst:HasTag("NOCLICK") then
+            if inst.brewer and inst.brewer.components.sanity then
+                inst.brewer.components.sanity:DoDelta(5)
             end
+
+            if inst.sourceprefab and inst.sourceprefab.components.fueled then
+                inst.sourceprefab.components.fueled:DoDelta(1)
+            end
+
             inst:Remove()
         end
     end)
@@ -217,6 +201,10 @@ local function common_fn(bank, build, anim, tag, isinventoryitem)
     inst.AnimState:SetBank(bank)
     inst.AnimState:SetBuild(build)
     inst.AnimState:PlayAnimation(anim, true)
+
+    inst:AddComponent("reticule")
+    inst.components.reticule.targetfn = ReticuleTargetFn
+    inst.components.reticule.ease = true
  
     inst.entity:SetPristine()
  
@@ -271,11 +259,5 @@ local function kidpotion_fn()
 	
     return inst
 end
-
---Hopefully this item doesn't exist when 3.0 is out.
-
--- That was written when I planned on rewriting this hat, now I'm just adjusting it... sadly this item still exists.
-
--- Checking in again, I've decided it's for the best that this item exists, at most I might rework it to just be ammo instead of a whole item, but it's fine for now.
  
 return Prefab("kidpotion_throwable", kidpotion_fn, kidpotion_assets, kidpotion_prefabs)
