@@ -13,11 +13,7 @@ local assets=
 	Asset( "ANIM", "anim/hatkid_timestop.zip" ),
 }
 
-
 RegisterInventoryItemAtlas("images/inventoryimages/timestophat.xml","timestophat.tex")
-
-
-
 
 local prefabs = 
 {
@@ -32,11 +28,6 @@ local function SlowNear(inst)
 	local nags = { "character", "player" }
 	local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, nil)
 	for _,ent in ipairs(targets) do
-		-- if ent.components.combat and ent.components.locomotor then
-		
-			-- ent.OPeriod = ent.components.combat.min_attack_period
-			-- ent.components.locomotor:SetExternalSpeedMultiplier(ent, "timeslow_speed_mod", 0.5)
-			-- ent.components.combat:SetAttackPeriod(ent.OPeriod * 2)
 			ent:AddTag("timeslowed")
 			SetLocalTimeScale(nil, ent, TUNING.TIMESTOPHAT_TIMESCALE)
 			if ent.slowed ~= nil then
@@ -49,17 +40,14 @@ local function SlowNear(inst)
 				SetLocalTimeScale(nil, ent, 1)
 				ent.slowed = nil
 			end)
-			
-		-- end
 	end
 end
 
 local function OnUse(inst)
 
 	local owner = inst.components.inventoryitem:GetGrandOwner()
-	local rechargeable = inst.components.rechargeable
 	
-	if not rechargeable:IsCharged() and rechargeable:GetRechargeTime() == TUNING.TIMESTOPHAT_COOLDOWN then -- If charging and the time is the cooldown
+	if not inst.components.rechargeable:IsCharged() and inst.components.rechargeable:GetRechargeTime() == TUNING.TIMESTOPHAT_COOLDOWN then -- If charging and the time is the cooldown
 		-- If in cooldown
 		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
 			inst.components.useableitem:StopUsingItem()
@@ -71,7 +59,7 @@ local function OnUse(inst)
 	elseif not inst.components.timer:TimerExists("timehat_duration") then
 		--Start duration cooldown
 		inst.components.timer:StartTimer("timehat_duration", TUNING.TIMESTOPHAT_DURATION)
-		rechargeable:Discharge(TUNING.TIMESTOPHAT_DURATION)
+		inst.components.rechargeable:Discharge(TUNING.TIMESTOPHAT_DURATION)
 
 		if inst.components.fueled then
 			inst.components.fueled:StartConsuming()
@@ -111,13 +99,9 @@ end
 local function OnStopUse(inst)
 
 	local owner = inst.components.inventoryitem:GetGrandOwner()
-	local rechargeable = inst.components.rechargeable
 	
-	if not rechargeable:IsCharged() and rechargeable:GetRechargeTime() == TUNING.TIMESTOPHAT_COOLDOWN then
-		-- If in cooldown
-		-- Do nothing, no point.
-		-- print("WARNING: Time Stop Hat was used while in cooldown!")
-		-- If this somehow prints I don't know what to do with my life.
+	if not inst.components.rechargeable:IsCharged() and inst.components.rechargeable:GetRechargeTime() == TUNING.TIMESTOPHAT_COOLDOWN then
+		-- Shouldn't ever happen
 	else
 		-- Cancel Time Slow
 		if inst.TimeSlow then
@@ -129,7 +113,7 @@ local function OnStopUse(inst)
 	
 		-- Start cooldown timer
 		--owner.components.timer:StartTimer("hat_cooldown", (60 * 0.1))
-		rechargeable:Discharge(TUNING.TIMESTOPHAT_COOLDOWN)
+		inst.components.rechargeable:Discharge(TUNING.TIMESTOPHAT_COOLDOWN)
 
 		if inst.components.fueled then
 			inst.components.fueled:StopConsuming()
@@ -194,16 +178,10 @@ local function OnUnequip(inst, owner)
 end
 
 local function OnCharged(inst)
-	local rechargeable = inst.components.rechargeable
-	
-	-- print(inst.components.rechargeable:GetRechargeTime())
 end
 
 
 local function OnDischarged(inst)
-	local rechargeable = inst.components.rechargeable
-	
-	-- print(rechargeable:GetRechargeTime())
 end
 
 local function OnEmpty(inst)
@@ -273,8 +251,6 @@ local function fn(Sim)
     inst.components.equippable:SetOnUnequip( OnUnequip )
 	
 	inst:AddComponent("rechargeable")
-	inst.components.rechargeable:SetOnDischargedFn(OnDischarged)
-	inst.components.rechargeable:SetOnChargedFn(OnCharged)
 
 	if TUNING.TIMESTOPHAT_DURABILITY then
 		inst:AddComponent("fueled")

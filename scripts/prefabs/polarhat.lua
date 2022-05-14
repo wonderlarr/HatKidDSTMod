@@ -16,7 +16,9 @@ RegisterInventoryItemAtlas("images/inventoryimages/polarhat.xml","polarhat.tex")
 -- 5/11/22 After taking many breaks and stuff, this is NEEDS a rewrite. I didn't really know how stategraphs worked when I first made this, so I just did everything manually
 -- because I thought it was easier. Boy was I wrong, and boy do I regret it. At least I can fix the rat's nest.
 
--- 5/14/22 Rewrite almost done! Made a stategraph and stuff, looking pretty good so far, a LOT cleaner than before.
+-- 5/14/22 Rewrite basically done! Made a stategraph and stuff, looking pretty good so far, a LOT cleaner than before.
+-- Still a bit of a rat's nest, but it's a lot more readable now, so I'm happy for the moment.
+
 
 -- TODO: Test client stuff
 
@@ -75,6 +77,9 @@ local function OnUse(inst)
 		-- Fakefreeze, rewritten properly as a state (finally)
 		owner.sg:GoToState("hat_frozen")
 
+		-- Enter FX
+		SpawnPrefab("hatshatter").Transform:SetPosition(owner.Transform:GetWorldPosition())
+
 		-- After a delay, explode!
 		owner:DoTaskInTime(0.5, function(owner)
 			inst.components.useableitem:StopUsingItem()
@@ -82,7 +87,7 @@ local function OnUse(inst)
 			-- Break out of hat_frozen state
 			owner:PushEvent("doexplode")
 
-			-- FX
+			-- Explode FX
 			SpawnPrefab("hatshatter2").Transform:SetPosition(owner.Transform:GetWorldPosition())
 			SpawnPrefab("polarhat_explode").Transform:SetPosition(owner.Transform:GetWorldPosition())
 			
