@@ -174,6 +174,4 @@ local function fn(Sim)
     return inst
 end
 
--- AddModRPCHandler("HatKidRPC", "GetMousePos", BrewingHatAbility)
-
 return  Prefab("brewinghat", fn, assets, prefabs)
