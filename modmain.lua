@@ -1268,3 +1268,63 @@ if TUNING.BREWINGHAT_DURABILITY then
 		inst:ListenForEvent("itemget", OnTick)
 	end)
 end
+
+-- We need to make an entire pseudo-frozen state specifically for using the ice hat, as we don't want to go to the hit state after being unfrozen, we don't want extra sounds, and we want to show the hud.
+AddStategraphState("wilson",
+State{
+	name = "hat_frozen",
+	tags = { "busy", "frozen", "nopredict", "nodangle" },
+
+	onenter = function(inst)
+		if inst.components.pinnable ~= nil and inst.components.pinnable:IsStuck() then
+			inst.components.pinnable:Unstick()
+		end
+
+		-- Pseudo ForceStopHeavyLifting, since we're not actually in the sgwilson file, we can't access the local function for this.
+		if inst.components.inventory:IsHeavyLifting() then
+			inst.components.inventory:DropItem(
+			inst.components.inventory:Unequip(GLOBAL.EQUIPSLOTS.BODY), true, true)
+		end
+
+		inst.components.locomotor:Stop()
+		inst:ClearBufferedAction()
+
+		inst.components.colouradder:PushColour("polarhat", 82 / 255, 115 / 255, 124 / 255, 0)
+
+		inst.AnimState:OverrideSymbol("swap_frozen", "frozen", "frozen")
+		inst.AnimState:PlayAnimation("frozen")
+
+		inst.SoundEmitter:PlaySound("icestomp/sound/activate")
+
+		inst:AddTag("alwaysblock")
+
+		-- Just in case this somehow bugs out, force the player back to idle after 3 seconds, so they aren't stuck in place.
+		-- Why did I name it jicle?
+		inst.jicle = inst:DoTaskInTime(3, function(inst)
+			inst.sg:GoToState("idle")
+		end)
+	end,
+
+	events =
+	{
+		EventHandler("unequip", function(inst, data)
+			if data.eslot == GLOBAL.EQUIPSLOTS.HEAD then
+				inst.sg:GoToState("idle", true)
+				inst.jicle:Cancel()
+				inst.jicle = nil
+			end
+		end),
+		EventHandler("doexplode", function(inst, data)
+			inst.sg:GoToState("idle", true)
+			inst.jicle:Cancel()
+			inst.jicle = nil
+		end),
+	},
+
+	onexit = function(inst)
+		inst.AnimState:ClearOverrideSymbol("swap_frozen")
+		inst.components.colouradder:PopColour("polarhat")
+		inst:RemoveTag("alwaysblock")
+	end,
+}
+)

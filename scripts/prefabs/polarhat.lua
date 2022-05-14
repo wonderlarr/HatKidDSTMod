@@ -4,9 +4,6 @@ local assets=
 
     Asset("ATLAS", "images/inventoryimages/polarhat.xml"),
     Asset("IMAGE", "images/inventoryimages/polarhat.tex"),
-
-	Asset("SOUNDPACKAGE", "sound/icestomp.fev"),
-    Asset("SOUND", "sound/icestomp.fsb"), 
 }
 
 RegisterInventoryItemAtlas("images/inventoryimages/polarhat.xml","polarhat.tex")
@@ -19,22 +16,16 @@ RegisterInventoryItemAtlas("images/inventoryimages/polarhat.xml","polarhat.tex")
 -- 5/11/22 After taking many breaks and stuff, this is NEEDS a rewrite. I didn't really know how stategraphs worked when I first made this, so I just did everything manually
 -- because I thought it was easier. Boy was I wrong, and boy do I regret it. At least I can fix the rat's nest.
 
+-- 5/14/22 Rewrite almost done! Made a stategraph and stuff, looking pretty good so far, a LOT cleaner than before.
+
+-- TODO: Test client stuff
+
 local prefabs = 
 { 
 	"hatshatter",
 	"hatshatter2",
 	"polarhat_explode",
 }
-
-local FREEZE_COLOUR = { 82 / 255, 115 / 255, 124 / 255, 0 }
-
-local function PushColour(owner, r, g, b, a)
-    if owner.components.colouradder ~= nil then
-        owner.components.colouradder:PushColour("fake_freeze", r, g, b, a)
-    else
-        owner.AnimState:SetAddColour(r, g, b, a)
-    end
-end
 
 local function polarhatclient(owner)
 	owner:DoTaskInTime(0.1, function(owner)
@@ -59,114 +50,43 @@ end
 
 AddClientModRPCHandler("HatKidRPC", "polarhatclient", polarhatclient)
 
-function UpdateTint(inst)
-	local owner = inst.components.inventoryitem:GetGrandOwner()
-	local r, g, b, a
-	PushColour(owner, FREEZE_COLOUR[1], FREEZE_COLOUR[2], FREEZE_COLOUR[3], FREEZE_COLOUR[4])
-end
-
-local function FakeReveal(inst)
-	local owner = inst.components.inventoryitem:GetGrandOwner()
-	
-	owner:DoTaskInTime(0, function(owner)
-		owner.sg:GoToState("idle")
-		owner.AnimState:PlayAnimation("idle")
-		owner.AnimState:ClearOverrideSymbol("swap_frozen")
-		owner.components.inventory:Show()
-		local hfx2t = SpawnPrefab("hatshatter2").Transform:SetPosition(owner.Transform:GetWorldPosition())
-		
-		if owner.components.playercontroller ~= nil then
-			owner.components.playercontroller:EnableMapControls(true)
-			owner.components.playercontroller:Enable(true)
-		end
-		
-		if owner.components.colouradder ~= nil then
-			owner.components.colouradder:PopColour("fake_freeze")
-		else
-			owner.AnimState:SetAddColour(0, 0, 0, 0)
-		end
-	end)
-end
-
-local function FakeFreeze(inst) -- why did I do this
-	local owner = inst.components.inventoryitem:GetGrandOwner()
-
-	if owner.components.pinnable ~= nil and owner.components.pinnable:IsStuck() then
-		owner.components.pinnable:Unstick()
-	end
-
-	if owner.components.inventory:IsHeavyLifting() then
-		owner.components.inventory:DropItem(
-		owner.components.inventory:Unequip(EQUIPSLOTS.BODY), true, true)
-	end
-	
-	owner.components.locomotor:StopMoving()
-
-	owner:ClearBufferedAction()
-
-	owner.AnimState:PlayAnimation("idle")
-	owner.sg:GoToState("idle")
-	
-	SendModRPCToClient(GetClientModRPC("HatKidRPC", "polarhatclient"), nil, owner)
-	
-	owner.Transform:SetPosition(owner.Transform:GetWorldPosition())
-	
-	owner.AnimState:OverrideSymbol("swap_frozen", "frozen", "frozen")
-	owner.AnimState:PlayAnimation("frozen")
-
-	owner.components.inventory:Hide()
-	owner:PushEvent("ms_closepopups")
-	if owner.components.playercontroller ~= nil then
-		owner.components.playercontroller:EnableMapControls(false)
-		owner.components.playercontroller:Enable(false)
-	end
-	UpdateTint(inst)
-end
-
-
-local function Indicator(inst, enable, scale)
-	if inst.ice_range ~= nil then
-		inst.ice_range:Remove()
-		inst.ice_range = nil
-	end
-	if enable then
-		inst.ice_range = SpawnPrefab("hkr_icerange")
-		inst.ice_range:LinkToEntity(inst, scale)
-	end
-end
+-- SendModRPCToClient(GetClientModRPC("HatKidRPC", "polarhatclient"), nil, owner)
 
 local function OnUse(inst)
-
 	local owner = inst.components.inventoryitem:GetGrandOwner()
-	local rechargeable = inst.components.rechargeable
 	
-	if not rechargeable:IsCharged() then
+	if not inst.components.rechargeable:IsCharged() then
 		-- If in cooldown
 		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
 			inst.components.useableitem:StopUsingItem()
 		end)
 		
-		-- owner:PushEvent("hatcooldown")
 		owner.components.talker:Say(GetString(owner, "HAT_ONCOOLDOWN"))
 		
-	elseif not owner:HasTag("alwaysblock") then
+	else
 		-- If not in cooldown
-		--Ability Stuff
-		
-		owner.SoundEmitter:PlaySound("icestomp/sound/activate")
+		if inst.components.fueled then
+			inst.components.fueled:DoDelta(-1, owner)
+		end
 
-		FakeFreeze(inst)
+		-- Cooldown
+		inst.components.rechargeable:Discharge(TUNING.POLARHAT_COOLDOWN)
 		
-		owner:AddTag("alwaysblock")
-		
-		-- owner:AddChild(fx)
+		-- Fakefreeze, rewritten properly as a state (finally)
+		owner.sg:GoToState("hat_frozen")
 
+		-- After a delay, explode!
 		owner:DoTaskInTime(0.5, function(owner)
-			FakeReveal(inst)
 			inst.components.useableitem:StopUsingItem()
+
+			-- Break out of hat_frozen state
+			owner:PushEvent("doexplode")
+
+			-- FX
+			SpawnPrefab("hatshatter2").Transform:SetPosition(owner.Transform:GetWorldPosition())
+			SpawnPrefab("polarhat_explode").Transform:SetPosition(owner.Transform:GetWorldPosition())
 			
-			owner:RemoveTag("alwaysblock")
-			
+			-- Camera Shake
 			for i, v in ipairs(AllPlayers) do
 				local distSq = v:GetDistanceSqToInst(owner)
 				local k = math.max(0, math.min(1, distSq / 400))
@@ -176,57 +96,25 @@ local function OnUse(inst)
 				end
 			end
 			
-			-- SpawnPrefab("icecloud").Transform:SetPosition(owner.Transform:GetWorldPosition())
-			SpawnPrefab("polarhat_explode").Transform:SetPosition(owner.Transform:GetWorldPosition())
+			-- Get entities in a radius around the explosion's center
+			local pt = owner:GetPosition()
+			local range = TUNING.POLARHAT_RADIUS
+			local tags = { "monster", "hostile", "smallcreature", "insect", "animal", "largecreature", "character", "player" }
+			local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nil, tags)	
+			for _,ent in ipairs(targets) do
 
-			owner.SoundEmitter:PlaySound("icestomp/sound/stomp")
-			
-			if not owner.components.health:IsDead() and not owner:HasTag("playerghost") then
-				local pt = owner:GetPosition()
-				local range = TUNING.POLARHAT_RADIUS
-				local tags = { "monster", "hostile", "smallcreature", "insect", "animal", "largecreature", "character" }
-				local nags = { "player", "ghost", "noauradamage", "notraptrigger" }
-				local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, tags)	
-				for _,ent in ipairs(targets) do
-					if ent.components.freezable ~= nil then
-						ent.components.freezable:AddColdness(TUNING.POLARHAT_LEVEL)
-						ent.components.freezable:SpawnShatterFX()
-
-					end
+				-- Freeze things that need frozen
+				if ent.components.freezable ~= nil and not ent:HasTag("player") and not ent:HasTag("noauradamage") and not ent:HasTag("notraptrigger") then
+					ent.components.freezable:AddColdness(TUNING.POLARHAT_LEVEL)
+					ent.components.freezable:SpawnShatterFX()
 				end
 
-				local tags = { "player" }
-				local nags = { "ghost" }
-				local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, tags)	
-				for _,ent in ipairs(targets) do
-					if ent.components.temperature ~= nil then
-						--stuff
-						ent.components.temperature:SetTemperature(ent.components.temperature:GetCurrent() - TUNING.POLARHAT_TEMP) -- For whatever reason temp values are REVERSED?! 
-																																	-- We have to add to it in order to make the in game temperature go down
-						-- print( tostring( ent.components.temperature:GetCurrent() ) )
-					end
+				-- Decrease character temperatures
+				if ent.components.temperature ~= nil and ent:HasTag("character") then
+					ent.components.temperature:DoDelta(-TUNING.POLARHAT_TEMP)
 				end
 			end
 		end)
-	end
-end
-
-local function OnStopUse(inst)
-
-	local owner = inst.components.inventoryitem:GetGrandOwner()
-	local rechargeable = inst.components.rechargeable
-	
-	if not rechargeable:IsCharged() then
-		-- If in cooldown
-		-- Visual indicator of some sort here.
-	else
-		-- If not in cooldown, or doing nothing, put it on cooldown!
-		
-		rechargeable:Discharge(TUNING.POLARHAT_COOLDOWN) -- We use the rechargeable component to track cooldowns
-
-		if inst.components.fueled then
-			inst.components.fueled:DoDelta(-1, owner) -- Use once
-		end
 	end
 end
 
@@ -240,9 +128,6 @@ local function OnEquip(inst, owner)
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Hide("HEAD_HAT")
 	end
-	
-
-	-- Indicator(owner, true, 0.15 * TUNING.POLARHAT_RADIUS)
 end
  
  
@@ -258,19 +143,10 @@ local function OnUnequip(inst, owner)
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Hide("HEAD_HAT")
 	end
-	
-	-- Indicator(owner, false, 0.15 * TUNING.POLARHAT_RADIUS)
-	-- inst.indcheck:Cancel()
-end
-
-
-local function OnCharged()
-
 end
 
 
 local function KeybindUse(inst)
-	-- local owner = inst.components.inventoryitem:GetGrandOwner()
 	inst.components.useableitem:StartUsingItem()
 end
 
@@ -280,12 +156,15 @@ end
 
 local function fn(Sim) 
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
 
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
+
+	inst.AnimState:SetBank("polarhat")
+    inst.AnimState:SetBuild("polarhat")
+    inst.AnimState:PlayAnimation("idle")
 	
     MakeInventoryPhysics(inst)
  
@@ -298,15 +177,10 @@ local function fn(Sim)
         return inst
     end
 	
-    inst.AnimState:SetBank("polarhat")
-    inst.AnimState:SetBuild("polarhat")
-    inst.AnimState:PlayAnimation("idle")
-	
 	MakeHauntableLaunch(inst)
  
 	inst:AddComponent("useableitem")
     inst.components.useableitem:SetOnUseFn(OnUse)
-    inst.components.useableitem:SetOnStopUseFn(OnStopUse)
 
     inst:AddComponent("timer")
  
@@ -324,24 +198,16 @@ local function fn(Sim)
 	inst.components.insulator:SetInsulation(TUNING.INSULATION_MED)
 	
 	inst:AddComponent("rechargeable")
-	inst.components.rechargeable:SetOnChargedFn(OnCharged)
 
 	if TUNING.POLARHAT_DURABILITY then
 		inst:AddComponent("fueled")
 		inst.components.fueled:InitializeFuelLevel( 10 ) -- add tuning
 		inst.components.fueled.fueltype = FUELTYPE.CHEMICAL
-		inst.components.fueled:SetDepletedFn(OnEmpty)
+		-- inst.components.fueled:SetDepletedFn(OnEmpty)
 		inst.components.fueled.bonusmult = 2 / 90
 		inst.components.fueled.accepting = true
 	end
 
-	-- inst:AddComponent("container")
-    -- inst.components.container:WidgetSetup("hkr_badgeslot")
-	-- inst.components.container.canbeopened = false
-    -- inst:ListenForEvent("itemget", OnBadgeLoaded)
-    -- inst:ListenForEvent("itemlose", OnBadgeUnloaded)
-	
-	-- inst:ListenForEvent("armordamaged", OnBlocked, inst)
 	inst:ListenForEvent("AbilityKey", KeybindUse)
 	
     return inst

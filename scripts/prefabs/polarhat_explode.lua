@@ -1,9 +1,11 @@
 local assets =
 {
-    -- Asset("ANIM", "anim/brewinghat_explode.zip"),
     Asset("ANIM", "anim/structure_collapse_fx.zip"),
     Asset("ANIM", "anim/fx_boat_pop.zip"),
     Asset("ANIM", "anim/sleepcloud.zip"),
+
+    Asset("SOUNDPACKAGE", "sound/icestomp.fev"),
+    Asset("SOUND", "sound/icestomp.fsb"), 
 }
 
 local function MakeExplosion(data)
@@ -22,19 +24,7 @@ local function MakeExplosion(data)
         inst.entity:AddLight()
 
         inst.Transform:SetFromProxy(proxy.GUID)
-
-
-
-
-        if not TheNet:IsDedicated() then
-            --Delay one frame so that we are positioned properly before starting the effect
-            --or in case we are about to be removed
-            inst:DoTaskInTime(0, function(inst)
-                -- inst.a.SoundEmitter:SetMute(true)
-            end)
-        end
 		
-		-- inst.Transform:SetScale(2, 2, 2)
         
         inst:AddComponent("colourtweener")
         inst:AddComponent("lighttweener")
@@ -42,7 +32,6 @@ local function MakeExplosion(data)
         inst.entity:AddLight()
 		inst.Light:Enable(true)
 		inst.Light:SetRadius(ABILITY_LIGHTRAD * TUNING.POLARHAT_RADIUS)
-		-- inst.Light:SetRadius(0.9403 * 6)
 		inst.Light:SetIntensity(0.99)
 		inst.Light:SetFalloff(1)
         inst.Light:SetColour(255/255, 255/255, 255/255)
@@ -51,7 +40,7 @@ local function MakeExplosion(data)
         inst.AnimState:SetBuild("structure_collapse_fx")
         inst.AnimState:PlayAnimation("collapse_large")
         inst.Transform:SetScale(0.85, 0.85, 0.85)
-        -- inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+        inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
         inst.AnimState:SetFinalOffset(10)
 		inst.AnimState:SetDeltaTimeMultiplier(1.5)
         inst.AnimState:SetMultColour(151/255, 255/255, 255/255, 1)
@@ -63,7 +52,7 @@ local function MakeExplosion(data)
         -- This code only runs on the client, so no need to do any stupid net vars, god i hate them
         -- Fade between orange a purple
 
-        -- inst.SoundEmitter:PlaySound("kidpotion/sound/explode")
+        inst.SoundEmitter:PlaySound("icestomp/sound/stomp")
 
         inst:ListenForEvent("animover", inst.Remove)
     end
@@ -122,10 +111,11 @@ local function MakeExplosion(data)
         inst.AnimState:HideSymbol("pollen")
         inst.AnimState:SetFinalOffset(8)
 
-        inst.AnimState:SetDeltaTimeMultiplier(1.8)
-        inst.AnimState:SetScale(2, 2)
+        inst.AnimState:SetDeltaTimeMultiplier(1.75)
+        inst.AnimState:SetScale(1.85, 2.15)
         inst.AnimState:SetMultColour(151/255, 255/255, 255/255, 1)
         inst.AnimState:SetAddColour(0, 0, 255/255, 1)
+        -- inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
 
         inst:ListenForEvent("animover", inst.Remove)
     end
