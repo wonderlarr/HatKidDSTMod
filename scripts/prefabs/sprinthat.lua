@@ -180,6 +180,7 @@ local function fn(Sim)
     MakeInventoryPhysics(inst)
  
     inst:AddTag("hat")
+    inst:AddTag("hatkidhat")
 
 	inst.entity:SetPristine()
 	
