@@ -42,8 +42,8 @@ local function MakeExplosion(data)
 
         inst.entity:AddLight()
 		inst.Light:Enable(true)
-		inst.Light:SetRadius(ABILITY_LIGHTRAD * TUNING.BREWINGHAT_RADIUS)
-		inst.Light:SetIntensity(0.99)
+		inst.Light:SetRadius(TUNING.BREWINGHAT_RADIUS)
+		inst.Light:SetIntensity(0.99999)
 		inst.Light:SetFalloff(1)
         inst.Light:SetColour(255/255, 255/255, 255/255)
         

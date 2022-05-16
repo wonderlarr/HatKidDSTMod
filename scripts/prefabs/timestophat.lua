@@ -107,12 +107,6 @@ local function OnStopUse(inst)
 		if inst.TimeSlow then
 			inst.TimeSlow:Cancel()
 		end
-		-- SetLocalTimeScale(nil, owner, 1)
-		-- owner.OPeriod = owner.components.combat.min_attack_period	
-		-- owner.components.combat:SetAttackPeriod(owner.OPeriod * 2)
-	
-		-- Start cooldown timer
-		--owner.components.timer:StartTimer("hat_cooldown", (60 * 0.1))
 		inst.components.rechargeable:Discharge(TUNING.TIMESTOPHAT_COOLDOWN)
 
 		if inst.components.fueled then
@@ -177,13 +171,6 @@ local function OnUnequip(inst, owner)
 	end
 end
 
-local function OnCharged(inst)
-end
-
-
-local function OnDischarged(inst)
-end
-
 local function OnEmpty(inst)
 	inst.components.useableitem:StopUsingItem() -- And we'll make sure to stop the dweller effect
 
@@ -192,7 +179,6 @@ end
  
 local function fn(Sim) 
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
 
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()

@@ -343,7 +343,7 @@ local function fn(Sim)
     MakeInventoryPhysics(inst)
 
 	inst.Light:SetFalloff(1)
-	inst.Light:SetIntensity(0.99)
+	inst.Light:SetIntensity(0.99999)
 	inst.Light:SetRadius(0)
 	inst.Light:SetColour(0/255, 255/255, 175/255)
 	inst.Light:Enable(true)
