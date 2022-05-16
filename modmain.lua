@@ -154,8 +154,6 @@ Assets = {
 
 }
 
-
-
 -- Constants
 GLOBAL.ABILITY_LIGHTRAD = 0.9403 -- This value is how light units translate to in game units while using specific settings with lights. Make sure you know what you're doing with this if you use it, it's not always accurate.
 -- End Constants

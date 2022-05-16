@@ -12,17 +12,17 @@
 local Ingredient = GLOBAL.Ingredient
 local TECH = GLOBAL.TECH
 
-AddCharacterRecipe("hatbrella",
-	{ -- ingredients
-		Ingredient("silk", 1),	
-		Ingredient("twigs", 2),
-		Ingredient("goldnugget", 1),
+AddCharacterRecipe("spear",
+	{ -- ingredients. Formatted identically to the old AddRecipe()
+		GLOBAL.Ingredient("silk", 1),	
+		GLOBAL.Ingredient("beefalowool", 2),
+		GLOBAL.Ingredient("goldnugget", 1),
 	},
-	TECH.SCIENCE_ONE, -- tech level
-	{ -- config
-		builder_tag = "hatkid"
+	GLOBAL.TECH.SCIENCE_ONE, -- crafting station. Refer to other recipes in recipes.lua for other stations.
+	{ -- config. Other options can be found in recipe.lua, under the Recipe class.
+		builder_tag = "my_tag"
 	}, 
-	{ -- crafting filters
+	{ -- crafting filters/tabs, found in recipes_filter.lua
 		"MODS",
 		"WEAPONS",
 		"RAIN",

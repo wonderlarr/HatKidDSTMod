@@ -1,5 +1,6 @@
 -- Whooo boy, this is a rat's nest in need of an exterminator. Time to get at it!
 
+-- (5/12/22) still a rat's nest, but manageable I guess.
 local assets=
 { 
     Asset("ANIM", "anim/brewinghat.zip"),
@@ -8,7 +9,7 @@ local assets=
     Asset("IMAGE", "images/inventoryimages/brewinghat.tex"),
 }
 
-RegisterInventoryItemAtlas("images/inventoryimages/brewinghat.xml","brewinghat.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/brewinghat.xml", "brewinghat.tex")
 
 local prefabs =
 {
