@@ -1,7 +1,5 @@
 --Item and character strings
 
-GLOBAL.STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Smol"
-
 
 -- String declarations
 local require = GLOBAL.require
@@ -23,6 +21,7 @@ STRINGS.CHARACTER_TITLES.hatkid = "The Homesick Hatter"
 STRINGS.CHARACTER_NAMES.hatkid = "Hat Kid"
 STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Knits cool hats\n*Is selfish and obsessive over them\n*Has a vulnerable mind\n*Considered extremely cute"
 STRINGS.CHARACTER_QUOTES.hatkid = "\"Oh, hi there!\""
+STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Smol"
 
 --Skin STRINGS
 

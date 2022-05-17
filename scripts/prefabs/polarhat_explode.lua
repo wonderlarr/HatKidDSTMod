@@ -29,7 +29,6 @@ local function MakeExplosion(data)
         inst:AddComponent("colourtweener")
         inst:AddComponent("lighttweener")
 
-        inst.entity:AddLight()
 		inst.Light:Enable(true)
 		inst.Light:SetRadius(TUNING.POLARHAT_RADIUS)
 		inst.Light:SetIntensity(0.99999)

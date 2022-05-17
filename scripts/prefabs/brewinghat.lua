@@ -39,10 +39,6 @@ local function equiprev(inst)
 	end
 end
 
-local function OnEmpty(inst)
-	-- inst:DoTaskInTime(0, inst.Remove)
-end
-
 local function OnEquip(inst, owner)
 	owner.AnimState:OverrideSymbol("swap_hat", "brewinghat", "swap_hat")
 
@@ -76,7 +72,7 @@ local function OnUse(inst)
 	if not inst.components.rechargeable:IsCharged()  -- if we aren't charged yet
 	or owner.components.sanity.current < TUNING.BREWINGHAT_THRESHHOLD  -- or we don't have enough sanity
 	or inst.components.fueled:GetPercent() < 0.125 -- or we don't have enough fuel
-	or (hands and string.match(hands.prefab, "kidpotion")) then -- Very cool lua
+	or (hands and string.match(hands.prefab, "kidpotion")) then -- or we are already holding a potion
 	
 		-- If in cooldown
 		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird

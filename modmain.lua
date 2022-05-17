@@ -15,16 +15,12 @@
            __/ |                     __/ |
           |___/                     |___/
 
+	This mod was originally based on Daniel's Hat Kid mod for DST, linked here https://steamcommunity.com/sharedfiles/filedetails/?id=1192668074
 
-	To be clear, I AM NOT GOOD AT CODING! However, I am good at using search engines, logic, and copy pasting.
+	However, almost every line of code has been rewritten or edited in some way, and every asset has also been redrawn, 
+	making this mod almost entirely my own, besides the art assets drawn by Powd3d4
 
-	A lot of the stuff written in this mod is absolutely disgusting, but it WORKS, and that's what matters.
-
-	If you are for whatever reason using part of my mod to learn something, or as an example, feel free, but also try to improve it,
-	improving already existing code is a lot of what I did in this mod, be it code that was already in the mod, or snippets I "borrowed" from somewhere else.
-
-	Also, if you're looking to help me with my mod in any way, be it textures or code, or you just wanna chat,  join my super secret private and epic discord https://discord.gg/ysJRjaVUmu
-	and make sure to give me an @. I'm Skylarr#9203.
+	This mod has been an awesome journey in learning to stay consistent with a project. I've been working on it very slowly since Summer 2020, 
 ]]
 
 
@@ -34,9 +30,6 @@ PrefabFiles = {
 	"hatkid",
 	"hatkid_none",
 
-	--player skins
-	-- "hatkid_copy", -- default clothes
-
 	--hats
     "kidhat",
 	"sprinthat",
@@ -45,40 +38,21 @@ PrefabFiles = {
 	"dwellermask",
 	"timestophat",
 
-	--hatbrellas
+	--other items
 	"hatbrella",
-	-- "hatbrella2",
-
-	--open hatbrellas
 	"hatbrellaopen",
-	-- "hatbrella2open",
-
-	--throwables
 	"kidpotion",
 	"kidpotion_throwable",
-
-	--badges (not implemented)
-	-- "hkr_badge_football",
-	-- "hkr_badge_winter",
 
 	--collectables (disabled)
 	-- "pon",
 	-- "pon_heart",
 	-- "timepiece",
 
-	-- Dweller Placeables
-	-- "dwellerplatform",
-	-- "dwellerplatform_player_collision",
-	-- "dwellerplatform_item_collision",
-	-- "dwellerplatform_item",
-
-	--fx prefabs
+	--fx
 	"brewinghat_explode",
 	"polarhat_explode",
 	"sprint_puff",
-	-- "hkr_aoe",
-	-- "hkr_icerange",
-	-- "icecloud",
 	"hatshatter",
 	"hatshatter2",
 
@@ -118,13 +92,6 @@ Assets = {
 	Asset( "IMAGE", "images/names_gold_hatkid.tex" ),
     Asset( "ATLAS", "images/names_gold_hatkid.xml" ),
 
-	-- Crafting tabs (obsolete)
-	-- Asset( "IMAGE", "images/gui/craftingtabicon.tex" ), -- Reused texture from Kid Hat, first swap image.
-	-- Asset( "ATLAS", "images/gui/craftingtabicon.xml" ),
-
-	-- Asset( "IMAGE", "images/gui/pontab.tex" ), -- Reused texture from Kid Hat, first swap image.
-	-- Asset( "ATLAS", "images/gui/pontab.xml" ),
-
 	-- Pon inventory (disabled)
 	-- Asset("ANIM", "anim/status_pons.zip"),
 	-- Asset("ANIM", "anim/pons_icon.zip"),
@@ -146,47 +113,38 @@ Assets = {
 	-- This means we don't load a ton of duplicate textures theoretically, though I'm not sure how this works in memory
 	-- At the very least it saves disk space
     Asset( "ATLAS", "bigportraits/hatkid_dye_niko.xml" ), --nightmargin is awesome i love oneshot
-    Asset( "ATLAS", "bigportraits/hatkid_dye_toonlink.xml" ), -- toonlink is pretty cool tool, my smash main
-    Asset( "ATLAS", "bigportraits/hatkid_dye_pinkdanger.xml" ), -- pink dye
+    Asset( "ATLAS", "bigportraits/hatkid_dye_toonlink.xml" ), -- toonlink is pretty cool too, my smash main
+    Asset( "ATLAS", "bigportraits/hatkid_dye_pinkdanger.xml" ), -- my primary dye in the actual game
 
     Asset( "ATLAS", "bigportraits/hatkid_timestop.xml" ), -- redundant bigportrait for time stop skin. This shouldn't display but it keeps the client log happy.
 
 
 }
 
--- Constants
-GLOBAL.ABILITY_LIGHTRAD = 0.9403 -- This value is how light units translate to in game units while using specific settings with lights. Make sure you know what you're doing with this if you use it, it's not always accurate.
--- End Constants
-
 -- Import modmain segments
 modimport("modmain_strings.lua")
 modimport("modmain_tuning.lua")
 modimport("modmain_crafting.lua")
+-- modimport("modmain_ponstuff.lua")
 
-modimport("engine.lua") --Keyhandler engine
+modimport("scripts/keyhandler.lua") --Keyhandler
+modimport("scripts/character_skins_api.lua") -- Character Skins API
 
 -- Imports to keep the keyhandler from working while typing into various things.
 Load "chatinputscreen"
 Load "consolescreen"
 Load "textedit"
 
--- Add Hat Kid to css and minimap
+-- Add Hat Kid to various things
 AddModCharacter("hatkid", "FEMALE")
 AddMinimapAtlas("images/map_icons/hatkid.xml")
+AddSkinnableCharacter("hatkid") -- Character skin thing
 
-
-----------------------------------
--- Skin Stuff --------------------
-----------------------------------
-
--- CHARACTER skins section, NOT item skins
---Thanks hornet
+-- Character Skins, thanks Hornet
 local _G = GLOBAL
 local PREFAB_SKINS = _G.PREFAB_SKINS
 local PREFAB_SKINS_IDS = _G.PREFAB_SKINS_IDS
 local SKIN_AFFINITY_INFO = GLOBAL.require("skin_affinity_info")
-
-modimport("skins_api") --Hornet: We import the file! If you named your file something else other than skins_api then youll want to rename this function to the name of the file
 
 SKIN_AFFINITY_INFO.hatkid = {
 	"hatkid_cat",
@@ -222,127 +180,6 @@ for prefab,skins in pairs(PREFAB_SKINS) do
     end
 end
 
-
-AddSkinnableCharacter("hatkid") --Hornet: The character youd like to skin, make sure you use the prefab name. And MAKE sure you run this function AFTER you import the skins_api file
-
--- ITEM skins section, NOT CHARACTER SKINS
--- Thanks Cunning Fox
-
--- BROKEN as of the crafting menu update! 
--- modimport("scripts/libs/skins_api.lua")
-
-
-
--- Character ingredient hack
--- Apparently making new character ingredients is either not easy as I thought when I started,
--- or I overlooked some simple function or method that does this all for me. Either way, I've done this mess now,
--- and it works.
-
-
--- We start by adding pon as a global constant
--- GLOBAL.CHARACTER_INGREDIENT.PON = "pon"
-
-
--- -- Here we hook into a function that tells things our ingredient IS a character ingredient
--- local _IsCharacterIngredient = GLOBAL.IsCharacterIngredient
-
---  -- We must replace IsCharacterIngredient, for some reason we can't add Pon to CHARACTER_INGREDIENT properly ourselves.
--- GLOBAL.IsCharacterIngredient = function(ingredienttype)
--- 	if ingredienttype == "pon" then
--- 		return ingredienttype ~= nil
--- 	end
-
--- 	local ret = _IsCharacterIngredient(ingredienttype)
--- 	return ret
--- end
-
-
--- -- Here we replace some stuff in Builder so we can use pon properly in recipes
--- AddComponentPostInit("builder", function(self)
--- 	-- Remove Ingredients
--- 	local _RemoveIngredients = self.RemoveIngredients
-
--- 	self.RemoveIngredients = function(self, ingredients, recname)
--- 		local recipe = GLOBAL.AllRecipes[recname]
-
--- 		if recipe then
--- 			for k,v in pairs(recipe.character_ingredients) do
--- 				if v.type == GLOBAL.CHARACTER_INGREDIENT.PON then
--- 					-- print("-------------------------------------------------------------------------")
-	
--- 					-- print(self.inst.prefab)
--- 					self.inst.pons = math.max(self.inst.pons - v.amount, 0)
--- 					-- self.inst:PushEvent("")
--- 				end
--- 			end
--- 		end
--- 		local ret = _RemoveIngredients(self, ingredients, recname)
--- 		return ret
--- 	end
-
-
-
--- 	-- Has Ingredients
--- 	local _HasCharacterIngredient = self.HasCharacterIngredient
-
--- 	self.HasCharacterIngredient = function(self, ingredient)
--- 		if ingredient.type == GLOBAL.CHARACTER_INGREDIENT.PON then
--- 			if self.inst.pons ~= nil then
--- 				local current = math.ceil(self.inst.pons)
--- 				return current >= ingredient.amount, current
--- 			end
--- 		end
-
-
--- 		local ret = _HasCharacterIngredient(self, ingredient)
--- 		return ret
--- 	end
--- end)
-
--- AddClassPostConstruct("components/builder_replica", function(self)
--- 	local _HasCharacterIngredient = self.HasCharacterIngredient
-
--- 	self.HasCharacterIngredient = function(self, ingredient)
--- 		if self.inst.components.builder ~= nil then
--- 			return self.inst.components.builder:HasCharacterIngredient(ingredient)
--- 		elseif self.classified ~= nil then
--- 			-- print("local hook success")
--- 			if ingredient.type == GLOBAL.CHARACTER_INGREDIENT.PON then
--- 				-- print("-------------------------------------------------------------------------")
--- 				local pons = self.inst.pons
--- 				-- print(self.inst.prefab)
--- 				if pons ~= nil then
--- 					local current = math.ceil(pons)
--- 					return current >= ingredient.amount, current
--- 				end
--- 			end  
--- 		end	
--- 		local ret = _HasCharacterIngredient(self, ingredient)
--- 		return ret
--- 	end
--- end)
-
-
--- AddClassPostConstruct("components/inventory_replica", function(self)
--- 	local _GetNumSlotsreplica = self.GetNumSlots
--- 	function self:GetNumSlots(...)
--- 		if self.inst.components.inventory ~= nil then
--- 			return self.inst.components.inventory:GetNumSlots()
--- 		else
--- 			return self.inst.maxslotsinv or _GetNumSlotsreplica(self, ...)
--- 		end
--- 	end	
--- end)
-
--- local _makereadonly = GLOBAL.makereadonly
--- function GLOBAL.makereadonly(t, k)
--- 	if k == "maxslots" then
--- 		return
--- 	end
-	
--- 	_makereadonly(t, k)
--- end
-
 -- Thanks Kzisor/Ysovuka for the Key Handling code.
 -- Key Handling guide https://forums.kleientertainment.com/forums/topic/63754-tutorial-character-transformation/
 local mod_option = "hatkid_polarhatkey"
@@ -350,7 +187,7 @@ local character = "HATKID"
 GLOBAL.TUNING[GLOBAL.string.upper(character)] = {}
 GLOBAL.TUNING[GLOBAL.string.upper(character)].KEY = GetModConfigData(mod_option) or 122
 
--- This is gross.
+-- Push AbilityKey to any Hat Kid's hats.
 local function Ability(inst)
 	local hat = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HEAD)
 	if hat ~= nil and hat:HasTag("hatkidhat") then
@@ -358,39 +195,7 @@ local function Ability(inst)
 	end
 end
 
-
--- This adds the handler, which means that if the server gets told "AbilityDown",
--- it will call the function, AbilityDown, above, with the correct player information on the server side.
 AddModRPCHandler("HatKidRPC", "AbilityKeyDown", Ability)
-
--- if TUNING.ENABLE_PONS then
--- 	AddClassPostConstruct("widgets/statusdisplays", function(self)
--- 		if self.owner:HasTag("hatkid") then
--- 			if self.ponbadge == nil then
--- 				local PonBadge      = require "widgets/ponbadge"
-
--- 				self.ponbadge = self:AddChild(PonBadge(self.owner))
-				
-
--- 				-- Checks for combined status from the workshop. We should reposition if it's enabled.
--- 				local cs_enabled = GLOBAL.KnownModIndex:IsModEnabled("workshop-376333686")
-
--- 				if cs_enabled then -- if using cs
--- 					self.ponbadge:SetPosition(0, -52)
--- 				else -- If we're using vanilla hud
--- 					self.ponbadge:SetPosition(0, -130, 0)
--- 				end
-
--- 				self.ponbadge:SetPercent(self.owner.pons / TUNING.PONS_MAX, TUNING.PONS_MAX)
--- 				self.ponbadge:SetClickable(true)
-
--- 				self.owner:ListenForEvent("UpdatePons", function()
--- 					self.ponbadge:SetPercent(self.owner.pons / TUNING.PONS_MAX, TUNING.PONS_MAX)
--- 				end)
--- 			end
--- 		end
--- 	end)
--- end
 
 -- Post inits
 local afs_enabled = GLOBAL.KnownModIndex:IsModEnabled("workshop-2736043172") or GLOBAL.KnownModIndex:IsModEnabled("AutoFuelSlotDSTMod")
@@ -398,8 +203,6 @@ local afs_enabled = GLOBAL.KnownModIndex:IsModEnabled("workshop-2736043172") or 
 -- Check to make sure my other mod that does all this patching as well isn't present
 -- Could cause issues if both try and patch the same code in the same way. Or maybe not. I don't know, but
 -- I'm not willing to take the chance.
-
-
 
 if not afs_enabled then
 	-- Code in here is stolen from my mod Item Auto-Fuel Slots. I gave myself permission, don't worry!
@@ -579,83 +382,6 @@ end
 
 -- I would have put this directly in the prefab but I just stole code from my other mod and I'm too lazy to do this properly
 
-if TUNING.DWELLERMASK_DURABILITY then
-	AddPrefabPostInit("dwellermask", function(inst)
-		local function OnTick(inst)
-			if inst.components.container and inst.components.container:GetItemInSlot(1) then
-				local owner = inst.components.inventoryitem:GetGrandOwner()
-
-				local fueltogive = TUNING.DWELLERMASK_VALUE / inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue
-				local currentfuel = inst.components.fueled.currentfuel
-				local maxfuel = inst.components.fueled.maxfuel
-
-				if (maxfuel - currentfuel) > fueltogive then
-					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
-					inst.components.fueled:TakeFuelItem(fuelitem, owner)
-				end
-			end
-		end
-
-		local function OnEquip(inst, data)
-			local owner = data.owner
-			if inst.components.container ~= nil then
-				inst.components.container:Open(owner)
-			end
-		end
-
-		local function OnUnequip(inst, data)
-			local owner = data.owner
-			if inst.components.container ~= nil then
-				inst.components.container:Close(owner)
-			end
-		end
-		
-		-- Start Container stuff ---------
-		local containers = GLOBAL.require("containers")
-		params = containers.params
-
-		params.dwellermask_inv =
-		{
-			widget =
-			{
-				slotpos =
-				{
-					GLOBAL.Vector3(0,   32 + 4,  0),
-				},
-				animbank = "ui_cookpot_1x2",
-				animbuild = "ui_cookpot_1x2",
-				pos = GLOBAL.Vector3(0, 15, 0),
-			},
-			usespecificslotsforitems = true,
-			type = "head_inv",
-		}
-		
-		function params.dwellermask_inv.itemtestfn(container, item, slot)
-			return item:HasTag("nightmarefuel") -- Tag added by this mod, not in vanilla.
-		end
-		-- End Container -------
-		
-
-		if not GLOBAL.TheWorld.ismastersim then
-			inst.OnEntityReplicated = function(inst) 
-				inst.replica.container:WidgetSetup("dwellermask_inv") 
-			end
-
-			return
-		end
-
-		inst:AddComponent("container")
-		inst.components.container:WidgetSetup("dwellermask_inv")
-		inst.components.container.canbeopened = false
-
-		inst.tick = inst:DoPeriodicTask(1, OnTick)
-
-		inst:ListenForEvent("equipped", OnEquip)
-		inst:ListenForEvent("unequipped", OnUnequip)
-		inst:ListenForEvent("itemget", OnTick)
-	end)
-end
-
 if TUNING.BREWINGHAT_DURABILITY then
 	AddPrefabPostInit("brewinghat", function(inst)
 		local function OnTick(inst)
@@ -723,6 +449,83 @@ if TUNING.BREWINGHAT_DURABILITY then
 
 		inst:AddComponent("container")
 		inst.components.container:WidgetSetup("brewinghat_inv")
+		inst.components.container.canbeopened = false
+
+		inst.tick = inst:DoPeriodicTask(1, OnTick)
+
+		inst:ListenForEvent("equipped", OnEquip)
+		inst:ListenForEvent("unequipped", OnUnequip)
+		inst:ListenForEvent("itemget", OnTick)
+	end)
+end
+
+if TUNING.DWELLERMASK_DURABILITY then
+	AddPrefabPostInit("dwellermask", function(inst)
+		local function OnTick(inst)
+			if inst.components.container and inst.components.container:GetItemInSlot(1) then
+				local owner = inst.components.inventoryitem:GetGrandOwner()
+
+				local fueltogive = TUNING.DWELLERMASK_VALUE / inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue
+				local currentfuel = inst.components.fueled.currentfuel
+				local maxfuel = inst.components.fueled.maxfuel
+
+				if (maxfuel - currentfuel) > fueltogive then
+					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
+					inst.components.fueled:TakeFuelItem(fuelitem, owner)
+				end
+			end
+		end
+
+		local function OnEquip(inst, data)
+			local owner = data.owner
+			if inst.components.container ~= nil then
+				inst.components.container:Open(owner)
+			end
+		end
+
+		local function OnUnequip(inst, data)
+			local owner = data.owner
+			if inst.components.container ~= nil then
+				inst.components.container:Close(owner)
+			end
+		end
+		
+		-- Start Container stuff ---------
+		local containers = GLOBAL.require("containers")
+		params = containers.params
+
+		params.dwellermask_inv =
+		{
+			widget =
+			{
+				slotpos =
+				{
+					GLOBAL.Vector3(0,   32 + 4,  0),
+				},
+				animbank = "ui_cookpot_1x2",
+				animbuild = "ui_cookpot_1x2",
+				pos = GLOBAL.Vector3(0, 15, 0),
+			},
+			usespecificslotsforitems = true,
+			type = "head_inv",
+		}
+		
+		function params.dwellermask_inv.itemtestfn(container, item, slot)
+			return item:HasTag("nightmarefuel") -- Tag added by this mod, not in vanilla.
+		end
+		-- End Container -------
+		
+
+		if not GLOBAL.TheWorld.ismastersim then
+			inst.OnEntityReplicated = function(inst) 
+				inst.replica.container:WidgetSetup("dwellermask_inv") 
+			end
+
+			return
+		end
+
+		inst:AddComponent("container")
+		inst.components.container:WidgetSetup("dwellermask_inv")
 		inst.components.container.canbeopened = false
 
 		inst.tick = inst:DoPeriodicTask(1, OnTick)
