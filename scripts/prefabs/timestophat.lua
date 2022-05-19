@@ -19,6 +19,16 @@ local prefabs =
 {
 }
 
+local SHIELD_DURATION = 10 * FRAMES
+
+local RESISTANCES =
+{
+    "_combat",
+    "explosive",
+    "quakedebris",
+    "caveindebris",
+    "trapdamage",
+}
 
 -------------------------------------------------------------------------------------------------------
 local function SlowNear(inst)
@@ -64,6 +74,17 @@ local function OnUse(inst)
 		if inst.components.fueled then
 			inst.components.fueled:StartConsuming()
 		end
+
+		local function OnTakeDamage(inst)
+			-- owner.components.combat:GetAttacked(inst, 0)
+			owner.sg:GoToState("hit")
+
+			inst:RemoveComponent("armor")
+		end
+
+		-- inst:AddComponent("armor")
+		-- inst.components.armor:InitIndestructible(1)
+		-- inst.components.armor.ontakedamage = OnTakeDamage
 		
 		-- Add tag
 		-- owner:AddTag("timeimmune")
@@ -111,6 +132,10 @@ local function OnStopUse(inst)
 
 		if inst.components.fueled then
 			inst.components.fueled:StopConsuming()
+		end
+
+		if inst.components.armor then
+			inst:RemoveComponent("armor")
 		end
 
 		--Remove tag
