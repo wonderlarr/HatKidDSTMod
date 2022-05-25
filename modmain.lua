@@ -129,6 +129,7 @@ modimport("modmain_crafting.lua")
 
 modimport("scripts/keyhandler.lua") --Keyhandler
 modimport("scripts/character_skins_api.lua") -- Character Skins API
+modimport("scripts/item_skins_api.lua") -- Item Skins API
 
 -- Imports to keep the keyhandler from working while typing into various things.
 Load "chatinputscreen"
@@ -162,8 +163,8 @@ PREFAB_SKINS["hatkid"] = {
 	"hatkid_none", 
 	"hatkid_cat",
 	"hatkid_detective",
-	--"hatkid_raincoat", -- plan on adding eventually
-	--"hatkid_snatcher", -- plan on adding eventually
+	--"hatkid_raincoat", -- would be cool to have
+	--"hatkid_snatcher",
 
 	--dyes
 	"hatkid_dye_niko",

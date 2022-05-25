@@ -12,15 +12,15 @@
 local Ingredient = GLOBAL.Ingredient
 local TECH = GLOBAL.TECH
 
-AddCharacterRecipe("spear",
-	{ -- ingredients. Formatted identically to the old AddRecipe()
-		GLOBAL.Ingredient("silk", 1),	
-		GLOBAL.Ingredient("beefalowool", 2),
-		GLOBAL.Ingredient("goldnugget", 1),
+AddCharacterRecipe("hatbrella",
+	{ -- ingredients. Formatted identically to the old AddRecipe()	
+		GLOBAL.Ingredient("twigs", 2),
+		GLOBAL.Ingredient("pigskin", 1),
+		GLOBAL.Ingredient("goldnugget", 2),
 	},
 	GLOBAL.TECH.SCIENCE_ONE, -- crafting station. Refer to other recipes in recipes.lua for other stations.
 	{ -- config. Other options can be found in recipe.lua, under the Recipe class.
-		builder_tag = "my_tag"
+		builder_tag = "hatkid"
 	}, 
 	{ -- crafting filters/tabs, found in recipes_filter.lua
 		"MODS",
@@ -36,7 +36,7 @@ AddCharacterRecipe("kidhat",
 	Ingredient("beefalowool", 4),
 	Ingredient("goldnugget", 1),
 	},
-	TECH.NONE, -- tech level
+	TECH.SCIENCE_ONE, -- tech level
 	{ -- config
 		builder_tag = "hatkid"
 	}, 
@@ -53,7 +53,7 @@ AddCharacterRecipe("sprinthat",
 	Ingredient("beefalowool", 4),
 	Ingredient("feather_robin", 2),
 	},
-	TECH.SCIENCE_ONE, -- tech level
+	TECH.SCIENCE_TWO, -- tech level
 	{ -- config
 		builder_tag = "hatkid"
 	}, 
@@ -106,15 +106,13 @@ AddCharacterRecipe("dwellermask",
 		Ingredient("thulecite", 2),
 		Ingredient("greengem", 1)
 	},
-	TECH.MAGIC_THREE, -- tech level
+	TECH.ANCIENT_TWO, -- tech level
 	{ -- config
 		builder_tag = "hatkid"
 	}, 
 	{ -- crafting filters
 		"MODS",
-		"LIGHT",
 		"RESTORATION",
-		"ARMOUR",
 		"CLOTHING"
 	}
 )
