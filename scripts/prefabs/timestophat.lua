@@ -19,6 +19,16 @@ local prefabs =
 {
 }
 
+local SHIELD_DURATION = 10 * FRAMES
+
+local RESISTANCES =
+{
+    "_combat",
+    "explosive",
+    "quakedebris",
+    "caveindebris",
+    "trapdamage",
+}
 
 -------------------------------------------------------------------------------------------------------
 local function SlowNear(inst)
@@ -44,9 +54,12 @@ local function SlowNear(inst)
 end
 
 local function OnUse(inst)
-
 	local owner = inst.components.inventoryitem:GetGrandOwner()
+
+	-- Idea is we pass the remaining slow time to the entity, then make a task that clears it after the time ends.
+	-- In addition, add slowed entities to a table, and tell them to stop being slowed early, as needed.
 	
+	-- Can we activate?
 	if not inst.components.rechargeable:IsCharged() and inst.components.rechargeable:GetRechargeTime() == TUNING.TIMESTOPHAT_COOLDOWN then -- If charging and the time is the cooldown
 		-- If in cooldown
 		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
@@ -56,49 +69,44 @@ local function OnUse(inst)
 		-- owner:PushEvent("hatcooldown")
 		owner.components.talker:Say(GetString(owner, "HAT_ONCOOLDOWN"))
 		
-	elseif not inst.components.timer:TimerExists("timehat_duration") then
-		--Start duration cooldown
-		inst.components.timer:StartTimer("timehat_duration", TUNING.TIMESTOPHAT_DURATION)
+	else
+		-- Duration timer
 		inst.components.rechargeable:Discharge(TUNING.TIMESTOPHAT_DURATION)
 
+		-- Fuel
 		if inst.components.fueled then
 			inst.components.fueled:StartConsuming()
 		end
-		
-		-- Add tag
-		-- owner:AddTag("timeimmune")
-		
+
+		local function OnTakeDamage(inst)
+			-- owner.components.combat:GetAttacked(inst, 0)
+			owner.sg:GoToState("hit")
+
+			inst:RemoveComponent("armor")
+		end
+
+		-- inst:AddComponent("armor")
+		-- inst.components.armor:InitIndestructible(1)
+		-- inst.components.armor.ontakedamage = OnTakeDamage
 		
 		--Sounds
 		inst.SoundEmitter:PlaySound("timestophat/sound/activate")
 		inst.SoundEmitter:PlaySound("timestophat/sound/loop", "timestoploop")
-		
-		--Set Skin to TimeStop skin
-		-- print("Before: ".. tostring(owner.AnimState:GetBuild()))
 
-
+		-- Skin, move to hatkid prefab based on event listeners, so we're able to be used by other characters
 		owner.oldskin = owner.AnimState:GetBuild()
-
 		SetSkinsOnAnim(owner.AnimState, "hatkid_timestop", "hatkid_timestop", owner.components.skinner:GetClothing(), nil, "hatkid_timestop")
-		-- print("After: " .. tostring(owner.AnimState:GetBuild()))
-		-- SetLocalTimeScale(nil, owner, 2)
-		-- owner.OPeriod = owner.components.combat.min_attack_period
-		-- ent.components.locomotor:SetExternalSpeedMultiplier(ent, "timeslow_speed_mod", 0.5)
-		-- owner.components.combat:SetAttackPeriod(owner.OPeriod / 2)
-		-- Slow code
-		if owner.components.timebound ~= nil then
-			inst.TimeSlow = inst:DoPeriodicTask(0, SlowNear, nil)
-		else
-			print("CRITICAL: Time Control API not enabled! Time Stop Hat can't slow time!")
-			TheNet:Announce("CRITICAL: Time Control API not enabled! Time Stop Hat can't slow time!")
-		end
+
+		-- Slow time, remake with updatelooper plz
+		inst.TimeSlow = inst:DoPeriodicTask(0, SlowNear, nil)
 		
 	end
 end
 
 local function OnStopUse(inst)
-
 	local owner = inst.components.inventoryitem:GetGrandOwner()
+	
+	-- Should be used to cancel the effects of OnUse, since this 
 	
 	if not inst.components.rechargeable:IsCharged() and inst.components.rechargeable:GetRechargeTime() == TUNING.TIMESTOPHAT_COOLDOWN then
 		-- Shouldn't ever happen
@@ -107,38 +115,40 @@ local function OnStopUse(inst)
 		if inst.TimeSlow then
 			inst.TimeSlow:Cancel()
 		end
+
 		inst.components.rechargeable:Discharge(TUNING.TIMESTOPHAT_COOLDOWN)
 
 		if inst.components.fueled then
 			inst.components.fueled:StopConsuming()
 		end
 
-		--Remove tag
-		-- owner:RemoveTag("timeimmune")
+		if inst.components.armor then
+			inst:RemoveComponent("armor")
+		end
 		
 		--Sounds
 		inst.SoundEmitter:PlaySound("timestophat/sound/deactivate")
 		inst.SoundEmitter:KillSound("timestoploop")
 		
-		--Revert back to default skin
+		--Revert back to default skin (as above, move to hk prefab)
 		local default = owner.oldskin or "hatkid"
 		SetSkinsOnAnim(owner.AnimState, default, default, owner.components.skinner:GetClothing(), nil, default)
 		
 		-- Stop the duration timer, if it exists
-		if inst.components.timer:TimerExists("timehat_duration") then
-			inst.components.timer:StopTimer("timehat_duration")
-		end
+		-- if inst.components.timer:TimerExists("timehat_duration") then
+		-- 	inst.components.timer:StopTimer("timehat_duration")
+		-- end
 	end
 end
 
 -------------------------------------------------------------------------------------------------------------
 
 local function KeybindUse(inst)
-	if not inst.components.timer:TimerExists("timehat_duration") then
-		inst.components.useableitem:StartUsingItem()
-	else
+	if inst:HasTag("inuse") then
 		inst.components.useableitem:StopUsingItem()
-	end
+	else
+		inst.components.useableitem:StartUsingItem()
+	end 
 end
 
 local function OnEquip(inst, owner)
@@ -155,9 +165,9 @@ end
  
 local function OnUnequip(inst, owner)
 ------------------------------------------------------
-	if inst.components.timer:TimerExists("timehat_duration") then
-		inst.components.useableitem:StopUsingItem()
-	end
+	-- if inst.components.timer:TimerExists("timehat_duration") then
+	-- 	inst.components.useableitem:StopUsingItem()
+	-- end
 ------------------------------------------------------
 
 	owner.AnimState:Hide("HAT")
@@ -208,14 +218,14 @@ local function fn(Sim)
     inst.components.useableitem:SetOnStopUseFn(OnStopUse)
 
 
-    inst:AddComponent("timer")
+--     inst:AddComponent("timer")
 
-    local function ontimerdone()
-		inst.components.useableitem:StopUsingItem()
-	end
+--     local function ontimerdone()
+-- 		inst.components.useableitem:StopUsingItem()
+-- 	end
 
-    inst:ListenForEvent("timerdone", ontimerdone)
-----------------------------------------------------------------
+--     inst:ListenForEvent("timerdone", ontimerdone)
+-- ----------------------------------------------------------------
  
     inst:AddComponent("inspectable")
 	
