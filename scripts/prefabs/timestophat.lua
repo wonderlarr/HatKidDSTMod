@@ -30,26 +30,29 @@ local RESISTANCES =
     "trapdamage",
 }
 
--------------------------------------------------------------------------------------------------------
 local function SlowNear(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 	local pt = owner:GetPosition()
 	local range = 32  -- range of spell	
-	local nags = { "character", "player" }
+	local nags = { "character", "player", "INLIMBO", "notarget", "noattack", "playerghost" }
 	local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, nil)
 	for _,ent in ipairs(targets) do
+		if ent.components.timebound then
 			ent:AddTag("timeslowed")
 			SetLocalTimeScale(nil, ent, TUNING.TIMESTOPHAT_TIMESCALE)
+
 			if ent.slowed ~= nil then
 				ent.slowed:Cancel()
+				ent.slowed = nil
 			end
 			
 			-- The task below clears the TIME SLOW
-			ent.slowed = ent:DoTaskInTime(.1, function(ent)
+			ent.slowed = ent:DoTaskInTime(0.1, function(ent)
 				ent:RemoveTag("timeslowed")
 				SetLocalTimeScale(nil, ent, 1)
 				ent.slowed = nil
 			end)
+		end
 	end
 end
 
@@ -66,7 +69,6 @@ local function OnUse(inst)
 			inst.components.useableitem:StopUsingItem()
 		end)
 		
-		-- owner:PushEvent("hatcooldown")
 		owner.components.talker:Say(GetString(owner, "HAT_ONCOOLDOWN"))
 		
 	else
@@ -78,12 +80,12 @@ local function OnUse(inst)
 			inst.components.fueled:StartConsuming()
 		end
 
-		local function OnTakeDamage(inst)
-			-- owner.components.combat:GetAttacked(inst, 0)
-			owner.sg:GoToState("hit")
+		-- local function OnTakeDamage(inst)
+		-- 	-- owner.components.combat:GetAttacked(inst, 0)
+		-- 	owner.sg:GoToState("hit")
 
-			inst:RemoveComponent("armor")
-		end
+		-- 	inst:RemoveComponent("armor")
+		-- end
 
 		-- inst:AddComponent("armor")
 		-- inst.components.armor:InitIndestructible(1)
@@ -97,16 +99,15 @@ local function OnUse(inst)
 		owner.oldskin = owner.AnimState:GetBuild()
 		SetSkinsOnAnim(owner.AnimState, "hatkid_timestop", "hatkid_timestop", owner.components.skinner:GetClothing(), nil, "hatkid_timestop")
 
-		-- Slow time, remake with updatelooper plz
+		-- Prepare to slow time!
 		inst.TimeSlow = inst:DoPeriodicTask(0, SlowNear, nil)
-		
 	end
 end
 
 local function OnStopUse(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 	
-	-- Should be used to cancel the effects of OnUse, since this 
+	-- Should be used to cancel the effects of OnUse
 	
 	if not inst.components.rechargeable:IsCharged() and inst.components.rechargeable:GetRechargeTime() == TUNING.TIMESTOPHAT_COOLDOWN then
 		-- Shouldn't ever happen
@@ -133,15 +134,8 @@ local function OnStopUse(inst)
 		--Revert back to default skin (as above, move to hk prefab)
 		local default = owner.oldskin or "hatkid"
 		SetSkinsOnAnim(owner.AnimState, default, default, owner.components.skinner:GetClothing(), nil, default)
-		
-		-- Stop the duration timer, if it exists
-		-- if inst.components.timer:TimerExists("timehat_duration") then
-		-- 	inst.components.timer:StopTimer("timehat_duration")
-		-- end
 	end
 end
-
--------------------------------------------------------------------------------------------------------------
 
 local function KeybindUse(inst)
 	if inst:HasTag("inuse") then
@@ -164,11 +158,9 @@ local function OnEquip(inst, owner)
 end
  
 local function OnUnequip(inst, owner)
-------------------------------------------------------
-	-- if inst.components.timer:TimerExists("timehat_duration") then
-	-- 	inst.components.useableitem:StopUsingItem()
-	-- end
-------------------------------------------------------
+	if inst:HasTag("inuse") then
+		inst.components.useableitem:StopUsingItem()
+	end
 
 	owner.AnimState:Hide("HAT")
 	owner.AnimState:Hide("HAT_HAIR")
@@ -182,12 +174,18 @@ local function OnUnequip(inst, owner)
 end
 
 local function OnEmpty(inst)
-	inst.components.useableitem:StopUsingItem() -- And we'll make sure to stop the dweller effect
+	if inst:HasTag("inuse") then
+		inst.components.useableitem:StopUsingItem()
+	end
+end
 
-	inst:DoTaskInTime(0, inst.Remove)
+local function OnCharged(inst)
+	if inst:HasTag("inuse") then
+		inst.components.useableitem:StopUsingItem()
+	end
 end
  
-local function fn(Sim) 
+local function fn() 
     local inst = CreateEntity()
 
 	inst.entity:AddTransform()
@@ -212,20 +210,9 @@ local function fn(Sim)
 	
 	MakeHauntableLaunch(inst)
 
-----------------------------------------------------------------
 	inst:AddComponent("useableitem")
     inst.components.useableitem:SetOnUseFn(OnUse)
     inst.components.useableitem:SetOnStopUseFn(OnStopUse)
-
-
---     inst:AddComponent("timer")
-
---     local function ontimerdone()
--- 		inst.components.useableitem:StopUsingItem()
--- 	end
-
---     inst:ListenForEvent("timerdone", ontimerdone)
--- ----------------------------------------------------------------
  
     inst:AddComponent("inspectable")
 	
@@ -237,8 +224,6 @@ local function fn(Sim)
     inst.components.insulator:SetInsulation(TUNING.INSULATION_SMALL)
 	
     inst:AddComponent("inventoryitem")
-    -- inst.components.inventoryitem.imagename = "timestophat"
-    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/timestophat.xml"
 	
     inst:AddComponent("equippable")
 	inst.components.equippable.restrictedtag = "hatkid"
@@ -247,6 +232,7 @@ local function fn(Sim)
     inst.components.equippable:SetOnUnequip( OnUnequip )
 	
 	inst:AddComponent("rechargeable")
+	inst.components.rechargeable:SetOnChargedFn(OnCharged)
 
 	if TUNING.TIMESTOPHAT_DURABILITY then
 		inst:AddComponent("fueled")
@@ -254,12 +240,6 @@ local function fn(Sim)
 		inst.components.fueled:InitializeFuelLevel( TUNING.TIMESTOPHAT_DURABILITY ) -- add tuning 300
 		inst.components.fueled:SetDepletedFn(OnEmpty)
 	end
-	
-	-- inst:AddComponent("container")
-    -- inst.components.container:WidgetSetup("hkr_badgeslot")
-	-- inst.components.container.canbeopened = false
-    -- inst:ListenForEvent("itemget", OnBadgeLoaded)
-    -- inst:ListenForEvent("itemlose", OnBadgeUnloaded)
 	
 	inst:ListenForEvent("AbilityKey", KeybindUse)
  
