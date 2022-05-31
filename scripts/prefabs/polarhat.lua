@@ -57,7 +57,8 @@ AddClientModRPCHandler("HatKidRPC", "polarhatclient", polarhatclient)
 local function OnUse(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 	
-	if not inst.components.rechargeable:IsCharged() then
+	if not inst.components.rechargeable:IsCharged()
+	or inst.components.fueled.currentfuel < 1 then
 		-- If in cooldown
 		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
 			inst.components.useableitem:StopUsingItem()
@@ -153,10 +154,6 @@ end
 
 local function KeybindUse(inst)
 	inst.components.useableitem:StartUsingItem()
-end
-
-local function OnEmpty(inst)
-	inst:DoTaskInTime(0, inst.Remove)
 end
 
 local function fn(Sim) 
