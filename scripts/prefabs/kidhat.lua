@@ -97,7 +97,7 @@ local function fn(Sim)
     inst:AddComponent("equippable")
 	inst.components.equippable.restrictedtag = "hatkid"
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
-	inst.components.equippable.dapperness = TUNING.KIDHAT_SANITY
+	inst.components.equippable.dapperness = TUNING.KIDHAT_SANITY / 60 -- Config number is sanity per minute, internal dapperness is by second.
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
 

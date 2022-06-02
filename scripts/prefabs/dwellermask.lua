@@ -172,7 +172,7 @@ local function OnUse(inst)
 		owner.AnimState:OverrideSymbol("swap_hat", "dwellermask_on", "swap_hat")
 
 		-- Sanity
-		inst.components.equippable.dapperness = TUNING.DWELLERMASK_DAPPERNESS
+		inst.components.equippable.dapperness = TUNING.DWELLERMASK_DAPPERNESS / 60 -- Config sanity is per minute, dapperness is by second.
 
 		owner.components.sanity:DoDelta(-TUNING.DWELLERMASK_THRESHHOLD)
 		
@@ -375,7 +375,6 @@ local function fn(Sim)
 	inst:AddComponent("useableitem")
     inst.components.useableitem:SetOnUseFn(OnUse)
     inst.components.useableitem:SetOnStopUseFn(OnStopUse)
-
 
     inst:AddComponent("timer")
 	
