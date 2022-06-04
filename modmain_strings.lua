@@ -17,11 +17,11 @@ STRINGS.NAMES.HATKID = "Hat Kid"
 STRINGS.CHARACTERS.HATKID = require "speech_hatkid" -- speech file
 
 -- The character select screen lines
-STRINGS.CHARACTER_TITLES.hatkid = "The Homesick Hatter"
+STRINGS.CHARACTER_TITLES.hatkid = "The Youthful Hatter"
 STRINGS.CHARACTER_NAMES.hatkid = "Hat Kid"
 STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Knits cool hats\n*Is selfish and obsessive over them\n*Has a vulnerable mind\n*Considered extremely cute"
 STRINGS.CHARACTER_QUOTES.hatkid = "\"Oh, hi there!\""
-STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Smol"
+STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Slim"
 
 --Skin STRINGS
 
@@ -288,7 +288,7 @@ STRINGS.CHARACTERS.WALTER.DESCRIBE.HATBRELLA = "What a small umbrella."
 STRINGS.CHARACTERS.WALTER.DESCRIBE.HATBRELLAOPEN = "Does that thing work well?"
 
 -- Wanda
-STRINGS.CHARACTERS.WANDA.DESCRIBE.KIDHAT = "A tiny little hat for a homesick hatter."
+STRINGS.CHARACTERS.WANDA.DESCRIBE.KIDHAT = "A little hat for a tiny hatter."
 STRINGS.CHARACTERS.WANDA.DESCRIBE.SPRINTHAT = "The less time spent running, the better."
 STRINGS.CHARACTERS.WANDA.DESCRIBE.BREWINGHAT = "Such destruction."
 STRINGS.CHARACTERS.WANDA.DESCRIBE.POLARHAT = "Looks cold."

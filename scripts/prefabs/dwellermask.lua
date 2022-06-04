@@ -341,6 +341,7 @@ local function fn(Sim)
 	
 	
     MakeInventoryPhysics(inst)
+	MakeInventoryFloatable(inst, "med", 0.1, 0.6) -- Makes items float on water, rather than just sitting there.
 
 	inst.Light:SetFalloff(1)
 	inst.Light:SetIntensity(0.99999)

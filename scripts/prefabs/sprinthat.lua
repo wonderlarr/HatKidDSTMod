@@ -126,6 +126,11 @@ local function OnEquip(inst, owner)
 
 	owner:ListenForEvent("locomote", onLocomote)
 	SendModRPCToClient(GetClientModRPC("HatKidRPC", "SprintEquip"), nil, inst, true)
+
+	owner:ListenForEvent("step", function()
+		print("step!")
+	end)
+
 end
  
 local function OnUnequip(inst, owner)
@@ -178,6 +183,7 @@ local function fn(Sim)
 	
 	
     MakeInventoryPhysics(inst)
+	MakeInventoryFloatable(inst, "med", 0.05, 0.6) -- Makes items float on water, rather than just sitting there.
  
     inst:AddTag("hat")
     inst:AddTag("hatkidhat")
@@ -216,7 +222,7 @@ local function fn(Sim)
 		inst.components.fueled:InitializeFuelLevel( TUNING.SPRINTHAT_DURABILITY ) -- 90 minutes by default
 		inst.components.fueled:SetDepletedFn(OnEmpty)
 	end
- 
+
     return inst
 end
 

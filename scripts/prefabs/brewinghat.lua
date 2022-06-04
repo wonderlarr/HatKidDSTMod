@@ -116,6 +116,7 @@ local function fn(Sim)
     inst.entity:AddNetwork()
 	
     MakeInventoryPhysics(inst)
+	MakeInventoryFloatable(inst, "med", 0.1, 0.6) -- Makes items float on water, rather than just sitting there.
  
     inst:AddTag("hat")
 	inst:AddTag("hatkidhat")

@@ -1,6 +1,6 @@
 name = "Hat Kid Reloaded (Internal)" -- Edit this title depending on branch.
-description = "The Overhaul update! So much to do, and so much to try!"
-author = "Skylarr"
+description = "This mod really is the mod of all time!"
+author = "Skylarr 󰀛"
 version = "3.0.0b16"
 
 forumthread = ""

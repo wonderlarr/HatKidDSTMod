@@ -61,45 +61,65 @@ local function KeybindUse(inst)
 	inst.components.useableitem:StartUsingItem()
 end
 
-local function fn(Sim) 
+local function fn() 
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
 
+	-- Client and Server
+
+	-- Add internal components
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-	
-    MakeInventoryPhysics(inst)
- 
+
+	-- Setup AnimState
+	inst.AnimState:SetBank("kidhat")
+    inst.AnimState:SetBuild("kidhat")
+    inst.AnimState:PlayAnimation("idle")
+
+	-- standardcomponents.lua functions
+    MakeInventoryPhysics(inst) -- Sets physics properties of an item when it's outside the inventory.
+	MakeInventoryFloatable(inst, "med", 0.1, 0.6) -- Makes items float on water, rather than just sitting there.
+
+	-- Custom Tags
     inst:AddTag("hat")
 	inst:AddTag("hatkidhat")
-	
+
+	-- Component Tags
+	inst:AddTag("inspectable")
+	inst:AddTag("waterproofer")
+
+	-- Set pristine
 	inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
+
+	-- Server only
 	
-    inst.AnimState:SetBank("kidhat")
-    inst.AnimState:SetBuild("kidhat")
-    inst.AnimState:PlayAnimation("idle")
-	
+	-- Hauntable mode
 	MakeHauntableLaunch(inst)
  
-    inst:AddComponent("inspectable")
+	-- Server components
+	inst:AddComponent("inventoryitem")
 
-	inst:AddComponent("waterproofer")
-    inst.components.waterproofer:SetEffectiveness(TUNING.KIDHAT_WATERPROOFNESS)
+	inst:AddComponent("inspectable")
 
-    inst:AddComponent("inventoryitem")
-	 
-    inst:AddComponent("equippable")
+	inst:AddComponent("equippable")
 	inst.components.equippable.restrictedtag = "hatkid"
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
 	inst.components.equippable.dapperness = TUNING.KIDHAT_SANITY / 60 -- Config number is sanity per minute, internal dapperness is by second.
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
+
+	-- TODO add proper insulation
+	-- inst:AddComponent("insulator")
+    -- inst.components.insulator:SetWinter()
+    -- inst.components.insulator:SetInsulation(TUNING.SPRINTHAT_INSULATION)
+
+	inst:AddComponent("waterproofer")
+    inst.components.waterproofer:SetEffectiveness(TUNING.KIDHAT_WATERPROOFNESS)
 
 	if TUNING.KIDHAT_DURABILITY then
 		inst:AddComponent("fueled")
