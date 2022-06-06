@@ -81,11 +81,17 @@ local function OnUse(inst)
 		SlowNear(inst)
 		-- Not very efficient, but there's little choice, unless I do some weirdness with AddPrefabPostInitAny, which I'd rather not do.
 		inst.TimeSlow = inst:DoPeriodicTask(0, SlowNear)
+
+		-- owner:AddTag("timestopuser")
 	end
 end
 
 local function OnStopUse(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
+
+	-- if owner:HasTag("timestopuser") and inst.components.rechargeable:IsCharged() then
+	-- 	return
+	-- end
 
 	if inst.components.rechargeable:GetRechargeTime() ~= TUNING.TIMESTOPHAT_COOLDOWN then
 		-- Cancel Time Slow
@@ -94,9 +100,11 @@ local function OnStopUse(inst)
 		end
 
 		-- Unslow everything in the slowed table
-		for k, v in ipairs(inst.slowedThings) do
-			if v ~= nil then
-				v.components.timebound:RemoveModifier(inst)
+		if inst.slowedThings ~= nil then
+			for k, v in ipairs(inst.slowedThings) do
+				if v ~= nil then
+					v.components.timebound:RemoveModifier(inst)
+				end
 			end
 		end
 		inst.slowedThings = nil
@@ -114,6 +122,8 @@ local function OnStopUse(inst)
 		--Revert back to default skin (as above, move to hk prefab)
 		local default = owner.oldskin or "hatkid"
 		SetSkinsOnAnim(owner.AnimState, default, default, owner.components.skinner:GetClothing(), nil, default)
+
+		-- owner:RemoveTag("timestopuser")
 	end
 end
 
@@ -138,6 +148,10 @@ local function OnEquip(inst, owner)
 end
  
 local function OnUnequip(inst, owner)
+	if inst:HasTag("inuse") then
+		inst.components.useableitem:StopUsingItem()
+	end
+
 	owner.AnimState:Hide("HAT")
 	owner.AnimState:Hide("HAT_HAIR")
 	owner.AnimState:Show("HAIR_NOHAT")

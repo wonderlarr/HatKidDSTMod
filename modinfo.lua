@@ -1,7 +1,7 @@
-name = "Hat Kid Reloaded (Internal)" -- Edit this title depending on branch.
+name = "Hat Kid Unlisted" -- Edit this title depending on branch.
 description = "This mod really is the mod of all time!"
-author = "Skylarr 󰀛"
-version = "3.0.0b16"
+author = "Skylarr 󰀏"
+version = "3.0.0b20"
 
 forumthread = ""
 
@@ -26,6 +26,14 @@ server_filter_tags = {
 	"hat kid",
 	"cute",
 }
+
+-- mod_dependencies = 
+-- {
+--     {
+--          workshop = "workshop-2570815741",
+--         ["[API] Time Control"] = true
+--     }
+-- }
 
 local null_options = {
 	{ description = "", data = 0 }

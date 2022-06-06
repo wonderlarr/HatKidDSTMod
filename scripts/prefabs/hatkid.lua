@@ -241,7 +241,7 @@ local master_postinit = function(inst, data)
 
 	-- Hunger
 	inst.components.hunger:SetMax(TUNING.HATKID_HUNGER)
-	inst.components.hunger.burnratemodifiers:SetModifier(inst, TUNING.HATKIDRATE * TUNING.WILSON_HUNGER_RATE, "base")
+	inst.components.hunger.burnratemodifiers:SetModifier(inst, TUNING.HATKIDRATE, "base")
 
 	-- Sanity
 	inst.components.sanity:SetMax(TUNING.HATKID_SANITY) 
@@ -275,7 +275,7 @@ local master_postinit = function(inst, data)
 	inst.OnLoad = OnLoad
 	-- inst.OnSave = OnSave
 
-	-- Pon stuff, currently disabled altgoether
+	-- Pon stuff, currently disabled
 
 	-- inst:ListenForEvent("onattackother", ApplyPons)
 	-- inst:ListenForEvent("working", ApplyPons)

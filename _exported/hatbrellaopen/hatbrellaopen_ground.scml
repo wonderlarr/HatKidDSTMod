@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
     <folder id="0" name="swap_object_ground">
-        <file id="0" name="swap_object_ground/swap_object_ground-0.png" width="399" height="415" pivot_x="0.112832" pivot_y="0.0499547"/>
+        <file id="0" name="swap_object_ground/swap_object_ground-0.png" width="399" height="415" pivot_x="0.106868" pivot_y="0.0582169"/>
     </folder>
     <entity id="0" name="hatbrellaopen_ground">
         <animation id="0" name="idle" length="1000" interval="100">
@@ -12,7 +12,7 @@
             </mainline>
             <timeline id="0" name="swap_object_ground-0">
                 <key id="0" spin="0">
-                    <object folder="0" file="0" x="-119.093352" y="-46.327582" angle="0" scale_y="0.945827"/>
+                    <object folder="0" file="0" x="-100.783339" y="-41.935091" angle="0" scale_y="0.945827"/>
                 </key>
             </timeline>
         </animation>

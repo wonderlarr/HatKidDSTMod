@@ -1,16 +1,24 @@
 {
 	"folders": [
 		{
+			"name": "HatKidDSTMod",
 			"path": "."
 		},
 		{
-			"path": "..\\..\\data\\scripts"
-		},
-		{
+			"name": "AutoFuelSlotDSTMod",
 			"path": "..\\AutoFuelSlotDSTMod"
 		},
 		{
+			"name": "SkyLabb",
 			"path": "..\\SkyLabb"
+		},
+		{
+			"name": "Timebound",
+			"path": "..\\Timebound"
+		},
+		{
+			"name": "scripts",
+			"path": "..\\..\\data\\scripts"
 		}
 	],
 	"settings": {
