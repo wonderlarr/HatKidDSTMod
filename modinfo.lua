@@ -383,8 +383,9 @@ configuration_options =
 			{description = "x0.8", data = 0.8},
 			{description = "x0.9", data = 0.9},
 			{description = "x1", data = 1},
+			{description = "x1.1 (Default)", data = 1.1},
 			{description = "x1.25", data = 1.25},
-			{description = "x1.5 (Default)", data = 1.5},
+			{description = "x1.5", data = 1.5},
 			{description = "x1.75", data = 1.75},
 			{description = "x2", data = 2},
 			{description = "x3", data = 3},
@@ -396,7 +397,7 @@ configuration_options =
 			{description = "x9", data = 9},
 			{description = "x10", data = 10},
 		},
-		default = 1.5,
+		default = 1.1,
 	},	
 
 	{

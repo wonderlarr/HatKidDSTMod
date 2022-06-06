@@ -205,7 +205,7 @@ local function fn(Sim)
 	if TUNING.POLARHAT_DURABILITY then
 		inst:AddComponent("fueled")
 		inst.components.fueled:InitializeFuelLevel( 10 ) -- add tuning
-		inst.components.fueled.fueltype = FUELTYPE.CHEMICAL
+		inst.components.fueled.fueltype = FUELTYPE.CHEMICAL --nitre
 		-- inst.components.fueled:SetDepletedFn(OnEmpty)
 		inst.components.fueled.bonusmult = 2 / 90
 		inst.components.fueled.accepting = true

@@ -382,6 +382,7 @@ if not afs_enabled then
 end
 
 -- I would have put this directly in the prefab but I just stole code from my other mod and I'm too lazy to do this properly
+-- besides, using postinits on your own prefabs is funny.
 
 if TUNING.BREWINGHAT_DURABILITY then
 	AddPrefabPostInit("brewinghat", function(inst)
@@ -435,7 +436,7 @@ if TUNING.BREWINGHAT_DURABILITY then
 		}
 		
 		function params.brewinghat_inv.itemtestfn(container, item, slot)
-			return item.prefab == "slurtleslime" -- Tag added by this mod, not in vanilla.
+			return item.prefab == "slurtleslime" -- compare only prefab name here, we only want to use the one item.
 		end
 		-- End Container -------
 		
@@ -450,6 +451,83 @@ if TUNING.BREWINGHAT_DURABILITY then
 
 		inst:AddComponent("container")
 		inst.components.container:WidgetSetup("brewinghat_inv")
+		inst.components.container.canbeopened = false
+
+		inst.tick = inst:DoPeriodicTask(1, OnTick)
+
+		inst:ListenForEvent("equipped", OnEquip)
+		inst:ListenForEvent("unequipped", OnUnequip)
+		inst:ListenForEvent("itemget", OnTick)
+	end)
+end
+
+if TUNING.POLARHAT_DURABILITY then
+	AddPrefabPostInit("polarhat", function(inst)
+		local function OnTick(inst)
+			if inst.components.container and inst.components.container:GetItemInSlot(1) then
+				local owner = inst.components.inventoryitem:GetGrandOwner()
+
+				local fueltogive = inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue * inst.components.fueled.bonusmult
+				local currentfuel = inst.components.fueled.currentfuel
+				local maxfuel = inst.components.fueled.maxfuel
+
+				if (maxfuel - currentfuel) > fueltogive then
+					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
+					inst.components.fueled:TakeFuelItem(fuelitem, owner)
+				end
+			end
+		end
+
+		local function OnEquip(inst, data)
+			local owner = data.owner
+			if inst.components.container ~= nil then
+				inst.components.container:Open(owner)
+			end
+		end
+
+		local function OnUnequip(inst, data)
+			local owner = data.owner
+			if inst.components.container ~= nil then
+				inst.components.container:Close(owner)
+			end
+		end
+		
+		-- Start Container stuff ---------
+		local containers = GLOBAL.require("containers")
+		params = containers.params
+
+		params.polarhat_inv =
+		{
+			widget =
+			{
+				slotpos =
+				{
+					GLOBAL.Vector3(0,   32 + 4,  0),
+				},
+				animbank = "ui_cookpot_1x2",
+				animbuild = "ui_cookpot_1x2",
+				pos = GLOBAL.Vector3(0, 15, 0),
+			},
+			usespecificslotsforitems = true,
+			type = "head_inv",
+		}
+		
+		function params.polarhat_inv.itemtestfn(container, item, slot)
+			return item.prefab == "nitre"
+		end
+		-- End Container -------
+		
+
+		if not GLOBAL.TheWorld.ismastersim then
+			inst.OnEntityReplicated = function(inst) 
+				inst.replica.container:WidgetSetup("polarhat_inv") 
+			end
+
+			return
+		end
+
+		inst:AddComponent("container")
+		inst.components.container:WidgetSetup("polarhat_inv")
 		inst.components.container.canbeopened = false
 
 		inst.tick = inst:DoPeriodicTask(1, OnTick)
