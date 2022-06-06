@@ -13,12 +13,16 @@
 			"path": "..\\SkyLabb"
 		},
 		{
+<<<<<<< Updated upstream
 			"name": "Timebound",
 			"path": "..\\Timebound"
 		},
 		{
 			"name": "scripts",
 			"path": "..\\..\\data\\scripts"
+=======
+			"path": "..\\TimeboundExample"
+>>>>>>> Stashed changes
 		}
 	],
 	"settings": {
