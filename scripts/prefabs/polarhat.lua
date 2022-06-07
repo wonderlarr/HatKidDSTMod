@@ -79,14 +79,20 @@ local function OnUse(inst)
 		owner.sg:GoToState("hat_frozen")
 
 		-- Enter FX
+		SpawnPrefab("polarhat_charge").Transform:SetPosition(owner.Transform:GetWorldPosition())
+
 		SpawnPrefab("hatshatter").Transform:SetPosition(owner.Transform:GetWorldPosition())
 
+		local two = SpawnPrefab("hatshatter")
+		two.Transform:SetPosition(owner.Transform:GetWorldPosition())
+		two.Transform:SetScale(1.25, 1.25, 1.25)
+
 		-- After a delay, explode!
-		owner:DoTaskInTime(0.5, function(owner)
+		owner:DoTaskInTime(0.4, function(owner)
 			inst.components.useableitem:StopUsingItem()
 
 			-- Break out of hat_frozen state
-			owner:PushEvent("doexplode")
+			-- owner:PushEvent("doexplode") -- 12 frames
 
 			-- Explode FX
 			SpawnPrefab("hatshatter2").Transform:SetPosition(owner.Transform:GetWorldPosition())
@@ -207,7 +213,7 @@ local function fn(Sim)
 		inst.components.fueled:InitializeFuelLevel( 10 ) -- add tuning
 		inst.components.fueled.fueltype = FUELTYPE.CHEMICAL --nitre
 		-- inst.components.fueled:SetDepletedFn(OnEmpty)
-		inst.components.fueled.bonusmult = 2 / 90
+		inst.components.fueled.bonusmult = 0.0222222222222 -- 2 / 90, floating point weird, fueled doesnt care
 		inst.components.fueled.accepting = true
 	end
 

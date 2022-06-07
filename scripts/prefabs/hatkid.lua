@@ -2,7 +2,6 @@ local MakePlayerCharacter = require "prefabs/player_common"
 
 local assets = {
     Asset("SCRIPT", "scripts/prefabs/player_common.lua"),
-	Asset("ANIM", "anim/ui_chest_3x3.zip"),
 
 	-- Hat Kid's voice
 	Asset( "SOUNDPACKAGE", "sound/hatkidvoice.fev"),

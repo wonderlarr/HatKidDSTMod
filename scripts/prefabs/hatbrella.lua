@@ -36,6 +36,8 @@ local function OnUse(inst)
 
 	owner.components.inventory:Equip(brella)
 
+    inst.components.inventoryitem:RemoveFromOwner()
+
 	inst:DoTaskInTime(0, inst.Remove)
 end
 

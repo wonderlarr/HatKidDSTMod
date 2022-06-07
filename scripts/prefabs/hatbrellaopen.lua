@@ -22,6 +22,8 @@ local function OnUse(inst)
     end
 
 	owner.components.inventory:Equip(brella)
+
+    inst.components.inventoryitem:RemoveFromOwner()
 	
 	inst:DoTaskInTime(0, inst.Remove)
 end
@@ -85,8 +87,6 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    -- inst.components.inventoryitem.imagename = "hatbrellaopen"
-    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/hatbrellaopen.xml"
 	
     inst:AddComponent("equippable")
     inst.components.equippable.restrictedtag = "hatkid"

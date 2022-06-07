@@ -161,7 +161,8 @@ local function fn(Sim)
 		inst.components.fueled:InitializeFuelLevel( 4 ) -- add tuning
 		inst.components.fueled.fueltype = FUELTYPE.CAVE
 		-- inst.components.fueled.secondaryfueltype = FUELTYPE.NIGHTMARE
-		inst.components.fueled.bonusmult = 2 / 45
+		inst.components.fueled.bonusmult = 0.0444444444444 -- 2 / 45, this causes floating point weirdness but it seems fueled just doesn't care, so whatever. 
+		-- if this needs to be fixed, perhaps add a math.ceil check to OnTick in the auto-fuel slots section.
 		inst.components.fueled.accepting = true
 	end
 	

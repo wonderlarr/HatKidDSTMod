@@ -52,6 +52,7 @@ PrefabFiles = {
 	--fx
 	"brewinghat_explode",
 	"polarhat_explode",
+	"polarhat_charge",
 	"sprint_puff",
 	"hatshatter",
 	"hatshatter2",
@@ -129,7 +130,7 @@ modimport("modmain_crafting.lua")
 
 modimport("scripts/keyhandler.lua") --Keyhandler
 modimport("scripts/character_skins_api.lua") -- Character Skins API
-modimport("scripts/item_skins_api.lua") -- Item Skins API
+-- modimport("scripts/item_skins_api.lua") -- Item Skins API
 
 -- Imports to keep the keyhandler from working while typing into various things.
 Load "chatinputscreen"
@@ -390,7 +391,7 @@ if TUNING.BREWINGHAT_DURABILITY then
 			if inst.components.container and inst.components.container:GetItemInSlot(1) then
 				local owner = inst.components.inventoryitem:GetGrandOwner()
 
-				local fueltogive = 1 / inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue
+				local fueltogive = inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue * inst.components.fueled.bonusmult
 				local currentfuel = inst.components.fueled.currentfuel
 				local maxfuel = inst.components.fueled.maxfuel
 
@@ -544,7 +545,7 @@ if TUNING.DWELLERMASK_DURABILITY then
 			if inst.components.container and inst.components.container:GetItemInSlot(1) then
 				local owner = inst.components.inventoryitem:GetGrandOwner()
 
-				local fueltogive = TUNING.DWELLERMASK_VALUE / inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue
+				local fueltogive = inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue * inst.components.fueled.bonusmult
 				local currentfuel = inst.components.fueled.currentfuel
 				local maxfuel = inst.components.fueled.maxfuel
 
@@ -615,6 +616,83 @@ if TUNING.DWELLERMASK_DURABILITY then
 	end)
 end
 
+if TUNING.TIMESTOPHAT_DURABILITY then
+	AddPrefabPostInit("timestophat", function(inst)
+		local function OnTick(inst)
+			if inst.components.container and inst.components.container:GetItemInSlot(1) then
+				local owner = inst.components.inventoryitem:GetGrandOwner()
+
+				local fueltogive = inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue * inst.components.fueled.bonusmult
+				local currentfuel = inst.components.fueled.currentfuel
+				local maxfuel = inst.components.fueled.maxfuel
+
+				if (maxfuel - currentfuel) > fueltogive then
+					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
+					inst.components.fueled:TakeFuelItem(fuelitem, owner)
+				end
+			end
+		end
+
+		local function OnEquip(inst, data)
+			local owner = data.owner
+			if inst.components.container ~= nil then
+				inst.components.container:Open(owner)
+			end
+		end
+
+		local function OnUnequip(inst, data)
+			local owner = data.owner
+			if inst.components.container ~= nil then
+				inst.components.container:Close(owner)
+			end
+		end
+		
+		-- Start Container stuff ---------
+		local containers = GLOBAL.require("containers")
+		params = containers.params
+
+		params.timestophat_inv =
+		{
+			widget =
+			{
+				slotpos =
+				{
+					GLOBAL.Vector3(0,   32 + 4,  0),
+				},
+				animbank = "ui_cookpot_1x2",
+				animbuild = "ui_cookpot_1x2",
+				pos = GLOBAL.Vector3(0, 15, 0),
+			},
+			usespecificslotsforitems = true,
+			type = "head_inv",
+		}
+		
+		function params.timestophat_inv.itemtestfn(container, item, slot)
+			return item:HasTag("nightmarefuel") -- Tag added by this mod, not in vanilla.
+		end
+		-- End Container -------
+		
+
+		if not GLOBAL.TheWorld.ismastersim then
+			inst.OnEntityReplicated = function(inst) 
+				inst.replica.container:WidgetSetup("timestophat_inv") 
+			end
+
+			return
+		end
+
+		inst:AddComponent("container")
+		inst.components.container:WidgetSetup("timestophat_inv")
+		inst.components.container.canbeopened = false
+
+		inst.tick = inst:DoPeriodicTask(1, OnTick)
+
+		inst:ListenForEvent("equipped", OnEquip)
+		inst:ListenForEvent("unequipped", OnUnequip)
+		inst:ListenForEvent("itemget", OnTick)
+	end)
+end
+
 -- We need to make an entire pseudo-frozen state specifically for using the ice hat, as we don't want to go to the hit state after being unfrozen, we don't want extra sounds, and we want to show the hud.
 AddStategraphState("wilson",
 State{
@@ -646,9 +724,12 @@ State{
 
 		-- Just in case this somehow bugs out, force the player back to idle after 3 seconds, so they aren't stuck in place.
 		-- Why did I name it jicle?
-		inst.jicle = inst:DoTaskInTime(3, function(inst)
-			inst.sg:GoToState("idle")
-		end)
+		-- TODO change to a SetTimeout (or whatever)
+		inst.sg:SetTimeout(12 * FRAMES)
+	end,
+
+	ontimeout = function(inst)
+		inst.sg:GoToState("idle")
 	end,
 
 	events =
@@ -656,14 +737,10 @@ State{
 		EventHandler("unequip", function(inst, data)
 			if data.eslot == GLOBAL.EQUIPSLOTS.HEAD then
 				inst.sg:GoToState("idle", true)
-				inst.jicle:Cancel()
-				inst.jicle = nil
 			end
 		end),
 		EventHandler("doexplode", function(inst, data)
 			inst.sg:GoToState("idle", true)
-			inst.jicle:Cancel()
-			inst.jicle = nil
 		end),
 	},
 
