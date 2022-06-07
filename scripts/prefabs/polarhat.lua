@@ -75,23 +75,21 @@ local function OnUse(inst)
 		-- Cooldown
 		inst.components.rechargeable:Discharge(TUNING.POLARHAT_COOLDOWN)
 		
-		-- Fakefreeze, rewritten properly as a state (finally)
+		-- Fakefreeze, rewritten somewhat more properly as a state
 		owner.sg:GoToState("hat_frozen")
 
-		-- Enter FX
+		-- Initial FX
 		SpawnPrefab("polarhat_charge").Transform:SetPosition(owner.Transform:GetWorldPosition())
-
 		SpawnPrefab("hatshatter").Transform:SetPosition(owner.Transform:GetWorldPosition())
-
 		local two = SpawnPrefab("hatshatter")
 		two.Transform:SetPosition(owner.Transform:GetWorldPosition())
 		two.Transform:SetScale(1.25, 1.25, 1.25)
 
 		-- After a delay, explode!
-		owner:DoTaskInTime(0.4, function(owner)
+		owner:DoTaskInTime(12 * FRAMES, function(owner)
 			inst.components.useableitem:StopUsingItem()
 
-			-- Break out of hat_frozen state
+			-- No longer needed, state has a 12 frame timeout.
 			-- owner:PushEvent("doexplode") -- 12 frames
 
 			-- Explode FX
@@ -111,18 +109,19 @@ local function OnUse(inst)
 			-- Get entities in a radius around the explosion's center
 			local pt = owner:GetPosition()
 			local range = TUNING.POLARHAT_RADIUS
-			local tags = { "monster", "hostile", "smallcreature", "insect", "animal", "largecreature", "character", "player" }
-			local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nil, tags)	
+			-- local tags = { "monster", "hostile", "smallcreature", "insect", "animal", "largecreature", "character", "player" }
+			local nags = { "CLASSIFED", "invisible", "playerghost" }
+			local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, nil)	
 			for _,ent in ipairs(targets) do
 
 				-- Freeze things that need frozen
-				if ent.components.freezable ~= nil and not ent:HasTag("player") and not ent:HasTag("noauradamage") and not ent:HasTag("notraptrigger") then
+				if ent.components.freezable ~= nil and not ent:HasOneOfTags({"player", "noauradamage", "notraptrigger" }) then
 					ent.components.freezable:AddColdness(TUNING.POLARHAT_LEVEL)
 					ent.components.freezable:SpawnShatterFX()
 				end
 
-				-- Decrease character temperatures
-				if ent.components.temperature ~= nil and ent:HasTag("character") then
+				-- Decrease character temperatures, TODO belly temp?
+				if ent.components.temperature ~= nil then
 					ent.components.temperature:DoDelta(-TUNING.POLARHAT_TEMP)
 				end
 			end
