@@ -721,10 +721,7 @@ State{
 		inst.SoundEmitter:PlaySound("icestomp/sound/activate")
 
 		inst:AddTag("alwaysblock")
-
-		-- Just in case this somehow bugs out, force the player back to idle after 3 seconds, so they aren't stuck in place.
-		-- Why did I name it jicle?
-		-- TODO change to a SetTimeout (or whatever)
+		
 		inst.sg:SetTimeout(12 * FRAMES)
 	end,
 

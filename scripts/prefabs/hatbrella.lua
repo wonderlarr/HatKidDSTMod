@@ -9,7 +9,7 @@ local assets =
     Asset("IMAGE", "images/inventoryimages/hatbrellaopen.tex"),
 }
 
-RegisterInventoryItemAtlas("images/inventoryimages/hatbrella.xml","hatbrella.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/hatbrella.xml", "hatbrella.tex")
 
 
 
@@ -83,7 +83,7 @@ local function fn()
     -- inst.components.inventoryitem.atlasname = "images/inventoryimages/hatbrella.xml"
 	
     inst:AddComponent("equippable")
-    inst.components.equippable.restrictedtag = "hatkid"
+    -- inst.components.equippable.restrictedtag = "hatkid"
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
 

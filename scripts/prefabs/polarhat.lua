@@ -19,9 +19,6 @@ RegisterInventoryItemAtlas("images/inventoryimages/polarhat.xml","polarhat.tex")
 -- 5/14/22 Rewrite basically done! Made a stategraph and stuff, looking pretty good so far, a LOT cleaner than before.
 -- Still a bit of a rat's nest, but it's a lot more readable now, so I'm happy for the moment.
 
-
--- TODO: Test client stuff
-
 local prefabs = 
 { 
 	"hatshatter",

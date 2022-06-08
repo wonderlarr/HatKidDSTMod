@@ -1,4 +1,4 @@
-name = "Hat Kid Unlisted" -- Edit this title depending on branch.
+name = "Hat Kid Unlisted Internal" -- Edit this title depending on branch.
 description = "This mod really is the mod of all time!"
 author = "Skylarr 󰀏"
 version = "3.0.0b20"

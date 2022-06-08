@@ -16,7 +16,7 @@ AddCharacterRecipe("hatbrella",
 	{ -- ingredients. Formatted identically to the old AddRecipe()	
 		GLOBAL.Ingredient("twigs", 2),
 		GLOBAL.Ingredient("pigskin", 1),
-		GLOBAL.Ingredient("goldnugget", 2),
+		GLOBAL.Ingredient("goldnugget", 1),
 	},
 	GLOBAL.TECH.SCIENCE_ONE, -- crafting station. Refer to other recipes in recipes.lua for other stations.
 	{ -- config. Other options can be found in recipe.lua, under the Recipe class.
