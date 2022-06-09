@@ -22,7 +22,6 @@ end
 local function OnUnequip(inst, owner)
     owner.AnimState:Hide("ARM_carry")
     owner.AnimState:Show("ARM_normal")
-    
 end
  
 local function OnUse(inst)
