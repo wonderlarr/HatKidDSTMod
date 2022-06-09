@@ -28,7 +28,8 @@
 
 PrefabFiles = {
 	"hatkid",
-	"hatkid_none",
+	-- replaced hatkid_none with skins, according to the new Skins API
+	"hatkid_skins",
 
 	--hats
     "kidhat",
@@ -118,11 +119,9 @@ Assets = {
 	-- At the very least it saves disk space
     Asset( "ATLAS", "bigportraits/hatkid_dye_niko.xml" ), --nightmargin is awesome i love oneshot
     Asset( "ATLAS", "bigportraits/hatkid_dye_toonlink.xml" ), -- toonlink is pretty cool too, my smash main
-    Asset( "ATLAS", "bigportraits/hatkid_dye_pinkdanger.xml" ), -- my primary dye in the actual game
+    Asset( "ATLAS", "bigportraits/hatkid_dye_pinkdanger.xml" ), --  cool
 
     Asset( "ATLAS", "bigportraits/hatkid_timestop.xml" ), -- redundant bigportrait for time stop skin. This shouldn't display but it keeps the client log happy.
-
-
 }
 
 -- Import modmain segments
@@ -132,8 +131,6 @@ modimport("modmain_crafting.lua")
 -- modimport("modmain_ponstuff.lua")
 
 modimport("scripts/keyhandler.lua") --Keyhandler
-modimport("scripts/character_skins_api.lua") -- Character Skins API
--- modimport("scripts/item_skins_api.lua") -- Item Skins API
 
 -- Imports to keep the keyhandler from working while typing into various things.
 Load "chatinputscreen"
@@ -143,47 +140,6 @@ Load "textedit"
 -- Add Hat Kid to various things
 AddModCharacter("hatkid", "FEMALE")
 AddMinimapAtlas("images/map_icons/hatkid.xml")
-AddSkinnableCharacter("hatkid") -- Character skin thing
-
--- Character Skins, thanks Hornet
-local _G = GLOBAL
-local PREFAB_SKINS = _G.PREFAB_SKINS
-local PREFAB_SKINS_IDS = _G.PREFAB_SKINS_IDS
-local SKIN_AFFINITY_INFO = GLOBAL.require("skin_affinity_info")
-
-SKIN_AFFINITY_INFO.hatkid = {
-	"hatkid_cat",
-	"hatkid_detective",
-
-	"hatkid_dye_niko",
-	"hatkid_dye_toonlink",
-	"hatkid_dye_pinkdanger",
-}
-
---Hornet: The table of skins youre going to have, You can have as many skins as you want!
-
-PREFAB_SKINS["hatkid"] = {
-	--outfits
-	"hatkid_none", 
-	"hatkid_cat",
-	"hatkid_detective",
-	--"hatkid_raincoat", -- would be cool to have
-	--"hatkid_snatcher",
-
-	--dyes
-	"hatkid_dye_niko",
-	"hatkid_dye_toonlink",
-	"hatkid_dye_pinkdanger",
-
-} 
-
-PREFAB_SKINS_IDS = {} --Make sure this is after you  change the PREFAB_SKINS["character"] table
-for prefab,skins in pairs(PREFAB_SKINS) do
-    PREFAB_SKINS_IDS[prefab] = {}
-    for k,v in pairs(skins) do
-      	  PREFAB_SKINS_IDS[prefab][v] = k
-    end
-end
 
 -- Thanks Kzisor/Ysovuka for the Key Handling code.
 -- Key Handling guide https://forums.kleientertainment.com/forums/topic/63754-tutorial-character-transformation/
