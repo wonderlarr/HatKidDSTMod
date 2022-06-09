@@ -79,6 +79,9 @@ Assets = {
 
 	Asset( "IMAGE", "images/avatars/avatar_hatkid.tex" ),
     Asset( "ATLAS", "images/avatars/avatar_hatkid.xml" ),
+	
+	Asset( "IMAGE", "images/crafting_menu_avatars/avatar_hatkid.tex" ),
+    Asset( "ATLAS", "images/crafting_menu_avatars/avatar_hatkid.xml" ),
 
 	Asset( "IMAGE", "images/avatars/avatar_ghost_hatkid.tex" ),
     Asset( "ATLAS", "images/avatars/avatar_ghost_hatkid.xml" ),
