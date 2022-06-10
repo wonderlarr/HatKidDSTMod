@@ -22,25 +22,40 @@ table.insert(prefabs, CreatePrefabSkin("hatkid_none", {
 	skin_tags = { "BASE", "HATKID"},
 }))
 
-table.insert(prefabs, CreatePrefabSkin("ms_hatkid_dye_niko", {
-	assets = {
-        Asset("ANIM", "anim/hatkid_dye_niko.zip"),
-        Asset("ANIM", "anim/ghost_hatkid_build.zip"),
-    },
-	skins = {
-		normal_skin = "hatkid_dye_niko",
-		ghost_skin = "ghost_hatkid_build",
-	},
+local hatskins = {
+	"ms_hatkid_cat",
+	"ms_hatkid_detective",
+	"ms_hatkid_dye_bowkid",
+	"ms_hatkid_dye_groovy",
+	"ms_hatkid_dye_lunar",
+	"ms_hatkid_dye_niko",
+	"ms_hatkid_dye_pinkdanger",
+	"ms_hatkid_dye_sans",
+	"ms_hatkid_dye_toonlink",
+}
 
-	base_prefab = "hatkid",
-	build_name_override = "hatkid_dye_niko",
+for k,v in ipairs(hatskins) do
 
-	torso_untuck_builds = { "hatkid_dye_niko", },
-	type = "base",
-	rarity = "ModMade",
+	table.insert(prefabs, CreatePrefabSkin(v, {
+		assets = {
+			Asset("ANIM", "anim/" .. v .. ".zip"),
+			Asset("ANIM", "anim/ghost_hatkid_build.zip"),
+		},
+		skins = {
+			normal_skin = v,
+			ghost_skin = "ghost_hatkid_build",
+		},
 
-	skin_tags = { "BASE", "HATKID" },
-}))
+		base_prefab = "hatkid",
+		build_name_override = v,
+
+		-- torso_untuck_builds = { v, },
+		type = "base",
+		rarity = "ModMade",
+
+		skin_tags = { "BASE", "HATKID" },
+	}))
+end
 
 
 return unpack(prefabs)

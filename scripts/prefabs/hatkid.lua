@@ -1,8 +1,6 @@
 local MakePlayerCharacter = require "prefabs/player_common"
 
 local assets = {
-    Asset("SCRIPT", "scripts/prefabs/player_common.lua"),
-
 	-- Hat Kid's voice
 	Asset( "SOUNDPACKAGE", "sound/hatkidvoice.fev"),
     Asset( "SOUND", "sound/hatkidvoice.fsb"),
@@ -10,13 +8,8 @@ local assets = {
 
 local prefabs = {}
 
+-- Spawn with Kid Hat
 local start_inv = { "kidhat" }
-
--- Spawn with Kid's Hat
-local function SpawnWithStuff(inst)
-    -- local kidhat = SpawnPrefab("kidhat")
-    -- inst.components.inventory:Equip(kidhat)
-end
 
 -- local function LoadPonInv(inst)
 -- 	if inst.lab then
@@ -79,9 +72,6 @@ local function onnewspawn(inst)
 
 	inst:ListenForEvent("ms_respawnedfromghost", onbecamehuman)
     inst:ListenForEvent("ms_becameghost", onbecameghost)
-
-	SpawnWithStuff(inst)
-	-- LoadPonInv(inst)
 end
 
 -- local function ApplyPons(inst, data)

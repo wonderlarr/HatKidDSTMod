@@ -1,6 +1,5 @@
 --Item and character strings
 
-
 -- String declarations
 local require = GLOBAL.require
 local STRINGS = GLOBAL.STRINGS
@@ -17,48 +16,60 @@ STRINGS.NAMES.HATKID = "Hat Kid"
 STRINGS.CHARACTERS.HATKID = require "speech_hatkid" -- speech file
 
 -- The character select screen lines
-STRINGS.CHARACTER_TITLES.hatkid = "The Youthful Hatter"
+STRINGS.CHARACTER_TITLES.hatkid = "The Tiny Hatter"
 STRINGS.CHARACTER_NAMES.hatkid = "Hat Kid"
 STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Knits cool hats\n*Is selfish and obsessive over them\n*Has a vulnerable mind\n*Considered extremely cute"
 STRINGS.CHARACTER_QUOTES.hatkid = "\"Oh, hi there!\""
 STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Slim"
 
 --Skin STRINGS
-
-	--Outfits
 STRINGS.SKIN_NAMES.hatkid_none = "Hat Kid"
-STRINGS.SKIN_NAMES.hatkid_cat = "The Nyakuza"
-STRINGS.SKIN_NAMES.hatkid_detective = "The Detective"
-	--Dyes
-STRINGS.SKIN_NAMES.hatkid_dye_niko = "Margin of the Night" --Oneshot
-STRINGS.SKIN_NAMES.hatkid_dye_toonlink = "The Forest Critter" -- Wind Waker
-STRINGS.SKIN_NAMES.hatkid_dye_pinkdanger = "Cute 'n Dangerous" -- Extremely Pink
-
-
-STRINGS.SKIN_QUOTES.hatkid_none = "\"Oh, hi there!\"" -- Redundant, mostly here for organization's sake. I believe the game uses the default quote with no skin selected, not this one.
+STRINGS.SKIN_QUOTES.hatkid_none = STRINGS.CHARACTER_QUOTES.hatkid
 STRINGS.SKIN_DESCRIPTIONS.hatkid_none = "A royal purple and gold outfit, best fit for a cute adventurer. Complete with a cape and a giant, very necessary zipper."
 
-STRINGS.SKIN_QUOTES.hatkid_cat = "\"Cat crime!\""
-STRINGS.SKIN_DESCRIPTIONS.hatkid_cat = "A cat themed varsity outfit, complete with mask and tail, which also may or may not be directly tied to countless illegal acts."
+--Outfits
+	STRINGS.SKIN_NAMES.ms_hatkid_cat = "The Nyakuza"
+	STRINGS.SKIN_QUOTES.ms_hatkid_cat = "\"Cat crime!\""
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_cat = "A cat themed varsity outfit, complete with mask and tail, which also may or may not be directly tied to countless illegal acts."
 
-STRINGS.SKIN_QUOTES.hatkid_detective = "\"MYURDER!\""
-STRINGS.SKIN_DESCRIPTIONS.hatkid_detective = "A detective outfit, worn by only the most mature of detectives!"
+	STRINGS.SKIN_NAMES.ms_hatkid_detective = "The Detective"
+	STRINGS.SKIN_QUOTES.ms_hatkid_detective = "\"MYURDER!\""
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_detective = "A detective outfit, worn by only the most mature of detectives!"
 
-STRINGS.SKIN_QUOTES.hatkid_dye_niko = "\"Oh, hi there!\""
-STRINGS.SKIN_DESCRIPTIONS.hatkid_dye_niko = "An outfit that you oddly associate with cats and lightbulbs."
+--Dyes
+	STRINGS.SKIN_NAMES.ms_hatkid_dye_bowkid = "Best Friends Forever" --Bow Kid
+	STRINGS.SKIN_QUOTES.ms_hatkid_dye_bowkid = STRINGS.CHARACTER_QUOTES.hatkid
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_bowkid = "A bright blue and green outfit, reminding you of your BFF."
 
-STRINGS.SKIN_QUOTES.hatkid_dye_toonlink = "\"Oh, hi there!\""
-STRINGS.SKIN_DESCRIPTIONS.hatkid_dye_toonlink = "Why would you ever want to wake up the wind? How would you even do that?"
+	STRINGS.SKIN_NAMES.ms_hatkid_dye_groovy = "2 Groovy" --Wargroove
+	STRINGS.SKIN_QUOTES.ms_hatkid_dye_groovy = STRINGS.CHARACTER_QUOTES.hatkid
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_groovy = "A dark teal and deep purple outfit. Available in sets of two, for double the trouble."
 
-STRINGS.SKIN_QUOTES.hatkid_dye_pinkdanger = "\"Oh, hi there!\""
-STRINGS.SKIN_DESCRIPTIONS.hatkid_dye_pinkdanger = "An outfit with lethal amounts of lightish red."
+	STRINGS.SKIN_NAMES.ms_hatkid_dye_lunar = "Lunar Lava" --Hilda
+	STRINGS.SKIN_QUOTES.ms_hatkid_dye_lunar = STRINGS.CHARACTER_QUOTES.hatkid
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_lunar = "A pale teal and red outfit, seemingly fit for a cute adventurer. WARNING: This outfit may attract trolls!"
 
+	STRINGS.SKIN_NAMES.ms_hatkid_dye_niko = "Margin of the Night" --Oneshot
+	STRINGS.SKIN_QUOTES.ms_hatkid_dye_niko = STRINGS.CHARACTER_QUOTES.hatkid
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_niko = "An outfit associated with... cats and lightbulbs? Weird."
+
+	STRINGS.SKIN_NAMES.ms_hatkid_dye_pinkdanger = "Cute 'n Dangerous" -- Extremely Pink
+	STRINGS.SKIN_QUOTES.ms_hatkid_dye_pinkdanger = STRINGS.CHARACTER_QUOTES.hatkid
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_pinkdanger = "A very pink, and cute outfit. It's just pink."
+
+	STRINGS.SKIN_NAMES.ms_hatkid_dye_sans = "Blue Flame" --Sans
+	STRINGS.SKIN_QUOTES.ms_hatkid_dye_sans = STRINGS.CHARACTER_QUOTES.hatkid
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_sans = "A blue outfit with a bit of pink. You're gonna have a good time."
+
+	STRINGS.SKIN_NAMES.ms_hatkid_dye_toonlink = "Forest Critter" -- Wind Waker
+	STRINGS.SKIN_QUOTES.ms_hatkid_dye_toonlink = STRINGS.CHARACTER_QUOTES.hatkid
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_toonlink = "A very green outfit, reminding you of sailing, oddly enough."
 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATKID =
 {
 	GENERIC = "It's Hat Kid!",
 	ATTACKER = "I hope she didn't mean to do that.",
-	MURDERER = "A murder? On MY owl express?",
+	MURDERER = "A murder? On the owl express?",
 	REVIVER = "She must like ghosts.",
 	GHOST = "We should help the poor kid.",
 	FIRESTARTER = "Should she have matches?",
@@ -66,11 +77,11 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATKID =
 
 STRINGS.CHARACTERS.HATKID.DESCRIBE.HATKID =
 {
-	GENERIC = "Oh hi there!",
+	GENERIC = "Oh, hi there!",
 	ATTACKER = "I don't like her.",
 	MURDERER = "MYURDER!",
-	REVIVER = "Nice job, me.",
-	GHOST = "How am I dead?",
+	REVIVER = "Good job, me!",
+	GHOST = "Oh no! I'm dead!",
 	FIRESTARTER = "Oh come on! We're better than this!",
 }
 
@@ -108,8 +119,7 @@ STRINGS.RECIPE_DESC.TIMESTOPHAT = "Death is inevitable. Your time is valuable."
 
 STRINGS.RECIPE_DESC.HATBRELLA = "Diplomacy didn't work, time for action."
 
--- temporary
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.KIDPOTION_THROWABLE = "Throwing these will be fun!"
+
 
 
 --Describe strings, by order of css screen, but Hat Kid first.
@@ -124,6 +134,9 @@ STRINGS.CHARACTERS.HATKID.DESCRIBE.DWELLERMASK = "This has changed just a little
 STRINGS.CHARACTERS.HATKID.DESCRIBE.TIMESTOPHAT = "Totally not overpowered!"
 STRINGS.CHARACTERS.HATKID.DESCRIBE.HATBRELLA = "It has a good swing."
 STRINGS.CHARACTERS.HATKID.DESCRIBE.HATBRELLAOPEN = "Good for rain, I guess."
+-- Only hat kid can obtain these
+STRINGS.CHARACTERS.HATKID.DESCRIBE.KIDPOTION = "Give it a little."
+STRINGS.CHARACTERS.HATKID.DESCRIBE.KIDPOTION_THROWABLE = "Blamo incoming!"
 
 -- Wilson/Generic
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.KIDHAT = "It's a short and stout tophat."
@@ -140,7 +153,7 @@ STRINGS.CHARACTERS.WILLOW.DESCRIBE.KIDHAT = "A top hat and a lighter, a perfect 
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.SPRINTHAT = "You could start a fire going that fast!"
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.BREWINGHAT = "Potions are just another way to start fires!"
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.POLARHAT = "Boo to this hat."
-STRINGS.CHARACTERS.WILLOW.DESCRIBE.DWELLERMASK = "Has science gone too far?"
+STRINGS.CHARACTERS.WILLOW.DESCRIBE.DWELLERMASK = "Not my favorite thing to look at."
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.TIMESTOPHAT = "Can't touch this!"
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.HATBRELLA = "I don't like the color."
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.HATBRELLAOPEN = "I don't like the color."

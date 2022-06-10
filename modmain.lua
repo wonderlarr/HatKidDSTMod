@@ -125,9 +125,16 @@ Assets = {
 }
 
 -- Import modmain segments
-modimport("modmain_strings.lua")
 modimport("modmain_tuning.lua")
 modimport("modmain_crafting.lua")
+
+-- If meme language is enabled, we'll use our own meme strings, otherwise load the normal ones.
+if GLOBAL.KnownModIndex:IsModEnabled("workshop-1289272965") then
+	modimport("modmain_strings_alt.lua")
+else -- just import the normal strings
+	modimport("modmain_strings.lua")
+end
+
 -- modimport("modmain_ponstuff.lua")
 
 modimport("scripts/keyhandler.lua") --Keyhandler
