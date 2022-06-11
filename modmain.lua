@@ -108,20 +108,24 @@ Assets = {
 	Asset( "IMAGE", "bigportraits/hatkid_none.tex" ), -- Default, texture is same as base.
     Asset( "ATLAS", "bigportraits/hatkid_none.xml" ),
 
-    Asset( "IMAGE", "bigportraits/hatkid_cat.tex" ), -- Nyakuza
-    Asset( "ATLAS", "bigportraits/hatkid_cat.xml" ),
+    Asset( "IMAGE", "bigportraits/ms_hatkid_cat.tex" ), -- Nyakuza
+    Asset( "ATLAS", "bigportraits/ms_hatkid_cat.xml" ),
 
-	Asset( "IMAGE", "bigportraits/hatkid_detective.tex" ), -- Detective
-    Asset( "ATLAS", "bigportraits/hatkid_detective.xml" ),
+	Asset( "IMAGE", "bigportraits/ms_hatkid_detective.tex" ), -- Detective
+    Asset( "ATLAS", "bigportraits/ms_hatkid_detective.xml" ),
 	
 	-- For the dyes we don't have custom portraits, so we just point the atlas at the default portrait.
 	-- This means we don't load a ton of duplicate textures theoretically, though I'm not sure how this works in memory
 	-- At the very least it saves disk space
-    Asset( "ATLAS", "bigportraits/hatkid_dye_niko.xml" ), --nightmargin is awesome i love oneshot
-    Asset( "ATLAS", "bigportraits/hatkid_dye_toonlink.xml" ), -- toonlink is pretty cool too, my smash main
-    Asset( "ATLAS", "bigportraits/hatkid_dye_pinkdanger.xml" ), --  cool
+    Asset( "ATLAS", "bigportraits/ms_hatkid_dye_niko.xml" ),
+    Asset( "ATLAS", "bigportraits/ms_hatkid_dye_toonlink.xml" ),
+    Asset( "ATLAS", "bigportraits/ms_hatkid_dye_pinkdanger.xml" ), 
+	Asset( "ATLAS", "bigportraits/ms_hatkid_dye_bowkid.xml" ),
+	Asset( "ATLAS", "bigportraits/ms_hatkid_dye_groovy.xml" ),
+	Asset( "ATLAS", "bigportraits/ms_hatkid_dye_lunar.xml" ),
+	Asset( "ATLAS", "bigportraits/ms_hatkid_dye_sans.xml" ),
 
-    Asset( "ATLAS", "bigportraits/hatkid_timestop.xml" ), -- redundant bigportrait for time stop skin. This shouldn't display but it keeps the client log happy.
+    Asset( "ATLAS", "bigportraits/hatkid_timestop.xml" ),
 }
 
 -- Import modmain segments
@@ -131,7 +135,7 @@ modimport("modmain_crafting.lua")
 -- If meme language is enabled, we'll use our own meme strings, otherwise load the normal ones.
 if GLOBAL.KnownModIndex:IsModEnabled("workshop-1289272965") then
 	modimport("modmain_strings_alt.lua")
-else -- just import the normal strings
+else
 	modimport("modmain_strings.lua")
 end
 
