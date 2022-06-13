@@ -1,7 +1,7 @@
-name = "Hat Kid Unlisted Internal" -- Edit this title depending on branch.
+name = "Hat Kid Unlisted Internal"
 description = "This mod really is the mod of all time!"
-author = "Skylarr 󰀏"
-version = "3.0.0b20"
+author = "Skylarr 󰀏" -- Unknown character is a torch emoji
+version = "0.20.1" -- major version . feature update . 
 
 forumthread = ""
 
@@ -18,12 +18,9 @@ icon_atlas = "modicon.xml"
 icon = "modicon.tex"
 
 server_filter_tags = {
-	"kid",
-	"hat",
-	"time",
 	"hatkid",
-	"a hat in time",
 	"hat kid",
+	"hat in time",
 	"cute",
 }
 
