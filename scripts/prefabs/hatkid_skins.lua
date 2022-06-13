@@ -49,7 +49,6 @@ for k,v in ipairs(hatskins) do
 		base_prefab = "hatkid",
 		build_name_override = v,
 
-		-- torso_untuck_builds = { v, },
 		type = "base",
 		rarity = "ModMade",
 

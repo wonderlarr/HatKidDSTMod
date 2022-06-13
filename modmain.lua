@@ -61,7 +61,7 @@ PrefabFiles = {
 	--misc
 	-- "inv_pons",
 
-	--testing (disable in final)
+	--testing TODO (disable in final)
 	"cooltarget", -- This is a dummytarget prefab, but it only regens health when it is low.
 }
 
@@ -117,6 +117,7 @@ Assets = {
 	-- For the dyes we don't have custom portraits, so we just point the atlas at the default portrait.
 	-- This means we don't load a ton of duplicate textures theoretically, though I'm not sure how this works in memory
 	-- At the very least it saves disk space
+
     Asset( "ATLAS", "bigportraits/ms_hatkid_dye_niko.xml" ),
     Asset( "ATLAS", "bigportraits/ms_hatkid_dye_toonlink.xml" ),
     Asset( "ATLAS", "bigportraits/ms_hatkid_dye_pinkdanger.xml" ), 
@@ -139,6 +140,7 @@ else
 	modimport("modmain_strings.lua")
 end
 
+-- disabled pon things
 -- modimport("modmain_ponstuff.lua")
 
 modimport("scripts/keyhandler.lua") --Keyhandler
@@ -674,7 +676,6 @@ State{
 			inst.components.pinnable:Unstick()
 		end
 
-		-- Pseudo ForceStopHeavyLifting, since we're not actually in the sgwilson file, we can't access the local function for this.
 		if inst.components.inventory:IsHeavyLifting() then
 			inst.components.inventory:DropItem(
 			inst.components.inventory:Unequip(GLOBAL.EQUIPSLOTS.BODY), true, true)

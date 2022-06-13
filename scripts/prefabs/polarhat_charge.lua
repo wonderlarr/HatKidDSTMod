@@ -4,7 +4,7 @@ local assets =
 }
 
 local function MakeExplosion(data)
-    local function PlayExplodeAnim(proxy)
+    local function PlayCollectAnim(proxy)
         local inst = CreateEntity()
 
         inst:AddTag("FX")
@@ -20,19 +20,21 @@ local function MakeExplosion(data)
 
         inst.Transform:SetFromProxy(proxy.GUID)
         
-        inst.AnimState:SetBank("stalker_shield")
-        inst.AnimState:SetBuild("stalker_shield")
-        inst.AnimState:PlayAnimation("idle1")
-        inst.AnimState:SetScale(0.8, 0.8)
+        inst.AnimState:SetBank("pocketwatch_cast_fx")
+        inst.AnimState:SetBuild("pocketwatch_casting_fx")
+        inst.AnimState:PlayAnimation("pocketwatch_heal_fx")
+        inst.AnimState:SetScale(1.5,1.5)
         inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
         inst.AnimState:SetFinalOffset(10)
-        inst.AnimState:SetAddColour(150/255, 255/255, 255/255, 1)
-        inst.AnimState:SetDeltaTimeMultiplier(1.5)
+        inst.AnimState:SetDeltaTimeMultiplier(1.25)
+        inst.AnimState:SetTime(16 * FRAMES) 
+        inst.AnimState:SetAddColour(1,1,1,1)
+        inst.AnimState:SetMultColour(180/255,1,1,1)
 
         inst:ListenForEvent("animover", inst.Remove)
     end
 
-    local function PlayExplode2Anim(proxy)
+    local function PlayFlashAnim(proxy)
         local inst = CreateEntity()
 
         inst:AddTag("FX")
@@ -53,7 +55,7 @@ local function MakeExplosion(data)
         inst.AnimState:PlayAnimation("idle2")
         inst.AnimState:SetScale(1.15, 1.15)
         inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
-        inst.AnimState:SetFinalOffset(10)
+        inst.AnimState:SetFinalOffset(8)
         inst.AnimState:SetAddColour(180/255, 255/255, 255/255, 1)
         inst.AnimState:SetDeltaTimeMultiplier(1.5)
 
@@ -71,8 +73,8 @@ local function MakeExplosion(data)
             --Delay one frame so that we are positioned properly before starting the effect
             --or in case we are about to be removed
             inst:DoTaskInTime(0, function(inst)
-                -- PlayExplodeAnim(inst)
-                PlayExplode2Anim(inst)
+                PlayCollectAnim(inst)
+                PlayFlashAnim(inst)
             end)
         end
 
