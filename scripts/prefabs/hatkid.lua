@@ -21,7 +21,7 @@ local start_inv = { "kidhat" }
 local function onbecamehuman(inst)
 	inst.components.locomotor:SetExternalSpeedMultiplier(inst, "hatkid_speed_config", TUNING.HATKIDSPEED)
 
-	inst.AnimState:SetScale(TUNING.HATKIDSIZE, TUNING.HATKIDSIZE) 
+	-- inst.AnimState:SetScale(TUNING.HATKIDSIZE, TUNING.HATKIDSIZE) 
 end
 
 -- when he died
@@ -29,7 +29,7 @@ local function onbecameghost(inst)
 	inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "hatkid_speed_config")
 	
 	-- HACK, overriding size manually on death so the ghost isn't unreasonably tiny. This won't look right if the player has the character size turned up higher than normal.
-	inst.AnimState:SetScale(1, 1) 
+	-- inst.AnimState:SetScale(1, 1) 
 end
 
 local function OnPotionThrow(inst)
