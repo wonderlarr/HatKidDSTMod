@@ -16,19 +16,19 @@ STRINGS.NAMES.HATKID = "Child"
 STRINGS.CHARACTERS.HATKID = require "speech_hatkid" -- speech file
 
 -- The character select screen lines
-STRINGS.CHARACTER_TITLES.hatkid = "The Child"
-STRINGS.CHARACTER_NAMES.hatkid = "Child"
-STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Child\n*Child\n*Child\n*Child\n*Child\n*Child\n*Child\n*Child\n*Child\n*Child\n*Child\n*Child\n*Child\n*Child\n*Child\n*Child\n*Child\n*Child\n*Child\n*Child\n*Child"
-STRINGS.CHARACTER_QUOTES.hatkid = "\"I am illiterate!\""
+STRINGS.CHARACTER_TITLES.hatkid = "The Illiterate"
+STRINGS.CHARACTER_NAMES.hatkid = "Smug Kid"
+STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Smug\n*Will take your cane\n*Absolute insanity\n*"
+STRINGS.CHARACTER_QUOTES.hatkid = "\"*Smug Dance*\""
 STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Child"
 
 --Skin STRINGS
-STRINGS.SKIN_NAMES.hatkid_none = "Child"
+STRINGS.SKIN_NAMES.hatkid_none = "The Kid"
 STRINGS.SKIN_QUOTES.hatkid_none = STRINGS.CHARACTER_QUOTES.hatkid
-STRINGS.SKIN_DESCRIPTIONS.hatkid_none = "Oh my god it's the one character from that smug dancing video I watched that one time."
+STRINGS.SKIN_DESCRIPTIONS.hatkid_none = "Oh my god it's the one cute character from that smug dancing video I watched that one time."
 
 --Outfits
-	STRINGS.SKIN_NAMES.ms_hatkid_cat = "The Cat Girl"
+	STRINGS.SKIN_NAMES.ms_hatkid_cat = "The Anime"
 	STRINGS.SKIN_QUOTES.ms_hatkid_cat = "\"FBI OPEN UP!\""
 	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_cat = "Oh my."
 
@@ -45,13 +45,13 @@ STRINGS.SKIN_DESCRIPTIONS.hatkid_none = "Oh my god it's the one character from t
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_groovy = STRINGS.CHARACTER_QUOTES.hatkid
 	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_groovy = ""
 
-	STRINGS.SKIN_NAMES.ms_hatkid_dye_lunar = "Fire Emblem I think" --Hilda
-	STRINGS.SKIN_QUOTES.ms_hatkid_dye_lunar = STRINGS.CHARACTER_QUOTES.hatkid
-	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_lunar = "Probably anyway, I looked it up on google!"
+	STRINGS.SKIN_NAMES.ms_hatkid_dye_lunar = "1) wait for it to rain" --Hilda
+	STRINGS.SKIN_QUOTES.ms_hatkid_dye_lunar = "3) fly"
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_lunar = "2) cover yourself in oil"
 
-	STRINGS.SKIN_NAMES.ms_hatkid_dye_niko = "THE CAT FROM ONESHOT" --Oneshot
+	STRINGS.SKIN_NAMES.ms_hatkid_dye_niko = "The Cat" --Oneshot
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_niko = STRINGS.CHARACTER_QUOTES.hatkid
-	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_niko = "Meme-out with the cat from OneShot."
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_niko = "I would like to hug the cat. Please and thank you."
 
 	STRINGS.SKIN_NAMES.ms_hatkid_dye_pinkdanger = "Lightish Red" -- Extremely Pink
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_pinkdanger = STRINGS.CHARACTER_QUOTES.hatkid
