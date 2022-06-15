@@ -41,6 +41,8 @@ local function OnUse(inst)
 end
 
 local function OnEmpty(inst)
+    inst.components.inventoryitem:GetGrandOwner().SoundEmitter:PlaySound("dontstarve/wilson/use_break")
+    
     inst:DoTaskInTime(0, inst.Remove)
 end
 
