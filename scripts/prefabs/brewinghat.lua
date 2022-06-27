@@ -94,7 +94,7 @@ local function OnUse(inst)
 		owner.components.inventory:Equip(kidpotion)
 
 		-- Hat Stuff
-		-- inst.components.rechargeable:Discharge(TUNING.BREWINGHAT_CHARGETIME) -- Cooldown
+		inst.components.rechargeable:Discharge(TUNING.BREWINGHAT_CHARGETIME) -- Cooldown
 		inst.components.fueled:DoDelta(-1)
 
 		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
