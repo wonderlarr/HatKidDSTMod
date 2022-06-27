@@ -97,17 +97,17 @@ local MasterPostInit = function(inst, data)
 
 	-- Hunger
 	inst.components.hunger:SetMax(TUNING.HATKID_HUNGER)
-	inst.components.hunger.burnratemodifiers:SetModifier(inst, TUNING.HATKIDRATE, "base")
+	inst.components.hunger.burnratemodifiers:SetModifier(inst, TUNING.HATKIDRATE, "config_base")
 
 	-- Sanity
 	inst.components.sanity:SetMax(TUNING.HATKID_SANITY) 
 	inst.components.sanity.rate_modifier = TUNING.HATKIDSANITYMULT
 	inst.components.sanity.night_drain_mult = TUNING.HATKIDNIGHTDRAIN
-	inst.components.sanity.neg_aura_modifiers:SetModifier(inst, TUNING.HATKIDSANITYDRAIN, "base")
+	inst.components.sanity.neg_aura_modifiers:SetModifier(inst, TUNING.HATKIDSANITYDRAIN, "config_base")
 
 	-- Combat
-	inst.components.combat.externaldamagemultipliers:SetModifier(inst, TUNING.HATKIDDAMAGEDEALT, "base")
-	inst.components.combat.externaldamagetakenmultipliers:SetModifier(inst, TUNING.HATKIDDAMAGETAKEN, "base")
+	inst.components.combat.externaldamagemultipliers:SetModifier(inst, TUNING.HATKIDDAMAGEDEALT, "config_base")
+	inst.components.combat.externaldamagetakenmultipliers:SetModifier(inst, TUNING.HATKIDDAMAGETAKEN, "config_base")
 
 	-- Movement
 	inst.components.locomotor:SetExternalSpeedMultiplier(inst, "hatkid_speed_config", TUNING.HATKIDSPEED)

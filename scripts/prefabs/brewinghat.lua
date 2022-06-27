@@ -85,7 +85,7 @@ local function OnUse(inst)
 		-- If not in cooldown
 		owner.prevequip = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 
-		-- Player stuffh
+		-- Penalty
 		owner.components.sanity:DoDelta(-TUNING.BREWINGHAT_THRESHHOLD)
 
 		local kidpotion = SpawnPrefab("kidpotion")
