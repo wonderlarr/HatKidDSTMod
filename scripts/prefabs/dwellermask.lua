@@ -289,9 +289,6 @@ local function OnUnequip(inst, owner)
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Hide("HEAD_HAT")
 	end
-
-	inst.AnimState:SetHaunted(false)
-
 end
 
 local function OnLightDirty(inst)
