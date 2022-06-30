@@ -1,8 +1,5 @@
 local assets =
 {
-    -- Asset("ANIM", "anim/brewinghat_explode.zip"),
-    Asset("ANIM", "anim/structure_collapse_fx.zip"),
-
     Asset("SOUNDPACKAGE", "sound/kidpotion.fev"),
     Asset("SOUND", "sound/kidpotion.fsb"),
 }
@@ -23,19 +20,6 @@ local function MakeExplosion(data)
         inst.entity:AddLight()
 
         inst.Transform:SetFromProxy(proxy.GUID)
-
-
-
-
-        if not TheNet:IsDedicated() then
-            --Delay one frame so that we are positioned properly before starting the effect
-            --or in case we are about to be removed
-            inst:DoTaskInTime(0, function(inst)
-                -- inst.a.SoundEmitter:SetMute(true)
-            end)
-        end
-		
-		-- inst.Transform:SetScale(2, 2, 2)
         
         inst:AddComponent("colourtweener")
         inst:AddComponent("lighttweener")
@@ -58,9 +42,6 @@ local function MakeExplosion(data)
         inst.components.colourtweener:StartTween({ 128/255, 24/255, 209/255, 1}, 15 * FRAMES)
 
         inst.components.lighttweener:StartTween(inst.Light, nil, nil, nil, {0,0,0,0}, 0.5) -- Fade out over 0.5 seconds. Hit rage indicator
-
-        -- This code only runs on the client, so no need to do any stupid net vars, god i hate them
-        -- Fade between orange a purple
 
         inst.SoundEmitter:PlaySound("kidpotion/sound/explode")
 

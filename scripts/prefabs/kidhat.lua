@@ -18,7 +18,7 @@ local prefabs =
 }
 
 local function OnEquip(inst, owner)
-	owner.AnimState:OverrideSymbol("swap_hat", inst.AnimState:GetBuild(), "swap_hat")
+	owner.AnimState:OverrideSymbol("swap_hat", "kidhat", "swap_hat")
 	
 	owner.AnimState:Show("HAT")
 	owner.AnimState:Show("HAT_HAIR")

@@ -85,7 +85,7 @@ local function OnUse(inst)
 		-- If not in cooldown
 		owner.prevequip = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 
-		-- Player stuffh
+		-- Penalty
 		owner.components.sanity:DoDelta(-TUNING.BREWINGHAT_THRESHHOLD)
 
 		local kidpotion = SpawnPrefab("kidpotion")
@@ -94,7 +94,7 @@ local function OnUse(inst)
 		owner.components.inventory:Equip(kidpotion)
 
 		-- Hat Stuff
-		-- inst.components.rechargeable:Discharge(TUNING.BREWINGHAT_CHARGETIME) -- Cooldown
+		inst.components.rechargeable:Discharge(TUNING.BREWINGHAT_CHARGETIME) -- Cooldown
 		inst.components.fueled:DoDelta(-1)
 
 		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
