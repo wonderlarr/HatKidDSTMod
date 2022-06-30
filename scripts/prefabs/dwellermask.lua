@@ -87,8 +87,9 @@ local function DwellerAbility(inst)
 		-- Use the radius of the light instead of setting one ourselves, that way it's visually consistent.
 		local tags = { "player" }
 		local nags = nil
-		local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, tags)
+		local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, nil)
 		for _,ent in ipairs(targets) do
+			print("I am " .. ent.prefab)
 			if ent.components.playervision then
 			
 				if not ent:HasTag("dwelling") then
@@ -401,7 +402,17 @@ local function fn(Sim)
 		-- inst.components.fueled.rate_modifiers:SetModifier(inst, 2, "base") -- Hard coding this value, configing shouldn't be needed
 		inst.components.fueled.bonusmult = TUNING.DWELLERMASK_VALUE / 180
 		inst.components.fueled.accepting = true
+	end
 
+	if TUNING.DWELLERMASK_INSULATION then
+		inst:AddComponent("insulator")
+		inst.components.insulator:SetWinter()
+		inst.components.insulator:SetInsulation(TUNING.DWELLERMASK_INSULATION)
+	end
+
+	if TUNING.DWELLERMASK_WATERPROOFNESS then
+		inst:AddComponent("waterproofer")
+		inst.components.waterproofer:SetEffectiveness(TUNING.DWELLERMASK_WATERPROOFNESS)
 	end
 
 	inst:ListenForEvent("AbilityKey", KeybindUse)

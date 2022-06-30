@@ -113,19 +113,22 @@ local function fn()
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
 
-	-- TODO add proper insulation
-	-- inst:AddComponent("insulator")
-    -- inst.components.insulator:SetWinter()
-    -- inst.components.insulator:SetInsulation(TUNING.SPRINTHAT_INSULATION)
-
-	inst:AddComponent("waterproofer")
-    inst.components.waterproofer:SetEffectiveness(TUNING.KIDHAT_WATERPROOFNESS)
-
 	if TUNING.KIDHAT_DURABILITY then
 		inst:AddComponent("fueled")
 		inst.components.fueled.fueltype = FUELTYPE.USAGE
-		inst.components.fueled:InitializeFuelLevel( TUNING.KIDHAT_DURABILITY ) -- add tuning 2 hours 7200
+		inst.components.fueled:InitializeFuelLevel( TUNING.KIDHAT_DURABILITY )
 		inst.components.fueled:SetDepletedFn(OnEmpty)
+	end
+
+	if TUNING.KIDHAT_INSULATION then
+		inst:AddComponent("insulator")
+		inst.components.insulator:SetWinter()
+		inst.components.insulator:SetInsulation(TUNING.KIDHAT_INSULATION)
+	end
+
+	if TUNING.KIDHAT_WATERPROOFNESS then
+		inst:AddComponent("waterproofer")
+		inst.components.waterproofer:SetEffectiveness(TUNING.KIDHAT_WATERPROOFNESS)
 	end
 	
     return inst

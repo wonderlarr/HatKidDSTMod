@@ -476,10 +476,10 @@ configuration_options =
 	{
 		name = "kidhatwaterproofness",
 		label = "Water Resistance",
-		hover = "How much water resistance this hat provides while worn.",
+		hover = "How much water resistance the Kid's Hat provides while worn.",
 		options =
 		{
-			{description = "None", data = 0},
+			{description = "None", data = false},
 			{description = "20% (Default)", data = 0.2},
 			{description = "35%", data = 0.35},
 			{description = "50%", data = 0.5},
@@ -489,6 +489,23 @@ configuration_options =
 		},
 		default = 0.2,
 	},	
+
+	{
+		name = "kidhatinsulation",
+		label = "Freezing Resistance",
+		hover = "How much freezing resistance the Kid's Hat provides while worn.",
+		options =
+		{
+			{description = "None (Default)", data = false},
+			{description = "30", data = 30},
+			{description = "60", data = 60},
+			{description = "90", data = 90},
+			{description = "120", data = 120},
+			{description = "180", data = 180},
+			{description = "240", data = 240},
+		},
+		default = false,
+	},
 
 
 	-- {
@@ -539,7 +556,7 @@ configuration_options =
 	{
 		name = "sprinthatdurability",
 		label = "Durability",
-		hover = "How long the sprinthat lasts while sprinting. Durabiltiy only decreases while sprinting.",
+		hover = "How long the Sprint Hat lasts while sprinting. Durabiltiy only decreases while sprinting.",
 		options =
 		{
 			{description = "Forever (Default)", data = false},
@@ -564,6 +581,23 @@ configuration_options =
 	},
 
 	{
+		name = "sprinthatwaterproofness",
+		label = "Water Resistance",
+		hover = "How much water resistance the Sprint Hat provides while worn.",
+		options =
+		{
+			{description = "None (Default)", data = false},
+			{description = "20%", data = 0.2},
+			{description = "35%", data = 0.35},
+			{description = "50%", data = 0.5},
+			{description = "70%", data = 0.7},
+			{description = "90%", data = 0.9},
+			{description = "100%", data = 1},
+		},
+		default = false,
+	},	
+
+	{
 		name = "sprinthatinsulation",
 		label = "Overheat Resistance",
 		hover = "How much overheating resistance the Sprint Hat provides while worn.",
@@ -572,6 +606,7 @@ configuration_options =
 			{description = "None", data = false},
 			{description = "30", data = 30},
 			{description = "60 (Default)", data = 60},
+			{description = "90", data = 90},
 			{description = "120", data = 120},
 			{description = "180", data = 180},
 			{description = "240", data = 240},
@@ -706,6 +741,40 @@ configuration_options =
 			{description = "Infinite", data = false},
 		},
 		default = 40,
+	},
+
+	{
+		name = "brewwaterproofness",
+		label = "Water Resistance",
+		hover = "How much water resistance the Brewing Hat provides while worn.",
+		options =
+		{
+			{description = "None", data = false},
+			{description = "20% (Default)", data = 0.2},
+			{description = "35%", data = 0.35},
+			{description = "50%", data = 0.5},
+			{description = "70%", data = 0.7},
+			{description = "90%", data = 0.9},
+			{description = "100%", data = 1},
+		},
+		default = 0.2,
+	},	
+
+	{
+		name = "brewinsulation",
+		label = "Overheat Resistance",
+		hover = "How much overheating resistance the Brewing Hat provides while worn.",
+		options =
+		{
+			{description = "None", data = false},
+			{description = "30 (Default)", data = 30},
+			{description = "60", data = 60},
+			{description = "90", data = 90},
+			{description = "120", data = 120},
+			{description = "180", data = 180},
+			{description = "240", data = 240},
+		},
+		default = 30,
 	},
 	
 	{
@@ -895,6 +964,40 @@ configuration_options =
 		},
 		default = 20,
 	},
+
+	{
+		name = "polarwaterproofness",
+		label = "Water Resistance",
+		hover = "How much water resistance the Ice Hat provides while worn.",
+		options =
+		{
+			{description = "None (Default)", data = false},
+			{description = "20%", data = 0.2},
+			{description = "35%", data = 0.35},
+			{description = "50%", data = 0.5},
+			{description = "70%", data = 0.7},
+			{description = "90%", data = 0.9},
+			{description = "100%", data = 1},
+		},
+		default = false,
+	},	
+
+	{
+		name = "polarinsulation",
+		label = "Freezing Resistance",
+		hover = "How much freezing resistance the Ice Hat provides while worn.",
+		options =
+		{
+			{description = "None", data = false},
+			{description = "30", data = 30},
+			{description = "60", data = 60},
+			{description = "90", data = 90},
+			{description = "120 (Default)", data = 120},
+			{description = "180", data = 180},
+			{description = "240", data = 240},
+		},
+		default = 120,
+	},
 	
 	{
 		name = "polarcooldown",
@@ -1026,13 +1129,47 @@ configuration_options =
 	},
 
 	{
+		name = "dwellerwaterproofness",
+		label = "Water Resistance",
+		hover = "How much water resistance the Dweller's Mask provides while worn.",
+		options =
+		{
+			{description = "None (Default)", data = false},
+			{description = "20%", data = 0.2},
+			{description = "35%", data = 0.35},
+			{description = "50%", data = 0.5},
+			{description = "70%", data = 0.7},
+			{description = "90%", data = 0.9},
+			{description = "100%", data = 1},
+		},
+		default = false,
+	},	
+
+	{
+		name = "dwellerinsulation",
+		label = "Freezing Resistance",
+		hover = "How much freezing resistance the Dweller's Mask provides while worn.",
+		options =
+		{
+			{description = "None (Default)", data = false},
+			{description = "30", data = 30},
+			{description = "60", data = 60},
+			{description = "90", data = 90},
+			{description = "120", data = 120},
+			{description = "180", data = 180},
+			{description = "240", data = 240},
+		},
+		default = false,
+	},
+
+	{
 		name = "dwellerfuelvalue",
 		label = "Fuel Value",
 		hover = "How much Nightmare Fuel is worth once consumed.",
 		options =
 		{
-			{description = "30", data = 30},
-			{description = "60 (Default)", data = 60},
+			{description = "30 (Default)", data = 30},
+			{description = "60", data = 60},
 			{description = "120", data = 120},
 			{description = "180", data = 180},
 			{description = "240", data = 240},
@@ -1041,7 +1178,7 @@ configuration_options =
 			{description = "900", data = 900},
 			{description = "1800", data = 1800},
 		},
-		default = 60,
+		default = 30,
 	},
 	
 	{
@@ -1335,6 +1472,40 @@ configuration_options =
 			{description = "Forever", data = false},
 		},
 		default = 5 * 60,
+	},
+
+	{
+		name = "timestopwaterproofness",
+		label = "Water Resistance",
+		hover = "How much water resistance the Time Stop hat provides while worn.",
+		options =
+		{
+			{description = "None (Default)", data = false},
+			{description = "20%", data = 0.2},
+			{description = "35%", data = 0.35},
+			{description = "50%", data = 0.5},
+			{description = "70%", data = 0.7},
+			{description = "90%", data = 0.9},
+			{description = "100%", data = 1},
+		},
+		default = false,
+	},	
+
+	{
+		name = "timestopinsulation",
+		label = "Freezing Resistance",
+		hover = "How much freezing resistance the Time Stop Hat provides while worn.",
+		options =
+		{
+			{description = "None", data = false},
+			{description = "30", data = 30},
+			{description = "60 (Default)", data = 60},
+			{description = "90", data = 90},
+			{description = "120", data = 120},
+			{description = "180", data = 180},
+			{description = "240", data = 240},
+		},
+		default = 60,
 	},
 	
 	{

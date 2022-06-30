@@ -203,10 +203,6 @@ local function fn(Sim)
  
     inst:AddComponent("inspectable")
 	
-	inst:AddComponent("insulator")
-    inst.components.insulator:SetSummer()
-    inst.components.insulator:SetInsulation(TUNING.SPRINTHAT_INSULATION)
-	
     inst:AddComponent("inventoryitem")
 	 
     inst:AddComponent("equippable")
@@ -221,6 +217,17 @@ local function fn(Sim)
 		inst.components.fueled.fueltype = FUELTYPE.USAGE
 		inst.components.fueled:InitializeFuelLevel( TUNING.SPRINTHAT_DURABILITY ) -- 90 minutes by default
 		inst.components.fueled:SetDepletedFn(OnEmpty)
+	end
+
+	if TUNING.SPRINTHAT_WATERPROOFNESS then
+		inst:AddComponent("waterproofer")
+		inst.components.waterproofer:SetEffectiveness(TUNING.KIDHAT_WATERPROOFNESS)
+	end
+
+	if TUNING.SPRINTHAT_INSULATION then
+		inst:AddComponent("insulator")
+		inst.components.insulator:SetSummer()
+		inst.components.insulator:SetInsulation(TUNING.SPRINTHAT_INSULATION)
 	end
 
     return inst

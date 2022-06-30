@@ -33,13 +33,13 @@ AddCharacterRecipe("hatbrella",
 
 AddCharacterRecipe("kidhat",
 	{ -- ingredients
-	Ingredient("beefalowool", 4),
+	Ingredient("beefalowool", 3),
 	Ingredient("goldnugget", 1),
 	},
 	TECH.SCIENCE_ONE, -- tech level
 	{ -- config
 		builder_tag = "hatkid"
-	}, 
+	},
 	{ -- crafting filters
 		"MODS",
 		"CLOTHING"
@@ -50,7 +50,7 @@ AddCharacterRecipe("kidhat",
 AddCharacterRecipe("sprinthat",
 	{ -- ingredients
 	Ingredient("silk", 1),	
-	Ingredient("beefalowool", 4),
+	Ingredient("beefalowool", 3),
 	Ingredient("feather_robin", 2),
 	},
 	TECH.SCIENCE_TWO, -- tech level

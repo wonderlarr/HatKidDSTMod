@@ -207,9 +207,6 @@ local function fn()
  
     inst:AddComponent("inspectable")
 	
-	-- inst:AddComponent("waterproofer")
-    -- inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_SMALL)
-	
 	inst:AddComponent("insulator")
     inst.components.insulator:SetSummer()
     inst.components.insulator:SetInsulation(TUNING.INSULATION_SMALL)
@@ -230,6 +227,17 @@ local function fn()
 		inst.components.fueled.fueltype = FUELTYPE.MAGIC
 		inst.components.fueled:InitializeFuelLevel( TUNING.TIMESTOPHAT_DURABILITY ) -- add tuning 300
 		inst.components.fueled:SetDepletedFn(OnEmpty)
+	end
+
+	if TUNING.TIMESTOPHAT_INSULATION then
+		inst:AddComponent("insulator")
+		inst.components.insulator:SetWinter()
+		inst.components.insulator:SetInsulation(TUNING.TIMESTOPHAT_INSULATION)
+	end
+
+	if TUNING.TIMESTOPHAT_WATERPROOFNESS then
+		inst:AddComponent("waterproofer")
+		inst.components.waterproofer:SetEffectiveness(TUNING.TIMESTOPHAT_WATERPROOFNESS)
 	end
 	
 	inst:ListenForEvent("AbilityKey", KeybindUse)

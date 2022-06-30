@@ -134,9 +134,6 @@ local function fn(Sim)
 	MakeHauntableLaunch(inst)
  
     inst:AddComponent("inspectable")
-    
-	inst:AddComponent("waterproofer")
-    inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_SMALL) 
 	
     inst:AddComponent("inventoryitem")
 	
@@ -145,16 +142,11 @@ local function fn(Sim)
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
-
-	inst:AddComponent("insulator")
-    inst.components.insulator:SetSummer() 
-    inst.components.insulator:SetInsulation(TUNING.INSULATION_SMALL)
 	
 	inst:AddComponent("rechargeable")
 	
 	inst:AddComponent("useableitem")
     inst.components.useableitem:SetOnUseFn(OnUse)
-    -- inst.components.useableitem:SetOnStopUseFn(OnStopUse)
 
 	if TUNING.BREWINGHAT_DURABILITY then
 		inst:AddComponent("fueled")
@@ -164,6 +156,17 @@ local function fn(Sim)
 		inst.components.fueled.bonusmult = 2 / 45
 		-- if this needs to be fixed, perhaps add a math.ceil check to OnTick in the auto-fuel slots section.
 		inst.components.fueled.accepting = true
+	end
+
+	if TUNING.BREWINGHAT_INSULATION then
+		inst:AddComponent("insulator")
+		inst.components.insulator:SetSummer() 
+		inst.components.insulator:SetInsulation(TUNING.BREWINGHAT_INSULATION)
+	end
+
+	if TUNING.BREWINGHAT_WATERPROOFNESS then
+		inst:AddComponent("waterproofer")
+		inst.components.waterproofer:SetEffectiveness(TUNING.BREWINGHAT_WATERPROOFNESS) 
 	end
 	
 	inst:ListenForEvent("AbilityKey", KeybindUse)

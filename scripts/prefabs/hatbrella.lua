@@ -14,7 +14,7 @@ RegisterInventoryItemAtlas("images/inventoryimages/hatbrella.xml", "hatbrella.te
 
 
 local function OnEquip(inst, owner)
-	owner.AnimState:OverrideSymbol("swap_object", inst.prefab, "swap_object")
+	owner.AnimState:OverrideSymbol("swap_object", "hatbrella", "swap_object")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
 end
@@ -41,7 +41,7 @@ local function OnUse(inst)
 end
 
 local function OnEmpty(inst)
-    inst.components.inventoryitem:GetGrandOwner().SoundEmitter:PlaySound("dontstarve/wilson/use_break")
+    inst.components.inventoryitem:GetGrandOwner():PushEvent("toolbroke")
     
     inst:DoTaskInTime(0, inst.Remove)
 end

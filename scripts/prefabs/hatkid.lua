@@ -17,19 +17,14 @@ local start_inv = { "kidhat" }
 -- 	end
 -- end
 
--- When the character is revived
+-- On revive
 local function onbecamehuman(inst)
 	inst.components.locomotor:SetExternalSpeedMultiplier(inst, "hatkid_speed_config", TUNING.HATKIDSPEED)
-
-	-- inst.AnimState:SetScale(TUNING.HATKIDSIZE, TUNING.HATKIDSIZE) 
 end
 
--- when he died
+-- On death
 local function onbecameghost(inst)
 	inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "hatkid_speed_config")
-	
-	-- HACK, overriding size manually on death so the ghost isn't unreasonably tiny. This won't look right if the player has the character size turned up higher than normal.
-	-- inst.AnimState:SetScale(1, 1) 
 end
 
 local function OnPotionThrow(inst)
@@ -223,7 +218,7 @@ end
 
 -- Server only, most components go here.
 local master_postinit = function(inst, data)
-	-- If anything below is hard coded 	 and not configurable, I did my job wrong. Please yell at me if that's the case.
+	-- If anything below is hard coded and not configurable, I did my job wrong. Please yell at me if that's the case.
 
 	-- Health
 	inst.components.health:SetMaxHealth(TUNING.HATKID_HEALTH)

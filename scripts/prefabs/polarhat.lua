@@ -199,8 +199,7 @@ local function fn(Sim)
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
 	
-	inst:AddComponent("insulator")
-	inst.components.insulator:SetInsulation(TUNING.INSULATION_MED)
+
 	
 	inst:AddComponent("rechargeable")
 
@@ -211,6 +210,17 @@ local function fn(Sim)
 		-- inst.components.fueled:SetDepletedFn(OnEmpty)
 		inst.components.fueled.bonusmult = 0.0222222222222 -- 2 / 90, floating point weird, fueled doesnt care
 		inst.components.fueled.accepting = true
+	end
+
+	if TUNING.POLARHAT_INSULATION then 
+		inst:AddComponent("insulator")
+		inst.components.insulator:SetWinter()
+		inst.components.insulator:SetInsulation(TUNING.POLARHAT_INSULATION)
+	end
+
+	if TUNING.POLARHAT_WATERPROOFNESS then
+		inst:AddComponent("waterproofer")
+		inst.components.waterproofer:SetEffectiveness(TUNING.POLARHAT_WATERPROOFNESS) 
 	end
 
 	inst:ListenForEvent("AbilityKey", KeybindUse)
