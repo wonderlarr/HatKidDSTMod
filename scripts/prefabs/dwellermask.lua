@@ -289,7 +289,7 @@ local function OnUnequip(inst, owner)
 	if owner:HasTag("player") then
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Hide("HEAD_HAT")
-	end
+	end	
 end
 
 local function OnLightDirty(inst)

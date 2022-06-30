@@ -129,9 +129,11 @@ Assets = {
     Asset( "ATLAS", "bigportraits/hatkid_timestop.xml" ),
 }
 
+
 -- Import modmain segments
 modimport("modmain_tuning.lua")
 modimport("modmain_crafting.lua")
+modimport("modmain_state.lua")
 
 -- If meme language is enabled, we'll use our own meme strings, otherwise load the normal ones.
 if GLOBAL.KnownModIndex:IsModEnabled("workshop-1289272965") then

@@ -73,6 +73,28 @@ local function OnLoad(inst, data)
     end
 end
 
+local function GetPointSpecialActions(inst, pos, useitem, right)
+    if right and useitem == nil then
+        local rider = inst.replica.rider
+        if rider == nil or not rider:IsRiding() then
+			print("getpoint")
+            return { ACTIONS.HATJUMP }
+        end
+    end
+    return {}
+end
+
+local function OnSetOwner(inst)
+    if inst.components.playeractionpicker ~= nil then
+        inst.components.playeractionpicker.pointspecialactionsfn = GetPointSpecialActions
+    end
+end
+
+local function DoHatJump(inst, data)
+	print("dohatjump")
+	inst.components.locomotor:StartHopping(data.pos.x, data.pos.y)
+end
+
 -- Server and client
 -- Thanks Kzisor/Ysovuka for the Key Handling code.
 -- Key Handling info https://forums.kleientertainment.com/forums/topic/63754-tutorial-character-transformation/
@@ -86,6 +108,8 @@ local CommonPostInit = function(inst)
 
 	-- 50% chance of quote on potion explode
 	inst:ListenForEvent("PotionThrown", OnPotionThrow)
+
+    inst:ListenForEvent("setowner", OnSetOwner)
 end
 
 -- Server only, most components go here.
@@ -129,6 +153,8 @@ local MasterPostInit = function(inst, data)
 	-- Listeners/Generics
     inst.OnNewSpawn = OnNewSpawn
 	inst.OnLoad = OnLoad
+
+	inst:ListenForEvent("hatjump", DoHatJump)
 end
 
 return MakePlayerCharacter("hatkid", prefabs, assets, CommonPostInit, MasterPostInit, startInv)
