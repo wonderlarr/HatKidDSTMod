@@ -13,8 +13,8 @@ return {
         },
 		SHAVE =
 		{
-			AWAKEBEEFALO = "I'm not going to try that while he's awake.",
-			GENERIC = "I can't shave that!",
+			AWAKEBEEFALO = "That would be crazy!",
+			GENERIC = "That would be weird.",
 			NOBITS = "That would be like me shaving myself!",
 		},
 		STORE =
@@ -37,7 +37,7 @@ return {
         COOK =
         {
             GENERIC = "I'll punish the food later.",
-            INUSE = "Someone is punishing food already.",
+            INUSE = "I hope it's tasty.",
             TOOFAR = "It's a little far.",
         },
         GIVE =
@@ -178,7 +178,7 @@ return {
 	ANNOUNCE_ENTER_DARK = "A little too spooky for me.",
 	ANNOUNCE_ENTER_LIGHT = "I can see again!",
 	ANNOUNCE_FREEDOM = "Yay! I'm free!",
-	ANNOUNCE_HIGHRESEARCH = "I feel so wise!",
+	ANNOUNCE_HIGHRESEARCH = "I feel so smart!",
 	ANNOUNCE_HOUNDS = "Did you hear that?",
 	ANNOUNCE_WORMS = "Did you feel that?",
 	ANNOUNCE_HUNGRY = "I'm really hungry!",

@@ -55,7 +55,7 @@ local function OnUse(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 	
 	if not inst.components.rechargeable:IsCharged()
-	or inst.components.fueled.currentfuel < 1 then
+	or inst.components.fueled.currentfuel < 90 then
 		-- If in cooldown
 		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
 			inst.components.useableitem:StopUsingItem()
@@ -66,7 +66,7 @@ local function OnUse(inst)
 	else
 		-- If not in cooldown
 		if inst.components.fueled then
-			inst.components.fueled:DoDelta(-1, owner)
+			inst.components.fueled:DoDelta(-1 * 90, owner)
 		end
 
 		-- Cooldown
@@ -205,10 +205,10 @@ local function fn(Sim)
 
 	if TUNING.POLARHAT_DURABILITY then
 		inst:AddComponent("fueled")
-		inst.components.fueled:InitializeFuelLevel( 10 ) -- add tuning
+		inst.components.fueled:InitializeFuelLevel( 6 * 90 ) -- add tuning
 		inst.components.fueled.fueltype = FUELTYPE.CHEMICAL --nitre
 		-- inst.components.fueled:SetDepletedFn(OnEmpty)
-		inst.components.fueled.bonusmult = 0.0222222222222 -- 2 / 90, floating point weird, fueled doesnt care
+		-- inst.components.fueled.bonusmult = 0.023 -- 2 / 90, floating point weirdness
 		inst.components.fueled.accepting = true
 	end
 

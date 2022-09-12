@@ -224,9 +224,11 @@ local function fn()
 
 	if TUNING.TIMESTOPHAT_DURABILITY then
 		inst:AddComponent("fueled")
-		inst.components.fueled.fueltype = FUELTYPE.MAGIC
+		inst.components.fueled.fueltype = FUELTYPE.NIGHTMARE
 		inst.components.fueled:InitializeFuelLevel( TUNING.TIMESTOPHAT_DURABILITY ) -- add tuning 300
 		inst.components.fueled:SetDepletedFn(OnEmpty)
+		inst.components.fueled.bonusmult = 30 / 180
+		inst.components.fueled.accepting = true
 	end
 
 	if TUNING.TIMESTOPHAT_INSULATION then

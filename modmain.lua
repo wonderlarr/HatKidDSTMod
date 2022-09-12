@@ -369,7 +369,7 @@ if TUNING.BREWINGHAT_DURABILITY then
 				local currentfuel = inst.components.fueled.currentfuel
 				local maxfuel = inst.components.fueled.maxfuel
 
-				if (maxfuel - currentfuel) > fueltogive then
+				if (maxfuel - currentfuel) >= fueltogive then
 					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
 					inst.components.fueled:TakeFuelItem(fuelitem, owner)
 				end
@@ -446,7 +446,7 @@ if TUNING.POLARHAT_DURABILITY then
 				local currentfuel = inst.components.fueled.currentfuel
 				local maxfuel = inst.components.fueled.maxfuel
 
-				if (maxfuel - currentfuel) > fueltogive then
+				if (maxfuel - currentfuel) >= fueltogive then
 					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
 					inst.components.fueled:TakeFuelItem(fuelitem, owner)
 				end
@@ -523,7 +523,7 @@ if TUNING.DWELLERMASK_DURABILITY then
 				local currentfuel = inst.components.fueled.currentfuel
 				local maxfuel = inst.components.fueled.maxfuel
 
-				if (maxfuel - currentfuel) > fueltogive then
+				if (maxfuel - currentfuel) >= fueltogive then
 					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
 					inst.components.fueled:TakeFuelItem(fuelitem, owner)
 				end
@@ -600,7 +600,7 @@ if TUNING.TIMESTOPHAT_DURABILITY then
 				local currentfuel = inst.components.fueled.currentfuel
 				local maxfuel = inst.components.fueled.maxfuel
 
-				if (maxfuel - currentfuel) > fueltogive then
+				if (maxfuel - currentfuel) >= fueltogive then
 					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
 					inst.components.fueled:TakeFuelItem(fuelitem, owner)
 				end

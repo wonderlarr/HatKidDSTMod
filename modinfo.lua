@@ -1,7 +1,7 @@
 name = "Hat Kid Unlisted Internal"
 description = "This mod really is the mod of all time!"
 author = "Skylarr 󰀏" -- Unknown character is a torch emoji
-version = "0.20.1" -- major version . feature update . 
+version = "0.20.1" -- major version . feature update . minor update/bugfix
 
 forumthread = ""
 
@@ -24,13 +24,13 @@ server_filter_tags = {
 	"cute",
 }
 
--- mod_dependencies = 
--- {
---     {
---          workshop = "workshop-2570815741",
---         ["[API] Time Control"] = true
---     }
--- }
+mod_dependencies = 
+{
+    {
+         workshop = "workshop-2570815741",
+        ["[API] Time Control"] = true
+    }
+}
 
 local null_options = {
 	{ description = "", data = 0 }
@@ -861,8 +861,8 @@ configuration_options =
 			{description = "-60%", data = 0.4},
 			{description = "-50%", data = 0.5},
 			{description = "-40%", data = 0.6},
-			{description = "-30%", data = 0.7},
-			{description = "-25% (Default)", data = 0.75},
+			{description = "-30% (Default)", data = 0.7},
+			{description = "-25%", data = 0.75},
 			{description = "-20%", data = 0.8},
 			{description = "-10%", data = 0.9},
 			{description = "No effect", data = 1},
@@ -877,7 +877,7 @@ configuration_options =
 			{description = "+90%", data = 1.9},
 			{description = "+100%", data = 2},
 		},
-		default = 0.75,
+		default = 0.7,
 	},
 	
 	{
@@ -894,9 +894,10 @@ configuration_options =
 			{description = "46", data = 46},
 			{description = "51", data = 51},
 			{description = "63", data = 63},
+			{description = "68 (Default)", data = 68},
 			{description = "72", data = 72},
 			{description = "80", data = 80},
-			{description = "89 (Default)", data = 89},
+			{description = "89", data = 89},
 			{description = "100", data = 100},
 			{description = "200", data = 200},
 			{description = "500", data = 500},

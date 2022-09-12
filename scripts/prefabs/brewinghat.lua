@@ -71,7 +71,7 @@ local function OnUse(inst)
 	
 	if not inst.components.rechargeable:IsCharged()  -- if we aren't charged yet
 	or owner.components.sanity.current < TUNING.BREWINGHAT_THRESHHOLD  -- or we don't have enough sanity
-	or inst.components.fueled:GetPercent() < 0.125 -- or we don't have enough fuel
+	or inst.components.fueled:GetPercent() < 0.25 -- or we don't have enough fuel
 	or (hands and string.match(hands.prefab, "kidpotion")) then -- or we are already holding a potion
 	
 		-- If in cooldown
@@ -94,8 +94,8 @@ local function OnUse(inst)
 		owner.components.inventory:Equip(kidpotion)
 
 		-- Hat Stuff
-		inst.components.rechargeable:Discharge(TUNING.BREWINGHAT_CHARGETIME) -- Cooldown
-		inst.components.fueled:DoDelta(-1)
+		inst.components.rechargeable:Discharge(TUNING.BREWINGHAT_COOLDOWN) -- Cooldown
+		inst.components.fueled:DoDelta(-1 * 45)
 
 		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
 			inst.components.useableitem:StopUsingItem()
@@ -150,10 +150,9 @@ local function fn(Sim)
 
 	if TUNING.BREWINGHAT_DURABILITY then
 		inst:AddComponent("fueled")
-		inst.components.fueled:InitializeFuelLevel( 4 ) -- add tuning
+		inst.components.fueled:InitializeFuelLevel( 4 * 45 ) -- add tuning
 		inst.components.fueled.fueltype = FUELTYPE.CAVE
-		-- inst.components.fueled.secondaryfueltype = FUELTYPE.NIGHTMARE
-		inst.components.fueled.bonusmult = 2 / 45
+		inst.components.fueled.bonusmult = 2
 		-- if this needs to be fixed, perhaps add a math.ceil check to OnTick in the auto-fuel slots section.
 		inst.components.fueled.accepting = true
 	end
