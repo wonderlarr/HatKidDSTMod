@@ -18,9 +18,9 @@ STRINGS.CHARACTERS.HATKID = require "speech_hatkid" -- speech file
 -- The character select screen lines
 STRINGS.CHARACTER_TITLES.hatkid = "The Illiterate"
 STRINGS.CHARACTER_NAMES.hatkid = "Smug Kid"
-STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Smug\n*Will take your cane\n*Absolute insanity\n*"
-STRINGS.CHARACTER_QUOTES.hatkid = "\"*Smug Dance*\""
-STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Child"
+STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Smug\n*Will take your cane\n*Pipe Bomb\n*Greeeeeen"
+STRINGS.CHARACTER_QUOTES.hatkid = "\"Check your mailbox.\""
+STRINGS.CHARACTER_SURVIVABILITY.hatkid = "no lol"
 
 --Skin STRINGS
 STRINGS.SKIN_NAMES.hatkid_none = "The Kid"
@@ -29,35 +29,35 @@ STRINGS.SKIN_DESCRIPTIONS.hatkid_none = "Oh my god it's the one cute character f
 
 --Outfits
 	STRINGS.SKIN_NAMES.ms_hatkid_cat = "The Anime"
-	STRINGS.SKIN_QUOTES.ms_hatkid_cat = "\"FBI OPEN UP!\""
-	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_cat = "Oh my."
+	STRINGS.SKIN_QUOTES.ms_hatkid_cat = "\"I'm better than the toothpaste\""
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_cat = "My god, what are you doing?"
 
 	STRINGS.SKIN_NAMES.ms_hatkid_detective = "The False Detective"
 	STRINGS.SKIN_QUOTES.ms_hatkid_detective = "\"MYURDER?\""
-	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_detective = "Apparently you CAN just miss all the evidence on accident. Trust me, I watched someone do it."
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_detective = "Apparently you CAN just miss all the evidence on accident."
 
 --Dyes
-	STRINGS.SKIN_NAMES.ms_hatkid_dye_bowkid = "The Other One" --Bow Kid
+	STRINGS.SKIN_NAMES.ms_hatkid_dye_bowkid = "BFF Without Benefits" --Bow Kid
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_bowkid = STRINGS.CHARACTER_QUOTES.hatkid
-	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_bowkid = "The other child is rapidly approaching your location."
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_bowkid = "https://www.youtube.com/watch?v=ERTNqL4zMl8"
 
 	STRINGS.SKIN_NAMES.ms_hatkid_dye_groovy = "Nobody Knows" --Wargroove
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_groovy = STRINGS.CHARACTER_QUOTES.hatkid
 	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_groovy = ""
 
-	STRINGS.SKIN_NAMES.ms_hatkid_dye_lunar = "1) wait for it to rain" --Hilda
-	STRINGS.SKIN_QUOTES.ms_hatkid_dye_lunar = "3) fly"
-	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_lunar = "2) cover yourself in oil"
+	STRINGS.SKIN_NAMES.ms_hatkid_dye_lunar = "Hilda (TV series)" --Hilda
+	STRINGS.SKIN_QUOTES.ms_hatkid_dye_lunar = STRINGS.CHARACTER_QUOTES.hatkid
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_lunar = "Hilda is an animated streaming television series based on the graphic novel series of the same name by Luke Pearson. Produced by Silvergate Media and Mercury Filmworks, the series follows the adventures of fearless Hilda, an 11-year-old blue-haired girl who, along with her deerfox Twig, moves to the city of Trolberg, where she befriends even the most dangerous monsters. The series debuted on September 21, 2018, as a Netflix miniseries to critical acclaim. Due to the positive response, the series was renewed for a second season on October 8, 2018. The world premiere of the first two episodes was at the New York International Children's Film Festival on February 25, 2018. The second season was released on December 14, 2020, and a film titled Hilda and the Mountain King premiered on Netflix on December 30, 2021."
 
-	STRINGS.SKIN_NAMES.ms_hatkid_dye_niko = "The Cat" --Oneshot
+	STRINGS.SKIN_NAMES.ms_hatkid_dye_niko = "Barrett M99 'OneShot' Sniper Rifle" --Oneshot
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_niko = STRINGS.CHARACTER_QUOTES.hatkid
-	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_niko = "I would like to hug the cat. Please and thank you."
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_niko = "Like the name suggests, it only has OneShot." -- https://steamcommunity.com/sharedfiles/filedetails/?id=1255304792
 
 	STRINGS.SKIN_NAMES.ms_hatkid_dye_pinkdanger = "Lightish Red" -- Extremely Pink
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_pinkdanger = STRINGS.CHARACTER_QUOTES.hatkid
 	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_pinkdanger = "Look at it, it's not pink. It's like, uh.. a lightish red."
 
-	STRINGS.SKIN_NAMES.ms_hatkid_dye_sans = "Sans" --Sans
+	STRINGS.SKIN_NAMES.ms_hatkid_dye_sans = "Him" --Sans
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_sans = STRINGS.CHARACTER_QUOTES.hatkid
 	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_sans = "You feel your Wagstaff's crawling on your back."
 

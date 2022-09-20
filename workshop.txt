@@ -1,0 +1,76 @@
+Hat Kid
+150 Health
+120 Sanity
+120 Hunger
+Smaller than some other survivors.
+Loves cookies.
+Mentally vulnerable while hatless.
+Gains and loses sanity 10% faster.
+Starts with a Kid's Hat.
+
+Blue Umbrella
+Diplomacy didn't work, time for action.
+Activate to open or close. Functions as a weapon while closed, dealing 42.5 damage per hit, or as an umbrella while open, functioning identically to a normal umbrella.
+
+
+Kid's Hat
+Your pride and joy. 
+Provides a medium sanity bonus, while being extremely cheap to craft. 
+
+
+Sprint Hat
+This hat looks ready to sprint! 
+Grants +30% movement speed, at the cost of increased hunger drain while moving.
+
+
+Brewing Hat
+Cook up mad concoctions! 
+Activate to begin brewing a Mad Concoction. Once ready, it can be thrown, dealing 89 damage in a small area, as well as dealing damage to structures and the environment.
+Can be refueled using Slurtle Slime or Gunpowder.
+
+
+Ice Hat
+It's so cold! 
+Activate to become a block of ice. After a brief period of invincibility, slam into the ground, freezing nearby enemies for the equivelant of 2 Ice Staff hits.
+Can be refueled using Ice.
+
+
+Dweller's Mask
+See the world through a Dweller's eyes! 
+Activate to emit a bright green aura. While inside this aura, mortal damage will be redirected to your max health at a 4:1 ratio, and you gain Night Vision. 
+Players can be revived by deactivating the hat while a dead player is within it's radius. This requires and consumes a bit of fuel.
+Can be refueled using Nightmare Fuel.
+
+
+Time Stop Hat
+Death is inevitable. Your time is valuable.
+Activate to slow nearby non-players to 50% speed for up to 15 seconds.
+Can be refueled using Nightmare Fuel.
+
+
+Info page
+
+[h1]Hat Kid[/h1]
+[b]The Homesick Hatter[/b]
+Hat Kid is a young little adventurer, knitting powerful hats, and doing whatever she needs to in the quest to get home.
+
+[b]Perks & Quirks[/b]
+*Knits her own hats, likes knitting any hat
+*Has a sensitive mind, especially without a hat
+*Experienced in death
+*Misses home
+
+[b]Quote[/b]
+"Oh, hi there!"
+
+[b]Birthday[/b]
+October 5th (supposedly)
+
+[b]Favorite Food[/b]
+Honey Nuggets
+
+[b]One Last Contract[/b]
+Hat Kid always had her eye on home from the beginning. The huge adventure she'd just been on was more of a detour than anything to her, although it was quite necessary to make her way home. When a familiar friend presented an offer to accelerate that journey home, for just one last contract, she found the offer irresistable. Perhaps it was the strange ragtime music playing, or perhaps her reckless nature that lead her to ignore the fine print. Either way, the contract had been signed, beginning her second adventure, much different from her first.
+
+
+

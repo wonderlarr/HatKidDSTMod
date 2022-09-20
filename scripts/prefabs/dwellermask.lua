@@ -89,7 +89,7 @@ local function DwellerAbility(inst)
 		local nags = nil
 		local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, nil)
 		for _,ent in ipairs(targets) do
-			print("I am " .. ent.prefab)
+			-- print("I am " .. ent.prefab) -- I accidentally almost left this uncommented for the full release, oops!
 			if ent.components.playervision then
 			
 				if not ent:HasTag("dwelling") then
@@ -382,7 +382,9 @@ local function fn(Sim)
     inst:AddComponent("inventoryitem")
 	 
     inst:AddComponent("equippable")
-	inst.components.equippable.restrictedtag = "hatkid"
+	if TUNING.ITEMRESTRICTIONS then
+		inst.components.equippable.restrictedtag = "hatkid"
+	end
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
@@ -398,7 +400,6 @@ local function fn(Sim)
 		inst.components.fueled:SetDepletedFn(OnEmpty)
 		-- inst.components.fueled.rate_modifiers:SetModifier(inst, 2, "base") -- Hard coding this value, configing shouldn't be needed
 		inst.components.fueled.bonusmult = TUNING.DWELLERMASK_VALUE / 180
-		inst.components.fueled.accepting = true
 	end
 
 	if TUNING.DWELLERMASK_INSULATION then

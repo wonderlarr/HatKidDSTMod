@@ -84,7 +84,9 @@ local function fn()
     -- inst.components.inventoryitem.atlasname = "images/inventoryimages/hatbrella.xml"
 	
     inst:AddComponent("equippable")
-    -- inst.components.equippable.restrictedtag = "hatkid"
+	if TUNING.ITEMRESTRICTIONS then
+		inst.components.equippable.restrictedtag = "hatkid"
+	end
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
 
@@ -102,19 +104,6 @@ local function fn()
 	
     return inst
 end
-
-local function fn_bowkid()
-	local inst = fn()
-
-	inst.AnimState:SetBuild("hatbrella_bowkid_ground")
-    RegisterInventoryItemAtlas("images/inventoryimages/hatbrella_bowkid.xml","hatbrella_bowkid.tex")
-
-    inst.handname = "hatbrella_bowkid"
-
-	return inst
-
-end
-
 
 return  Prefab("hatbrella", fn, assets)
 -- CreateModPrefabSkin("hatbrella_bowkid",

@@ -40,12 +40,14 @@ end
 local function OnEquip(inst, data) -- Remove hat sanity modifer when wearing a hat
     if data.eslot == EQUIPSLOTS.HEAD then
 		inst.components.sanity.neg_aura_modifiers:RemoveModifier(inst, "hat_sanity_vuln")
+		inst.components.sanity.night_drain_mult = TUNING.HATKIDNIGHTDRAIN
 	end
 end
 
 local function OnUnequip(inst, data) -- Add a sanity modifier if the head slot is unequipped
     if data.eslot == EQUIPSLOTS.HEAD then
-		inst.components.sanity.neg_aura_modifiers:SetModifier(inst, TUNING.HATKIDSANITYDRAIN, "hat_sanity_vuln")
+		inst.components.sanity.neg_aura_modifiers:SetModifier(inst, TUNING.HATKIDNOHATPENALTY, "hat_sanity_vuln")
+		inst.components.sanity.night_drain_mult = TUNING.HATKIDNIGHTDRAIN * TUNING.HATKIDNOHATPENALTY
     end
 end
 
@@ -80,6 +82,7 @@ local CommonPostInit = function(inst)
 	inst.MiniMapEntity:SetIcon( "hatkid.tex" )
 	inst:AddTag("hatkidcrafter")
 	inst:AddTag("hatkid")
+	inst:AddTag("hatter")
 	
 	inst:AddComponent("keyhandler")
     inst.components.keyhandler:AddActionListener("HatKidRPC", TUNING["HATKID"].KEY, "AbilityKeyDown", "KEYDOWN")
@@ -113,7 +116,7 @@ local MasterPostInit = function(inst, data)
 	inst.components.locomotor:SetExternalSpeedMultiplier(inst, "hatkid_speed_config", TUNING.HATKIDSPEED)
 
 	-- Flavor/Misc
-	inst.components.foodaffinity:AddPrefabAffinity("pumpkincookie", TUNING.AFFINITY_15_CALORIES_LARGE) -- Favorite food
+	inst.components.foodaffinity:AddPrefabAffinity("honeynuggets", TUNING.AFFINITY_15_CALORIES_LARGE) -- Favorite food
 	inst.AnimState:SetScale(TUNING.HATKIDSIZE, TUNING.HATKIDSIZE) -- Character size
 
 	-- Voice
@@ -126,7 +129,6 @@ local MasterPostInit = function(inst, data)
 		inst.soundsname = TUNING.HATKIDVOICE
 	end
 
-	-- Listeners/Generics
     inst.OnNewSpawn = OnNewSpawn
 	inst.OnLoad = OnLoad
 end

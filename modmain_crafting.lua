@@ -9,13 +9,16 @@
                                                   |___/
 ]]
 
+-- Hi there, you seem to have stumbled upon my crafting section. I actually used this file to develop the guide I wrote here https://forums.kleientertainment.com/forums/topic/140881-documentation-new-recipe-system-functions-other-info/
+-- as you may be able to tell by the commments. Regardless, welcome, take a seat, stay a while, have a cookie, dunk it in some medium-roast black coffee, etc etc.
+
 local Ingredient = GLOBAL.Ingredient
 local TECH = GLOBAL.TECH
 
 AddCharacterRecipe("hatbrella",
-	{ -- ingredients. Formatted identically to the old AddRecipe()	
-		GLOBAL.Ingredient("twigs", 2),
-		GLOBAL.Ingredient("pigskin", 1),
+	{ -- ingredients. Formatted identically to the old AddRecipe()
+		GLOBAL.Ingredient("twigs", 3),
+		GLOBAL.Ingredient("beefalowool", 2),
 		GLOBAL.Ingredient("goldnugget", 1),
 	},
 	GLOBAL.TECH.SCIENCE_ONE, -- crafting station. Refer to other recipes in recipes.lua for other stations.
@@ -33,8 +36,8 @@ AddCharacterRecipe("hatbrella",
 
 AddCharacterRecipe("kidhat",
 	{ -- ingredients
-	Ingredient("beefalowool", 3),
-	Ingredient("goldnugget", 1),
+		Ingredient("silk", 2),
+		Ingredient("goldnugget", 1),
 	},
 	TECH.SCIENCE_ONE, -- tech level
 	{ -- config
@@ -49,9 +52,8 @@ AddCharacterRecipe("kidhat",
 
 AddCharacterRecipe("sprinthat",
 	{ -- ingredients
-	Ingredient("silk", 1),	
-	Ingredient("beefalowool", 3),
-	Ingredient("feather_robin", 2),
+		Ingredient("silk", 2),
+		Ingredient("feather_robin", 2),
 	},
 	TECH.SCIENCE_TWO, -- tech level
 	{ -- config
@@ -66,7 +68,7 @@ AddCharacterRecipe("sprinthat",
 
 AddCharacterRecipe("brewinghat",
 	{ -- ingredients
-		Ingredient("silk", 3),
+		Ingredient("silk", 4),
 		Ingredient("slurtleslime", 2),
 		Ingredient("purplegem", 1),
 	},
@@ -85,7 +87,7 @@ AddCharacterRecipe("brewinghat",
 AddCharacterRecipe("polarhat",
 	{ -- ingredients
 		Ingredient("winterhat", 1),
-		Ingredient("ice", 2),
+		Ingredient("ice", 10),
 		Ingredient("bluegem", 1),
 	},
 	TECH.MAGIC_TWO, -- tech level
@@ -102,7 +104,7 @@ AddCharacterRecipe("polarhat",
 
 AddCharacterRecipe("dwellermask",
 	{ -- ingredients
-		Ingredient("nightmarefuel", 4),
+		Ingredient("nightmarefuel", 6),
 		Ingredient("thulecite", 2),
 		Ingredient("greengem", 1)
 	},
@@ -119,9 +121,10 @@ AddCharacterRecipe("dwellermask",
 
 AddCharacterRecipe("timestophat",
 	{ -- ingredients
-		Ingredient("silk", 4),	
-		Ingredient("moonglass", 3),
-		Ingredient("greengem", 1),
+		Ingredient("ruinshat", 1),
+		Ingredient("moonglass", 9),
+		Ingredient("silk", 16),	
+		Ingredient("greengem", 1)
 	},
 	TECH.MOON_ALTAR_TWO, -- tech level
 	{ -- config

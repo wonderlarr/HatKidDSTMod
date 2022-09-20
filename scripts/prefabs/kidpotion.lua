@@ -84,7 +84,9 @@ local function kidpotion_fn()
 	inst.components.inventoryitem.cangoincontainer = false
 	
     inst:AddComponent("equippable")
-    inst.components.equippable.restrictedtag = "hatkid"
+	if TUNING.ITEMRESTRICTIONS then
+		inst.components.equippable.restrictedtag = "hatkid"
+	end
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
 	inst.components.equippable.walkspeedmult = TUNING.BREWINGHAT_SLOWDOWN

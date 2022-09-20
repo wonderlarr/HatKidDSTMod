@@ -206,7 +206,9 @@ local function fn(Sim)
     inst:AddComponent("inventoryitem")
 	 
     inst:AddComponent("equippable")
-	inst.components.equippable.restrictedtag = "hatkid"
+	if TUNING.ITEMRESTRICTIONS then
+		inst.components.equippable.restrictedtag = "hatkid"
+	end
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )

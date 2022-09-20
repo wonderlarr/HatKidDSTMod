@@ -71,7 +71,7 @@ local function OnUse(inst)
 	
 	if not inst.components.rechargeable:IsCharged()  -- if we aren't charged yet
 	or owner.components.sanity.current < TUNING.BREWINGHAT_THRESHHOLD  -- or we don't have enough sanity
-	or inst.components.fueled:GetPercent() < 0.25 -- or we don't have enough fuel
+	or inst.components.fueled:GetPercent() < (1 / TUNING.BREWINGHAT_DURABILITY) -- or we don't have enough fuel
 	or (hands and string.match(hands.prefab, "kidpotion")) then -- or we are already holding a potion
 	
 		-- If in cooldown
@@ -138,7 +138,9 @@ local function fn(Sim)
     inst:AddComponent("inventoryitem")
 	
     inst:AddComponent("equippable")
-	inst.components.equippable.restrictedtag = "hatkid"
+	if TUNING.ITEMRESTRICTIONS then
+		inst.components.equippable.restrictedtag = "hatkid"
+	end
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
@@ -150,11 +152,10 @@ local function fn(Sim)
 
 	if TUNING.BREWINGHAT_DURABILITY then
 		inst:AddComponent("fueled")
-		inst.components.fueled:InitializeFuelLevel( 4 * 45 ) -- add tuning
-		inst.components.fueled.fueltype = FUELTYPE.CAVE
-		inst.components.fueled.bonusmult = 2
-		-- if this needs to be fixed, perhaps add a math.ceil check to OnTick in the auto-fuel slots section.
-		inst.components.fueled.accepting = true
+		inst.components.fueled:InitializeFuelLevel( TUNING.BREWINGHAT_DURABILITY * 45 )
+		inst.components.fueled.fueltype = FUELTYPE.EXPLOSIVE -- gunpowder, 90
+		inst.components.fueled.secondaryfueltype = FUELTYPE.CAVE -- slurtle slime only, 45
+		-- although technically lightbulbs and fireflies are included in CAVE fuel, we limit that using the container fuel approach
 	end
 
 	if TUNING.BREWINGHAT_INSULATION then

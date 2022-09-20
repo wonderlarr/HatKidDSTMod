@@ -112,7 +112,7 @@ local function onunequip(inst, owner)
 end
  
 local function onthrown(inst)
-	if inst.brewer ~= nil and inst.brewer:HasTag("hatkid") then
+	if inst.brewer ~= nil then
         inst:AddTag("NOCLICK")
         inst.persists = false
         
@@ -161,11 +161,11 @@ local function onDrop(inst)
     inst:DoTaskInTime(0, function(inst)
         if not inst:HasTag("NOCLICK") then
             if inst.brewer and inst.brewer.components.sanity then
-                inst.brewer.components.sanity:DoDelta(5)
+                inst.brewer.components.sanity:DoDelta(TUNING.BREWINGHAT_THRESHHOLD)
             end
 
             if inst.sourceprefab and inst.sourceprefab.components.fueled then
-                inst.sourceprefab.components.fueled:DoDelta(1)
+                inst.sourceprefab.components.fueled:DoDelta(1 * 45)
             end
 
             inst:Remove()
@@ -252,7 +252,9 @@ local function kidpotion_fn()
 	inst.components.complexprojectile:SetOnHit(OnHitSomething)
 	
     inst:AddComponent("equippable")
-    inst.components.equippable.restrictedtag = "hatkid"
+	if TUNING.ITEMRESTRICTIONS then
+		inst.components.equippable.restrictedtag = "hatkid"
+	end
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
 	inst.components.equippable.walkspeedmult = TUNING.BREWINGHAT_SLOWDOWN

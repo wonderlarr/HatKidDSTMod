@@ -12,6 +12,7 @@ TUNING.HATKIDDAMAGETAKEN = GetModConfigData("hatkiddamagetaken")
 TUNING.HATKIDSPEED = GetModConfigData("hatkidspeed")
 TUNING.HATKIDNIGHTDRAIN = GetModConfigData("hatkidnightdrain")
 TUNING.HATKIDSANITYDRAIN = GetModConfigData("hatkidsanitydrain")
+TUNING.HATKIDNOHATPENALTY = GetModConfigData("hatkidnohatpenalty")
 TUNING.HATKIDSANITYMULT = GetModConfigData("hatkidsanitymult")
 -- Other character stuff
 TUNING.HATKIDSIZE = GetModConfigData("hatkidbasesize")
@@ -106,6 +107,7 @@ TUNING.PONS_MAX = GetModConfigData("ponsmax")
 
 --funny mode
 TUNING.FUNNYMODE = GetModConfigData("funnymode")
+TUNING.ITEMRESTRICTIONS = GetModConfigData("itemrestrictions")
 
 
 TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.HATKID = {"kidhat"}

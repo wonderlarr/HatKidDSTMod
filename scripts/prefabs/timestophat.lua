@@ -102,7 +102,7 @@ local function OnStopUse(inst)
 		-- Unslow everything in the slowed table
 		if inst.slowedThings ~= nil then
 			for k, v in ipairs(inst.slowedThings) do
-				if v ~= nil then
+				if v ~= nil and v:IsValid() and not v:IsInLimbo() then
 					v.components.timebound:RemoveModifier(inst)
 				end
 			end
@@ -174,6 +174,10 @@ local function OnCharged(inst)
 		inst.components.useableitem:StopUsingItem()
 	end
 end
+
+local function ontakefuel(inst)
+    inst.SoundEmitter:PlaySound("dontstarve/common/nightmareAddFuel")
+end
  
 local function fn() 
     local inst = CreateEntity()
@@ -214,7 +218,9 @@ local function fn()
     inst:AddComponent("inventoryitem")
 	
     inst:AddComponent("equippable")
-	inst.components.equippable.restrictedtag = "hatkid"
+	if TUNING.ITEMRESTRICTIONS then
+		inst.components.equippable.restrictedtag = "hatkid"
+	end
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
@@ -225,10 +231,10 @@ local function fn()
 	if TUNING.TIMESTOPHAT_DURABILITY then
 		inst:AddComponent("fueled")
 		inst.components.fueled.fueltype = FUELTYPE.NIGHTMARE
+		inst.components.fueled:SetTakeFuelFn(ontakefuel)
 		inst.components.fueled:InitializeFuelLevel( TUNING.TIMESTOPHAT_DURABILITY ) -- add tuning 300
 		inst.components.fueled:SetDepletedFn(OnEmpty)
-		inst.components.fueled.bonusmult = 30 / 180
-		inst.components.fueled.accepting = true
+		inst.components.fueled.bonusmult = 5 / 180
 	end
 
 	if TUNING.TIMESTOPHAT_INSULATION then

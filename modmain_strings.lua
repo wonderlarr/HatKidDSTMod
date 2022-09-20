@@ -16,54 +16,59 @@ STRINGS.NAMES.HATKID = "Hat Kid"
 STRINGS.CHARACTERS.HATKID = require "speech_hatkid" -- speech file
 
 -- The character select screen lines
-STRINGS.CHARACTER_TITLES.hatkid = "The Tiny Hatter"
+STRINGS.CHARACTER_TITLES.hatkid = "The Homesick Hatter"
 STRINGS.CHARACTER_NAMES.hatkid = "Hat Kid"
-STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Knits cool hats\n*Is selfish and obsessive over them\n*Has a vulnerable mind\n*Considered extremely cute"
+STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Experienced knitter\n*Comes up with her own hats\n*Needs hats a little too much\n*Comfortable with the idea of resurrection\n*Misses home"
 STRINGS.CHARACTER_QUOTES.hatkid = "\"Oh, hi there!\""
 STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Slim"
 
 --Skin STRINGS
 STRINGS.SKIN_NAMES.hatkid_none = "Hat Kid"
 STRINGS.SKIN_QUOTES.hatkid_none = STRINGS.CHARACTER_QUOTES.hatkid
-STRINGS.SKIN_DESCRIPTIONS.hatkid_none = "A royal purple and gold outfit, best fit for a cute adventurer. Complete with a cape and a giant, very necessary zipper."
+STRINGS.SKIN_DESCRIPTIONS.hatkid_none = "A royal purple and gold outfit, best fit for a cute adventurer. Complete with a cape, and a giant, very necessary zipper."
 
 --Outfits
 	STRINGS.SKIN_NAMES.ms_hatkid_cat = "The Nyakuza"
 	STRINGS.SKIN_QUOTES.ms_hatkid_cat = "\"Cat crime!\""
-	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_cat = "A cat themed varsity outfit, complete with mask and tail, which also may or may not be directly tied to countless illegal acts."
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_cat = "A cat themed varsity outfit, complete with mask and tail, which also may or may not be directly tied to some major organized crimes. But that's only a maybe."
 
 	STRINGS.SKIN_NAMES.ms_hatkid_detective = "The Detective"
 	STRINGS.SKIN_QUOTES.ms_hatkid_detective = "\"MYURDER!\""
-	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_detective = "A detective outfit, worn by only the most mature of detectives!"
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_detective = "A detective outfit, worn by only the most mature of detectives! Bubble Pipe not included."
 
 --Dyes
 	STRINGS.SKIN_NAMES.ms_hatkid_dye_bowkid = "Best Friends Forever" --Bow Kid
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_bowkid = STRINGS.CHARACTER_QUOTES.hatkid
-	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_bowkid = "A bright blue and green outfit, reminding you of your BFF."
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_bowkid = "A bright blue and green outfit, the same colors your BFF wears!"
 
 	STRINGS.SKIN_NAMES.ms_hatkid_dye_groovy = "2 Groovy" --Wargroove
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_groovy = STRINGS.CHARACTER_QUOTES.hatkid
-	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_groovy = "A dark teal and deep purple outfit. Available in sets of two, for double the trouble."
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_groovy = "A dark turquoise and deep purple outfit. Traditionally available in sets of two, for double the trouble."
 
 	STRINGS.SKIN_NAMES.ms_hatkid_dye_lunar = "Lunar Lava" --Hilda
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_lunar = STRINGS.CHARACTER_QUOTES.hatkid
-	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_lunar = "A pale teal and red outfit, seemingly fit for a cute adventurer. WARNING: This outfit may attract trolls!"
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_lunar = "A pale teal and red outfit, seemingly fit for another little adventurer. NOTICE: This outfit may attract trolls!"
 
 	STRINGS.SKIN_NAMES.ms_hatkid_dye_niko = "Margin of the Night" --Oneshot
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_niko = STRINGS.CHARACTER_QUOTES.hatkid
-	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_niko = "An outfit associated with... cats and lightbulbs? Weird."
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_niko = "A dark maroon and purple outfit, seemingly fit for a small messiah."
 
 	STRINGS.SKIN_NAMES.ms_hatkid_dye_pinkdanger = "Cute 'n Dangerous" -- Extremely Pink
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_pinkdanger = STRINGS.CHARACTER_QUOTES.hatkid
 	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_pinkdanger = "A very pink, and cute outfit. It's just pink."
 
-	STRINGS.SKIN_NAMES.ms_hatkid_dye_sans = "Blue Flame" --Sans
+	STRINGS.SKIN_NAMES.ms_hatkid_dye_sans = "Blue Flame" --Sans (I hate Ian)
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_sans = STRINGS.CHARACTER_QUOTES.hatkid
 	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_sans = "A blue outfit with a bit of pink. You're gonna have a good time."
 
 	STRINGS.SKIN_NAMES.ms_hatkid_dye_toonlink = "Forest Critter" -- Wind Waker
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_toonlink = STRINGS.CHARACTER_QUOTES.hatkid
 	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_toonlink = "A very green outfit, reminding you of sailing, oddly enough."
+
+	-- New skins
+	STRINGS.SKIN_NAMES.ms_hatkid_dye_oliver = "Arcane Ocean" -- Oliver
+	STRINGS.SKIN_QUOTES.ms_hatkid_dye_oliver = STRINGS.CHARACTER_QUOTES.hatkid
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_oliver = "A set of white, baby blue, and red clothes. It seems magical and familiar."
 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATKID =
 {

@@ -49,14 +49,12 @@ end
 
 AddClientModRPCHandler("HatKidRPC", "polarhatclient", polarhatclient)
 
--- SendModRPCToClient(GetClientModRPC("HatKidRPC", "polarhatclient"), nil, owner)
-
 local function OnUse(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 	
 	if not inst.components.rechargeable:IsCharged()
-	or inst.components.fueled.currentfuel < 90 then
-		-- If in cooldown
+	or inst.components.fueled.currentfuel < (90 * 4) then -- add tuning
+		-- If cant use
 		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
 			inst.components.useableitem:StopUsingItem()
 		end)
@@ -64,9 +62,9 @@ local function OnUse(inst)
 		owner.components.talker:Say(GetString(owner, "HAT_ONCOOLDOWN"))
 		
 	else
-		-- If not in cooldown
+		-- If can use
 		if inst.components.fueled then
-			inst.components.fueled:DoDelta(-1 * 90, owner)
+			inst.components.fueled:DoDelta(-90 * 4)
 		end
 
 		-- Cooldown
@@ -83,11 +81,11 @@ local function OnUse(inst)
 		two.Transform:SetScale(1.25, 1.25, 1.25)
 
 		-- After a delay, explode!
-		owner:DoTaskInTime(12 * FRAMES, function(owner)
+		owner:DoTaskInTime(20 * FRAMES, function(owner)
 			inst.components.useableitem:StopUsingItem()
 
-			-- No longer needed, state has a 12 frame timeout.
-			-- owner:PushEvent("doexplode") -- 12 frames
+			-- Take sanity
+			owner.components.sanity:DoDelta(-5) -- Add TUNING
 
 			-- Explode FX
 			SpawnPrefab("hatshatter2").Transform:SetPosition(owner.Transform:GetWorldPosition())
@@ -111,15 +109,25 @@ local function OnUse(inst)
 			local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, nil)	
 			for _,ent in ipairs(targets) do
 
+				-- Hitstun and damage
+				if ent.components.combat and not ent:HasTag("player") then
+					ent.components.combat:GetAttacked(owner, 18, inst)
+				end
+
 				-- Freeze things that need frozen
-				if ent.components.freezable ~= nil and not ent:HasOneOfTags({"player", "noauradamage", "notraptrigger" }) then
+				if ent.components.freezable ~= nil then
 					ent.components.freezable:AddColdness(TUNING.POLARHAT_LEVEL)
 					ent.components.freezable:SpawnShatterFX()
 				end
 
-				-- Decrease character temperatures, TODO belly temp?
+				-- Decrease character temperatures
 				if ent.components.temperature ~= nil then
-					ent.components.temperature:DoDelta(-TUNING.POLARHAT_TEMP)
+					-- If effecting the owner, modify temp directly to bypass polarhat insulation
+					if ent == owner then
+						ent.components.temperature:SetTemperature(ent.components.temperature.current + -TUNING.POLARHAT_TEMP + -(math.max(0, ent.components.temperature:GetCurrent() / 70 * 20)))
+					else
+						ent.components.temperature:DoDelta(-TUNING.POLARHAT_TEMP + -(math.max(0, ent.components.temperature:GetCurrent() / 70 * 20)))
+					end
 				end
 			end
 		end)
@@ -194,7 +202,9 @@ local function fn(Sim)
     inst:AddComponent("inventoryitem")
 	 
     inst:AddComponent("equippable")
-	inst.components.equippable.restrictedtag = "hatkid"
+	if TUNING.ITEMRESTRICTIONS then
+		inst.components.equippable.restrictedtag = "hatkid"
+	end
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
@@ -205,11 +215,8 @@ local function fn(Sim)
 
 	if TUNING.POLARHAT_DURABILITY then
 		inst:AddComponent("fueled")
-		inst.components.fueled:InitializeFuelLevel( 6 * 90 ) -- add tuning
-		inst.components.fueled.fueltype = FUELTYPE.CHEMICAL --nitre
-		-- inst.components.fueled:SetDepletedFn(OnEmpty)
-		-- inst.components.fueled.bonusmult = 0.023 -- 2 / 90, floating point weirdness
-		inst.components.fueled.accepting = true
+		inst.components.fueled:InitializeFuelLevel( TUNING.POLARHAT_DURABILITY * 90 )
+		inst.components.fueled.fueltype = "ICE" -- ice, 90
 	end
 
 	if TUNING.POLARHAT_INSULATION then 

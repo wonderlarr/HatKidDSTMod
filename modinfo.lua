@@ -27,9 +27,13 @@ server_filter_tags = {
 mod_dependencies = 
 {
     {
-         workshop = "workshop-2570815741",
+        workshop = "workshop-2570815741",
         ["[API] Time Control"] = true
-    }
+    },
+	{
+		workshop = "workshop-2812783478",
+		["[API] Modded Skins"] = true
+	}
 }
 
 local null_options = {
@@ -37,8 +41,6 @@ local null_options = {
 }
 
 -- Set some vars for config
-local seg_time = 30
-local total_day_time = seg_time*16
 
 configuration_options =
 {
@@ -229,7 +231,7 @@ configuration_options =
 	{
 		name = "hatkidbasesize",
 		label = "Character Size Multiplier",
-		hover = "How big Hat Kid will be.",
+		hover = "How big Hat Kid will be. This is essentially cosmetic.",
 		options =
 		{
 			{description = "x0.01", data = 0.01},
@@ -398,6 +400,40 @@ configuration_options =
 	},	
 
 	{
+		name = "hatkidnohatpenalty",
+		label = "No Hat Sanity Penalty",
+		hover = "How much Hat Kid's sanity will be negatively impacted while not wearing a hat. This multiplier only applies to night drain and negative auras.",
+		options =
+		{
+			{description = "x0.001", data = 0.001},
+			{description = "x0.01", data = 0.01},
+			{description = "x0.1", data = 0.1},
+			{description = "x0.2", data = 0.2},
+			{description = "x0.3", data = 0.3},
+			{description = "x0.4", data = 0.4},
+			{description = "x0.5", data = 0.5},
+			{description = "x0.6", data = 0.6},
+			{description = "x0.7", data = 0.7},
+			{description = "x0.8", data = 0.8},
+			{description = "x0.9", data = 0.9},
+			{description = "x1", data = 1},
+			{description = "x1.25", data = 1.25},
+			{description = "x1.5", data = 1.5},
+			{description = "x1.75", data = 1.75},
+			{description = "x2 (Default)", data = 2},
+			{description = "x3", data = 3},
+			{description = "x4", data = 4},
+			{description = "x5", data = 5},
+			{description = "x6", data = 6},
+			{description = "x7", data = 7},
+			{description = "x8", data = 8},
+			{description = "x9", data = 9},
+			{description = "x10", data = 10},
+		},
+		default = 2,
+	},	
+
+	{
 		name = "hatkidvoice",
 		label = "Voice Type",
 		hover = "Which sounds Hat Kid will make while talking.",
@@ -422,28 +458,36 @@ configuration_options =
 	{
 		name = "kidhatdurability",
 		label = "Durability",
-		hover = "How long the Kid's Hat lasts while worn.",
-		options = -- This is a kinda dirty table
+		hover = "How long the Kid's Hat lasts while worn. 1 segment is 30 seconds.",
+		options =
 		{
-			{description = "Forever (Default)", data = false},
-			{description = "30 seconds", data = 30},
-			{description = "1 minute", data = 60},
-			{description = "5 minutes", data = 5 * 60},
-			{description = "10 minutes", data = 10 * 60},
-			{description = "15 minutes", data = 15 * 60},
-			{description = "30 minutes", data = 30 * 60},
-			{description = "45 minutes", data = 45 * 60},
-			{description = "60 minutes", data = 60 * 60},
-			{description = "75 minutes", data = 75 * 60},
-			{description = "90 minutes", data = 90 * 60},
-			{description = "2 hours", data = 2 * 60 * 60},
-			{description = "3 hours", data = 3 * 60 * 60},
-			{description = "4 hours", data = 4 * 60 * 60},
-			{description = "6 hours", data = 6 * 60 * 60},
-			{description = "12 hours", data = 12 * 60 * 60},
-			{description = "Forever (Default)", data = false},
+			{description = "Forever", data = false},
+
+			{description = "5 seconds", data = 5},
+			{description = "10 seconds", data = 10},
+			{description = "15 seconds", data = 15},
+			{description = "20 seconds", data = 20},
+			{description = "25 seconds", data = 25},
+			{description = "1 segment", data = 30}, -- 1 segment = 30 seconds
+			{description = "2 segments", data = 30 * 2},
+			{description = "4 segments", data = 30 * 4},
+			{description = "8 segments", data = 30 * 8},
+			{description = "1 day", data = 480}, -- 30 * 16, 1 day = 16 segments
+			{description = "2 days", data = 480 * 2},
+			{description = "3 days", data = 480 * 3},
+			{description = "4 days", data = 480 * 4},
+			{description = "5 days", data = 480 * 5},
+			{description = "6 days", data = 480 * 6},
+			{description = "8 days (Default)", data = 480 * 8},
+			{description = "10 days", data = 480 * 10},
+			{description = "12 days", data = 480 * 12},
+			{description = "16 days", data = 480 * 16},
+			{description = "20 days", data = 480 * 20},
+			{description = "40 days", data = 480 * 40},
+
+			{description = "Forever", data = false},
 		},
-		default = false,
+		default = 480 * 8,
 	},
 
 	{
@@ -463,14 +507,15 @@ configuration_options =
 			{description = "None", data = 0},
 			{description = "1.4/min", data = 1.4},
 			{description = "2/min", data = 2},
-			{description = "3.4/min (Default)", data = 3.4},
+			{description = "2.3/min (Default)", data = 2},
+			{description = "3.4/min", data = 3.4},
 			{description = "4.5/min", data = 4.5},
 			{description = "6.7/min", data = 6.7},
 			{description = "10/min", data = 10},
 			{description = "20/min", data = 20},
 			{description = "60/min", data = 60},
 		},
-		default = 3.4,
+		default = 2,
 	},	
 
 	{
@@ -556,28 +601,36 @@ configuration_options =
 	{
 		name = "sprinthatdurability",
 		label = "Durability",
-		hover = "How long the Sprint Hat lasts while sprinting. Durabiltiy only decreases while sprinting.",
+		hover = "How long the Sprint Hat lasts while sprinting. Durabiltiy only decreases while sprinting. 1 segment is 30 seconds.",
 		options =
 		{
-			{description = "Forever (Default)", data = false},
-			{description = "30 seconds", data = 30},
-			{description = "1 minute", data = 60},
-			{description = "5 minutes", data = 5 * 60},
-			{description = "10 minutes", data = 10 * 60},
-			{description = "15 minutes", data = 15 * 60},
-			{description = "30 minutes", data = 30 * 60},
-			{description = "45 minutes", data = 45 * 60},
-			{description = "60 minutes", data = 60 * 60},
-			{description = "75 minutes", data = 75 * 60},
-			{description = "90 minutes", data = 90 * 60},
-			{description = "2 hours", data = 2 * 60 * 60},
-			{description = "3 hours", data = 3 * 60 * 60},
-			{description = "4 hours", data = 4 * 60 * 60},
-			{description = "6 hours", data = 6 * 60 * 60},
-			{description = "12 hours", data = 12 * 60 * 60},
-			{description = "Forever (Default)", data = false},
+			{description = "Forever", data = false},
+
+			{description = "5 seconds", data = 5},
+			{description = "10 seconds", data = 10},
+			{description = "15 seconds", data = 15},
+			{description = "20 seconds", data = 20},
+			{description = "25 seconds", data = 25},
+			{description = "1 segment", data = 30}, -- 1 segment = 30 seconds
+			{description = "2 segments", data = 30 * 2},
+			{description = "4 segments", data = 30 * 4},
+			{description = "8 segments", data = 30 * 8},
+			{description = "1 day", data = 480}, -- 30 * 16, 1 day = 16 segments
+			{description = "2 days", data = 480 * 2},
+			{description = "3 days", data = 480 * 3},
+			{description = "4 days", data = 480 * 4},
+			{description = "5 days", data = 480 * 5},
+			{description = "6 days (Default)", data = 480 * 6},
+			{description = "8 days", data = 480 * 8},
+			{description = "10 days", data = 480 * 10},
+			{description = "12 days", data = 480 * 12},
+			{description = "16 days", data = 480 * 16},
+			{description = "20 days", data = 480 * 20},
+			{description = "40 days", data = 480 * 40},
+
+			{description = "Forever", data = false},
 		},
-		default = false,
+		default = 480 * 6,
 	},
 
 	{
@@ -711,21 +764,27 @@ configuration_options =
 
 	{
 		name = "brewdurability",
-		label = "Durability",
-		hover = "How many uses the Brewing Hat has. One use per concoction brewed.",
+		label = "Fuel Capacity",
+		hover = "How many uses the Brewing Hat can store. One use per concoction brewed.",
 		options =
 		{
 			{description = "Infinite", data = false},
 			{description = "1", data = 1},
+			{description = "2 (Default)", data = 2},
 			{description = "3", data = 3},
+			{description = "4", data = 4},
 			{description = "5", data = 5},
+			{description = "6", data = 6},
+			{description = "7", data = 7},
+			{description = "8", data = 8},
+			{description = "9", data = 9},
 			{description = "10", data = 10},
 			{description = "15", data = 15},
 			{description = "20", data = 20},
 			{description = "25", data = 25},
 			{description = "30", data = 30},
 			{description = "35", data = 35},
-			{description = "40 (Default)", data = 40},
+			{description = "40", data = 40},
 			{description = "45", data = 45},
 			{description = "50", data = 50},
 			{description = "55", data = 55},
@@ -734,13 +793,9 @@ configuration_options =
 			{description = "80", data = 80},
 			{description = "90", data = 90},
 			{description = "100", data = 100},
-			{description = "150", data = 150},
-			{description = "250", data = 250},
-			{description = "500", data = 500},
-			{description = "1000", data = 1000},
 			{description = "Infinite", data = false},
 		},
-		default = 40,
+		default = 2,
 	},
 
 	{
@@ -749,15 +804,15 @@ configuration_options =
 		hover = "How much water resistance the Brewing Hat provides while worn.",
 		options =
 		{
-			{description = "None", data = false},
-			{description = "20% (Default)", data = 0.2},
+			{description = "None (Default)", data = false},
+			{description = "20%", data = 0.2},
 			{description = "35%", data = 0.35},
 			{description = "50%", data = 0.5},
 			{description = "70%", data = 0.7},
 			{description = "90%", data = 0.9},
 			{description = "100%", data = 1},
 		},
-		default = 0.2,
+		default = false,
 	},	
 
 	{
@@ -786,8 +841,8 @@ configuration_options =
 			{description = "1 Second", data = 1},
 			{description = "2 Seconds", data = 2},
 			{description = "3 Seconds", data = 3},
-			{description = "4 Seconds (Default)", data = 4},
-			{description = "5 Seconds", data = 5},
+			{description = "4 Seconds", data = 4},
+			{description = "5 Seconds (Default)", data = 5},
 			{description = "10 Seconds", data = 10},
 			{description = "12 Seconds", data = 12},
 			{description = "15 Seconds", data = 15},
@@ -803,7 +858,7 @@ configuration_options =
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 4,
+		default = 5,
 	},
 
 	{
@@ -815,9 +870,9 @@ configuration_options =
 			{description = "0", data = 0},
 			{description = "1", data = 1},
 			{description = "2", data = 2},
-			{description = "3", data = 3},
+			{description = "3 (Default)", data = 3},
 			{description = "4", data = 4},
-			{description = "5 (Default)", data = 5},
+			{description = "5", data = 5},
 			{description = "10", data = 10},
 			{description = "15", data = 15},
 			{description = "20", data = 20},
@@ -826,7 +881,7 @@ configuration_options =
 			{description = "50", data = 50},
 			{description = "100", data = 100},
 		},
-		default = 5,
+		default = 3,
 	},
 	
 	{
@@ -894,16 +949,16 @@ configuration_options =
 			{description = "46", data = 46},
 			{description = "51", data = 51},
 			{description = "63", data = 63},
-			{description = "68 (Default)", data = 68},
+			{description = "68", data = 68},
 			{description = "72", data = 72},
 			{description = "80", data = 80},
 			{description = "89", data = 89},
-			{description = "100", data = 100},
+			{description = "100 (Default)", data = 100},
 			{description = "200", data = 200},
 			{description = "500", data = 500},
 			{description = "KILLER QUEEN!!!", data = 999999, hover = "999,999"},
 		},
-		default = 89,
+		default = 100,
 	},
 	
 	{
@@ -920,7 +975,7 @@ configuration_options =
 			{description = "x5", data = 5},
 			{description = "x6", data = 6},
 			{description = "x7", data = 7},
-			{description = "x8 (Very Large)", data = 8},
+			{description = "x8 (Wow!)", data = 8},
 		},
 		default = 3,
 	},
@@ -934,17 +989,23 @@ configuration_options =
 
 	{
 		name = "polardurability",
-		label = "Durability",
-		hover = "How many uses the Ice Hat has. One use per ground slam.",
+		label = "Ice Consumption",
+		hover = "How much ice the Ice Hat can store at one time.",
 		options =
 		{
-			{description = "Infinite", data = false},
+			{description = "None", data = false},
 			{description = "1", data = 1},
+			{description = "2", data = 2},
 			{description = "3", data = 3},
+			{description = "4", data = 4},
 			{description = "5", data = 5},
+			{description = "6", data = 6},
+			{description = "7", data = 7},
+			{description = "8 (Default)", data = 8},
+			{description = "9", data = 9},
 			{description = "10", data = 10},
 			{description = "15", data = 15},
-			{description = "20 (Default)", data = 20},
+			{description = "20", data = 20},
 			{description = "25", data = 25},
 			{description = "30", data = 30},
 			{description = "35", data = 35},
@@ -957,13 +1018,9 @@ configuration_options =
 			{description = "80", data = 80},
 			{description = "90", data = 90},
 			{description = "100", data = 100},
-			{description = "150", data = 150},
-			{description = "250", data = 250},
-			{description = "500", data = 500},
-			{description = "1000", data = 1000},
-			{description = "Infinite", data = false},
+			{description = "None", data = false},
 		},
-		default = 20,
+		default = 8,
 	},
 
 	{
@@ -1003,7 +1060,7 @@ configuration_options =
 	{
 		name = "polarcooldown",
 		label = "Cooldown",
-		hover = "How long the Ice Hat takes to recharge after exiting it's effect.",
+		hover = "How long the Ice Hat takes to recharge.",
 		options =
 		{
 			{description = "1 Second", data = 1},
@@ -1058,8 +1115,8 @@ configuration_options =
 			{description = "-2.5", data = 2.5},
 			{description = "-5", data = 5},
 			{description = "-10", data = 10},
-			{description = "-15", data = 15},
-			{description = "-20 (Default)", data = 20},
+			{description = "-15 (Default)", data = 15},
+			{description = "-20", data = 20},
 			{description = "-25", data = 25},
 			{description = "-30", data = 30},
 			{description = "-35", data = 35},
@@ -1071,7 +1128,7 @@ configuration_options =
 			{description = "-90", data = 90},
 			{description = "-100", data = 100},
 		},
-		default = 20,
+		default = 15,
 	},
 
 	{
@@ -1111,22 +1168,36 @@ configuration_options =
 	{
 		name = "dwellerfuelcapacity",
 		label = "Fuel Capacity",
-		hover = "How much fuel the Dweller's Mask can hold at one time.",
+		hover = "How much fuel the Dweller's Mask can store.",
 		options =
 		{
 			{description = "Forever", data = false},
-			{description = "30", data = 30},
-			{description = "60", data = 60},
-			{description = "120", data = 120},
-			{description = "180", data = 180},
-			{description = "240", data = 240},
-			{description = "300 (Default)", data = 300},
-			{description = "600", data = 600},
-			{description = "900", data = 900},
-			{description = "1800", data = 1800},
+
+			{description = "5 seconds", data = 5},
+			{description = "10 seconds", data = 10},
+			{description = "15 seconds", data = 15},
+			{description = "20 seconds", data = 20},
+			{description = "25 seconds", data = 25},
+			{description = "1 segment", data = 30}, -- 1 segment = 30 seconds
+			{description = "2 segments", data = 30 * 2},
+			{description = "4 segments (Default)", data = 30 * 4},
+			{description = "8 segments", data = 30 * 8},
+			{description = "1 day", data = 480}, -- 30 * 16, 1 day = 16 segments
+			{description = "2 days", data = 480 * 2},
+			{description = "3 days", data = 480 * 3},
+			{description = "4 days", data = 480 * 4},
+			{description = "5 days", data = 480 * 5},
+			{description = "6 days", data = 480 * 6},
+			{description = "8 days", data = 480 * 8},
+			{description = "10 days", data = 480 * 10},
+			{description = "12 days", data = 480 * 12},
+			{description = "16 days", data = 480 * 16},
+			{description = "20 days", data = 480 * 20},
+			{description = "40 days", data = 480 * 40},
+
 			{description = "Forever", data = false},
 		},
-		default = 300,
+		default = 30 * 4,
 	},
 
 	{
@@ -1169,7 +1240,12 @@ configuration_options =
 		hover = "How much Nightmare Fuel is worth once consumed.",
 		options =
 		{
-			{description = "30 (Default)", data = 30},
+			{description = "5", data = 5},
+			{description = "10", data = 10},
+			{description = "15", data = 15},
+			{description = "20 (Default)", data = 20},
+			{description = "25", data = 25},
+			{description = "30", data = 30},
 			{description = "60", data = 60},
 			{description = "120", data = 120},
 			{description = "180", data = 180},
@@ -1179,7 +1255,7 @@ configuration_options =
 			{description = "900", data = 900},
 			{description = "1800", data = 1800},
 		},
-		default = 30,
+		default = 20,
 	},
 	
 	{
@@ -1191,13 +1267,13 @@ configuration_options =
 			{description = "1 Second", data = 1},
 			{description = "2 Seconds", data = 2},
 			{description = "3 Seconds", data = 3},
-			{description = "4 Seconds (Default)", data = 4},
+			{description = "4 Seconds", data = 4},
 			{description = "5 Seconds", data = 5},
 			{description = "10 Seconds", data = 10},
 			{description = "15 Seconds", data = 15},
 			{description = "20 Seconds", data = 20},
 			{description = "30 Seconds", data = 30},
-			{description = "45 Seconds", data = 45},
+			{description = "45 Seconds (Default)", data = 45},
 			{description = "60 Seconds", data = 60},
 			{description = "90 Seconds", data = 90},
 			{description = "2 Minutes", data = 120},
@@ -1207,13 +1283,13 @@ configuration_options =
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 4,
+		default = 45,
 	},
 	
 	{
 		name = "dwellerlinger",
 		label = "Linger Duration",
-		hover = "How long the Dweller's Mask's nightvision effect will linger for once you're no longer within it's active radius.",
+		hover = "How long the Dweller's Mask's nightvision effect will linger on players once they've left the active radius.",
 		options =
 		{
 			{description = "1 Second", data = 1},
@@ -1237,22 +1313,22 @@ configuration_options =
 		hover = "How big the Dweller's Mask's effect radius will be. The effective radius is identical to the size of the light generated by the hat.",
 		options =
 		{
-			{description = "1", data = 1},
-			{description = "2", data = 2},
-			{description = "3", data = 3},
-			{description = "4", data = 4},
-			{description = "5", data = 5},
-			{description = "6", data = 6},
-			{description = "7", data = 7},
-			{description = "8 (Default)", data = 8},
-			{description = "9", data = 9},
-			{description = "10", data = 10},
-			{description = "11", data = 11},
-			{description = "12", data = 12},
-			{description = "13", data = 13},
-			{description = "14", data = 14},
-			{description = "15", data = 15},
-			{description = "16 (Very Large)", data = 16},
+			{description = "x1", data = 1},
+			{description = "x2", data = 2},
+			{description = "x3", data = 3},
+			{description = "x4", data = 4},
+			{description = "x5", data = 5},
+			{description = "x6", data = 6},
+			{description = "x7", data = 7},
+			{description = "x8 (Default)", data = 8},
+			{description = "x9", data = 9},
+			{description = "x10", data = 10},
+			{description = "x11", data = 11},
+			{description = "x12", data = 12},
+			{description = "x13", data = 13},
+			{description = "x14", data = 14},
+			{description = "x15", data = 15},
+			{description = "x16 (Very Large)", data = 16},
 
 		},
 		default = 8,
@@ -1267,8 +1343,8 @@ configuration_options =
 			{description = "-60/min", data = -60},
 			{description = "-20/min", data = -20},
 			{description = "-10/min", data = -10},
-			{description = "-6.7/min", data = -6.7},
-			{description = "-4.5/min (Default)", data = -4.5},
+			{description = "-6.7/min (Default)", data = -6.7},
+			{description = "-4.5/min", data = -4.5},
 			{description = "-3.4/min", data = -3.4},
 			{description = "-2/min", data = -2},
 			{description = "-1.4/min", data = -1.4},
@@ -1282,7 +1358,7 @@ configuration_options =
 			{description = "20/min", data = 20},
 			{description = "60/min", data = 60},
 		},
-		default = -4.5,
+		default = -6.7,
 	},
 
 	{
@@ -1340,10 +1416,10 @@ configuration_options =
 			{description = "None", data = 0},
 			{description = "-1", data = 1},
 			{description = "-2", data = 2},
-			{description = "-3", data = 3},
+			{description = "-3 (Default)", data = 3},
 			{description = "-4", data = 4},
 			{description = "-5", data = 5},
-			{description = "-10 (Default)", data = 10},
+			{description = "-10", data = 10},
 			{description = "-15", data = 15},
 			{description = "-20", data = 20},
 			{description = "-25", data = 25},
@@ -1351,7 +1427,7 @@ configuration_options =
 			{description = "-60", data = 60},
 			{description = "-120", data = 120},
 		},
-		default = 10,
+		default = 3,
 	},
 
 	{
@@ -1361,14 +1437,14 @@ configuration_options =
 		options =
 		{
 			{description = "x0.1", data = 0.1},
-			{description = "x0.25", data = 0.25},
-			{description = "x0.5 (Default)", data = 0.5},
+			{description = "x0.25 (Default)", data = 0.25},
+			{description = "x0.5", data = 0.5},
 			{description = "x0.75", data = 0.75},
 			{description = "x1", data = 1},
 			{description = "x1.5", data = 1.5},
 			{description = "x2", data = 2},
 		},
-		default = 0.5,
+		default = 0.25,
 	},
 
 	{
@@ -1392,13 +1468,13 @@ configuration_options =
 			{description = "None", data = 0},
 			{description = "5", data = 5},
 			{description = "10", data = 10},
-			{description = "20", data = 20},
+			{description = "20 (Default)", data = 20},
 			{description = "30", data = 30},
-			{description = "40 (Default)", data = 40},
+			{description = "40", data = 40},
 			{description = "80", data = 80},
 			{description = "120", data = 120},
 		},
-		default = 40,
+		default = 20,
 	},
 
 	{
@@ -1451,28 +1527,36 @@ configuration_options =
 	{
 		name = "timestopdurability",
 		label = "Durability",
-		hover = "How long the Time Stop Hat lasts.",
+		hover = "How long the Time Stop Hat can last without being refueled. 1 segment is 30 seconds.",
 		options =
 		{
 			{description = "Forever", data = false},
-			{description = "30 seconds", data = 30},
-			{description = "1 minute", data = 60},
-			{description = "5 minutes", data = 5 * 60},
-			{description = "10 minutes", data = 10 * 60},
-			{description = "15 minutes", data = 15 * 60},
-			{description = "30 minutes", data = 30 * 60},
-			{description = "45 minutes", data = 45 * 60},
-			{description = "60 minutes", data = 60 * 60},
-			{description = "75 minutes", data = 75 * 60},
-			{description = "90 minutes", data = 90 * 60},
-			{description = "2 hours", data = 2 * 60 * 60},
-			{description = "3 hours", data = 3 * 60 * 60},
-			{description = "4 hours", data = 4 * 60 * 60},
-			{description = "6 hours", data = 6 * 60 * 60},
-			{description = "12 hours", data = 12 * 60 * 60},
+
+			{description = "5 seconds", data = 5},
+			{description = "10 seconds", data = 10},
+			{description = "15 seconds", data = 15},
+			{description = "20 seconds", data = 20},
+			{description = "25 seconds", data = 25},
+			{description = "1 segment (Default)", data = 30}, -- 1 segment = 30 seconds
+			{description = "2 segments", data = 30 * 2},
+			{description = "4 segments", data = 30 * 4},
+			{description = "8 segments", data = 30 * 8},
+			{description = "1 day", data = 480}, -- 30 * 16, 1 day = 16 segments
+			{description = "2 days", data = 480 * 2},
+			{description = "3 days", data = 480 * 3},
+			{description = "4 days", data = 480 * 4},
+			{description = "5 days", data = 480 * 5},
+			{description = "6 days", data = 480 * 6},
+			{description = "8 days", data = 480 * 8},
+			{description = "10 days", data = 480 * 10},
+			{description = "12 days", data = 480 * 12},
+			{description = "16 days", data = 480 * 16},
+			{description = "20 days", data = 480 * 20},
+			{description = "40 days", data = 480 * 40},
+
 			{description = "Forever", data = false},
 		},
-		default = 5 * 60,
+		default = 30,
 	},
 
 	{
@@ -1523,18 +1607,18 @@ configuration_options =
 			{description = "10 Seconds", data = 10},
 			{description = "15 Seconds", data = 15},
 			{description = "20 Seconds", data = 20},
-			{description = "30 Seconds (Default)", data = 30},
+			{description = "30 Seconds", data = 30},
 			{description = "45 Seconds", data = 45},
 			{description = "60 Seconds", data = 60},
 			{description = "90 Seconds", data = 90},
 			{description = "2 Minutes", data = 120},
-			{description = "3 Minutes", data = 180},
+			{description = "3 Minutes (Default)", data = 180},
 			{description = "4 Minutes", data = 240},
 			{description = "5 Minutes", data = 300},
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 30,
+		default = 180,
 	},
 	
 	{
@@ -1547,8 +1631,8 @@ configuration_options =
 			{description = "5 Seconds", data = 5},
 			{description = "10 Seconds", data = 10},
 			{description = "12 Seconds", data = 12},
-			{description = "15 Seconds", data = 15},
-			{description = "20 Seconds (Default)", data = 20},
+			{description = "15 Seconds (Default)", data = 15},
+			{description = "20 Seconds", data = 20},
 			{description = "30 Seconds", data = 30},
 			{description = "45 Seconds", data = 45},
 			{description = "60 Seconds", data = 60},
@@ -1560,7 +1644,7 @@ configuration_options =
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 20,
+		default = 15,
 	},
 
 	{
@@ -1580,12 +1664,11 @@ configuration_options =
 			{description = "x0.7", data = 0.7},
 			{description = "x0.8", data = 0.8},
 			{description = "x0.9", data = 0.9},
-			{description = "x1", data = 1},
+			{description = "x1 (No Effect)", data = 1},
 			{description = "x1.25", data = 1.25},
 			{description = "x1.5", data = 1.5},
 			{description = "x1.75", data = 1.75},
 			{description = "x2", data = 2},
-			{description = "x3", data = 3},
 		},
 		default = 0.5,
 	},
@@ -1600,7 +1683,7 @@ configuration_options =
 	{
 		name = "hatbrelladurability",
 		label = "Closed Umbrella Durability",
-		hover = "How many times you can hit something with the closed variant of Hat Kid's umbrella, before it breaks.",
+		hover = "How many times you can hit something with the closed variant of Hat Kid's umbrella before it breaks.",
 		options =
 		{
 			{description = "Disabled", data = false},
@@ -1636,7 +1719,7 @@ configuration_options =
 			{description = "14", data = 14},
 			{description = "27", data = 27},
 			{description = "34", data = 34},
-			{description = "40 (Default)", data = 40},
+			{description = "42.5 (Default)", data = 42.5},
 			{description = "51", data = 51},
 			{description = "63", data = 63},
 			{description = "72", data = 72},
@@ -1646,34 +1729,43 @@ configuration_options =
 			{description = "500", data = 500},
 			{description = "KILLER QUEEN!!!", data = 999999, hover = "999,999"},
 		},
-		default = 40,
+		default = 42.5,
 	},
 
 	{
 		name = "hatbrellaopendurability",
 		label = "Open Umbrella Durability",
-		hover = "How long you can hold the open variant of Hat Kid's umbrella, before it breaks.",
+		hover = "How long you can hold the open variant of Hat Kid's umbrella, before it breaks. 1 segment is 30 seconds.",
 		options =
 		{
-			{description = "Disabled", data = false},
-			
-			{description = "1 segment", data = seg_time},
-			{description = "4 segments", data = seg_time * 4},
-			{description = "8 segments", data = seg_time * 8},
-			{description = "1 day", data = total_day_time * 1},
-			{description = "2 days", data = total_day_time * 2},
-			{description = "4 days", data = total_day_time * 4},
-			{description = "6 days (Default)", data = total_day_time * 6},			
-			{description = "8 days", data = total_day_time * 8},
-			{description = "10 days", data = total_day_time * 10},
-			{description = "12 days", data = total_day_time * 12},
-			{description = "15 days", data = total_day_time * 15},
-			{description = "20 days", data = total_day_time * 20},
+			{description = "Forever", data = false},
 
-			{description = "Disabled", data = false},
+			{description = "5 seconds", data = 5},
+			{description = "10 seconds", data = 10},
+			{description = "15 seconds", data = 15},
+			{description = "20 seconds", data = 20},
+			{description = "25 seconds", data = 25},
+			{description = "1 segment", data = 30}, -- 1 segment = 30 seconds
+			{description = "2 segments", data = 30 * 2},
+			{description = "4 segments", data = 30 * 4},
+			{description = "8 segments", data = 30 * 8},
+			{description = "1 day", data = 480}, -- 30 * 16, 1 day = 16 segments
+			{description = "2 days", data = 480 * 2},
+			{description = "3 days", data = 480 * 3},
+			{description = "4 days", data = 480 * 4},
+			{description = "5 days", data = 480 * 5},
+			{description = "6 days (Default)", data = 480 * 6},
+			{description = "8 days", data = 480 * 8},
+			{description = "10 days", data = 480 * 10},
+			{description = "12 days", data = 480 * 12},
+			{description = "16 days", data = 480 * 16},
+			{description = "20 days", data = 480 * 20},
+			{description = "40 days", data = 480 * 40},
+
+			{description = "Forever", data = false},
 
 		},
-		default = total_day_time * 6,
+		default = 480 * 6,
 	},
 
 	{
@@ -1815,12 +1907,24 @@ configuration_options =
 		default = false,
 	},
 	
-	-- {
-	-- 	name = "Experimental",
-	-- 	options = null_options,
-	-- 	hover = "",
-	-- 	default = 0,
-	-- },	
+	{
+		name = "Experimental",
+		options = null_options,
+		hover = "",
+		default = 0,
+	},	
+
+	{
+		name = "itemrestrictions",
+		label = "Hat Kid Item Restrictions",
+		hover = "Restricts Hat Kid's custom items to be useable exclusively on her. The ability keybind is not available to other characters.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled (Default)", data = true},
+		},
+		default = true,
+	},
 
 	-- {
 	-- 	name = "enablepons",

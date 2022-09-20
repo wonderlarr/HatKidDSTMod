@@ -107,7 +107,9 @@ local function fn()
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("equippable")
-	inst.components.equippable.restrictedtag = "hatkid"
+	if TUNING.ITEMRESTRICTIONS then
+		inst.components.equippable.restrictedtag = "hatkid"
+	end
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
 	inst.components.equippable.dapperness = TUNING.KIDHAT_SANITY / 60 -- Config number is sanity per minute, internal dapperness is by second.
     inst.components.equippable:SetOnEquip( OnEquip )
