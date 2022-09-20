@@ -1,6 +1,3 @@
-
---A prefabs table is created in which all of our custom skins will be poured into and then this file returns the unpacked contents.
---”whimsy” in this case is the code name of my friends custom character
 local prefabs = {}
 
 table.insert(prefabs, CreatePrefabSkin("hatkid_none", {
@@ -23,6 +20,7 @@ table.insert(prefabs, CreatePrefabSkin("hatkid_none", {
 }))
 
 local hatskins = {
+	-- Launch
 	"ms_hatkid_cat",
 	"ms_hatkid_detective",
 	"ms_hatkid_dye_bowkid",
@@ -32,6 +30,8 @@ local hatskins = {
 	"ms_hatkid_dye_pinkdanger",
 	"ms_hatkid_dye_sans",
 	"ms_hatkid_dye_toonlink",
+	--New
+	"ms_hatkid_dye_oliver",
 }
 
 for k,v in ipairs(hatskins) do
