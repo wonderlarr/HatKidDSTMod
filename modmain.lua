@@ -371,7 +371,9 @@ if TUNING.BREWINGHAT_DURABILITY then
 
 				if (maxfuel - currentfuel) >= fueltogive then
 					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
+					inst.components.fueled.accepting = true
 					inst.components.fueled:TakeFuelItem(fuelitem, owner)
+					inst.components.fueled.accepting = false
 				end
 			end
 		end
@@ -411,7 +413,7 @@ if TUNING.BREWINGHAT_DURABILITY then
 		}
 		
 		function params.brewinghat_inv.itemtestfn(container, item, slot)
-			return item.prefab == "slurtleslime" -- compare only prefab name here, we only want to use the one item.
+			return item.prefab == "slurtleslime" or item.prefab == "gunpowder"
 		end
 		-- End Container -------
 		
@@ -428,7 +430,7 @@ if TUNING.BREWINGHAT_DURABILITY then
 		inst.components.container:WidgetSetup("brewinghat_inv")
 		inst.components.container.canbeopened = false
 
-		inst.tick = inst:DoPeriodicTask(1, OnTick)
+		inst.tick = inst:DoPeriodicTask(0.25, OnTick)
 
 		inst:ListenForEvent("equipped", OnEquip)
 		inst:ListenForEvent("unequipped", OnUnequip)
@@ -448,7 +450,9 @@ if TUNING.POLARHAT_DURABILITY then
 
 				if (maxfuel - currentfuel) >= fueltogive then
 					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
+					inst.components.fueled.accepting = true
 					inst.components.fueled:TakeFuelItem(fuelitem, owner)
+					inst.components.fueled.accepting = false
 				end
 			end
 		end
@@ -488,7 +492,7 @@ if TUNING.POLARHAT_DURABILITY then
 		}
 		
 		function params.polarhat_inv.itemtestfn(container, item, slot)
-			return item.prefab == "nitre"
+			return item.prefab == "ice"
 		end
 		-- End Container -------
 		
@@ -505,7 +509,7 @@ if TUNING.POLARHAT_DURABILITY then
 		inst.components.container:WidgetSetup("polarhat_inv")
 		inst.components.container.canbeopened = false
 
-		inst.tick = inst:DoPeriodicTask(1, OnTick)
+		inst.tick = inst:DoPeriodicTask(0.25, OnTick)
 
 		inst:ListenForEvent("equipped", OnEquip)
 		inst:ListenForEvent("unequipped", OnUnequip)
@@ -525,7 +529,9 @@ if TUNING.DWELLERMASK_DURABILITY then
 
 				if (maxfuel - currentfuel) >= fueltogive then
 					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
+					inst.components.fueled.accepting = true
 					inst.components.fueled:TakeFuelItem(fuelitem, owner)
+					inst.components.fueled.accepting = false
 				end
 			end
 		end
@@ -582,7 +588,7 @@ if TUNING.DWELLERMASK_DURABILITY then
 		inst.components.container:WidgetSetup("dwellermask_inv")
 		inst.components.container.canbeopened = false
 
-		inst.tick = inst:DoPeriodicTask(1, OnTick)
+		inst.tick = inst:DoPeriodicTask(0.25, OnTick)
 
 		inst:ListenForEvent("equipped", OnEquip)
 		inst:ListenForEvent("unequipped", OnUnequip)
@@ -602,7 +608,9 @@ if TUNING.TIMESTOPHAT_DURABILITY then
 
 				if (maxfuel - currentfuel) >= fueltogive then
 					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
+					inst.components.fueled.accepting = true
 					inst.components.fueled:TakeFuelItem(fuelitem, owner)
+					inst.components.fueled.accepting = false
 				end
 			end
 		end
@@ -659,7 +667,7 @@ if TUNING.TIMESTOPHAT_DURABILITY then
 		inst.components.container:WidgetSetup("timestophat_inv")
 		inst.components.container.canbeopened = false
 
-		inst.tick = inst:DoPeriodicTask(1, OnTick)
+		inst.tick = inst:DoPeriodicTask(0.25, OnTick)
 
 		inst:ListenForEvent("equipped", OnEquip)
 		inst:ListenForEvent("unequipped", OnUnequip)
@@ -695,7 +703,7 @@ State{
 
 		inst:AddTag("alwaysblock")
 		
-		inst.sg:SetTimeout(12 * FRAMES)
+		inst.sg:SetTimeout(20 * FRAMES)
 	end,
 
 	ontimeout = function(inst)
@@ -722,27 +730,17 @@ State{
 }
 )
 
--- local nochar = {
--- 	"wilson",
--- 	"willow",
--- 	"wolfgang",
--- 	"wendy",
--- 	"wx78",
--- 	"wickerbottom",
--- 	"woodie",
--- 	"wes",
--- 	"waxwell",
--- 	"wathgrithr",
--- 	"webber",
--- 	"winona",
--- 	"warly",
--- 	"wortox",
--- 	"wormwood",
--- 	"wurt",
--- 	"walter",
--- 	"wanda",
--- }
+GLOBAL.FUELTYPE.ICE = "ICE"
+GLOBAL.FUELTYPE.EXPLOSIVE = "EXPLOSIVE"
 
--- for k, v in ipairs(nochar) do
--- 	RemoveDefaultCharacter(v)
--- end
+AddPrefabPostInit("ice", function(inst)
+	inst:AddComponent("fuel")
+    inst.components.fuel.fuelvalue = TUNING.MED_LARGE_FUEL -- 90
+    inst.components.fuel.fueltype = GLOBAL.FUELTYPE.ICE -- do do do do do
+end)
+
+AddPrefabPostInit("gunpowder", function(inst)
+	inst:AddComponent("fuel")
+    inst.components.fuel.fuelvalue = TUNING.MED_LARGE_FUEL -- 90
+    inst.components.fuel.fueltype = GLOBAL.FUELTYPE.EXPLOSIVE -- do do do do do
+end)
