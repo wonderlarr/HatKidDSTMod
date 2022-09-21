@@ -71,8 +71,10 @@ local startInv = { "kidhat" }
 -- On revive or load
 local function OnAlien(inst)
 	inst.components.locomotor:SetExternalSpeedMultiplier(inst, "hatkid_speed_config", TUNING.HATKIDSPEED)
-	
-	inst.components.sanity:DoDelta(30) -- Sanity
+end
+
+local function OnAlienRespawn(inst)
+	inst.components.sanity:DoDelta(30)
 end
 
 -- On death
@@ -117,6 +119,7 @@ local function OnNewSpawn(inst)
     inst:ListenForEvent("unequip", OnUnequip)
 
 	inst:ListenForEvent("ms_respawnedfromghost", OnAlien)
+	inst:ListenForEvent("ms_respawnedfromghost", OnAlienRespawn)
     inst:ListenForEvent("ms_becameghost", OnGhost)
 end
 
@@ -125,6 +128,7 @@ local function OnLoad(inst, data)
     inst:ListenForEvent("unequip", OnUnequip)
 
 	inst:ListenForEvent("ms_respawnedfromghost", OnAlien)
+	inst:ListenForEvent("ms_respawnedfromghost", OnAlienRespawn)
     inst:ListenForEvent("ms_becameghost", OnGhost)
 	
     if inst:HasTag("playerghost") then

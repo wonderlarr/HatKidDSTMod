@@ -1,7 +1,7 @@
 name = "[Internal] Hat Kid: The Homesick Hatter"
 description = "Adds Hat Kid from A Hat in Time into the world of Don't Starve Together, complete with her hats, umbrella, and even some of her outfits!\n\nThis mod is highly configurable, click the config button below to customize your experience to a tee."
 author = "Skylarr 󰀏" -- Unknown character is a torch emoji
-version = "0.20.2 rc3" -- major version . feature update . minor update/bugfix
+version = "1.0.1" -- major version . feature update . minor update/bugfix
 
 forumthread = ""
 
