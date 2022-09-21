@@ -18,7 +18,7 @@ STRINGS.CHARACTERS.HATKID = require "speech_hatkid" -- speech file
 -- The character select screen lines
 STRINGS.CHARACTER_TITLES.hatkid = "The Illiterate"
 STRINGS.CHARACTER_NAMES.hatkid = "Smug Kid"
-STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Smug\n*Will take your cane\n*Pipe Bomb\n*Greeeeeen"
+STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Smug\n*Idiot Child\n*Crafts Hats Faster\n*Good at dying"
 STRINGS.CHARACTER_QUOTES.hatkid = "\"Check your mailbox.\""
 STRINGS.CHARACTER_SURVIVABILITY.hatkid = "no lol"
 
@@ -41,9 +41,9 @@ STRINGS.SKIN_DESCRIPTIONS.hatkid_none = "Oh my god it's the one cute character f
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_bowkid = STRINGS.CHARACTER_QUOTES.hatkid
 	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_bowkid = "https://www.youtube.com/watch?v=ERTNqL4zMl8"
 
-	STRINGS.SKIN_NAMES.ms_hatkid_dye_groovy = "Nobody Knows" --Wargroove
+	STRINGS.SKIN_NAMES.ms_hatkid_dye_groovy = "" --Wargroove
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_groovy = STRINGS.CHARACTER_QUOTES.hatkid
-	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_groovy = ""
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_groovy = "Nobody Knows"
 
 	STRINGS.SKIN_NAMES.ms_hatkid_dye_lunar = "Hilda (TV series)" --Hilda
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_lunar = STRINGS.CHARACTER_QUOTES.hatkid

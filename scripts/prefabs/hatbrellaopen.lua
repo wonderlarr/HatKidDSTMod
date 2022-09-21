@@ -78,11 +78,6 @@ local function fn()
     end
  
     inst.entity:SetPristine()
-
-    -- inst:AddComponent("weapon")
-    -- inst.components.weapon:SetDamage(TUNING.HATBRELLAOPEN_DAMAGE) 
-	-- This is specifically to annoy someone down the line that see's 11 instead of some even number, esepcially considering
-	-- default damage is 10, and Hat Kid has a damage debuff that lowers the 11 back to 10. 
   
     inst:AddComponent("inspectable")
 

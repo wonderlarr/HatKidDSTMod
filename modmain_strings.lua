@@ -6,7 +6,7 @@ local STRINGS = GLOBAL.STRINGS
 ---- Item skin strings ----
 STRINGS.SKIN_NAMES.kidhat_dye_niko = "Margin of the Night"
 STRINGS.SKIN_NAMES.kidhat_dye_toonlink = "The Forest Critter"
-STRINGS.SKIN_NAMES.kidhat_dye_pinkdanger = "Cute `n Dangerous"
+STRINGS.SKIN_NAMES.kidhat_dye_pinkdanger = "Cute 'n Dangerous"
 
 STRINGS.SKIN_NAMES.hatbrella_bowkid = "Bow Kid's Favorite"
 
@@ -18,7 +18,7 @@ STRINGS.CHARACTERS.HATKID = require "speech_hatkid" -- speech file
 -- The character select screen lines
 STRINGS.CHARACTER_TITLES.hatkid = "The Homesick Hatter"
 STRINGS.CHARACTER_NAMES.hatkid = "Hat Kid"
-STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Experienced knitter\n*Comes up with her own hats\n*Needs hats a little too much\n*Comfortable with the idea of resurrection\n*Misses home"
+STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Experienced hatter\n*Comes up with her own hats\n*Likes hats a little too much\n*Comfortable with the idea of resurrection\n*Misses home"
 STRINGS.CHARACTER_QUOTES.hatkid = "\"Oh, hi there!\""
 STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Slim"
 

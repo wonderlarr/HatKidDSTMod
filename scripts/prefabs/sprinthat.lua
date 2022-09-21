@@ -126,11 +126,6 @@ local function OnEquip(inst, owner)
 
 	owner:ListenForEvent("locomote", onLocomote)
 	SendModRPCToClient(GetClientModRPC("HatKidRPC", "SprintEquip"), nil, inst, true)
-
-	owner:ListenForEvent("step", function()
-		print("step!")
-	end)
-
 end
  
 local function OnUnequip(inst, owner)

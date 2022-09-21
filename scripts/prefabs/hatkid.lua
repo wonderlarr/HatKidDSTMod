@@ -6,6 +6,63 @@ local assets = {
     Asset( "SOUND", "sound/hatkidvoice.fsb"),
 }
 
+local hatNames = {
+	"strawhat",
+	"tophat",
+	"beefalohat",
+	"featherhat",
+	"beehat",
+	"minerhat",
+	"spiderhat",
+	"footballhat",
+	"earmuffshat",
+	"winterhat",
+	"bushhat",
+	"flowerhat",
+	"walrushat",
+	"slurtlehat",
+	"ruinshat",
+	"molehat",
+	"wathgrithrhat",
+	"walterhat",
+	"icehat",
+	"rainhat",
+	"catcoonhat",
+	"watermelonhat",
+	"eyebrellahat",
+	"red_mushroomhat",
+	"green_mushroomhat",
+	"blue_mushroomhat",
+	"hivehat",
+	"dragonheadhat",
+	"dragonbodyhat",
+	"dragontailhat",
+	"deserthat",
+	"goggleshat",
+	"moonstorm_goggleshat",
+	"skeletonhat",
+	"kelphat",
+	"mermhat",
+	"cookiecutterhat",
+	"batnosehat",
+	"nutrientsgoggleshat",
+	"plantregistryhat",
+	"balloonhat",
+	"alterguardianhat",
+	"eyemaskhat",
+	"monkey_mediumhat",
+	"monkey_smallhat",
+	"polly_rogershat",
+
+	-- AHIT items
+	"kidhat",
+	"sprinthat",
+	"brewinghat",
+	"polarhat",
+	"dwellermask",
+	"timestophat",
+}
+
 local prefabs = {}
 
 -- Starting inventory as a table. Passed into MakePlayerCharacter later
@@ -14,6 +71,8 @@ local startInv = { "kidhat" }
 -- On revive or load
 local function OnAlien(inst)
 	inst.components.locomotor:SetExternalSpeedMultiplier(inst, "hatkid_speed_config", TUNING.HATKIDSPEED)
+	
+	inst.components.sanity:DoDelta(30) -- Sanity
 end
 
 -- On death
@@ -131,6 +190,26 @@ local MasterPostInit = function(inst, data)
 
     inst.OnNewSpawn = OnNewSpawn
 	inst.OnLoad = OnLoad
+
+	inst:ListenForEvent("builditem", function(inst, data)
+		if data.item:HasTag("hat") and inst.components.sanity then
+			inst.components.sanity:DoDelta(12)
+		end
+	end)
+
+	inst:ListenForEvent("makerecipe", function(inst, data)
+		for k, v in pairs(hatNames) do
+			if data.recipe.product == v then
+				inst:AddTag("fastbuilder")
+				inst:DoTaskInTime(0, function(inst)
+					if inst:HasTag("fastbuilder") then
+						inst:RemoveTag("fastbuilder")
+					end
+				end)
+				return
+			end
+		end
+	end)
 end
 
 return MakePlayerCharacter("hatkid", prefabs, assets, CommonPostInit, MasterPostInit, startInv)
