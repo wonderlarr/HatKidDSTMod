@@ -59,7 +59,7 @@ local function OnUse(inst)
 			inst.components.useableitem:StopUsingItem()
 		end)
 		
-		owner.components.talker:Say(GetString(owner, "HAT_ONCOOLDOWN"))
+		owner.components.talker:Say(GetString(owner, "ACTIONFAIL_GENERIC"))
 		
 	else
 		-- If can use

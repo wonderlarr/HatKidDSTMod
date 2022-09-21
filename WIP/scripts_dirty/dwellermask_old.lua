@@ -133,7 +133,7 @@ local function OnUse(inst)
 		inst:DoTaskInTime(0, inst.components.useableitem:StopUsingItem()) -- Wait 1 frame or else things get weird
 		
 		--Cooldown line
-		owner.components.talker:Say(GetString(owner, "HAT_ONCOOLDOWN"))
+		owner.components.talker:Say(GetString(owner, "ACTIONFAIL_GENERIC"))
 		
 		-- print(owner.components.timer:GetTimeLeft("hat_cooldown"))
 	elseif rechargeable:IsCharged() and not inst.components.timer:TimerExists("dwellmask_duration") then

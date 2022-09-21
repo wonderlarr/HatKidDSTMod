@@ -80,7 +80,7 @@ local function OnUse(inst)
 		end)
 		
 		--Cooldown line
-		owner.components.talker:Say(GetString(owner, "HAT_ONCOOLDOWN"))
+		owner.components.talker:Say(GetString(owner, "ACTIONFAIL_GENERIC"))
 	else
 		-- If not in cooldown
 		owner.prevequip = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)

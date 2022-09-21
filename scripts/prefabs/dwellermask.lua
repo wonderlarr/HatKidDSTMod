@@ -149,7 +149,7 @@ local function OnUse(inst)
 
 		inst:DoTaskInTime(0, inst.components.useableitem:StopUsingItem()) -- Wait 1 frame or else things get weird
 	
-		owner.components.talker:Say(GetString(owner, "HAT_ONCOOLDOWN"))
+		owner.components.talker:Say(GetString(owner, "ACTIONFAIL_GENERIC"))
 		
 	else
 		-- If not in cooldown

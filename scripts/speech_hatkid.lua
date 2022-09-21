@@ -288,7 +288,7 @@ return {
         },
         POUR_WATER =
         {
-            OUT_OF_WATER = "Drat, out of water.",
+            OUT_OF_WATER = "Out of water.",
         },
         POUR_WATER_GROUNDTILE =
         {
@@ -322,7 +322,7 @@ return {
         },
         YOTB_UNLOCKSKIN =
         {
-            ALREADYKNOWN = "I'm seeing a familiar pattern... I've learned this already!",
+            ALREADYKNOWN = "I think I know this already.",
         },
         CARNIVALGAME_FEED =
         {
@@ -330,7 +330,7 @@ return {
         },
         HERD_FOLLOWERS =
         {
-            WEBBERONLY = "They won't listen to me, but they might listen to Webber.",
+            WEBBERONLY = "Maybe I should talk to Webber.",
         },
         BEDAZZLE =
         {
@@ -393,7 +393,7 @@ return {
 		NO_STATION = "I think I need tools for that.",
 	},
 
-	ACTIONFAIL_GENERIC = "I can't even",
+	ACTIONFAIL_GENERIC = "Not right now.",
 	ANNOUNCE_BOAT_LEAK = "We're taking on a lot of water.",
 	ANNOUNCE_BOAT_SINK = "I don't want to drown!",
 	ANNOUNCE_DIG_DISEASE_WARNING = "It looks better already.", --removed
