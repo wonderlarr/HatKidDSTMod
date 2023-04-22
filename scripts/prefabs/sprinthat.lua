@@ -41,7 +41,7 @@ end
 
 local function onLocomote(owner)
 	local inst = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
-	local isrunning = inst.cansprint and owner.components.locomotor.isrunning or owner.components.locomotor.wantstorun
+	local isrunning = owner.components.locomotor.isrunning or owner.components.locomotor.wantstorun
 
 	if inst.sprinting ~= isrunning then -- This is here so we don't retrigger the sound event when we aren't doing anything, so it only triggers if the state is different
 
@@ -169,7 +169,6 @@ end
  
 local function fn(Sim) 
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
 
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()

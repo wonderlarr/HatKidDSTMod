@@ -44,7 +44,7 @@
 <maxplaybacks>0</maxplaybacks>
 <maxplaybacks_behavior>Steal_oldest</maxplaybacks_behavior>
 <notes></notes>
-<open>0</open>
+<open>1</open>
 </eventcategory>
 </eventcategory>
 <sounddeffolder>
@@ -65,8 +65,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -104,8 +104,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -143,8 +143,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -182,8 +182,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -221,8 +221,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -260,8 +260,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -299,8 +299,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -338,8 +338,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -377,8 +377,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -416,8 +416,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -455,8 +455,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -494,8 +494,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -533,8 +533,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -572,8 +572,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -611,8 +611,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -650,8 +650,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -689,8 +689,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -728,8 +728,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -767,8 +767,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -806,8 +806,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>1</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>1</spawntime_min>
-<spawntime_max>1</spawntime_max>
+<spawntime_min>0</spawntime_min>
+<spawntime_max>0</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -912,7 +912,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -1101,7 +1101,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -1290,7 +1290,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -1479,7 +1479,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -1668,7 +1668,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -1857,7 +1857,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -2046,7 +2046,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -2235,7 +2235,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -2424,7 +2424,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -2613,7 +2613,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -2802,7 +2802,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -2991,7 +2991,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -3180,7 +3180,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -3369,7 +3369,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -3558,7 +3558,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -3747,7 +3747,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -3936,7 +3936,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -4125,7 +4125,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -4314,7 +4314,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -4503,7 +4503,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/sfx</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -4683,6 +4683,7 @@
 <_IOS_quality>50</_IOS_quality>
 <_IOS_forcesoftware>1</_IOS_forcesoftware>
 <_IOS_maxstreams>10</_IOS_maxstreams>
+<_lang_default_filename_prefix></_lang_default_filename_prefix>
 <_lang_default_rebuild>0</_lang_default_rebuild>
 </default_soundbank_props>
 <soundbank>
@@ -5603,8 +5604,8 @@
 <_IOS_fixedsamplerate>48000</_IOS_fixedsamplerate>
 <notes></notes>
 </waveform>
-<_PC_format>PCM</_PC_format>
-<_PC_quality>50</_PC_quality>
+<_PC_format>VORBIS</_PC_format>
+<_PC_quality>100</_PC_quality>
 <_PC_forcesoftware>1</_PC_forcesoftware>
 <_PC_maxstreams>10</_PC_maxstreams>
 <_XBOX360_format>PCM</_XBOX360_format>
@@ -5643,6 +5644,7 @@
 <_IOS_quality>50</_IOS_quality>
 <_IOS_forcesoftware>1</_IOS_forcesoftware>
 <_IOS_maxstreams>10</_IOS_maxstreams>
+<_lang_default_filename_prefix></_lang_default_filename_prefix>
 <_lang_default_rebuild>0</_lang_default_rebuild>
 </soundbank>
 <notes></notes>

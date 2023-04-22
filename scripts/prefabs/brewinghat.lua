@@ -15,30 +15,6 @@ local prefabs =
 {
 }
 
-local function equiprev(inst)
-	local owner = inst.components.inventoryitem:GetGrandOwner()
-
-	if TUNING.FUNNYMODE then --Just a funny item teleportation mechanic we can do here.
-
-		if owner.prevequip then
-			inst:DoTaskInTime(0, function(inst)
-				owner.components.inventory:Equip(owner.prevequip)
-				owner.prevequip = nil
-			end)
-		end
-
-	else
-
-		if owner.prevequip and owner.prevequip.components.inventoryitem and owner.prevequip.components.inventoryitem:GetGrandOwner() == owner then
-			inst:DoTaskInTime(0, function(inst)
-				owner.components.inventory:Equip(owner.prevequip)
-				owner.prevequip = nil
-			end)
-		end
-
-	end
-end
-
 local function OnEquip(inst, owner)
 	owner.AnimState:OverrideSymbol("swap_hat", "brewinghat", "swap_hat")
 
@@ -63,51 +39,72 @@ local function OnUnequip(inst, owner)
 		owner.AnimState:Hide("HEAD_HAT")
 	end
 end
- 
- 
-local function OnUse(inst)
+
+local function equiprev(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
-	local hands = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 	
-	if not inst.components.rechargeable:IsCharged()  -- if we aren't charged yet
-	or owner.components.sanity.current < TUNING.BREWINGHAT_THRESHHOLD  -- or we don't have enough sanity
-	or inst.components.fueled:GetPercent() < (1 / TUNING.BREWINGHAT_DURABILITY) -- or we don't have enough fuel
-	or (hands and string.match(hands.prefab, "kidpotion")) then -- or we are already holding a potion
-	
-		-- If in cooldown
-		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
-			inst.components.useableitem:StopUsingItem()
-		end)
-		
-		--Cooldown line
-		owner.components.talker:Say(GetString(owner, "ACTIONFAIL_GENERIC"))
-	else
-		-- If not in cooldown
-		owner.prevequip = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-
-		-- Penalty
-		owner.components.sanity:DoDelta(-TUNING.BREWINGHAT_THRESHHOLD)
-
-		local kidpotion = SpawnPrefab("kidpotion")
-		kidpotion.sourceprefab = inst
-		kidpotion.brewer = owner
-		owner.components.inventory:Equip(kidpotion)
-
-		-- Hat Stuff
-		inst.components.rechargeable:Discharge(TUNING.BREWINGHAT_COOLDOWN) -- Cooldown
-		inst.components.fueled:DoDelta(-1 * 45)
-
-		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
-			inst.components.useableitem:StopUsingItem()
+	if owner.prevequip and owner.prevequip.components.inventoryitem and owner.prevequip.components.inventoryitem:GetGrandOwner() == owner then
+		inst:DoTaskInTime(0, function(inst)
+			owner.components.inventory:Equip(owner.prevequip)
+			owner.prevequip = nil
 		end)
 	end
 end
 
-local function KeybindUse(inst)
-	inst.components.useableitem:StartUsingItem()
+local function TestFn(inst)
+	local owner = inst.components.inventoryitem:GetGrandOwner()
+	
+	if inst.components.fueled then
+		if owner.components.sanity.current >= TUNING.BREWINGHAT_THRESHHOLD -- if we have enough sanity 
+		and inst.components.fueled:GetPercent() >= (1 / TUNING.BREWINGHAT_DURABILITY) then -- and we have enough fuel
+			return true
+		else
+			return false
+		end
+	else
+		if owner.components.sanity.current >= TUNING.BREWINGHAT_THRESHHOLD then
+			return true
+		else
+			return false
+		end
+	end
 end
 
-local function fn(Sim) 
+local function OnActivate(inst)	
+	local owner = inst.components.inventoryitem:GetGrandOwner()
+
+	-- Activation cost
+	if owner.components.sanity then
+		owner.components.sanity:DoDelta(-TUNING.BREWINGHAT_THRESHHOLD)
+	end
+
+	if inst.components.fueled then
+		inst.components.fueled:SetPercent(inst.components.fueled:GetPercent() - (1 / TUNING.BREWINGHAT_DURABILITY))
+		inst.components.fueled.currentfuel = math.floor(inst.components.fueled.currentfuel/(45 * inst.components.fueled.bonusmult)+0.5)* (45 * inst.components.fueled.bonusmult)
+	end
+
+	owner.prevequip = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+
+	local kidpotion = SpawnPrefab("kidpotion")
+	kidpotion.sourceprefab = inst
+	kidpotion.brewer = owner
+	owner.components.inventory:Equip(kidpotion)
+end
+
+local function OnDeactivate(inst)
+	local owner = inst.components.inventoryitem:GetGrandOwner()
+	local hands = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+
+	if hands and (hands.prefab == "kidpotion" or hands.prefab == "kidpotion_throwable") then
+		owner.components.inventory:DropItem(hands)
+	end
+end
+
+local function KeybindUse(inst)
+	inst.components.hatmagic:Use()
+end
+
+local function fn() 
     local inst = CreateEntity()
 
 	inst.entity:AddTransform()
@@ -144,17 +141,21 @@ local function fn(Sim)
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
-	
-	inst:AddComponent("rechargeable")
-	
-	inst:AddComponent("useableitem")
-    inst.components.useableitem:SetOnUseFn(OnUse)
+
+	inst:AddComponent("hatmagic")
+	inst.components.hatmagic.instant = false
+	inst.components.hatmagic.cooldowntime = TUNING.BREWINGHAT_COOLDOWN
+	inst.components.hatmagic.activetime = 0 -- infinite, technically
+	inst.components.hatmagic:SetActivateFn(OnActivate)
+	inst.components.hatmagic:SetDeactivateFn(OnDeactivate)
+	inst.components.hatmagic:SetTestFn(TestFn)
 
 	if TUNING.BREWINGHAT_DURABILITY then
 		inst:AddComponent("fueled")
 		inst.components.fueled:InitializeFuelLevel( TUNING.BREWINGHAT_DURABILITY * 45 )
 		inst.components.fueled.fueltype = FUELTYPE.EXPLOSIVE -- gunpowder, 90
 		inst.components.fueled.secondaryfueltype = FUELTYPE.CAVE -- slurtle slime only, 45
+		inst.components.fueled.bonusmult = TUNING.BREWINGHAT_FUELMULT
 		-- although technically lightbulbs and fireflies are included in CAVE fuel, we limit that using the container fuel approach
 	end
 
@@ -172,6 +173,10 @@ local function fn(Sim)
 	inst:ListenForEvent("AbilityKey", KeybindUse)
 
 	inst:ListenForEvent("prevequip", equiprev)
+
+	inst:ListenForEvent("startcooling", function(inst)
+		inst.components.hatmagic:Deactivate()
+	end)
 
     return inst
 end

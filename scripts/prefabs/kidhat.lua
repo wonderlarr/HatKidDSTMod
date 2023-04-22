@@ -56,11 +56,6 @@ local function OnEmpty(inst)
 	inst:DoTaskInTime(0, inst.Remove)
 end
 
-
-local function KeybindUse(inst)
-	inst.components.useableitem:StartUsingItem()
-end
-
 local function fn() 
     local inst = CreateEntity()
 
@@ -132,7 +127,7 @@ local function fn()
 		inst:AddComponent("waterproofer")
 		inst.components.waterproofer:SetEffectiveness(TUNING.KIDHAT_WATERPROOFNESS)
 	end
-	
+
     return inst
 end
 

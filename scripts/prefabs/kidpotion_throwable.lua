@@ -21,9 +21,9 @@ local kidpotion_prefabs = {
     "superjump_fx",
     "hatshatter2",
 
-    "reticule",
-    "reticuleaoe",
-    "reticuleaoeping",
+    -- "reticule",
+    -- "reticuleaoe",
+    -- "reticuleaoeping",
 } 
 
 local function DoExplode(self)
@@ -88,17 +88,6 @@ end
 local function OnHitSomething(inst, attacker, target)
     inst.components.explosive:OnBurnt()
 end
-
--- local function RefreshReticule(inst)
---     local owner = ThePlayer
---     if owner ~= nil then
---         local inventoryitem = inst.replica.inventoryitem
---         if inventoryitem ~= nil and inventoryitem:IsHeldBy(owner) and owner.components.playercontroller ~= nil then
---             owner.components.playercontroller:RefreshReticule()
---         end
---     end
--- end
-
  
 local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_object", "swap_kidpotion", "swap_kidpotion")
@@ -113,6 +102,10 @@ end
  
 local function onthrown(inst)
 	if inst.brewer ~= nil then
+        if inst.sourceprefab then
+            inst.sourceprefab:PushEvent("startcooling")
+        end
+
         inst:AddTag("NOCLICK")
         inst.persists = false
         
@@ -163,9 +156,13 @@ local function onDrop(inst)
             if inst.brewer and inst.brewer.components.sanity then
                 inst.brewer.components.sanity:DoDelta(TUNING.BREWINGHAT_THRESHHOLD)
             end
-
+            
             if inst.sourceprefab and inst.sourceprefab.components.fueled then
-                inst.sourceprefab.components.fueled:DoDelta(1 * 45)
+                inst.sourceprefab.components.fueled:SetPercent(inst.sourceprefab.components.fueled:GetPercent() + (1 / TUNING.BREWINGHAT_DURABILITY))
+            end
+            
+            if inst.sourceprefab then
+                inst.sourceprefab:PushEvent("startcooling")
             end
 
             inst:Remove()

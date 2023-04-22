@@ -33,11 +33,15 @@ local function onDrop(inst)
     -- If we get dropped but aren't brewed, refund the potion costs
     if not inst.components.rechargeable:IsCharged() then
         if inst.brewer and inst.brewer.components.sanity then
-            inst.brewer.components.sanity:DoDelta(5)
+            inst.brewer.components.sanity:DoDelta(TUNING.BREWINGHAT_THRESHHOLD)
         end
         
         if inst.sourceprefab and inst.sourceprefab.components.fueled then
-            inst.sourceprefab.components.fueled:DoDelta(1)
+            inst.sourceprefab.components.fueled:SetPercent(inst.sourceprefab.components.fueled:GetPercent() + (1 / TUNING.BREWINGHAT_DURABILITY))
+        end
+
+        if inst.sourceprefab then
+            inst.sourceprefab:PushEvent("startcooling")
         end
     end
     
@@ -56,7 +60,6 @@ end
 
 local function kidpotion_fn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
 
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()

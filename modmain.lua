@@ -133,7 +133,8 @@ Assets = {
 -- Import modmain segments
 modimport("modmain_tuning.lua")
 modimport("modmain_crafting.lua")
-modimport("modmain_state.lua")
+modimport("modmain_actions.lua")
+modimport("modmain_insight.lua")
 
 -- If meme language is enabled, we'll use our own meme strings, otherwise load the normal ones.
 if GLOBAL.KnownModIndex:IsModEnabled("workshop-1289272965") then
@@ -294,7 +295,7 @@ if not afs_enabled then
 						self.body_inv:MoveToBack()
 					end
 	
-					if GLOBAL.EQUIPSLOTS.NECK ~= nil and v.slot == GLOBAL.EQUIPSLOTS.NECK then -- added for compatiblity with equipslot mods. hopefully they call their slot this.
+					if GLOBAL.EQUIPSLOTS.NECK ~= nil and v.slot == GLOBAL.EQUIPSLOTS.NECK then -- added for compatibility with equipslot mods. hopefully they call their slot this.
 						self.amulet_inv:SetPosition(x, do_integrated_backpack and 80 or 40, 0)
 						self.amulet_inv:MoveToBack()
 					end
@@ -340,7 +341,9 @@ if not afs_enabled then
 		
 			self:SelectDefaultSlot()
 			self.current_list = self.inv
-			self:UpdateCursor()
+			if not controller_attached then
+				self:UpdateCursor()
+			end
 		
 			self.rebuild_pending = nil
 			self.rebuild_snapping = nil
@@ -373,6 +376,7 @@ if TUNING.BREWINGHAT_DURABILITY then
 					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
 					inst.components.fueled.accepting = true
 					inst.components.fueled:TakeFuelItem(fuelitem, owner)
+					currentfuel = math.floor(currentfuel/fueltogive+0.5)*fueltogive
 					inst.components.fueled.accepting = false
 				end
 			end
@@ -452,6 +456,7 @@ if TUNING.POLARHAT_DURABILITY then
 					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
 					inst.components.fueled.accepting = true
 					inst.components.fueled:TakeFuelItem(fuelitem, owner)
+					currentfuel = math.floor(currentfuel/fueltogive+0.5)*fueltogive
 					inst.components.fueled.accepting = false
 				end
 			end
@@ -694,6 +699,13 @@ State{
 		inst.components.locomotor:Stop()
 		inst:ClearBufferedAction()
 
+		inst.components.inventory:Hide()
+		inst:PushEvent("ms_closepopups")
+		if inst.components.playercontroller ~= nil then
+			inst.components.playercontroller:EnableMapControls(false)
+			inst.components.playercontroller:Enable(false)
+		end
+
 		inst.components.colouradder:PushColour("polarhat", 82 / 255, 115 / 255, 124 / 255, 0)
 
 		inst.AnimState:OverrideSymbol("swap_frozen", "frozen", "frozen")
@@ -726,21 +738,123 @@ State{
 		inst.AnimState:ClearOverrideSymbol("swap_frozen")
 		inst.components.colouradder:PopColour("polarhat")
 		inst:RemoveTag("alwaysblock")
+
+		inst.components.inventory:Show()
+		if inst.components.playercontroller ~= nil then
+			inst.components.playercontroller:EnableMapControls(true)
+			inst.components.playercontroller:Enable(true)
+		end
 	end,
 }
 )
 
 GLOBAL.FUELTYPE.ICE = "ICE"
-GLOBAL.FUELTYPE.EXPLOSIVE = "EXPLOSIVE"
+GLOBAL.FUELTYPE.EXPLOSIVE = "EXPLOSIVE"	
 
 AddPrefabPostInit("ice", function(inst)
 	inst:AddComponent("fuel")
-    inst.components.fuel.fuelvalue = TUNING.MED_LARGE_FUEL -- 90
+    inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL -- 180
     inst.components.fuel.fueltype = GLOBAL.FUELTYPE.ICE -- do do do do do
 end)
 
 AddPrefabPostInit("gunpowder", function(inst)
 	inst:AddComponent("fuel")
     inst.components.fuel.fuelvalue = TUNING.MED_LARGE_FUEL -- 90
-    inst.components.fuel.fueltype = GLOBAL.FUELTYPE.EXPLOSIVE -- do do do do do
+    inst.components.fuel.fueltype = GLOBAL.FUELTYPE.EXPLOSIVE
 end)
+
+if TUNING.HATKID_DISCOUNT ~= false then
+	if TUNING.HATKID_DISCOUNT_RUINSHAT then
+		table.insert(TUNING.HATKID_CHEAP_HATS, "ruinshat")
+	end
+
+	-- Client pin bar "fake" discount
+	AddClassPostConstruct("widgets/redux/craftingmenu_pinslot", function(self)
+		local _ShowRecipe = self.ShowRecipe
+		
+		self.ShowRecipe = function(self)
+			local product = self.recipe_name ~= nil and self.craftingmenu:GetRecipeState(self.recipe_name) ~= nil and self.craftingmenu:GetRecipeState(self.recipe_name).recipe.product
+
+			if self.owner:HasTag("madhatter") then
+				local hatdiscount = false
+				for k, v in pairs(TUNING.HATKID_CHEAP_HATS) do
+					if v == product then
+						hatdiscount = true
+						break
+					end
+				end
+
+				-- BIOHAZARD ZONE! DO NOT TOUCH INGREDIENTMOD IF A GREEN AMULET IS IN PLAY!!!!!
+				local body = self.owner.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BODY)
+				if (body and body.prefab ~= "greenamulet") or not body then
+					if hatdiscount then
+						self.owner.replica.builder:SetIngredientMod(TUNING.HATKID_DISCOUNT)
+					else
+						self.owner.replica.builder:SetIngredientMod(1)
+					end
+				end
+			end
+			_ShowRecipe(self)
+		end
+		
+	end)
+	
+	-- Client full menu "fake" discount
+	AddClassPostConstruct("widgets/redux/craftingmenu_details", function(self)
+		local _PopulateRecipeDetailPanel = self.PopulateRecipeDetailPanel
+
+		self.PopulateRecipeDetailPanel = function(self, data, skin_name)
+			if self.owner:HasTag("madhatter") then
+				local hatdiscount = false
+				for k, v in pairs(TUNING.HATKID_CHEAP_HATS) do
+					if data and v == data.recipe.product then
+						hatdiscount = true
+						break
+					end
+				end
+
+				-- BIOHAZARD ZONE! DO NOT TOUCH INGREDIENTMOD IF A GREEN AMULET IS IN PLAY!!!!!
+				local body = self.owner.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BODY)
+				if (body and body.prefab ~= "greenamulet") or not body then
+					if hatdiscount then
+						self.owner.replica.builder:SetIngredientMod(TUNING.HATKID_DISCOUNT)
+					else
+						self.owner.replica.builder:SetIngredientMod(1)
+					end
+				end
+			end
+
+			return _PopulateRecipeDetailPanel(self, data, skin_name)
+		end
+	end)
+
+	-- Server-side Discount
+	AddComponentPostInit("builder", function(self)
+		local _HasIngredients = self.HasIngredients
+
+		self.HasIngredients = function(self, recipe)
+			if self.inst:HasTag("madhatter") then
+				local hatdiscount = false
+				for k, v in pairs(TUNING.HATKID_CHEAP_HATS) do
+					if v == recipe.product then
+						hatdiscount = true
+						break
+					end
+				end
+
+				-- BIOHAZARD ZONE! DO NOT TOUCH INGREDIENTMOD IF A GREEN AMULET IS IN PLAY!!!!!
+				local body = self.inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BODY)
+				-- if we're wearing something that isn't the green amulet or we aren't wearing anything at all, go ahead with the discount
+				if (body and body.prefab ~= "greenamulet") or not body then
+					if hatdiscount then
+						self.ingredientmod = TUNING.HATKID_DISCOUNT
+					else
+						self.ingredientmod = 1
+					end
+				end
+			end
+
+			return _HasIngredients(self, recipe)
+		end
+	end)
+end

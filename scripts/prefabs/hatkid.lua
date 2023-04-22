@@ -6,63 +6,6 @@ local assets = {
     Asset( "SOUND", "sound/hatkidvoice.fsb"),
 }
 
-local hatNames = {
-	"strawhat",
-	"tophat",
-	"beefalohat",
-	"featherhat",
-	"beehat",
-	"minerhat",
-	"spiderhat",
-	"footballhat",
-	"earmuffshat",
-	"winterhat",
-	"bushhat",
-	"flowerhat",
-	"walrushat",
-	"slurtlehat",
-	"ruinshat",
-	"molehat",
-	"wathgrithrhat",
-	"walterhat",
-	"icehat",
-	"rainhat",
-	"catcoonhat",
-	"watermelonhat",
-	"eyebrellahat",
-	"red_mushroomhat",
-	"green_mushroomhat",
-	"blue_mushroomhat",
-	"hivehat",
-	"dragonheadhat",
-	"dragonbodyhat",
-	"dragontailhat",
-	"deserthat",
-	"goggleshat",
-	"moonstorm_goggleshat",
-	"skeletonhat",
-	"kelphat",
-	"mermhat",
-	"cookiecutterhat",
-	"batnosehat",
-	"nutrientsgoggleshat",
-	"plantregistryhat",
-	"balloonhat",
-	"alterguardianhat",
-	"eyemaskhat",
-	"monkey_mediumhat",
-	"monkey_smallhat",
-	"polly_rogershat",
-
-	-- AHIT items
-	"kidhat",
-	"sprinthat",
-	"brewinghat",
-	"polarhat",
-	"dwellermask",
-	"timestophat",
-}
-
 local prefabs = {}
 
 -- Starting inventory as a table. Passed into MakePlayerCharacter later
@@ -145,7 +88,7 @@ local CommonPostInit = function(inst)
 	inst.MiniMapEntity:SetIcon( "hatkid.tex" )
 	inst:AddTag("hatkidcrafter")
 	inst:AddTag("hatkid")
-	inst:AddTag("hatter")
+	inst:AddTag("madhatter")
 	
 	inst:AddComponent("keyhandler")
     inst.components.keyhandler:AddActionListener("HatKidRPC", TUNING["HATKID"].KEY, "AbilityKeyDown", "KEYDOWN")
@@ -194,26 +137,29 @@ local MasterPostInit = function(inst, data)
 
     inst.OnNewSpawn = OnNewSpawn
 	inst.OnLoad = OnLoad
-
-	inst:ListenForEvent("builditem", function(inst, data)
-		if data.item:HasTag("hat") and inst.components.sanity then
-			inst.components.sanity:DoDelta(12)
-		end
-	end)
-
-	inst:ListenForEvent("makerecipe", function(inst, data)
-		for k, v in pairs(hatNames) do
-			if data.recipe.product == v then
-				inst:AddTag("fastbuilder")
-				inst:DoTaskInTime(0, function(inst)
-					if inst:HasTag("fastbuilder") then
-						inst:RemoveTag("fastbuilder")
-					end
-				end)
-				return
+	if TUNING.HATKID_CRAFT_SANITY ~= 0 then
+		inst:ListenForEvent("builditem", function(inst, data)
+			if data.item:HasTag("hat") and inst.components.sanity then
+				inst.components.sanity:DoDelta(TUNING.HATKID_CRAFT_SANITY)
 			end
-		end
-	end)
+		end)
+	end
+
+	if TUNING.HATKID_FASTCRAFTING then
+		inst:ListenForEvent("makerecipe", function(inst, data)
+			for k, v in pairs(TUNING.HATKID_FAST_HATS) do
+				if data.recipe.product == v then
+					inst:AddTag("fastbuilder")
+					inst:DoTaskInTime(0, function(inst)
+						if inst:HasTag("fastbuilder") then
+							inst:RemoveTag("fastbuilder")
+						end
+					end)
+					return
+				end
+			end
+		end)
+	end
 end
 
 return MakePlayerCharacter("hatkid", prefabs, assets, CommonPostInit, MasterPostInit, startInv)

@@ -5,45 +5,45 @@ return {
 	{
         APPRAISE =
         {
-            NOTNOW = "They must be busy now.",
+            NOTNOW = "Awh, not yet?",
         },
         REPAIR =
         {
-            WRONGPIECE = "Did I do that right?",
+            WRONGPIECE = "Oops.",
         },
         BUILD =
         {
-            MOUNTED = "I can't place that from way up here.",
+            MOUNTED = "I have to get off first.",
             HASPET = "I've already got a pet.",
-			TICOON = "I'm too invested in my own Ticoon to follow another one.",
+			TICOON = "One is already hard enough.",
         },
 		SHAVE =
 		{
-			AWAKEBEEFALO = "That would be crazy!",
-			GENERIC = "That would be weird.",
-			NOBITS = "That would be like me shaving myself!",
+			AWAKEBEEFALO = "I don't think he would like that much!",
+			GENERIC = "I don't think I'm supposed to do that.",
+			NOBITS = "I don't wanna hurt him.",
 			REFUSE = "only_used_by_woodie",
-            SOMEONEELSESBEEFALO = "I won't shave someone else's beefalo!",
+            SOMEONEELSESBEEFALO = "Someone might get angry if I do.",
 		},
 		STORE =
 		{
-			GENERIC = "It's full.",
-			NOTALLOWED = "That can't go in there.",
-			INUSE = "I'll wait my turn.",
-            NOTMASTERCHEF = "I'm not a fancy enough chef for that.",
+			GENERIC = "No more space.",
+			NOTALLOWED = "It doesn't fit right.",
+			INUSE = "It's not my turn yet",
+            NOTMASTERCHEF = "If I was better at cooking...",
 		},
         CONSTRUCT =
         {
-            INUSE = "Someone beat me to it.",
-            NOTALLOWED = "It won't fit.",
-            EMPTY = "I need something to build with.",
-            MISMATCH = "Whoops! Wrong plans.",
+            INUSE = "I wasn't fast enough.",
+            NOTALLOWED = "Won't fit here.",
+            EMPTY = "Can't do it with nothing.",
+            MISMATCH = "That's not right...",
 		},
 		RUMMAGE =
 		{	
-			GENERIC = "I can't do that.",
-			INUSE = "They're elbow deep in junk right now.",
-            NOTMASTERCHEF = "I'm not a fancy enough chef for that.",
+			GENERIC = "I shouldn't.",
+			INUSE = "I should wait for them to finish.",
+            NOTMASTERCHEF = "Warly might get upset...",
 		},
 		UNLOCK =
         {
@@ -53,22 +53,22 @@ return {
         {
         	WRONGKEY = "Whoops! That wasn't right.",
         	KLAUS = "I think there's too much going on!!",
-			QUAGMIRE_WRONGKEY = "I'll just have to find another key.",
+			QUAGMIRE_WRONGKEY = "Aw... It's the wrong one.",
         },
 		ACTIVATE =
 		{
-			LOCKED_GATE = "The gate is locked.",
-            HOSTBUSY = "He seems a bit preoccupied at the moment.",
-            CARNIVAL_HOST_HERE = "He's around here somewhere.",
-            NOCARNIVAL = "It looks like those birds flew the coop.",
-			EMPTY_CATCOONDEN = "Drat, I thought for sure there'd be something good inside!",
-			KITCOON_HIDEANDSEEK_NOT_ENOUGH_HIDERS = "It would be too easy, perhaps if there were more of these little guys...",
-			KITCOON_HIDEANDSEEK_NOT_ENOUGH_HIDING_SPOTS = "There aren't a lot of places around for them to hide.",
-			KITCOON_HIDEANDSEEK_ONE_GAME_PER_DAY = "I think that's enough for one day.",
+			LOCKED_GATE = "Knock nock!",
+            HOSTBUSY = "Maybe I'll come back later.",
+            CARNIVAL_HOST_HERE = "Didn't I just see him?",
+            NOCARNIVAL = "No more birds, I guess.",
+			EMPTY_CATCOONDEN = "No one's home...",
+			KITCOON_HIDEANDSEEK_NOT_ENOUGH_HIDERS = "I think we need more Kitty's",
+			KITCOON_HIDEANDSEEK_NOT_ENOUGH_HIDING_SPOTS = "What if we found more hiding spots first?",
+			KITCOON_HIDEANDSEEK_ONE_GAME_PER_DAY = "I'm a little tired of this for now.",
 		},
 		OPEN_CRAFTING =
 		{
-            PROFESSIONALCHEF = "I'm not a fancy enough chef for that.",
+            PROFESSIONALCHEF = "Warly might get upset.",
 			SHADOWMAGIC = "Scary.",
         },
         COOK =
@@ -79,22 +79,22 @@ return {
         },
         START_CARRAT_RACE =
         {
-            NO_RACERS = "I think I'm missing something here.",
+            NO_RACERS = "I should find some Carrats first!",
         },
 
 		DISMANTLE =
 		{
-			COOKING = "I can't do that while something's cooking.",
+			COOKING = "It would be fun, but I shouldn't yet.",
 			INUSE = "I'll wait my turn.",
-			NOTEMPTY = "I'll have to clean it out first.",
+			NOTEMPTY = "There's still stuff inside!",
         },
         FISH_OCEAN =
 		{
-			TOODEEP = "This rod wasn't made for deep sea fishing.",
+			TOODEEP = "I don't think I should use this rod here.",
 		},
         OCEAN_FISHING_POND =
 		{
-			WRONGGEAR = "This rod wasn't made for pond fishing.",
+			WRONGGEAR = "Woah, this rod isn't quite right.",
 		},
         --wickerbottom specific action
         READ =
@@ -117,116 +117,116 @@ return {
         GIVE =
         {
             GENERIC = "I can't do it!",
-            DEAD = "I don't think they'll need this.",
-            SLEEPING = "Shhh, they're napping!",
-            BUSY = "I'll try again in a second.",
-            ABIGAILHEART = "It was worth a shot.",
-            GHOSTHEART = "Maybe this is a bad idea.",
-            NOTGEM = "I'm not sticking that in there!",
-            WRONGGEM = "This gem won't work here.",
-            NOTSTAFF = "It's not quite the right shape.",
-            MUSHROOMFARM_NEEDSSHROOM = "A mushroom would probably be of more use.",
-            MUSHROOMFARM_NEEDSLOG = "A living log would probably be of more use.",
-            MUSHROOMFARM_NOMOONALLOWED = "These mushrooms seem to resist being planted!",
+            DEAD = "Uh. I should probably keep it.",
+            SLEEPING = "They're taking a nap right now.",
+            BUSY = "I'll wait a second.",
+            ABIGAILHEART = "Sorry Wendy.",
+            GHOSTHEART = "I don't think I even want them to come back.",
+            NOTGEM = "It doesn't fit right!",
+            WRONGGEM = "Let's keep it to ourselves..",
+            NOTSTAFF = "It almost kinda works. But also doesn't.",
+            MUSHROOMFARM_NEEDSSHROOM = "It needs a mushroom!",
+            MUSHROOMFARM_NEEDSLOG = "It needs one of those magic logs.",
+            MUSHROOMFARM_NOMOONALLOWED = "I don't think they'll grow.",
             SLOTFULL = "We already put something there.",
-            FOODFULL = "There's already a meal there.",
-            NOTDISH = "It won't want to eat that.",
+            FOODFULL = "I guess it doesn't need it.",
+            NOTDISH = "I don't think I should give it that.",
             DUPLICATE = "We already know that one.",
-            NOTSCULPTABLE = "I wonder how that would work?",
+            NOTSCULPTABLE = "How would that work?",
             NOTATRIUMKEY = "It's not quite the right shape.",
-            CANTSHADOWREVIVE = "It won't resurrect.",
-            WRONGSHADOWFORM = "It's not put together right.",
-            NOMOON = "I need to see the moon for that to work.",
-			PIGKINGGAME_MESSY = "I need to clean up first.",
-			PIGKINGGAME_DANGER = "It's too dangerous for that right now.",
-			PIGKINGGAME_TOOLATE = "It's too late for that now.",
-			CARNIVALGAME_INVALID_ITEM = "I need to buy some tokens.",
-			CARNIVALGAME_ALREADY_PLAYING = "A game is already underway.",
-            SPIDERNOHAT = "I can't fit them together in my pocket",
-            TERRARIUM_REFUSE = "Maybe I should experiment with different kinds of fuel...",
-            TERRARIUM_COOLDOWN = "I suppose the tree has to grow back before we can give it anything.",
-            NOTAMONKEY = "I don't speak monkey.",
-            QUEENBUSY = "She seems busy.",
+            CANTSHADOWREVIVE = "It's not waking up.",
+            WRONGSHADOWFORM = "I put the bones together wrong.",
+            NOMOON = "Don't work. I probably need to see the moon or something.",
+			PIGKINGGAME_MESSY = "I need to clean up before I can play.",
+			PIGKINGGAME_DANGER = "I think I'll wait a second.",
+			PIGKINGGAME_TOOLATE = "It's too close to bedtime to start another game.",
+			CARNIVALGAME_INVALID_ITEM = "Hmm, it doesn't want that.",
+			CARNIVALGAME_ALREADY_PLAYING = "I'm playing next!",
+            SPIDERNOHAT = "I don't have enough space.",
+            TERRARIUM_REFUSE = "What if we tried something else?",
+            TERRARIUM_COOLDOWN = "Let's wait for the tiny tree to come back first!",
+            NOTAMONKEY = "Oooooh ooooh. Nope, guess not.",
+            QUEENBUSY = "I think I'll just wait.",
         },
         GIVETOPLAYER =
         {
-            FULL = "Your pockets are too full!",
-            DEAD = "Maybe I'll just hold on to this.",
-            SLEEPING = "I could use a nap too.",
-            BUSY = "I'll try again in a second.",
+            FULL = "Make room please!",
+            DEAD = "Sealed away.",
+            SLEEPING = "They're having a little nap right now.",
+            BUSY = "I should wait a second.",
         },
         GIVEALLTOPLAYER =
         {
-            FULL = "Your pockets are too full!",
-            DEAD = "Maybe I'll just hold on to this.",
-            SLEEPING = "I could use a nap too.",
-            BUSY = "I'll try again in a second.",
+            FULL = "Make room please!",
+            DEAD = "Sealed away.",
+            SLEEPING = "They're having a little nap right now.",
+            BUSY = "I should wait a second.",
         },
         WRITE =
         {
-            GENERIC = "I think it's fine as is.",
-            INUSE = "There's only room for one scribbler.",
+            GENERIC = "I can't write on that now.",
+            INUSE = "I'll get my \"crayon\" things ready while they finish up!",
         },
         DRAW =
         {
-            NOIMAGE = "This would be easier if I had the item in front of me.",
+            NOIMAGE = "How do I know what to draw?",
         },
         CHANGEIN =
         {
-            GENERIC = "I don't want to change right now.",
-            BURNING = "It's too dangerous right now!",
-            INUSE = "It can only handle one style change at a time.",
-            NOTENOUGHHAIR = "There isn't enough fur to style.",
-            NOOCCUPANT = "It needs something hitched up.",
+            GENERIC = "I think it's fine right now.",
+            BURNING = "Woah! That's not good!",
+            INUSE = "It can only handle one style at a time.",
+            NOTENOUGHHAIR = "Maybe once the fur grows back.",
+            NOOCCUPANT = "We can make a beefalo look cooler!",
         },
         ATTUNE =
         {
-            NOHEALTH = "I don't feel well enough.",
+            NOHEALTH = "I don't feel so good, I'll wait till later.",
         },
         MOUNT =
         {
-            TARGETINCOMBAT = "I know better than to bother an angry beefalo!",
-            INUSE = "Someone beat me to the saddle!",
-			SLEEPING = "Wake up sleepy!",
+            TARGETINCOMBAT = "It's too angry!",
+            INUSE = "I didn't get there in time.",
+			SLEEPING = "Wakey wakey!",
         },
         SADDLE =
         {
-            TARGETINCOMBAT = "It won't let me do that while it's angry.",
+            TARGETINCOMBAT = "It's too angry!",
         },
         TEACH =
         {
             --Recipes/Teacher
-            KNOWN = "I already know that one.",
-            CANTLEARN = "I can't learn that one.",
+            KNOWN = "I think I already know that.",
+            CANTLEARN = "I can't tell what to do.",
 
             --MapRecorder/MapExplorer
-            WRONGWORLD = "This map was made for some other place.",
+            WRONGWORLD = "This map isn't the right one.",
 
 			--MapSpotRevealer/messagebottle
-			MESSAGEBOTTLEMANAGER_NOT_FOUND = "I can't make anything out in this lighting!",--Likely trying to read messagebottle treasure map in caves
+			MESSAGEBOTTLEMANAGER_NOT_FOUND = "I should try to go back outside.",--Likely trying to read messagebottle treasure map in caves
 
-            STASH_MAP_NOT_FOUND = "I don't see an \"X marks the spot\". They must've forgotten to draw it.",-- Likely trying to read stash map  in world without stash
+            STASH_MAP_NOT_FOUND = "There's \"X\". That's not very fun.",-- Likely trying to read stash map  in world without stash
         },
         WRAPBUNDLE =
         {
-            EMPTY = "I need to have something to wrap.",
+            EMPTY = "What should I wrap up?",
         },
         PICKUP =
         {
-			RESTRICTION = "I'm not skilled enough to use that.",
-			INUSE = "I'll wait my turn.",
+			RESTRICTION = "Nope. I don't want that.",
+			INUSE = "Oops. Someone else is using that.",
             NOTMINE_SPIDER = "only_used_by_webber",
             NOTMINE_YOTC =
             {
-                "You're not my carrat.",
-                "OW, it bit me!",
+                "Oh, you're not the right friend!",
+                "Hmm, not this one.",
 	},
 			NO_HEAVY_LIFTING = "only_used_by_wanda",
-            FULL_OF_CURSES = "I'm not touching that.",
+            FULL_OF_CURSES = "Might be scary to touch.",
         },
         SLAUGHTER =
         {
-            TOOFAR = "It got away.",
+            TOOFAR = "Aw, It got away.",
         },
         REPLATE =
         {
@@ -235,13 +235,13 @@ return {
         },
         SAIL =
         {
-        	REPAIR = "It doesn't need repairing.",
+        	REPAIR = "That won't work.",
         },
         ROW_FAIL =
         {
-            BAD_TIMING0 = "Too soon!",
-            BAD_TIMING1 = "My timing is off!",
-            BAD_TIMING2 = "Not again!",
+            BAD_TIMING0 = "I should paddle at the right time, next time.",
+            BAD_TIMING1 = "I'm not doing this right.",
+            BAD_TIMING2 = "Oh, I guess I messed up.",
         },
         LOWER_SAIL_FAIL =
         {
@@ -279,46 +279,46 @@ return {
         },
         PLANTREGISTRY_RESEARCH_FAIL =
         {
-            GENERIC = "I have nothing left to learn.",
-            FERTILIZER = "I'd rather not know anything further.",
+            GENERIC = "Nothing new.",
+            FERTILIZER = "Gross.",
         },
         FILL_OCEAN =
         {
-            UNSUITABLE_FOR_PLANTS = "For some reason, plants don't like salt water.",
+            UNSUITABLE_FOR_PLANTS = "Plants won't like this.",
         },
         POUR_WATER =
         {
-            OUT_OF_WATER = "Out of water.",
+            OUT_OF_WATER = "Oops! Out of water.",
         },
         POUR_WATER_GROUNDTILE =
         {
-            OUT_OF_WATER = "My watering can ran dry.",
+            OUT_OF_WATER = "All out of water.",
         },
         USEITEMON =
         {
             --GENERIC = "I can't use this on that!",
 
             --construction is PREFABNAME_REASON
-            BEEF_BELL_INVALID_TARGET = "I couldn't possibly!",
-            BEEF_BELL_ALREADY_USED = "This beefalo already belongs to someone else.",
-            BEEF_BELL_HAS_BEEF_ALREADY = "I don't need a whole herd.",
+            BEEF_BELL_INVALID_TARGET = "It's not meant for that.",
+            BEEF_BELL_ALREADY_USED = "It's already someone elses friend.",
+            BEEF_BELL_HAS_BEEF_ALREADY = "I already have a friend.",
         },
         HITCHUP =
         {
-            NEEDBEEF = "If I had a bell I could befriend a beefalo.",
-            NEEDBEEF_CLOSER = "My beefalo buddy is too far away.",
-            BEEF_HITCHED = "My beefalo is already hitched up.",
-            INMOOD = "My beefalo seems to be too lively.",
+            NEEDBEEF = "No beefalo are here!",
+            NEEDBEEF_CLOSER = "My buddy is too far away.",
+            BEEF_HITCHED = "My buddy is already up.",
+            INMOOD = "He's too wild right now.",
         },
         MARK =
         {
-            ALREADY_MARKED = "I've already made my pick.",
-            NOT_PARTICIPANT = "I've got no steak in this contest.",
+            ALREADY_MARKED = "I already chose.",
+            NOT_PARTICIPANT = "I don't wanna ruin the game.",
         },
         YOTB_STARTCONTEST =
         {
-            DOESNTWORK = "I guess they don't support the arts here.",
-            ALREADYACTIVE = "He must be busy with another contest somewhere.",
+            DOESNTWORK = "I guess I can't do that.",
+            ALREADYACTIVE = "Another contest is already happening.",
         },
         YOTB_UNLOCKSKIN =
         {
@@ -326,11 +326,11 @@ return {
         },
         CARNIVALGAME_FEED =
         {
-            TOO_LATE = "I need to be quicker!",
+            TOO_LATE = "Awh, I wasn't fast enough!",
         },
         HERD_FOLLOWERS =
         {
-            WEBBERONLY = "Maybe I should talk to Webber.",
+            WEBBERONLY = "Webber? I wonder where he is...",
         },
         BEDAZZLE =
         {
@@ -393,7 +393,7 @@ return {
 		NO_STATION = "I think I need tools for that.",
 	},
 
-	ACTIONFAIL_GENERIC = "Not right now.",
+	ACTIONFAIL_GENERIC = "That won't work.",
 	ANNOUNCE_BOAT_LEAK = "We're taking on a lot of water.",
 	ANNOUNCE_BOAT_SINK = "I don't want to drown!",
 	ANNOUNCE_DIG_DISEASE_WARNING = "It looks better already.", --removed
@@ -418,9 +418,9 @@ return {
     },
 
 	ANNOUNCE_BEES = "BEEEEEEEEEEEEES!!!!",
-	ANNOUNCE_BOOMERANG = "Ow! I should try to catch that!",
-	ANNOUNCE_CHARLIE = "That presence... it's familiar! Hello?",
-	ANNOUNCE_CHARLIE_ATTACK = "OW! Something bit me!",
+	ANNOUNCE_BOOMERANG = "Ow! Oops.",
+	ANNOUNCE_CHARLIE = "Hello?",
+	ANNOUNCE_CHARLIE_ATTACK = "Ow! That wasn't Snatcher...",
 	ANNOUNCE_CHARLIE_MISSED = "only_used_by_winona", --winona specific
 	ANNOUNCE_HOT = "I could use a pool of water right about now",
 	ANNOUNCE_COLD = "Brrrrr!",
@@ -1249,27 +1249,27 @@ return {
 		RUINSHAT = "How's my hair?",
 		NIGHTMARE_TIMEPIECE =
 		{
-            CALM = "All is well.",
+            CALM = "Seems calm.",
             WARN = "Getting pretty magical around here.",
             WAXING = "It's becoming more concentrated!",
             STEADY = "It seems to be staying steady.",
             WANING = "Feels like it's receding.",
-            DAWN = "The nightmare is almost gone!",
-            NOMAGIC = "There's no magic around here.",
+            DAWN = "It's almost over!",
+            NOMAGIC = "I don't think this is the right place.",
 		},
-		BISHOP_NIGHTMARE = "It's falling apart!",
-		ROOK_NIGHTMARE = "Terrifying!",
-		KNIGHT_NIGHTMARE = "It's a knightmare!",
+		BISHOP_NIGHTMARE = "Whaa?",
+		ROOK_NIGHTMARE = "Scary!",
+		KNIGHT_NIGHTMARE = "I hope I don't get knightmares.",
 		MINOTAUR = "That thing doesn't look happy.",
 		SPIDER_DROPPER = "Note to self: Don't look up.",
 		NIGHTMARELIGHT = "I wonder what function this served.",
 		NIGHTSTICK = "It's electric!",
 		GREENGEM = "It's green and gemmy.",
 		MULTITOOL_AXE_PICKAXE = "It's brilliant!",
-		ORANGESTAFF = "This beats walking.",
+		ORANGESTAFF = "Awesome-r way of walking!",
 		YELLOWAMULET = "Warm to the touch.",
-		GREENAMULET = "No base should be without one!",
-		SLURPERPELT = "Doesn't look all that much different dead.",	
+		GREENAMULET = "I could make more hats!",
+		SLURPERPELT = "Looks softish.",	
 
 		SLURPER = "It's so hairy!",
 		SLURPER_PELT = "Doesn't look all that much different dead.",
@@ -1766,13 +1766,13 @@ return {
 		COOKEDSMALLMEAT = "Now there's no reason to worry about getting worms!",
 		COOKPOT =
 		{
-			COOKING_LONG = "I'm just like Cooking Cat!",
-			COOKING_SHORT = "It's almost done!",
-			DONE = "The food has been punished because it was bad.",
-			EMPTY = "It makes me hungry just to look at it.",
-			BURNT = "Did the food fight back?",
+			COOKING_LONG = "Sure is taking a while.",
+			COOKING_SHORT = "I can't wait!",
+			DONE = "The food was being very bad.",
+			EMPTY = "It's used to punish food that has been bad.",
+			BURNT = "The food fought back.",
 		},
-		CORN = "High in fructose!",
+		CORN = "Tastes alright!",
 		CORN_COOKED = "Cooked and high in fructose!",
 		CORN_SEEDS = "It's a corn seed.",
         CANARY =
@@ -1908,11 +1908,11 @@ return {
 		},
 		DECIDUOUSTREE = 
 		{
-			BURNING = "What a waste of wood.",
-			BURNT = "I feel like I could have prevented that.",
-			CHOPPED = "Take that, nature!",
-			POISON = "It looks unhappy about me stealing those birchnuts!",
-			GENERIC = "It's all leafy. Most of the time.",
+			BURNING = "Goodbye tree.",
+			BURNT = "Oh, sorry tree.",
+			CHOPPED = "It's a chopped down tree I think.",
+			POISON = "Is that bad?",
+			GENERIC = "I don't speak for the trees.",
 		},
 		ACORN = "There's definitely something inside there.",
         ACORN_SAPLING = "It'll be a tree soon!",
@@ -1997,7 +1997,7 @@ return {
 		FISHSTICKS = "Sticks to your ribs.",
 		FISHTACOS = "Crunchy and delicious!",
 		FISH_COOKED = "Grilled to perfection.",
-		FLINT = "It's a very sharp rock.",
+		FLINT = "A weird rock.",
 		FLOWER = 
 		{
             GENERIC = "It's pretty, but it smells like a common laborer.",
@@ -2011,7 +2011,7 @@ return {
         FOSSIL_PIECE = "Dino bones! Cool!",
         FOSSIL_STALKER =
         {
-			GENERIC = "Still missing some pieces.",
+			GENERIC = "B-b-b-bad to the fossil!",
 			FUNNY = "What? How!",
 			COMPLETE = "A whole dinosaur! Almost.",
         },
@@ -2187,9 +2187,9 @@ return {
         MAXWELLHEAD = "I can see into his pores.",
         MAXWELLLIGHT = "I wonder how they work.",
         MAXWELLLOCK = "Looks almost like a key hole.",
-        MAXWELLTHRONE = "That doesn't look very comfortable.",
-        MEAT = "It's a bit gamey, but it'll do.",
-        MEATBALLS = "It's just a big wad of meat.",
+        MAXWELLTHRONE = "I don't think I should.",
+        MEAT = "I'll punish it first.",
+        MEATBALLS = "Tasty!",
         MEATRACK =
         {
             DONE = "Jerky time!",
@@ -2307,16 +2307,16 @@ return {
         POMEGRANATE_COOKED = "Haute Cuisine!",
         POMEGRANATE_SEEDS = "It's a pome-whatsit seed.",
         POND = "I can't see the bottom!",
-        POOP = "I should fill my pockets!",
+        POOP = "Gross.",
         --PORTABLECOOKPOT_ITEM = "Now we're cookin'!",
         FERTILIZER = "That is definitely a bucket full of poop.",
-        PUMPKIN = "It's as big as my head!",
-        PUMPKINCOOKIE = "I love these things",
-        PUMPKIN_COOKED = "How did it not turn into a pie?",
+        PUMPKIN = "It's bigger than my whole head!",
+        PUMPKINCOOKIE = "Cookies!",
+        PUMPKIN_COOKED = "Spooky.",
         PUMPKIN_LANTERN = "Spooky!",
         PUMPKIN_SEEDS = "It's a pumpkin seed.",
-        PURPLEAMULET = "It's whispering to me.",
-        PURPLEGEM = "It contains the mysteries of the universe.",
+        PURPLEAMULET = "That would drive me insane.",
+        PURPLEGEM = "Could make good fuel.",
         RABBIT =
         {
             GENERIC = "He's looking for carrots.",
@@ -2357,7 +2357,7 @@ return {
         --RUINSRELIC_PLATE = "I find the shards get in my food.",
         RESEARCHLAB =
         {
-            GENERIC = "Cool sciency thing!",
+            GENERIC = "It's a cool sciency thing!",
             BURNT = "Burnt sciency stuff isn't as cool.",
         },
         RESEARCHLAB2 =
@@ -2380,16 +2380,16 @@ return {
             GENERIC = "The Queen was creepier",
             BURNT = "A little creepier now.",
         },
-        RESURRECTIONSTONE = "It's always a good idea to touch base.",
+        RESURRECTIONSTONE = "Glad I know it's here.",
         ROBIN =
         {
-            GENERIC = "Does that mean winter is gone?",
-            HELD = "He likes my hat.",
+            GENERIC = "It's a cute birdy!",
+            HELD = "He likes my hat. I think.",
         },
         ROBIN_WINTER =
         {
-            GENERIC = "Life in the frozen wastes.",
-            HELD = "It's so soft.",
+            GENERIC = "I wish I could fly too.",
+            HELD = "So soft.",
         },
         ROBOT_PUPPET = "They're trapped!",
         ROCK_LIGHT =

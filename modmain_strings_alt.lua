@@ -18,7 +18,7 @@ STRINGS.CHARACTERS.HATKID = require "speech_hatkid" -- speech file
 -- The character select screen lines
 STRINGS.CHARACTER_TITLES.hatkid = "The Illiterate"
 STRINGS.CHARACTER_NAMES.hatkid = "Smug Kid"
-STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Smug\n*Idiot Child\n*Crafts Hats Faster\n*Good at dying"
+STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Crafts hats faster and cheaper\n*Has her own weird hats\n*Needs something on her head (or else)\n*Willow sanity passive but again\n*Good at dying"
 STRINGS.CHARACTER_QUOTES.hatkid = "\"Check your mailbox.\""
 STRINGS.CHARACTER_SURVIVABILITY.hatkid = "no lol"
 
@@ -65,6 +65,11 @@ STRINGS.SKIN_DESCRIPTIONS.hatkid_none = "Oh my god it's the one cute character f
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_toonlink = STRINGS.CHARACTER_QUOTES.hatkid
 	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_toonlink = "DO NOT CALL Jack in the Box Munchie Meal at 3:00 AM"
 
+
+	STRINGS.SKIN_NAMES.ms_hatkid_dye_oliver = "Magic Child" -- Oliver
+	STRINGS.SKIN_QUOTES.ms_hatkid_dye_oliver = STRINGS.CHARACTER_QUOTES.hatkid
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_oliver = "The AI will always make the worst choice I swear."
+
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATKID =
 {
 	GENERIC = "Destroy the child!",
@@ -85,34 +90,34 @@ STRINGS.NAMES.KIDHAT = "Child's"
 	STRINGS.NAMES.KIDHAT_DYE_PINKDANGER = STRINGS.NAMES.KIDHAT
 
 STRINGS.NAMES.SPRINTHAT = "Red Sus"
-STRINGS.NAMES.BREWINGHAT = "which witch would watch which watch"
+STRINGS.NAMES.BREWINGHAT = "リトルウィッチアカデミア"
 STRINGS.NAMES.POLARHAT = "Diamond Tester"
 STRINGS.NAMES.DWELLERMASK = "Green"
 STRINGS.NAMES.TIMESTOPHAT = "ZA WARUDO"
 
-STRINGS.NAMES.HATBRELLA = "Blue Uhhh"
-	STRINGS.NAMES.HATBRELLA_BOWKID = "Pink Uhhh"
+STRINGS.NAMES.HATBRELLA = "Hungern"
+	STRINGS.NAMES.HATBRELLA_BOWKID = "Pink Umbrella"
 
-STRINGS.NAMES.HATBRELLAOPEN = "Open Blue Uhhh"
-	STRINGS.NAMES.HATBRELLAOPEN_BOWKID = "Open Pink Uhhh"
+STRINGS.NAMES.HATBRELLAOPEN = "Open Hungern"
+	STRINGS.NAMES.HATBRELLAOPEN_BOWKID = "Open Pink Umbrella"
 
-STRINGS.NAMES.KIDPOTION_THROWABLE = "Mad Concocktion"
-STRINGS.NAMES.KIDPOTION = "Brewing Concocktion"
+STRINGS.NAMES.KIDPOTION_THROWABLE = "c2a4d"
+STRINGS.NAMES.KIDPOTION = "c2a1"
 
 --Recipe Descriptions
 STRINGS.RECIPE_DESC.KIDHAT = "Will not work for anyone but you, amazing."
 STRINGS.RECIPE_DESC.SPRINTHAT = "It's just gonna be on all the time now."
-STRINGS.RECIPE_DESC.BREWINGHAT = "Destroy the crock pots first."
+STRINGS.RECIPE_DESC.BREWINGHAT = "Weeb."
 STRINGS.RECIPE_DESC.POLARHAT = "Do do do do do"
 STRINGS.RECIPE_DESC.DWELLERMASK = "OOOOOHHH... GREEEEEEENNNN."
 STRINGS.RECIPE_DESC.TIMESTOPHAT = "Slow down your enemies, and your PC!"
 
-STRINGS.RECIPE_DESC.HATBRELLA = "How"
+STRINGS.RECIPE_DESC.HATBRELLA = "Don't worry, Hungern has never eaten anyone...! That I know of..."
 
 -- Wilson/Generic
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.KIDHAT = "Child."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPRINTHAT = "Sus."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BREWINGHAT = "If two witches were watching two watches..."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BREWINGHAT = "What does that even mean?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.POLARHAT = "ICE!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DWELLERMASK = "That's what the point of the mask is."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIMESTOPHAT = "STAR PLATINUM, ZA WARUDO"
@@ -120,5 +125,5 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATBRELLA = "Did you pick up the "
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATBRELLAOPEN = "Wow, gotta love the "
 
 -- Only hat kid can obtain these
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.KIDPOTION = "Give it a little."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.KIDPOTION_THROWABLE = "Oh my"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.KIDPOTION = "I'm a highly trained professional!"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.KIDPOTION_THROWABLE = "My god! What are you doing?!"

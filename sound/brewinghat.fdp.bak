@@ -3,7 +3,7 @@
 <guid>{1cba56d9-08cf-4066-b1b1-dd1d19ad2a3c}</guid>
 <version>4</version>
 <eventgroup_nextid>0</eventgroup_nextid>
-<soundbank_nextid>1</soundbank_nextid>
+<soundbank_nextid>2</soundbank_nextid>
 <sounddef_nextid>1</sounddef_nextid>
 <build_project>1</build_project>
 <build_headerfile>0</build_headerfile>
@@ -198,13 +198,13 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>brewinghat/Item_Throw_Swoosh_3.ogg</filename>
+<filename>brewinghat/MonoItem_Throw_Swoosh_2.ogg</filename>
 <soundbankname>brewinghat</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
 </waveform>
 <waveform>
-<filename>brewinghat/Item_Throw_Swoosh_2.ogg</filename>
+<filename>brewinghat/MonoItem_Throw_Swoosh_3.ogg</filename>
 <soundbankname>brewinghat</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -265,7 +265,7 @@
 <car_rpmsmooth>0.075</car_rpmsmooth>
 <car_loadsmooth>0.05</car_loadsmooth>
 <car_loadscale>6</car_loadscale>
-<volume_db>-13</volume_db>
+<volume_db>-8</volume_db>
 <pitch>0</pitch>
 <pitch_units>Octaves</pitch_units>
 <pitch_randomization>0</pitch_randomization>
@@ -278,8 +278,8 @@
 <mode>x_3d</mode>
 <ignoregeometry>No</ignoregeometry>
 <rolloff>Logarithmic</rolloff>
-<mindistance>1</mindistance>
-<maxdistance>10000</maxdistance>
+<mindistance>50</mindistance>
+<maxdistance>1000</maxdistance>
 <auto_distance_filtering>Off</auto_distance_filtering>
 <distance_filter_centre_freq>1500</distance_filter_centre_freq>
 <headrelative>World_relative</headrelative>
@@ -407,6 +407,8 @@
 <_IOS_resamplemode>Off</_IOS_resamplemode>
 <_IOS_automaticsampleratepercentage>100</_IOS_automaticsampleratepercentage>
 <_IOS_fixedsamplerate>48000</_IOS_fixedsamplerate>
+<unmanagedwaveform>brewinghat/MonoItem_Throw_Swoosh_2.ogg</unmanagedwaveform>
+<unmanagedwaveform>brewinghat/MonoItem_Throw_Swoosh_3.ogg</unmanagedwaveform>
 </simpleevent>
 </eventgroup>
 <default_soundbank_props>
@@ -472,7 +474,7 @@
 </default_soundbank_props>
 <soundbank>
 <name>brewinghat</name>
-<guid>{0346a423-4f16-40f4-acec-240d91216790}</guid>
+<guid>{e480baf7-d7fe-4ffc-9585-40b87e505cbb}</guid>
 <load_into_rsx>0</load_into_rsx>
 <disable_seeking>0</disable_seeking>
 <enable_syncpoints>1</enable_syncpoints>
@@ -489,8 +491,8 @@
 <_IOS_banktype>DecompressedSample</_IOS_banktype>
 <notes></notes>
 <waveform>
-<filename>brewinghat/Item_Throw_Swoosh_2.ogg</filename>
-<guid>{8a58bffc-a412-47a9-a523-ae99a70a74df}</guid>
+<filename>brewinghat/MonoItem_Throw_Swoosh_2.ogg</filename>
+<guid>{cc8eb5b9-46ec-46ad-8125-9014607d74d5}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -534,8 +536,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>brewinghat/Item_Throw_Swoosh_3.ogg</filename>
-<guid>{fa7033c8-60e0-406d-b773-e2bd2595254d}</guid>
+<filename>brewinghat/MonoItem_Throw_Swoosh_3.ogg</filename>
+<guid>{2d014d22-fd0f-45fe-8d44-da9155a340d0}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -578,8 +580,8 @@
 <_IOS_fixedsamplerate>48000</_IOS_fixedsamplerate>
 <notes></notes>
 </waveform>
-<_PC_format>PCM</_PC_format>
-<_PC_quality>50</_PC_quality>
+<_PC_format>VORBIS</_PC_format>
+<_PC_quality>100</_PC_quality>
 <_PC_forcesoftware>1</_PC_forcesoftware>
 <_PC_maxstreams>10</_PC_maxstreams>
 <_XBOX360_format>PCM</_XBOX360_format>

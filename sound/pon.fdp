@@ -88,7 +88,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain1.ogg</filename>
+<filename>pon/mono/Pon_Chain1.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -127,7 +127,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain2.ogg</filename>
+<filename>pon/mono/Pon_Chain2.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -166,7 +166,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain3.ogg</filename>
+<filename>pon/mono/Pon_Chain3.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -205,7 +205,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain4.ogg</filename>
+<filename>pon/mono/Pon_Chain4.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -244,7 +244,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain5.ogg</filename>
+<filename>pon/mono/Pon_Chain5.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -283,7 +283,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain6.ogg</filename>
+<filename>pon/mono/Pon_Chain6.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -322,7 +322,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain7.ogg</filename>
+<filename>pon/mono/Pon_Chain7.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -361,7 +361,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain8.ogg</filename>
+<filename>pon/mono/Pon_Chain8.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -400,7 +400,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain9.ogg</filename>
+<filename>pon/mono/Pon_Chain9.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -439,7 +439,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain10.ogg</filename>
+<filename>pon/mono/Pon_Chain10.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -478,7 +478,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain11.ogg</filename>
+<filename>pon/mono/Pon_Chain11.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -517,7 +517,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain12.ogg</filename>
+<filename>pon/mono/Pon_Chain12.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -556,7 +556,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain13.ogg</filename>
+<filename>pon/mono/Pon_Chain13.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -595,7 +595,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain14.ogg</filename>
+<filename>pon/mono/Pon_Chain14.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -634,7 +634,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain15.ogg</filename>
+<filename>pon/mono/Pon_Chain15.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -673,7 +673,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain16.ogg</filename>
+<filename>pon/mono/Pon_Chain16.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -712,7 +712,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain17.ogg</filename>
+<filename>pon/mono/Pon_Chain17.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -751,7 +751,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain18.ogg</filename>
+<filename>pon/mono/Pon_Chain18.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -790,7 +790,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain19.ogg</filename>
+<filename>pon/mono/Pon_Chain19.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -829,7 +829,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>pon/Pon_Chain20.ogg</filename>
+<filename>pon/mono/Pon_Chain20.ogg</filename>
 <soundbankname>pon_bank01</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -4705,8 +4705,8 @@
 <_IOS_banktype>DecompressedSample</_IOS_banktype>
 <notes></notes>
 <waveform>
-<filename>pon/Pon_Chain1.ogg</filename>
-<guid>{9966ab92-8130-46ba-8f7c-d70dba680860}</guid>
+<filename>pon/mono/Pon_Chain1.ogg</filename>
+<guid>{f570cc3d-98e0-40f1-afcf-d0e28d0e968e}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -4750,8 +4750,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>pon/Pon_Chain10.ogg</filename>
-<guid>{d24eeb2d-3b96-44f3-b2e0-1cdf757146a3}</guid>
+<filename>pon/mono/Pon_Chain10.ogg</filename>
+<guid>{d2eccb9b-9026-4fe4-b011-90c8361ed8fe}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -4795,8 +4795,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>pon/Pon_Chain11.ogg</filename>
-<guid>{dc84053d-a4e2-4745-a79e-73e06ea8c4c4}</guid>
+<filename>pon/mono/Pon_Chain11.ogg</filename>
+<guid>{c460d4c6-97fe-4f65-89c1-978842599f47}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -4840,8 +4840,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>pon/Pon_Chain12.ogg</filename>
-<guid>{90344e8a-8518-447c-8922-f40f952145e4}</guid>
+<filename>pon/mono/Pon_Chain12.ogg</filename>
+<guid>{883ea093-fbd0-48b0-bebd-51c30e9bdfa0}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -4885,8 +4885,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>pon/Pon_Chain13.ogg</filename>
-<guid>{ee4a4b8d-b6ac-4637-b60a-ae96375fc935}</guid>
+<filename>pon/mono/Pon_Chain13.ogg</filename>
+<guid>{8d689525-4bdd-4750-8caa-ce23b8557978}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -4930,8 +4930,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>pon/Pon_Chain14.ogg</filename>
-<guid>{cbd4a679-6bde-4e6d-80b9-aa1feb21800f}</guid>
+<filename>pon/mono/Pon_Chain14.ogg</filename>
+<guid>{361cd4bc-fed7-4509-bce3-905b9730fb8e}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -4975,8 +4975,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>pon/Pon_Chain15.ogg</filename>
-<guid>{814dee84-8b3f-444c-a977-2ebcc6c14930}</guid>
+<filename>pon/mono/Pon_Chain15.ogg</filename>
+<guid>{a5868899-ac53-43fd-9c89-e6008e702932}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -5020,8 +5020,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>pon/Pon_Chain16.ogg</filename>
-<guid>{ec0f8681-6faf-4152-a251-90884080cb54}</guid>
+<filename>pon/mono/Pon_Chain16.ogg</filename>
+<guid>{c1da1838-cab7-4cc1-9b07-459c9c084726}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -5065,8 +5065,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>pon/Pon_Chain17.ogg</filename>
-<guid>{6e869aa6-58fb-4b84-81d6-35d22c19e7b6}</guid>
+<filename>pon/mono/Pon_Chain17.ogg</filename>
+<guid>{22e81ff9-276e-404c-a9ba-093ef6773fcc}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -5110,8 +5110,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>pon/Pon_Chain18.ogg</filename>
-<guid>{11769626-cc45-4168-ae94-4c027eea5da5}</guid>
+<filename>pon/mono/Pon_Chain18.ogg</filename>
+<guid>{6784d403-5a3f-483d-9c19-aa50793c96d4}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -5155,8 +5155,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>pon/Pon_Chain19.ogg</filename>
-<guid>{50e97f0d-bb4a-4493-a445-46687c1a1070}</guid>
+<filename>pon/mono/Pon_Chain19.ogg</filename>
+<guid>{7ccd3d9d-e25e-42aa-9cd6-3abab928ea95}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -5200,8 +5200,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>pon/Pon_Chain2.ogg</filename>
-<guid>{19a94fb6-c4dd-40ca-a9a4-f6397fadf0d7}</guid>
+<filename>pon/mono/Pon_Chain2.ogg</filename>
+<guid>{0cd7ab90-39e9-43e3-99f1-2ff00fbf8cc0}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -5245,8 +5245,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>pon/Pon_Chain20.ogg</filename>
-<guid>{2e86ed8e-8861-40d6-93cb-2a57e5331576}</guid>
+<filename>pon/mono/Pon_Chain20.ogg</filename>
+<guid>{aaf89a61-4c44-45ea-ad62-32bf3b05e515}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -5290,8 +5290,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>pon/Pon_Chain3.ogg</filename>
-<guid>{5329e03c-993d-4221-92f0-c365ff6cec30}</guid>
+<filename>pon/mono/Pon_Chain3.ogg</filename>
+<guid>{1a114b5d-8d8a-4261-80bc-09e06eda2c71}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -5335,8 +5335,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>pon/Pon_Chain4.ogg</filename>
-<guid>{04572366-aa13-4229-a4b0-bea643cd5667}</guid>
+<filename>pon/mono/Pon_Chain4.ogg</filename>
+<guid>{6dea4674-f85e-4d0c-8127-fb4c1391377d}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -5380,8 +5380,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>pon/Pon_Chain5.ogg</filename>
-<guid>{c51769b5-259f-424f-aba4-0c538ae4612a}</guid>
+<filename>pon/mono/Pon_Chain5.ogg</filename>
+<guid>{4fae2e23-2145-4415-8f27-0aef0e422b92}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -5425,8 +5425,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>pon/Pon_Chain6.ogg</filename>
-<guid>{f09a2ef2-035b-43c7-81a4-d4f8a103f1e8}</guid>
+<filename>pon/mono/Pon_Chain6.ogg</filename>
+<guid>{9c42c0ad-cd54-4e71-989c-660d252fac6a}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -5470,8 +5470,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>pon/Pon_Chain7.ogg</filename>
-<guid>{cdf9ed7c-a227-4bae-9b86-086f4e7bd605}</guid>
+<filename>pon/mono/Pon_Chain7.ogg</filename>
+<guid>{a9e4c9c4-4f2e-497d-8141-a61a52c1ba2e}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -5515,8 +5515,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>pon/Pon_Chain8.ogg</filename>
-<guid>{95a7a884-e189-44c1-bd60-bb3e88c865e9}</guid>
+<filename>pon/mono/Pon_Chain8.ogg</filename>
+<guid>{95f78bcf-37aa-40fe-88d3-01b71fbc7fbf}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -5560,8 +5560,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>pon/Pon_Chain9.ogg</filename>
-<guid>{c55336d8-263f-4b68-b0b7-7db73dc9a494}</guid>
+<filename>pon/mono/Pon_Chain9.ogg</filename>
+<guid>{ee686ab8-4405-48d2-a419-32a04413a934}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -5604,8 +5604,8 @@
 <_IOS_fixedsamplerate>48000</_IOS_fixedsamplerate>
 <notes></notes>
 </waveform>
-<_PC_format>PCM</_PC_format>
-<_PC_quality>50</_PC_quality>
+<_PC_format>VORBIS</_PC_format>
+<_PC_quality>100</_PC_quality>
 <_PC_forcesoftware>1</_PC_forcesoftware>
 <_PC_maxstreams>10</_PC_maxstreams>
 <_XBOX360_format>PCM</_XBOX360_format>

@@ -3,3 +3,29 @@ Warning: QPainter::setPen: Painter not active
 Warning: QPainter::setBrush: Painter not active
 Warning: QPainter::setRenderHint: Painter must be active to set rendering hints
 Warning: QPainter::setPen: Painter not active
+Debug: 
+Building project 'timestophat'...
+Debug: Building project D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\timestophat.fev...
+Debug: Unique sound defs 2/4
+Debug: Retrieving sound file info...
+Debug: Retrieving reverb info...
+Debug: FEV file written ok
+Debug: Unique Envelope Points: 0 of 0
+Debug: Unique Strings: 200 characters of 200
+Debug: Caching sound file details for ''...
+Debug: dweller_monno\MonoBadge_Start.ogg
+Debug: dweller_monno\MonoBadge_Stop.ogg
+Debug: timestop_mono\MonoBadge_Loop_With_Clocks.ogg
+Debug: timestop_mono\za warudo!.ogg
+Debug: Building 'timestophat.fsb'
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\dweller_monno\MonoBadge_Stop.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\dweller_monno\MonoBadge_Start.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\timestop_mono\MonoBadge_Loop_With_Clocks.ogg
+Debug: Encoded D:\SteamLibrary\steamapps\common\Don't Starve Together\mods\HatKidDSTMod\sound\timestop_mono\za warudo!.ogg
+Debug: Writing FSB...
+Debug: Finished building FSB
+Debug: 
+Debug: 
+Summary of build:
+SUCCESS: D:/SteamLibrary/steamapps/common/Don't Starve Together/mods/HatKidDSTMod/sound/timestophat.fev
+SUCCESS: timestophat.fsb

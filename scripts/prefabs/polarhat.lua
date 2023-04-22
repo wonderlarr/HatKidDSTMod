@@ -49,91 +49,6 @@ end
 
 AddClientModRPCHandler("HatKidRPC", "polarhatclient", polarhatclient)
 
-local function OnUse(inst)
-	local owner = inst.components.inventoryitem:GetGrandOwner()
-	
-	if not inst.components.rechargeable:IsCharged()
-	or inst.components.fueled.currentfuel < (90 * 4) then -- add tuning
-		-- If cant use
-		inst:DoTaskInTime(0, function(inst) -- Wait 1 frame or else things get weird
-			inst.components.useableitem:StopUsingItem()
-		end)
-		
-		owner.components.talker:Say(GetString(owner, "ACTIONFAIL_GENERIC"))
-		
-	else
-		-- If can use
-		if inst.components.fueled then
-			inst.components.fueled:DoDelta(-90 * 4)
-		end
-
-		-- Cooldown
-		inst.components.rechargeable:Discharge(TUNING.POLARHAT_COOLDOWN)
-		
-		-- Fakefreeze, rewritten somewhat more properly as a state
-		owner.sg:GoToState("hat_frozen")
-
-		-- Initial FX
-		SpawnPrefab("polarhat_charge").Transform:SetPosition(owner.Transform:GetWorldPosition())
-		SpawnPrefab("hatshatter").Transform:SetPosition(owner.Transform:GetWorldPosition())
-		local two = SpawnPrefab("hatshatter")
-		two.Transform:SetPosition(owner.Transform:GetWorldPosition())
-		two.Transform:SetScale(1.25, 1.25, 1.25)
-
-		-- After a delay, explode!
-		owner:DoTaskInTime(20 * FRAMES, function(owner)
-			inst.components.useableitem:StopUsingItem()
-
-			-- Take sanity
-			owner.components.sanity:DoDelta(-5) -- Add TUNING
-
-			-- Explode FX
-			SpawnPrefab("hatshatter2").Transform:SetPosition(owner.Transform:GetWorldPosition())
-			SpawnPrefab("polarhat_explode").Transform:SetPosition(owner.Transform:GetWorldPosition())
-			
-			-- Camera Shake
-			for i, v in ipairs(AllPlayers) do
-				local distSq = v:GetDistanceSqToInst(owner)
-				local k = math.max(0, math.min(1, distSq / 400))
-				local intensity = k * 0.75 * (k - 2) + 0.75 --easing.outQuad(k, 1, -1, 1)
-				if intensity > 0 then
-					v:ShakeCamera(CAMERASHAKE.FULL, .7, .02, intensity / 2)
-				end
-			end
-			
-			-- Get entities in a radius around the explosion's center
-			local pt = owner:GetPosition()
-			local range = TUNING.POLARHAT_RADIUS
-			-- local tags = { "monster", "hostile", "smallcreature", "insect", "animal", "largecreature", "character", "player" }
-			local nags = { "CLASSIFED", "invisible", "playerghost" }
-			local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, nil)	
-			for _,ent in ipairs(targets) do
-
-				-- Hitstun and damage
-				if ent.components.combat and not ent:HasTag("player") then
-					ent.components.combat:GetAttacked(owner, 18, inst)
-				end
-
-				-- Freeze things that need frozen
-				if ent.components.freezable ~= nil then
-					ent.components.freezable:AddColdness(TUNING.POLARHAT_LEVEL)
-					ent.components.freezable:SpawnShatterFX()
-				end
-
-				-- Decrease character temperatures
-				if ent.components.temperature ~= nil then
-					-- If effecting the owner, modify temp directly to bypass polarhat insulation
-					if ent == owner then
-						ent.components.temperature:SetTemperature(ent.components.temperature.current + -TUNING.POLARHAT_TEMP + -(math.max(0, ent.components.temperature:GetCurrent() / 70 * 20)))
-					else
-						ent.components.temperature:DoDelta(-TUNING.POLARHAT_TEMP + -(math.max(0, ent.components.temperature:GetCurrent() / 70 * 20)))
-					end
-				end
-			end
-		end)
-	end
-end
-
 local function OnEquip(inst, owner)
 	owner.AnimState:OverrideSymbol("swap_hat", "polarhat", "swap_hat")
 	
@@ -161,9 +76,99 @@ local function OnUnequip(inst, owner)
 	end
 end
 
+local function OnActivate(inst)
+	local owner = inst.components.inventoryitem:GetGrandOwner()
+	
+	-- Cost
+	if inst.components.fueled then -- what the heck is happening here??? -- it works, leave it alone for now
+		inst.components.fueled:SetPercent(inst.components.fueled:GetPercent() - (1 / TUNING.POLARHAT_DURABILITY))
+		inst.components.fueled.currentfuel = math.floor(inst.components.fueled.currentfuel/(180 * inst.components.fueled.bonusmult)+0.5)* (180 * inst.components.fueled.bonusmult)
+	end
+
+	if owner.components.sanity then
+		owner.components.sanity:DoDelta(-TUNING.POLARHAT_THRESHHOLD)
+	end
+	
+	-- Fakefreeze, rewritten somewhat more properly as a state
+	owner.sg:GoToState("hat_frozen")
+
+	-- Initial FX
+	SpawnPrefab("polarhat_charge").Transform:SetPosition(owner.Transform:GetWorldPosition())
+	SpawnPrefab("hatshatter").Transform:SetPosition(owner.Transform:GetWorldPosition())
+	local two = SpawnPrefab("hatshatter")
+	two.Transform:SetPosition(owner.Transform:GetWorldPosition())
+	two.Transform:SetScale(1.25, 1.25, 1.25)
+
+	-- After a delay, explode!
+	owner:DoTaskInTime(20 * FRAMES, function(owner)
+		-- Explode FX
+		SpawnPrefab("hatshatter2").Transform:SetPosition(owner.Transform:GetWorldPosition())
+		SpawnPrefab("polarhat_explode").Transform:SetPosition(owner.Transform:GetWorldPosition())
+		
+		-- Start Camera Shake
+		for i, v in ipairs(AllPlayers) do
+			local distSq = v:GetDistanceSqToInst(owner)
+			local k = math.max(0, math.min(1, distSq / 400))
+			local intensity = k * 0.75 * (k - 2) + 0.75
+			if intensity > 0 then
+				v:ShakeCamera(CAMERASHAKE.FULL, .7, .02, intensity / 2)
+			end
+		end
+		-- End Camera Shake
+		
+		-- Get entities in a radius around the explosion's center
+		local pt = owner:GetPosition()
+		local range = TUNING.POLARHAT_RADIUS
+		-- local tags = { "monster", "hostile", "smallcreature", "insect", "animal", "largecreature", "character", "player" }
+		local nags = { "CLASSIFED", "invisible", "playerghost", "INLIMBO" }
+		local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, nil)	
+		for _,ent in ipairs(targets) do
+
+			-- Hitstun and damage
+			if ent.components.combat and not ent:HasTag("player") then
+				ent.components.combat:GetAttacked(owner, TUNING.POLARHAT_DAMAGE, inst)
+			end
+
+			-- Freeze things that need frozen
+			if ent.components.freezable ~= nil then
+				ent.components.freezable:AddColdness(TUNING.POLARHAT_LEVEL)
+				ent.components.freezable:SpawnShatterFX()
+			end
+
+			-- Decrease character temperatures
+			if ent.components.temperature ~= nil then
+				-- If effecting the owner, modify temp directly to bypass polarhat insulation
+				if ent == owner then
+					ent.components.temperature:SetTemperature(ent.components.temperature.current + -TUNING.POLARHAT_TEMP + -(math.max(0, ent.components.temperature:GetCurrent() / 70 * 20)))
+				else
+					ent.components.temperature:DoDelta(-TUNING.POLARHAT_TEMP + -(math.max(0, ent.components.temperature:GetCurrent() / 70 * 20)))
+				end
+			end
+		end
+	end)
+end
+
+local function TestFn(inst)
+	local owner = inst.components.inventoryitem:GetGrandOwner()
+
+	if inst.components.fueled then
+		if owner.components.sanity.current >= TUNING.POLARHAT_THRESHHOLD -- if we have enough sanity 
+		and inst.components.fueled:GetPercent() >= (1 / TUNING.POLARHAT_DURABILITY) then -- and we have enough fuel
+			return true
+		else
+			return false
+		end
+	else
+		if owner.components.sanity.current >= TUNING.POLARHAT_THRESHHOLD then
+			return true
+		else
+			return false
+		end
+	end
+end
 
 local function KeybindUse(inst)
-	inst.components.useableitem:StartUsingItem()
+	inst.components.hatmagic:Activate()
 end
 
 local function fn(Sim) 
@@ -191,9 +196,6 @@ local function fn(Sim)
     end
 	
 	MakeHauntableLaunch(inst)
- 
-	inst:AddComponent("useableitem")
-    inst.components.useableitem:SetOnUseFn(OnUse)
 
     inst:AddComponent("timer")
  
@@ -208,15 +210,20 @@ local function fn(Sim)
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
-	
 
-	
-	inst:AddComponent("rechargeable")
+	inst:AddComponent("hatmagic")
+	inst.components.hatmagic.instant = false
+	-- inst.components.hatmagic.cooldowntime = TUNING.POLARHAT_COOLDOWN
+	inst.components.hatmagic.cooldowntime = 2
+	inst.components.hatmagic.activetime = 2/3
+	inst.components.hatmagic:SetActivateFn(OnActivate)
+	inst.components.hatmagic:SetTestFn(TestFn)
 
 	if TUNING.POLARHAT_DURABILITY then
 		inst:AddComponent("fueled")
-		inst.components.fueled:InitializeFuelLevel( TUNING.POLARHAT_DURABILITY * 90 )
-		inst.components.fueled.fueltype = "ICE" -- ice, 90
+		inst.components.fueled:InitializeFuelLevel( TUNING.POLARHAT_DURABILITY * 180 )
+		inst.components.fueled.fueltype = "ICE" -- ice, 180
+		inst.components.fueled.bonusmult = TUNING.POLARHAT_FUELMULT
 	end
 
 	if TUNING.POLARHAT_INSULATION then 
@@ -235,4 +242,4 @@ local function fn(Sim)
     return inst
 end
 
-return  Prefab("polarhat", fn, assets, prefabs)
+return Prefab("polarhat", fn, assets, prefabs)

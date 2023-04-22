@@ -1,7 +1,7 @@
 name = "[Internal] Hat Kid: The Homesick Hatter"
-description = "Adds Hat Kid from A Hat in Time into the world of Don't Starve Together, complete with her hats, umbrella, and even some of her outfits!\n\nThis mod is highly configurable, click the config button below to customize your experience to a tee."
+description = "Adds Hat Kid from A Hat in Time into the world of Don't Starve Together, complete with her hats, umbrella, and even some of her outfits!\n\nThis mod is highly configurable, click the config button below to customize your experience to a tee.\n\nDependencies:\n\n* [API] Modded Skins\n* [API] Time Control"
 author = "Skylarr 󰀏" -- Unknown character is a torch emoji
-version = "1.0.1" -- major version . feature update . minor update/bugfix
+version = "1.2.4" -- major version . feature update . minor update/bugfix
 
 forumthread = ""
 
@@ -22,19 +22,20 @@ server_filter_tags = {
 	"hat kid",
 	"hat in time",
 	"cute",
+	"skylarr",
 }
 
-mod_dependencies = 
-{
-    {
-        workshop = "workshop-2570815741",
-        ["[API] Time Control"] = true
-    },
-	{
-		workshop = "workshop-2812783478",
-		["[API] Modded Skins"] = true
-	}
-}
+-- mod_dependencies = 
+-- {
+--     {
+--         workshop = "workshop-2570815741",
+--         ["[API] Time Control"] = true
+--     },
+-- 	{
+-- 		workshop = "workshop-2812783478",
+-- 		["[API] Modded Skins"] = true
+-- 	}
+-- }
 
 local null_options = {
 	{ description = "", data = 0 }
