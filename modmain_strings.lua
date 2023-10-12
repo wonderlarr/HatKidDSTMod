@@ -16,9 +16,9 @@ STRINGS.NAMES.HATKID = "Hat Kid"
 STRINGS.CHARACTERS.HATKID = require "speech_hatkid" -- speech file
 
 -- The character select screen lines
-STRINGS.CHARACTER_TITLES.hatkid = "The Homesick Hatter"
+STRINGS.CHARACTER_TITLES.hatkid = "The Haberdasher"
 STRINGS.CHARACTER_NAMES.hatkid = "Hat Kid"
-STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Experienced hatter\n*Collects lots of stuff\n*Likes hats a little too much\n"
+STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Is a grandmaster haberdasher\n*Overreliant on headwear\n*Collects all sorts of things"
 STRINGS.CHARACTER_QUOTES.hatkid = "\"Oh, hi there!\""
 STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Slim"
 
@@ -65,10 +65,12 @@ STRINGS.SKIN_DESCRIPTIONS.hatkid_none = "A royal purple and gold outfit, best fi
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_toonlink = STRINGS.CHARACTER_QUOTES.hatkid
 	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_toonlink = "A very green outfit, reminding you of sailing, oddly enough."
 
-	-- New skins
 	STRINGS.SKIN_NAMES.ms_hatkid_dye_oliver = "Arcane Ocean" -- Oliver
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_oliver = STRINGS.CHARACTER_QUOTES.hatkid
 	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_oliver = "A set of white, baby blue, and red clothes. It seems magical and familiar."
+
+-- If we're in the menu we don't need to load any more
+if GLOBAL.TheNet:GetServerGameMode() == "" then return end
 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATKID =
 {
