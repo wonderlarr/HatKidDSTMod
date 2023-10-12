@@ -11,19 +11,62 @@ local prefabs = {}
 -- Starting inventory as a table. Passed into MakePlayerCharacter later
 local startInv = { "kidhat" }
 
--- On revive or load
-local function OnAlien(inst)
+-- On revive or load, onbecomehuman equivalent
+local function OnAlien(inst, data, isloading)
 	inst.components.locomotor:SetExternalSpeedMultiplier(inst, "hatkid_speed_config", TUNING.HATKIDSPEED)
+
+	-- Wanda item compat
+	if inst.components.positionalwarp ~= nil then
+		if not isloading then
+			inst.components.positionalwarp:Reset()
+		end
+		if inst.components.inventory:HasItemWithTag("pocketwatch_warp", 1) then
+			inst.components.positionalwarp:EnableMarker(true)
+		end
+	end
 end
 
+-- Called only on respawns
 local function OnAlienRespawn(inst)
 	inst.components.sanity:DoDelta(30)
 end
 
--- On death
+-- On death, onbecomeghost equivalent
 local function OnGhost(inst)
 	inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "hatkid_speed_config")
+
+	-- Wanda item compat
+	if inst.components.positionalwarp ~= nil then
+		inst.components.positionalwarp:EnableMarker(false)
+	end
 end
+
+local function on_show_warp_marker(inst)
+	inst.components.positionalwarp:EnableMarker(true)
+end
+
+local function on_hide_warp_marker(inst)
+	inst.components.positionalwarp:EnableMarker(false)
+end
+
+local function DelayedWarpBackTalker(inst)
+	-- if the player starts moving right away then we can skip this
+	if inst.sg == nil or inst.sg:HasStateTag("idle") then 
+		inst.components.talker:Say(GetString(inst, "ANNOUNCE_POCKETWATCH_RECALL"))
+	end 
+end
+
+local function OnWarpBack(inst, data)
+	if inst.components.positionalwarp ~= nil then
+		if data ~= nil and data.reset_warp then
+			inst.components.positionalwarp:Reset()
+			inst:DoTaskInTime(15 * FRAMES, DelayedWarpBackTalker) 
+		else
+			inst.components.positionalwarp:GetHistoryPosition(true)
+		end
+	end
+end
+
 
 local function OnPotionThrow(inst)
 
@@ -149,19 +192,19 @@ local function OnLoad(inst, data)
 end
 
 -- Server and client
--- Thanks Kzisor/Ysovuka for the Key Handling code.
--- Key Handling info https://forums.kleientertainment.com/forums/topic/63754-tutorial-character-transformation/
 local CommonPostInit = function(inst) 
 	inst.MiniMapEntity:SetIcon( "hatkid.tex" )
-	inst:AddTag("hatkidcrafter")
-	inst:AddTag("hatkid")
-	inst:AddTag("madhatter")
+	inst:AddTag("hatkid") -- Unique character tag, used for various things
+	inst:AddTag("hatkidcrafter") -- Enables crafting of Hat Kid's hats
+
+	inst:AddTag("madhatter") -- from the MadHatter component
+	inst:AddTag("pocketwatchcaster") -- Enables usage of Wanda's clocks, but not crafting
 	
-	inst:AddComponent("keyhandler")
+	inst:AddComponent("keyhandler") -- From custom Key Handler by Kzisor/Ysovuka https://forums.kleientertainment.com/forums/topic/63754-tutorial-character-transformation/
     inst.components.keyhandler:AddActionListener("HatKidRPC", TUNING.HATKID_ABILITYKEY, "AbilityKeyDown", "KEYDOWN")
     inst.components.keyhandler:AddActionListener("HatKidRPC", TUNING.HATKID_SWITCHKEY, "SwitchKeyDown", "KEYDOWN")
 
-	-- 50% chance of quote on potion explode
+	-- 50% chance of quote on potion explode TODO move this somewhere better
 	inst:ListenForEvent("PotionThrown", OnPotionThrow)
 	
 	inst:AddComponent("madhatter")
@@ -169,8 +212,6 @@ end
 
 -- Server only, most components go here.
 local MasterPostInit = function(inst, data)
-	-- If anything below is hard coded and not configurable, I did my job wrong. Please yell at me if that's the case.
-
 	-- Health
 	inst.components.health:SetMaxHealth(TUNING.HATKID_HEALTH)
 
@@ -194,6 +235,15 @@ local MasterPostInit = function(inst, data)
 	-- Flavor/Misc
 	inst.components.foodaffinity:AddPrefabAffinity("honeynuggets", TUNING.AFFINITY_15_CALORIES_LARGE) -- Favorite food
 	inst.AnimState:SetScale(TUNING.HATKIDSIZE, TUNING.HATKIDSIZE) -- Character size
+
+	-- Wanda
+	inst:AddComponent("positionalwarp")
+	inst:DoTaskInTime(0, function() inst.components.positionalwarp:SetMarker("pocketwatch_warp_marker") end)
+	inst.components.positionalwarp:SetWarpBackDist(TUNING.WANDA_WARP_DIST_YOUNG)
+
+	inst:ListenForEvent("show_warp_marker", on_show_warp_marker)
+	inst:ListenForEvent("hide_warp_marker", on_hide_warp_marker)
+    inst:ListenForEvent("onwarpback", OnWarpBack)
 
 	-- Voice
 	if TUNING.HATKIDVOICE == "hatkidvoice" then

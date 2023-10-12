@@ -71,6 +71,7 @@ for k, v in pairs(GLOBAL.KnownModIndex:GetModsToLoad()) do
 end
 
 -- Get the badge to actually appear on screen
+-- I have no idea what I am doing here
 local PonBadge = require("widgets/ponbadge")
 AddClassPostConstruct("widgets/statusdisplays", function(self)
     if not self.owner or self.owner.prefab ~= "hatkid" then return end
@@ -155,28 +156,26 @@ GLOBAL.c_makehats = function()
 	inst.Transform:SetPosition(x, y, z)
 end
 
--- Add hat to skin select
--- AddClassPostConstruct("widgets/redux/loadoutselect", function(self)
---     if self.puppet ~= nil and self.currentcharacter == "hatkid" then
---         local puppet = self.puppet 
+-- Change Ageless Watch if Hat Kid is using it
+AddPrefabPostInit("pocketwatch_heal", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then return end -- clients don't like this at all
+    local old_spell = inst.components.pocketwatch.DoCastSpell
 
---         puppet.animstate:OverrideSymbol("swap_hat", "kidhat", "swap_hat")
---         puppet.animstate:Show("HAT")
---         puppet.animstate:Show("HAIR_HAT")
---         puppet.animstate:Hide("HAIR_NOHAT")
---         puppet.animstate:Hide("HAIR")
---     end
--- end)
-
--- Try adding hat to character button, does not work though
--- AddClassPostConstruct("widgets/redux/characterbutton", function(self)
---     if self.herocharacter == "hatkid" then
---         local puppet = self.head_animstate
-
---         puppet:OverrideSymbol("swap_hat", "kidhat", "swap_hat")
---         puppet:Show("HAT")
---         puppet:Show("HAIR_HAT")
---         puppet:Hide("HAIR_NOHAT")
---         puppet:Hide("HAIR")
---     end
--- end)
+    inst.components.pocketwatch.DoCastSpell = function(inst, doer)
+        if doer:HasTag("hatkid") then
+            local health = doer.components.health
+            if health ~= nil and not health:IsDead() then
+                -- doer.components.oldager:StopDamageOverTime() -- Hat Kid doesn't have this component, the game gets mad if we call this
+                health:DoDelta(TUNING.POCKETWATCH_HEAL_HEALING, true, inst.prefab)
+        
+                local fx = SpawnPrefab((doer.components.rider ~= nil and doer.components.rider:IsRiding()) and "pocketwatch_heal_fx_mount" or "pocketwatch_heal_fx")
+                fx.entity:SetParent(doer.entity)
+        
+                inst.components.rechargeable:Discharge(TUNING.POCKETWATCH_HEAL_COOLDOWN)
+                return true
+            end
+        else
+            old_spell(inst, doer)
+        end
+    end
+end)
