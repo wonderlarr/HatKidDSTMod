@@ -1,7 +1,7 @@
 name = "[Internal] Hat Kid: The Homesick Hatter"
 description = "Adds Hat Kid from A Hat in Time into the world of Don't Starve Together, complete with her hats, umbrella, and even some of her outfits!\n\nThis mod is highly configurable, click the config button below to customize your experience to a tee.\n\nDependencies:\n\n* [API] Modded Skins\n* [API] Time Control"
 author = "Skylarr 󰀏" -- Unknown character is a torch emoji
-version = "1.2.4" -- major version . feature update . minor update/bugfix
+version = "1.2.3" -- major version . feature update . minor update/bugfix
 
 forumthread = ""
 
@@ -22,7 +22,6 @@ server_filter_tags = {
 	"hat kid",
 	"hat in time",
 	"cute",
-	"skylarr",
 }
 
 -- mod_dependencies = 
@@ -86,8 +85,8 @@ configuration_options =
 			{description = "50", data = 50},
 			{description = "75", data = 75},
 			{description = "100", data = 100},
-			{description = "120 (Default)", data = 120},
-			{description = "125", data = 125},
+			{description = "120", data = 120},
+			{description = "125 (Default)", data = 125},
 			{description = "150", data = 150},
 			{description = "175", data = 175},
 			{description = "200", data = 200},
@@ -96,7 +95,7 @@ configuration_options =
 			{description = "275", data = 275},				
 			{description = "300", data = 300},
 		},
-		default = 120,
+		default = 125,
 	},
 	
 	{
@@ -112,8 +111,8 @@ configuration_options =
 			{description = "105", data = 105},
 			{description = "110", data = 110},
 			{description = "115", data = 115},
-			{description = "120 (Default)", data = 120},
-			{description = "125", data = 125},
+			{description = "120", data = 120},
+			{description = "125 (Default)", data = 125},
 			{description = "130", data = 130},
 			{description = "135", data = 135},
 			{description = "140", data = 140},
@@ -126,7 +125,7 @@ configuration_options =
 			{description = "300", data = 300},
 			{description = "400", data = 400},
 		},
-		default = 120,
+		default = 125,
 	},
 	
 	{
@@ -448,6 +447,70 @@ configuration_options =
 		default = "hatkidvoice",
 	},	
 
+	{
+		name = "hatkid_fastcrafting",
+		label = "Fast Hat Crafting",
+		hover = "Whether or not Hat Kid will craft hats faster than normal.",
+		options =
+		{
+			{description = "Yes (Default)", data = true},
+			{description = "No", data = false},
+		},
+		default = true,
+	},	
+
+	{
+		name = "hatkid_craft_sanity",
+		label = "Hat Crafting Sanity",
+		hover = "How much sanity Hat Kid will gain when crafting any hat (including her own)",
+		options =
+		{
+			{description = "None", data = false},
+			{description = "1", data = 1},
+			{description = "2", data = 2},
+			{description = "3", data = 3},
+			{description = "4", data = 4},
+			{description = "5", data = 5},
+			{description = "8", data = 8},
+			{description = "10 (Default)", data = 10},
+			{description = "15", data = 15},
+			{description = "20", data = 20},
+			{description = "30", data = 30},
+			{description = "40", data = 40},
+			{description = "50", data = 50},
+			{description = "100", data = 100},
+			{description = "120", data = 120},
+			{description = "None", data = false},
+		},
+		default = 10,
+	},	
+
+	{
+		name = "hatkid_discount",
+		label = "Hat Recipe Modifier",
+		hover = "How much what ingredient modifier is applied when Hat Kid crafts any hat.",
+		options =
+		{
+			{description = "Full Cost", data = false},
+			{description = "75% (Default)", data = 0.75},
+			{description = "50% (Amulet)", data = 0.5},
+			{description = "25%", data = 0.25},
+			{description = "0% (Free)", data = 0},
+		},
+		default = 0.75,
+	},	
+
+	{
+		name = "hatkid_discount_ruinshat",
+		label = "Thulecite Crown Modifier",
+		hover = "Whether or not the Thulecite Crown can be crafted cheaper by Hat Kid.",
+		options =
+		{
+			{description = "Yes", data = true},
+			{description = "No (Default)", data = false},
+		},
+		default = false,
+	},	
 
 	{
 		name = "Kid's Hat Options",
@@ -507,8 +570,9 @@ configuration_options =
 			{description = "-1.4/min", data = -1.4},
 			{description = "None", data = 0},
 			{description = "1.4/min", data = 1.4},
+			{description = "1.8/min (Default)", data = 1.8},
 			{description = "2/min", data = 2},
-			{description = "2.3/min (Default)", data = 2},
+			{description = "2.3/min", data = 2},
 			{description = "3.4/min", data = 3.4},
 			{description = "4.5/min", data = 4.5},
 			{description = "6.7/min", data = 6.7},
@@ -516,7 +580,7 @@ configuration_options =
 			{description = "20/min", data = 20},
 			{description = "60/min", data = 60},
 		},
-		default = 2,
+		default = 1.8,
 	},	
 
 	{
@@ -548,7 +612,7 @@ configuration_options =
 			{description = "90", data = 90},
 			{description = "120", data = 120},
 			{description = "180", data = 180},
-			{description = "240", data = 240},
+			{description = "240", data = 240},	
 		},
 		default = false,
 	},
@@ -765,8 +829,8 @@ configuration_options =
 
 	{
 		name = "brewdurability",
-		label = "Fuel Capacity",
-		hover = "How many uses the Brewing Hat can store. One use per concoction brewed.",
+		label = "Max Uses",
+		hover = "How many uses the Brewing Hat can store.",
 		options =
 		{
 			{description = "Infinite", data = false},
@@ -780,15 +844,10 @@ configuration_options =
 			{description = "8", data = 8},
 			{description = "9", data = 9},
 			{description = "10", data = 10},
-			{description = "15", data = 15},
 			{description = "20", data = 20},
-			{description = "25", data = 25},
 			{description = "30", data = 30},
-			{description = "35", data = 35},
 			{description = "40", data = 40},
-			{description = "45", data = 45},
 			{description = "50", data = 50},
-			{description = "55", data = 55},
 			{description = "60", data = 60},
 			{description = "70", data = 70},
 			{description = "80", data = 80},
@@ -797,6 +856,34 @@ configuration_options =
 			{description = "Infinite", data = false},
 		},
 		default = 2,
+	},
+
+	{
+		name = "brewfuelmult",
+		label = "Uses Per Fuel",
+		hover = "How many uses the Brewing Hat gains per Slurtle Slime. Gunpowder grants double this amount.",
+		options =
+		{
+			{description = "0.05", data = 0.05},
+			{description = "0.1", data = 0.1},
+			{description = "0.15", data = 0.15},
+			{description = "0.2", data = 0.2},
+			{description = "0.25", data = 0.25},
+			{description = "0.5", data = 0.5},
+			{description = "0.75", data = 0.75},
+			{description = "1 (Default)", data = 1},
+			{description = "2", data = 2},
+			{description = "4", data = 4},
+			{description = "5", data = 5},
+			{description = "8", data = 8},
+			{description = "10", data = 10},
+			{description = "20", data = 20},
+			{description = "30", data = 30},
+			{description = "40", data = 40},
+			{description = "50", data = 50},
+			{description = "100", data = 100},
+		},
+		default = 1,
 	},
 
 	{
@@ -871,9 +958,9 @@ configuration_options =
 			{description = "0", data = 0},
 			{description = "1", data = 1},
 			{description = "2", data = 2},
-			{description = "3 (Default)", data = 3},
+			{description = "3", data = 3},
 			{description = "4", data = 4},
-			{description = "5", data = 5},
+			{description = "5 (Default)", data = 5},
 			{description = "10", data = 10},
 			{description = "15", data = 15},
 			{description = "20", data = 20},
@@ -882,13 +969,13 @@ configuration_options =
 			{description = "50", data = 50},
 			{description = "100", data = 100},
 		},
-		default = 3,
+		default = 5,
 	},
 	
 	{
 		name = "brewcharge",
 		label = "Concoction Brewing Time",
-		hover = "How long a Brewing Concoction takes to charge before it can be thrown.",
+		hover = "How long a Mad Concoction takes to charge before it can be thrown.",
 		options =
 		{
 			{description = "No charge time", data = 0},
@@ -990,38 +1077,59 @@ configuration_options =
 
 	{
 		name = "polardurability",
-		label = "Ice Consumption",
-		hover = "How much ice the Ice Hat can store at one time.",
+		label = "Max Uses",
+		hover = "How many uses the Ice Hat can store at one time.",
 		options =
 		{
-			{description = "None", data = false},
+			{description = "Infinite", data = false},
 			{description = "1", data = 1},
 			{description = "2", data = 2},
-			{description = "3", data = 3},
+			{description = "3 (Default)", data = 3},
 			{description = "4", data = 4},
 			{description = "5", data = 5},
 			{description = "6", data = 6},
 			{description = "7", data = 7},
-			{description = "8 (Default)", data = 8},
+			{description = "8", data = 8},
 			{description = "9", data = 9},
 			{description = "10", data = 10},
-			{description = "15", data = 15},
 			{description = "20", data = 20},
-			{description = "25", data = 25},
 			{description = "30", data = 30},
-			{description = "35", data = 35},
 			{description = "40", data = 40},
-			{description = "45", data = 45},
 			{description = "50", data = 50},
-			{description = "55", data = 55},
 			{description = "60", data = 60},
 			{description = "70", data = 70},
 			{description = "80", data = 80},
 			{description = "90", data = 90},
 			{description = "100", data = 100},
-			{description = "None", data = false},
+			{description = "Infinite", data = false},
 		},
-		default = 8,
+		default = 3,
+	},
+
+	{
+		name = "polarfuelmult",
+		label = "Uses Per Fuel",
+		hover = "How many uses the Ice Hat gains per Ice.",
+		options =
+		{
+			{description = "0.1", data = 0.1},
+			{description = "0.2", data = 0.2},
+			{description = "0.25 (Default)", data = 0.25},
+			{description = "0.5", data = 0.5},
+			{description = "0.75", data = 0.75},
+			{description = "1", data = 1},
+			{description = "2", data = 2},
+			{description = "4", data = 4},
+			{description = "5", data = 5},
+			{description = "8", data = 8},
+			{description = "10", data = 10},
+			{description = "20", data = 20},
+			{description = "30", data = 30},
+			{description = "40", data = 40},
+			{description = "50", data = 50},
+			{description = "100", data = 100},
+		},
+		default = 0.25,
 	},
 
 	{
@@ -1067,12 +1175,12 @@ configuration_options =
 			{description = "1 Second", data = 1},
 			{description = "2 Seconds", data = 2},
 			{description = "3 Seconds", data = 3},
-			{description = "4 Seconds (Default)", data = 4},
+			{description = "4 Seconds", data = 4},
 			{description = "5 Seconds", data = 5},
 			{description = "10 Seconds", data = 10},
 			{description = "15 Seconds", data = 15},
 			{description = "20 Seconds", data = 20},
-			{description = "30 Seconds", data = 30},
+			{description = "30 Seconds (Default)", data = 30},
 			{description = "45 Seconds", data = 45},
 			{description = "60 Seconds", data = 60},
 			{description = "90 Seconds", data = 90},
@@ -1083,7 +1191,30 @@ configuration_options =
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 4,
+		default = 30,
+	},
+
+	{
+		name = "polarthreshhold",
+		label = "Sanity Threshhold",
+		hover = "How much sanity is required to activate the Ice Hat. This amount is consumed immediately when activated.",
+		options =
+		{
+			{description = "0", data = 0},
+			{description = "1", data = 1},
+			{description = "2", data = 2},
+			{description = "3", data = 3},
+			{description = "4", data = 4},
+			{description = "5 (Default)", data = 5},
+			{description = "10", data = 10},
+			{description = "15", data = 15},
+			{description = "20", data = 20},
+			{description = "25", data = 25},
+			{description = "30", data = 30},
+			{description = "50", data = 50},
+			{description = "100", data = 100},
+		},
+		default = 5,
 	},
 
 	{
@@ -1133,6 +1264,32 @@ configuration_options =
 	},
 
 	{
+		name = "polardamage",
+		label = "Explosion Damage",
+		hover = "How much damage the Ice Hat's explosion will deal.",
+		options =
+		{
+			{description = "1", data = 1},
+			{description = "9", data = 9},
+			{description = "14", data = 14},
+			{description = "27 (Default)", data = 27},
+			{description = "34", data = 34},
+			{description = "46", data = 46},
+			{description = "51", data = 51},
+			{description = "63", data = 63},
+			{description = "68", data = 68},
+			{description = "72", data = 72},
+			{description = "80", data = 80},
+			{description = "89", data = 89},
+			{description = "100", data = 100},
+			{description = "200", data = 200},
+			{description = "500", data = 500},
+			{description = "KILLER QUEEN!!!", data = 999999, hover = "999,999"},
+		},
+		default = 27,
+	},
+
+	{
 		name = "polarradius",
 		label = "Radius",
 		hover = "How big the Ice Hat's freeze radius will be. The radius can be observed by the circle shown after ground slamming.",
@@ -1168,8 +1325,8 @@ configuration_options =
 
 	{
 		name = "dwellerfuelcapacity",
-		label = "Fuel Capacity",
-		hover = "How much fuel the Dweller's Mask can store.",
+		label = "Max Fuel Capacity",
+		hover = "How much fuel the Dweller's Mask can store. Uses in-game time.",
 		options =
 		{
 			{description = "Forever", data = false},
@@ -1199,6 +1356,30 @@ configuration_options =
 			{description = "Forever", data = false},
 		},
 		default = 30 * 4,
+	},
+	
+	{
+		name = "dwellerfuelvalue",
+		label = "Seconds Per Fuel",
+		hover = "How much Nightmare Fuel is worth once consumed.",
+		options =
+		{
+			{description = "5", data = 5},
+			{description = "10", data = 10},
+			{description = "15", data = 15},
+			{description = "20 (Default)", data = 20},
+			{description = "25", data = 25},
+			{description = "30", data = 30},
+			{description = "60", data = 60},
+			{description = "120", data = 120},
+			{description = "180", data = 180},
+			{description = "240", data = 240},
+			{description = "300", data = 300},
+			{description = "600", data = 600},
+			{description = "900", data = 900},
+			{description = "1800", data = 1800},
+		},
+		default = 20,
 	},
 
 	{
@@ -1234,30 +1415,6 @@ configuration_options =
 		},
 		default = false,
 	},
-
-	{
-		name = "dwellerfuelvalue",
-		label = "Fuel Value",
-		hover = "How much Nightmare Fuel is worth once consumed.",
-		options =
-		{
-			{description = "5", data = 5},
-			{description = "10", data = 10},
-			{description = "15", data = 15},
-			{description = "20 (Default)", data = 20},
-			{description = "25", data = 25},
-			{description = "30", data = 30},
-			{description = "60", data = 60},
-			{description = "120", data = 120},
-			{description = "180", data = 180},
-			{description = "240", data = 240},
-			{description = "300", data = 300},
-			{description = "600", data = 600},
-			{description = "900", data = 900},
-			{description = "1800", data = 1800},
-		},
-		default = 20,
-	},
 	
 	{
 		name = "dwellercooldown",
@@ -1285,6 +1442,29 @@ configuration_options =
 			{description = "15 Minutes", data = 900},
 		},
 		default = 45,
+	},
+
+	{
+		name = "dwellerthreshhold",
+		label = "Sanity Threshhold",
+		hover = "How much sanity is required to activate the Dweller's Mask. This amount is consumed immediately when activated.",
+		options =
+		{
+			{description = "0", data = 0},
+			{description = "1", data = 1},
+			{description = "2", data = 2},
+			{description = "3 (Default)", data = 3},
+			{description = "4", data = 4},
+			{description = "5", data = 5},
+			{description = "10", data = 10},
+			{description = "15", data = 15},
+			{description = "20", data = 20},
+			{description = "25", data = 25},
+			{description = "30", data = 30},
+			{description = "50", data = 50},
+			{description = "100", data = 100},
+		},
+		default = 3,
 	},
 	
 	{
@@ -1360,29 +1540,6 @@ configuration_options =
 			{description = "60/min", data = 60},
 		},
 		default = -6.7,
-	},
-
-	{
-		name = "dwellerthreshhold",
-		label = "Sanity Threshhold",
-		hover = "How much sanity is required to activate the Dweller's Mask. This amount is consumed immediately when activated.",
-		options =
-		{
-			{description = "0", data = 0},
-			{description = "1", data = 1},
-			{description = "2", data = 2},
-			{description = "3 (Default)", data = 3},
-			{description = "4", data = 4},
-			{description = "5", data = 5},
-			{description = "10", data = 10},
-			{description = "15", data = 15},
-			{description = "20", data = 20},
-			{description = "25", data = 25},
-			{description = "30", data = 30},
-			{description = "50", data = 50},
-			{description = "100", data = 100},
-		},
-		default = 3,
 	},
 
 	{
@@ -1527,11 +1684,11 @@ configuration_options =
 
 	{
 		name = "timestopdurability",
-		label = "Durability",
+		label = "Max Fuel Capacity",
 		hover = "How long the Time Stop Hat can last without being refueled. 1 segment is 30 seconds.",
 		options =
 		{
-			{description = "Forever", data = false},
+			{description = "Infinite", data = false},
 
 			{description = "5 seconds", data = 5},
 			{description = "10 seconds", data = 10},
@@ -1555,9 +1712,35 @@ configuration_options =
 			{description = "20 days", data = 480 * 20},
 			{description = "40 days", data = 480 * 40},
 
-			{description = "Forever", data = false},
+			{description = "Infinite", data = false},
 		},
 		default = 30,
+	},
+
+	{
+		name = "timestopfuelvalue",
+		label = "Seconds Per Fuel",
+		hover = "How many seconds of use time Nightmare Fuel grants once consumed.",
+		options =
+		{
+			{description = "1", data = 1},
+			{description = "3 (Default)", data = 3},
+			{description = "5", data = 5},
+			{description = "10", data = 10},
+			{description = "15", data = 15},
+			{description = "20", data = 20},
+			{description = "25", data = 25},
+			{description = "30", data = 30},
+			{description = "60", data = 60},
+			{description = "120", data = 120},
+			{description = "180", data = 180},
+			{description = "240", data = 240},
+			{description = "300", data = 300},
+			{description = "600", data = 600},
+			{description = "900", data = 900},
+			{description = "1800", data = 1800},
+		},
+		default = 3,
 	},
 
 	{
@@ -1620,6 +1803,29 @@ configuration_options =
 			{description = "15 Minutes", data = 900},
 		},
 		default = 180,
+	},
+
+	{
+		name = "timestopthreshhold",
+		label = "Sanity Threshhold",
+		hover = "How much sanity is required to activate the Time Stop Hat. This amount is consumed immediately when activated.",
+		options =
+		{
+			{description = "0", data = 0},
+			{description = "1", data = 1},
+			{description = "2", data = 2},
+			{description = "3", data = 3},
+			{description = "4", data = 4},
+			{description = "5", data = 5},
+			{description = "10 (Default)", data = 10},
+			{description = "15", data = 15},
+			{description = "20", data = 20},
+			{description = "25", data = 25},
+			{description = "30", data = 30},
+			{description = "50", data = 50},
+			{description = "100", data = 100},
+		},
+		default = 10,
 	},
 	
 	{
@@ -1687,7 +1893,7 @@ configuration_options =
 		hover = "How many times you can hit something with the closed variant of Hat Kid's umbrella before it breaks.",
 		options =
 		{
-			{description = "Disabled", data = false},
+			{description = "Infinite", data = false},
 			
 			{description = "10", data = 10},
 			{description = "25", data = 25},
@@ -1703,7 +1909,7 @@ configuration_options =
 			{description = "400", data = 400},
 			{description = "500", data = 500},
 
-			{description = "Disabled", data = false},
+			{description = "Infinite", data = false},
 
 		},
 		default = 200,
@@ -1796,7 +2002,7 @@ configuration_options =
 	{
         name = "hatkid_polarhatkey",
         label = "Ability Key",
-        hover = "This is the key used to activate hat abilities. Unfortunately this is set globally for all Hat Kid's, rather than per player.",
+        hover = "This is the key used to activate hat abilities. This is set globally for all players playing Hat Kid in the server.",
         options =
         {
             {description="TAB", data = 9},
@@ -1821,14 +2027,14 @@ configuration_options =
             {description="CAPSLOCK", data = 301},
             {description="SCROLLOCK", data = 302},
             {description="RSHIFT", data = 303}, -- use SHIFT instead
-            {description="LSHIFT", data = 304}, -- use SHIFT instead
+            {description="LSHIFT (Default)", data = 304}, -- use SHIFT instead
             {description="RCTRL", data = 305}, -- use CTRL instead
             {description="LCTRL", data = 306}, -- use CTRL instead
             {description="RALT", data = 307}, -- use ALT instead
             {description="LALT", data = 308}, -- use ALT instead
-            {description="ALT", data = 400},
-            {description="CTRL", data = 401},
-            {description="SHIFT", data = 402},
+            {description="ALT (broken)", data = 400},
+            {description="CTRL (broken)", data = 401},
+            {description="SHIFT (broken)", data = 402},
             {description="BACKSPACE", data = 8},
             {description="PERIOD", data = 46},
             {description="SLASH", data = 47},
@@ -1861,7 +2067,7 @@ configuration_options =
             {description="W", data = 119},
             {description="X", data = 120},
             {description="Y", data = 121},
-            {description="Z (Default)", data = 122},
+            {description="Z", data = 122},
             {description="F1", data = 282},
             {description="F2", data = 283},
             {description="F3", data = 284},
@@ -1893,7 +2099,110 @@ configuration_options =
             {description="8", data = 56},
             {description="9", data = 57},
         },
-        default = 122,
+        default = 304,
+    },
+
+	{
+        name = "hatkid_switchkey",
+        label = "Hat Switch Key",
+        hover = "This is the convenience key used to switch to the next available Hat Kid hat. This is set globally for all players playing Hat Kid in the server.",
+        options =
+        {
+            {description="TAB", data = 9},
+            {description="KP_PERIOD", data = 266},
+            {description="KP_DIVIDE", data = 267},
+            {description="KP_MULTIPLY", data = 268},
+            {description="KP_MINUS", data = 269},
+            {description="KP_PLUS", data = 270},
+            {description="KP_ENTER", data = 271},
+            {description="KP_EQUALS", data = 272},
+            {description="MINUS", data = 45},
+            {description="EQUALS", data = 61},
+            {description="SPACE", data = 32},
+            {description="ENTER", data = 13},
+            {description="ESCAPE", data = 27},
+            {description="HOME", data = 278},
+            {description="INSERT", data = 277},
+            {description="DELETE", data = 127},
+            {description="END", data   = 279},
+            {description="PAUSE", data = 19},
+            {description="PRINT", data = 316},
+            {description="CAPSLOCK", data = 301},
+            {description="SCROLLOCK", data = 302},
+            {description="RSHIFT", data = 303}, -- use SHIFT instead
+            {description="LSHIFT", data = 304}, -- use SHIFT instead
+            {description="RCTRL", data = 305}, -- use CTRL instead
+            {description="LCTRL", data = 306}, -- use CTRL instead
+            {description="RALT", data = 307}, -- use ALT instead
+            {description="LALT", data = 308}, -- use ALT instead
+            {description="ALT (broken)", data = 400},
+            {description="CTRL (broken)", data = 401},
+            {description="SHIFT (broken)", data = 402},
+            {description="BACKSPACE", data = 8},
+            {description="PERIOD", data = 46},
+            {description="SLASH", data = 47},
+            {description="LEFTBRACKET", data     = 91},
+            {description="BACKSLASH", data     = 92},
+            {description="RIGHTBRACKET", data = 93},
+            {description="TILDE", data = 96},
+            {description="A", data = 97},
+            {description="B", data = 98},
+            {description="C", data = 99},
+            {description="D", data = 100},
+            {description="E", data = 101},
+            {description="F", data = 102},
+            {description="G", data = 103},
+            {description="H", data = 104},
+            {description="I", data = 105},
+            {description="J", data = 106},
+            {description="K", data = 107},
+            {description="L", data = 108},
+            {description="M", data = 109},
+            {description="N", data = 110},
+            {description="O", data = 111},
+            {description="P", data = 112},
+            {description="Q", data = 113},
+            {description="R (Default)", data = 114},
+            {description="S", data = 115},
+            {description="T", data = 116},
+            {description="U", data = 117},
+            {description="V", data = 118},
+            {description="W", data = 119},
+            {description="X", data = 120},
+            {description="Y", data = 121},
+            {description="Z", data = 122},
+            {description="F1", data = 282},
+            {description="F2", data = 283},
+            {description="F3", data = 284},
+            {description="F4", data = 285},
+            {description="F5", data = 286},
+            {description="F6", data = 287},
+            {description="F7", data = 288},
+            {description="F8", data = 289},
+            {description="F9", data = 290},
+            {description="F10", data = 291},
+            {description="F11", data = 292},
+            {description="F12", data = 293},
+ 
+            {description="UP", data = 273},
+            {description="DOWN", data = 274},
+            {description="RIGHT", data = 275},
+            {description="LEFT", data = 276},
+            {description="PAGEUP", data = 280},
+            {description="PAGEDOWN", data = 281},
+ 
+            {description="0", data = 48},
+            {description="1", data = 49},
+            {description="2", data = 50},
+            {description="3", data = 51},
+            {description="4", data = 52},
+            {description="5", data = 53},
+            {description="6", data = 54},
+            {description="7", data = 55},
+            {description="8", data = 56},
+            {description="9", data = 57},
+        },
+        default = 114,
     },
 
 	{
@@ -1926,39 +2235,4 @@ configuration_options =
 		},
 		default = true,
 	},
-
-	-- {
-	-- 	name = "enablepons",
-	-- 	label = "Pons",
-	-- 	hover = "Enables the Pon Count Meter, as well as the spawning of Green Pons through various actions (eg. mining, chopping, killing)",
-	-- 	options =
-	-- 	{
-	-- 		{description = "Disabled (Default)", data = false},
-	-- 		{description = "Enabled", data = true},
-	-- 	},
-	-- 	default = false,
-	-- },
-
-	-- {
-	-- 	name = "ponsmax",
-	-- 	label = "Max Pons",
-	-- 	hover = "How many Pons Hat Kid can hold at once.",
-	-- 	options =
-	-- 	{
-	-- 		{description = "1,000", data = 1000},
-	-- 		{description = "1,500", data = 1500},
-	-- 		{description = "2,000", data = 2000},
-	-- 		{description = "2,500", data = 2500},
-	-- 		{description = "2,500 (Default)", data = 2500},
-	-- 		{description = "3,000", data = 3000},
-	-- 		{description = "3,500", data = 3500},
-	-- 		{description = "4,000", data = 4000},
-	-- 		{description = "4,500", data = 4500},
-	-- 		{description = "5,000", data = 5000},
-	-- 		{description = "10,000", data = 10000},
-			
-
-	-- 	},
-	-- 	default = 2500,
-	-- },
 }

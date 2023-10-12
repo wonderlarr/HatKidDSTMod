@@ -1,0 +1,29 @@
+2.0.0 - More, More, MORE!!!
+
+New Content
+Pons
+* Pons are stored as a meter (this character has a meter now, that means I've won)
+* Hat Kid can collect pons by doing various things in the world, like killing monsters, chopping trees, or picking plants!
+* Hat Kid can craft pons into various small upgrades.
+* Hat Kid can sell pons to The Badge Seller to get badges, which can upgrade Hat Kid's stats, abilities, or items.
+* Hat Kid's speech is now based on 
+
+The Badge Seller
+* The Badge Seller arrives every new moon to sell Hat Kid badges.
+
+Items
+* The Blue Umbrella now uses a 3-hit quick-attack system. Hat Kid can attack 3 times with the Blue Umbrella in quick succession.
+* The Ice Hat now freezes attackers after they hit you, costing some fuel.
+* Added the Hat Pack, a Hat Kid specific backpack to store your hats in!
+* Added a quick-switch keybind for Hat Kid's hats. Defaults to R.
+* Updated Hat Kid's default ability keybind to be LSHIFT. Any existing worlds will still be Z unless changed manually.
+* Pure Horror can now be used to fuel some of Hat Kid's hats.
+
+Misc.
+* Added support for Meme Language Server
+
+
+TODO
+New pon methods - Talking to plants, reviving players, prototyping,
+Badge Selling UI
+Dwellermask Turf?

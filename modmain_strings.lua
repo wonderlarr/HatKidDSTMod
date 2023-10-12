@@ -18,7 +18,7 @@ STRINGS.CHARACTERS.HATKID = require "speech_hatkid" -- speech file
 -- The character select screen lines
 STRINGS.CHARACTER_TITLES.hatkid = "The Homesick Hatter"
 STRINGS.CHARACTER_NAMES.hatkid = "Hat Kid"
-STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Experienced hatter\n*Makes her own cool hats\n*Likes hats a little too much\n*Comfortable with resurrection\n*Misses home"
+STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Experienced hatter\n*Collects lots of stuff\n*Likes hats a little too much\n"
 STRINGS.CHARACTER_QUOTES.hatkid = "\"Oh, hi there!\""
 STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Slim"
 
@@ -113,6 +113,8 @@ STRINGS.NAMES.HATBRELLAOPEN = "Open Blue Umbrella"
 
 STRINGS.NAMES.KIDPOTION_THROWABLE = "Mad Concoction"
 STRINGS.NAMES.KIDPOTION = "Brewing Concoction"
+
+STRINGS.NAMES.HATPACK = "Hat Pack"
 
 --Recipe Descriptions
 STRINGS.RECIPE_DESC.KIDHAT = "Your pride and joy."

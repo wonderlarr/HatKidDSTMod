@@ -59,14 +59,14 @@ STRINGS.SKIN_DESCRIPTIONS.hatkid_none = "Oh my god it's the one cute character f
 
 	STRINGS.SKIN_NAMES.ms_hatkid_dye_sans = "Him" --Sans
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_sans = STRINGS.CHARACTER_QUOTES.hatkid
-	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_sans = "You feel your Wagstaff's crawling on your back."
+	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_sans = "You feel your Wagstaffs crawling on your back."
 
 	STRINGS.SKIN_NAMES.ms_hatkid_dye_toonlink = "The Dank" -- Wind Waker
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_toonlink = STRINGS.CHARACTER_QUOTES.hatkid
 	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_toonlink = "DO NOT CALL Jack in the Box Munchie Meal at 3:00 AM"
 
 
-	STRINGS.SKIN_NAMES.ms_hatkid_dye_oliver = "Magic Child" -- Oliver
+	STRINGS.SKIN_NAMES.ms_hatkid_dye_oliver = "Stupid Kid" -- Oliver
 	STRINGS.SKIN_QUOTES.ms_hatkid_dye_oliver = STRINGS.CHARACTER_QUOTES.hatkid
 	STRINGS.SKIN_DESCRIPTIONS.ms_hatkid_dye_oliver = "The AI will always make the worst choice I swear."
 

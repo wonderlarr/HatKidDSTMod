@@ -55,6 +55,69 @@ local function OnUnequip(inst, data) -- Add a sanity modifier if the head slot i
     end
 end
 
+
+local hatlist = {
+    "kidhat",
+    "sprinthat",
+    "brewinghat",
+    "polarhat",
+    "dwellermask",
+    "timestophat",
+}
+
+local hatlist_r = {
+    "timestophat",
+	"dwellermask",
+	"polarhat",
+	"brewinghat",
+	"sprinthat",
+	"kidhat",
+}
+
+local function SimpleHatSwitch(inst, reverse)
+	local hatpack = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BEARD)
+	local playerinv = inst.components.inventory
+	local oldhat = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+
+	local instances = {}
+
+	for k, v in pairs(reverse and hatlist_r or hatlist) do
+		local hatpack_item = hatpack and next(hatpack.components.container:GetItemByName(v, 1, true))
+		local playerinv_item = next(playerinv:GetItemByName(v, 1, true))
+		if hatpack_item or playerinv_item ~= nil then
+			table.insert(instances, k, hatpack_item or playerinv_item)
+		end
+	end
+
+	if oldhat and oldhat:HasTag("hatkidhat") then
+		for k, v in pairs(reverse and hatlist_r or hatlist) do
+			if oldhat.prefab == v then
+				for i = k, 12, 1 do
+					if i > 6 then
+						if instances[i - 6] then
+							inst.components.inventory:Equip(instances[i - 6])
+							break
+						end
+					else
+						if instances[i + 1] then
+							inst.components.inventory:Equip(instances[i + 1])
+							break
+						end
+					end
+				end
+				break
+			end
+		end
+	else
+		for i = 1, 6, 1 do
+			if instances[i] then
+				inst.components.inventory:Equip(instances[i])
+				break
+			end
+		end
+	end
+end
+
 -- When spawning the character
 local function OnNewSpawn(inst)
 -- Listens for taking off hat, applies sanity mods
@@ -64,6 +127,8 @@ local function OnNewSpawn(inst)
 	inst:ListenForEvent("ms_respawnedfromghost", OnAlien)
 	inst:ListenForEvent("ms_respawnedfromghost", OnAlienRespawn)
     inst:ListenForEvent("ms_becameghost", OnGhost)
+
+	inst:ListenForEvent("SwitchKey", SimpleHatSwitch)
 end
 
 local function OnLoad(inst, data)
@@ -73,6 +138,8 @@ local function OnLoad(inst, data)
 	inst:ListenForEvent("ms_respawnedfromghost", OnAlien)
 	inst:ListenForEvent("ms_respawnedfromghost", OnAlienRespawn)
     inst:ListenForEvent("ms_becameghost", OnGhost)
+
+	inst:ListenForEvent("SwitchKey", SimpleHatSwitch)
 	
     if inst:HasTag("playerghost") then
         OnGhost(inst)
@@ -91,10 +158,13 @@ local CommonPostInit = function(inst)
 	inst:AddTag("madhatter")
 	
 	inst:AddComponent("keyhandler")
-    inst.components.keyhandler:AddActionListener("HatKidRPC", TUNING["HATKID"].KEY, "AbilityKeyDown", "KEYDOWN")
+    inst.components.keyhandler:AddActionListener("HatKidRPC", TUNING.HATKID_ABILITYKEY, "AbilityKeyDown", "KEYDOWN")
+    inst.components.keyhandler:AddActionListener("HatKidRPC", TUNING.HATKID_SWITCHKEY, "SwitchKeyDown", "KEYDOWN")
 
 	-- 50% chance of quote on potion explode
 	inst:ListenForEvent("PotionThrown", OnPotionThrow)
+	
+	inst:AddComponent("madhatter")
 end
 
 -- Server only, most components go here.
@@ -137,29 +207,43 @@ local MasterPostInit = function(inst, data)
 
     inst.OnNewSpawn = OnNewSpawn
 	inst.OnLoad = OnLoad
+	
+	inst.CurrentHat = 0
+
+	-- Check if HATKID_CRAFT_SANITY is nonzero (has a positive value)
 	if TUNING.HATKID_CRAFT_SANITY ~= 0 then
+		-- Listen for the "builditem" event
 		inst:ListenForEvent("builditem", function(inst, data)
+			-- Check if the built item has the "hat" tag and if the player has a sanity component
 			if data.item:HasTag("hat") and inst.components.sanity then
+				-- Increase the player's sanity by the specified amount from TUNING.HATKID_CRAFT_SANITY
 				inst.components.sanity:DoDelta(TUNING.HATKID_CRAFT_SANITY)
 			end
 		end)
 	end
 
+	-- Check if HATKID_FASTCRAFTING is enabled
 	if TUNING.HATKID_FASTCRAFTING then
+		-- Listen for the "makerecipe" event
 		inst:ListenForEvent("makerecipe", function(inst, data)
+			-- Iterate through the list of hats in TUNING.HATKID_FAST_HATS
 			for k, v in pairs(TUNING.HATKID_FAST_HATS) do
+				-- Check if the crafted recipe's product matches any hat in the list
 				if data.recipe.product == v then
+					-- Add the "fastbuilder" tag to the player temporarily
 					inst:AddTag("fastbuilder")
+					-- Remove next tick
 					inst:DoTaskInTime(0, function(inst)
 						if inst:HasTag("fastbuilder") then
 							inst:RemoveTag("fastbuilder")
 						end
 					end)
-					return
+					return -- Exit the loop early since we found a match
 				end
 			end
 		end)
 	end
+
 end
 
 return MakePlayerCharacter("hatkid", prefabs, assets, CommonPostInit, MasterPostInit, startInv)

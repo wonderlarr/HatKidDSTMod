@@ -23,17 +23,14 @@
 	This mod has been an awesome journey in learning to stay consistent with a project. I've been working on it very slowly since Summer 2020, 
 ]]
 
-
--- Currently incompatible with Insight. sadly.
-
-PrefabFiles = {
+local PrefabFilesLocal = {
 	"hatkid",
 	-- replaced hatkid_none with skins, according to the new Skins API
 	"hatkid_skins",
 
 	--hats
     "kidhat",
-	"sprinthat",
+	-- "sprinthat",
 	"brewinghat",
 	"polarhat",
 	"dwellermask",
@@ -46,7 +43,7 @@ PrefabFiles = {
 	"kidpotion_throwable",
 
 	--collectables (disabled)
-	-- "pon",
+	"pon",
 	-- "pon_heart",
 	-- "timepiece",
 
@@ -60,10 +57,21 @@ PrefabFiles = {
 
 	--misc
 	-- "inv_pons",
+	"hatpack",
+
+	--badges
+	"badge_cooldown",
 
 	--testing TODO (disable in final)
 	"cooltarget", -- This is a dummytarget prefab, but it only regens health when it is low.
 }
+
+-- If Meme Language is enabled, manually add sprinthat
+if GLOBAL.KnownModIndex:IsModEnabled("workshop-1289272965") or GLOBAL.KnownModIndex:IsModEnabled("workshop-2926922407") then
+	table.insert(PrefabFilesLocal, "sprinthat")
+end
+
+PrefabFiles = PrefabFilesLocal
 
 Assets = {
     Asset( "IMAGE", "images/saveslot_portraits/hatkid.tex" ),
@@ -127,6 +135,31 @@ Assets = {
 	Asset( "ATLAS", "bigportraits/ms_hatkid_dye_sans.xml" ),
 
     Asset( "ATLAS", "bigportraits/hatkid_timestop.xml" ),
+
+	-- Slotbg's
+
+	Asset( "IMAGE", "images/gui/slotbg_kidhat.tex" ),
+    Asset( "ATLAS", "images/gui/slotbg_kidhat.xml" ),
+
+	Asset( "IMAGE", "images/gui/slotbg_sprinthat.tex" ),
+    Asset( "ATLAS", "images/gui/slotbg_sprinthat.xml" ),
+
+	Asset( "IMAGE", "images/gui/slotbg_brewinghat.tex" ),
+    Asset( "ATLAS", "images/gui/slotbg_brewinghat.xml" ),
+
+	Asset( "IMAGE", "images/gui/slotbg_polarhat.tex" ),
+    Asset( "ATLAS", "images/gui/slotbg_polarhat.xml" ),
+
+	Asset( "IMAGE", "images/gui/slotbg_dwellermask.tex" ),
+    Asset( "ATLAS", "images/gui/slotbg_dwellermask.xml" ),
+
+	Asset( "IMAGE", "images/gui/slotbg_timestophat.tex" ),
+    Asset( "ATLAS", "images/gui/slotbg_timestophat.xml" ),
+
+	Asset( "IMAGE", "images/gui/slotbg_badge.tex" ),
+    Asset( "ATLAS", "images/gui/slotbg_badge.xml" ),
+
+	Asset("ANIM", "anim/tab_badgeseller.zip"),
 }
 
 
@@ -136,17 +169,16 @@ modimport("modmain_crafting.lua")
 modimport("modmain_actions.lua")
 modimport("modmain_insight.lua")
 
--- If meme language is enabled, we'll use our own meme strings, otherwise load the normal ones.
-if GLOBAL.KnownModIndex:IsModEnabled("workshop-1289272965") then
+modimport("modmain_dev.lua")
+
+-- If meme language or meme language server is enabled, we'll use our own meme strings, otherwise load the normal ones.
+if GLOBAL.KnownModIndex:IsModEnabled("workshop-1289272965") or GLOBAL.KnownModIndex:IsModEnabled("workshop-2926922407") then
 	modimport("modmain_strings_alt.lua")
 else
 	modimport("modmain_strings.lua")
 end
 
--- disabled pon things
--- modimport("modmain_ponstuff.lua")
-
-modimport("scripts/keyhandler.lua") --Keyhandler
+modimport("scripts/keyhandler.lua") --Keyhandler (usually engine.lua)
 
 -- Imports to keep the keyhandler from working while typing into various things.
 Load "chatinputscreen"
@@ -159,20 +191,23 @@ AddMinimapAtlas("images/map_icons/hatkid.xml")
 
 -- Thanks Kzisor/Ysovuka for the Key Handling code.
 -- Key Handling guide https://forums.kleientertainment.com/forums/topic/63754-tutorial-character-transformation/
-local mod_option = "hatkid_polarhatkey"
-local character = "HATKID"
-GLOBAL.TUNING[GLOBAL.string.upper(character)] = {}
-GLOBAL.TUNING[GLOBAL.string.upper(character)].KEY = GetModConfigData(mod_option) or 122
 
--- Push AbilityKey to any Hat Kid's hats.
-local function Ability(inst)
+-- Ability Key Handler
+local function OnAbility(inst)
 	local hat = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HEAD)
 	if hat ~= nil and hat:HasTag("hatkidhat") then
 		hat:PushEvent("AbilityKey")
 	end
 end
 
-AddModRPCHandler("HatKidRPC", "AbilityKeyDown", Ability)
+AddModRPCHandler("HatKidRPC", "AbilityKeyDown", OnAbility)
+
+-- Hat Switch Handler
+local function OnHatSwitch(inst)
+	inst:PushEvent("SwitchKey")
+end
+
+AddModRPCHandler("HatKidRPC", "SwitchKeyDown", OnHatSwitch)
 
 -- Post inits
 local afs_enabled = GLOBAL.KnownModIndex:IsModEnabled("workshop-2736043172") or GLOBAL.KnownModIndex:IsModEnabled("AutoFuelSlotDSTMod")
@@ -196,6 +231,10 @@ if not afs_enabled then
 	end)
 	
 	AddPrefabPostInit("nightmarefuel", function(inst)
+		inst:AddTag("nightmarefuel")
+	end)
+
+	AddPrefabPostInit("horrorfuel", function(inst)
 		inst:AddTag("nightmarefuel")
 	end)
 	

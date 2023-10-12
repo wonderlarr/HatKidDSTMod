@@ -2,6 +2,8 @@
 
 -- Events you can listen for: `magicactivated` `magicdeactivated` `magicready`
 
+local SourceModifierList = require("util/sourcemodifierlist")
+
 local HatMagic = Class(function(self, inst)
     self.inst = inst
     self.owner = nil -- current player using the item, might be nil if unequipped
@@ -9,7 +11,9 @@ local HatMagic = Class(function(self, inst)
     -- Config
     self.instant = true -- whether or not to instantly deactive magic after activation. set to false for timed abilities.
     self.activetime = 5 -- how long activetime based magic can stay active at most. 0 or less will be infinite.
+    -- self.activetimemods = SourceModifierList(self.inst)
     self.cooldowntime = 10 -- how long magic will cool down before it can be used again
+    -- self.cooldowntimemods = SourceModifierList(self.inst)
 
     -- Control
     self.useable = true -- setting this to false will prevent activation AND deactivation, in case you need that for some reason.
@@ -221,7 +225,18 @@ function HatMagic:OnRemoveFromEntity()
 end
 
 function HatMagic:GetDebugString()
-	return "Haven't gotten around to this one yet, sorry."
+    local status = self.isactive and "Active" or "Inactive"
+    local cooldown = self.oncooldown and "On Cooldown" or "Cooldown Ready"
+    
+    local ownerStr = "No Owner"
+    if self.owner then
+        ownerStr = "Owner: " .. tostring(self.owner)
+    end
+    
+    local result = string.format("Status: %s\nCooldown: %s\n%s", status, cooldown, ownerStr)
+    
+    return result
 end
+
 
 return HatMagic

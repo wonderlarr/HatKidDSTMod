@@ -59,6 +59,16 @@ local function OnEquip(inst, owner)
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Hide("HEAD_HAT")
 	end
+
+	inst.freezefn = function(attacked, data)
+        if data and data.attacker and data.attacker.components.freezable and inst.components.fueled:GetPercent() >= 0.08 then
+            data.attacker.components.freezable:AddColdness(1)
+            data.attacker.components.freezable:SpawnShatterFX()
+            inst.components.fueled:DoDelta(-0.08 * inst.components.fueled.maxfuel)
+        end
+    end
+
+    inst:ListenForEvent("attacked", inst.freezefn, owner)
 end
  
  
@@ -74,6 +84,8 @@ local function OnUnequip(inst, owner)
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Hide("HEAD_HAT")
 	end
+
+	inst:RemoveEventCallback("attacked", inst.freezefn, owner)
 end
 
 local function OnActivate(inst)

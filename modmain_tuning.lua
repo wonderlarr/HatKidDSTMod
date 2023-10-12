@@ -1,6 +1,7 @@
 local TUNING = GLOBAL.TUNING
 
 TUNING.HATKID_ABILITYKEY = GetModConfigData("hatkid_polarhatkey")
+TUNING.HATKID_SWITCHKEY = GetModConfigData("hatkid_switchkey")
 
 --Character stat config
 TUNING.HATKID_HEALTH = GetModConfigData("hatkidbasehp")
@@ -31,9 +32,6 @@ TUNING.HATBRELLA_DURABILITY = GetModConfigData("hatbrelladurability")
 TUNING.HATBRELLA_DAMAGE = GetModConfigData("hatbrelladamage")
 TUNING.HATBRELLA_OPENDURABILITY = GetModConfigData("hatbrellaopendurability")
 TUNING.HATBRELLA_WATERPROOFNESS = GetModConfigData("hatbrellaopenwaterproofness")
-
---Togglables
--- TUNING.ENABLE_PONS = GetModConfigData("enablepons")
 
 --Kid Hat
 TUNING.KIDHAT_DURABILITY = GetModConfigData("kidhatdurability")
@@ -112,9 +110,6 @@ TUNING.TIMESTOPHAT_COOLDOWN = GetModConfigData("timestopcooldown")
 TUNING.TIMESTOPHAT_THRESHHOLD = GetModConfigData("timestopthreshhold")
 TUNING.TIMESTOPHAT_DURATION = GetModConfigData("timestopactive")
 TUNING.TIMESTOPHAT_TIMESCALE = GetModConfigData("timestopscale")
-
--- Pons and Badges
-TUNING.PONS_MAX = GetModConfigData("ponsmax")
 
 --funny mode
 TUNING.FUNNYMODE = GetModConfigData("funnymode")

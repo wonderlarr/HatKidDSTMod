@@ -9,6 +9,7 @@ local assets=
     Asset("IMAGE", "images/inventoryimages/dwellermask.tex"),
 	
 	Asset("IMAGE", resolvefilepath("images/cc/nd.tex")),
+	Asset("IMAGE", resolvefilepath("images/cc/dwellervision.tex")),
 
 	Asset("SOUNDPACKAGE", "sound/dwellermask.fev"),
     Asset("SOUND", "sound/dwellermask.fsb"),
@@ -19,6 +20,14 @@ RegisterInventoryItemAtlas("images/inventoryimages/dwellermask.xml","dwellermask
 local prefabs = 
 {
 
+}
+
+local DWELLERVISION_COLOURCUBES_2 =
+{
+    day = resolvefilepath("images/cc/dwellervision.tex"),
+    dusk = resolvefilepath("images/cc/dwellervision.tex"),
+    night = resolvefilepath("images/cc/dwellervision.tex"),
+    full_moon = resolvefilepath("images/cc/dwellervision.tex"),
 }
 
 local DWELLERVISION_COLOURCUBES_3 =
@@ -59,8 +68,8 @@ local function OnEquip(inst, owner)
 		owner.AnimState:Hide("HEAD_HAT")
 	end
 
+	-- TODO is this supposed to be here???
 	inst.AnimState:SetHaunted(true)
-
 end
  
 local function OnUnequip(inst, owner)

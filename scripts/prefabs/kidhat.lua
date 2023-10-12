@@ -62,10 +62,10 @@ local function fn()
 	-- Client and Server
 
 	-- Add internal components
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
+	inst.entity:AddTransform() -- position
+	inst.entity:AddAnimState() -- sprite and animation
+	inst.entity:AddSoundEmitter() -- sounds
+    inst.entity:AddNetwork() -- networked from server to client
 
 	-- Setup AnimState
 	inst.AnimState:SetBank("kidhat")
@@ -97,10 +97,13 @@ local function fn()
 	MakeHauntableLaunch(inst)
  
 	-- Server components
+
+	-- Makes the item, well, an item
 	inst:AddComponent("inventoryitem")
 
+	-- Allows inspecting of the item
 	inst:AddComponent("inspectable")
-
+	
 	inst:AddComponent("equippable")
 	if TUNING.ITEMRESTRICTIONS then
 		inst.components.equippable.restrictedtag = "hatkid"
@@ -158,7 +161,7 @@ end
 
 -- end
 
-return  Prefab("kidhat", fn, assets, prefabs)
+return Prefab("kidhat", fn, assets, prefabs)
 -- CreateModPrefabSkin("kidhat_dye_niko",
 -- {
 -- 	assets = {
