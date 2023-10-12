@@ -1,4 +1,0 @@
-I have no idea how fmod's distance equates to in game distance, it says in game units but I don't think it's accurate.
-this is probably Klei's fault, lol
-
-Also I hate how I had to do the pon chains, I couldn't get the playlist behaviour to work correctly with them all in one event
