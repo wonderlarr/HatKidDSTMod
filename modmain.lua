@@ -814,7 +814,7 @@ if TUNING.HATKID_DISCOUNT ~= false then
 		self.ShowRecipe = function(self)
 			local product = self.recipe_name ~= nil and self.craftingmenu:GetRecipeState(self.recipe_name) ~= nil and self.craftingmenu:GetRecipeState(self.recipe_name).recipe.product
 
-			if self.owner:HasTag("madhatter") then
+			if self.owner:HasTag("hatkidcrafter") then
 				local hatdiscount = false
 				for k, v in pairs(TUNING.HATKID_CHEAP_HATS) do
 					if v == product then
@@ -843,7 +843,7 @@ if TUNING.HATKID_DISCOUNT ~= false then
 		local _PopulateRecipeDetailPanel = self.PopulateRecipeDetailPanel
 
 		self.PopulateRecipeDetailPanel = function(self, data, skin_name)
-			if self.owner:HasTag("madhatter") then
+			if self.owner:HasTag("hatkidcrafter") then
 				local hatdiscount = false
 				for k, v in pairs(TUNING.HATKID_CHEAP_HATS) do
 					if data and v == data.recipe.product then
@@ -872,7 +872,7 @@ if TUNING.HATKID_DISCOUNT ~= false then
 		local _HasIngredients = self.HasIngredients
 
 		self.HasIngredients = function(self, recipe)
-			if self.inst:HasTag("madhatter") then
+			if self.inst:HasTag("hatkidcrafter") then
 				local hatdiscount = false
 				for k, v in pairs(TUNING.HATKID_CHEAP_HATS) do
 					if v == recipe.product then
