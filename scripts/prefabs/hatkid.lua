@@ -194,6 +194,8 @@ end
 -- Server and client
 local CommonPostInit = function(inst) 
 	inst.MiniMapEntity:SetIcon( "hatkid.tex" )
+	inst.components.talker.font = TALKINGFONT_HATKID
+	inst.components.talker.fontsize = 28 -- 35 is default, decreased to help with longer sentences
 	inst:AddTag("hatkid") -- Unique character tag, used for various things
 	inst:AddTag("hatkidcrafter") -- Enables crafting of Hat Kid's hats
 

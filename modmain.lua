@@ -160,6 +160,8 @@ Assets = {
     Asset( "ATLAS", "images/gui/slotbg_badge.xml" ),
 
 	Asset("ANIM", "anim/tab_badgeseller.zip"),
+
+	Asset("FONT", "fonts/talkingfont_hatkid.zip"),
 }
 
 
@@ -188,6 +190,32 @@ Load "textedit"
 -- Add Hat Kid to various things
 AddModCharacter("hatkid", "FEMALE")
 AddMinimapAtlas("images/map_icons/hatkid.xml")
+
+local TheSim = GLOBAL.TheSim
+
+GLOBAL.TALKINGFONT_HATKID = "talkingfont_hatkid"
+
+local HATKID_FALLBACK_TABLE_OUTLINE = {
+	GLOBAL.TALKINGFONT,
+	"controllers",
+	"emoji",
+	GLOBAL.FALLBACK_FONT_OUTLINE,
+	GLOBAL.FALLBACK_FONT_FULL_OUTLINE,
+}
+
+AddSimPostInit(function()
+	TheSim:UnloadFont(GLOBAL.TALKINGFONT_HATKID)
+	TheSim:UnloadPrefabs({"hatkid_fonts"})
+
+	local Assets = {
+		Asset("FONT", GLOBAL.resolvefilepath("fonts/talkingfont_hatkid.zip")),
+	}
+	local FontsPrefab = GLOBAL.Prefab("hatkid_fonts", function() return GLOBAL.CreateEntity() end, Assets)
+	GLOBAL.RegisterPrefabs(FontsPrefab)
+	TheSim:LoadPrefabs({"hatkid_fonts"})
+	TheSim:LoadFont(GLOBAL.resolvefilepath("fonts/talkingfont_hatkid.zip"), GLOBAL.TALKINGFONT_HATKID)
+	TheSim:SetupFontFallbacks(GLOBAL.TALKINGFONT_HATKID, HATKID_FALLBACK_TABLE_OUTLINE)
+end)
 
 -- Thanks Kzisor/Ysovuka for the Key Handling code.
 -- Key Handling guide https://forums.kleientertainment.com/forums/topic/63754-tutorial-character-transformation/
