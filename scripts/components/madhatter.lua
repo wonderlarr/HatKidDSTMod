@@ -1,11 +1,9 @@
-local function OnPonValDirty(inst)
-    inst.components.madhatter.val = inst.components.madhatter.net_val:value()
-    inst:PushEvent("ponval")
+local function OnPonVal(self, val)
+    self.inst.replica.madhatter:SetPons(val)
 end
 
-local function OnPonMaxDirty(inst)
-    inst.components.madhatter.max = inst.components.madhatter.net_max:value()
-    inst:PushEvent("ponmax")
+local function OnPonMax(self, max)
+    self.inst.replica.madhatter:SetMax(max)
 end
 
 -- For entities with health
@@ -53,9 +51,7 @@ local MadHatter = Class(function(self, inst)
     self.inst = inst
 
     self.max = 100
-    self.net_max = net_ushortint(self.inst.GUID, "ponmax", "ponmax_dirty" )
     self.val = 0
-    self.net_val = net_ushortint(self.inst.GUID, "ponval", "ponval_dirty" )
 
     self.chainPos = 0
 
@@ -64,12 +60,12 @@ local MadHatter = Class(function(self, inst)
     self.inst:ListenForEvent("onattackother", OnAttack)
     self.inst:ListenForEvent("working", OnAttack)
     self.inst:ListenForEvent("picksomething", OnPick)
-
-    if not TheWorld.ismastersim then
-        self.inst:ListenForEvent("ponval_dirty", OnPonValDirty)
-        self.inst:ListenForEvent("ponmax_dirty", OnPonMaxDirty)
-    end
-end)
+end,
+nil, 
+{
+    max = OnPonMax,
+    val = OnPonVal,
+})
 
 function MadHatter:OnRemoveFromEntity()
     self.inst:RemoveTag("madhatter")
@@ -91,13 +87,11 @@ end
 function MadHatter:SetPons(val)
     local newval = math.clamp(val, 0, self.max)
     self.val = newval
-    self.net_val:set(newval)
 end
 
 function MadHatter:SetMax(max)
     local newmax = math.clamp(max, 0, 65535)
     self.max = newmax
-    self.net_max:set(newmax)
 end
 
 function MadHatter:GetPercent()

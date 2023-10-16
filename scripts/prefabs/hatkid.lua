@@ -195,7 +195,7 @@ end
 local CommonPostInit = function(inst) 
 	inst.MiniMapEntity:SetIcon( "hatkid.tex" )
 	inst.components.talker.font = TALKINGFONT_HATKID
-	inst.components.talker.fontsize = 28 -- 35 is default, decreased to help with longer sentences
+	inst.components.talker.fontsize = 32 -- 35 is default, decreased to help with longer sentences
 	inst:AddTag("hatkid") -- Unique character tag, used for various things
 	inst:AddTag("hatkidcrafter") -- Enables crafting of Hat Kid's hats
 
@@ -210,7 +210,7 @@ local CommonPostInit = function(inst)
 	inst:ListenForEvent("PotionThrown", OnPotionThrow)
 	
 	-- This seems like it should only be a server component, but it breaks if you dont add it to both for now
-	inst:AddComponent("madhatter")
+
 end
 
 -- Server only, most components go here.
@@ -238,6 +238,9 @@ local MasterPostInit = function(inst, data)
 	-- Flavor/Misc
 	inst.components.foodaffinity:AddPrefabAffinity("honeynuggets", TUNING.AFFINITY_15_CALORIES_LARGE) -- Favorite food
 	inst.AnimState:SetScale(TUNING.HATKIDSIZE, TUNING.HATKIDSIZE) -- Character size
+
+	-- Mad Hatter (pons)
+	inst:AddComponent("madhatter")
 
 	-- Wanda
 	inst:AddComponent("positionalwarp")

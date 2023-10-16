@@ -70,11 +70,10 @@ for k, v in pairs(GLOBAL.KnownModIndex:GetModsToLoad()) do
     end
 end
 
--- Get the badge to actually appear on screen
--- I have no idea what I am doing here
+-- Get the badge to actually appear on screen, pull from client replica for data
 local PonBadge = require("widgets/ponbadge")
 AddClassPostConstruct("widgets/statusdisplays", function(self)
-    if not self.owner or self.owner.prefab ~= "hatkid" then return end
+    if not self.owner or not self.owner:HasTag("madhatter") then return end
 
     self.ponbadge = self:AddChild(PonBadge(self.owner))
     self.ponbadge:SetPosition(-120, 20)
@@ -85,16 +84,18 @@ AddClassPostConstruct("widgets/statusdisplays", function(self)
     end
 
     local function OnPonDelta(owner, data) 
-        self.ponbadge:SetPercent(owner.components.madhatter.val / owner.components.madhatter.max, owner.components.madhatter.max)
-
-        local im = Image("images/inventoryimages/pon.xml", "pon.tex")
+        self.ponbadge:SetPercent(owner.replica.madhatter:GetPercent(), owner.replica.madhatter:GetMax())
+        
         local start_pos = Vector3(TheSim:GetScreenPos(owner:GetPosition():Get()))
         local dest_pos = self.ponbadge:GetWorldPosition()
-        im:MoveTo(start_pos, dest_pos, .3, function() im:Kill() end)
+
+        -- TODO optimize this so we don't make a new image every time we collect a pon
+        local PonImage = Image("images/inventoryimages/pon.xml", "pon.tex") 
+        PonImage:MoveTo(start_pos, dest_pos, .3, function() PonImage:Kill() end)
     end 
 
-    self.inst:ListenForEvent("ponval", OnPonDelta, self.owner)
-    self.inst:ListenForEvent("ponmax", OnPonDelta, self.owner)
+    self.inst:ListenForEvent("ponval_dirty", OnPonDelta, self.owner)
+    self.inst:ListenForEvent("ponmax_dirty", OnPonDelta, self.owner)
 end)
 
 
@@ -180,6 +181,71 @@ AddPrefabPostInit("pocketwatch_heal", function(inst)
     end
 end)
 
+AddReplicableComponent("madhatter")
+
 -- for k, v in pairs(GLOBAL.EMOJI_ITEMS) do
 --     print(k .. " = " .. "\"" .. v.data.utf8_str .. "\",")
+-- end
+
+local CHARACTER_INGREDIENT = GLOBAL.CHARACTER_INGREDIENT
+CHARACTER_INGREDIENT.PON = "pon"
+
+
+AddClassPostConstruct("components/builder_replica", function(self)
+    local _HasCharacterIngredient = self.HasCharacterIngredient
+
+    self.HasCharacterIngredient = function(self, ingredient)
+        if self.inst.components.builder ~= nil then
+            return self.inst.components.builder:HasCharacterIngredient(ingredient)
+        elseif self.classified ~= nil then
+            if ingredient.type == CHARACTER_INGREDIENT.PON then
+                local health = self.inst.replica.madhatter
+                if madhatter ~= nil then
+                    -- no need to round, we should never be at decimal values under normal conditions
+                    local current = madhatter:GetCurrent()
+                    return current >= ingredient.amount, current
+                end
+            end
+        end
+
+
+
+        return _HasCharacterIngredient(self, ingredient)
+    end
+end)
+
+-- function Builder:HasCharacterIngredient(ingredient)
+--     if self.inst.components.builder ~= nil then
+--         return self.inst.components.builder:HasCharacterIngredient(ingredient)
+--     elseif self.classified ~= nil then
+--         if ingredient.type == CHARACTER_INGREDIENT.HEALTH then
+--             local health = self.inst.replica.health
+--             if health ~= nil then
+--                 --round up health to match UI display
+-- 				local amount_required = self.inst:HasTag("health_as_oldage") and math.ceil(ingredient.amount * TUNING.OLDAGE_HEALTH_SCALE) or ingredient.amount
+--                 local current = math.ceil(health:GetCurrent())
+--                 return current > amount_required, current --Don't die from crafting!
+--             end
+--         elseif ingredient.type == CHARACTER_INGREDIENT.MAX_HEALTH then
+--             local health = self.inst.replica.health
+--             if health ~= nil then
+--                 local penalty = health:GetPenaltyPercent()
+--                 return penalty + ingredient.amount <= TUNING.MAXIMUM_HEALTH_PENALTY, 1 - penalty
+--             end
+--         elseif ingredient.type == CHARACTER_INGREDIENT.SANITY then
+--             local sanity = self.inst.replica.sanity
+--             if sanity ~= nil then
+--                 --round up sanity to match UI display
+--                 local current = math.ceil(sanity:GetCurrent())
+--                 return current >= ingredient.amount, current
+--             end
+--         elseif ingredient.type == CHARACTER_INGREDIENT.MAX_SANITY then
+--             local sanity = self.inst.replica.sanity
+--             if sanity ~= nil then
+--                 local penalty = sanity:GetPenaltyPercent()
+--                 return penalty + ingredient.amount <= TUNING.MAXIMUM_SANITY_PENALTY, 1 - penalty
+--             end
+--         end
+--     end
+--     return false, 0
 -- end

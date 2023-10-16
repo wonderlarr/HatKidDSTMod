@@ -132,7 +132,7 @@ return {
         {
             GENERIC = emoji.arcane .. "not now",
             INUSE = emoji.wave .. "in use",
-            TOOFAR = emoji.eyeball .. "too far",
+            TOOFAR = emoji.arcane .. "too far",
         },
         START_CARRAT_RACE =
         {
@@ -460,7 +460,7 @@ return {
 		NO_STATION = emoji.alchemyengine .. "need station!",
 	},
 
-	ACTIONFAIL_GENERIC = emoji.arcane .. " nope",
+	ACTIONFAIL_GENERIC = emoji.arcane .. "nope",
 	ANNOUNCE_BOAT_LEAK = "We're taking on a lot of water.",
 	ANNOUNCE_BOAT_SINK = "I don't want to drown!",
 	ANNOUNCE_DIG_DISEASE_WARNING = "It looks better already.", --removed
