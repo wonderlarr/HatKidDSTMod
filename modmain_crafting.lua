@@ -10,7 +10,7 @@
 ]]
 
 -- Hi there, you seem to have stumbled upon my crafting section. I actually used this file to develop the guide I wrote here https://forums.kleientertainment.com/forums/topic/140881-documentation-new-recipe-system-functions-other-info/
--- as you may be able to tell by the commments. Regardless, welcome, take a seat, stay a while, have a cookie, dunk it in some medium-roast black coffee, etc etc.
+-- as you may be able to tell by the commments. Regardless, welcome, take a seat, stay a while, have a cookie, dunk it in some dark-roast black coffee, etc etc.
 
 local Ingredient = GLOBAL.Ingredient
 local TECH = GLOBAL.TECH
