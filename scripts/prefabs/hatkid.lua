@@ -241,7 +241,7 @@ local MasterPostInit = function(inst, data)
 	-- Wanda
 	inst:AddComponent("positionalwarp")
 	inst:DoTaskInTime(0, function() inst.components.positionalwarp:SetMarker("pocketwatch_warp_marker") end)
-	inst.components.positionalwarp:SetWarpBackDist(TUNING.WANDA_WARP_DIST_YOUNG)
+	inst.components.positionalwarp:SetWarpBackDist(TUNING.WANDA_WARP_DIST_NORMAL)
 
 	inst:ListenForEvent("show_warp_marker", on_show_warp_marker)
 	inst:ListenForEvent("hide_warp_marker", on_hide_warp_marker)
