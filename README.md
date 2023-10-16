@@ -2,6 +2,7 @@
 A custom character mod for Don't Starve Together, adding Hat Kid from A Hat in Time.
 
 ## Credits
-* Skylarr - Code, FMOD Sounds, Voice, Design (Translating mechanics from A Hat in Time to DST)
+* Skylarr - Programming, Audio, Character Voice, Gameplay Design and Concepts
 * POWD3d4 - Art (Character and Most Items)
-* Kzisor - Code (Specifically the Key Handler)
+* Ultra Boo - Talker Font (Moleman Language, adapted from A Hat in Time)
+* Kzisor - Code Excerpts (Key Handler Engine)
