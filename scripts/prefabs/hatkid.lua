@@ -209,6 +209,7 @@ local CommonPostInit = function(inst)
 	-- 50% chance of quote on potion explode TODO move this somewhere better
 	inst:ListenForEvent("PotionThrown", OnPotionThrow)
 	
+	-- This seems like it should only be a server component, but it breaks if you dont add it to both for now
 	inst:AddComponent("madhatter")
 end
 

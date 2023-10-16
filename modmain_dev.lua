@@ -179,3 +179,7 @@ AddPrefabPostInit("pocketwatch_heal", function(inst)
         end
     end
 end)
+
+-- for k, v in pairs(GLOBAL.EMOJI_ITEMS) do
+--     print(k .. " = " .. "\"" .. v.data.utf8_str .. "\",")
+-- end

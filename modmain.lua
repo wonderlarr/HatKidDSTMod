@@ -30,7 +30,7 @@ local PrefabFilesLocal = {
 
 	--hats
     "kidhat",
-	-- "sprinthat",
+	"sprinthat",
 	"brewinghat",
 	"polarhat",
 	"dwellermask",
@@ -65,11 +65,6 @@ local PrefabFilesLocal = {
 	--testing TODO (disable in final)
 	"cooltarget", -- This is a dummytarget prefab, but it only regens health when it is low.
 }
-
--- If Meme Language is enabled, manually add sprinthat
-if GLOBAL.KnownModIndex:IsModEnabled("workshop-1289272965") or GLOBAL.KnownModIndex:IsModEnabled("workshop-2926922407") then
-	table.insert(PrefabFilesLocal, "sprinthat")
-end
 
 PrefabFiles = PrefabFilesLocal
 

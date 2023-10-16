@@ -1,4 +1,4 @@
-name = "[Internal] Hat Kid: The Haberdasher"
+name = "[Internal] Hat Kid: The Little Haberdasher"
 description = "Adds Hat Kid from A Hat in Time into the world of Don't Starve Together, complete with her hats, umbrella, and even some of her outfits!\n\nThis mod is highly configurable, click the config button below to customize your experience to a tee.\n\nDependencies:\n\n* [API] Modded Skins\n* [API] Time Control"
 author = "Skylarr 󰀏" -- Unknown character is a torch emoji
 version = "1.2.3" -- major version . feature update . minor update/bugfix

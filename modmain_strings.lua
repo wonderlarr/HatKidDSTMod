@@ -16,11 +16,11 @@ STRINGS.NAMES.HATKID = "Hat Kid"
 STRINGS.CHARACTERS.HATKID = require "speech_hatkid" -- speech file
 
 -- The character select screen lines
-STRINGS.CHARACTER_TITLES.hatkid = "The Haberdasher"
+STRINGS.CHARACTER_TITLES.hatkid = "The Little Haberdasher"
 STRINGS.CHARACTER_NAMES.hatkid = "Hat Kid"
-STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Is a grandmaster haberdasher\n*Overreliant on headwear\n*Collects all sorts of things"
+STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Is a grandmaster haberdasher\n*And is overreliant on headwear\n*Collects all sorts of things\n*Speaks an alien language"
 STRINGS.CHARACTER_QUOTES.hatkid = "\"Oh, hi there!\""
-STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Slim"
+STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Grim"
 
 --Skin STRINGS
 STRINGS.SKIN_NAMES.hatkid_none = "Hat Kid"
@@ -131,7 +131,7 @@ STRINGS.RECIPE_DESC.HATBRELLA = "Diplomacy didn't work, time for action."
 
 
 
---Describe strings, by order of css screen, but Hat Kid first.
+--Describe strings, by order of css, but Hat Kid first.
 -- generic is wilson, as well as any other undefined characters (eg. modded, future dlc's)
 
 -- Hat Kid
