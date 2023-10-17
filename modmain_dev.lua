@@ -70,7 +70,7 @@ for k, v in pairs(GLOBAL.KnownModIndex:GetModsToLoad()) do
     end
 end
 
--- Get the badge to actually appear on screen, pull from client replica for data
+-- Make PonBadge appear on the UI if we have the madhatter component
 local PonBadge = require("widgets/ponbadge")
 AddClassPostConstruct("widgets/statusdisplays", function(self)
     if not self.owner or not self.owner:HasTag("madhatter") then return end
@@ -84,20 +84,30 @@ AddClassPostConstruct("widgets/statusdisplays", function(self)
     end
 
     local function OnPonDelta(owner, data) 
+        local repDelta = owner.replica.madhatter:GetPercent() - self.ponbadge.percent
+        print(repDelta)
         self.ponbadge:SetPercent(owner.replica.madhatter:GetPercent(), owner.replica.madhatter:GetMax())
-        
-        local start_pos = Vector3(TheSim:GetScreenPos(owner:GetPosition():Get()))
-        local dest_pos = self.ponbadge:GetWorldPosition()
 
-        -- TODO maybe optimize this so we don't make a new image every time we collect a pon
-        local PonImage = Image("images/inventoryimages/pon.xml", "pon.tex") 
-        PonImage:MoveTo(start_pos, dest_pos, .3, function() PonImage:Kill() end)
+        if repDelta > 0 then
+            local start_pos = Vector3(TheSim:GetScreenPos(owner:GetPosition():Get()))
+            local dest_pos = self.ponbadge:GetWorldPosition()
+
+            -- TODO maybe optimize this so we don't make a new image every time we collect a pon
+            local PonImage = Image("images/inventoryimages/pon.xml", "pon.tex") 
+            PonImage:SetScale(0.8, 0.8)
+            PonImage:MoveTo(start_pos, dest_pos, .3, function() PonImage:Kill() end)
+        end
     end 
 
     self.inst:ListenForEvent("ponval_dirty", OnPonDelta, self.owner)
     self.inst:ListenForEvent("ponmax_dirty", OnPonDelta, self.owner)
 end)
 
+AddClassPostConstruct("widgets/statusdisplays", function(self)
+    if self.owner and self.owner:HasTag("hatkid") then
+        
+    end
+end)
 
 -- Push "badgeseller" locally to trigger
 -- local BadgeToast = require("widgets/badgetoast")
@@ -189,7 +199,6 @@ AddClassPostConstruct("components/builder_replica", function(self)
     local _HasCharacterIngredient = self.HasCharacterIngredient
 
     self.HasCharacterIngredient = function(self, ingredient)
-        print("HasCharacterIngredient_replica")
         if self.inst.components.builder ~= nil then
             return self.inst.components.builder:HasCharacterIngredient(ingredient)
         elseif ingredient.type == CHARACTER_INGREDIENT.PON then
@@ -212,7 +221,6 @@ AddClassPostConstruct("components/builder", function(self)
     self.RemoveIngredients = function(self, ingredients, recname)
         local recipe = GLOBAL.AllRecipes[recname]
         if recipe then
-            print("RemoveIngredients")
             for k,v in pairs(recipe.character_ingredients) do
                 if v.type == CHARACTER_INGREDIENT.PON then
                     self.inst.components.madhatter:DoDelta(-v.amount)
@@ -226,10 +234,9 @@ AddClassPostConstruct("components/builder", function(self)
     local _HasCharacterIngredient = self.HasCharacterIngredient
 
     self.HasCharacterIngredient = function(self, ingredient)
-        print("HasCharacterIngredient")
         if ingredient.type == CHARACTER_INGREDIENT.PON and self.inst.components.madhatter ~= nil then
             local current = self.inst.components.madhatter.val
-            return current >= ingredient.amount, current --Don't die from crafting!
+            return current >= ingredient.amount, current
         end
 
         return _HasCharacterIngredient(self, ingredient)

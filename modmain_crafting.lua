@@ -18,8 +18,15 @@ local CHARACTER_INGREDIENT = GLOBAL.CHARACTER_INGREDIENT
 
 CHARACTER_INGREDIENT["PON"] = "pon"
 
--- table.insert(CHARACTER_INGREDIENT)
--- CHARACTER_INGREDIENT.PON = "pon"
+local _IsCharacterIngredient = GLOBAL.IsCharacterIngredient
+
+GLOBAL.IsCharacterIngredient = function(ingredienttype)
+	if ingredienttype and ingredienttype == "pon" then
+		return true
+	else
+		return _IsCharacterIngredient(ingredienttype)
+	end
+end
 
 AddCharacterRecipe("hatbrella",
 	{ -- ingredients. Formatted identically to the old AddRecipe()

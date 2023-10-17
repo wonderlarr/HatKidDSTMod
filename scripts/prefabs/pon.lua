@@ -79,7 +79,7 @@ local function fn()
 
     inst.entity:AddPhysics()
 
-    inst.Physics:SetCapsule(0.85, 0.85)
+    inst.Physics:SetCapsule(0.6, 0.6)
     inst.Physics:SetCollisionGroup(COLLISION.SMALLOBSTACLES)
     inst.Physics:ClearCollisionMask()
     inst.Physics:CollidesWith(COLLISION.WORLD)
@@ -90,6 +90,7 @@ local function fn()
     inst.AnimState:SetBank("pon")
     inst.AnimState:SetBuild("pon")
     inst.AnimState:PlayAnimation("idle")
+    inst.AnimState:SetScale(2, 2)
 
     inst:AddTag("pon")
 	
