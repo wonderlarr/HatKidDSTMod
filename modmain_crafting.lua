@@ -14,13 +14,19 @@
 
 local Ingredient = GLOBAL.Ingredient
 local TECH = GLOBAL.TECH
+local CHARACTER_INGREDIENT = GLOBAL.CHARACTER_INGREDIENT
+
+CHARACTER_INGREDIENT["PON"] = "pon"
+
+-- table.insert(CHARACTER_INGREDIENT)
+-- CHARACTER_INGREDIENT.PON = "pon"
 
 AddCharacterRecipe("hatbrella",
 	{ -- ingredients. Formatted identically to the old AddRecipe()
 		-- GLOBAL.Ingredient("twigs", 2),
 		-- GLOBAL.Ingredient("beefalowool", 1),
 		-- GLOBAL.Ingredient("goldnugget", 2),
-		Ingredient(GLOBAL.CHARACTER_INGREDIENT.PON, 10)
+		Ingredient(CHARACTER_INGREDIENT.PON, 10)
 	},
 	GLOBAL.TECH.SCIENCE_ONE, -- crafting station. Refer to other recipes in recipes.lua for other stations.
 	{ -- config. Other options can be found in recipe.lua, under the Recipe class.

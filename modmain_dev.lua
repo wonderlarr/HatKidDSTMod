@@ -89,7 +89,7 @@ AddClassPostConstruct("widgets/statusdisplays", function(self)
         local start_pos = Vector3(TheSim:GetScreenPos(owner:GetPosition():Get()))
         local dest_pos = self.ponbadge:GetWorldPosition()
 
-        -- TODO optimize this so we don't make a new image every time we collect a pon
+        -- TODO maybe optimize this so we don't make a new image every time we collect a pon
         local PonImage = Image("images/inventoryimages/pon.xml", "pon.tex") 
         PonImage:MoveTo(start_pos, dest_pos, .3, function() PonImage:Kill() end)
     end 
@@ -100,13 +100,13 @@ end)
 
 
 -- Push "badgeseller" locally to trigger
-local BadgeToast = require("widgets/badgetoast")
-AddClassPostConstruct("widgets/controls", function(self)
-    if not self.owner or self.owner.prefab ~= "hatkid" then return end
+-- local BadgeToast = require("widgets/badgetoast")
+-- AddClassPostConstruct("widgets/controls", function(self)
+--     if not self.owner or self.owner.prefab ~= "hatkid" then return end
 
-    self.badgetoast_notification = self.topleft_root:AddChild(BadgeToast(self.owner, self))
-    self.badgetoast_notification:SetPosition(315, 150, 0)
-end)
+--     self.badgetoast_notification = self.topleft_root:AddChild(BadgeToast(self.owner, self))
+--     self.badgetoast_notification:SetPosition(315, 150, 0)
+-- end)
 
 -- Reward pons for a lot of things
 AddPrefabPostInitAny(function(inst)
@@ -163,7 +163,7 @@ AddPrefabPostInit("pocketwatch_heal", function(inst)
     local old_spell = inst.components.pocketwatch.DoCastSpell
 
     inst.components.pocketwatch.DoCastSpell = function(inst, doer)
-        if doer:HasTag("hatkid") then
+        if doer.prefab == "hatkid" then
             local health = doer.components.health
             if health ~= nil and not health:IsDead() then
                 -- doer.components.oldager:StopDamageOverTime() -- Hat Kid doesn't have this component, the game gets mad if we call this
@@ -183,69 +183,55 @@ end)
 
 AddReplicableComponent("madhatter")
 
--- for k, v in pairs(GLOBAL.EMOJI_ITEMS) do
---     print(k .. " = " .. "\"" .. v.data.utf8_str .. "\",")
--- end
-
 local CHARACTER_INGREDIENT = GLOBAL.CHARACTER_INGREDIENT
-CHARACTER_INGREDIENT.PON = "pon"
-
 
 AddClassPostConstruct("components/builder_replica", function(self)
     local _HasCharacterIngredient = self.HasCharacterIngredient
 
     self.HasCharacterIngredient = function(self, ingredient)
+        print("HasCharacterIngredient_replica")
         if self.inst.components.builder ~= nil then
             return self.inst.components.builder:HasCharacterIngredient(ingredient)
-        elseif self.classified ~= nil then
-            if ingredient.type == CHARACTER_INGREDIENT.PON then
-                local health = self.inst.replica.madhatter
-                if madhatter ~= nil then
-                    -- no need to round, we should never be at decimal values under normal conditions
-                    local current = madhatter:GetCurrent()
-                    return current >= ingredient.amount, current
-                end
+        elseif ingredient.type == CHARACTER_INGREDIENT.PON then
+            local madhatter = self.inst.replica.madhatter
+            if madhatter ~= nil then
+                -- no need to round, we should never be at decimal values under normal conditions
+                local current = madhatter:GetVal()
+                return current >= ingredient.amount, current
             end
         end
-
-
 
         return _HasCharacterIngredient(self, ingredient)
     end
 end)
 
--- function Builder:HasCharacterIngredient(ingredient)
---     if self.inst.components.builder ~= nil then
---         return self.inst.components.builder:HasCharacterIngredient(ingredient)
---     elseif self.classified ~= nil then
---         if ingredient.type == CHARACTER_INGREDIENT.HEALTH then
---             local health = self.inst.replica.health
---             if health ~= nil then
---                 --round up health to match UI display
--- 				local amount_required = self.inst:HasTag("health_as_oldage") and math.ceil(ingredient.amount * TUNING.OLDAGE_HEALTH_SCALE) or ingredient.amount
---                 local current = math.ceil(health:GetCurrent())
---                 return current > amount_required, current --Don't die from crafting!
---             end
---         elseif ingredient.type == CHARACTER_INGREDIENT.MAX_HEALTH then
---             local health = self.inst.replica.health
---             if health ~= nil then
---                 local penalty = health:GetPenaltyPercent()
---                 return penalty + ingredient.amount <= TUNING.MAXIMUM_HEALTH_PENALTY, 1 - penalty
---             end
---         elseif ingredient.type == CHARACTER_INGREDIENT.SANITY then
---             local sanity = self.inst.replica.sanity
---             if sanity ~= nil then
---                 --round up sanity to match UI display
---                 local current = math.ceil(sanity:GetCurrent())
---                 return current >= ingredient.amount, current
---             end
---         elseif ingredient.type == CHARACTER_INGREDIENT.MAX_SANITY then
---             local sanity = self.inst.replica.sanity
---             if sanity ~= nil then
---                 local penalty = sanity:GetPenaltyPercent()
---                 return penalty + ingredient.amount <= TUNING.MAXIMUM_SANITY_PENALTY, 1 - penalty
---             end
---         end
---     end
---     return false, 0
--- end
+AddClassPostConstruct("components/builder", function(self)
+    -- RemoveIngredients
+    local _RemoveIngredients = self.RemoveIngredients
+
+    self.RemoveIngredients = function(self, ingredients, recname)
+        local recipe = GLOBAL.AllRecipes[recname]
+        if recipe then
+            print("RemoveIngredients")
+            for k,v in pairs(recipe.character_ingredients) do
+                if v.type == CHARACTER_INGREDIENT.PON then
+                    self.inst.components.madhatter:DoDelta(-v.amount)
+                end
+            end
+        end
+        return _RemoveIngredients(self, ingredients, recname)
+    end
+
+    -- HasCharacterIngredient
+    local _HasCharacterIngredient = self.HasCharacterIngredient
+
+    self.HasCharacterIngredient = function(self, ingredient)
+        print("HasCharacterIngredient")
+        if ingredient.type == CHARACTER_INGREDIENT.PON and self.inst.components.madhatter ~= nil then
+            local current = self.inst.components.madhatter.val
+            return current >= ingredient.amount, current --Don't die from crafting!
+        end
+
+        return _HasCharacterIngredient(self, ingredient)
+    end
+end)

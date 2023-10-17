@@ -8,7 +8,7 @@ local MadHatter = Class(function(self, inst)
     -- self.chainPos = 0
 end)
 
-function MadHatter:SetPons(val)
+function MadHatter:SetVal(val)
     self._val:set(val)
 end
 
@@ -16,7 +16,7 @@ function MadHatter:SetMax(max)
     self._max:set(max)
 end
 
-function MadHatter:GetPons()
+function MadHatter:GetVal()
     return self._val:value()
 end
 

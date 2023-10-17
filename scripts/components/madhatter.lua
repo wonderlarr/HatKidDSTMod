@@ -1,5 +1,5 @@
 local function OnPonVal(self, val)
-    self.inst.replica.madhatter:SetPons(val)
+    self.inst.replica.madhatter:SetVal(val)
 end
 
 local function OnPonMax(self, max)
@@ -76,7 +76,7 @@ function MadHatter:DoDelta(delta)
 
     local old = self.val
 
-    self:SetPons(self.val + delta)
+    self:SetVal(self.val + delta)
 
     local actualDelta = self.val - old
     
@@ -84,7 +84,7 @@ function MadHatter:DoDelta(delta)
     return actualDelta
 end
 
-function MadHatter:SetPons(val)
+function MadHatter:SetVal(val)
     local newval = math.clamp(val, 0, self.max)
     self.val = newval
 end
