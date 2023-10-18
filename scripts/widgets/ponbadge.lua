@@ -10,10 +10,10 @@ local PonBadge = Class(Badge, function(self, owner)
     self.circleframe:GetAnimState():PlayAnimation("frame")
 
     self.ponicon = self.circleframe:AddChild(UIAnim())
-	self.ponicon:GetAnimState():SetBank("pon")
-	self.ponicon:GetAnimState():SetBuild("pon")
+	self.ponicon:GetAnimState():SetBank("pon_nocap")
+	self.ponicon:GetAnimState():SetBuild("pon_nocap")
 	self.ponicon:GetAnimState():PlayAnimation("idle")
-    self.ponicon:SetScale(0.8)
+    self.ponicon:SetScale(0.6)
     -- self.ponicon:SetPosition(22.5, -67) 
 end)
 
