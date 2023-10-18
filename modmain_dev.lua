@@ -105,7 +105,9 @@ end)
 
 AddClassPostConstruct("widgets/statusdisplays", function(self)
     if self.owner and self.owner:HasTag("hatkid") then
-        
+        -- self.healthbadge
+        -- self.heart.topperanim:GetAnimState():SetBank("status_oldage")
+        -- self.heart.topperanim:GetAnimState():SetBuild("status_oldage")
     end
 end)
 
