@@ -4,6 +4,8 @@ local assets = {
 	-- Hat Kid's voice
 	Asset( "SOUNDPACKAGE", "sound/hatkidvoice.fev"),
     Asset( "SOUND", "sound/hatkidvoice.fsb"),
+
+	Asset( "ANIM", "anim/status_clockhealth.zip")
 }
 
 local prefabs = {}

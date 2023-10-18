@@ -85,7 +85,6 @@ AddClassPostConstruct("widgets/statusdisplays", function(self)
 
     local function OnPonDelta(owner, data) 
         local repDelta = owner.replica.madhatter:GetPercent() - self.ponbadge.percent
-        print(repDelta)
         self.ponbadge:SetPercent(owner.replica.madhatter:GetPercent(), owner.replica.madhatter:GetMax())
 
         if repDelta > 0 then
@@ -103,11 +102,44 @@ AddClassPostConstruct("widgets/statusdisplays", function(self)
     self.inst:ListenForEvent("ponmax_dirty", OnPonDelta, self.owner)
 end)
 
-AddClassPostConstruct("widgets/statusdisplays", function(self)
+local UIAnim = require "widgets/uianim"
+AddClassPostConstruct("widgets/healthbadge", function(self)
     if self.owner and self.owner:HasTag("hatkid") then
-        -- self.healthbadge
-        -- self.heart.topperanim:GetAnimState():SetBank("status_oldage")
-        -- self.heart.topperanim:GetAnimState():SetBuild("status_oldage")
+
+        -- use custom red wanda-like meter
+        self.anim:GetAnimState():SetBank("status_clockhealth")
+        self.anim:GetAnimState():SetBuild("status_clockhealth")
+        self.anim:GetAnimState():PlayAnimation("anim")
+        self.anim:GetAnimState():SetMultColour(1,1,1,1)
+
+        -- add years hand, it moves in SetPercent
+        self.year_hand = self.underNumber:AddChild(UIAnim())
+        self.year_hand:GetAnimState():SetBank("status_oldage")
+        self.year_hand:GetAnimState():SetBuild("status_oldage")
+        self.year_hand:GetAnimState():PlayAnimation("year")
+        self.year_hand:GetAnimState():AnimateWhilePaused(false)
+    
+        -- add days hand, it is static at 12 o'clock
+        self.days_hand = self.underNumber:AddChild(UIAnim())
+        self.days_hand:GetAnimState():SetBank("status_oldage")
+        self.days_hand:GetAnimState():SetBuild("status_oldage")
+        self.days_hand:GetAnimState():PlayAnimation("day")
+        self.days_hand:GetAnimState():AnimateWhilePaused(false)
+
+        -- hide heart icon
+        if self.circleframe then
+            self.circleframe:GetAnimState():ClearOverrideSymbol("icon")
+        end
+
+        -- hook into setpercent so year hand can move properly
+        local _SetPercent = self.SetPercent
+
+        self.SetPercent = function(self, val, max)
+            local percent = val
+            self.year_hand:SetRotation( GLOBAL.Lerp(0, 360, percent) )
+
+            return _SetPercent(self, val, max)
+        end
     end
 end)
 

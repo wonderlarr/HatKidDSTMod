@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="clock_parts2">
+        <file id="0" name="clock_parts2/clock_parts2-0.png" width="220" height="257" pivot_x="0.486414" pivot_y="0.49398"/>
+        <file id="1" name="clock_parts2/clock_parts2-1.png" width="45" height="91" pivot_x="0.491313" pivot_y="0.326029"/>
+        <file id="2" name="clock_parts2/clock_parts2-2.png" width="75" height="96" pivot_x="0.488333" pivot_y="0.357552"/>
+    </folder>
+    <entity id="0" name="status_clockhealth">
+        <animation id="0" name="anim" length="34" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="34">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="clock_parts2">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="-1.15" y="3.9" angle="0" scale_x="0.332977" scale_y="0.332977"/>
+                </key>
+                <key id="1" time="34" spin="0">
+                    <object folder="0" file="0" x="-1.15" y="3.9" angle="0" scale_x="0.332977" scale_y="0.332977"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="1" name="day" length="34" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="34">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="clock_parts2">
+                <key id="0" spin="0">
+                    <object folder="0" file="1" x="-0.45" y="4.5" angle="0" scale_x="0.332977" scale_y="0.332977"/>
+                </key>
+                <key id="1" time="34" spin="0">
+                    <object folder="0" file="1" x="-0.45" y="4.5" angle="0" scale_x="0.332977" scale_y="0.332977"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="2" name="year" length="34" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="34">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="clock_parts2">
+                <key id="0" spin="0">
+                    <object folder="0" file="2" x="-0.15" y="0.3" angle="0" scale_x="0.332977" scale_y="0.332977"/>
+                </key>
+                <key id="1" time="34" spin="0">
+                    <object folder="0" file="2" x="-0.15" y="0.3" angle="0" scale_x="0.332977" scale_y="0.332977"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>
