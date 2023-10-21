@@ -11,8 +11,6 @@ local assets =
 
 RegisterInventoryItemAtlas("images/inventoryimages/hatbrella.xml", "hatbrella.tex")
 
-
-
 local function OnEquip(inst, owner)
 	owner.AnimState:OverrideSymbol("swap_object", "hatbrella", "swap_object")
     owner.AnimState:Show("ARM_carry")
@@ -47,10 +45,11 @@ local function OnEmpty(inst)
 end
 
 local function OnAttack(inst, attacker, target)
-    -- print(inst.attack_chain)
     -- If we're strong on this attack
     if inst:HasTag("strongatk") then
         inst.SoundEmitter:PlaySound("dontstarve/creatures/together/klaus/lock_break")
+        inst:RemoveTag("strongatk")
+        inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE)
     end
 
     -- Add one to the counter
@@ -58,16 +57,10 @@ local function OnAttack(inst, attacker, target)
 
     -- Set damage for next attack if we're ready
     if inst.attack_chain >= 3 then
-        -- print("strong attack")
         inst.attack_chain = 0
         inst:AddTag("strongatk")
         inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE * 1.6)
-    else
-        -- print("revert")
-        inst:RemoveTag("strongatk")
-        inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE)
     end
-    -- print(inst.attack_chain .. "\n-------")
 end
 
 local function fn()
@@ -87,8 +80,6 @@ local function fn()
     inst.AnimState:SetBuild("hatbrella_ground")
     inst.AnimState:PlayAnimation("idle")
     inst.AnimState:SetScale(0.65, 0.65)
-
-    inst.handname = "hatbrella"
 	
     inst:AddTag("sharp")
 
@@ -99,9 +90,11 @@ local function fn()
     end
 
     inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE)
+    inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE * 1.6) -- * 1.6 to start with a strong attack on load
     inst.components.weapon:SetOnAttack(OnAttack)
-    inst.attack_chain = 0
+
+    inst:AddTag("strongatk")
+    inst.attack_chain = 0 
   
     inst:AddComponent("inspectable")
 
@@ -133,22 +126,3 @@ local function fn()
 end
 
 return  Prefab("hatbrella", fn, assets)
--- CreateModPrefabSkin("hatbrella_bowkid",
--- {
--- 	assets = {
--- 		Asset("ANIM", "anim/hatbrella_bowkid.zip"),
--- 		Asset("ANIM", "anim/hatbrella_bowkid_ground.zip"),
--- 		Asset("ATLAS", "images/inventoryimages/hatbrella_bowkid.xml"),
--- 		Asset("IMAGE", "images/inventoryimages/hatbrella_bowkid.tex"),
--- 	},
--- 	base_prefab = "hatbrella",
--- 	fn = fn_bowkid,
--- 	rarity = "Timeless",
--- 	reskinable = true,
-	
--- 	build_name_override = "hatbrella_bowkid",
-	
--- 	type = "item",
--- 	skin_tags = { },
--- 	release_group = 0,
--- })
