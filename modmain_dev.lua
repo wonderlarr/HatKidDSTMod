@@ -104,13 +104,22 @@ end)
 
 local UIAnim = require "widgets/uianim"
 AddClassPostConstruct("widgets/healthbadge", function(self)
-    if self.owner and self.owner:HasTag("hatkid") then
+    if self.owner and self.owner:HasTag("hatkid") then -- we must exist and be hat kid
 
-        -- use custom red wanda-like meter
+        -- use Angela's meter
         self.anim:GetAnimState():SetBank("status_clockhealth")
         self.anim:GetAnimState():SetBuild("status_clockhealth")
         self.anim:GetAnimState():PlayAnimation("anim")
-        self.anim:GetAnimState():SetMultColour(1,1,1,1)
+        self.anim:GetAnimState():SetMultColour(1,1,1,1) -- Remove red tint
+
+        -- make a new health penalty meter so we can be circular
+        self.topperanim2 = self.underNumber:AddChild(UIAnim())
+        self.topperanim2:GetAnimState():SetBank( "status_meter_circle")
+        self.topperanim2:GetAnimState():SetBuild("status_meter_circle")
+        self.topperanim2:GetAnimState():PlayAnimation("meter")
+        self.topperanim2:GetAnimState():SetMultColour(0,0,0,1)
+        self.topperanim2:GetAnimState():AnimateWhilePaused(false)
+        self.topperanim2:SetClickable(false)
 
         -- add years hand, it moves in SetPercent
         self.year_hand = self.underNumber:AddChild(UIAnim())
@@ -118,27 +127,27 @@ AddClassPostConstruct("widgets/healthbadge", function(self)
         self.year_hand:GetAnimState():SetBuild("status_clockhealth")
         self.year_hand:GetAnimState():PlayAnimation("year")
         self.year_hand:GetAnimState():AnimateWhilePaused(false)
-    
-        -- add days hand, it is static at 12 o'clock
-        -- self.days_hand = self.underNumber:AddChild(UIAnim())
-        -- self.days_hand:GetAnimState():SetBank("status_oldage")
-        -- self.days_hand:GetAnimState():SetBuild("status_oldage")
-        -- self.days_hand:GetAnimState():PlayAnimation("day")
-        -- self.days_hand:GetAnimState():AnimateWhilePaused(false)
 
         -- hide heart icon
         if self.circleframe then
             self.circleframe:GetAnimState():ClearOverrideSymbol("icon")
         end
 
+        -- hide default penalty
+        self.topperanim:Hide()
+
+        self.sanityarrow:MoveToFront()
+
         -- hook into setpercent so year hand can move properly
+        -- WandaAgeBadge.lua has it's own SetPercent function, but we have to hook since we're not actually an age widget
         local _SetPercent = self.SetPercent
 
-        self.SetPercent = function(self, val, max)
-            local percent = val
-            self.year_hand:SetRotation( GLOBAL.Lerp(0, 360, percent) )
+        self.SetPercent = function(self, val, max, penaltypercent)
+            self.year_hand:SetRotation( GLOBAL.Lerp(0, -360, val) )
+            penaltypercent = penaltypercent or 0
+            self.topperanim2:GetAnimState():SetPercent("meter", penaltypercent)
 
-            return _SetPercent(self, val, max)
+            return _SetPercent(self, val, max, penaltypercent)
         end
     end
 end)
