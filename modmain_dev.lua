@@ -114,17 +114,17 @@ AddClassPostConstruct("widgets/healthbadge", function(self)
 
         -- add years hand, it moves in SetPercent
         self.year_hand = self.underNumber:AddChild(UIAnim())
-        self.year_hand:GetAnimState():SetBank("status_oldage")
-        self.year_hand:GetAnimState():SetBuild("status_oldage")
+        self.year_hand:GetAnimState():SetBank("status_clockhealth")
+        self.year_hand:GetAnimState():SetBuild("status_clockhealth")
         self.year_hand:GetAnimState():PlayAnimation("year")
         self.year_hand:GetAnimState():AnimateWhilePaused(false)
     
         -- add days hand, it is static at 12 o'clock
-        self.days_hand = self.underNumber:AddChild(UIAnim())
-        self.days_hand:GetAnimState():SetBank("status_oldage")
-        self.days_hand:GetAnimState():SetBuild("status_oldage")
-        self.days_hand:GetAnimState():PlayAnimation("day")
-        self.days_hand:GetAnimState():AnimateWhilePaused(false)
+        -- self.days_hand = self.underNumber:AddChild(UIAnim())
+        -- self.days_hand:GetAnimState():SetBank("status_oldage")
+        -- self.days_hand:GetAnimState():SetBuild("status_oldage")
+        -- self.days_hand:GetAnimState():PlayAnimation("day")
+        -- self.days_hand:GetAnimState():AnimateWhilePaused(false)
 
         -- hide heart icon
         if self.circleframe then
