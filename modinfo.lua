@@ -1926,8 +1926,8 @@ configuration_options =
 			{description = "14", data = 14},
 			{description = "27", data = 27},
 			{description = "34", data = 34},
-			{description = "42.5 (Default)", data = 42.5},
-			{description = "51", data = 51},
+			{description = "42.5", data = 42.5},
+			{description = "51 (Default)", data = 51},
 			{description = "63", data = 63},
 			{description = "72", data = 72},
 			{description = "89", data = 89},
@@ -1936,7 +1936,7 @@ configuration_options =
 			{description = "500", data = 500},
 			{description = "KILLER QUEEN!!!", data = 999999, hover = "999,999"},
 		},
-		default = 42.5,
+		default = 51,
 	},
 
 	{

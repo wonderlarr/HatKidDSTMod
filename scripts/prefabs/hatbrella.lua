@@ -46,6 +46,29 @@ local function OnEmpty(inst)
     inst:DoTaskInTime(0, inst.Remove)
 end
 
+local function OnAttack(inst, attacker, target)
+    -- print(inst.attack_chain)
+    -- If we're strong on this attack
+    if inst:HasTag("strongatk") then
+        inst.SoundEmitter:PlaySound("dontstarve/creatures/together/klaus/lock_break")
+    end
+
+    -- Add one to the counter
+    inst.attack_chain = inst.attack_chain + 1
+
+    -- Set damage for next attack if we're ready
+    if inst.attack_chain >= 3 then
+        -- print("strong attack")
+        inst.attack_chain = 0
+        inst:AddTag("strongatk")
+        inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE * 1.6)
+    else
+        -- print("revert")
+        inst:RemoveTag("strongatk")
+        inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE)
+    end
+    -- print(inst.attack_chain .. "\n-------")
+end
 
 local function fn()
   
@@ -54,7 +77,8 @@ local function fn()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
-	inst.entity:AddMiniMapEntity()
+	-- inst.entity:AddMiniMapEntity()
+    inst.entity:AddSoundEmitter()
      
     MakeInventoryPhysics(inst)   
 
@@ -76,6 +100,8 @@ local function fn()
 
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE)
+    inst.components.weapon:SetOnAttack(OnAttack)
+    inst.attack_chain = 0
   
     inst:AddComponent("inspectable")
 
@@ -89,6 +115,7 @@ local function fn()
 	end
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
+    inst.components.equippable.walkspeedmult = 1.05
 
     if TUNING.HATBRELLA_DURABILITY then
         inst:AddComponent("finiteuses")
