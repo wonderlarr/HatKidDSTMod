@@ -57,7 +57,7 @@ local function OnCollide(inst, owner)
         DoSound(inst, owner)
         if owner.components.madhatter ~= nil and owner.components.madhatter:GetPercent() < 1 then
             -- Give the pon component the pons if we're hatkid
-            owner.components.madhatter:DoDelta(1)
+            owner.components.madhatter:DoDelta(inst.components.stackable:StackSize() or 1)
 
             inst:Remove()
         else
