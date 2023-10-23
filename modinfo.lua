@@ -835,7 +835,7 @@ configuration_options =
 		{
 			{description = "Infinite", data = false},
 			{description = "1", data = 1},
-			{description = "2 (Default)", data = 2},
+			{description = "2", data = 2},
 			{description = "3", data = 3},
 			{description = "4", data = 4},
 			{description = "5", data = 5},
@@ -843,7 +843,7 @@ configuration_options =
 			{description = "7", data = 7},
 			{description = "8", data = 8},
 			{description = "9", data = 9},
-			{description = "10", data = 10},
+			{description = "10 (Default)", data = 10},
 			{description = "20", data = 20},
 			{description = "30", data = 30},
 			{description = "40", data = 40},
@@ -855,7 +855,7 @@ configuration_options =
 			{description = "100", data = 100},
 			{description = "Infinite", data = false},
 		},
-		default = 2,
+		default = 10,
 	},
 
 	{
@@ -871,8 +871,8 @@ configuration_options =
 			{description = "0.25", data = 0.25},
 			{description = "0.5", data = 0.5},
 			{description = "0.75", data = 0.75},
-			{description = "1 (Default)", data = 1},
-			{description = "2", data = 2},
+			{description = "1", data = 1},
+			{description = "2 (Default)", data = 2},
 			{description = "4", data = 4},
 			{description = "5", data = 5},
 			{description = "8", data = 8},
@@ -883,7 +883,7 @@ configuration_options =
 			{description = "50", data = 50},
 			{description = "100", data = 100},
 		},
-		default = 1,
+		default = 2,
 	},
 
 	{
@@ -892,7 +892,7 @@ configuration_options =
 		hover = "How much water resistance the Brewing Hat provides while worn.",
 		options =
 		{
-			{description = "None (Default)", data = false},
+			{description = "None", data = false},
 			{description = "20%", data = 0.2},
 			{description = "35%", data = 0.35},
 			{description = "50%", data = 0.5},
@@ -900,7 +900,7 @@ configuration_options =
 			{description = "90%", data = 0.9},
 			{description = "100%", data = 1},
 		},
-		default = false,
+		default = 0.20,
 	},	
 
 	{
@@ -960,7 +960,8 @@ configuration_options =
 			{description = "2", data = 2},
 			{description = "3", data = 3},
 			{description = "4", data = 4},
-			{description = "5 (Default)", data = 5},
+			{description = "5", data = 5},
+			{description = "8 (Default)", data = 8},
 			{description = "10", data = 10},
 			{description = "15", data = 15},
 			{description = "20", data = 20},
@@ -969,7 +970,7 @@ configuration_options =
 			{description = "50", data = 50},
 			{description = "100", data = 100},
 		},
-		default = 5,
+		default = 8,
 	},
 	
 	{
@@ -1030,23 +1031,24 @@ configuration_options =
 		options =
 		{
 			{description = "1", data = 1},
-			{description = "9", data = 9},
-			{description = "14", data = 14},
-			{description = "27", data = 27},
+			{description = "10", data = 10},
+			{description = "17", data = 17},
+			{description = "25.5", data = 25.5},
 			{description = "34", data = 34},
-			{description = "46", data = 46},
+			{description = "42.5", data = 42.5},
 			{description = "51", data = 51},
-			{description = "63", data = 63},
+			{description = "59.5", data = 59.5},
 			{description = "68", data = 68},
-			{description = "72", data = 72},
-			{description = "80", data = 80},
+			{description = "76.5", data = 76.5},
 			{description = "89", data = 89},
-			{description = "100 (Default)", data = 100},
-			{description = "200", data = 200},
-			{description = "500", data = 500},
+			{description = "102 (Default)", data = 102},
+			{description = "153", data = 153},
+			{description = "204", data = 204},
+			{description = "255", data = 255},
+			{description = "510", data = 510},
 			{description = "KILLER QUEEN!!!", data = 999999, hover = "999,999"},
 		},
-		default = 100,
+		default = 102,
 	},
 	
 	{
@@ -1084,12 +1086,12 @@ configuration_options =
 			{description = "Infinite", data = false},
 			{description = "1", data = 1},
 			{description = "2", data = 2},
-			{description = "3 (Default)", data = 3},
+			{description = "3", data = 3},
 			{description = "4", data = 4},
 			{description = "5", data = 5},
 			{description = "6", data = 6},
 			{description = "7", data = 7},
-			{description = "8", data = 8},
+			{description = "8 (Default)", data = 8},
 			{description = "9", data = 9},
 			{description = "10", data = 10},
 			{description = "20", data = 20},
@@ -1103,7 +1105,7 @@ configuration_options =
 			{description = "100", data = 100},
 			{description = "Infinite", data = false},
 		},
-		default = 3,
+		default = 8,
 	},
 
 	{
@@ -1179,8 +1181,8 @@ configuration_options =
 			{description = "5 Seconds", data = 5},
 			{description = "10 Seconds", data = 10},
 			{description = "15 Seconds", data = 15},
-			{description = "20 Seconds", data = 20},
-			{description = "30 Seconds (Default)", data = 30},
+			{description = "20 Seconds (Default)", data = 20},
+			{description = "30 Seconds", data = 30},
 			{description = "45 Seconds", data = 45},
 			{description = "60 Seconds", data = 60},
 			{description = "90 Seconds", data = 90},
@@ -1191,7 +1193,7 @@ configuration_options =
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 30,
+		default = 20,
 	},
 
 	{
@@ -1270,23 +1272,24 @@ configuration_options =
 		options =
 		{
 			{description = "1", data = 1},
-			{description = "9", data = 9},
-			{description = "14", data = 14},
-			{description = "27 (Default)", data = 27},
-			{description = "34", data = 34},
-			{description = "46", data = 46},
+			{description = "10", data = 10},
+			{description = "17", data = 17},
+			{description = "25.5", data = 25.5},
+			{description = "34 (Default)", data = 34},
+			{description = "42.5", data = 42.5},
 			{description = "51", data = 51},
-			{description = "63", data = 63},
+			{description = "59.5", data = 59.5},
 			{description = "68", data = 68},
-			{description = "72", data = 72},
-			{description = "80", data = 80},
+			{description = "76.5", data = 76.5},
 			{description = "89", data = 89},
-			{description = "100", data = 100},
-			{description = "200", data = 200},
-			{description = "500", data = 500},
+			{description = "102", data = 102},
+			{description = "153", data = 153},
+			{description = "204", data = 204},
+			{description = "255", data = 255},
+			{description = "510", data = 510},
 			{description = "KILLER QUEEN!!!", data = 999999, hover = "999,999"},
 		},
-		default = 27,
+		default = 34,
 	},
 
 	{
@@ -1338,7 +1341,8 @@ configuration_options =
 			{description = "25 seconds", data = 25},
 			{description = "1 segment", data = 30}, -- 1 segment = 30 seconds
 			{description = "2 segments", data = 30 * 2},
-			{description = "4 segments (Default)", data = 30 * 4},
+			{description = "4 segments", data = 30 * 4},
+			{description = "6 segments (Default)", data = 30 * 6},
 			{description = "8 segments", data = 30 * 8},
 			{description = "1 day", data = 480}, -- 30 * 16, 1 day = 16 segments
 			{description = "2 days", data = 480 * 2},
@@ -1355,21 +1359,22 @@ configuration_options =
 
 			{description = "Forever", data = false},
 		},
-		default = 30 * 4,
+		default = 30 * 6,
 	},
 	
 	{
 		name = "dwellerfuelvalue",
-		label = "Seconds Per Fuel",
+		label = "Fuel Efficiency",
 		hover = "How much Nightmare Fuel is worth once consumed.",
 		options =
 		{
 			{description = "5", data = 5},
 			{description = "10", data = 10},
 			{description = "15", data = 15},
-			{description = "20 (Default)", data = 20},
+			{description = "20", data = 20},
 			{description = "25", data = 25},
 			{description = "30", data = 30},
+			{description = "36 (Default)", data = 36},
 			{description = "60", data = 60},
 			{description = "120", data = 120},
 			{description = "180", data = 180},
@@ -1379,7 +1384,7 @@ configuration_options =
 			{description = "900", data = 900},
 			{description = "1800", data = 1800},
 		},
-		default = 20,
+		default = 36,
 	},
 
 	{
@@ -1430,8 +1435,8 @@ configuration_options =
 			{description = "10 Seconds", data = 10},
 			{description = "15 Seconds", data = 15},
 			{description = "20 Seconds", data = 20},
-			{description = "30 Seconds", data = 30},
-			{description = "45 Seconds (Default)", data = 45},
+			{description = "30 Seconds (Default)", data = 30},
+			{description = "45 Seconds", data = 45},
 			{description = "60 Seconds", data = 60},
 			{description = "90 Seconds", data = 90},
 			{description = "2 Minutes", data = 120},
@@ -1441,7 +1446,7 @@ configuration_options =
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 45,
+		default = 30,
 	},
 
 	{
@@ -1695,8 +1700,8 @@ configuration_options =
 			{description = "15 seconds", data = 15},
 			{description = "20 seconds", data = 20},
 			{description = "25 seconds", data = 25},
-			{description = "1 segment (Default)", data = 30}, -- 1 segment = 30 seconds
-			{description = "2 segments", data = 30 * 2},
+			{description = "1 segment", data = 30}, -- 1 segment = 30 seconds
+			{description = "2 segments (Default)", data = 30 * 2},
 			{description = "4 segments", data = 30 * 4},
 			{description = "8 segments", data = 30 * 8},
 			{description = "1 day", data = 480}, -- 30 * 16, 1 day = 16 segments
@@ -1714,7 +1719,7 @@ configuration_options =
 
 			{description = "Infinite", data = false},
 		},
-		default = 30,
+		default = 30 * 2,
 	},
 
 	{
@@ -1724,8 +1729,8 @@ configuration_options =
 		options =
 		{
 			{description = "1", data = 1},
-			{description = "3 (Default)", data = 3},
-			{description = "5", data = 5},
+			{description = "3", data = 3},
+			{description = "5 (Default)", data = 5},
 			{description = "10", data = 10},
 			{description = "15", data = 15},
 			{description = "20", data = 20},
@@ -1740,7 +1745,7 @@ configuration_options =
 			{description = "900", data = 900},
 			{description = "1800", data = 1800},
 		},
-		default = 3,
+		default = 5,
 	},
 
 	{
@@ -1838,8 +1843,8 @@ configuration_options =
 			{description = "5 Seconds", data = 5},
 			{description = "10 Seconds", data = 10},
 			{description = "12 Seconds", data = 12},
-			{description = "15 Seconds (Default)", data = 15},
-			{description = "20 Seconds", data = 20},
+			{description = "15 Seconds", data = 15},
+			{description = "20 Seconds (Default)", data = 20},
 			{description = "30 Seconds", data = 30},
 			{description = "45 Seconds", data = 45},
 			{description = "60 Seconds", data = 60},
@@ -1851,7 +1856,7 @@ configuration_options =
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 15,
+		default = 20,
 	},
 
 	{
@@ -1860,8 +1865,8 @@ configuration_options =
 		hover = "How much nearby entities are effected by the Time Stop Hat's effect. Setting this below x0.3 may cause issues.",
 		options =
 		{
-			{description = "x0.1 (Careful)", data = 0.1},
-			{description = "x0.2 (Careful)", data = 0.2},
+			-- {description = "x0.1 (Careful)", data = 0.1},
+			-- {description = "x0.2 (Careful)", data = 0.2},
 			{description = "x0.3", data = 0.3},
 			{description = "x0.34", data = 0.34},
 			{description = "x0.4", data = 0.4},
@@ -2027,14 +2032,14 @@ configuration_options =
             {description="CAPSLOCK", data = 301},
             {description="SCROLLOCK", data = 302},
             {description="RSHIFT", data = 303}, -- use SHIFT instead
-            {description="LSHIFT (Default)", data = 304}, -- use SHIFT instead
+            {description="LSHIFT", data = 304}, -- use SHIFT instead
             {description="RCTRL", data = 305}, -- use CTRL instead
             {description="LCTRL", data = 306}, -- use CTRL instead
             {description="RALT", data = 307}, -- use ALT instead
             {description="LALT", data = 308}, -- use ALT instead
-            {description="ALT (broken)", data = 400},
-            {description="CTRL (broken)", data = 401},
-            {description="SHIFT (broken)", data = 402},
+            -- {description="ALT (broken)", data = 400},
+            -- {description="CTRL (broken)", data = 401},
+            -- {description="SHIFT (broken)", data = 402},
             {description="BACKSPACE", data = 8},
             {description="PERIOD", data = 46},
             {description="SLASH", data = 47},
@@ -2067,7 +2072,7 @@ configuration_options =
             {description="W", data = 119},
             {description="X", data = 120},
             {description="Y", data = 121},
-            {description="Z", data = 122},
+            {description="Z (Default)", data = 122},
             {description="F1", data = 282},
             {description="F2", data = 283},
             {description="F3", data = 284},
@@ -2099,7 +2104,7 @@ configuration_options =
             {description="8", data = 56},
             {description="9", data = 57},
         },
-        default = 304,
+        default = 122,
     },
 
 	{
@@ -2135,9 +2140,9 @@ configuration_options =
             {description="LCTRL", data = 306}, -- use CTRL instead
             {description="RALT", data = 307}, -- use ALT instead
             {description="LALT", data = 308}, -- use ALT instead
-            {description="ALT (broken)", data = 400},
-            {description="CTRL (broken)", data = 401},
-            {description="SHIFT (broken)", data = 402},
+            -- {description="ALT (broken)", data = 400},
+            -- {description="CTRL (broken)", data = 401},
+            -- {description="SHIFT (broken)", data = 402},
             {description="BACKSPACE", data = 8},
             {description="PERIOD", data = 46},
             {description="SLASH", data = 47},
