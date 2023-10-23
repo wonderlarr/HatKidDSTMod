@@ -15,6 +15,31 @@ local prefabs =
 {
 }
 
+-- Start Container stuff ---------
+local containers = require("containers")
+params = containers.params
+
+params.brewinghat_inv =
+{
+	widget =
+	{
+		slotpos =
+		{
+			Vector3(0,   32 + 4,  0),
+		},
+		animbank = "ui_cookpot_1x2",
+		animbuild = "ui_cookpot_1x2",
+		pos = Vector3(0, 15, 0),
+	},
+	usespecificslotsforitems = true,
+	type = "head_inv",
+}
+
+function params.brewinghat_inv.itemtestfn(container, item, slot)
+	return item:HasTag("brewinghat_fuel")
+end
+-- End Container -------
+
 local function OnEquip(inst, owner)
 	owner.AnimState:OverrideSymbol("swap_hat", "brewinghat", "swap_hat")
 
@@ -24,6 +49,10 @@ local function OnEquip(inst, owner)
 	if owner:HasTag("player") then
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Hide("HEAD_HAT")
+	end
+
+	if inst.components.container ~= nil then
+		inst.components.container:Open(owner)
 	end
 end
  
@@ -37,6 +66,10 @@ local function OnUnequip(inst, owner)
 	if owner:HasTag("player") then
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Hide("HEAD_HAT")
+	end
+
+	if inst.components.container ~= nil then
+		inst.components.container:Close(owner)
 	end
 end
 
@@ -121,6 +154,10 @@ local function fn()
 	inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
+		inst.OnEntityReplicated = function(inst) 
+			inst.replica.container:WidgetSetup("brewinghat_inv") 
+		end
+
         return inst
     end
 	
@@ -170,6 +207,10 @@ local function fn()
 		inst:AddComponent("waterproofer")
 		inst.components.waterproofer:SetEffectiveness(TUNING.BREWINGHAT_WATERPROOFNESS) 
 	end
+
+	inst:AddComponent("container")
+	inst.components.container:WidgetSetup("brewinghat_inv")
+	inst.components.container.canbeopened = false
 	
 	inst:ListenForEvent("AbilityKey", KeybindUse)
 
