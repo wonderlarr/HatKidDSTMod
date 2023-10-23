@@ -2,7 +2,19 @@ local Vector3 = GLOBAL.Vector3
 local containers = GLOBAL.require("containers")
 local params = containers.params
 
-params.hatpack =
+-- controls the order hats are allowed in for the hatpack
+local hatlist = {
+    "kidhat",
+    "sprinthat",
+    "brewinghat",
+    "polarhat",
+    "dwellermask",
+    "timestophat"
+}
+
+local scale = 70
+
+params.hatpack_1 =
 {
     widget =
     {
@@ -15,6 +27,7 @@ params.hatpack =
             { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
             { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
             { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
+            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
         },
         animbank = "ui_hatpack_3x2",
         animbuild = "ui_hatpack_3x2",
@@ -23,29 +36,91 @@ params.hatpack =
     },
     type = "side_inv_behind",
     acceptsstacks = false,
-    lowpriorityselection = true,
-    excludefromcrafting = true,
+    issidewidget = true,
 }
 
-local scale = 70
-
-for y = 1, 0, -1 do
+for y = 1, -1, -1 do
     for x = 0, 2 do
-        table.insert(params.hatpack.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
+        if y == -1 and x > 0 then break end
+        table.insert(params.hatpack_1.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
     end
 end
 
--- controls the order hats are allowed in for the hatpack
-local hatlist = {
-    "kidhat",
-    "sprinthat",
-    "brewinghat",
-    "polarhat",
-    "dwellermask",
-    "timestophat"
+function params.hatpack_1.itemtestfn(container, item, slot)
+    return item:HasTag("hatkidhat") and item.prefab == hatlist[slot]
+end
+
+params.hatpack_2 =
+{
+    widget =
+    {
+        slotpos = { }, -- we have to make an empty table or the slot position function gets angry
+        slotbg =
+        {
+            { image = "slotbg_kidhat.tex", atlas = "images/gui/slotbg_kidhat.xml" },
+            { image = "slotbg_sprinthat.tex", atlas = "images/gui/slotbg_sprinthat.xml" },
+            { image = "slotbg_brewinghat.tex", atlas = "images/gui/slotbg_brewinghat.xml" },
+            { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
+            { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
+            { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
+            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
+            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
+        },
+        animbank = "ui_hatpack_3x2",
+        animbuild = "ui_hatpack_3x2",
+        pos = Vector3(-82, 108, 0),
+        bottom_align_tip = -100,
+    },
+    type = "side_inv_behind",
+    acceptsstacks = false,
+    issidewidget = true,
 }
 
-function params.hatpack.itemtestfn(container, item, slot)
+for y = 1, -1, -1 do
+    for x = 0, 2 do
+        if y == -1 and x > 1 then break end
+        table.insert(params.hatpack_2.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
+    end
+end
+
+function params.hatpack_2.itemtestfn(container, item, slot)
+    return item:HasTag("hatkidhat") and item.prefab == hatlist[slot]
+end
+
+params.hatpack_3 =
+{
+    widget =
+    {
+        slotpos = { }, -- we have to make an empty table or the slot position function gets angry
+        slotbg =
+        {
+            { image = "slotbg_kidhat.tex", atlas = "images/gui/slotbg_kidhat.xml" },
+            { image = "slotbg_sprinthat.tex", atlas = "images/gui/slotbg_sprinthat.xml" },
+            { image = "slotbg_brewinghat.tex", atlas = "images/gui/slotbg_brewinghat.xml" },
+            { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
+            { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
+            { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
+            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
+            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
+            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
+        },
+        animbank = "ui_hatpack_3x2",
+        animbuild = "ui_hatpack_3x2",
+        pos = Vector3(-82, 108, 0),
+        bottom_align_tip = -100,
+    },
+    type = "side_inv_behind",
+    acceptsstacks = false,
+    issidewidget = true,
+}
+
+for y = 1, -1, -1 do
+    for x = 0, 2 do
+        table.insert(params.hatpack_3.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
+    end
+end
+
+function params.hatpack_3.itemtestfn(container, item, slot)
     return item:HasTag("hatkidhat") and item.prefab == hatlist[slot]
 end
 

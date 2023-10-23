@@ -52,6 +52,8 @@ local MadHatter = Class(function(self, inst)
 
     self.max = 100
     self.val = 0
+    
+    self.badgeslots = 1
 
     self.chainPos = 0
 

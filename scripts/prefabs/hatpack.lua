@@ -20,10 +20,10 @@ end
 local function OnDropped(inst)
     inst.components.container:DropEverything()
 
-    inst:Remove()
+    -- inst:Remove()
 end
 
-local function fn()
+local function fn_common()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -38,29 +38,22 @@ local function fn()
     inst.AnimState:PlayAnimation("anim")
     inst.AnimState:SetMultColour(0,0,1,1)
 
-    inst.entity:SetPristine()
+    return inst
+end
 
-    if not TheWorld.ismastersim then
-        inst.OnEntityReplicated = function(inst) 
-            inst.replica.container:WidgetSetup("hatpack") 
-        end
-
-        return inst
-    end
-
+local function fn_master(inst, widgetsetupname)
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.cangoincontainer = false
-    -- inst.components.inventoryitem.keepondeath = true
     inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.BEARD -- my god what are you doing?
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
-    inst.components.equippable:SetPreventUnequipping(true)
+    -- inst.components.equippable:SetPreventUnequipping(true)
 
     inst:AddComponent("container")
-    inst.components.container:WidgetSetup("hatpack")
+    inst.components.container:WidgetSetup(widgetsetupname)
     inst.components.container.skipopensnd = true
     inst.components.container.skipclosesnd = true
     inst.components.container.stay_open_on_hide = true
@@ -72,4 +65,66 @@ local function fn()
     return inst
 end
 
-return Prefab("hatpack", fn, assets)
+local function fn1()
+    local inst = fn_common()
+
+    inst:AddTag("hatpack_1")
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        inst.OnEntityReplicated = function(inst)  
+            inst.replica.container:WidgetSetup("hatpack_1")
+        end
+
+        return inst
+    end
+
+    fn_master(inst, "hatpack_1")
+
+    return inst
+end
+
+local function fn2()
+    local inst = fn_common()
+
+    inst:AddTag("hatpack_2")
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        inst.OnEntityReplicated = function(inst)  
+            inst.replica.container:WidgetSetup("hatpack_2")
+        end
+
+        return inst
+    end
+
+    fn_master(inst, "hatpack_2")
+
+    return inst
+end
+
+local function fn3()
+    local inst = fn_common()
+
+    inst:AddTag("hatpack_3")
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        inst.OnEntityReplicated = function(inst)  
+            inst.replica.container:WidgetSetup("hatpack_3")
+        end
+
+        return inst
+    end
+
+    fn_master(inst, "hatpack_3")
+
+    return inst
+end
+
+return Prefab("hatpack_1", fn1, assets),
+    Prefab("hatpack_2", fn2, assets),
+    Prefab("hatpack_3", fn3, assets)

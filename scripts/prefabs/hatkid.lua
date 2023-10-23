@@ -79,7 +79,6 @@ local function OnPotionThrow(inst)
 		"Boo-ya" ,
 	}
 	
-	-- Possibly overcomplicated way to make things happen 50% of the time. Not called often, should be fine.
 	if math.random(1, 2) == 1 and inst.components.talker then
 		-- Say one of the 4 lines defined above.
 		inst.components.talker:Say(lines[math.random(1, 4)])
