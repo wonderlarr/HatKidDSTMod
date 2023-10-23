@@ -12,8 +12,6 @@ local kidpotion_assets = {
     Asset("SOUND", "sound/kidpotion.fsb"),
 }
 
-RegisterInventoryItemAtlas("images/inventoryimages/kidpotion.xml","kidpotion.tex")
-
 local kidpotion_prefabs = {
     "brewinghat_explode",
     "burntground",

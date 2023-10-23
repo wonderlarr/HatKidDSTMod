@@ -36,7 +36,7 @@ params.brewinghat_inv =
 }
 
 function params.brewinghat_inv.itemtestfn(container, item, slot)
-	return item:HasTag("brewinghat_fuel")
+	return item:HasTag("brewinghat_ammo")
 end
 -- End Container -------
 
@@ -87,20 +87,8 @@ end
 local function TestFn(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 	
-	if inst.components.fueled then
-		if owner.components.sanity.current >= TUNING.BREWINGHAT_THRESHHOLD -- if we have enough sanity 
-		and inst.components.fueled:GetPercent() >= (1 / TUNING.BREWINGHAT_DURABILITY) then -- and we have enough fuel
-			return true
-		else
-			return false
-		end
-	else
-		if owner.components.sanity.current >= TUNING.BREWINGHAT_THRESHHOLD then
-			return true
-		else
-			return false
-		end
-	end
+	return owner.components.sanity.current >= TUNING.BREWINGHAT_THRESHHOLD -- if we have enough sanity 
+	and inst.components.container:HasItemWithTag("brewinghat_ammo", 1)
 end
 
 local function OnActivate(inst)	
@@ -111,9 +99,14 @@ local function OnActivate(inst)
 		owner.components.sanity:DoDelta(-TUNING.BREWINGHAT_THRESHHOLD)
 	end
 
-	if inst.components.fueled then
-		inst.components.fueled:SetPercent(inst.components.fueled:GetPercent() - (1 / TUNING.BREWINGHAT_DURABILITY))
-		inst.components.fueled.currentfuel = math.floor(inst.components.fueled.currentfuel/(45 * inst.components.fueled.bonusmult)+0.5)* (45 * inst.components.fueled.bonusmult)
+	-- if inst.components.fueled then
+	-- 	inst.components.fueled:SetPercent(inst.components.fueled:GetPercent() - (1 / TUNING.BREWINGHAT_DURABILITY))
+	-- 	inst.components.fueled.currentfuel = math.floor(inst.components.fueled.currentfuel/(45 * inst.components.fueled.bonusmult)+0.5)* (45 * inst.components.fueled.bonusmult)
+	-- end
+
+	local ammo = inst.components.container:GetItemInSlot(1)
+	if ammo.components.stackable then
+		ammo.components.stackable:Get():Remove()
 	end
 
 	owner.prevequip = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
@@ -187,15 +180,15 @@ local function fn()
 	inst.components.hatmagic:SetDeactivateFn(OnDeactivate)
 	inst.components.hatmagic:SetTestFn(TestFn)
 
-	if TUNING.BREWINGHAT_DURABILITY then
-		inst:AddComponent("fueled")
-		inst.components.fueled:InitializeFuelLevel( TUNING.BREWINGHAT_DURABILITY * 45 )
-		inst.components.fueled.fueltype = FUELTYPE.EXPLOSIVE -- gunpowder, 90
-		inst.components.fueled.secondaryfueltype = FUELTYPE.CAVE -- slurtle slime only, 45
-		inst.components.fueled.bonusmult = TUNING.BREWINGHAT_FUELMULT
-		inst.components.fueled.accepting = true
-		-- although technically lightbulbs and fireflies are included in CAVE fuel, we limit that using the container fuel approach
-	end
+	-- if TUNING.BREWINGHAT_DURABILITY then
+	-- 	inst:AddComponent("fueled")
+	-- 	inst.components.fueled:InitializeFuelLevel( TUNING.BREWINGHAT_DURABILITY * 45 )
+	-- 	inst.components.fueled.fueltype = FUELTYPE.EXPLOSIVE -- gunpowder, 90
+	-- 	inst.components.fueled.secondaryfueltype = FUELTYPE.CAVE -- slurtle slime only, 45
+	-- 	inst.components.fueled.bonusmult = TUNING.BREWINGHAT_FUELMULT
+	-- 	inst.components.fueled.accepting = true
+	-- 	-- although technically lightbulbs and fireflies are included in CAVE fuel, we limit that using the container fuel approach
+	-- end
 
 	if TUNING.BREWINGHAT_INSULATION then
 		inst:AddComponent("insulator")

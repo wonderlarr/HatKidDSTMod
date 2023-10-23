@@ -37,8 +37,8 @@ local function DoSound(inst, owner)
         owner.chaintracker = nil
     end
 
-    -- reset chain value to 1 after 10 seconds of not collecting pons
-    owner.chaintracker = owner:DoTaskInTime(10, function(inst) 
+    -- reset chain value to 1 after 8 seconds of not collecting pons
+    owner.chaintracker = owner:DoTaskInTime(8, function(inst) 
         if owner ~= nil then
             owner.chain = 1
         end

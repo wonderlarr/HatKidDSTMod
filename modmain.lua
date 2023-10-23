@@ -40,6 +40,7 @@ local PrefabFilesLocal = {
 	"hatbrella",
 	"hatbrellaopen",
 	"kidpotion",
+	"kidpotion_ammo",
 	"kidpotion_throwable",
 
 	--collectables (disabled)
