@@ -121,7 +121,7 @@ local function OnDeactivate(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 	local hands = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 
-	if hands and (hands.prefab == "kidpotion" or hands.prefab == "kidpotion_throwable") then
+	if hands and (hands.prefab == "kidpotion") then
 		owner.components.inventory:DropItem(hands)
 	end
 end

@@ -41,12 +41,13 @@ local PrefabFilesLocal = {
 	"hatbrellaopen",
 	"kidpotion",
 	"kidpotion_ammo",
-	"kidpotion_throwable",
+	-- "kidpotion_throwable",
 
 	--collectables (disabled)
 	"pon",
 	-- "pon_heart",
 	-- "timepiece",
+	-- "relic_rift1",
 
 	--fx
 	"brewinghat_explode",
@@ -64,7 +65,7 @@ local PrefabFilesLocal = {
 	"badge_cooldown",
 
 	--testing TODO (disable in final)
-	"cooltarget", -- This is a dummytarget prefab, but it only regens health when it is low.
+	-- "cooltarget", -- This is a dummytarget prefab, but it only regens health when it is low.
 }
 
 PrefabFiles = PrefabFilesLocal

@@ -11,7 +11,7 @@ local function kidpotion_fn()
     inst.AnimState:SetBuild("kidpotion")
     inst.AnimState:PlayAnimation("idle")
 
-    inst:AddTag("brewinghat_ammo")
+    inst:AddTag("brewinghat_ammo") -- tag used in brewinghat container testfn
 
     if not TheWorld.ismastersim then
         return inst
