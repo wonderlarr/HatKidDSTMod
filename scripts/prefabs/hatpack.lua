@@ -11,6 +11,8 @@ end
 
 local function onunequip(inst, owner)
     inst.components.container:Close(owner)
+
+    -- TODO drop all items
 end
 
 local function fn()
@@ -43,9 +45,9 @@ local function fn()
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.BEARD -- yes, this DOES technically mean hat kid has a beard.
-    inst.components.equippable:SetPreventUnequipping(false)
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
+    inst.components.equippable:SetPreventUnequipping(true)
 
     inst:AddComponent("container")
     inst.components.container:WidgetSetup("hatpack")
