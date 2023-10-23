@@ -1,3 +1,9 @@
+local kidpotion_assets = {
+    Asset("ATLAS", "images/inventoryimages/kidpotion_ammo.xml"),
+}
+
+RegisterInventoryItemAtlas("images/inventoryimages/kidpotion_ammo.xml","kidpotion_ammo.tex")
+
 local function kidpotion_fn()
     local inst = CreateEntity()
 
@@ -29,4 +35,4 @@ local function kidpotion_fn()
     return inst
 end
  
-return Prefab("kidpotion_ammo", kidpotion_fn)
+return Prefab("kidpotion_ammo", kidpotion_fn, kidpotion_assets)

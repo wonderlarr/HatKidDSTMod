@@ -164,6 +164,7 @@ local function SimpleHatSwitch(inst, reverse)
 end
 
 -- When spawning the character
+-- TODO can we just combine all these listeners into master postinit?
 local function OnNewSpawn(inst)
 -- Listens for taking off hat, applies sanity mods
 	inst:ListenForEvent("equip", OnEquip)

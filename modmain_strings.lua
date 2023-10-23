@@ -113,8 +113,8 @@ STRINGS.NAMES.HATBRELLA = "Blue Umbrella"
 STRINGS.NAMES.HATBRELLAOPEN = "Open Blue Umbrella"
 	STRINGS.NAMES.HATBRELLAOPEN_BOWKID = "Open Pink Umbrella"
 
-STRINGS.NAMES.KIDPOTION_THROWABLE = "Mad Concoction"
-STRINGS.NAMES.KIDPOTION = "Brewing Concoction"
+STRINGS.NAMES.KIDPOTION = "Mad Concoction"
+STRINGS.NAMES.KIDPOTION_AMMO = "Innate Concoction"
 
 STRINGS.NAMES.HATPACK = "Hat Pack"
 
@@ -127,6 +127,7 @@ STRINGS.RECIPE_DESC.DWELLERMASK = "See the world through a Dweller's eyes!"
 STRINGS.RECIPE_DESC.TIMESTOPHAT = "Death is inevitable. Your time is valuable."
 
 STRINGS.RECIPE_DESC.HATBRELLA = "Diplomacy didn't work, time for action."
+STRINGS.RECIPE_DESC.KIDPOTION_AMMO = "An innate concoction, waiting to be brewed."
 
 
 
@@ -144,8 +145,8 @@ STRINGS.CHARACTERS.HATKID.DESCRIBE.TIMESTOPHAT = "Totally not overpowered!"
 STRINGS.CHARACTERS.HATKID.DESCRIBE.HATBRELLA = "It has a good swing."
 STRINGS.CHARACTERS.HATKID.DESCRIBE.HATBRELLAOPEN = "Good for rain, I guess."
 -- Only hat kid can obtain these
-STRINGS.CHARACTERS.HATKID.DESCRIBE.KIDPOTION = "Give it a little."
-STRINGS.CHARACTERS.HATKID.DESCRIBE.KIDPOTION_THROWABLE = "Blamo incoming!"
+STRINGS.CHARACTERS.HATKID.DESCRIBE.KIDPOTION = "Blamo incoming!"
+STRINGS.CHARACTERS.HATKID.DESCRIBE.KIDPOTION_AMMO = "It's not ready."
 
 -- Wilson/Generic
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.KIDHAT = "It's a short and stout tophat."

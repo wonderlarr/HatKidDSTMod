@@ -148,3 +148,33 @@ AddCharacterRecipe("timestophat",
 		"CLOTHING"
 	}
 )
+
+AddCharacterRecipe("kidpotion_ammo",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 10),
+		Ingredient("slurtleslime", 1),
+		Ingredient("nightmarefuel", 2),
+
+	},
+	TECH.SCIENCE_TWO, -- tech level
+	{ -- config
+		builder_tag = "hatkid",
+		numtogive = 2,
+	},
+	{ -- crafting filters
+		"MODS",
+	}
+)
+
+AddCharacterRecipe("hatpack",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 100),
+	},
+	TECH.SCIENCE_ONE, -- tech level
+	{ -- config
+		builder_tag = "hatkid"
+	},
+	{ -- crafting filters
+		"MODS",
+	}
+)

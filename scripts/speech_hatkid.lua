@@ -455,9 +455,9 @@ return {
 
 	ANNOUNCE_CANNOT_BUILD =
 	{
-		NO_INGREDIENTS = emoji.gold .. "need more!",
-		NO_TECH = emoji.sciencemachine .. "more research!",
-		NO_STATION = emoji.alchemyengine .. "need station!",
+		NO_INGREDIENTS = emoji.gold .. "more stuff?",
+		NO_TECH = emoji.sciencemachine .. "more research?",
+		NO_STATION = emoji.alchemyengine .. "maybe station?",
 	},
 
 	ACTIONFAIL_GENERIC = emoji.arcane .. "nope",
