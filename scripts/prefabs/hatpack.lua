@@ -11,8 +11,16 @@ end
 
 local function onunequip(inst, owner)
     inst.components.container:Close(owner)
+end
 
-    -- TODO drop all items
+local function OnAlien(inst)
+    inst.components.container:Open(owner)
+end
+
+local function OnDropped(inst)
+    inst.components.container:DropEverything()
+
+    inst:Remove()
 end
 
 local function fn()
@@ -42,9 +50,11 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.cangoincontainer = false
+    -- inst.components.inventoryitem.keepondeath = true
+    inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
 
     inst:AddComponent("equippable")
-    inst.components.equippable.equipslot = EQUIPSLOTS.BEARD -- yes, this DOES technically mean hat kid has a beard.
+    inst.components.equippable.equipslot = EQUIPSLOTS.BEARD -- my god what are you doing?
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
     inst.components.equippable:SetPreventUnequipping(true)
@@ -56,6 +66,8 @@ local function fn()
     inst.components.container.stay_open_on_hide = true
 
     MakeHauntableLaunchAndDropFirstItem(inst)
+
+	inst:ListenForEvent("ms_respawnedfromghost", OnAlien)
 
     return inst
 end
