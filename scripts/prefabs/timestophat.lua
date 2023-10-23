@@ -229,6 +229,7 @@ local function fn()
 		inst.components.fueled:InitializeFuelLevel( TUNING.TIMESTOPHAT_DURABILITY )
 		inst.components.fueled:SetDepletedFn(OnEmpty)
 		inst.components.fueled.bonusmult = TUNING.TIMESTOPHAT_VALUE / 180
+		inst.components.fueled.accepting = true
 	end
 
 	if TUNING.TIMESTOPHAT_INSULATION then

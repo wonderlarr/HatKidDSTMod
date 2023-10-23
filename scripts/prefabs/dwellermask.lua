@@ -386,6 +386,7 @@ local function fn(Sim)
 		inst.components.fueled:SetDepletedFn(OnEmpty)
 		-- inst.components.fueled.rate_modifiers:SetModifier(inst, 2, "base") -- Hard coding this value, configing shouldn't be needed
 		inst.components.fueled.bonusmult = TUNING.DWELLERMASK_VALUE / 180
+		inst.components.fueled.accepting = true
 	end
 
 	if TUNING.DWELLERMASK_INSULATION then

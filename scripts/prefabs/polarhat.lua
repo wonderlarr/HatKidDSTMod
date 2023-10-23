@@ -236,6 +236,7 @@ local function fn(Sim)
 		inst.components.fueled:InitializeFuelLevel( TUNING.POLARHAT_DURABILITY * 180 )
 		inst.components.fueled.fueltype = "ICE" -- ice, 180
 		inst.components.fueled.bonusmult = TUNING.POLARHAT_FUELMULT
+		inst.components.fueled.accepting = true
 	end
 
 	if TUNING.POLARHAT_INSULATION then 

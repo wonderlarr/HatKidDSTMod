@@ -424,323 +424,323 @@ end
 -- I would have put this directly in the prefab but I just stole code from my other mod and I'm too lazy to do this properly
 -- besides, using postinits on your own prefabs is funny.
 
-if TUNING.BREWINGHAT_DURABILITY then
-	AddPrefabPostInit("brewinghat", function(inst)
-		local function OnTick(inst)
-			if inst.components.container and inst.components.container:GetItemInSlot(1) then
-				local owner = inst.components.inventoryitem:GetGrandOwner()
+-- if TUNING.BREWINGHAT_DURABILITY then
+-- 	AddPrefabPostInit("brewinghat", function(inst)
+-- 		local function OnTick(inst)
+-- 			if inst.components.container and inst.components.container:GetItemInSlot(1) then
+-- 				local owner = inst.components.inventoryitem:GetGrandOwner()
 
-				local fueltogive = inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue * inst.components.fueled.bonusmult
-				local currentfuel = inst.components.fueled.currentfuel
-				local maxfuel = inst.components.fueled.maxfuel
+-- 				local fueltogive = inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue * inst.components.fueled.bonusmult
+-- 				local currentfuel = inst.components.fueled.currentfuel
+-- 				local maxfuel = inst.components.fueled.maxfuel
 
-				if (maxfuel - currentfuel) >= fueltogive then
-					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
-					inst.components.fueled.accepting = true
-					inst.components.fueled:TakeFuelItem(fuelitem, owner)
-					currentfuel = math.floor(currentfuel/fueltogive+0.5)*fueltogive
-					inst.components.fueled.accepting = false
-				end
-			end
-		end
+-- 				if (maxfuel - currentfuel) >= fueltogive then
+-- 					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
+-- 					inst.components.fueled.accepting = true
+-- 					inst.components.fueled:TakeFuelItem(fuelitem, owner)
+-- 					currentfuel = math.floor(currentfuel/fueltogive+0.5)*fueltogive
+-- 					inst.components.fueled.accepting = false
+-- 				end
+-- 			end
+-- 		end
 
-		local function OnEquip(inst, data)
-			local owner = data.owner
-			if inst.components.container ~= nil then
-				inst.components.container:Open(owner)
-			end
-		end
+-- 		local function OnEquip(inst, data)
+-- 			local owner = data.owner
+-- 			if inst.components.container ~= nil then
+-- 				inst.components.container:Open(owner)
+-- 			end
+-- 		end
 
-		local function OnUnequip(inst, data)
-			local owner = data.owner
-			if inst.components.container ~= nil then
-				inst.components.container:Close(owner)
-			end
-		end
+-- 		local function OnUnequip(inst, data)
+-- 			local owner = data.owner
+-- 			if inst.components.container ~= nil then
+-- 				inst.components.container:Close(owner)
+-- 			end
+-- 		end
 		
-		-- Start Container stuff ---------
-		local containers = GLOBAL.require("containers")
-		params = containers.params
+-- 		-- Start Container stuff ---------
+-- 		local containers = GLOBAL.require("containers")
+-- 		params = containers.params
 
-		params.brewinghat_inv =
-		{
-			widget =
-			{
-				slotpos =
-				{
-					GLOBAL.Vector3(0,   32 + 4,  0),
-				},
-				animbank = "ui_cookpot_1x2",
-				animbuild = "ui_cookpot_1x2",
-				pos = GLOBAL.Vector3(0, 15, 0),
-			},
-			usespecificslotsforitems = true,
-			type = "head_inv",
-		}
+-- 		params.brewinghat_inv =
+-- 		{
+-- 			widget =
+-- 			{
+-- 				slotpos =
+-- 				{
+-- 					GLOBAL.Vector3(0,   32 + 4,  0),
+-- 				},
+-- 				animbank = "ui_cookpot_1x2",
+-- 				animbuild = "ui_cookpot_1x2",
+-- 				pos = GLOBAL.Vector3(0, 15, 0),
+-- 			},
+-- 			usespecificslotsforitems = true,
+-- 			type = "head_inv",
+-- 		}
 		
-		function params.brewinghat_inv.itemtestfn(container, item, slot)
-			return item.prefab == "slurtleslime" or item.prefab == "gunpowder"
-		end
-		-- End Container -------
-		
-
-		if not GLOBAL.TheWorld.ismastersim then
-			inst.OnEntityReplicated = function(inst) 
-				inst.replica.container:WidgetSetup("brewinghat_inv") 
-			end
-
-			return
-		end
-
-		inst:AddComponent("container")
-		inst.components.container:WidgetSetup("brewinghat_inv")
-		inst.components.container.canbeopened = false
-
-		inst.tick = inst:DoPeriodicTask(0.25, OnTick)
-
-		inst:ListenForEvent("equipped", OnEquip)
-		inst:ListenForEvent("unequipped", OnUnequip)
-		inst:ListenForEvent("itemget", OnTick)
-	end)
-end
-
-if TUNING.POLARHAT_DURABILITY then
-	AddPrefabPostInit("polarhat", function(inst)
-		local function OnTick(inst)
-			if inst.components.container and inst.components.container:GetItemInSlot(1) then
-				local owner = inst.components.inventoryitem:GetGrandOwner()
-
-				local fueltogive = inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue * inst.components.fueled.bonusmult
-				local currentfuel = inst.components.fueled.currentfuel
-				local maxfuel = inst.components.fueled.maxfuel
-
-				if (maxfuel - currentfuel) >= fueltogive then
-					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
-					inst.components.fueled.accepting = true
-					inst.components.fueled:TakeFuelItem(fuelitem, owner)
-					currentfuel = math.floor(currentfuel/fueltogive+0.5)*fueltogive
-					inst.components.fueled.accepting = false
-				end
-			end
-		end
-
-		local function OnEquip(inst, data)
-			local owner = data.owner
-			if inst.components.container ~= nil then
-				inst.components.container:Open(owner)
-			end
-		end
-
-		local function OnUnequip(inst, data)
-			local owner = data.owner
-			if inst.components.container ~= nil then
-				inst.components.container:Close(owner)
-			end
-		end
-		
-		-- Start Container stuff ---------
-		local containers = GLOBAL.require("containers")
-		params = containers.params
-
-		params.polarhat_inv =
-		{
-			widget =
-			{
-				slotpos =
-				{
-					GLOBAL.Vector3(0,   32 + 4,  0),
-				},
-				animbank = "ui_cookpot_1x2",
-				animbuild = "ui_cookpot_1x2",
-				pos = GLOBAL.Vector3(0, 15, 0),
-			},
-			usespecificslotsforitems = true,
-			type = "head_inv",
-		}
-		
-		function params.polarhat_inv.itemtestfn(container, item, slot)
-			return item.prefab == "ice"
-		end
-		-- End Container -------
+-- 		function params.brewinghat_inv.itemtestfn(container, item, slot)
+-- 			return item.prefab == "slurtleslime" or item.prefab == "gunpowder"
+-- 		end
+-- 		-- End Container -------
 		
 
-		if not GLOBAL.TheWorld.ismastersim then
-			inst.OnEntityReplicated = function(inst) 
-				inst.replica.container:WidgetSetup("polarhat_inv") 
-			end
+-- 		if not GLOBAL.TheWorld.ismastersim then
+-- 			inst.OnEntityReplicated = function(inst) 
+-- 				inst.replica.container:WidgetSetup("brewinghat_inv") 
+-- 			end
 
-			return
-		end
+-- 			return
+-- 		end
 
-		inst:AddComponent("container")
-		inst.components.container:WidgetSetup("polarhat_inv")
-		inst.components.container.canbeopened = false
+-- 		inst:AddComponent("container")
+-- 		inst.components.container:WidgetSetup("brewinghat_inv")
+-- 		inst.components.container.canbeopened = false
 
-		inst.tick = inst:DoPeriodicTask(0.25, OnTick)
+-- 		-- inst.tick = inst:DoPeriodicTask(0.5, OnTick)
 
-		inst:ListenForEvent("equipped", OnEquip)
-		inst:ListenForEvent("unequipped", OnUnequip)
-		inst:ListenForEvent("itemget", OnTick)
-	end)
-end
+-- 		inst:ListenForEvent("equipped", OnEquip)
+-- 		inst:ListenForEvent("unequipped", OnUnequip)
+-- 		inst:ListenForEvent("itemget", OnTick)
+-- 	end)
+-- end
 
-if TUNING.DWELLERMASK_DURABILITY then
-	AddPrefabPostInit("dwellermask", function(inst)
-		local function OnTick(inst)
-			if inst.components.container and inst.components.container:GetItemInSlot(1) then
-				local owner = inst.components.inventoryitem:GetGrandOwner()
+-- if TUNING.POLARHAT_DURABILITY then
+-- 	AddPrefabPostInit("polarhat", function(inst)
+-- 		local function OnTick(inst)
+-- 			if inst.components.container and inst.components.container:GetItemInSlot(1) then
+-- 				local owner = inst.components.inventoryitem:GetGrandOwner()
 
-				local fueltogive = inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue * inst.components.fueled.bonusmult
-				local currentfuel = inst.components.fueled.currentfuel
-				local maxfuel = inst.components.fueled.maxfuel
+-- 				local fueltogive = inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue * inst.components.fueled.bonusmult
+-- 				local currentfuel = inst.components.fueled.currentfuel
+-- 				local maxfuel = inst.components.fueled.maxfuel
 
-				if (maxfuel - currentfuel) >= fueltogive then
-					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
-					inst.components.fueled.accepting = true
-					inst.components.fueled:TakeFuelItem(fuelitem, owner)
-					inst.components.fueled.accepting = false
-				end
-			end
-		end
+-- 				if (maxfuel - currentfuel) >= fueltogive then
+-- 					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
+-- 					inst.components.fueled.accepting = true
+-- 					inst.components.fueled:TakeFuelItem(fuelitem, owner)
+-- 					currentfuel = math.floor(currentfuel/fueltogive+0.5)*fueltogive
+-- 					inst.components.fueled.accepting = false
+-- 				end
+-- 			end
+-- 		end
 
-		local function OnEquip(inst, data)
-			local owner = data.owner
-			if inst.components.container ~= nil then
-				inst.components.container:Open(owner)
-			end
-		end
+-- 		local function OnEquip(inst, data)
+-- 			local owner = data.owner
+-- 			if inst.components.container ~= nil then
+-- 				inst.components.container:Open(owner)
+-- 			end
+-- 		end
 
-		local function OnUnequip(inst, data)
-			local owner = data.owner
-			if inst.components.container ~= nil then
-				inst.components.container:Close(owner)
-			end
-		end
+-- 		local function OnUnequip(inst, data)
+-- 			local owner = data.owner
+-- 			if inst.components.container ~= nil then
+-- 				inst.components.container:Close(owner)
+-- 			end
+-- 		end
 		
-		-- Start Container stuff ---------
-		local containers = GLOBAL.require("containers")
-		params = containers.params
+-- 		-- Start Container stuff ---------
+-- 		local containers = GLOBAL.require("containers")
+-- 		params = containers.params
 
-		params.dwellermask_inv =
-		{
-			widget =
-			{
-				slotpos =
-				{
-					GLOBAL.Vector3(0,   32 + 4,  0),
-				},
-				animbank = "ui_cookpot_1x2",
-				animbuild = "ui_cookpot_1x2",
-				pos = GLOBAL.Vector3(0, 15, 0),
-			},
-			usespecificslotsforitems = true,
-			type = "head_inv",
-		}
+-- 		params.polarhat_inv =
+-- 		{
+-- 			widget =
+-- 			{
+-- 				slotpos =
+-- 				{
+-- 					GLOBAL.Vector3(0,   32 + 4,  0),
+-- 				},
+-- 				animbank = "ui_cookpot_1x2",
+-- 				animbuild = "ui_cookpot_1x2",
+-- 				pos = GLOBAL.Vector3(0, 15, 0),
+-- 			},
+-- 			usespecificslotsforitems = true,
+-- 			type = "head_inv",
+-- 		}
 		
-		function params.dwellermask_inv.itemtestfn(container, item, slot)
-			return item:HasTag("nightmarefuel") -- Tag added by this mod, not in vanilla.
-		end
-		-- End Container -------
-		
-
-		if not GLOBAL.TheWorld.ismastersim then
-			inst.OnEntityReplicated = function(inst) 
-				inst.replica.container:WidgetSetup("dwellermask_inv") 
-			end
-
-			return
-		end
-
-		inst:AddComponent("container")
-		inst.components.container:WidgetSetup("dwellermask_inv")
-		inst.components.container.canbeopened = false
-
-		inst.tick = inst:DoPeriodicTask(0.25, OnTick)
-
-		inst:ListenForEvent("equipped", OnEquip)
-		inst:ListenForEvent("unequipped", OnUnequip)
-		inst:ListenForEvent("itemget", OnTick)
-	end)
-end
-
-if TUNING.TIMESTOPHAT_DURABILITY then
-	AddPrefabPostInit("timestophat", function(inst)
-		local function OnTick(inst)
-			if inst.components.container and inst.components.container:GetItemInSlot(1) then
-				local owner = inst.components.inventoryitem:GetGrandOwner()
-
-				local fueltogive = inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue * inst.components.fueled.bonusmult
-				local currentfuel = inst.components.fueled.currentfuel
-				local maxfuel = inst.components.fueled.maxfuel
-
-				if (maxfuel - currentfuel) >= fueltogive then
-					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
-					inst.components.fueled.accepting = true
-					inst.components.fueled:TakeFuelItem(fuelitem, owner)
-					inst.components.fueled.accepting = false
-				end
-			end
-		end
-
-		local function OnEquip(inst, data)
-			local owner = data.owner
-			if inst.components.container ~= nil then
-				inst.components.container:Open(owner)
-			end
-		end
-
-		local function OnUnequip(inst, data)
-			local owner = data.owner
-			if inst.components.container ~= nil then
-				inst.components.container:Close(owner)
-			end
-		end
-		
-		-- Start Container stuff ---------
-		local containers = GLOBAL.require("containers")
-		params = containers.params
-
-		params.timestophat_inv =
-		{
-			widget =
-			{
-				slotpos =
-				{
-					GLOBAL.Vector3(0,   32 + 4,  0),
-				},
-				animbank = "ui_cookpot_1x2",
-				animbuild = "ui_cookpot_1x2",
-				pos = GLOBAL.Vector3(0, 15, 0),
-			},
-			usespecificslotsforitems = true,
-			type = "head_inv",
-		}
-		
-		function params.timestophat_inv.itemtestfn(container, item, slot)
-			return item:HasTag("nightmarefuel") -- Tag added by this mod, not in vanilla.
-		end
-		-- End Container -------
+-- 		function params.polarhat_inv.itemtestfn(container, item, slot)
+-- 			return item.prefab == "ice"
+-- 		end
+-- 		-- End Container -------
 		
 
-		if not GLOBAL.TheWorld.ismastersim then
-			inst.OnEntityReplicated = function(inst) 
-				inst.replica.container:WidgetSetup("timestophat_inv") 
-			end
+-- 		if not GLOBAL.TheWorld.ismastersim then
+-- 			inst.OnEntityReplicated = function(inst) 
+-- 				inst.replica.container:WidgetSetup("polarhat_inv") 
+-- 			end
 
-			return
-		end
+-- 			return
+-- 		end
 
-		inst:AddComponent("container")
-		inst.components.container:WidgetSetup("timestophat_inv")
-		inst.components.container.canbeopened = false
+-- 		inst:AddComponent("container")
+-- 		inst.components.container:WidgetSetup("polarhat_inv")
+-- 		inst.components.container.canbeopened = false
 
-		inst.tick = inst:DoPeriodicTask(0.25, OnTick)
+-- 		inst.tick = inst:DoPeriodicTask(0.25, OnTick)
 
-		inst:ListenForEvent("equipped", OnEquip)
-		inst:ListenForEvent("unequipped", OnUnequip)
-		inst:ListenForEvent("itemget", OnTick)
-	end)
-end
+-- 		inst:ListenForEvent("equipped", OnEquip)
+-- 		inst:ListenForEvent("unequipped", OnUnequip)
+-- 		inst:ListenForEvent("itemget", OnTick)
+-- 	end)
+-- end
+
+-- if TUNING.DWELLERMASK_DURABILITY then
+-- 	AddPrefabPostInit("dwellermask", function(inst)
+-- 		local function OnTick(inst)
+-- 			if inst.components.container and inst.components.container:GetItemInSlot(1) then
+-- 				local owner = inst.components.inventoryitem:GetGrandOwner()
+
+-- 				local fueltogive = inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue * inst.components.fueled.bonusmult
+-- 				local currentfuel = inst.components.fueled.currentfuel
+-- 				local maxfuel = inst.components.fueled.maxfuel
+
+-- 				if (maxfuel - currentfuel) >= fueltogive then
+-- 					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
+-- 					inst.components.fueled.accepting = true
+-- 					inst.components.fueled:TakeFuelItem(fuelitem, owner)
+-- 					inst.components.fueled.accepting = false
+-- 				end
+-- 			end
+-- 		end
+
+-- 		local function OnEquip(inst, data)
+-- 			local owner = data.owner
+-- 			if inst.components.container ~= nil then
+-- 				inst.components.container:Open(owner)
+-- 			end
+-- 		end
+
+-- 		local function OnUnequip(inst, data)
+-- 			local owner = data.owner
+-- 			if inst.components.container ~= nil then
+-- 				inst.components.container:Close(owner)
+-- 			end
+-- 		end
+		
+-- 		-- Start Container stuff ---------
+-- 		local containers = GLOBAL.require("containers")
+-- 		params = containers.params
+
+-- 		params.dwellermask_inv =
+-- 		{
+-- 			widget =
+-- 			{
+-- 				slotpos =
+-- 				{
+-- 					GLOBAL.Vector3(0,   32 + 4,  0),
+-- 				},
+-- 				animbank = "ui_cookpot_1x2",
+-- 				animbuild = "ui_cookpot_1x2",
+-- 				pos = GLOBAL.Vector3(0, 15, 0),
+-- 			},
+-- 			usespecificslotsforitems = true,
+-- 			type = "head_inv",
+-- 		}
+		
+-- 		function params.dwellermask_inv.itemtestfn(container, item, slot)
+-- 			return item:HasTag("nightmarefuel") -- Tag added by this mod, not in vanilla.
+-- 		end
+-- 		-- End Container -------
+		
+
+-- 		if not GLOBAL.TheWorld.ismastersim then
+-- 			inst.OnEntityReplicated = function(inst) 
+-- 				inst.replica.container:WidgetSetup("dwellermask_inv") 
+-- 			end
+
+-- 			return
+-- 		end
+
+-- 		inst:AddComponent("container")
+-- 		inst.components.container:WidgetSetup("dwellermask_inv")
+-- 		inst.components.container.canbeopened = false
+
+-- 		inst.tick = inst:DoPeriodicTask(0.25, OnTick)
+
+-- 		inst:ListenForEvent("equipped", OnEquip)
+-- 		inst:ListenForEvent("unequipped", OnUnequip)
+-- 		inst:ListenForEvent("itemget", OnTick)
+-- 	end)
+-- end
+
+-- if TUNING.TIMESTOPHAT_DURABILITY then
+-- 	AddPrefabPostInit("timestophat", function(inst)
+-- 		local function OnTick(inst)
+-- 			if inst.components.container and inst.components.container:GetItemInSlot(1) then
+-- 				local owner = inst.components.inventoryitem:GetGrandOwner()
+
+-- 				local fueltogive = inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue * inst.components.fueled.bonusmult
+-- 				local currentfuel = inst.components.fueled.currentfuel
+-- 				local maxfuel = inst.components.fueled.maxfuel
+
+-- 				if (maxfuel - currentfuel) >= fueltogive then
+-- 					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
+-- 					inst.components.fueled.accepting = true
+-- 					inst.components.fueled:TakeFuelItem(fuelitem, owner)
+-- 					inst.components.fueled.accepting = false
+-- 				end
+-- 			end
+-- 		end
+
+-- 		local function OnEquip(inst, data)
+-- 			local owner = data.owner
+-- 			if inst.components.container ~= nil then
+-- 				inst.components.container:Open(owner)
+-- 			end
+-- 		end
+
+-- 		local function OnUnequip(inst, data)
+-- 			local owner = data.owner
+-- 			if inst.components.container ~= nil then
+-- 				inst.components.container:Close(owner)
+-- 			end
+-- 		end
+		
+-- 		-- Start Container stuff ---------
+-- 		local containers = GLOBAL.require("containers")
+-- 		params = containers.params
+
+-- 		params.timestophat_inv =
+-- 		{
+-- 			widget =
+-- 			{
+-- 				slotpos =
+-- 				{
+-- 					GLOBAL.Vector3(0,   32 + 4,  0),
+-- 				},
+-- 				animbank = "ui_cookpot_1x2",
+-- 				animbuild = "ui_cookpot_1x2",
+-- 				pos = GLOBAL.Vector3(0, 15, 0),
+-- 			},
+-- 			usespecificslotsforitems = true,
+-- 			type = "head_inv",
+-- 		}
+		
+-- 		function params.timestophat_inv.itemtestfn(container, item, slot)
+-- 			return item:HasTag("nightmarefuel") -- Tag added by this mod, not in vanilla.
+-- 		end
+-- 		-- End Container -------
+		
+
+-- 		if not GLOBAL.TheWorld.ismastersim then
+-- 			inst.OnEntityReplicated = function(inst) 
+-- 				inst.replica.container:WidgetSetup("timestophat_inv") 
+-- 			end
+
+-- 			return
+-- 		end
+
+-- 		inst:AddComponent("container")
+-- 		inst.components.container:WidgetSetup("timestophat_inv")
+-- 		inst.components.container.canbeopened = false
+
+-- 		inst.tick = inst:DoPeriodicTask(0.25, OnTick)
+
+-- 		inst:ListenForEvent("equipped", OnEquip)
+-- 		inst:ListenForEvent("unequipped", OnUnequip)
+-- 		inst:ListenForEvent("itemget", OnTick)
+-- 	end)
+-- end
 
 -- We need to make an entire pseudo-frozen state specifically for using the ice hat, as we don't want to go to the hit state after being unfrozen, we don't want extra sounds, and we want to show the hud.
 AddStategraphState("wilson",

@@ -156,6 +156,7 @@ local function fn()
 		inst.components.fueled.fueltype = FUELTYPE.EXPLOSIVE -- gunpowder, 90
 		inst.components.fueled.secondaryfueltype = FUELTYPE.CAVE -- slurtle slime only, 45
 		inst.components.fueled.bonusmult = TUNING.BREWINGHAT_FUELMULT
+		inst.components.fueled.accepting = true
 		-- although technically lightbulbs and fireflies are included in CAVE fuel, we limit that using the container fuel approach
 	end
 
