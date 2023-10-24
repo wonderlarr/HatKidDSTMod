@@ -48,6 +48,7 @@ local function OnAttack(inst, attacker, target)
     -- If we're strong on this attack
     if inst:HasTag("strongatk") then
         inst.SoundEmitter:PlaySound("dontstarve/creatures/together/klaus/lock_break")
+        
         inst:RemoveTag("strongatk")
         inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE)
     end

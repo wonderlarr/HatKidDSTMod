@@ -20,10 +20,6 @@ local kidpotion_prefabs = {
     "fx_boat_pop",
     "superjump_fx",
     "hatshatter2",
-
-    -- "reticule",
-    -- "reticuleaoe",
-    -- "reticuleaoeping",
 } 
 
 local function DoExplode(inst, attacker, target)
