@@ -38,6 +38,8 @@ local function fn_common()
     inst.AnimState:PlayAnimation("anim")
     inst.AnimState:SetMultColour(0,0,1,1)
 
+    inst:AddTag("badgepack")
+
     return inst
 end
 

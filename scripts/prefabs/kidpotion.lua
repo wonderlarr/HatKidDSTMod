@@ -42,12 +42,12 @@ local function DoExplode(inst, attacker, target)
     for k, v in ipairs(ents) do
         if v ~= inst and v:IsValid() and not v:IsInLimbo() then
 
-            -- Any workable thing
+            -- Any workable thing, deal 10 dammage
             if v.components.workable ~= nil and v.components.workable:CanBeWorked() then
                 v.components.workable:WorkedBy(attacker, 10)
             end
 
-            -- Any combatant
+            -- Any combatant, deal default damage
             if v.components.combat ~= nil then
                 attacker:PushEvent("onattackother", { target = v })
                 v.components.combat:GetAttacked(attacker, TUNING.BREWINGHAT_DAMAGE) -- TODO find a way to reference brewing hat here

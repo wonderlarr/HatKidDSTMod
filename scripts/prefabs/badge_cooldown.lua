@@ -1,7 +1,5 @@
 local assets=
 { 
-    -- Asset("ANIM", "anim/kidhat.zip"),
-	
     Asset("ATLAS", "images/inventoryimages/badge_cooldown.xml"),
     Asset("IMAGE", "images/inventoryimages/badge_cooldown.tex"),
 }
@@ -49,6 +47,8 @@ local function fn()
 	inst:AddComponent("inventoryitem")
 
 	inst:AddComponent("inspectable")
+
+	inst:AddComponent("badge")
 
     return inst
 end
