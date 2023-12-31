@@ -75,6 +75,7 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
 	inst.entity:AddSoundEmitter()
+    inst.entity:AddDynamicShadow()
      
     MakeInventoryPhysics(inst)   
 
@@ -87,11 +88,14 @@ local function fn()
     inst.Physics:CollidesWith(COLLISION.OBSTACLES)
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
     -- inst.Physics:SetActive(false)
+
+    inst.DynamicShadow:SetSize(0.75, 0.75)
     
     inst.AnimState:SetBank("pon")
     inst.AnimState:SetBuild("pon")
-    inst.AnimState:PlayAnimation("idle")
-    inst.AnimState:SetScale(2, 2)
+    inst.AnimState:PlayAnimation("bob", true)
+    inst.AnimState:SetTime(math.random() * inst.AnimState:GetCurrentAnimationLength())
+    inst.AnimState:SetScale(1.8, 1.8)
 
     inst:AddTag("pon")
 	
