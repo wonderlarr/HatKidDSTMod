@@ -11,6 +11,7 @@ end
 
 local function onunequip(inst, owner)
     inst.components.container:Close(owner)
+    inst.components.container:DropEverything() 
 end
 
 local function OnAlien(inst)
@@ -49,7 +50,7 @@ local function fn_master(inst, widgetsetupname)
     inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
 
     inst:AddComponent("equippable")
-    inst.components.equippable.equipslot = EQUIPSLOTS.BEARD -- my god what are you doing?
+    inst.components.equippable.equipslot = EQUIPSLOTS.BEARD -- "my god what are you doing?"
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
     -- inst.components.equippable:SetPreventUnequipping(true)
