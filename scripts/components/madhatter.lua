@@ -1,3 +1,5 @@
+local SourceModifierList = require("util/sourcemodifierlist")
+
 local function OnPonVal(self, val)
     self.inst.replica.madhatter:SetVal(val)
 end
@@ -57,6 +59,8 @@ local MadHatter = Class(function(self, inst)
 
     self.chainPos = 0
 
+    self.cd_mods = SourceModifierList(self.inst)
+
     self.inst:AddTag("madhatter")
 
     self.inst:ListenForEvent("onattackother", OnAttack)
@@ -72,6 +76,10 @@ nil,
 function MadHatter:OnRemoveFromEntity()
     self.inst:RemoveTag("madhatter")
 end
+
+----------
+-- Pons
+----------
 
 function MadHatter:DoDelta(delta)
     if not type(delta) == "number" then return false end
@@ -98,6 +106,14 @@ end
 
 function MadHatter:GetPercent()
     return self.val / self.max
+end
+
+----------
+-- HatMagic
+----------
+
+function MadHatter:GetCDMod()
+    return self.cd_mods:Get() -- Using SourceModifierList
 end
 
 function MadHatter:GetDebugString()

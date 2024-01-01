@@ -1,15 +1,16 @@
 local function OnPut(inst, container)
     if container and container:HasTag("badgepack") then
-        inst.components.badge:AddEffect()
+        inst.components.badge:Equip(inst.components.inventoryitem:GetGrandOwner())
     else
-        inst.components.badge:RemoveEffect()
+        inst.components.badge:Unequip(inst.components.inventoryitem:GetGrandOwner())
     end
 end
 
 local Badge = Class(function(self, inst)
     self.inst = inst
 
-    self.owner = nil
+    self.equip_fn = nil
+    self.unequip_fn = nil
 
     inst:AddTag("badge")
 
@@ -20,20 +21,29 @@ function Badge:OnRemoveFromEntity()
     self.inst:RemoveTag("pon")
 end
 
-function Badge:AddEffect()
-    self.owner = self.inst.components.inventoryitem:GetGrandOwner()
-
-    if self.owner and self.owner.components.health then
-        self.owner.components.health:SetMaxHealth(self.owner.components.health.maxhealth + 50)
+function Badge:Equip(owner)
+    if self.equip_fn ~= nil then
+        self.equip_fn(self.inst, owner)
     end
+
+    self.inst:PushEvent("equipped", { owner = owner })
 end
 
-function Badge:RemoveEffect()
-    if self.owner and self.owner.components.health then
-        self.owner.components.health:SetMaxHealth(self.owner.components.health.maxhealth - 50)
+function Badge:Unequip(owner)
+    if self.unequip_fn ~= nil then
+        self.unequip_fn(self.inst, owner)
     end
+
+    self.inst:PushEvent("unequipped", { owner = owner })
 end
 
+function Badge:SetOnEquip(fn)
+    self.equip_fn = fn
+end
+
+function Badge:SetOnUnequip(fn)
+    self.unequip_fn = fn
+end
 -- function Badge:GetDebugString()
 -- 	return ""
 -- end

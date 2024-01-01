@@ -28,7 +28,7 @@ local HatMagic = Class(function(self, inst)
     self.fn_activate = nil -- runs when the item is activated
     self.fn_loop = nil -- runs ~30 times a second via component update while the item is active
     self.fn_deactivate = nil -- runs when the item is deactivated
-    self.fn_test = nil -- a function that should return true to allow activation. if left nil, activation will be allowed.
+    self.fn_test = nil -- check function. whatever function you feed in must return true to allow activation. leaving as nil is okay too.
 
     self.inst:AddTag("hatmagic")
     -- self.inst:AddTag("rechargeable_bonus") -- makes rechargeable green
@@ -125,8 +125,9 @@ end
 
 -- Activates cooldown. MIGHT break things if magic isn't deactivated first.
 function HatMagic:DoCooldown(override_time)
+    local owner = self.inst.components.inventoryitem:GetGrandOwner()
     -- You can pass in an override time to force a specific cooldown if needed for some reason.
-    local cooldowntime = override_time or self.cooldowntime or 0
+    local cooldowntime = (override_time or self.cooldowntime or 0) * (owner.components.madhatter and owner.components.madhatter.cd_mods:Get() or 1)
     
     if cooldowntime > 0 then
         local function OnCharged()

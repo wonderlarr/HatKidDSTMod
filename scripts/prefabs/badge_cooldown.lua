@@ -8,6 +8,18 @@ RegisterInventoryItemAtlas("images/inventoryimages/badge_cooldown.xml","badge_co
 
 STRINGS.NAMES.BADGE_COOLDOWN = "Cooldown Badge"
 
+local function OnEquip(inst, owner)
+	if owner.components.madhatter then
+		owner.components.madhatter.cd_mods:SetModifier(inst, 0.5, "cdbadge")
+	end
+end
+
+local function OnUnequip(inst, owner)
+	if owner.components.madhatter then
+		owner.components.madhatter.cd_mods:RemoveModifier(inst, "cdbadge")
+	end
+end
+
 local function fn() 
     local inst = CreateEntity()
 
@@ -49,6 +61,8 @@ local function fn()
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("badge")
+	inst.components.badge:SetOnEquip(OnEquip)
+	inst.components.badge:SetOnUnequip(OnUnequip)
 
     return inst
 end
