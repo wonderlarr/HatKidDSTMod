@@ -62,7 +62,7 @@ local PrefabFilesLocal = {
 	"hatpack",
 
 	--badges
-	"badge_cooldown",
+	"badge_fasthatter",
 
 	--testing TODO (disable in final)
 	-- "cooltarget", -- This is a dummytarget prefab, but it only regens health when it is low.

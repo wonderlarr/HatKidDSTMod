@@ -1,23 +1,23 @@
 local assets=
 { 
-    Asset("ATLAS", "images/inventoryimages/badge_cooldown.xml"),
-    Asset("IMAGE", "images/inventoryimages/badge_cooldown.tex"),
+    Asset("ATLAS", "images/inventoryimages/badge_fasthatter.xml"),
+    Asset("IMAGE", "images/inventoryimages/badge_fasthatter.tex"),
 }
 
-RegisterInventoryItemAtlas("images/inventoryimages/badge_cooldown.xml","badge_cooldown.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/badge_fasthatter.xml","badge_fasthatter.tex")
 
-STRINGS.NAMES.BADGE_COOLDOWN = "Cooldown Badge"
+STRINGS.NAMES.BADGE_FASTHATTER = "Fast Hatter Badge"
 
 local function OnEquip(inst, owner)
-	if owner.components.madhatter then
-		owner.components.madhatter.cd_mods:SetModifier(inst, 0.5, "cdbadge")
-	end
+	-- if owner.components.madhatter then
+	-- 	owner.components.madhatter.cd_mods:SetModifier(inst, 0.5, "cdbadge")
+	-- end
 end
 
 local function OnUnequip(inst, owner)
-	if owner.components.madhatter then
-		owner.components.madhatter.cd_mods:RemoveModifier(inst, "cdbadge")
-	end
+	-- if owner.components.madhatter then
+	-- 	owner.components.madhatter.cd_mods:RemoveModifier(inst, "cdbadge")
+	-- end
 end
 
 local function fn() 
@@ -41,6 +41,7 @@ local function fn()
 
 	-- Custom Tags
     inst:AddTag("badge")
+	inst:AddTag("badge_fasthatter")
 
 	-- Component Tags
 	inst:AddTag("inspectable")
@@ -67,4 +68,4 @@ local function fn()
     return inst
 end
 
-return  Prefab("badge_cooldown", fn, assets)
+return  Prefab("badge_fasthatter", fn, assets)
