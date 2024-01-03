@@ -47,7 +47,7 @@ for y = 1, -1, -1 do
 end
 
 function params.hatpack_1.itemtestfn(container, item, slot)
-    return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot > 6 and item:HasTag("badge")
+    return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot > 6 and item:HasTag("badge") -- and not container:HasItemWithTag(item.prefab, 1)
 end
 
 params.hatpack_2 =
@@ -84,7 +84,7 @@ for y = 1, -1, -1 do
 end
 
 function params.hatpack_2.itemtestfn(container, item, slot)
-    return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot > 6 and item:HasTag("badge")
+    return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot > 6 and item:HasTag("badge") and not container:HasItemWithTag(item.prefab, 1)
 end
 
 params.hatpack_3 =
@@ -121,7 +121,7 @@ for y = 1, -1, -1 do
 end
 
 function params.hatpack_3.itemtestfn(container, item, slot)
-    return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot and slot > 6 and item:HasTag("badge")
+    return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot and slot > 6 and item:HasTag("badge") and not container:HasItemWithTag(item.prefab, 1) -- this depends on each badge having its prefab name as a tag as well
 end
 
 -- Mod compatibility checker by rezecib
