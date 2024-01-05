@@ -360,3 +360,29 @@ AddClassPostConstruct("components/builder", function(self)
         return _HasCharacterIngredient(self, ingredient)
     end
 end)
+
+local EQUIPSLOTS = GLOBAL.EQUIPSLOTS
+EQUIPSLOTS.BADGE1 = "badge1"
+EQUIPSLOTS.BADGE2 = "badge2"
+EQUIPSLOTS.BADGE3 = "badge3"
+
+AddClassPostConstruct("widgets/inventorybar", function(self)
+    local badgeslots = {
+        EQUIPSLOTS.BADGE1,
+        EQUIPSLOTS.BADGE2,
+        EQUIPSLOTS.BADGE3,
+    }
+
+    for k, v in pairs(badgeslots) do
+        self:AddEquipSlot(v, "images/hud.xml", "equip_slot.tex")
+    end
+
+    local _Rebuild = self.Rebuild
+
+    self.Rebuild = function(self)
+        _Rebuild(self)
+
+        self.bg:SetScale(1.22 + (0.7 * 3), 1, 1)
+        self.bgcover:SetScale(1.22 + (0.7 * 3), 1, 1)
+    end
+end)

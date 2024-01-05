@@ -20,7 +20,7 @@
 	However, almost every line of code has been rewritten or edited in some way, and every asset has also been redrawn, 
 	making this mod almost entirely my own, besides the art assets drawn by Powd3d4
 
-	This mod has been an awesome journey in learning to stay consistent with a project. I've been working on it very slowly since Summer 2020, 
+	This mod has been an awesome journey in learning to stay with a project. I've been working on it very slowly since Summer 2020, burnout after burnout, but it feels good.
 ]]
 
 local PrefabFilesLocal = {
