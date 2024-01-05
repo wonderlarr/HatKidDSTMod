@@ -382,7 +382,7 @@ AddClassPostConstruct("widgets/inventorybar", function(self)
     self.Rebuild = function(self)
         _Rebuild(self)
 
-        self.bg:SetScale(1.22 + (0.7 * 3), 1, 1)
-        self.bgcover:SetScale(1.22 + (0.7 * 3), 1, 1)
+        self.bg:SetScale(1.22 + 0.06 * 3, 1, 1)
+        self.bgcover:SetScale(1.22 + 0.06 * 3, 1, 1)
     end
 end)
