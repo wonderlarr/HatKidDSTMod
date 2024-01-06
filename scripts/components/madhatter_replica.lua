@@ -5,7 +5,8 @@ local MadHatter = Class(function(self, inst)
     self._max = net_ushortint(self.inst.GUID, "ponmax", "ponmax_dirty")
     self._val = net_ushortint(self.inst.GUID, "ponval", "ponval_dirty")
 
-    -- self.chainPos = 0
+    self._badgemax = net_ushortint(self.inst.GUID, "badgemax", "badgemax_dirty")
+    self._badgeval = net_ushortint(self.inst.GUID, "badgeval", "badgeval_dirty")
 end)
 
 function MadHatter:SetVal(val)
@@ -30,6 +31,16 @@ end
 
 function MadHatter:GetDebugString()
 	return "Pons: " .. tostring(self._val:value()) .. " / " .. tostring(self._max:value())
+end
+
+-- Badges
+
+function MadHatter:SetBadgeVal(val)
+    self._badgeval:set(val)
+end
+
+function MadHatter:SetBadgeMax(max)
+    self._badgemax:set(max)
 end
 
 return MadHatter

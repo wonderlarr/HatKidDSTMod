@@ -14,7 +14,7 @@ local hatlist = {
 
 local scale = 70
 
-params.hatpack_1 =
+params.hatpack =
 {
     widget =
     {
@@ -27,7 +27,6 @@ params.hatpack_1 =
             { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
             { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
             { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
-            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
         },
         animbank = "ui_hatpack_3x2",
         animbuild = "ui_hatpack_3x2",
@@ -42,86 +41,12 @@ params.hatpack_1 =
 for y = 1, -1, -1 do
     for x = 0, 2 do
         if y == -1 and x > 0 then break end
-        table.insert(params.hatpack_1.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
+        table.insert(params.hatpack.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
     end
 end
 
-function params.hatpack_1.itemtestfn(container, item, slot)
-    return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot > 6 and item:HasTag("badge") -- and not container:HasItemWithTag(item.prefab, 1)
-end
-
-params.hatpack_2 =
-{
-    widget =
-    {
-        slotpos = { }, -- we have to make an empty table or the slot position function gets angry
-        slotbg =
-        {
-            { image = "slotbg_kidhat.tex", atlas = "images/gui/slotbg_kidhat.xml" },
-            { image = "slotbg_sprinthat.tex", atlas = "images/gui/slotbg_sprinthat.xml" },
-            { image = "slotbg_brewinghat.tex", atlas = "images/gui/slotbg_brewinghat.xml" },
-            { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
-            { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
-            { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
-            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
-            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
-        },
-        animbank = "ui_hatpack_3x2",
-        animbuild = "ui_hatpack_3x2",
-        pos = Vector3(-82, 108, 0),
-        bottom_align_tip = -100,
-    },
-    type = "side_inv_behind",
-    acceptsstacks = false,
-    issidewidget = true,
-}
-
-for y = 1, -1, -1 do
-    for x = 0, 2 do
-        if y == -1 and x > 1 then break end
-        table.insert(params.hatpack_2.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
-    end
-end
-
-function params.hatpack_2.itemtestfn(container, item, slot)
-    return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot > 6 and item:HasTag("badge") and not container:HasItemWithTag(item.prefab, 1)
-end
-
-params.hatpack_3 =
-{
-    widget =
-    {
-        slotpos = { }, -- we have to make an empty table or the slot position function gets angry
-        slotbg =
-        {
-            { image = "slotbg_kidhat.tex", atlas = "images/gui/slotbg_kidhat.xml" },
-            { image = "slotbg_sprinthat.tex", atlas = "images/gui/slotbg_sprinthat.xml" },
-            { image = "slotbg_brewinghat.tex", atlas = "images/gui/slotbg_brewinghat.xml" },
-            { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
-            { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
-            { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
-            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
-            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
-            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
-        },
-        animbank = "ui_hatpack_3x2",
-        animbuild = "ui_hatpack_3x2",
-        pos = Vector3(-82, 108, 0),
-        bottom_align_tip = -100,
-    },
-    type = "side_inv_behind",
-    acceptsstacks = false,
-    issidewidget = true,
-}
-
-for y = 1, -1, -1 do
-    for x = 0, 2 do
-        table.insert(params.hatpack_3.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
-    end
-end
-
-function params.hatpack_3.itemtestfn(container, item, slot)
-    return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot and slot > 6 and item:HasTag("badge") and not container:HasItemWithTag(item.prefab, 1) -- this depends on each badge having its prefab name as a tag as well
+function params.hatpack.itemtestfn(container, item, slot)
+    return item:HasTag("hatkidhat") and item.prefab == hatlist[slot]
 end
 
 -- Mod compatibility checker by rezecib
@@ -374,7 +299,7 @@ AddClassPostConstruct("widgets/inventorybar", function(self)
     }
 
     for k, v in pairs(badgeslots) do
-        self:AddEquipSlot(v, "images/hud.xml", "equip_slot.tex")
+        self:AddEquipSlot(v, "images/gui/slotbg_badge.xml", "slotbg_badge.tex")
     end
 
     local _Rebuild = self.Rebuild

@@ -8,6 +8,14 @@ local function OnPonMax(self, max)
     self.inst.replica.madhatter:SetMax(max)
 end
 
+local function OnBadgeMax(self, val)
+    self.inst.replica.madhatter:SetBadgeMax(val)
+end
+
+local function OnBadgeVal(self, val)
+    self.inst.replica.madhatter:SetBadgeVal(val)
+end
+
 -- For entities with health
 -- And workable entities for now, as they share enough values
 local function OnAttack(inst, data)
@@ -55,7 +63,8 @@ local MadHatter = Class(function(self, inst)
     self.max = 100
     self.val = 0
     
-    self.badgeslots = 1
+    self.badgemax = 0
+    self.badgeval = 0
 
     self.chainPos = 0
 
@@ -71,6 +80,8 @@ nil,
 {
     max = OnPonMax,
     val = OnPonVal,
+    badgeval = OnBadgeVal,
+    badgemax = OnBadgeMax,
 })
 
 function MadHatter:OnRemoveFromEntity()
@@ -118,6 +129,22 @@ end
 
 function MadHatter:GetDebugString()
 	return "Pons: " .. tostring(self.val) .. " / " .. tostring(self.max)
+end
+
+----------
+-- Badges
+----------
+
+function MadHatter:SetBadgeMax(max)
+    self.badgemax = max
+end
+
+function MadHatter:SetBadgeVal(val)
+    self.badgeval = val
+end
+
+function MadHatter:DoBadgeDelta(delta)
+    self.badgeval = math.clamp(self.badgeval + delta, 0, self.badgemax)
 end
 
 return MadHatter

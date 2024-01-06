@@ -128,6 +128,4 @@ local function fn3()
     return inst
 end
 
-return Prefab("hatpack_1", fn1, assets),
-    Prefab("hatpack_2", fn2, assets),
-    Prefab("hatpack_3", fn3, assets)
+return Prefab("hatpack", fn1, assets)
