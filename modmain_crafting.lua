@@ -159,7 +159,7 @@ AddCharacterRecipe("kidpotion_ammo",
 	TECH.SCIENCE_TWO, -- tech level
 	{ -- config
 		builder_tag = "hatkid",
-		numtogive = 2,
+		numtogive = 3,
 	},
 	{ -- crafting filters
 		"MODS",
