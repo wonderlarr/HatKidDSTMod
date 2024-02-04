@@ -35,6 +35,14 @@ end
 
 -- Badges
 
+function MadHatter:GetBadgeVal()
+    return self._badgeval:value()
+end
+
+function MadHatter:GetBadgeMax()
+    return self._badgemax:value()
+end
+
 function MadHatter:SetBadgeVal(val)
     self._badgeval:set(val)
 end

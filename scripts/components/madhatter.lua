@@ -63,10 +63,10 @@ local MadHatter = Class(function(self, inst)
     self.max = 100
     self.val = 0
     
-    self.badgemax = 0
+    self.badgemax = 3
     self.badgeval = 0
 
-    self.chainPos = 0
+    self.chainPos = 1
 
     self.cd_mods = SourceModifierList(self.inst)
 
