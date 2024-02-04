@@ -127,7 +127,7 @@ STRINGS.RECIPE_DESC.DWELLERMASK = "See the world through a Dweller's eyes!"
 STRINGS.RECIPE_DESC.TIMESTOPHAT = "Death is inevitable. Your time is valuable."
 
 STRINGS.RECIPE_DESC.HATBRELLA = "Diplomacy didn't work, time for action."
-STRINGS.RECIPE_DESC.KIDPOTION_AMMO = "An innate concoction, waiting to be brewed."
+STRINGS.RECIPE_DESC.KIDPOTION_AMMO = "An explosive concoction of slime and nightmares."
 
 
 
