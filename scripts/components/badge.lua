@@ -1,7 +1,7 @@
 local function OnPut(inst, container)
     if container and container:HasTag("badgepack") then
         inst.components.badge:Equip(inst.components.inventoryitem:GetGrandOwner())
-    else
+    elseif inst.components.badge.is_equipped then -- only run unequip if we havent already
         inst.components.badge:Unequip(inst.components.inventoryitem:GetGrandOwner())
     end
 end
@@ -11,6 +11,8 @@ local Badge = Class(function(self, inst)
 
     self.equip_fn = nil
     self.unequip_fn = nil
+
+    self.is_equipped = false
 
     inst:AddTag("badge")
 
@@ -26,6 +28,7 @@ function Badge:Equip(owner)
         self.equip_fn(self.inst, owner)
     end
 
+    self.is_equipped = true
     self.inst:PushEvent("equipped", { owner = owner })
 end
 
@@ -34,6 +37,7 @@ function Badge:Unequip(owner)
         self.unequip_fn(self.inst, owner)
     end
 
+    self.is_equipped = false
     self.inst:PushEvent("unequipped", { owner = owner })
 end
 
