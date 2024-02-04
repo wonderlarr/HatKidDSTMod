@@ -61,9 +61,18 @@ local function fn()
 
 	inst:AddComponent("inspectable")
 
+	-- inst:AddComponent("equippable")
+	-- inst.components.equippable:SetOnEquip(OnEquip)
+	-- inst.components.equippable:SetOnUnequip(OnUnequip)
+	-- inst.components.equippable.equipslot = EQUIPSLOTS.BADGE
+
 	inst:AddComponent("badge")
-	inst.components.badge:SetOnEquip(OnEquip)
-	inst.components.badge:SetOnUnequip(OnUnequip)
+	inst.components.badge:SetOnEquip(function()
+		print("equip")
+	end)
+	inst.components.badge:SetOnUnequip(function()
+		print("unequip")
+	end)
 
     return inst
 end

@@ -14,7 +14,42 @@ local hatlist = {
 
 local scale = 70
 
-params.hatpack =
+-- params.hatpack =
+-- {
+--     widget =
+--     {
+--         slotpos = { }, -- we have to make an empty table or the slot position function gets angry
+--         slotbg =
+--         {
+--             { image = "slotbg_kidhat.tex", atlas = "images/gui/slotbg_kidhat.xml" },
+--             { image = "slotbg_sprinthat.tex", atlas = "images/gui/slotbg_sprinthat.xml" },
+--             { image = "slotbg_brewinghat.tex", atlas = "images/gui/slotbg_brewinghat.xml" },
+--             { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
+--             { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
+--             { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
+--         },
+--         animbank = "ui_hatpack_3x2",
+--         animbuild = "ui_hatpack_3x2",
+--         pos = Vector3(-82, 108, 0),
+--         bottom_align_tip = -100,
+--     },
+--     type = "side_inv_behind",
+--     acceptsstacks = false,
+--     issidewidget = true,
+-- }
+
+-- for y = 1, -1, -1 do
+--     for x = 0, 2 do
+--         if y == -1 and x > 0 then break end
+--         table.insert(params.hatpack.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
+--     end
+-- end
+
+-- function params.hatpack.itemtestfn(container, item, slot)
+--     return item:HasTag("hatkidhat") and item.prefab == hatlist[slot]
+-- end
+
+params.hatpack_1 =
 {
     widget =
     {
@@ -27,6 +62,7 @@ params.hatpack =
             { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
             { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
             { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
+            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
         },
         animbank = "ui_hatpack_3x2",
         animbuild = "ui_hatpack_3x2",
@@ -41,12 +77,86 @@ params.hatpack =
 for y = 1, -1, -1 do
     for x = 0, 2 do
         if y == -1 and x > 0 then break end
-        table.insert(params.hatpack.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
+        table.insert(params.hatpack_1.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
     end
 end
 
-function params.hatpack.itemtestfn(container, item, slot)
-    return item:HasTag("hatkidhat") and item.prefab == hatlist[slot]
+function params.hatpack_1.itemtestfn(container, item, slot)
+    return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot > 6 and item:HasTag("badge") -- and not container:HasItemWithTag(item.prefab, 1)
+end
+
+params.hatpack_2 =
+{
+    widget =
+    {
+        slotpos = { }, -- we have to make an empty table or the slot position function gets angry
+        slotbg =
+        {
+            { image = "slotbg_kidhat.tex", atlas = "images/gui/slotbg_kidhat.xml" },
+            { image = "slotbg_sprinthat.tex", atlas = "images/gui/slotbg_sprinthat.xml" },
+            { image = "slotbg_brewinghat.tex", atlas = "images/gui/slotbg_brewinghat.xml" },
+            { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
+            { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
+            { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
+            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
+            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
+        },
+        animbank = "ui_hatpack_3x2",
+        animbuild = "ui_hatpack_3x2",
+        pos = Vector3(-82, 108, 0),
+        bottom_align_tip = -100,
+    },
+    type = "side_inv_behind",
+    acceptsstacks = false,
+    issidewidget = true,
+}
+
+for y = 1, -1, -1 do
+    for x = 0, 2 do
+        if y == -1 and x > 1 then break end
+        table.insert(params.hatpack_2.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
+    end
+end
+
+function params.hatpack_2.itemtestfn(container, item, slot)
+    return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot > 6 and item:HasTag("badge") and not container:HasItemWithTag(item.prefab, 1)
+end
+
+params.hatpack_3 =
+{
+    widget =
+    {
+        slotpos = { }, -- we have to make an empty table or the slot position function gets angry
+        slotbg =
+        {
+            { image = "slotbg_kidhat.tex", atlas = "images/gui/slotbg_kidhat.xml" },
+            { image = "slotbg_sprinthat.tex", atlas = "images/gui/slotbg_sprinthat.xml" },
+            { image = "slotbg_brewinghat.tex", atlas = "images/gui/slotbg_brewinghat.xml" },
+            { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
+            { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
+            { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
+            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
+            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
+            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
+        },
+        animbank = "ui_chest_3x3",
+        animbuild = "ui_chest_3x3",
+        pos = Vector3(-82, 108, 0),
+        bottom_align_tip = -100,
+    },
+    type = "side_inv_behind",
+    acceptsstacks = false,
+    issidewidget = true,
+}
+
+for y = 1, -1, -1 do
+    for x = 0, 2 do
+        table.insert(params.hatpack_3.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
+    end
+end
+
+function params.hatpack_3.itemtestfn(container, item, slot)
+    return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot and slot > 6 and item:HasTag("badge") and not container:HasItemWithTag(item.prefab, 1) -- this depends on each badge having its prefab name as a tag as well
 end
 
 -- Mod compatibility checker by rezecib
@@ -286,28 +396,88 @@ AddClassPostConstruct("components/builder", function(self)
     end
 end)
 
-local EQUIPSLOTS = GLOBAL.EQUIPSLOTS
-EQUIPSLOTS.BADGE1 = "badge1"
-EQUIPSLOTS.BADGE2 = "badge2"
-EQUIPSLOTS.BADGE3 = "badge3"
+-- Add custom EQUIPSLOTS
+-- local EQUIPSLOTS = GLOBAL.EQUIPSLOTS
+-- EQUIPSLOTS.BADGE1 = "badge1"
+-- EQUIPSLOTS.BADGE2 = "badge2"
+-- EQUIPSLOTS.BADGE3 = "badge3"
+-- EQUIPSLOTS.BADGE = "badge"
 
-AddClassPostConstruct("widgets/inventorybar", function(self)
-    local badgeslots = {
-        EQUIPSLOTS.BADGE1,
-        EQUIPSLOTS.BADGE2,
-        EQUIPSLOTS.BADGE3,
-    }
+-- AddClassPostConstruct("widgets/inventorybar", function(self)
+--     self.badgeval = 0
+    
+--     local badgeslots = {
+--         EQUIPSLOTS.BADGE,
+--         EQUIPSLOTS.BADGE,
+--         EQUIPSLOTS.BADGE,
+--     }
 
-    for k, v in pairs(badgeslots) do
-        self:AddEquipSlot(v, "images/gui/slotbg_badge.xml", "slotbg_badge.tex")
-    end
+--     for k, v in pairs(badgeslots) do
+--         self:AddEquipSlot(v, "images/gui/slotbg_badge.xml", "slotbg_badge.tex")
+--     end
 
-    local _Rebuild = self.Rebuild
+    
 
-    self.Rebuild = function(self)
-        _Rebuild(self)
+--     -- These should be compatible with most things that change scale, although I would prefer to 
+--     -- not do it this way, as GetLooseScale is really weird
 
-        self.bg:SetScale(1.22 + 0.06 * 3, 1, 1)
-        self.bgcover:SetScale(1.22 + 0.06 * 3, 1, 1)
-    end
-end)
+--     -- helper
+--     local slotscale = 0.06
+
+--     -- hijack Rebuild
+--     local _Rebuild = self.Rebuild
+
+--     self.Rebuild = function(self)
+--         _Rebuild(self)
+        
+--         -- i truncate the return val here because it returns the x y z as one number value for some reason
+--         local bg = math.floor(self.bg:GetLooseScale()*1000)/1000 
+--         local bgcover = math.floor(self.bgcover:GetLooseScale()*1000)/1000
+
+--         -- local badgeval = self.owner.replica.madhatter:GetBadgeVal()
+--         local badgeval = 3
+--         self.bg:SetScale(bg + slotscale * badgeval, 1, 1)
+--         self.bgcover:SetScale(bgcover + slotscale * badgeval, 1, 1)
+
+--         -- self.equip.badge1.equipslot = "badge"
+--         -- self.equip.badge2.equipslot = "badge"
+--         -- self.equip.badge3.equipslot = "badge"
+--     end
+
+--     -- hijack Refresh
+--     local _Refresh = self.Refresh
+
+--     self.Refresh = function(self)
+--         _Refresh(self)
+
+--         local bg = math.floor(self.bg:GetLooseScale()*1000)/1000
+--         local bgcover = math.floor(self.bgcover:GetLooseScale()*1000)/1000
+
+--         -- local badgeval = self.owner.replica.madhatter:GetBadgeVal()
+--         local badgeval = 3
+--         self.bg:SetScale(bg + slotscale * badgeval, 1, 1)
+--         self.bgcover:SetScale(bgcover + slotscale * badgeval, 1, 1)
+
+--         -- -- GLOBAL.dumptable(self.equip)
+--         -- self.equip.badge1.equipslot = "badge"
+--         -- self.equip.badge2.equipslot = "badge"
+--         -- self.equip.badge3.equipslot = "badge"
+
+--         -- if self.badgeval ~= badgeval then
+--         --     self.badgeval = badgeval
+
+--         --     if badgeval >= 3 then
+                
+--         --     end
+--         --     -- recalculate badge equip slots
+--         --     for i = 1, #self.equipslotinfo, 1 do
+--         --         if self.equipslotinfo[i] ~= nil then
+--         --             self.equipslotinfo.slot
+--         --         end
+--         --     end
+--         -- end
+
+
+--     end
+
+-- end)
