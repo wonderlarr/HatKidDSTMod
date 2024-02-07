@@ -8,10 +8,8 @@ RegisterInventoryItemAtlas("images/inventoryimages/badge_fasthatter.xml","badge_
 
 STRINGS.NAMES.BADGE_FASTHATTER = "Fast Hatter Badge"
 
-local function OnUse(owner, data)
-	local inst = data.inst
-
-	print(inst) -- currently bugged
+local function OnUse(inst, data)
+	inst.components.fueled:DoDelta(-1)
 end
 
 local function OnEquip(inst, owner)
@@ -19,7 +17,7 @@ local function OnEquip(inst, owner)
 		owner.components.madhatter.cd_mods:SetModifier(inst, 0.6, "cdbadge")
 	end
 
-	owner:ListenForEvent("magicdeactivated", OnUse)
+	inst:ListenForEvent("magicdeactivated", OnUse)
 end
 
 local function OnUnequip(inst, owner)
@@ -27,13 +25,13 @@ local function OnUnequip(inst, owner)
 		owner.components.madhatter.cd_mods:RemoveModifier(inst, "cdbadge")
 	end
 
-	owner:RemoveEventCallback("magicdeactivated", OnUse)
+	inst:RemoveEventCallback("magicdeactivated", OnUse)
 end
 
 local function OnEmpty(inst)
     inst.components.inventoryitem:GetGrandOwner():PushEvent("toolbroke")
     
-    inst:DoTaskInTime(0, inst.Remove)
+    inst:Remove()
 end
 
 local function fn() 
@@ -83,7 +81,7 @@ local function fn()
 
 	inst:AddComponent("fueled")
 	inst.components.fueled.fueltype = FUELTYPE.MAGIC
-	inst.components.fueled:InitializeFuelLevel(2)
+	inst.components.fueled:InitializeFuelLevel(50)
 	inst.components.fueled:SetDepletedFn(OnEmpty)
 
     return inst

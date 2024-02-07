@@ -57,8 +57,20 @@ local function OnPick(inst, data)
     end
 end
 
-local function OnBadgeUse(inst)
+local function OnMagicActivated(inst, data)
+    for k ,v in pairs(inst.components.madhatter.badges) do
+        if v:IsValid() then
+            v:PushEvent("magicactivated", data)
+        end
+    end
+end
 
+local function OnMagicDeactivated(inst, data)
+    for k ,v in pairs(inst.components.madhatter.badges) do
+        if v:IsValid() then
+            v:PushEvent("magicdeactivated", data)
+        end
+    end
 end
 
 local MadHatter = Class(function(self, inst)
@@ -67,8 +79,7 @@ local MadHatter = Class(function(self, inst)
     self.max = 100
     self.val = 0
     
-    self.badgemax = 3
-    self.badgeval = 0
+    self.badges = {}
 
     self.chainPos = 1
 
@@ -79,6 +90,9 @@ local MadHatter = Class(function(self, inst)
     self.inst:ListenForEvent("onattackother", OnAttack)
     self.inst:ListenForEvent("working", OnAttack)
     self.inst:ListenForEvent("picksomething", OnPick)
+
+    self.inst:ListenForEvent("magicactivated", OnMagicActivated)
+    self.inst:ListenForEvent("magicdeactivated", OnMagicDeactivated)
 end,
 nil, 
 {
@@ -139,11 +153,17 @@ end
 -- Badges
 ----------
 function MadHatter:RegisterBadge(badge)
-
+    table.insert(self.badges, badge)
+    print(badge.prefab .. " registered")
 end
 
 function MadHatter:UnregisterBadge(badge)
-    
+    for k, v in pairs(self.badges) do
+        if v == badge then
+            self.badges[k] = nil
+            print(badge.prefab .. " unregistered")
+        end
+    end
 end
 
 function MadHatter:SetBadgeMax(max)
