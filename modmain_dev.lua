@@ -144,8 +144,9 @@ params.hatpack_3 =
         pos = Vector3(-82, 108, 0),
         bottom_align_tip = -100,
     },
-    type = "side_inv_behind",
+    usespecificslotsforitems = true,
     acceptsstacks = false,
+    type = "side_inv_behind",
     issidewidget = true,
 }
 
@@ -156,7 +157,9 @@ for y = 1, -1, -1 do
 end
 
 function params.hatpack_3.itemtestfn(container, item, slot)
-    return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot and slot > 6 and item:HasTag("badge") and not container:HasItemWithTag(item.prefab, 1) -- this depends on each badge having its prefab name as a tag as well
+    return slot == nil and (item:HasTag("hatkidhat") or item:HasTag("badge") and not container:HasItemWithTag(item.prefab, 1)) or 
+    item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or 
+    slot and slot > 6 and item:HasTag("badge") and not container:HasItemWithTag(item.prefab, 1) -- this depends on each badge having its prefab name as a tag as well
 end
 
 
