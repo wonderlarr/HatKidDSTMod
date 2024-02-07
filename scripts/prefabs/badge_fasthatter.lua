@@ -8,16 +8,32 @@ RegisterInventoryItemAtlas("images/inventoryimages/badge_fasthatter.xml","badge_
 
 STRINGS.NAMES.BADGE_FASTHATTER = "Fast Hatter Badge"
 
+local function OnUse(owner, data)
+	local inst = data.inst
+
+	print(inst) -- currently bugged
+end
+
 local function OnEquip(inst, owner)
-	-- if owner.components.madhatter then
-	-- 	owner.components.madhatter.cd_mods:SetModifier(inst, 0.5, "cdbadge")
-	-- end
+	if owner.components.madhatter then
+		owner.components.madhatter.cd_mods:SetModifier(inst, 0.6, "cdbadge")
+	end
+
+	owner:ListenForEvent("magicdeactivated", OnUse)
 end
 
 local function OnUnequip(inst, owner)
-	-- if owner.components.madhatter then
-	-- 	owner.components.madhatter.cd_mods:RemoveModifier(inst, "cdbadge")
-	-- end
+	if owner.components.madhatter then
+		owner.components.madhatter.cd_mods:RemoveModifier(inst, "cdbadge")
+	end
+
+	owner:RemoveEventCallback("magicdeactivated", OnUse)
+end
+
+local function OnEmpty(inst)
+    inst.components.inventoryitem:GetGrandOwner():PushEvent("toolbroke")
+    
+    inst:DoTaskInTime(0, inst.Remove)
 end
 
 local function fn() 
@@ -61,18 +77,14 @@ local function fn()
 
 	inst:AddComponent("inspectable")
 
-	-- inst:AddComponent("equippable")
-	-- inst.components.equippable:SetOnEquip(OnEquip)
-	-- inst.components.equippable:SetOnUnequip(OnUnequip)
-	-- inst.components.equippable.equipslot = EQUIPSLOTS.BADGE
-
 	inst:AddComponent("badge")
-	inst.components.badge:SetOnEquip(function()
-		print("equip")
-	end)
-	inst.components.badge:SetOnUnequip(function()
-		print("unequip")
-	end)
+	inst.components.badge:SetOnEquip(OnEquip)
+	inst.components.badge:SetOnUnequip(OnUnequip)
+
+	inst:AddComponent("fueled")
+	inst.components.fueled.fueltype = FUELTYPE.MAGIC
+	inst.components.fueled:InitializeFuelLevel(2)
+	inst.components.fueled:SetDepletedFn(OnEmpty)
 
     return inst
 end

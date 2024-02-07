@@ -1,3 +1,8 @@
+-- Badge component
+
+-- Badges basically only exist as inventory items, they cannot be equipped properly. As a result, I've made my own
+-- pseudo-equip system by looking for specific slots each time the item is moved.
+
 local function OnPut(inst, container)
     if container and container:HasTag("badgepack") then
         inst.components.badge:Equip(inst.components.inventoryitem:GetGrandOwner())
@@ -24,6 +29,10 @@ function Badge:OnRemoveFromEntity()
 end
 
 function Badge:Equip(owner)
+    if owner.components.madhatter then
+        owner.components.madhatter:RegisterBadge(self.inst)
+    end
+
     if self.equip_fn ~= nil then
         self.equip_fn(self.inst, owner)
     end
@@ -33,6 +42,10 @@ function Badge:Equip(owner)
 end
 
 function Badge:Unequip(owner)
+    if owner.components.madhatter then
+        owner.components.madhatter:UnregisterBadge(self.inst)
+    end
+
     if self.unequip_fn ~= nil then
         self.unequip_fn(self.inst, owner)
     end

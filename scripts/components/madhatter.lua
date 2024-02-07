@@ -57,6 +57,10 @@ local function OnPick(inst, data)
     end
 end
 
+local function OnBadgeUse(inst)
+
+end
+
 local MadHatter = Class(function(self, inst)
     self.inst = inst
 
@@ -134,6 +138,13 @@ end
 ----------
 -- Badges
 ----------
+function MadHatter:RegisterBadge(badge)
+
+end
+
+function MadHatter:UnregisterBadge(badge)
+    
+end
 
 function MadHatter:SetBadgeMax(max)
     self.badgemax = max
