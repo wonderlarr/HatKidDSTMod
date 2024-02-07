@@ -2,7 +2,8 @@ local assets =
 {
     Asset("ANIM", "anim/backpack.zip"),
     Asset("ANIM", "anim/swap_krampus_sack.zip"),
-    Asset("ANIM", "anim/ui_hatpack_3x2.zip")
+    Asset("ANIM", "anim/ui_hatpack_3x2.zip"),
+    Asset("ANIM", "anim/ui_hatpack_3x3.zip")
 }
 
 local function onequip(inst, owner)

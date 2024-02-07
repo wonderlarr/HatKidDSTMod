@@ -139,8 +139,8 @@ params.hatpack_3 =
             { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
             { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
         },
-        animbank = "ui_chest_3x3",
-        animbuild = "ui_chest_3x3",
+        animbank = "ui_hatpack_3x3",
+        animbuild = "ui_hatpack_3x3",
         pos = Vector3(-82, 108, 0),
         bottom_align_tip = -100,
     },
@@ -158,6 +158,8 @@ end
 function params.hatpack_3.itemtestfn(container, item, slot)
     return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot and slot > 6 and item:HasTag("badge") and not container:HasItemWithTag(item.prefab, 1) -- this depends on each badge having its prefab name as a tag as well
 end
+
+
 
 -- Mod compatibility checker by rezecib
 -- https://steamcommunity.com/profiles/76561198025931302

@@ -50,7 +50,7 @@ AddCharacterRecipe("hatbrella",
 AddCharacterRecipe("kidhat",
 	{ -- ingredients
 		Ingredient("silk", 2),
-		Ingredient("goldnugget", 1),
+		Ingredient("goldnugget", 2),
 	},
 	TECH.SCIENCE_ONE, -- tech level
 	{ -- config
@@ -65,7 +65,7 @@ AddCharacterRecipe("kidhat",
 
 AddCharacterRecipe("sprinthat",
 	{ -- ingredients
-		Ingredient("silk", 2),
+		Ingredient("silk", 4),
 		Ingredient("feather_robin", 2),
 	},
 	TECH.SCIENCE_TWO, -- tech level
