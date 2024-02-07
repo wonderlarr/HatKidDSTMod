@@ -75,6 +75,9 @@ function HatMagic:Activate()
         end
 
         self.inst:PushEvent("magicactivated")
+        if self.owner then
+            self.owner:PushEvent("magicactivated", {inst = self.inst})
+        end
     else
         local owner = self.inst.components.inventoryitem:GetGrandOwner()
         owner.components.talker:Say(GetString(owner, "ACTIONFAIL_GENERIC"))
@@ -102,6 +105,9 @@ function HatMagic:Deactivate()
         end
 
         self.inst:PushEvent("magicdeactivated")
+        if self.owner then
+            self.owner:PushEvent("magicdeactivated", {inst = self.inst})
+        end
     end
 end
 
@@ -151,6 +157,9 @@ function HatMagic:OnCooldownFinished()
     end
 
     self.inst:PushEvent("magicready")
+    if self.owner then
+        self.owner:PushEvent("magicready", {inst = self.inst})
+    end
 end
 
 -- Sets the active time visual. Not super useful to call this manually at the moment.
