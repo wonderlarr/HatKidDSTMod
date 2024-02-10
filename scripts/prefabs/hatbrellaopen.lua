@@ -48,7 +48,17 @@ local function OnUnequip(inst, owner)
 end
 
 local function OnEmpty(inst)
-    inst:DoTaskInTime(0, inst.Remove)
+    local equippable = inst.components.equippable
+    if equippable ~= nil and equippable:IsEquipped() then
+        local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner or nil
+        if owner ~= nil then
+            inst:Remove()
+            owner:PushEvent("umbrellaranout", { prefab = inst.prefab, equipslot = equippable.equipslot })
+            return
+        end
+    end
+
+    inst:Remove()
 end
  
 local function fn()

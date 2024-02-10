@@ -29,8 +29,10 @@ local function OnUnequip(inst, owner)
 end
 
 local function OnEmpty(inst)
-    inst.components.inventoryitem:GetGrandOwner():PushEvent("toolbroke")
-    
+    if inst.components.inventoryitem ~= nil and inst.components.inventoryitem:GetGrandOwner() ~= nil then
+        inst.components.inventoryitem:GetGrandOwner():PushEvent("toolbroke", { tool = inst })
+    end
+
     inst:Remove()
 end
 

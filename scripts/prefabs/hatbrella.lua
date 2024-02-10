@@ -39,9 +39,11 @@ local function OnUse(inst)
 end
 
 local function OnEmpty(inst)
-    inst.components.inventoryitem:GetGrandOwner():PushEvent("toolbroke")
-    
-    inst:DoTaskInTime(0, inst.Remove)
+    if inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner ~= nil then
+        inst.components.inventoryitem.owner:PushEvent("toolbroke", { tool = inst })
+    end
+
+    inst:Remove()
 end
 
 local function OnAttack(inst, attacker, target)
