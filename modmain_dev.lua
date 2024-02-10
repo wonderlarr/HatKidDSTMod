@@ -14,41 +14,6 @@ local hatlist = {
 
 local scale = 70
 
--- params.hatpack =
--- {
---     widget =
---     {
---         slotpos = { }, -- we have to make an empty table or the slot position function gets angry
---         slotbg =
---         {
---             { image = "slotbg_kidhat.tex", atlas = "images/gui/slotbg_kidhat.xml" },
---             { image = "slotbg_sprinthat.tex", atlas = "images/gui/slotbg_sprinthat.xml" },
---             { image = "slotbg_brewinghat.tex", atlas = "images/gui/slotbg_brewinghat.xml" },
---             { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
---             { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
---             { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
---         },
---         animbank = "ui_hatpack_3x2",
---         animbuild = "ui_hatpack_3x2",
---         pos = Vector3(-82, 108, 0),
---         bottom_align_tip = -100,
---     },
---     type = "side_inv_behind",
---     acceptsstacks = false,
---     issidewidget = true,
--- }
-
--- for y = 1, -1, -1 do
---     for x = 0, 2 do
---         if y == -1 and x > 0 then break end
---         table.insert(params.hatpack.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
---     end
--- end
-
--- function params.hatpack.itemtestfn(container, item, slot)
---     return item:HasTag("hatkidhat") and item.prefab == hatlist[slot]
--- end
-
 params.hatpack_1 =
 {
     widget =
@@ -215,6 +180,20 @@ AddClassPostConstruct("widgets/statusdisplays", function(self)
 
     self.inst:ListenForEvent("ponval_dirty", OnPonDelta, self.owner)
     self.inst:ListenForEvent("ponmax_dirty", OnPonDelta, self.owner)
+
+    -- hook into setghostmode to enable and disable badge on death
+    local _SetGhostMode = self.SetGhostMode
+
+    self.SetGhostMode = function(self, ghostmode)
+        -- don't force boolean on self.ghostmode since we're hooking into the function
+        if ghostmode then
+            self.ponbadge:Hide()
+        else
+            self.ponbadge:Show()
+        end
+
+        return _SetGhostMode(self, ghostmode)
+    end
 end)
 
 local UIAnim = require "widgets/uianim"
