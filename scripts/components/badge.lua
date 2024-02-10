@@ -6,9 +6,11 @@
 local function OnPut(inst, container)
     if container then
         if container:HasTag("badgepack") then
+            inst.components.badge.hatpack = container
             inst.components.badge:Equip(container:HasTag("player") and container or container.components.inventoryitem:GetGrandOwner())
         elseif inst.components.badge.is_equipped then -- only run unequip if we havent already
             inst.components.badge:Unequip(container:HasTag("player") and container or container.components.inventoryitem:GetGrandOwner())
+            inst.components.badge.hatpack = nil
         end
     end
 end
@@ -17,6 +19,7 @@ local Badge = Class(function(self, inst)
     self.inst = inst
 
     self.owner = nil
+    self.hatpack = nil
 
     self.equip_fn = nil
     self.unequip_fn = nil

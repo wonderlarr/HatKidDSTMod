@@ -79,6 +79,7 @@ local MadHatter = Class(function(self, inst)
     self.max = 100
     self.val = 0
     
+    -- Table of badges
     self.badges = {}
 
     self.chainPos = 1
@@ -154,14 +155,12 @@ end
 ----------
 function MadHatter:RegisterBadge(badge)
     table.insert(self.badges, badge)
-    print(badge.prefab .. " registered")
 end
 
 function MadHatter:UnregisterBadge(badge)
     for k, v in pairs(self.badges) do
         if v == badge then
             self.badges[k] = nil
-            print(badge.prefab .. " unregistered")
         end
     end
 end
