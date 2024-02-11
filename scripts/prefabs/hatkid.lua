@@ -197,7 +197,7 @@ end
 local CommonPostInit = function(inst) 
 	inst.MiniMapEntity:SetIcon( "hatkid.tex" )
 	inst.components.talker.font = TALKINGFONT_HATKID
-	inst.components.talker.fontsize = 32 -- 35 is default, decreased to help with longer sentences
+	inst.components.talker.fontsize = 30 -- 35 is default, decreased to help with longer sentences
 	inst:AddTag("hatkid") -- Unique character tag, used for various things
 	inst:AddTag("hatkidcrafter") -- Enables crafting of Hat Kid's hats
 
@@ -233,6 +233,13 @@ local MasterPostInit = function(inst, data)
 	-- Combat
 	inst.components.combat.externaldamagemultipliers:SetModifier(inst, TUNING.HATKIDDAMAGEDEALT, "config_base")
 	inst.components.combat.externaldamagetakenmultipliers:SetModifier(inst, TUNING.HATKIDDAMAGETAKEN, "config_base")
+	inst.components.combat:SetDefaultDamage(0) -- no damage on punch
+	inst:ListenForEvent("onattackother", function()
+		if not inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) then
+			inst.components.combat:GetAttacked(inst, 1)
+			inst.components.combat:OverrideCooldown(2)
+		end
+	end)
 
 	-- Movement
 	inst.components.locomotor:SetExternalSpeedMultiplier(inst, "hatkid_speed_config", TUNING.HATKIDSPEED)
