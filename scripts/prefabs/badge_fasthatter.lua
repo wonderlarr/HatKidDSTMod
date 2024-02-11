@@ -77,9 +77,15 @@ local function fn()
 
 	inst:AddComponent("inspectable")
 
+	inst:AddComponent("equippable")
+	inst.components.equippable.restrictedtag = "badgerestricted"
+	inst.components.equippable.equipslot = EQUIPSLOTS.BADGE1
+    -- inst.components.equippable:SetOnEquip( OnEquip )
+    -- inst.components.equippable:SetOnUnequip( OnUnequip )
+
 	inst:AddComponent("badge")
-	inst.components.badge:SetOnEquip(OnEquip)
-	inst.components.badge:SetOnUnequip(OnUnequip)
+	-- inst.components.badge:SetOnEquip(OnEquip)
+	-- inst.components.badge:SetOnUnequip(OnUnequip)
 
 	inst:AddComponent("fueled")
 	inst.components.fueled.fueltype = FUELTYPE.MAGIC
