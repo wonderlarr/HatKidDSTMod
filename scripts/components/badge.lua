@@ -3,15 +3,34 @@
 -- Badges basically only exist as inventory items, they cannot be equipped properly. As a result, I've made my own
 -- pseudo-equip system by looking for specific slots each time the item is moved.
 
-local function OnPut(inst, container)
-    if container then
-        if container:HasTag("badgepack") then
-            inst.components.badge.hatpack = container
-            inst.components.badge:Equip(container:HasTag("player") and container or container.components.inventoryitem:GetGrandOwner())
-        elseif inst.components.badge.is_equipped then -- only run unequip if we havent already
-            inst.components.badge:Unequip(container:HasTag("player") and container or container.components.inventoryitem:GetGrandOwner())
-            inst.components.badge.hatpack = nil
-        end
+-- local function OnPut(inst, container)
+--     if container then
+--         if container:HasTag("badgepack") then
+--             inst.components.badge.hatpack = container
+--             inst.components.badge:Equip(container:HasTag("player") and container or container.components.inventoryitem:GetGrandOwner())
+--         elseif inst.components.badge.is_equipped then -- only run unequip if we havent already
+--             inst.components.badge:Unequip(container:HasTag("player") and container or container.components.inventoryitem:GetGrandOwner())
+--             inst.components.badge.hatpack = nil
+--         end
+--     end
+-- end
+
+local function OnUnequip(inst)
+    local owner = inst.components.inventoryitem:GetGrandOwner()
+    if owner then
+        inst.components.badge:Unequip(owner)
+    end
+end
+
+local function GetNextBadgeSlot(owner)
+    if not owner.components.inventory:GetEquippedItem(EQUIPSLOTS.BADGE1) and owner.components.madhatter.badgeslots >= 1 then
+        return EQUIPSLOTS.BADGE1
+    elseif not owner.components.inventory:GetEquippedItem(EQUIPSLOTS.BADGE2) and owner.components.madhatter.badgeslots >= 2 then
+        return EQUIPSLOTS.BADGE2
+    elseif not owner.components.inventory:GetEquippedItem(EQUIPSLOTS.BADGE3) and owner.components.madhatter.badgeslots >= 3 then
+        return EQUIPSLOTS.BADGE3
+    else
+        return nil
     end
 end
 
@@ -28,45 +47,26 @@ local Badge = Class(function(self, inst)
 
     inst:AddTag("badge")
 
-    inst:ListenForEvent("onputininventory", OnPut)
+    inst:ListenForEvent("unequipped", OnUnequip)
 end)
 
 function Badge:OnRemoveFromEntity()
-    self.inst:RemoveTag("pon")
+    self.inst:RemoveTag("badge")
 end
 
 function Badge:Equip(owner)
-    if self.is_equipped or not owner then return false end
-
-    self.owner = owner
-
-    if owner.components.madhatter then
-        owner.components.madhatter:RegisterBadge(self.inst)
+    if self.inst.components.equippable then
+        self.inst.components.equippable.restrictedtag = nil
+        local nextslot = GetNextBadgeSlot(owner)
+        if nextslot then
+            self.inst.components.equippable.equipslot = nextslot or EQUIPSLOTS.BADGE1
+            owner.components.inventory:Equip(self.inst)
+        end
     end
-
-    if self.equip_fn ~= nil then
-        self.equip_fn(self.inst, owner)
-    end
-
-    self.is_equipped = true
-    self.inst:PushEvent("equipped", { owner = owner })
 end
 
 function Badge:Unequip(owner)
-    if not self.is_equipped or not owner then return false end
-
-    if owner.components.madhatter then
-        owner.components.madhatter:UnregisterBadge(self.inst)
-    end
-
-    if self.unequip_fn ~= nil then
-        self.unequip_fn(self.inst, owner)
-    end
-
-    self.is_equipped = false
-    self.inst:PushEvent("unequipped", { owner = owner })
-
-    self.owner = nil
+    self.inst.components.equippable.restrictedtag = "badgerestricted"
 end
 
 function Badge:SetOnEquip(fn)
@@ -77,9 +77,15 @@ function Badge:SetOnUnequip(fn)
     self.unequip_fn = fn
 end
 
-function Badge:OnLoad(data)
-    OnPut(self.inst, self.inst.component.inventory:GetContainer())
-end
+-- function Badge:OnLoad(data)
+--     if self.inst.components.equippable then
+--         self.inst.components.equippable.restrictedtag = data.tag
+--     end
+-- end
+
+-- function Badge:OnSave()
+--     return { tag = self.inst.components.equippable and self.inst.components.equippable.restrictedtag }
+-- end
 
 -- function Badge:GetDebugString()
 -- 	return ""

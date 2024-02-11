@@ -8,12 +8,16 @@ local function OnPonMax(self, max)
     self.inst.replica.madhatter:SetMax(max)
 end
 
-local function OnBadgeMax(self, val)
-    self.inst.replica.madhatter:SetBadgeMax(val)
+local function OnBadgeSlots(self, val)
+    self.inst.replica.madhatter:SetBadgeSlots(val)
 end
 
-local function OnBadgeVal(self, val)
-    self.inst.replica.madhatter:SetBadgeVal(val)
+local function OnBadgeSlotsMax(self, max)
+    self.inst.replica.madhatter:SetBadgeSlotsMax(max)
+end
+
+local function OnNoImage(self, val)
+    self.inst.replica.madhatter:SetNoImage(val)
 end
 
 -- For entities with health
@@ -82,11 +86,18 @@ local MadHatter = Class(function(self, inst)
     -- Table of badges
     self.badges = {}
 
+    self.badgeslots = 0
+    self.badgeslotsmax = 3
+
     self.chainPos = 1
+    self.noimage = false
 
     self.cd_mods = SourceModifierList(self.inst)
 
     self.inst:AddTag("madhatter")
+    -- HACK to make badges not auto drop on load
+    self.inst:AddTag("badgerestricted")
+    self.inst:DoTaskInTime(0, function() self.inst:RemoveTag("badgerestricted") end)
 
     self.inst:ListenForEvent("onattackother", OnAttack)
     self.inst:ListenForEvent("working", OnAttack)
@@ -99,8 +110,9 @@ nil,
 {
     max = OnPonMax,
     val = OnPonVal,
-    badgeval = OnBadgeVal,
-    badgemax = OnBadgeMax,
+    badgeslots = OnBadgeSlots,
+    badgeslotsmax = OnBadgeSlotsMax,
+    noimage = OnNoImage,
 })
 
 function MadHatter:OnRemoveFromEntity()
@@ -153,6 +165,7 @@ end
 ----------
 -- Badges
 ----------
+
 function MadHatter:RegisterBadge(badge)
     table.insert(self.badges, badge)
 end
@@ -165,16 +178,43 @@ function MadHatter:UnregisterBadge(badge)
     end
 end
 
-function MadHatter:SetBadgeMax(max)
-    self.badgemax = max
+function MadHatter:SetBadgeSlotsMax(max)
+    self.badgeslotsmax = max
 end
 
-function MadHatter:SetBadgeVal(val)
-    self.badgeval = val
+function MadHatter:SetBadgeSlots(val)
+    self.badgeslots = val
 end
 
 function MadHatter:DoBadgeDelta(delta)
-    self.badgeval = math.clamp(self.badgeval + delta, 0, self.badgemax)
+    self.badgeslots = math.clamp(self.badgeslots + delta, 0, self.badgeslotsmax)
+end
+
+function MadHatter:OnSave()
+    return { ponmax = self.max, ponval = self.val, badgeslotsmax = self.badgeslotsmax, badgeslots = self.badgeslots }
+end
+
+function MadHatter:OnLoad(data)
+    self.noimage = true
+    if self.max ~= data.ponmax then
+        self.max = data.ponmax
+        self:DoDelta(0)
+    end
+    if self.val ~= data.ponval then
+        self.val = data.ponval
+        self:DoDelta(0)
+    end
+    if self.badgeslotsmax ~= data.badgeslotsmax then
+        self:SetBadgeSlotsMax(data.badgeslotsmax)
+    end
+    if self.badgeslots ~= data.badgeslots then
+        self:SetBadgeSlots(data.badgeslots)
+    end
+
+    -- HACK to make sure pon images dont lag the game on load
+    self.inst:DoTaskInTime(0.5, function()
+        self.noimage = false
+    end)
 end
 
 return MadHatter

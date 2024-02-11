@@ -5,8 +5,10 @@ local MadHatter = Class(function(self, inst)
     self._max = net_ushortint(self.inst.GUID, "ponmax", "ponmax_dirty")
     self._val = net_ushortint(self.inst.GUID, "ponval", "ponval_dirty")
 
-    self._badgemax = net_ushortint(self.inst.GUID, "badgemax", "badgemax_dirty")
-    self._badgeval = net_ushortint(self.inst.GUID, "badgeval", "badgeval_dirty")
+    self._badgeslotsmax = net_ushortint(self.inst.GUID, "badgeslotsmax", "badgeslotsmax_dirty")
+    self._badgeslots = net_ushortint(self.inst.GUID, "badgeslots", "badgeslots_dirty")
+
+    self._noimage = net_bool(self.inst.GUID, "noimage", "noimage_dirty")
 end)
 
 function MadHatter:SetVal(val)
@@ -29,26 +31,34 @@ function MadHatter:GetPercent()
     return self._val:value() / self._max:value()
 end
 
+function MadHatter:SetNoImage(val)
+    self._noimage:set(val)
+end
+
+function MadHatter:GetNoImage()
+    return self._noimage:value()
+end
+
 function MadHatter:GetDebugString()
 	return "Pons: " .. tostring(self._val:value()) .. " / " .. tostring(self._max:value())
 end
 
 -- Badges
 
-function MadHatter:GetBadgeVal()
-    return self._badgeval:value()
+function MadHatter:GetBadgeSlots()
+    return self._badgeslots:value()
 end
 
-function MadHatter:GetBadgeMax()
-    return self._badgemax:value()
+function MadHatter:GetBadgeSlotsMax()
+    return self._badgeslotsmax:value()
 end
 
-function MadHatter:SetBadgeVal(val)
-    self._badgeval:set(val)
+function MadHatter:SetBadgeSlots(val)
+    self._badgeslots:set(val)
 end
 
-function MadHatter:SetBadgeMax(max)
-    self._badgemax:set(max)
+function MadHatter:SetBadgeSlotsMax(max)
+    self._badgeslotsmax:set(max)
 end
 
 return MadHatter

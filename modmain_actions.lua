@@ -19,7 +19,7 @@ local DEACTIVATE_HAT_MAGIC = AddAction("DEACTIVATE_HAT_MAGIC", "Deactivate", fun
     end
 end)
 
-DEACTIVATE_HAT_MAGIC.priority = 1
+DEACTIVATE_HAT_MAGIC.priority = 1.1
 DEACTIVATE_HAT_MAGIC.instant = true
 
 -- Component action (both)
@@ -37,6 +37,54 @@ AddComponentAction("INVENTORY", "hatmagic", function(inst, doer, actions, right)
         end
     end
 end)
+
+-- Activate inv useable items
+local ACTIVATE_INV_USEABLE = AddAction("ACTIVATE_INV_USEABLE", "Use", function(act)
+    if act.invobject.components.invuseable and act.invobject.components.invuseable.onuse_fn then
+        act.invobject.components.invuseable:OnUse()
+        return true
+    end
+end)
+
+ACTIVATE_INV_USEABLE.priority = 1.1
+-- ACTIVATE_INV_USEABLE.instant = true
+
+AddComponentAction("INVENTORY", "invuseable", function(inst, doer, actions, right)
+    if doer.replica.inventory ~= nil and
+    doer.replica.inventory:IsOpenedBy(doer) and
+    doer.replica.madhatter:GetBadgeSlots() < 3 then
+        table.insert(actions, GLOBAL.ACTIONS.ACTIVATE_INV_USEABLE)
+    end
+end)
+
+AddStategraphActionHandler("wilson", GLOBAL.ActionHandler(GLOBAL.ACTIONS.ACTIVATE_INV_USEABLE,
+function(inst)
+	return "dolongaction"
+end))
+
+--Equip badges
+local EQUIP_BADGE = AddAction("EQUIP_BADGE", "Use", function(act)
+    if act.invobject.components.badge then
+        act.invobject.components.badge:Equip(act.doer)
+        return true
+    end
+end)
+
+EQUIP_BADGE.priority = 2
+
+AddComponentAction("INVENTORY", "badge", function(inst, doer, actions, right)
+    if inst.replica.equippable ~= nil and
+    not inst.replica.equippable:IsEquipped() and
+    doer.replica.inventory ~= nil and
+    doer.replica.inventory:IsOpenedBy(doer) then
+        table.insert(actions, GLOBAL.ACTIONS.EQUIP_BADGE)
+    end
+end)
+
+AddStategraphActionHandler("wilson", GLOBAL.ActionHandler(GLOBAL.ACTIONS.EQUIP_BADGE,
+function(inst)
+	return "domediumaction"
+end))
 
 -- changes
 --[[

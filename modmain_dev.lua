@@ -167,7 +167,7 @@ AddClassPostConstruct("widgets/statusdisplays", function(self)
         local repDelta = owner.replica.madhatter:GetPercent() - self.ponbadge.percent
         self.ponbadge:SetPercent(owner.replica.madhatter:GetPercent(), owner.replica.madhatter:GetMax())
 
-        if repDelta > 0 then
+        if repDelta > 0 and not owner.replica.madhatter:GetNoImage() then
             local start_pos = Vector3(TheSim:GetScreenPos(owner:GetPosition():Get()))
             local dest_pos = self.ponbadge:GetWorldPosition()
 
@@ -381,87 +381,229 @@ AddClassPostConstruct("components/builder", function(self)
 end)
 
 -- Add custom EQUIPSLOTS
--- local EQUIPSLOTS = GLOBAL.EQUIPSLOTS
--- EQUIPSLOTS.BADGE1 = "badge1"
--- EQUIPSLOTS.BADGE2 = "badge2"
--- EQUIPSLOTS.BADGE3 = "badge3"
--- EQUIPSLOTS.BADGE = "badge"
+local EQUIPSLOTS = GLOBAL.EQUIPSLOTS
+EQUIPSLOTS.BADGE1 = "badge1"
+EQUIPSLOTS.BADGE2 = "badge2"
+EQUIPSLOTS.BADGE3 = "badge3"
 
--- AddClassPostConstruct("widgets/inventorybar", function(self)
---     self.badgeval = 0
+AddClassPostConstruct("widgets/inventorybar", function(self)
+    -- Add functionality here so we can conveniently use it in madhatter.lua
+    -- You probably shouldn't use this to remove default slots
+    function self:RemoveEquipSlot(slot)
+        for k, v in pairs(self.equipslotinfo) do
+            if v.slot == slot then
+                self.equipslotinfo[k] = nil
+                self.rebuild_pending = true
+                break
+            end
+        end
+    end
     
---     local badgeslots = {
---         EQUIPSLOTS.BADGE,
---         EQUIPSLOTS.BADGE,
---         EQUIPSLOTS.BADGE,
+    -- These should be compatible with most things that change scale, although I would prefer to 
+    -- not do it this way, as GetLooseScale is really weird
+
+    -- hijack Rebuild
+    local _Rebuild = self.Rebuild
+
+    self.Rebuild = function(self)
+        _Rebuild(self)
+        if not self.owner:HasTag("madhatter") then return end
+        
+        -- i truncate the return val here because it returns the x y z as one number value for some reason
+        local bg = math.floor(self.bg:GetLooseScale()*1000)/1000 
+        local bgcover = math.floor(self.bgcover:GetLooseScale()*1000)/1000
+
+        local badgeval = self.owner.replica.madhatter and self.owner.replica.madhatter:GetBadgeSlots() or 0
+        local slotscale = 0.06 -- helper number
+        self.bg:SetScale(bg + slotscale * badgeval, 1, 1)
+        self.bgcover:SetScale(bgcover + slotscale * badgeval, 1, 1)
+    end
+
+    local badge_equipslots = {
+        EQUIPSLOTS.BADGE1,
+        EQUIPSLOTS.BADGE2,
+        EQUIPSLOTS.BADGE3,
+    }
+
+    local function OnBadgeSlots(inst)
+        print("OnBadgeSlots")
+        if not self.owner:HasTag("madhatter") then return end
+        local badgeval = self.owner.replica.madhatter:GetBadgeSlots()
+        local badgeslots_inv = 0
+        for k, v in pairs(self.equipslotinfo) do
+            if string.find(v.slot, "badge") then
+                badgeslots_inv = badgeslots_inv + 1
+            end
+        end
+
+        local delta = badgeval - badgeslots_inv
+        if delta > 0 then
+            for i = 1, delta do
+                if badgeslots_inv + i > 3 then break end -- prevent overflow
+                self:AddEquipSlot(badge_equipslots[badgeslots_inv + i], "images/gui/slotbg_badge.xml", "slotbg_badge.tex")
+            end
+        elseif delta < 0 then
+            for i = 1, -delta do
+                if badgeslots_inv - i < 0 then break end -- prevent underflow
+                self:RemoveEquipSlot(badge_equipslots[badgeslots_inv - (i - 1)])
+            end
+        elseif delta == 0 then
+            print("delta zero")
+            -- rebuild badge slots
+            for k, v in pairs(self.equipslotinfo) do
+                if string.find(v.slot, "badge") then
+                    print("remove")
+                    self:RemoveEquipSlot(v.slot)
+                end
+            end
+            for i = 1, self.owner.replica.madhatter:GetBadgeSlots() do
+                print("add")
+                self:AddEquipSlot(badge_equipslots[i], "images/gui/slotbg_badge.xml", "slotbg_badge.tex")
+            end
+        end
+    end
+
+    self.inst:ListenForEvent("badgeslots_dirty", OnBadgeSlots, self.owner)
+
+    -- Run on load to make sure we have the right number of badge slots
+    -- local function OnMadLoad()
+    --     if not self.owner:HasTag("madhatter") then return end
+    --     local badgeslots_inv = 0
+    --     local badgeval = self.owner.replica.madhatter:GetBadgeSlots()
+    --     for i = 1, badgeval do
+    --         self:AddEquipSlot(badge_equipslots[i], "images/gui/slotbg_badge.xml", "slotbg_badge.tex")
+    --     end
+    -- end
+    
+    -- self.inst:ListenForEvent("onmadload", OnMadLoad, self.owner)
+end)
+
+-- This will add some code to the server side stategraph
+-- AddStategraphPostInit("wilson", function(sg) 
+-- 	local _attack = sg.states["attack"]
+-- 	local _onenter = _attack.onenter
+--     local _onexit = _attack.onexit
+--     local _timeline = _attack.timeline
+--     local _events = _attack.events
+    
+-- 	_attack.onenter = function(inst,...)
+--         -- if we're hatkid, unarmed, and not riding (you can remove that restriction if you want), then run our custom attack 
+-- 		if inst:HasTag("hatkid") and not inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) and not inst.components.rider:IsRiding() then
+--             local buffaction = inst:GetBufferedAction()
+--             local target = buffaction ~= nil and buffaction.target or nil
+
+--             -- dont attack while on cooldown
+--             if inst.components.combat:InCooldown() then
+--                 inst.sg:RemoveStateTag("abouttoattack")
+--                 inst:ClearBufferedAction()
+--                 inst.sg:GoToState("idle", true)
+--                 return
+--             end
+
+--             if inst.sg.laststate == inst.sg.currentstate then
+--                 inst.sg.statemem.chained = true
+--             end
+
+--             inst.sg.statemem.unarmed = true
+
+--             -- inst.components.combat.onhitotherfn = function()
+--             --     inst.components.combat:GetAttacked(inst, 1)
+--             --     print("attack other")
+--             -- end
+--             inst.components.combat:SetTarget(target)
+--             inst.components.combat:StartAttack()
+--             inst.components.locomotor:Stop()
+
+--             -- use normal attacking anims instead of punch
+--             inst.AnimState:PlayAnimation("punch")
+--             inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_whoosh", nil, nil, true)
+
+--             inst.sg:SetTimeout(24 * GLOBAL.FRAMES) -- same timeout as normal slash weapons like spear
+
+--             -- allows proper attack chaining by holding the attack key
+--             if target ~= nil then
+--                 inst.components.combat:BattleCry()
+--                 if target:IsValid() then
+--                     inst:FacePoint(target:GetPosition())
+--                     inst.sg.statemem.attacktarget = target
+--                     inst.sg.statemem.retarget = target
+--                 end
+--             end
+            
+--             return -- since we overrode the attack, don't continue with the rest of onenter
+--         end
+--         return _onenter(inst,...) -- continue to vanilla attack onenter if we didnt override the punch
+-- 	end
+
+--     -- _attack.onexit = function(inst, ...)
+--     --     _onexit(inst, ...)
+--     --     if inst.sg.statemem.unarmed then
+--     --         inst.components.combat:GetAttacked(inst, 1)
+--     --         inst.sg.statemem.unarmed = false
+--     --     end
+--     -- end
+
+--     -- local addtimeline = {
+--     --     GLOBAL.TimeEvent(3 * FRAMES, function(inst)
+--     --         if inst.sg.statemem.unarmed then
+--     --             inst.components.combat:GetAttacked(inst, 1)
+--     --         end
+--     --     end)
+--     -- }
+
+--     -- table.insert(_timeline, 1, addtimeline[1])
+
+--     local newevent = {
+--         GLOBAL.EventHandler("onattackother", function(inst) inst.components.combat:GetAttacked(inst, 1) end)
 --     }
 
---     for k, v in pairs(badgeslots) do
---         self:AddEquipSlot(v, "images/gui/slotbg_badge.xml", "slotbg_badge.tex")
---     end
+--     table.insert(_events, 1, newevent[1])
 
+--     -- _events[0] = EventHandler("onattackother", function(inst)  end)
+-- end)
+
+-- -- This covers the client stategraph, only used if movement prediction is enabled
+-- -- its mostly the same with some stuff removed and server side components replaced with replicas
+-- AddStategraphPostInit("wilson_client", function(sg) -- This will add some code to the server side stategraph
+-- 	local _attack = sg.states["attack"]
+-- 	local _onenter = _attack.onenter
     
+-- 	_attack.onenter = function(inst,...)
+-- 		if inst:HasTag("hatkid") and not inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) and not (inst.replica.rider and inst.replica.rider:IsRiding()) then
+--             local buffaction = inst:GetBufferedAction()
+-- 			if inst.replica.combat:InCooldown() then
+-- 				inst.sg:RemoveStateTag("abouttoattack")
+-- 				inst:ClearBufferedAction()
+-- 				inst.sg:GoToState("idle", true)
+-- 				return
+-- 			end
 
---     -- These should be compatible with most things that change scale, although I would prefer to 
---     -- not do it this way, as GetLooseScale is really weird
+--             if inst.sg.laststate == inst.sg.currentstate then
+--                 inst.sg.statemem.chained = true
+--             end
 
---     -- helper
---     local slotscale = 0.06
+--             inst.replica.combat:StartAttack()
+--             inst.components.locomotor:Stop()
 
---     -- hijack Rebuild
---     local _Rebuild = self.Rebuild
-
---     self.Rebuild = function(self)
---         _Rebuild(self)
+--             -- use normal attacking anims instead of punch
+--             inst.AnimState:PlayAnimation("atk_pre")
+--             inst.AnimState:PushAnimation("atk", false)
         
---         -- i truncate the return val here because it returns the x y z as one number value for some reason
---         local bg = math.floor(self.bg:GetLooseScale()*1000)/1000 
---         local bgcover = math.floor(self.bgcover:GetLooseScale()*1000)/1000
+--             inst.sg:SetTimeout(13 * GLOBAL.FRAMES) -- same timeout as normal slash weapons like spear
 
---         -- local badgeval = self.owner.replica.madhatter:GetBadgeVal()
---         local badgeval = 3
---         self.bg:SetScale(bg + slotscale * badgeval, 1, 1)
---         self.bgcover:SetScale(bgcover + slotscale * badgeval, 1, 1)
+--             -- allows proper attack chaining by holding the attack key
+--             if buffaction ~= nil then
+--                 inst:PerformPreviewBufferedAction()
 
---         -- self.equip.badge1.equipslot = "badge"
---         -- self.equip.badge2.equipslot = "badge"
---         -- self.equip.badge3.equipslot = "badge"
---     end
-
---     -- hijack Refresh
---     local _Refresh = self.Refresh
-
---     self.Refresh = function(self)
---         _Refresh(self)
-
---         local bg = math.floor(self.bg:GetLooseScale()*1000)/1000
---         local bgcover = math.floor(self.bgcover:GetLooseScale()*1000)/1000
-
---         -- local badgeval = self.owner.replica.madhatter:GetBadgeVal()
---         local badgeval = 3
---         self.bg:SetScale(bg + slotscale * badgeval, 1, 1)
---         self.bgcover:SetScale(bgcover + slotscale * badgeval, 1, 1)
-
---         -- -- GLOBAL.dumptable(self.equip)
---         -- self.equip.badge1.equipslot = "badge"
---         -- self.equip.badge2.equipslot = "badge"
---         -- self.equip.badge3.equipslot = "badge"
-
---         -- if self.badgeval ~= badgeval then
---         --     self.badgeval = badgeval
-
---         --     if badgeval >= 3 then
-                
---         --     end
---         --     -- recalculate badge equip slots
---         --     for i = 1, #self.equipslotinfo, 1 do
---         --         if self.equipslotinfo[i] ~= nil then
---         --             self.equipslotinfo.slot
---         --         end
---         --     end
---         -- end
-
-
---     end
-
+--                 if buffaction.target ~= nil and buffaction.target:IsValid() then
+--                     inst:FacePoint(buffaction.target:GetPosition())
+--                     inst.sg.statemem.attacktarget = buffaction.target
+--                     inst.sg.statemem.retarget = buffaction.target
+--                 end
+--             end
+            
+--             return -- since we overrode the attack, don't continue with the rest of onenter
+--         end
+--         return _onenter(inst,...) -- continue to vanilla attack onenter if we didnt override the punch
+-- 	end
 -- end)
