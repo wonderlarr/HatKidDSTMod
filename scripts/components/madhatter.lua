@@ -166,8 +166,8 @@ end
 -- Badges
 ----------
 
-function MadHatter:RegisterBadge(badge)
-    table.insert(self.badges, badge)
+function MadHatter:RegisterBadge(badge, num)
+    self.badges[num] = badge
 end
 
 function MadHatter:UnregisterBadge(badge)
@@ -196,20 +196,32 @@ end
 
 function MadHatter:OnLoad(data)
     self.noimage = true
-    if self.max ~= data.ponmax then
+    if data.ponmax and self.max ~= data.ponmax then
         self.max = data.ponmax
         self:DoDelta(0)
     end
-    if self.val ~= data.ponval then
+    if data.ponval and self.val ~= data.ponval then
         self.val = data.ponval
         self:DoDelta(0)
     end
-    if self.badgeslotsmax ~= data.badgeslotsmax then
+    if data.badgeslotsmax and self.badgeslotsmax ~= data.badgeslotsmax then
         self:SetBadgeSlotsMax(data.badgeslotsmax)
     end
-    if self.badgeslots ~= data.badgeslots then
+    if data.badgeslots and self.badgeslots ~= data.badgeslots then
         self:SetBadgeSlots(data.badgeslots)
     end
+
+    -- if data.badges and self.badges ~= data.badges then
+    --     self.badges = data.badges
+    -- end
+    -- -- if self.badges then
+    -- --     for k, v in pairs(self.badges) do
+    -- --         if v.components.badge then
+    -- --             v.components.badge:Equip(self.inst)
+    -- --         end
+    -- --     end
+    -- -- end
+
 
     -- HACK to make sure pon images dont lag the game on load
     self.inst:DoTaskInTime(0.5, function()

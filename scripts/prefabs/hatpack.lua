@@ -1,9 +1,9 @@
 local assets =
 {
-    Asset("ANIM", "anim/backpack.zip"),
-    Asset("ANIM", "anim/swap_krampus_sack.zip"),
+    -- Asset("ANIM", "anim/backpack.zip"),
+    -- Asset("ANIM", "anim/swap_krampus_sack.zip"),
     Asset("ANIM", "anim/ui_hatpack_3x2.zip"),
-    Asset("ANIM", "anim/ui_hatpack_3x3.zip")
+    -- Asset("ANIM", "anim/ui_hatpack_3x3.zip")
 }
 
 local function onequip(inst, owner)
@@ -69,6 +69,26 @@ local function fn_master(inst, widgetsetupname)
     return inst
 end
 
+local function fn()
+    local inst = fn_common()
+
+    inst:AddTag("hatpack")
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        inst.OnEntityReplicated = function(inst)  
+            inst.replica.container:WidgetSetup("hatpack")
+        end
+
+        return inst
+    end
+
+    fn_master(inst, "hatpack")
+
+    return inst
+end
+
 local function fn1()
     local inst = fn_common()
 
@@ -129,6 +149,8 @@ local function fn3()
     return inst
 end
 
-return Prefab("hatpack_1", fn1, assets),
-    Prefab("hatpack_2", fn2, assets),
-    Prefab("hatpack_3", fn3, assets)
+return Prefab("hatpack", fn, assets)
+
+-- return Prefab("hatpack_1", fn1, assets),
+--     Prefab("hatpack_2", fn2, assets),
+--     Prefab("hatpack_3", fn3, assets)

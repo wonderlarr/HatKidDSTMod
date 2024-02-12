@@ -14,7 +14,7 @@ local hatlist = {
 
 local scale = 70
 
-params.hatpack_1 =
+params.hatpack =
 {
     widget =
     {
@@ -27,85 +27,9 @@ params.hatpack_1 =
             { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
             { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
             { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
-            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
         },
         animbank = "ui_hatpack_3x2",
         animbuild = "ui_hatpack_3x2",
-        pos = Vector3(-82, 108, 0),
-        bottom_align_tip = -100,
-    },
-    type = "side_inv_behind",
-    acceptsstacks = false,
-    issidewidget = true,
-}
-
-for y = 1, -1, -1 do
-    for x = 0, 2 do
-        if y == -1 and x > 0 then break end
-        table.insert(params.hatpack_1.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
-    end
-end
-
-function params.hatpack_1.itemtestfn(container, item, slot)
-    return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot > 6 and item:HasTag("badge") -- and not container:HasItemWithTag(item.prefab, 1)
-end
-
-params.hatpack_2 =
-{
-    widget =
-    {
-        slotpos = { }, -- we have to make an empty table or the slot position function gets angry
-        slotbg =
-        {
-            { image = "slotbg_kidhat.tex", atlas = "images/gui/slotbg_kidhat.xml" },
-            { image = "slotbg_sprinthat.tex", atlas = "images/gui/slotbg_sprinthat.xml" },
-            { image = "slotbg_brewinghat.tex", atlas = "images/gui/slotbg_brewinghat.xml" },
-            { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
-            { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
-            { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
-            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
-            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
-        },
-        animbank = "ui_hatpack_3x2",
-        animbuild = "ui_hatpack_3x2",
-        pos = Vector3(-82, 108, 0),
-        bottom_align_tip = -100,
-    },
-    type = "side_inv_behind",
-    acceptsstacks = false,
-    issidewidget = true,
-}
-
-for y = 1, -1, -1 do
-    for x = 0, 2 do
-        if y == -1 and x > 1 then break end
-        table.insert(params.hatpack_2.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
-    end
-end
-
-function params.hatpack_2.itemtestfn(container, item, slot)
-    return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot > 6 and item:HasTag("badge") and not container:HasItemWithTag(item.prefab, 1)
-end
-
-params.hatpack_3 =
-{
-    widget =
-    {
-        slotpos = { }, -- we have to make an empty table or the slot position function gets angry
-        slotbg =
-        {
-            { image = "slotbg_kidhat.tex", atlas = "images/gui/slotbg_kidhat.xml" },
-            { image = "slotbg_sprinthat.tex", atlas = "images/gui/slotbg_sprinthat.xml" },
-            { image = "slotbg_brewinghat.tex", atlas = "images/gui/slotbg_brewinghat.xml" },
-            { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
-            { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
-            { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
-            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
-            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
-            { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
-        },
-        animbank = "ui_hatpack_3x3",
-        animbuild = "ui_hatpack_3x3",
         pos = Vector3(-82, 108, 0),
         bottom_align_tip = -100,
     },
@@ -115,17 +39,128 @@ params.hatpack_3 =
     issidewidget = true,
 }
 
-for y = 1, -1, -1 do
+for y = 1, 0, -1 do
     for x = 0, 2 do
-        table.insert(params.hatpack_3.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
+        table.insert(params.hatpack.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
     end
 end
 
-function params.hatpack_3.itemtestfn(container, item, slot)
-    return slot == nil and (item:HasTag("hatkidhat") or item:HasTag("badge") and not container:HasItemWithTag(item.prefab, 1)) or 
-    item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or 
-    slot and slot > 6 and item:HasTag("badge") and not container:HasItemWithTag(item.prefab, 1) -- this depends on each badge having its prefab name as a tag as well
+function params.hatpack.itemtestfn(container, item, slot)
+    return slot == nil and item:HasTag("hatkidhat") or item:HasTag("hatkidhat") and item.prefab == hatlist[slot]
 end
+
+-- params.hatpack_1 =
+-- {
+--     widget =
+--     {
+--         slotpos = { }, -- we have to make an empty table or the slot position function gets angry
+--         slotbg =
+--         {
+--             { image = "slotbg_kidhat.tex", atlas = "images/gui/slotbg_kidhat.xml" },
+--             { image = "slotbg_sprinthat.tex", atlas = "images/gui/slotbg_sprinthat.xml" },
+--             { image = "slotbg_brewinghat.tex", atlas = "images/gui/slotbg_brewinghat.xml" },
+--             { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
+--             { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
+--             { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
+--             { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
+--         },
+--         animbank = "ui_hatpack_3x2",
+--         animbuild = "ui_hatpack_3x2",
+--         pos = Vector3(-82, 108, 0),
+--         bottom_align_tip = -100,
+--     },
+--     type = "side_inv_behind",
+--     acceptsstacks = false,
+--     issidewidget = true,
+-- }
+
+-- for y = 1, -1, -1 do
+--     for x = 0, 2 do
+--         if y == -1 and x > 0 then break end
+--         table.insert(params.hatpack_1.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
+--     end
+-- end
+
+-- function params.hatpack_1.itemtestfn(container, item, slot)
+--     return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot > 6 and item:HasTag("badge") -- and not container:HasItemWithTag(item.prefab, 1)
+-- end
+
+-- params.hatpack_2 =
+-- {
+--     widget =
+--     {
+--         slotpos = { }, -- we have to make an empty table or the slot position function gets angry
+--         slotbg =
+--         {
+--             { image = "slotbg_kidhat.tex", atlas = "images/gui/slotbg_kidhat.xml" },
+--             { image = "slotbg_sprinthat.tex", atlas = "images/gui/slotbg_sprinthat.xml" },
+--             { image = "slotbg_brewinghat.tex", atlas = "images/gui/slotbg_brewinghat.xml" },
+--             { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
+--             { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
+--             { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
+--             { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
+--             { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
+--         },
+--         animbank = "ui_hatpack_3x2",
+--         animbuild = "ui_hatpack_3x2",
+--         pos = Vector3(-82, 108, 0),
+--         bottom_align_tip = -100,
+--     },
+--     type = "side_inv_behind",
+--     acceptsstacks = false,
+--     issidewidget = true,
+-- }
+
+-- for y = 1, -1, -1 do
+--     for x = 0, 2 do
+--         if y == -1 and x > 1 then break end
+--         table.insert(params.hatpack_2.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
+--     end
+-- end
+
+-- function params.hatpack_2.itemtestfn(container, item, slot)
+--     return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot > 6 and item:HasTag("badge") and not container:HasItemWithTag(item.prefab, 1)
+-- end
+
+-- params.hatpack_3 =
+-- {
+--     widget =
+--     {
+--         slotpos = { }, -- we have to make an empty table or the slot position function gets angry
+--         slotbg =
+--         {
+--             { image = "slotbg_kidhat.tex", atlas = "images/gui/slotbg_kidhat.xml" },
+--             { image = "slotbg_sprinthat.tex", atlas = "images/gui/slotbg_sprinthat.xml" },
+--             { image = "slotbg_brewinghat.tex", atlas = "images/gui/slotbg_brewinghat.xml" },
+--             { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
+--             { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
+--             { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
+--             { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
+--             { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
+--             { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
+--         },
+--         animbank = "ui_hatpack_3x3",
+--         animbuild = "ui_hatpack_3x3",
+--         pos = Vector3(-82, 108, 0),
+--         bottom_align_tip = -100,
+--     },
+--     usespecificslotsforitems = true,
+--     acceptsstacks = false,
+--     type = "side_inv_behind",
+--     issidewidget = true,
+-- }
+
+-- for y = 1, -1, -1 do
+--     for x = 0, 2 do
+--         table.insert(params.hatpack_3.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
+--     end
+-- end
+
+-- function params.hatpack_3.itemtestfn(container, item, slot)
+--     return slot == nil and (item:HasTag("hatkidhat") or item:HasTag("badge") and not container:HasItemWithTag(item.prefab, 1)) or 
+--     item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or 
+--     slot and slot > 6 and item:HasTag("badge") and not container:HasItemWithTag(item.prefab, 1) -- this depends on each badge having its prefab name as a tag as well
+-- end
 
 
 
@@ -426,7 +461,6 @@ AddClassPostConstruct("widgets/inventorybar", function(self)
     }
 
     local function OnBadgeSlots(inst)
-        print("OnBadgeSlots")
         if not self.owner:HasTag("madhatter") then return end
         local badgeval = self.owner.replica.madhatter:GetBadgeSlots()
         local badgeslots_inv = 0
@@ -448,162 +482,38 @@ AddClassPostConstruct("widgets/inventorybar", function(self)
                 self:RemoveEquipSlot(badge_equipslots[badgeslots_inv - (i - 1)])
             end
         elseif delta == 0 then
-            print("delta zero")
             -- rebuild badge slots
             for k, v in pairs(self.equipslotinfo) do
                 if string.find(v.slot, "badge") then
-                    print("remove")
                     self:RemoveEquipSlot(v.slot)
                 end
             end
             for i = 1, self.owner.replica.madhatter:GetBadgeSlots() do
-                print("add")
                 self:AddEquipSlot(badge_equipslots[i], "images/gui/slotbg_badge.xml", "slotbg_badge.tex")
             end
         end
     end
 
     self.inst:ListenForEvent("badgeslots_dirty", OnBadgeSlots, self.owner)
-
-    -- Run on load to make sure we have the right number of badge slots
-    -- local function OnMadLoad()
-    --     if not self.owner:HasTag("madhatter") then return end
-    --     local badgeslots_inv = 0
-    --     local badgeval = self.owner.replica.madhatter:GetBadgeSlots()
-    --     for i = 1, badgeval do
-    --         self:AddEquipSlot(badge_equipslots[i], "images/gui/slotbg_badge.xml", "slotbg_badge.tex")
-    --     end
-    -- end
-    
-    -- self.inst:ListenForEvent("onmadload", OnMadLoad, self.owner)
 end)
 
--- This will add some code to the server side stategraph
--- AddStategraphPostInit("wilson", function(sg) 
--- 	local _attack = sg.states["attack"]
--- 	local _onenter = _attack.onenter
---     local _onexit = _attack.onexit
---     local _timeline = _attack.timeline
---     local _events = _attack.events
-    
--- 	_attack.onenter = function(inst,...)
---         -- if we're hatkid, unarmed, and not riding (you can remove that restriction if you want), then run our custom attack 
--- 		if inst:HasTag("hatkid") and not inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) and not inst.components.rider:IsRiding() then
---             local buffaction = inst:GetBufferedAction()
---             local target = buffaction ~= nil and buffaction.target or nil
+AddComponentPostInit("inventory", function(self)
+    local _Equip = self.Equip
 
---             -- dont attack while on cooldown
---             if inst.components.combat:InCooldown() then
---                 inst.sg:RemoveStateTag("abouttoattack")
---                 inst:ClearBufferedAction()
---                 inst.sg:GoToState("idle", true)
---                 return
---             end
+    self.Equip = function(self, item, old_to_active, no_animation, force_ui_anim)
+        -- find next free badge slot manually since we're loading
+        -- this is a HACK but i really dont feel like doing this any better right now
+        if item:HasTag("badge") and item.components.badge.loading then
+            if not self.equipslots[GLOBAL.EQUIPSLOTS.BADGE1] then
+                item.components.equippable.equipslot = GLOBAL.EQUIPSLOTS.BADGE1
+            elseif not self.equipslots[GLOBAL.EQUIPSLOTS.BADGE2] then
+                item.components.equippable.equipslot = GLOBAL.EQUIPSLOTS.BADGE2
+            elseif not self.equipslots[GLOBAL.EQUIPSLOTS.BADGE3] then
+                item.components.equippable.equipslot = GLOBAL.EQUIPSLOTS.BADGE3
+            end
+        end
 
---             if inst.sg.laststate == inst.sg.currentstate then
---                 inst.sg.statemem.chained = true
---             end
-
---             inst.sg.statemem.unarmed = true
-
---             -- inst.components.combat.onhitotherfn = function()
---             --     inst.components.combat:GetAttacked(inst, 1)
---             --     print("attack other")
---             -- end
---             inst.components.combat:SetTarget(target)
---             inst.components.combat:StartAttack()
---             inst.components.locomotor:Stop()
-
---             -- use normal attacking anims instead of punch
---             inst.AnimState:PlayAnimation("punch")
---             inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_whoosh", nil, nil, true)
-
---             inst.sg:SetTimeout(24 * GLOBAL.FRAMES) -- same timeout as normal slash weapons like spear
-
---             -- allows proper attack chaining by holding the attack key
---             if target ~= nil then
---                 inst.components.combat:BattleCry()
---                 if target:IsValid() then
---                     inst:FacePoint(target:GetPosition())
---                     inst.sg.statemem.attacktarget = target
---                     inst.sg.statemem.retarget = target
---                 end
---             end
-            
---             return -- since we overrode the attack, don't continue with the rest of onenter
---         end
---         return _onenter(inst,...) -- continue to vanilla attack onenter if we didnt override the punch
--- 	end
-
---     -- _attack.onexit = function(inst, ...)
---     --     _onexit(inst, ...)
---     --     if inst.sg.statemem.unarmed then
---     --         inst.components.combat:GetAttacked(inst, 1)
---     --         inst.sg.statemem.unarmed = false
---     --     end
---     -- end
-
---     -- local addtimeline = {
---     --     GLOBAL.TimeEvent(3 * FRAMES, function(inst)
---     --         if inst.sg.statemem.unarmed then
---     --             inst.components.combat:GetAttacked(inst, 1)
---     --         end
---     --     end)
---     -- }
-
---     -- table.insert(_timeline, 1, addtimeline[1])
-
---     local newevent = {
---         GLOBAL.EventHandler("onattackother", function(inst) inst.components.combat:GetAttacked(inst, 1) end)
---     }
-
---     table.insert(_events, 1, newevent[1])
-
---     -- _events[0] = EventHandler("onattackother", function(inst)  end)
--- end)
-
--- -- This covers the client stategraph, only used if movement prediction is enabled
--- -- its mostly the same with some stuff removed and server side components replaced with replicas
--- AddStategraphPostInit("wilson_client", function(sg) -- This will add some code to the server side stategraph
--- 	local _attack = sg.states["attack"]
--- 	local _onenter = _attack.onenter
-    
--- 	_attack.onenter = function(inst,...)
--- 		if inst:HasTag("hatkid") and not inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) and not (inst.replica.rider and inst.replica.rider:IsRiding()) then
---             local buffaction = inst:GetBufferedAction()
--- 			if inst.replica.combat:InCooldown() then
--- 				inst.sg:RemoveStateTag("abouttoattack")
--- 				inst:ClearBufferedAction()
--- 				inst.sg:GoToState("idle", true)
--- 				return
--- 			end
-
---             if inst.sg.laststate == inst.sg.currentstate then
---                 inst.sg.statemem.chained = true
---             end
-
---             inst.replica.combat:StartAttack()
---             inst.components.locomotor:Stop()
-
---             -- use normal attacking anims instead of punch
---             inst.AnimState:PlayAnimation("atk_pre")
---             inst.AnimState:PushAnimation("atk", false)
-        
---             inst.sg:SetTimeout(13 * GLOBAL.FRAMES) -- same timeout as normal slash weapons like spear
-
---             -- allows proper attack chaining by holding the attack key
---             if buffaction ~= nil then
---                 inst:PerformPreviewBufferedAction()
-
---                 if buffaction.target ~= nil and buffaction.target:IsValid() then
---                     inst:FacePoint(buffaction.target:GetPosition())
---                     inst.sg.statemem.attacktarget = buffaction.target
---                     inst.sg.statemem.retarget = buffaction.target
---                 end
---             end
-            
---             return -- since we overrode the attack, don't continue with the rest of onenter
---         end
---         return _onenter(inst,...) -- continue to vanilla attack onenter if we didnt override the punch
--- 	end
--- end)
+        -- run vanilla function
+        _Equip(self, item, old_to_active, no_animation, force_ui_anim)
+    end
+end)

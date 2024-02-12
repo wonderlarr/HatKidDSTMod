@@ -63,28 +63,46 @@ function(inst)
 end))
 
 --Equip badges
-local EQUIP_BADGE = AddAction("EQUIP_BADGE", "Use", function(act)
-    if act.invobject.components.badge then
+local EQUIP_BADGE = AddAction("EQUIP_BADGE", "Equip", function(act)
+    if act.invobject.components.badge and not act.invobject.components.equippable.isequipped then
         act.invobject.components.badge:Equip(act.doer)
         return true
     end
 end)
 
-EQUIP_BADGE.priority = 2
+EQUIP_BADGE.priority = 2.1
 
-AddComponentAction("INVENTORY", "badge", function(inst, doer, actions, right)
-    if inst.replica.equippable ~= nil and
-    not inst.replica.equippable:IsEquipped() and
-    doer.replica.inventory ~= nil and
-    doer.replica.inventory:IsOpenedBy(doer) then
-        table.insert(actions, GLOBAL.ACTIONS.EQUIP_BADGE)
+--Unequip badges
+local UNEQUIP_BADGE = AddAction("UNEQUIP_BADGE", "Unequip", function(act)
+    if act.invobject.components.badge and act.invobject.components.equippable.isequipped then
+        act.invobject.components.badge:Unequip(act.doer)
+        return true
     end
 end)
+
+UNEQUIP_BADGE.priority = 2
 
 AddStategraphActionHandler("wilson", GLOBAL.ActionHandler(GLOBAL.ACTIONS.EQUIP_BADGE,
 function(inst)
 	return "domediumaction"
 end))
+
+AddStategraphActionHandler("wilson", GLOBAL.ActionHandler(GLOBAL.ACTIONS.UNEQUIP_BADGE,
+function(inst)
+	return "domediumaction"
+end))
+
+AddComponentAction("INVENTORY", "badge", function(inst, doer, actions, right)
+    if inst.replica.equippable ~= nil and
+    doer.replica.inventory ~= nil and
+    doer.replica.inventory:IsOpenedBy(doer) then
+        if inst.replica.equippable:IsEquipped() then
+            table.insert(actions, GLOBAL.ACTIONS.UNEQUIP_BADGE)
+        else
+            table.insert(actions, GLOBAL.ACTIONS.EQUIP_BADGE)
+        end
+    end
+end)
 
 -- changes
 --[[

@@ -248,7 +248,7 @@ local MasterPostInit = function(inst, data)
 	inst.components.foodaffinity:AddPrefabAffinity("honeynuggets", TUNING.AFFINITY_15_CALORIES_LARGE) -- Favorite food
 	inst.AnimState:SetScale(TUNING.HATKIDSIZE, TUNING.HATKIDSIZE) -- Character size
 
-	-- Mad Hatter (pons)
+	-- Mad Hatter
 	inst:AddComponent("madhatter")
 
 	-- Wanda
