@@ -64,6 +64,9 @@ local PrefabFilesLocal = {
 	--badges
 	"badge_fasthatter",
 	"badge_football",
+	"badge_fury",
+
+
 	"badge_pin",
 
 	--testing TODO (disable in final)

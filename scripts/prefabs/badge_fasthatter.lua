@@ -57,7 +57,6 @@ local function fn()
 
 	-- Custom Tags
     inst:AddTag("badge")
-	inst:AddTag("badge_fasthatter")
 
 	-- Component Tags
 	inst:AddTag("inspectable")
@@ -95,4 +94,4 @@ local function fn()
     return inst
 end
 
-return  Prefab("badge_fasthatter", fn, assets)
+return Prefab("badge_fasthatter", fn, assets)

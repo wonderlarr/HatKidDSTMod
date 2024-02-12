@@ -1,12 +1,30 @@
 local assets=
 { 
-    Asset("ATLAS", "images/inventoryimages/badge_football.xml"),
-    Asset("IMAGE", "images/inventoryimages/badge_football.tex"),
+--     Asset("ATLAS", "images/inventoryimages/badge_football.xml"),
+--     Asset("IMAGE", "images/inventoryimages/badge_football.tex"),
 }
 
-RegisterInventoryItemAtlas("images/inventoryimages/badge_football.xml","badge_football.tex")
+-- RegisterInventoryItemAtlas("images/inventoryimages/badge_football.xml","badge_football.tex")
 
-STRINGS.NAMES.BADGE_FOOTBALL = "Wood Armor Badge"
+STRINGS.NAMES.BADGE_FURY = "Fury Badge"
+
+local function OnHealthDelta(owner, data)
+	if data.newpercent <= 0.25 then
+		owner.components.combat.externaldamagemultipliers:SetModifier(owner, 1.5, "badge_fury")
+	else
+		owner.components.combat.externaldamagemultipliers:RemoveModifier(owner, "badge_fury")
+	end
+end
+
+local function OnEquip(inst, owner)
+	inst:ListenForEvent("healthdelta", OnHealthDelta, owner)
+	owner.components.health:DoDelta(0)
+end
+
+local function OnUnequip(inst, owner)
+	inst:RemoveEventCallback("healthdelta", OnHealthDelta, owner)
+	owner.components.combat.externaldamagemultipliers:RemoveModifier(owner, "badge_fury")
+end
 
 local function fn() 
     local inst = CreateEntity()
@@ -45,18 +63,19 @@ local function fn()
  
 	-- Server components
 	inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.imagename = "kidpotion"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/kidpotion.xml"
 
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("equippable")
 	inst.components.equippable.restrictedtag = "badgerestricted"
 	inst.components.equippable.equipslot = EQUIPSLOTS.BADGE1
+	inst.components.equippable:SetOnEquip( OnEquip )
+    inst.components.equippable:SetOnUnequip( OnUnequip )
 
 	inst:AddComponent("badge")
-
-	inst:AddComponent("armor")
-    inst.components.armor:InitCondition(TUNING.ARMOR_FOOTBALLHAT, TUNING.ARMOR_FOOTBALLHAT_ABSORPTION)
     return inst
 end
 
-return Prefab("badge_football", fn, assets)
+return Prefab("badge_fury", fn, assets)
