@@ -86,7 +86,7 @@ end
 local MadHatter = Class(function(self, inst)
     self.inst = inst
 
-    self.max = 100
+    self.max = 200 -- 200, 1000, 5000
     self.val = 0
     
     -- Table of badges
