@@ -61,21 +61,27 @@ local function OnPick(inst, data)
     end
 end
 
-local function OnMagicActivated(inst, data)
-    for k ,v in pairs(inst.components.madhatter.badges) do
-        if v:IsValid() then
-            v:PushEvent("magicactivated", data)
-        end
-    end
+local function OnUnlockRecipe(inst, data)
+    local pon = SpawnPrefab("pon")
+    pon.Transform:SetPosition(inst.Transform:GetWorldPosition())
+    pon.components.stackable.stacksize = 4
 end
 
-local function OnMagicDeactivated(inst, data)
-    for k ,v in pairs(inst.components.madhatter.badges) do
-        if v:IsValid() then
-            v:PushEvent("magicdeactivated", data)
-        end
-    end
-end
+-- local function OnMagicActivated(inst, data)
+--     for k ,v in pairs(inst.components.madhatter.badges) do
+--         if v:IsValid() then
+--             v:PushEvent("magicactivated", data)
+--         end
+--     end
+-- end
+
+-- local function OnMagicDeactivated(inst, data)
+--     for k ,v in pairs(inst.components.madhatter.badges) do
+--         if v:IsValid() then
+--             v:PushEvent("magicdeactivated", data)
+--         end
+--     end
+-- end
 
 local MadHatter = Class(function(self, inst)
     self.inst = inst
@@ -102,9 +108,10 @@ local MadHatter = Class(function(self, inst)
     self.inst:ListenForEvent("onattackother", OnAttack)
     self.inst:ListenForEvent("working", OnAttack)
     self.inst:ListenForEvent("picksomething", OnPick)
+    self.inst:ListenForEvent("unlockrecipe", OnUnlockRecipe)
 
-    self.inst:ListenForEvent("magicactivated", OnMagicActivated)
-    self.inst:ListenForEvent("magicdeactivated", OnMagicDeactivated)
+    -- self.inst:ListenForEvent("magicactivated", OnMagicActivated)
+    -- self.inst:ListenForEvent("magicdeactivated", OnMagicDeactivated)
 end,
 nil, 
 {

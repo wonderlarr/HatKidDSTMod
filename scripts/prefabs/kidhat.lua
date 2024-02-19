@@ -1,24 +1,42 @@
 local assets=
 { 
     Asset("ANIM", "anim/kidhat.zip"),
-	Asset("ANIM", "anim/quagmire_ui_pot_1x3.zip"),
+    Asset("ANIM", "anim/ms_kidhat_dye_toonlink.zip"),
 	
     Asset("ATLAS", "images/inventoryimages/kidhat.xml"),
     Asset("IMAGE", "images/inventoryimages/kidhat.tex"),
+
+	-- Asset("ATLAS", "images/inventoryimages/ms_kidhat_dye_bowkid.xml"),
+    -- Asset("IMAGE", "images/inventoryimages/ms_kidhat_dye_bowkid.tex"),
+
+	-- Asset("ATLAS", "images/inventoryimages/ms_kidhat_dye_groovy.xml"),
+    -- Asset("IMAGE", "images/inventoryimages/ms_kidhat_dye_groovy.tex"),
 }
 
 
 RegisterInventoryItemAtlas("images/inventoryimages/kidhat.xml","kidhat.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/kidhat_dye_niko.xml","kidhat_dye_niko.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/kidhat_dye_toonlink.xml","kidhat_dye_toonlink.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/kidhat_dye_pinkdanger.xml","kidhat_dye_pinkdanger.tex")
+
+RegisterInventoryItemAtlas("images/inventoryimages/ms_kidhat_dye_bowkid.xml","ms_kidhat_dye_bowkid.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/ms_kidhat_dye_groovy.xml","ms_kidhat_dye_groovy.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/ms_kidhat_dye_lunar.xml","ms_kidhat_dye_lunar.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/ms_kidhat_dye_niko.xml","ms_kidhat_dye_niko.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/ms_kidhat_dye_oliver.xml","ms_kidhat_dye_oliver.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/ms_kidhat_dye_pinkdanger.xml","ms_kidhat_dye_pinkdanger.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/ms_kidhat_dye_sans.xml","ms_kidhat_dye_sans.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/ms_kidhat_dye_toonlink.xml","ms_kidhat_dye_toonlink.tex")
 
 local prefabs = 
 {
 }
 
 local function OnEquip(inst, owner)
-	owner.AnimState:OverrideSymbol("swap_hat", "kidhat", "swap_hat")
+	local skin_build = inst:GetSkinBuild()
+	if skin_build ~= nil then
+		owner.AnimState:OverrideItemSkinSymbol("swap_hat", skin_build, "swap_hat", inst.GUID, "kidhat")
+	else
+		owner.AnimState:OverrideSymbol("swap_hat", "kidhat", "swap_hat")
+	end
+	
 	
 	owner.AnimState:Show("HAT")
 	owner.AnimState:Show("HAT_HAIR")
@@ -162,57 +180,3 @@ end
 -- end
 
 return Prefab("kidhat", fn, assets, prefabs)
--- CreateModPrefabSkin("kidhat_dye_niko",
--- {
--- 	assets = {
--- 		Asset("ANIM", "anim/kidhat_dye_niko.zip"),
--- 		Asset("ATLAS", "images/inventoryimages/kidhat_dye_niko.xml"),
--- 		Asset("IMAGE", "images/inventoryimages/kidhat_dye_niko.tex"),
--- 	},
--- 	base_prefab = "kidhat",
--- 	fn = fn_dye_niko,
--- 	rarity = "Timeless",
--- 	reskinable = true,
-	
--- 	build_name_override = "kidhat_dye_niko",
-	
--- 	type = "item",
--- 	skin_tags = { },
--- 	release_group = 0,
--- }),
--- CreateModPrefabSkin("kidhat_dye_toonlink",
--- {
--- 	assets = {
--- 		Asset("ANIM", "anim/kidhat_dye_toonlink.zip"),
--- 		Asset("ATLAS", "images/inventoryimages/kidhat_dye_toonlink.xml"),
--- 		Asset("IMAGE", "images/inventoryimages/kidhat_dye_toonlink.tex"),
--- 	},
--- 	base_prefab = "kidhat",
--- 	fn = fn_dye_toonlink,
--- 	rarity = "Timeless",
--- 	reskinable = true,
-	
--- 	build_name_override = "kidhat_dye_toonlink",
-	
--- 	type = "item",
--- 	skin_tags = { },
--- 	release_group = 0,
--- }),
--- CreateModPrefabSkin("kidhat_dye_pinkdanger",
--- {
--- 	assets = {
--- 		Asset("ANIM", "anim/kidhat_dye_pinkdanger.zip"),
--- 		Asset("ATLAS", "images/inventoryimages/kidhat_dye_pinkdanger.xml"),
--- 		Asset("IMAGE", "images/inventoryimages/kidhat_dye_pinkdanger.tex"),
--- 	},
--- 	base_prefab = "kidhat",
--- 	fn = fn_dye_pinkdanger,
--- 	rarity = "Timeless",
--- 	reskinable = true,
-	
--- 	build_name_override = "kidhat_dye_pinkdanger",
-	
--- 	type = "item",
--- 	skin_tags = { },
--- 	release_group = 0,
--- })

@@ -23,15 +23,17 @@ local function OnDrop(inst)
     inst:DoTaskInTime(1.5, function(inst)
         inst.Physics:CollidesWith(COLLISION.CHARACTERS)
     end)
+
+    inst.AnimState:SetMultColour(0.2,0.2,1,1)
 end
 
 local function DoSound(inst, owner)
     --define owner.chain if not defined. This shouldn't happen often.
-    if owner ~= nil and owner.chain == nil then
+    if owner and not owner.chain then
         owner.chain = 1 
     end
 
-    -- Cancel 10 second timer if it's running already
+    -- Cancel 8 second timer if it's running already
     if owner.chaintracker ~= nil then 
         owner.chaintracker:Cancel()
         owner.chaintracker = nil
