@@ -17,13 +17,24 @@ local function OnHealthDelta(owner, data)
 end
 
 local function OnEquip(inst, owner)
+	-- Fury of the Fallen
 	inst:ListenForEvent("healthdelta", OnHealthDelta, owner)
-	owner.components.health:DoDelta(0)
+	owner.components.health:DoDelta(0) -- trigger a healthdelta on equip
+
+	-- Quickslash (custom tag, not vanilla)
+	owner:AddTag("fastattacker")
+
+	-- Mark of Pride
+	owner.components.combat:SetRange(TUNING.DEFAULT_ATTACK_RANGE + 1)
 end
 
 local function OnUnequip(inst, owner)
 	inst:RemoveEventCallback("healthdelta", OnHealthDelta, owner)
 	owner.components.combat.externaldamagemultipliers:RemoveModifier(owner, "badge_fury")
+
+	owner:RemoveTag("fastattacker")
+
+	owner.components.combat:SetRange(TUNING.DEFAULT_ATTACK_RANGE)
 end
 
 local function fn() 
