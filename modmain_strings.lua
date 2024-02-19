@@ -4,11 +4,16 @@
 local require = GLOBAL.require
 local STRINGS = GLOBAL.STRINGS
 ---- Item skin strings ----
-STRINGS.SKIN_NAMES.kidhat_dye_niko = "Margin of the Night"
-STRINGS.SKIN_NAMES.kidhat_dye_toonlink = "The Forest Critter"
-STRINGS.SKIN_NAMES.kidhat_dye_pinkdanger = "Cute 'n Dangerous"
+STRINGS.SKIN_NAMES.ms_kidhat_dye_groovy = "2 Groovy"
+STRINGS.SKIN_NAMES.ms_kidhat_dye_oliver = "Arcane Ocean"
+STRINGS.SKIN_NAMES.ms_kidhat_dye_bowkid = "Best Friends Forever"
+STRINGS.SKIN_NAMES.ms_kidhat_dye_sans = "Blue Flame"
+STRINGS.SKIN_NAMES.ms_kidhat_dye_pinkdanger = "Cute 'n Dangerous"
+STRINGS.SKIN_NAMES.ms_kidhat_dye_toonlink = "The Forest Critter"
+STRINGS.SKIN_NAMES.ms_kidhat_dye_lunar = "Lunar Lava"
+STRINGS.SKIN_NAMES.ms_kidhat_dye_niko = "Margin of the Night"
 
-STRINGS.SKIN_NAMES.hatbrella_bowkid = "Bow Kid's Favorite"
+-- STRINGS.SKIN_NAMES.hatbrella_bowkid = "Bow Kid's Favorite"
 
 
 ---- Character skin strings ----
@@ -96,10 +101,10 @@ STRINGS.CHARACTERS.HATKID.DESCRIBE.HATKID =
 -- Item names
 STRINGS.NAMES.KIDHAT = "Kid's Hat"
 	-- STRINGS.NAMES.KIDHAT_CAT = STRINGS.NAMES.KIDHAT -- Does not exist
-	STRINGS.NAMES.KIDHAT_DETECTIVE = "Detective's Cap"
-	STRINGS.NAMES.KIDHAT_DYE_NIKO = STRINGS.NAMES.KIDHAT
-	STRINGS.NAMES.KIDHAT_DYE_TOONLINK = STRINGS.NAMES.KIDHAT
-	STRINGS.NAMES.KIDHAT_DYE_PINKDANGER = STRINGS.NAMES.KIDHAT
+	STRINGS.NAMES.MS_KIDHAT_DETECTIVE = "Detective's Cap"
+	-- STRINGS.NAMES.MS_KIDHAT_DYE_NIKO = STRINGS.NAMES.KIDHAT
+	-- STRINGS.NAMES.MS_KIDHAT_DYE_TOONLINK = STRINGS.NAMES.KIDHAT
+	-- STRINGS.NAMES.MS_KIDHAT_DYE_PINKDANGER = STRINGS.NAMES.KIDHAT
 
 STRINGS.NAMES.SPRINTHAT = "Sprint Hat"
 STRINGS.NAMES.BREWINGHAT = "Brewing Hat"

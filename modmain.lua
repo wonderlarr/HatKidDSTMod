@@ -927,3 +927,15 @@ if TUNING.HATKID_DISCOUNT ~= false then
 		end
 	end)
 end
+
+-- GLOBAL.ALL_CHARACTERS = {}
+
+-- -- Add default characters
+-- for k, v in pairs(GLOBAL.DST_CHARACTERLIST) do 
+--     table.insert(GLOBAL.ALL_CHARACTERS, v)
+-- end
+
+-- for k, v in pairs(GLOBAL.MODCHARACTERLIST) do
+--     table.insert(GLOBAL.ALL_CHARACTERS, v)
+-- end
+

@@ -103,32 +103,3 @@ AddComponentAction("INVENTORY", "badge", function(inst, doer, actions, right)
         end
     end
 end)
-
--- changes
---[[
-    1.2.0b1
-    * The Brewing Hat, Ice Hat, Dweller's Mask, and Time Stop Hat now use a new homemade component for activation and cooldowns called "hatmagic". Should be more consistent than the old, janky system.
-    Because of the above change, you may notice differences in how those hats feel and work, however it shouldn't be too drastic.
-    
-    * Added compatibility with Insight (Show Me+)
-    * Attempted to make the mod configuration options more consistent.
-    * Rebalanced a couple things while doing that
-
-    Brewing Hat:
-        * Adjusted the names and positions of some existing entries.
-        * New Entry: Uses Per Fuel. This controls how many uses 1 unit of fuel is worth.
-        * Sanity Threshhold (3 >> 5)
-    Ice Hat:
-        * Adjusted the names and positions of some existing entries.
-        * New Entry: Uses Per Fuel. This controls how many uses 1 unit of fuel is worth.
-        * New Entry: Sanity Threshhold. This controls how much sanity is required to activate the hat.
-        * New Entry: Explosion Damage. This controlshow much damage the ice explosion deals to all enemies in the radius.
-        * Explosion Damage (was hard coded before) (18 >> 27)
-        * Max Uses (2 >> 3)
-    Dweller's Mask:
-        * Adjusted the names and positions of some existing entries.
-    Time Stop Hat:
-        * Adjusted the names and positions of some existing entries.
-        * New Entry: Seconds Per Fuel. This controls how many seconds of use 1 unity of fuel is worth.
-        * New Entry: Sanity Threshhold. This controls how much sanity is required to activate the hat.
-]]
