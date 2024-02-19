@@ -68,6 +68,7 @@ local PrefabFilesLocal = {
 
 
 	"badge_pin",
+	"pon_upgrade",
 
 	--testing TODO (disable in final)
 	-- "cooltarget", -- This is a dummytarget prefab, but it only regens health when it is low.
