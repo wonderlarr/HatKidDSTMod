@@ -298,24 +298,21 @@ AddPrefabPostInitAny(function(inst)
             inst.gpons = 50 -- guarenteed pons
             inst.cpons = 50 -- 50% pons
         elseif inst:HasTag("smallcreature") then
-            inst.gpons = 0
-            inst.cpons = 1
-        elseif inst:HasTag("hostile") then
             inst.gpons = 1
             inst.cpons = 2
         else
             -- not a boss, small, or hostile
-            inst.gpons = 0
-            inst.cpons = 3
+            inst.gpons = 3
+            inst.cpons = 2
         end
     -- For workable entities, like rocks and trees
     elseif inst.components.workable then
-        inst.gpons = 0
+        inst.gpons = 5
         inst.cpons = inst.components.workable.workleft or 0
     -- For pickable entities, like mushrooms and bushes
     elseif inst.components.pickable then
         inst.cpons = 1
-        inst.gpons = 0
+        inst.gpons = 1
     end
 end)
 
