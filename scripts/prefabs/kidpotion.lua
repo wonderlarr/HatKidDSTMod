@@ -50,7 +50,7 @@ local function DoExplode(inst, attacker, target)
             -- Any combatant, deal default damage
             if v.components.combat ~= nil then
                 attacker:PushEvent("onattackother", { target = v })
-                v.components.combat:GetAttacked(attacker, TUNING.BREWINGHAT_DAMAGE) -- TODO find a way to reference brewing hat here
+                v.components.combat:GetAttacked(attacker, TUNING.BREWINGHAT_DAMAGE) -- TODO find a way to set the brewing hat as the weapon
             end
 
             v:PushEvent("explosion", { explosive = inst })

@@ -119,48 +119,60 @@ local hatlist_r = {
 }
 
 local function SimpleHatSwitch(inst, reverse)
-	local hatpack = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BEARD)
-	local playerinv = inst.components.inventory
-	local oldhat = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+    -- Retrieve the beard item equipped by the player
+    local hatpack = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BEARD)
+    -- Retrieve the player's inventory
+    local playerinv = inst.components.inventory
+    -- Retrieve the currently equipped head item
+    local oldhat = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
 
-	local instances = {}
+    -- Table to store instances of hats available for switching
+    local instances = {}
 
-	for k, v in pairs(reverse and hatlist_r or hatlist) do
-		local hatpack_item = hatpack and next(hatpack.components.container:GetItemByName(v, 1, true))
-		local playerinv_item = next(playerinv:GetItemByName(v, 1, true))
-		if hatpack_item or playerinv_item ~= nil then
-			table.insert(instances, k, hatpack_item or playerinv_item)
-		end
-	end
+    -- Populate the instances table with available hats
+    for k, v in pairs(reverse and hatlist_r or hatlist) do
+        -- Check if the hat exists in the hat pack or player's inventory
+        local hatpack_item = hatpack and next(hatpack.components.container:GetItemByName(v, 1, true))
+        local playerinv_item = next(playerinv:GetItemByName(v, 1, true))
+        -- Add the hat instance to the instances table if found
+        if hatpack_item then
+            table.insert(instances, hatpack_item)
+        elseif playerinv_item then
+            table.insert(instances, playerinv_item)
+        end
+    end
 
-	if oldhat and oldhat:HasTag("hatkidhat") then
-		for k, v in pairs(reverse and hatlist_r or hatlist) do
-			if oldhat.prefab == v then
-				for i = k, 12, 1 do
-					if i > 6 then
-						if instances[i - 6] then
-							inst.components.inventory:Equip(instances[i - 6])
-							break
-						end
-					else
-						if instances[i + 1] then
-							inst.components.inventory:Equip(instances[i + 1])
-							break
-						end
-					end
-				end
-				break
-			end
-		end
-	else
-		for i = 1, 6, 1 do
-			if instances[i] then
-				inst.components.inventory:Equip(instances[i])
-				break
-			end
-		end
-	end
+    -- Determine the starting index for hat switching
+    local startIndex = 1
+    if oldhat and oldhat:HasTag("hatkidhat") then
+        -- If the current hat is a hatkidhat, find its index in the hatlist
+        for k, v in pairs(reverse and hatlist_r or hatlist) do
+            if oldhat.prefab == v then
+                -- Set the starting index to the index of the current hat
+                startIndex = k
+                break
+            end
+        end
+    end
+
+    -- Iterate through the hat instances to find the next hat to equip
+    for i = startIndex, startIndex + 6, 1 do
+        local index = i
+        -- Adjust index for reverse switching
+        if reverse then
+            index = (index - 1) % 6 + 1
+        else
+            -- Wrap around if index exceeds hatlist length
+            index = index > 6 and index - 6 or index
+        end
+        -- Equip the next available hat and break the loop
+        if instances[index] then
+            inst.components.inventory:Equip(instances[index])
+            break
+        end
+    end
 end
+
 
 -- When spawning the character
 -- TODO can we just combine all these listeners into master postinit?
