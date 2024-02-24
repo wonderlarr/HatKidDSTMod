@@ -168,9 +168,37 @@ AddCharacterRecipe("kidpotion_ammo",
 
 AddCharacterRecipe("hatpack",
 	{ -- ingredients
+		Ingredient("pigskin", 4),
+		Ingredient("rope", 2),
 		Ingredient(CHARACTER_INGREDIENT.PON, 100),
 	},
-	TECH.SCIENCE_ONE, -- tech level
+	TECH.SCIENCE_TWO, -- tech level
+	{ -- config
+		builder_tag = "hatkid"
+	},
+	{ -- crafting filters
+		"MODS",
+	}
+)
+
+AddCharacterRecipe("pon_upgrade1",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 100),
+	},
+	TECH.SCIENCE_TWO, -- tech level
+	{ -- config
+		builder_tag = "hatkid"
+	},
+	{ -- crafting filters
+		"MODS",
+	}
+)
+
+AddCharacterRecipe("pon_upgrade2",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 250),
+	},
+	TECH.SCIENCE_TWO, -- tech level
 	{ -- config
 		builder_tag = "hatkid"
 	},

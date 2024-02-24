@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="swap_badgesellercane">
+        <file id="0" name="swap_badgesellercane/swap_badgesellercane-0.png" width="69" height="222" pivot_x="0.478261" pivot_y="0.531532"/>
+    </folder>
+    <folder id="1" name="badgesellercane_01">
+        <file id="0" name="badgesellercane_01/badgesellercane_01-0.png" width="109" height="190" pivot_x="0.779817" pivot_y="0.0684211"/>
+    </folder>
+    <entity id="0" name="badgesellercane">
+        <animation id="0" name="idle" length="100" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="100">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="badgesellercane_01-0">
+                <key id="0" spin="0">
+                    <object folder="1" file="0" x="1.333333" y="-0.289855" angle="0"/>
+                </key>
+                <key id="1" time="100" spin="0">
+                    <object folder="1" file="0" x="1.333333" y="-0.289855" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>
