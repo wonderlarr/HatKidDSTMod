@@ -67,6 +67,7 @@ local PrefabFilesLocal = {
 	"badge_fury",
 
 
+	"badgeseller",
 	"badge_pin",
 	"pon_upgrades",
 
