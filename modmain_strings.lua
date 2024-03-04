@@ -13,7 +13,7 @@ STRINGS.SKIN_NAMES.ms_kidhat_dye_toonlink = "The Forest Critter"
 STRINGS.SKIN_NAMES.ms_kidhat_dye_lunar = "Lunar Lava"
 STRINGS.SKIN_NAMES.ms_kidhat_dye_niko = "Margin of the Night"
 
--- STRINGS.SKIN_NAMES.hatbrella_bowkid = "Bow Kid's Favorite"
+STRINGS.SKIN_NAMES.ms_hatbrella_bowkid = "Pink Umbrella"
 
 
 ---- Character skin strings ----
@@ -31,6 +31,11 @@ STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Grim"
 STRINGS.SKIN_NAMES.hatkid_none = "Hat Kid"
 STRINGS.SKIN_QUOTES.hatkid_none = STRINGS.CHARACTER_QUOTES.hatkid
 STRINGS.SKIN_DESCRIPTIONS.hatkid_none = "A royal purple and gold outfit, best fit for a cute adventurer. Complete with a cape, and a giant, very necessary zipper."
+
+--Bow Kid
+	STRINGS.SKIN_NAMES.ms_bowkid = "Bow Kid"
+	STRINGS.SKIN_QUOTES.ms_bowkid = "Hello?"
+	STRINGS.SKIN_DESCRIPTIONS.ms_bowkid = "A great partner for a big adventure."
 
 --Outfits
 	STRINGS.SKIN_NAMES.ms_hatkid_cat = "The Nyakuza"

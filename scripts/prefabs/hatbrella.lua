@@ -10,12 +10,12 @@ local assets =
 }
 
 RegisterInventoryItemAtlas("images/inventoryimages/hatbrella.xml", "hatbrella.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/hatbrella_bowkid.xml", "hatbrella_bowkid.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/ms_hatbrella_bowkid.xml", "ms_hatbrella_bowkid.tex")
 
 local function OnEquip(inst, owner)
     local skin_build = inst:GetSkinBuild()
 	if skin_build ~= nil then
-		owner.AnimState:OverrideItemSkinSymbol("swap_object", skin_build, "hatbrella", inst.GUID, "swap_object")
+		owner.AnimState:OverrideItemSkinSymbol("swap_object", skin_build, "swap_object", inst.GUID, "swap_object")
 	else
         owner.AnimState:OverrideSymbol("swap_object", "hatbrella", "swap_object")
     end

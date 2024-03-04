@@ -39,7 +39,9 @@ table.insert(prefabs, CreatePrefabSkin("ms_bowkid", {
 	type = "base",
 	rarity = "ModMade",
 
-	skin_tags = { "HATKID", "BOWKID" },
+	release_group = 1,
+
+	skin_tags = { "HATKID", "BOWKID", "SURVIVOR" },
 }))
 
 local hatskins = {
@@ -113,24 +115,17 @@ for k, v in ipairs(kidhatskins) do
 	-- RegisterInventoryItemAtlas("images/inventoryimages/" .. v .. ".xml",v .. ".tex")
 end
 
-kidhat_init_fn = function(inst, build_name)
-    basic_init_fn(inst, build_name, "kidhat" )
-end
-
-kidhat_clear_fn = function(inst)
-    basic_clear_fn(inst, "kidhat" )
-end
 
 
 table.insert(prefabs, CreatePrefabSkin("ms_hatbrella_bowkid", { --The ID of our skin
 	assets = { --Our assets
-		Asset("ANIM", "anim/hatbrella_bowkid.zip"),
+		Asset("ANIM", "anim/ms_hatbrella_bowkid.zip"),
 
-		Asset("ATLAS", "images/inventoryimages/hatbrella_bowkid.xml"),
-		Asset("IMAGE", "images/inventoryimages/hatbrella_bowkid.tex"),
+		Asset("ATLAS", "images/inventoryimages/ms_hatbrella_bowkid.xml"),
+		Asset("IMAGE", "images/inventoryimages/ms_hatbrella_bowkid.tex"),
 	},
 	base_prefab = "hatbrella", --The prefab of the item/structure we're adding a skin for
-	build_name_override = "hatbrella_bowkid",
+	build_name_override = "ms_hatbrella_bowkid",
 
 	type = "item", --We are now creating a modded item/structure! Thus our skin's type is "item" (Note: there aren't different types for modded "structures", to the game there is no difference between skinning an item, a structure, or even a mob! (Yes you could create mob skins if you wanted!)
 	rarity = "ModMade",
@@ -138,13 +133,7 @@ table.insert(prefabs, CreatePrefabSkin("ms_hatbrella_bowkid", { --The ID of our 
 	skin_tags = {"HATBRELLA"}, --Skin tags, you should add a tag matching the original prefab of the item/structure we're adding a skin for in full capitalization
 }))
 
-hatbrella_init_fn = function(inst, build_name)
-    basic_init_fn(inst, build_name, "hatbrella" )
-end
 
-hatbrella_clear_fn = function(inst)
-    basic_clear_fn(inst, "hatbrella" )
-end
 
 
 return unpack(prefabs)

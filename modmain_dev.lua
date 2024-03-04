@@ -569,3 +569,19 @@ AddStategraphPostInit("wilson_client", function(sg) -- This adds code to the cli
 		return _onexit(inst,...)
 	end
 end)
+
+GLOBAL.kidhat_init_fn = function(inst, build_name)
+    GLOBAL.basic_init_fn(inst, build_name, "kidhat" )
+end
+
+GLOBAL.kidhat_clear_fn = function(inst)
+    GLOBAL.basic_clear_fn(inst, "kidhat" )
+end
+
+GLOBAL.hatbrella_init_fn = function(inst, build_name)
+    GLOBAL.basic_init_fn(inst, build_name, "hatbrella" )
+end
+
+GLOBAL.hatbrella_clear_fn = function(inst)
+    GLOBAL.basic_clear_fn(inst, "hatbrella" )
+end

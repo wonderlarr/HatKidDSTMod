@@ -27,6 +27,7 @@ RegisterInventoryItemAtlas("images/inventoryimages/ms_kidhat_dye_pinkdanger.xml"
 RegisterInventoryItemAtlas("images/inventoryimages/ms_kidhat_dye_sans.xml","ms_kidhat_dye_sans.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/ms_kidhat_dye_toonlink.xml","ms_kidhat_dye_toonlink.tex")
 
+
 local prefabs = 
 {
 }
