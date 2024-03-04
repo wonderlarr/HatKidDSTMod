@@ -15,6 +15,8 @@ local assets=
 
 
 RegisterInventoryItemAtlas("images/inventoryimages/kidhat.xml","kidhat.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/ms_kidhat_bowkid.xml","ms_kidhat_bowkid.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/ms_kidhat_detective.xml","ms_kidhat_detective.tex")
 
 RegisterInventoryItemAtlas("images/inventoryimages/ms_kidhat_dye_bowkid.xml","ms_kidhat_dye_bowkid.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/ms_kidhat_dye_groovy.xml","ms_kidhat_dye_groovy.tex")

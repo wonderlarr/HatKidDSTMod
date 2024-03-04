@@ -24,7 +24,7 @@ local function OnDrop(inst)
         inst.Physics:CollidesWith(COLLISION.CHARACTERS)
     end)
 
-    inst.AnimState:SetMultColour(0.2,0.2,1,1)
+    -- inst.AnimState:SetMultColour(0.2,0.2,1,1)
 end
 
 local function DoSound(inst, owner)

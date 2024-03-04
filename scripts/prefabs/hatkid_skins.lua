@@ -21,6 +21,27 @@ table.insert(prefabs, CreatePrefabSkin("hatkid_none", {
 	skin_tags = { "BASE", "HATKID"},
 }))
 
+-- Bow kid!!!!
+table.insert(prefabs, CreatePrefabSkin("ms_bowkid", {
+	assets = {
+		Asset("ANIM", "anim/bowkid.zip"),
+		Asset("ANIM", "anim/ghost_bowkid_build.zip"),
+	},
+	skins = {
+		normal_skin = "bowkid",
+		ghost_skin = "ghost_bowkid_build",
+	},
+
+	base_prefab = "hatkid",
+	build_name_override = "bowkid",
+	torso_untuck_builds = { "bowkid" },
+
+	type = "base",
+	rarity = "ModMade",
+
+	skin_tags = { "HATKID", "BOWKID" },
+}))
+
 local hatskins = {
 	-- Launch
 	"ms_hatkid_cat",
@@ -60,6 +81,8 @@ end
 -- Kid Hat skins
 
 local kidhatskins = {
+	"ms_kidhat_bowkid",
+	"ms_kidhat_detective",
 	"ms_kidhat_dye_bowkid",
 	"ms_kidhat_dye_groovy",
 	"ms_kidhat_dye_lunar",
@@ -97,5 +120,31 @@ end
 kidhat_clear_fn = function(inst)
     basic_clear_fn(inst, "kidhat" )
 end
+
+
+table.insert(prefabs, CreatePrefabSkin("ms_hatbrella_bowkid", { --The ID of our skin
+	assets = { --Our assets
+		Asset("ANIM", "anim/hatbrella_bowkid.zip"),
+
+		Asset("ATLAS", "images/inventoryimages/hatbrella_bowkid.xml"),
+		Asset("IMAGE", "images/inventoryimages/hatbrella_bowkid.tex"),
+	},
+	base_prefab = "hatbrella", --The prefab of the item/structure we're adding a skin for
+	build_name_override = "hatbrella_bowkid",
+
+	type = "item", --We are now creating a modded item/structure! Thus our skin's type is "item" (Note: there aren't different types for modded "structures", to the game there is no difference between skinning an item, a structure, or even a mob! (Yes you could create mob skins if you wanted!)
+	rarity = "ModMade",
+
+	skin_tags = {"HATBRELLA"}, --Skin tags, you should add a tag matching the original prefab of the item/structure we're adding a skin for in full capitalization
+}))
+
+hatbrella_init_fn = function(inst, build_name)
+    basic_init_fn(inst, build_name, "hatbrella" )
+end
+
+hatbrella_clear_fn = function(inst)
+    basic_clear_fn(inst, "hatbrella" )
+end
+
 
 return unpack(prefabs)

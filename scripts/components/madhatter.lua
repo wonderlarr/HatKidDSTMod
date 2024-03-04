@@ -62,6 +62,10 @@ local function OnPick(inst, data)
 end
 
 local function OnUnlockRecipe(inst, data)
+    if inst.recipepons then return end
+    inst.recipepons = inst:DoTaskInTime(0, function(inst)
+        inst.recipepons = nil
+    end)
     local pon = SpawnPrefab("pon")
     pon.Transform:SetPosition(inst.Transform:GetWorldPosition())
     pon.components.stackable.stacksize = 4
