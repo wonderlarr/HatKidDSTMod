@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="hatpack">
+        <file id="0" name="hatpack/hatkidbackpack_ground.png" width="168" height="147" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <entity id="0" name="hatpack">
+        <animation id="0" name="idle" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="hatkidbackpack_ground">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="-83" y="73"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>
