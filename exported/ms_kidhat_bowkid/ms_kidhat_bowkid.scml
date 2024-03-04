@@ -5,7 +5,7 @@
         <file id="1" name="swap_hat/swap_hat-1.png" width="300" height="300" pivot_x="0.545165" pivot_y="0.181918"/>
         <file id="3" name="swap_hat/swap_hat-3.png" width="220" height="160" pivot_x="0.509091" pivot_y="0.3"/>
     </folder>
-    <entity id="0" name="bowkidhat">
+    <entity id="0" name="ms_kidhat_bowkid">
         <animation id="0" name="anim" length="1000" interval="100">
             <mainline>
                 <key id="0">
