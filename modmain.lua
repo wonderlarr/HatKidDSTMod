@@ -69,6 +69,7 @@ local PrefabFilesLocal = {
 
 
 	"badgeseller",
+	"badgesellercane",
 	"badge_pin",
 	"pon_upgrades",
 
