@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
     <folder id="0" name="swap_object">
-        <file id="0" name="swap_object/swap_object-0.png" width="69" height="222" pivot_x="0.478261" pivot_y="0.531532"/>
+        <file id="0" name="swap_object/swap_object-0.png" width="69" height="222" pivot_x="0.487177" pivot_y="0.536793"/>
     </folder>
     <folder id="1" name="badgesellercane_01">
         <file id="0" name="badgesellercane_01/badgesellercane_01-0.png" width="109" height="190" pivot_x="0.779817" pivot_y="0.0684211"/>
     </folder>
+    <folder id="2">
+        <file id="0" name="badgesellercane.png" width="64" height="64" pivot_x="0" pivot_y="1"/>
+    </folder>
     <entity id="0" name="badgesellercane">
-        <animation id="0" name="idle" length="100" interval="100">
+        <animation id="0" name="BUILD" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="swap_object-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="6.639329" y="31.890917"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="1" name="idle" length="100" interval="100">
             <mainline>
                 <key id="0">
                     <object_ref id="0" timeline="0" key="0" z_index="0"/>
