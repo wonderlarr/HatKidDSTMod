@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
-    <folder id="0" name="swap_badgesellercane">
-        <file id="0" name="swap_badgesellercane/swap_badgesellercane-0.png" width="69" height="222" pivot_x="0.478261" pivot_y="0.531532"/>
+    <folder id="0" name="swap_object">
+        <file id="0" name="swap_object/swap_badgesellercane-0.png" width="69" height="222" pivot_x="0.478261" pivot_y="0.531532"/>
     </folder>
     <folder id="1" name="badgesellercane_01">
         <file id="0" name="badgesellercane_01/badgesellercane_01-0.png" width="109" height="190" pivot_x="0.779817" pivot_y="0.0684211"/>
