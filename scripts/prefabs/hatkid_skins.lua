@@ -82,6 +82,15 @@ end
 
 -- Kid Hat skins
 
+
+kidhat_init_fn = function(inst, build_name)
+    basic_init_fn(inst, build_name, "kidhat" )
+end
+
+kidhat_clear_fn = function(inst)
+    basic_clear_fn(inst, "kidhat" )
+end
+
 local kidhatskins = {
 	"ms_kidhat_bowkid",
 	"ms_kidhat_detective",
@@ -115,7 +124,13 @@ for k, v in ipairs(kidhatskins) do
 	-- RegisterInventoryItemAtlas("images/inventoryimages/" .. v .. ".xml",v .. ".tex")
 end
 
+hatbrella_init_fn = function(inst, build_name)
+    basic_init_fn(inst, build_name, "hatbrella" )
+end
 
+hatbrella_clear_fn = function(inst)
+    basic_clear_fn(inst, "hatbrella" )
+end
 
 table.insert(prefabs, CreatePrefabSkin("ms_hatbrella_bowkid", { --The ID of our skin
 	assets = { --Our assets
@@ -132,8 +147,5 @@ table.insert(prefabs, CreatePrefabSkin("ms_hatbrella_bowkid", { --The ID of our 
 
 	skin_tags = {"HATBRELLA"}, --Skin tags, you should add a tag matching the original prefab of the item/structure we're adding a skin for in full capitalization
 }))
-
-
-
 
 return unpack(prefabs)

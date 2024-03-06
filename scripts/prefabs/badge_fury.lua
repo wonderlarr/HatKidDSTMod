@@ -23,9 +23,6 @@ local function OnEquip(inst, owner)
 
 	-- Quickslash (custom tag, not vanilla)
 	owner:AddTag("fastattacker")
-
-	-- Mark of Pride
-	owner.components.combat:SetRange(TUNING.DEFAULT_ATTACK_RANGE + 1)
 end
 
 local function OnUnequip(inst, owner)
@@ -33,8 +30,6 @@ local function OnUnequip(inst, owner)
 	owner.components.combat.externaldamagemultipliers:RemoveModifier(owner, "badge_fury")
 
 	owner:RemoveTag("fastattacker")
-
-	owner.components.combat:SetRange(TUNING.DEFAULT_ATTACK_RANGE)
 end
 
 local function fn() 

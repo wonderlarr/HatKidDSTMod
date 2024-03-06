@@ -1,10 +1,13 @@
 local assets =
 {
-    -- Asset("ANIM", "anim/backpack.zip"),
-    -- Asset("ANIM", "anim/swap_krampus_sack.zip"),
     Asset("ANIM", "anim/ui_hatpack_3x2.zip"),
-    -- Asset("ANIM", "anim/ui_hatpack_3x3.zip")
+    Asset("ANIM", "anim/hatpack.zip"),
+
+    Asset("ATLAS", "images/inventoryimages/hatpack.xml"),
+    Asset("IMAGE", "images/inventoryimages/hatpack.tex"),
 }
+
+RegisterInventoryItemAtlas("images/inventoryimages/hatpack.xml", "hatpack.tex")
 
 local function onequip(inst, owner)
     inst.components.container:Open(owner)
@@ -35,10 +38,9 @@ local function fn_common()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("backpack1")
-    inst.AnimState:SetBuild("swap_krampus_sack")
-    inst.AnimState:PlayAnimation("anim")
-    inst.AnimState:SetMultColour(0,0,1,1)
+    inst.AnimState:SetBank("hatpack")
+    inst.AnimState:SetBuild("hatpack")
+    inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("badgepack")
 

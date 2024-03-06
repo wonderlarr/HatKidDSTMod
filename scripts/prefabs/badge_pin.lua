@@ -1,7 +1,12 @@
 local assets=
 { 
+    Asset("ANIM", "anim/badge_pin.zip"),
 
+    Asset("ATLAS", "images/inventoryimages/badge_pin.xml"),
+    Asset("IMAGE", "images/inventoryimages/badge_pin.tex"),
 }
+
+RegisterInventoryItemAtlas("images/inventoryimages/badge_pin.xml", "badge_pin.tex")
 
 STRINGS.NAMES.BADGE_PIN = "Badge Pin"
 
@@ -26,8 +31,8 @@ local function fn()
     inst.entity:AddNetwork() -- networked from server to client
 
 	-- Setup AnimState
-	inst.AnimState:SetBank("kidhat")
-    inst.AnimState:SetBuild("kidhat")
+	inst.AnimState:SetBank("badge_pin")
+    inst.AnimState:SetBuild("badge_pin")
     inst.AnimState:PlayAnimation("idle")
 
 	-- standardcomponents.lua functions
@@ -53,8 +58,6 @@ local function fn()
 
 	-- Makes the item, well, an item
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.imagename = "kidpotion"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/kidpotion.xml"
 
 	-- Allows inspecting of the item
 	inst:AddComponent("inspectable")
