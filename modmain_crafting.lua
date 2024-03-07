@@ -15,6 +15,8 @@
 local Ingredient = GLOBAL.Ingredient
 local TECH = GLOBAL.TECH
 local CHARACTER_INGREDIENT = GLOBAL.CHARACTER_INGREDIENT
+local TUNING = GLOBAL.TUNING
+local TechTree = GLOBAL.require("techtree")
 
 CHARACTER_INGREDIENT["PON"] = "pon"
 
@@ -204,5 +206,46 @@ AddCharacterRecipe("pon_upgrade2",
 	},
 	{ -- crafting filters
 		"MODS",
+	}
+)
+
+-- Badges and Badge Seller
+
+GLOBAL.STRINGS.ACTIONS.OPEN_CRAFTING.PURCHASE_BADGE = "Purchase from"
+GLOBAL.STRINGS.UI.CRAFTING.RECIPEACTION.PURCHASE_BADGE = "Purchase"
+GLOBAL.STRINGS.UI.CRAFTING.TABACTION.PURCHASE_BADGE = "Purchase"
+
+AddPrototyperDef("badgeseller", {
+	icon_atlas = "images/inventoryimages/pon.xml", 
+	icon_image = "pon.tex",	
+	is_crafting_station = true,		
+	action_str = "PURCHASE_BADGE",	
+	filter_text = "Badge Seller"
+})
+
+TUNING.PROTOTYPER_TREES.BADGESELLER = TechTree.Create({
+	-- SCIENCE = 1,
+	BADGEPOWER = 1,
+})
+
+-- table.insert(TechTree.BONUS_TECH, "BADGESELLER")
+
+TECH.BADGESELLER_ONE = { BADGEPOWER = 1 }
+
+AddCharacterRecipe("badge_football",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 4),
+	},
+	TECH.BADGESELLER_ONE, -- tech level
+	{ -- config
+		builder_tag = "hatkid",
+		-- nounlock = true,
+		manufactured = true,
+		actionstr = "PURCHASE_BADGE"
+	},
+	{ -- crafting filters
+		"MODS",
+		"ARMOR",
+		"CRAFTING_STATION"
 	}
 )

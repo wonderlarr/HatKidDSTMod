@@ -9,7 +9,7 @@ local assets =
 RegisterInventoryItemAtlas("images/inventoryimages/badgesellercane.xml", "badgesellercane.tex")
 
 local function OnEquip(inst, owner)
-    owner.AnimState:OverrideSymbol("swap_object", "badgesellercane", "badgesellercane")
+    owner.AnimState:OverrideSymbol("swap_object", "badgesellercane", "swap_object")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
 end

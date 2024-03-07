@@ -128,6 +128,10 @@ STRINGS.NAMES.KIDPOTION_AMMO = "Innate Concoction"
 
 STRINGS.NAMES.HATPACK = "Hat Pack"
 
+STRINGS.NAMES.BADGESELLER = "Badge Seller"
+STRINGS.NAMES.BADGESELLERCANE = "Merchant's Cane"
+STRINGS.NAMES.BADGESELLERBACKPACK = "Merchant's Pack"
+
 --Recipe Descriptions
 STRINGS.RECIPE_DESC.KIDHAT = "Your pride and joy."
 STRINGS.RECIPE_DESC.SPRINTHAT = "This hat looks ready to sprint!"
