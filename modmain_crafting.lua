@@ -215,18 +215,7 @@ GLOBAL.STRINGS.ACTIONS.OPEN_CRAFTING.PURCHASE_BADGE = "Purchase from"
 GLOBAL.STRINGS.UI.CRAFTING.RECIPEACTION.PURCHASE_BADGE = "Purchase"
 GLOBAL.STRINGS.UI.CRAFTING.TABACTION.PURCHASE_BADGE = "Purchase"
 GLOBAL.STRINGS.UI.CRAFTING.NEEDSBADGESELLER_ONE = "Find the Badge Seller to purchase this badge."
-
--- table.insert(TechTree.AVAILABLE_TECH, "BADGESELLER")
-
--- for k, v in pairs(TUNING.PROTOTYPER_TREES) do
--- 	v.BADGESELLER = 0
--- end
-
--- for k, v in pairs(GLOBAL.AllRecipes) do
--- 	v.level.BADGESELLER = 0
--- end
-
--- TECH.NONE.BADGESELLER = 0
+GLOBAL.STRINGS.UI.CRAFTING.NEEDSBADGESELLER_TWO = "Find the Badge Seller to purchase this badge."
 
 -- references from ShoeTime
 
@@ -254,31 +243,21 @@ TUNING.PROTOTYPER_TREES.BADGESELLER_TWO = TechTree.Create({
 	BADGESELLER = 3,
 })
 
-GLOBAL.PROTOTYPER_DEFS["badgeseller"] = {
-	icon_atlas = "images/inventoryimages/pon.xml", 
-	icon_image = "pon.tex",	
-	is_crafting_station = true,		
-	action_str = "PURCHASE_BADGE",	
-	filter_text = "Badge Seller"
-}
-
--- AddPrototyperDef("badgeseller", {
+-- GLOBAL.PROTOTYPER_DEFS["badgeseller"] = {
 -- 	icon_atlas = "images/inventoryimages/pon.xml", 
 -- 	icon_image = "pon.tex",	
 -- 	is_crafting_station = true,		
 -- 	action_str = "PURCHASE_BADGE",	
 -- 	filter_text = "Badge Seller"
--- })
+-- }
 
--- TECH.BADGESELLER_ONE = { BADGESELLER = 2 }
-
--- TUNING.PROTOTYPER_TREES.BADGESELLER = TechTree.Create({
--- 	-- SCIENCE = 1,
--- 	BADGESELLER = 2,
--- })
-
--- table.insert(TechTree.BONUS_TECH, "BADGESELLER")
-
+AddPrototyperDef("badgeseller", {
+	icon_atlas = "images/inventoryimages/pon.xml", 
+	icon_image = "pon.tex",	
+	is_crafting_station = true,		
+	action_str = "PURCHASE_BADGE",	
+	filter_text = "Badge Seller"
+})
 
 AddRecipe2("badge_football",
 	{ -- ingredients
@@ -293,7 +272,7 @@ AddRecipe2("badge_football",
 		actionstr = "PURCHASE_BADGE"
 	},
 	{ -- crafting filters
-		"MODS",
+		-- "MODS",
 		"ARMOR",
 		-- "CRAFTING_STATION"
 	}
