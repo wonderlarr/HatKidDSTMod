@@ -29,11 +29,7 @@ local function StartSelling(inst, doer, recipe)
 end
 
 local function MakePrototyper(inst)
-    inst:AddComponent("prototyper")
-    inst.components.prototyper.onturnon = onturnon
-    inst.components.prototyper.onturnoff = onturnoff
-    inst.components.prototyper.onactivate = StartSelling
-    inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.BADGESELLER
+
 end
 
 local function fn()
@@ -69,7 +65,11 @@ local function fn()
         -- inst.components.pointofinterest:SetHeight(220)
     -- end
 
-    MakePrototyper(inst)
+    inst:AddComponent("prototyper")
+    inst.components.prototyper.onturnon = onturnon
+    inst.components.prototyper.onturnoff = onturnoff
+    inst.components.prototyper.onactivate = StartSelling
+    inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.BADGESELLER_ONE
 
 
     inst.entity:SetPristine()

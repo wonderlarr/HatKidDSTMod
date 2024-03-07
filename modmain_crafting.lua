@@ -214,38 +214,87 @@ AddCharacterRecipe("pon_upgrade2",
 GLOBAL.STRINGS.ACTIONS.OPEN_CRAFTING.PURCHASE_BADGE = "Purchase from"
 GLOBAL.STRINGS.UI.CRAFTING.RECIPEACTION.PURCHASE_BADGE = "Purchase"
 GLOBAL.STRINGS.UI.CRAFTING.TABACTION.PURCHASE_BADGE = "Purchase"
+GLOBAL.STRINGS.UI.CRAFTING.NEEDSBADGESELLER_ONE = "Find the Badge Seller to purchase this badge."
 
-AddPrototyperDef("badgeseller", {
+-- table.insert(TechTree.AVAILABLE_TECH, "BADGESELLER")
+
+-- for k, v in pairs(TUNING.PROTOTYPER_TREES) do
+-- 	v.BADGESELLER = 0
+-- end
+
+-- for k, v in pairs(GLOBAL.AllRecipes) do
+-- 	v.level.BADGESELLER = 0
+-- end
+
+-- TECH.NONE.BADGESELLER = 0
+
+-- references from ShoeTime
+
+table.insert(TechTree.AVAILABLE_TECH, "BADGESELLER")
+	
+for k, v in pairs(TUNING.PROTOTYPER_TREES) do
+	v.BADGESELLER = 0
+end
+
+for k, v in pairs(GLOBAL.AllRecipes) do
+	v.level.BADGESELLER = 0
+end
+
+TECH.NONE.BADGESELLER = 0
+
+TECH.BADGESELLER_ONE = {BADGESELLER = 2}
+TECH.BADGESELLER_TWO = {BADGESELLER = 3}
+
+TUNING.PROTOTYPER_TREES.BADGESELLER_ONE = TechTree.Create({
+	-- SCIENCE = 1,
+	BADGESELLER = 2,
+})
+
+TUNING.PROTOTYPER_TREES.BADGESELLER_TWO = TechTree.Create({
+	BADGESELLER = 3,
+})
+
+GLOBAL.PROTOTYPER_DEFS["badgeseller"] = {
 	icon_atlas = "images/inventoryimages/pon.xml", 
 	icon_image = "pon.tex",	
 	is_crafting_station = true,		
 	action_str = "PURCHASE_BADGE",	
 	filter_text = "Badge Seller"
-})
+}
 
-TUNING.PROTOTYPER_TREES.BADGESELLER = TechTree.Create({
-	-- SCIENCE = 1,
-	BADGEPOWER = 1,
-})
+-- AddPrototyperDef("badgeseller", {
+-- 	icon_atlas = "images/inventoryimages/pon.xml", 
+-- 	icon_image = "pon.tex",	
+-- 	is_crafting_station = true,		
+-- 	action_str = "PURCHASE_BADGE",	
+-- 	filter_text = "Badge Seller"
+-- })
+
+-- TECH.BADGESELLER_ONE = { BADGESELLER = 2 }
+
+-- TUNING.PROTOTYPER_TREES.BADGESELLER = TechTree.Create({
+-- 	-- SCIENCE = 1,
+-- 	BADGESELLER = 2,
+-- })
 
 -- table.insert(TechTree.BONUS_TECH, "BADGESELLER")
 
-TECH.BADGESELLER_ONE = { BADGEPOWER = 1 }
 
-AddCharacterRecipe("badge_football",
+AddRecipe2("badge_football",
 	{ -- ingredients
 		Ingredient(CHARACTER_INGREDIENT.PON, 4),
+		-- Ingredient("goldnugget", 2)
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config
 		builder_tag = "hatkid",
-		-- nounlock = true,
+		nounlock = true,
 		manufactured = true,
 		actionstr = "PURCHASE_BADGE"
 	},
 	{ -- crafting filters
 		"MODS",
 		"ARMOR",
-		"CRAFTING_STATION"
+		-- "CRAFTING_STATION"
 	}
 )
