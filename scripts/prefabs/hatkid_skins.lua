@@ -124,6 +124,92 @@ for k, v in ipairs(kidhatskins) do
 	-- RegisterInventoryItemAtlas("images/inventoryimages/" .. v .. ".xml",v .. ".tex")
 end
 
+-- Sprint Hat Skins
+
+
+sprinthat_init_fn = function(inst, build_name)
+    basic_init_fn(inst, build_name, "sprinthat" )
+end
+
+sprinthat_clear_fn = function(inst)
+    basic_clear_fn(inst, "sprinthat" )
+end
+
+local sprinthatskins = {
+	"ms_sprinthat_dye_bowkid",
+	"ms_sprinthat_dye_groovy",
+	"ms_sprinthat_dye_lunar",
+	"ms_sprinthat_dye_niko",
+	"ms_sprinthat_dye_pinkdanger",
+	"ms_sprinthat_dye_sans",
+	"ms_sprinthat_dye_toonlink",
+	"ms_sprinthat_dye_oliver",
+}
+
+for k, v in ipairs(sprinthatskins) do
+	table.insert(prefabs, CreatePrefabSkin(v, { --The ID of our skin
+		assets = { --Our assets
+			Asset( "ANIM", "anim/" .. v .. ".zip"),
+
+			Asset("ATLAS", "images/inventoryimages/" .. v .. ".xml"),
+			Asset("IMAGE", "images/inventoryimages/" .. v .. ".tex"),
+		},
+		base_prefab = "sprinthat", --The prefab of the item/structure we're adding a skin for
+		build_name_override = v,
+
+		type = "item", --We are now creating a modded item/structure! Thus our skin's type is "item" (Note: there aren't different types for modded "structures", to the game there is no difference between skinning an item, a structure, or even a mob! (Yes you could create mob skins if you wanted!)
+		rarity = "ModMade",
+
+		skin_tags = {"SPRINTHAT"}, --Skin tags, you should add a tag matching the original prefab of the item/structure we're adding a skin for in full capitalization
+	}))
+
+	-- RegisterInventoryItemAtlas("images/inventoryimages/" .. v .. ".xml",v .. ".tex")
+end
+
+-- Brewing Hat Skins
+
+
+brewinghat_init_fn = function(inst, build_name)
+    basic_init_fn(inst, build_name, "brewinghat" )
+end
+
+brewinghat_clear_fn = function(inst)
+    basic_clear_fn(inst, "brewinghat" )
+end
+
+local brewinghatskins = {
+	"ms_brewinghat_dye_bowkid",
+	"ms_brewinghat_dye_groovy",
+	"ms_brewinghat_dye_lunar",
+	"ms_brewinghat_dye_niko",
+	"ms_brewinghat_dye_pinkdanger",
+	"ms_brewinghat_dye_sans",
+	"ms_brewinghat_dye_toonlink",
+	"ms_brewinghat_dye_oliver",
+}
+
+for k, v in ipairs(brewinghatskins) do
+	table.insert(prefabs, CreatePrefabSkin(v, { --The ID of our skin
+		assets = { --Our assets
+			Asset( "ANIM", "anim/" .. v .. ".zip"),
+
+			Asset("ATLAS", "images/inventoryimages/" .. v .. ".xml"),
+			Asset("IMAGE", "images/inventoryimages/" .. v .. ".tex"),
+		},
+		base_prefab = "brewinghat", --The prefab of the item/structure we're adding a skin for
+		build_name_override = v,
+
+		type = "item", --We are now creating a modded item/structure! Thus our skin's type is "item" (Note: there aren't different types for modded "structures", to the game there is no difference between skinning an item, a structure, or even a mob! (Yes you could create mob skins if you wanted!)
+		rarity = "ModMade",
+
+		skin_tags = {"BREWINGHAT"}, --Skin tags, you should add a tag matching the original prefab of the item/structure we're adding a skin for in full capitalization
+	}))
+
+	-- RegisterInventoryItemAtlas("images/inventoryimages/" .. v .. ".xml",v .. ".tex")
+end
+
+--Hatbrella skins
+
 hatbrella_init_fn = function(inst, build_name)
     basic_init_fn(inst, build_name, "hatbrella" )
 end

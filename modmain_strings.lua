@@ -13,6 +13,28 @@ STRINGS.SKIN_NAMES.ms_kidhat_dye_toonlink = "The Forest Critter"
 STRINGS.SKIN_NAMES.ms_kidhat_dye_lunar = "Lunar Lava"
 STRINGS.SKIN_NAMES.ms_kidhat_dye_niko = "Margin of the Night"
 
+STRINGS.SKIN_NAMES.ms_sprinthat_dye_groovy = "2 Groovy"
+STRINGS.SKIN_NAMES.ms_sprinthat_dye_oliver = "Arcane Ocean"
+STRINGS.SKIN_NAMES.ms_sprinthat_dye_bowkid = "Best Friends Forever"
+STRINGS.SKIN_NAMES.ms_sprinthat_dye_sans = "Blue Flame"
+STRINGS.SKIN_NAMES.ms_sprinthat_dye_pinkdanger = "Cute 'n Dangerous"
+STRINGS.SKIN_NAMES.ms_sprinthat_dye_toonlink = "The Forest Critter"
+STRINGS.SKIN_NAMES.ms_sprinthat_dye_lunar = "Lunar Lava"
+STRINGS.SKIN_NAMES.ms_sprinthat_dye_niko = "Margin of the Night"
+
+STRINGS.SKIN_NAMES.ms_brewinghat_dye_groovy = "2 Groovy"
+STRINGS.SKIN_NAMES.ms_brewinghat_dye_oliver = "Arcane Ocean"
+STRINGS.SKIN_NAMES.ms_brewinghat_dye_bowkid = "Best Friends Forever"
+STRINGS.SKIN_NAMES.ms_brewinghat_dye_sans = "Blue Flame"
+STRINGS.SKIN_NAMES.ms_brewinghat_dye_pinkdanger = "Cute 'n Dangerous"
+STRINGS.SKIN_NAMES.ms_brewinghat_dye_toonlink = "The Forest Critter"
+STRINGS.SKIN_NAMES.ms_brewinghat_dye_lunar = "Lunar Lava"
+STRINGS.SKIN_NAMES.ms_brewinghat_dye_niko = "Margin of the Night"
+
+STRINGS.SKIN_NAMES.ms_kidhat_bowkid = "The Bow"
+STRINGS.SKIN_NAMES.ms_kidhat_detective = "Detective's Cap"
+
+
 STRINGS.SKIN_NAMES.ms_hatbrella_bowkid = "Pink Umbrella"
 
 

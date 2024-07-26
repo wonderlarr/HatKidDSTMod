@@ -11,6 +11,15 @@ local assets=
 
 RegisterInventoryItemAtlas("images/inventoryimages/brewinghat.xml", "brewinghat.tex")
 
+RegisterInventoryItemAtlas("images/inventoryimages/ms_brewinghat_dye_bowkid.xml","ms_brewinghat_dye_bowkid.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/ms_brewinghat_dye_groovy.xml","ms_brewinghat_dye_groovy.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/ms_brewinghat_dye_lunar.xml","ms_brewinghat_dye_lunar.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/ms_brewinghat_dye_niko.xml","ms_brewinghat_dye_niko.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/ms_brewinghat_dye_oliver.xml","ms_brewinghat_dye_oliver.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/ms_brewinghat_dye_pinkdanger.xml","ms_brewinghat_dye_pinkdanger.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/ms_brewinghat_dye_sans.xml","ms_brewinghat_dye_sans.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/ms_brewinghat_dye_toonlink.xml","ms_brewinghat_dye_toonlink.tex")
+
 local prefabs =
 {
 }
@@ -41,7 +50,12 @@ end
 -- End Container -------
 
 local function OnEquip(inst, owner)
-	owner.AnimState:OverrideSymbol("swap_hat", "brewinghat", "swap_hat")
+	local skin_build = inst:GetSkinBuild()
+	if skin_build ~= nil then
+		owner.AnimState:OverrideItemSkinSymbol("swap_hat", skin_build, "swap_hat", inst.GUID, "brewinghat")
+	else
+		owner.AnimState:OverrideSymbol("swap_hat", "brewinghat", "swap_hat")
+	end
 
 	owner.AnimState:Show("HAT")
 	owner.AnimState:Show("HAT_HAIR")
