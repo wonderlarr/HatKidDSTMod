@@ -252,8 +252,8 @@ TUNING.PROTOTYPER_TREES.BADGESELLER_TWO = TechTree.Create({
 -- }
 
 AddPrototyperDef("badgeseller", {
-	icon_atlas = "images/inventoryimages/pon.xml", 
-	icon_image = "pon.tex",	
+	icon_atlas = "images/gui/craft_pon.xml", 
+	icon_image = "craft_pon.tex",	
 	is_crafting_station = true,		
 	action_str = "PURCHASE_BADGE",	
 	filter_text = "Badge Seller"

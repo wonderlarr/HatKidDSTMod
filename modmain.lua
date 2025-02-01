@@ -75,6 +75,7 @@ local PrefabFilesLocal = {
 
 	--testing TODO (disable in final)
 	-- "cooltarget", -- This is a dummytarget prefab, but it only regens health when it is low.
+	"swordsdance_fx",
 }
 
 PrefabFiles = PrefabFilesLocal
@@ -169,7 +170,6 @@ Assets = {
 
 	Asset("FONT", "fonts/talkingfont_hatkid.zip"),
 }
-
 
 -- Import modmain segments
 modimport("modmain_tuning.lua")

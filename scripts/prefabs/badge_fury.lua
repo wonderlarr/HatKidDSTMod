@@ -1,10 +1,11 @@
 local assets=
 { 
---     Asset("ATLAS", "images/inventoryimages/badge_football.xml"),
---     Asset("IMAGE", "images/inventoryimages/badge_football.tex"),
+    Asset("ANIM", "anim/badge_ground.zip"),
+	
+    Asset("ATLAS", "images/inventoryimages/badge_fury.xml"),
+    Asset("IMAGE", "images/inventoryimages/badge_fury.tex"),
 }
-
--- RegisterInventoryItemAtlas("images/inventoryimages/badge_football.xml","badge_football.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/badge_fury.xml","badge_fury.tex")
 
 STRINGS.NAMES.BADGE_FURY = "Fury Badge"
 
@@ -43,8 +44,8 @@ local function fn()
     inst.entity:AddNetwork()
 
 	-- Setup AnimState
-	inst.AnimState:SetBank("kidhat")
-    inst.AnimState:SetBuild("kidhat")
+	inst.AnimState:SetBank("badge_ground")
+    inst.AnimState:SetBuild("badge_ground")
     inst.AnimState:PlayAnimation("idle")
 
 	-- standardcomponents.lua functions
@@ -69,8 +70,8 @@ local function fn()
  
 	-- Server components
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.imagename = "kidpotion"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/kidpotion.xml"
+	-- inst.components.inventoryitem.imagename = "kidpotion"
+    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/kidpotion.xml"
 
 	inst:AddComponent("inspectable")
 

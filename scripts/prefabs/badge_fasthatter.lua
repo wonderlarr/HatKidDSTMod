@@ -1,5 +1,7 @@
 local assets=
 { 
+	Asset("ANIM", "anim/badge_ground.zip"),
+
     Asset("ATLAS", "images/inventoryimages/badge_fasthatter.xml"),
     Asset("IMAGE", "images/inventoryimages/badge_fasthatter.tex"),
 }
@@ -47,8 +49,8 @@ local function fn()
     inst.entity:AddNetwork()
 
 	-- Setup AnimState
-	inst.AnimState:SetBank("kidhat")
-    inst.AnimState:SetBuild("kidhat")
+	inst.AnimState:SetBank("badge_ground")
+    inst.AnimState:SetBuild("badge_ground")
     inst.AnimState:PlayAnimation("idle")
 
 	-- standardcomponents.lua functions

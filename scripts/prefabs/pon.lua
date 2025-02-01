@@ -83,13 +83,13 @@ local function fn()
 
     inst.entity:AddPhysics()
 
-    inst.Physics:SetCapsule(0.6, 0.6)
+    inst.Physics:SetSphere(0.6)
     inst.Physics:SetCollisionGroup(COLLISION.SMALLOBSTACLES)
     inst.Physics:ClearCollisionMask()
     inst.Physics:CollidesWith(COLLISION.WORLD)
     inst.Physics:CollidesWith(COLLISION.OBSTACLES)
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-    -- inst.Physics:SetActive(false)
+    inst.Physics:SetMass(0)
 
     inst.DynamicShadow:SetSize(0.75, 0.75)
     
@@ -97,7 +97,7 @@ local function fn()
     inst.AnimState:SetBuild("pon")
     inst.AnimState:PlayAnimation("bob", true)
     inst.AnimState:SetTime(math.random() * inst.AnimState:GetCurrentAnimationLength())
-    inst.AnimState:SetScale(1.8, 1.8)
+    inst.AnimState:SetScale(1, 1)
 
     inst:AddTag("pon")
 	

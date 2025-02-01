@@ -39,15 +39,13 @@ table.insert(prefabs, CreatePrefabSkin("ms_bowkid", {
 	type = "base",
 	rarity = "ModMade",
 
-	release_group = 1,
+	release_group = 64,
 
 	skin_tags = { "HATKID", "BOWKID", "SURVIVOR" },
 }))
 
 local hatskins = {
-	-- Launch
-	"ms_hatkid_cat",
-	"ms_hatkid_detective",
+	-- dyes
 	"ms_hatkid_dye_bowkid",
 	"ms_hatkid_dye_groovy",
 	"ms_hatkid_dye_lunar",
@@ -75,6 +73,38 @@ for k,v in ipairs(hatskins) do
 
 		type = "base",
 		rarity = "ModMade",
+
+		release_group = 0,
+
+		skin_tags = { "BASE", "HATKID" },
+	}))
+end
+
+local hatskins_2 = {
+	-- actual skins
+	"ms_hatkid_cat",
+	"ms_hatkid_detective",
+}
+
+for k,v in ipairs(hatskins_2) do
+
+	table.insert(prefabs, CreatePrefabSkin(v, {
+		assets = {
+			Asset("ANIM", "anim/" .. v .. ".zip"),
+			Asset("ANIM", "anim/ghost_hatkid_build.zip"),
+		},
+		skins = {
+			normal_skin = v,
+			ghost_skin = "ghost_hatkid_build",
+		},
+
+		base_prefab = "hatkid",
+		build_name_override = v,
+
+		type = "base",
+		rarity = "ModMade",
+
+		release_group = 32,
 
 		skin_tags = { "BASE", "HATKID" },
 	}))

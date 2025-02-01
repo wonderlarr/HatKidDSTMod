@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11" pixel_mode="1">
     <folder id="0" name="pon_pickup">
-        <file id="0" name="pon_pickup/pon_large.png" width="64" height="64" pivot_x="0.500457" pivot_y="0.500041"/>
+        <file id="0" name="pon_pickup/pon_large.png" width="128" height="128" pivot_x="0.500457" pivot_y="0.500041"/>
     </folder>
     <entity id="0" name="pon">
         <animation id="0" name="idle" length="1000" interval="100">
@@ -30,13 +30,13 @@
             </mainline>
             <timeline id="0" name="pon_large">
                 <key id="0" spin="0">
-                    <object folder="0" file="0" y="23" angle="0"/>
+                    <object folder="0" file="0" y="64" angle="0"/>
                 </key>
                 <key id="1" time="1500" spin="0">
-                    <object folder="0" file="0" y="45" angle="0"/>
+                    <object folder="0" file="0" y="48" angle="0"/>
                 </key>
                 <key id="2" time="3000" spin="0">
-                    <object folder="0" file="0" y="23" angle="0"/>
+                    <object folder="0" file="0" y="64" angle="0"/>
                 </key>
             </timeline>
         </animation>

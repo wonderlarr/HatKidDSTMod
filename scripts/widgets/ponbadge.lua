@@ -13,7 +13,7 @@ local PonBadge = Class(Badge, function(self, owner)
 	self.ponicon:GetAnimState():SetBank("pon_nocap")
 	self.ponicon:GetAnimState():SetBuild("pon_nocap")
 	self.ponicon:GetAnimState():PlayAnimation("idle")
-    self.ponicon:SetScale(0.65)
+    self.ponicon:SetScale(0.38)
     -- self.ponicon:SetPosition(22.5, -67) 
 end)
 

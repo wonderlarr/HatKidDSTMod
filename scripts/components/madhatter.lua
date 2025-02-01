@@ -62,13 +62,12 @@ local function OnPick(inst, data)
 end
 
 local function OnUnlockRecipe(inst, data)
-    if inst.recipepons then return end
-    inst.recipepons = inst:DoTaskInTime(0, function(inst)
-        inst.recipepons = nil
-    end)
-    local pon = SpawnPrefab("pon")
-    pon.Transform:SetPosition(inst.Transform:GetWorldPosition())
-    pon.components.stackable.stacksize = 4
+    -- Players auto-learn recipes when they spawn. This prevents an award for that.
+    if inst:GetTimeAlive() > 0.5 then
+        local pon = SpawnPrefab("pon")
+        pon.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        pon.components.stackable.stacksize = 5
+    end
 end
 
 -- local function OnMagicActivated(inst, data)
