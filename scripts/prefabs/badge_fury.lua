@@ -7,14 +7,22 @@ local assets=
 }
 RegisterInventoryItemAtlas("images/inventoryimages/badge_fury.xml","badge_fury.tex")
 
-STRINGS.NAMES.BADGE_FURY = "Fury Badge"
-
 local function OnHealthDelta(owner, data)
 	if data.newpercent <= 0.25 then
-		owner.components.combat.externaldamagemultipliers:SetModifier(owner, 1.5, "badge_fury")
+		owner.components.combat.externaldamagemultipliers:SetModifier(owner, 1.75, "badge_fury")
+		owner:AddTag("fury_attacker")
 	else
 		owner.components.combat.externaldamagemultipliers:RemoveModifier(owner, "badge_fury")
+		owner:RemoveTag("fury_attacker")
 	end
+end
+
+local function OnEmpty(inst)
+    if inst.components.inventoryitem ~= nil and inst.components.inventoryitem:GetGrandOwner() ~= nil then
+        inst.components.inventoryitem:GetGrandOwner():PushEvent("toolbroke", { tool = inst })
+    end
+
+    inst:Remove()
 end
 
 local function OnEquip(inst, owner)
@@ -22,15 +30,14 @@ local function OnEquip(inst, owner)
 	inst:ListenForEvent("healthdelta", OnHealthDelta, owner)
 	owner.components.health:DoDelta(0) -- trigger a healthdelta on equip
 
-	-- Quickslash (custom tag, not vanilla)
-	owner:AddTag("fastattacker")
+	inst:ListenForEvent("onattackother", inst.OnAttack, owner)
 end
 
 local function OnUnequip(inst, owner)
 	inst:RemoveEventCallback("healthdelta", OnHealthDelta, owner)
 	owner.components.combat.externaldamagemultipliers:RemoveModifier(owner, "badge_fury")
 
-	owner:RemoveTag("fastattacker")
+	inst:RemoveEventCallback("onattackother", inst.OnAttack, owner)
 end
 
 local function fn() 
@@ -70,8 +77,6 @@ local function fn()
  
 	-- Server components
 	inst:AddComponent("inventoryitem")
-	-- inst.components.inventoryitem.imagename = "kidpotion"
-    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/kidpotion.xml"
 
 	inst:AddComponent("inspectable")
 
@@ -82,6 +87,19 @@ local function fn()
     inst.components.equippable:SetOnUnequip( OnUnequip )
 
 	inst:AddComponent("badge")
+
+	inst:AddComponent("fueled")
+	inst.components.fueled.fueltype = FUELTYPE.MAGIC
+	inst.components.fueled:InitializeFuelLevel(100)
+	inst.components.fueled:SetDepletedFn(OnEmpty)
+
+	-- putting this here because WHERE ELSE CAN I PUT THIS???
+	inst.OnAttack = function(owner, data)
+		if owner:HasTag("fury_attacker") then
+			inst.components.fueled:DoDelta(-1)
+		end
+	end
+
     return inst
 end
 

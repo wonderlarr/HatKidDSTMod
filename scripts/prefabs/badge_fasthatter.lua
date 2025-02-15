@@ -8,8 +8,6 @@ local assets=
 
 RegisterInventoryItemAtlas("images/inventoryimages/badge_fasthatter.xml","badge_fasthatter.tex")
 
-STRINGS.NAMES.BADGE_FASTHATTER = "Fast Hatter Badge"
-
 local function OnUse(inst, data)
 	inst.components.fueled:DoDelta(-1)
 end

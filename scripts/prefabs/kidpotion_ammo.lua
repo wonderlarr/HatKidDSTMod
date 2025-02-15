@@ -1,8 +1,10 @@
 local kidpotion_assets = {
-    -- Asset("ATLAS", "images/inventoryimages/kidpotion_ammo.xml"),
+    Asset("ATLAS", "images/inventoryimages/kidpotion_ammo.xml"),
+    Asset("IMAGE", "images/inventoryimages/kidpotion_ammo.tex"),
+
 }
 
--- RegisterInventoryItemAtlas("images/inventoryimages/kidpotion_ammo.xml","kidpotion.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/kidpotion_ammo.xml","kidpotion_ammo.tex")
 
 local function kidpotion_fn()
     local inst = CreateEntity()
@@ -26,8 +28,8 @@ local function kidpotion_fn()
     inst:AddComponent("inspectable")
  
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.imagename = "kidpotion"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/kidpotion.xml"
+    -- inst.components.inventoryitem.imagename = "kidpotion"
+    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/kidpotion.xml"
 
 	inst:AddComponent("stackable")
 	inst.components.stackable.maxsize = TUNING.STACK_SIZE_MEDITEM -- 20 can be in an item stack

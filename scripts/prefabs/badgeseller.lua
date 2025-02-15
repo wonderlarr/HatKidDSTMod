@@ -13,19 +13,19 @@ local prefabs =
 }
 
 local function onturnon(inst)
-    inst.AnimState:SetMultColour(1,0,1,1)
+    -- inst.AnimState:SetMultColour(1,0,1,1)
 end
 
 local function onturnoff(inst)
-    inst.AnimState:SetMultColour(1,1,1,1)
+    -- inst.AnimState:SetMultColour(1,1,1,1)
 end
 
 local function StartSelling(inst, doer, recipe)
-    print(inst)
-    print(doer)
-    if recipe and type(recipe) == "table" then
-        dumptable(recipe)
-    end
+    -- print(inst)
+    -- print(doer)
+    -- if recipe and type(recipe) == "table" then
+    --     dumptable(recipe)
+    -- end
 end
 
 local function MakePrototyper(inst)
@@ -52,7 +52,7 @@ local function fn()
     inst.AnimState:SetBank("wilson")
     inst.AnimState:SetBuild("badgeseller")
     inst.AnimState:PlayAnimation("idle_loop", true)
-	inst.AnimState:SetScale(1.25, 1.25)
+	inst.AnimState:SetScale(1.3, 1.3)
 
     inst.AnimState:Hide("ARM_normal")
 
@@ -61,8 +61,8 @@ local function fn()
     inst.AnimState:OverrideSymbol("swap_body", "swap_badgeseller_backpack", "swap_body")
 
     -- if not TheNet:IsDedicated() then
-        -- inst:AddComponent("pointofinterest")
-        -- inst.components.pointofinterest:SetHeight(220)
+    --     inst:AddComponent("pointofinterest")
+    --     inst.components.pointofinterest:SetHeight(70)
     -- end
 
     inst:AddComponent("prototyper")

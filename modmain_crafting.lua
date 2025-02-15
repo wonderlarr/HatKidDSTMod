@@ -154,55 +154,13 @@ AddCharacterRecipe("timestophat",
 AddCharacterRecipe("kidpotion_ammo",
 	{ -- ingredients
 		Ingredient(CHARACTER_INGREDIENT.PON, 10),
-		Ingredient("slurtleslime", 1),
-		Ingredient("nightmarefuel", 2),
+		Ingredient("nightmarefuel", 1),
 
 	},
 	TECH.SCIENCE_TWO, -- tech level
 	{ -- config
 		builder_tag = "hatkid",
-		numtogive = 3,
-	},
-	{ -- crafting filters
-		"MODS",
-	}
-)
-
-AddCharacterRecipe("hatpack",
-	{ -- ingredients
-		Ingredient("pigskin", 4),
-		Ingredient("rope", 2),
-		Ingredient(CHARACTER_INGREDIENT.PON, 100),
-	},
-	TECH.SCIENCE_TWO, -- tech level
-	{ -- config
-		builder_tag = "hatkid"
-	},
-	{ -- crafting filters
-		"MODS",
-	}
-)
-
-AddCharacterRecipe("pon_upgrade1",
-	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 100),
-	},
-	TECH.SCIENCE_TWO, -- tech level
-	{ -- config
-		builder_tag = "hatkid"
-	},
-	{ -- crafting filters
-		"MODS",
-	}
-)
-
-AddCharacterRecipe("pon_upgrade2",
-	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 250),
-	},
-	TECH.SCIENCE_TWO, -- tech level
-	{ -- config
-		builder_tag = "hatkid"
+		numtogive = 2,
 	},
 	{ -- crafting filters
 		"MODS",
@@ -214,10 +172,10 @@ AddCharacterRecipe("pon_upgrade2",
 GLOBAL.STRINGS.ACTIONS.OPEN_CRAFTING.PURCHASE_BADGE = "Purchase from"
 GLOBAL.STRINGS.UI.CRAFTING.RECIPEACTION.PURCHASE_BADGE = "Purchase"
 GLOBAL.STRINGS.UI.CRAFTING.TABACTION.PURCHASE_BADGE = "Purchase"
-GLOBAL.STRINGS.UI.CRAFTING.NEEDSBADGESELLER_ONE = "Find the Badge Seller to purchase this badge."
-GLOBAL.STRINGS.UI.CRAFTING.NEEDSBADGESELLER_TWO = "Find the Badge Seller to purchase this badge."
+GLOBAL.STRINGS.UI.CRAFTING.NEEDSBADGESELLER_ONE = "Find the Badge Seller to purchase this item."
+GLOBAL.STRINGS.UI.CRAFTING.NEEDSBADGESELLER_TWO = "Find the Badge Seller to purchase this item."
 
--- references from ShoeTime
+-- references from ShoeTime (vaguely, i didnt know how to do this)
 
 table.insert(TechTree.AVAILABLE_TECH, "BADGESELLER")
 	
@@ -243,14 +201,6 @@ TUNING.PROTOTYPER_TREES.BADGESELLER_TWO = TechTree.Create({
 	BADGESELLER = 3,
 })
 
--- GLOBAL.PROTOTYPER_DEFS["badgeseller"] = {
--- 	icon_atlas = "images/inventoryimages/pon.xml", 
--- 	icon_image = "pon.tex",	
--- 	is_crafting_station = true,		
--- 	action_str = "PURCHASE_BADGE",	
--- 	filter_text = "Badge Seller"
--- }
-
 AddPrototyperDef("badgeseller", {
 	icon_atlas = "images/gui/craft_pon.xml", 
 	icon_image = "craft_pon.tex",	
@@ -259,21 +209,125 @@ AddPrototyperDef("badgeseller", {
 	filter_text = "Badge Seller"
 })
 
-AddRecipe2("badge_football",
+AddCharacterRecipe("badge_football",
 	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 4),
-		-- Ingredient("goldnugget", 2)
+		Ingredient(CHARACTER_INGREDIENT.PON, 100),
+	},
+	TECH.BADGESELLER_ONE, -- tech level
+	{ -- config
+		builder_tag = "hatkid",
+		-- nounlock = true,
+		-- manufactured = true,
+		actionstr = "PURCHASE_BADGE",
+		sg_state = "domediumaction",
+	},
+	{ -- crafting filters
+		"MODS",
+		"ARMOR",
+		"CRAFTING_STATION",
+		-- "CHARACTER"
+	}
+)
+
+AddCharacterRecipe("badge_fasthatter",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 100),
+	},
+	TECH.BADGESELLER_ONE, -- tech level
+	{ -- config
+		builder_tag = "hatkid",
+		-- nounlock = true,
+		-- manufactured = true,
+		actionstr = "PURCHASE_BADGE",
+		sg_state = "domediumaction",
+	},
+	{ -- crafting filters
+		"MODS",
+		"ARMOR",
+		"CRAFTING_STATION",
+		-- "CHARACTER"
+	}
+)
+
+AddCharacterRecipe("badge_fury",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 100),
+	},
+	TECH.BADGESELLER_ONE, -- tech level
+	{ -- config
+		builder_tag = "hatkid",
+		-- nounlock = true,
+		-- manufactured = true,
+		actionstr = "PURCHASE_BADGE",
+		sg_state = "domediumaction",
+	},
+	{ -- crafting filters
+		"MODS",
+		"ARMOR",
+		"CRAFTING_STATION",
+		-- "CHARACTER"
+	}
+)
+
+AddCharacterRecipe("hatpack",
+	{ -- ingredients
+		Ingredient("pigskin", 2),
+		Ingredient("rope", 1),
+		Ingredient(CHARACTER_INGREDIENT.PON, 100),
+	},
+	TECH.BADGESELLER_ONE, -- tech level
+	{ -- config
+		builder_tag = "hatkid"
+	},
+	{ -- crafting filters
+		"MODS",
+		"CRAFTING_STATION",
+	}
+)
+
+-- TODO make these NOT items, instead directly upgrade the player
+
+AddCharacterRecipe("pon_upgrade1",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 150),
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config
 		builder_tag = "hatkid",
 		nounlock = true,
-		manufactured = true,
-		actionstr = "PURCHASE_BADGE"
 	},
 	{ -- crafting filters
-		-- "MODS",
-		"ARMOR",
-		-- "CRAFTING_STATION"
+		"MODS",
+		"CRAFTING_STATION",
+	}
+)
+
+AddCharacterRecipe("pon_upgrade2",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 300),
+	},
+	TECH.BADGESELLER_ONE, -- tech level
+	{ -- config
+		builder_tag = "hatkid",
+		nounlock = true,
+	},
+	{ -- crafting filters
+		"MODS",
+		"CRAFTING_STATION",
+	}
+)
+
+AddCharacterRecipe("badge_pin",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 100),
+	},
+	TECH.BADGESELLER_ONE, -- tech level
+	{ -- config
+		builder_tag = "hatkid",
+		nounlock = true,
+	},
+	{ -- crafting filters
+		"MODS",
+		"CRAFTING_STATION",
 	}
 )

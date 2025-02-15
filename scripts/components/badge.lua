@@ -49,6 +49,8 @@ function Badge:Equip(owner)
             owner.components.inventory:Equip(self.inst)
 
             self.isequipped = true
+        else
+            owner.components.talker:Say("I need another Badge Pin.")
         end
     end
 end

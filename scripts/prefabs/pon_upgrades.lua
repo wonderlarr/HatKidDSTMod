@@ -1,10 +1,14 @@
 local assets=
 { 
+    Asset("ATLAS", "images/inventoryimages/pon_upgrade1.xml"),
+    Asset("IMAGE", "images/inventoryimages/pon_upgrade1.tex"),
 
+	Asset("ATLAS", "images/inventoryimages/pon_upgrade2.xml"),
+    Asset("IMAGE", "images/inventoryimages/pon_upgrade2.tex"),
 }
 
-STRINGS.NAMES.PON_UPGRADE1 = "Wallet Upgrade 1"
-STRINGS.NAMES.PON_UPGRADE2 = "Wallet Upgrade 2"
+RegisterInventoryItemAtlas("images/inventoryimages/pon_upgrade1.xml","pon_upgrade1.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/pon_upgrade2.xml","pon_upgrade2.tex")
 
 local function OnUse(inst)
 
@@ -49,8 +53,6 @@ local function fn_master(inst)
 
 	-- Makes the item, well, an item
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.imagename = "kidpotion"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/kidpotion.xml"
 
 	-- Allows inspecting of the item
 	inst:AddComponent("inspectable")

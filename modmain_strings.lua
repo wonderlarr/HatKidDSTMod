@@ -148,11 +148,38 @@ STRINGS.NAMES.HATBRELLAOPEN = "Open Blue Umbrella"
 STRINGS.NAMES.KIDPOTION = "Mad Concoction"
 STRINGS.NAMES.KIDPOTION_AMMO = "Innate Concoction"
 
-STRINGS.NAMES.HATPACK = "Hat Pack"
-
 STRINGS.NAMES.BADGESELLER = "Badge Seller"
 STRINGS.NAMES.BADGESELLERCANE = "Merchant's Cane"
 STRINGS.NAMES.BADGESELLERBACKPACK = "Merchant's Pack"
+
+STRINGS.NAMES.HATPACK = "Hat Pack"
+STRINGS.RECIPE_DESC.HATPACK = "A little backpack for holding all your hats!"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATPACK = "A little small for me..."
+
+STRINGS.NAMES.BADGE_FURY = "Comeback Badge"
+STRINGS.RECIPE_DESC.BADGE_FURY = "Greatly increases damage while at low health."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BADGE_FURY = "Quite useful!"
+
+STRINGS.NAMES.BADGE_FASTHATTER = "Fast Hatter Badge"
+STRINGS.RECIPE_DESC.BADGE_FASTHATTER = "Reduces the cooldown of hat abilities."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BADGE_FASTHATTER = "Quite useful!"
+
+STRINGS.NAMES.BADGE_FOOTBALL = "Protection Badge"
+STRINGS.RECIPE_DESC.BADGE_FOOTBALL = "Protects from some damage."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BADGE_FOOTBALL = "Quite useful!"
+
+STRINGS.NAMES.BADGE_PIN = "Badge Pin"
+STRINGS.RECIPE_DESC.BADGE_PIN = "Increases the number of badges that can be worn at one time."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BADGE_PIN = "Hard not to lose such a small thing!"
+
+STRINGS.NAMES.PON_UPGRADE1 = "Bigger Wallet Upgrade"
+STRINGS.RECIPE_DESC.PON_UPGRADE1 = "A new wallet that can hold 1000 pons!"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PON_UPGRADE1 = "More space for debt, I guess."
+
+STRINGS.NAMES.PON_UPGRADE2 = "Biggest Wallet Upgrade"
+STRINGS.RECIPE_DESC.PON_UPGRADE2 = "A new wallet that can hold 5000 pons!"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PON_UPGRADE2 = "I'd hate to lose this when it's full..."
+
 
 --Recipe Descriptions
 STRINGS.RECIPE_DESC.KIDHAT = "Your pride and joy."
@@ -163,7 +190,9 @@ STRINGS.RECIPE_DESC.DWELLERMASK = "See the world through a Dweller's eyes!"
 STRINGS.RECIPE_DESC.TIMESTOPHAT = "Death is inevitable. Your time is valuable."
 
 STRINGS.RECIPE_DESC.HATBRELLA = "Diplomacy didn't work, time for action."
-STRINGS.RECIPE_DESC.KIDPOTION_AMMO = "An explosive concoction of slime and nightmares."
+STRINGS.RECIPE_DESC.KIDPOTION_AMMO = "A witchy concoction of some sort."
+
+
 
 
 

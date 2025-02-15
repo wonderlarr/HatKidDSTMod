@@ -8,8 +8,6 @@ local assets=
 
 RegisterInventoryItemAtlas("images/inventoryimages/badge_pin.xml", "badge_pin.tex")
 
-STRINGS.NAMES.BADGE_PIN = "Badge Pin"
-
 local function OnUse(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 	if owner then

@@ -43,7 +43,7 @@ local function fn()
     end
 
     inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(12)
+    inst.components.weapon:SetDamage(17)
   
     inst:AddComponent("inspectable")
 
@@ -52,7 +52,7 @@ local function fn()
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
-    inst.components.equippable.walkspeedmult = 1.1
+    inst.components.equippable.walkspeedmult = 1.25
 	
 	MakeHauntableLaunch(inst)
 	

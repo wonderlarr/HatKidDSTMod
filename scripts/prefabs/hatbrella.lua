@@ -99,7 +99,7 @@ local function fn()
     end
 
     inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE * 1.6) -- * 1.6 to start with a strong attack on load
+    inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE * 1.5) -- * 1.6 to start with a strong attack on load
     inst.components.weapon:SetOnAttack(OnAttack)
 
     inst:AddTag("strongatk")

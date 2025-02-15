@@ -112,7 +112,7 @@ local function OnActivate(inst)
 	two.Transform:SetScale(1.25, 1.25, 1.25)
 
 	-- After a delay, explode!
-	owner:DoTaskInTime(20 * FRAMES, function(owner)
+	owner:DoTaskInTime(16 * FRAMES, function(owner)
 		-- Explode FX
 		SpawnPrefab("hatshatter2").Transform:SetPosition(owner.Transform:GetWorldPosition())
 		SpawnPrefab("polarhat_explode").Transform:SetPosition(owner.Transform:GetWorldPosition())
@@ -142,7 +142,7 @@ local function OnActivate(inst)
 			end
 
 			-- Freeze things that need frozen
-			if ent.components.freezable ~= nil then
+			if ent.components.freezable ~= nil and not ent:HasTag("player") then
 				ent.components.freezable:AddColdness(TUNING.POLARHAT_LEVEL)
 				ent.components.freezable:SpawnShatterFX()
 			end
@@ -150,11 +150,11 @@ local function OnActivate(inst)
 			-- Decrease character temperatures
 			if ent.components.temperature ~= nil then
 				-- If effecting the owner, modify temp directly to bypass polarhat insulation
-				if ent == owner then
-					ent.components.temperature:SetTemperature(ent.components.temperature.current + -TUNING.POLARHAT_TEMP + -(math.max(0, ent.components.temperature:GetCurrent() / 70 * 20)))
-				else
+				-- if ent == owner then
+				-- 	ent.components.temperature:SetTemperature(ent.components.temperature.current + -TUNING.POLARHAT_TEMP + -(math.max(0, ent.components.temperature:GetCurrent() / 70 * 20)))
+				-- else
 					ent.components.temperature:DoDelta(-TUNING.POLARHAT_TEMP + -(math.max(0, ent.components.temperature:GetCurrent() / 70 * 20)))
-				end
+				-- end
 			end
 		end
 	end)

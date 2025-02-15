@@ -32,6 +32,11 @@ params.hatpack =
         animbuild = "ui_hatpack_3x2",
         pos = Vector3(-82, 108, 0),
         bottom_align_tip = -100,
+        buttoninfo =
+        {
+            text = "Unequip",
+            position = Vector3(0, -80, 0),
+        }
     },
     usespecificslotsforitems = true,
     acceptsstacks = false,
@@ -47,6 +52,14 @@ end
 
 function params.hatpack.itemtestfn(container, item, slot)
     return slot == nil and item:HasTag("hatkidhat") or item:HasTag("hatkidhat") and item.prefab == hatlist[slot]
+end
+
+function params.hatpack.widget.buttoninfo.fn(inst, doer)
+    if doer.components.inventory then
+        doer.components.inventory:DropItem(inst)
+    else
+        SendModRPCToServer(GetModRPC("HatKidRPC", "UnequipHatpack"), inst, doer)
+    end
 end
 
 -- params.hatpack_1 =
@@ -207,6 +220,7 @@ AddClassPostConstruct("widgets/statusdisplays", function(self)
             local dest_pos = self.ponbadge:GetWorldPosition()
 
             -- TODO maybe optimize this so we don't make a new image every time we collect a pon
+            -- possibly impractical
             local PonImage = Image("images/inventoryimages/pon.xml", "pon.tex") 
             PonImage:SetScale(0.8, 0.8)
             PonImage:MoveTo(start_pos, dest_pos, .3, function() PonImage:Kill() end)
@@ -231,6 +245,7 @@ AddClassPostConstruct("widgets/statusdisplays", function(self)
     end
 end)
 
+-- Replace normal health widget with our custom one (for fun)
 local UIAnim = require "widgets/uianim"
 AddClassPostConstruct("widgets/healthbadge", function(self)
     if self.owner and self.owner:HasTag("hatkid") then -- we must exist and be hat kid
@@ -525,51 +540,51 @@ end)
 --     end
 -- end)
 
-AddStategraphPostInit("wilson", function(sg) -- This will add some code to the server side stategraph
-	local _attack = sg.states["attack"]
-	local _onenter = _attack.onenter
-	_attack.onenter = function(inst,...)
-		_onenter(inst,...)
-		if inst:HasTag("fastattacker") then -- You'll want to change wilba to your own character's prefab
-			local speed = 1.3 -- Change this to whatever yoy want your speed multiplier to go to, careful when going over 5 though, it gets buggy.
-			inst.sg:SetTimeout(inst.sg.timeout/speed)
-      	    inst.components.combat:SetAttackPeriod(TUNING.WILSON_ATTACK_PERIOD / speed) -- Attack period is essentially like an attack cooldown, so we divide it by the speed. 
-			inst.AnimState:SetDeltaTimeMultiplier(speed) -- This is the time multiplier for animations, we multiply it by our speed to make the character punch fast and not have animation desyncs.
-			for k, v in pairs(_attack.timeline) do
-				v.time = v.time/speed
-			end
-		end
-	end
-	local _onexit = _attack.onexit
-	_attack.onexit = function(inst,...)
-		if inst:HasTag("fastattacker") then -- Make sure to change your prefab here too!
-            -- inst.components.combat:SetAttackPeriod(TUNING.WILSON_ATTACK_PERIOD)
-			inst.AnimState:SetDeltaTimeMultiplier(1) -- Here we'll only return out animation speed back to normal, since Attack Period being increased doesn't matter otherwise, and it might break things if we did return it after every attack.
-		end
-		return _onexit(inst,...)
-	end
-end)
+-- AddStategraphPostInit("wilson", function(sg) -- This will add some code to the server side stategraph
+-- 	local _attack = sg.states["attack"]
+-- 	local _onenter = _attack.onenter
+-- 	_attack.onenter = function(inst,...)
+-- 		_onenter(inst,...)
+-- 		if inst:HasTag("fastattacker") then -- You'll want to change wilba to your own character's prefab
+-- 			local speed = 1.3 -- Change this to whatever yoy want your speed multiplier to go to, careful when going over 5 though, it gets buggy.
+-- 			inst.sg:SetTimeout(inst.sg.timeout/speed)
+--       	    inst.components.combat:SetAttackPeriod(TUNING.WILSON_ATTACK_PERIOD / speed) -- Attack period is essentially like an attack cooldown, so we divide it by the speed. 
+-- 			inst.AnimState:SetDeltaTimeMultiplier(speed) -- This is the time multiplier for animations, we multiply it by our speed to make the character punch fast and not have animation desyncs.
+-- 			for k, v in pairs(_attack.timeline) do
+-- 				v.time = v.time/speed
+-- 			end
+-- 		end
+-- 	end
+-- 	local _onexit = _attack.onexit
+-- 	_attack.onexit = function(inst,...)
+-- 		if inst:HasTag("fastattacker") then -- Make sure to change your prefab here too!
+--             -- inst.components.combat:SetAttackPeriod(TUNING.WILSON_ATTACK_PERIOD)
+-- 			inst.AnimState:SetDeltaTimeMultiplier(1) -- Here we'll only return out animation speed back to normal, since Attack Period being increased doesn't matter otherwise, and it might break things if we did return it after every attack.
+-- 		end
+-- 		return _onexit(inst,...)
+-- 	end
+-- end)
 
-AddStategraphPostInit("wilson_client", function(sg) -- This adds code to the client side stategraph, but it's only used if the client has Movement Prediction enabled.
-	local _attack = sg.states["attack"]
-	local _onenter = _attack.onenter
-	_attack.onenter = function(inst,...)
-		_onenter(inst,...)
-		if inst:HasTag("fastattacker") then --Change it here again!
-			local speed = 1.3 -- Make sure to set your speed here as well, so the client knows.
-			inst.sg:SetTimeout(inst.sg.timeout/speed)
-			inst.AnimState:SetDeltaTimeMultiplier(speed)
-			for k, v in pairs(_attack.timeline) do
-				v.time = v.time/speed
-			end
-		end
-		return
-	end
-	local _onexit = _attack.onexit
-	_attack.onexit = function(inst,...)
-		if inst:HasTag("fastattacker") then  -- Final change here, to your characters prefab again.
-			inst.AnimState:SetDeltaTimeMultiplier(1)
-		end
-		return _onexit(inst,...)
-	end
-end)
+-- AddStategraphPostInit("wilson_client", function(sg) -- This adds code to the client side stategraph, but it's only used if the client has Movement Prediction enabled.
+-- 	local _attack = sg.states["attack"]
+-- 	local _onenter = _attack.onenter
+-- 	_attack.onenter = function(inst,...)
+-- 		_onenter(inst,...)
+-- 		if inst:HasTag("fastattacker") then --Change it here again!
+-- 			local speed = 1.3 -- Make sure to set your speed here as well, so the client knows.
+-- 			inst.sg:SetTimeout(inst.sg.timeout/speed)
+-- 			inst.AnimState:SetDeltaTimeMultiplier(speed)
+-- 			for k, v in pairs(_attack.timeline) do
+-- 				v.time = v.time/speed
+-- 			end
+-- 		end
+-- 		return
+-- 	end
+-- 	local _onexit = _attack.onexit
+-- 	_attack.onexit = function(inst,...)
+-- 		if inst:HasTag("fastattacker") then  -- Final change here, to your characters prefab again.
+-- 			inst.AnimState:SetDeltaTimeMultiplier(1)
+-- 		end
+-- 		return _onexit(inst,...)
+-- 	end
+-- end)

@@ -8,8 +8,6 @@ local assets=
 
 RegisterInventoryItemAtlas("images/inventoryimages/badge_football.xml","badge_football.tex")
 
-STRINGS.NAMES.BADGE_FOOTBALL = "Wood Armor Badge"
-
 local function fn() 
     local inst = CreateEntity()
 

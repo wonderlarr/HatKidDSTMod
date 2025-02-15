@@ -66,7 +66,7 @@ local function OnUnlockRecipe(inst, data)
     if inst:GetTimeAlive() > 0.5 then
         local pon = SpawnPrefab("pon")
         pon.Transform:SetPosition(inst.Transform:GetWorldPosition())
-        pon.components.stackable.stacksize = 5
+        pon.components.stackable.stacksize = 8
     end
 end
 

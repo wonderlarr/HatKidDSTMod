@@ -75,7 +75,6 @@ local PrefabFilesLocal = {
 
 	--testing TODO (disable in final)
 	-- "cooltarget", -- This is a dummytarget prefab, but it only regens health when it is low.
-	"swordsdance_fx",
 }
 
 PrefabFiles = PrefabFilesLocal
@@ -166,6 +165,9 @@ Assets = {
 	Asset( "IMAGE", "images/gui/slotbg_badge.tex" ),
     Asset( "ATLAS", "images/gui/slotbg_badge.xml" ),
 
+	Asset( "IMAGE", "images/gui/craft_pon.tex" ),
+    Asset( "ATLAS", "images/gui/craft_pon.xml" ),
+
 	Asset("ANIM", "anim/tab_badgeseller.zip"),
 
 	Asset("FONT", "fonts/talkingfont_hatkid.zip"),
@@ -242,6 +244,13 @@ local function OnHatSwitch(inst)
 end
 
 AddModRPCHandler("HatKidRPC", "SwitchKeyDown", OnHatSwitch)
+
+-- Hatpack Unequip button
+local function OnUnequipHatpack(inst, pack)
+	inst.components.inventory:DropItem(pack)
+end
+
+AddModRPCHandler("HatKidRPC", "UnequipHatpack", OnUnequipHatpack)
 
 -- Post inits
 local afs_enabled = GLOBAL.KnownModIndex:IsModEnabled("workshop-2736043172") or GLOBAL.KnownModIndex:IsModEnabled("AutoFuelSlotDSTMod")

@@ -186,6 +186,10 @@ local function OnNewSpawn(inst)
     inst:ListenForEvent("ms_becameghost", OnGhost)
 
 	inst:ListenForEvent("SwitchKey", SimpleHatSwitch)
+
+	-- local hat = inst.components.inventory:FindItem(function(item)
+	-- 	return item.prefab == "kidhat"
+	-- end)
 end
 
 local function OnLoad(inst, data)
@@ -208,8 +212,8 @@ end
 -- Server and client
 local CommonPostInit = function(inst) 
 	inst.MiniMapEntity:SetIcon( "hatkid.tex" )
-	inst.components.talker.font = TALKINGFONT_HATKID
-	inst.components.talker.fontsize = 30 -- 35 is default, decreased to help with longer sentences
+	-- inst.components.talker.font = TALKINGFONT_HATKID
+	inst.components.talker.fontsize = 32 -- 35 is default, decreased to help with longer sentences
 	inst:AddTag("hatkid") -- Unique character tag, used for various things
 	inst:AddTag("hatkidcrafter") -- Enables crafting of Hat Kid's hats
 
@@ -222,9 +226,6 @@ local CommonPostInit = function(inst)
 
 	-- 50% chance of quote on potion explode TODO move this somewhere better
 	inst:ListenForEvent("PotionThrown", OnPotionThrow)
-	
-	-- This seems like it should only be a server component, but it breaks if you dont add it to both for now
-
 end
 
 -- Server only, most components go here.
@@ -245,13 +246,7 @@ local MasterPostInit = function(inst, data)
 	-- Combat
 	inst.components.combat.externaldamagemultipliers:SetModifier(inst, TUNING.HATKIDDAMAGEDEALT, "config_base")
 	inst.components.combat.externaldamagetakenmultipliers:SetModifier(inst, TUNING.HATKIDDAMAGETAKEN, "config_base")
-	inst.components.combat:SetDefaultDamage(0) -- no damage on punch
-	inst:ListenForEvent("onattackother", function()
-		if not inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) then
-			inst.components.combat:GetAttacked(inst, 1)
-			inst.components.combat:OverrideCooldown(2)
-		end
-	end)
+	inst.components.combat:SetDefaultDamage(5) -- low punch damage
 
 	-- Movement
 	inst.components.locomotor:SetExternalSpeedMultiplier(inst, "hatkid_speed_config", TUNING.HATKIDSPEED)
@@ -260,7 +255,7 @@ local MasterPostInit = function(inst, data)
 	inst.components.foodaffinity:AddPrefabAffinity("honeynuggets", TUNING.AFFINITY_15_CALORIES_LARGE) -- Favorite food
 	inst.AnimState:SetScale(TUNING.HATKIDSIZE, TUNING.HATKIDSIZE) -- Character size
 
-	-- Mad Hatter
+	-- Mad Hatter, custom component which handles a lot of hat kid's specific things
 	inst:AddComponent("madhatter")
 
 	-- Wanda
@@ -274,7 +269,7 @@ local MasterPostInit = function(inst, data)
 
 	-- Voice
 	if TUNING.HATKIDVOICE == "hatkidvoice" then
-		-- Custom voice made by myself, Skylarr!
+		-- Custom voice for hat kid!
 		inst.soundsname = "hatkidvoice"
 		inst.talker_path_override = "hatkidvoice/"
 	else
@@ -285,7 +280,14 @@ local MasterPostInit = function(inst, data)
     inst.OnNewSpawn = OnNewSpawn
 	inst.OnLoad = OnLoad
 	
+	-- unused?
 	inst.CurrentHat = 0
+
+	inst:WatchWorldState("isnewmoon", function(inst, is_new)
+		if is_new then
+			
+		end
+	end)
 
 	-- Check if HATKID_CRAFT_SANITY is nonzero (has a positive value)
 	if TUNING.HATKID_CRAFT_SANITY ~= 0 then
