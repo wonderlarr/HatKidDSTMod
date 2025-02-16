@@ -133,7 +133,8 @@ end
 function HatMagic:DoCooldown(override_time)
     local owner = self.inst.components.inventoryitem:GetGrandOwner()
     -- You can pass in an override time to force a specific cooldown if needed for some reason.
-    local cooldowntime = (override_time or self.cooldowntime or 0) * (owner.components.madhatter and owner.components.madhatter.cd_mods:Get() or 1)
+    local cooldowntime = (override_time or self.cooldowntime or 0)
+
     
     if cooldowntime > 0 then
         local function OnCharged()
@@ -142,6 +143,7 @@ function HatMagic:DoCooldown(override_time)
 
         self.inst.components.rechargeable:SetOnChargedFn(OnCharged)
         self.inst.components.rechargeable:Discharge(cooldowntime)
+        self.inst.components.rechargeable:SetPercent(owner.components.madhatter and math.abs(owner.components.madhatter:GetCDMod() - 1) or 0)
         
         self.oncooldown = true
         self.inst:AddTag("oncooldown")

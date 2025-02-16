@@ -93,7 +93,7 @@ local function fn()
 	inst.components.fueled:InitializeFuelLevel(100)
 	inst.components.fueled:SetDepletedFn(OnEmpty)
 
-	-- putting this here because WHERE ELSE CAN I PUT THIS???
+	-- idk where else to put this where i can access inst based on this event
 	inst.OnAttack = function(owner, data)
 		if owner:HasTag("fury_attacker") then
 			inst.components.fueled:DoDelta(-1)
