@@ -1862,7 +1862,7 @@ configuration_options =
 	{
 		name = "timestopscale",
 		label = "Time Speed",
-		hover = "How much nearby entities are effected by the Time Stop Hat's effect. Setting this below x0.3 may cause issues.",
+		hover = "How much nearby entities are effected by the Time Stop Hat's effect.",
 		options =
 		{
 			-- {description = "x0.1 (Careful)", data = 0.1},
@@ -1908,7 +1908,8 @@ configuration_options =
 			{description = "125", data = 125},
 			{description = "150", data = 150},
 			{description = "175", data = 175},
-			{description = "200 (Default)", data = 200},
+			{description = "180 (Default)", data = 180},
+			{description = "200", data = 200},
 			{description = "250", data = 250},
 			{description = "300", data = 300},
 			{description = "400", data = 400},
@@ -1917,7 +1918,7 @@ configuration_options =
 			{description = "Infinite", data = false},
 
 		},
-		default = 200,
+		default = 180,
 	},
 	
 	{

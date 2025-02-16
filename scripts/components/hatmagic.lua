@@ -80,7 +80,7 @@ function HatMagic:Activate()
         end
     else
         local owner = self.inst.components.inventoryitem:GetGrandOwner()
-        owner.components.talker:Say(GetString(owner, "ACTIONFAIL_GENERIC"))
+        owner.components.talker:Say("My hat won't work!") -- TODO fix hardcoded string
     end
 end
 

@@ -65,6 +65,7 @@ local function OnLoop(inst)
 		if ent.components.timebound:GetModifierFromSource(inst) == 1 then
 			ent.components.timebound:SetModifier(inst, TUNING.TIMESTOPHAT_TIMESCALE, nil)
 			
+			-- TODO investigate using GUID based tags to enable multiple timestophat's at once
 			ent:AddTag("timeslowed")
 			table.insert(inst.slowedThings, ent)
 		end
@@ -83,7 +84,7 @@ local function OnActivate(inst)
 		c_announce("Hat Kid: Dependency '[API] Time Control' not enabled, time slow can't function!")
 		inst:AddTag("NoModError")
 
-		owner.components.talker:Say("Something's missing...")
+		owner.components.talker:Say("Something's missing...") -- TODO hardcoded string
 	end
 
 	-- Fuel
@@ -107,8 +108,10 @@ local function OnActivate(inst)
 	inst.SoundEmitter:PlaySound("timestophat/sound/loop", "timestoploop")
 
 	-- Skin, move to hatkid prefab based on event listeners, so the hat is able to be used by other characters
-	owner.oldskin = owner.AnimState:GetBuild()
-	SetSkinsOnAnim(owner.AnimState, "hatkid_timestop", "hatkid_timestop", owner.components.skinner:GetClothing(), nil, "hatkid_timestop")
+	if owner:HasTag("hatkid") then
+		owner.oldskin = owner.AnimState:GetBuild()
+		SetSkinsOnAnim(owner.AnimState, "hatkid_timestop", "hatkid_timestop", owner.components.skinner:GetClothing(), nil, "hatkid_timestop")
+	end
 
 	-- Slowed entities table
 	inst.slowedThings = {}
@@ -137,8 +140,10 @@ local function OnDeactivate(inst)
 	inst.SoundEmitter:KillSound("timestoploop")
 	
 	--Revert back to default skin (as above, move to hk prefab)
-	local default = owner.oldskin or "hatkid"
-	SetSkinsOnAnim(owner.AnimState, default, default, owner.components.skinner:GetClothing(), nil, default)
+	if owner:HasTag("hatkid") then
+		local default = owner.oldskin or "hatkid"
+		SetSkinsOnAnim(owner.AnimState, default, default, owner.components.skinner:GetClothing(), nil, default)
+	end
 end
 
 local function KeybindUse(inst)
@@ -209,14 +214,11 @@ local function fn()
 	inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
-	
-	-- inst:AddComponent("rechargeable")
-	-- inst.components.rechargeable:SetOnChargedFn(OnCharged)
 
 	inst:AddComponent("hatmagic")
 	inst.components.hatmagic.instant = false
 	inst.components.hatmagic.cooldowntime = TUNING.TIMESTOPHAT_COOLDOWN
-	inst.components.hatmagic.activetime = TUNING.TIMESTOPHAT_DURATION -- infinite, technically
+	inst.components.hatmagic.activetime = TUNING.TIMESTOPHAT_DURATION
 	inst.components.hatmagic:SetActivateFn(OnActivate)
 	inst.components.hatmagic:SetDeactivateFn(OnDeactivate)
 	inst.components.hatmagic:SetLoopFn(OnLoop)
