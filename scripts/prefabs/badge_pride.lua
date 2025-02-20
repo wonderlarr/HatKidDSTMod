@@ -7,16 +7,25 @@ local assets=
 }
 RegisterInventoryItemAtlas("images/inventoryimages/badge_pride.xml","badge_pride.tex")
 
-
-STRINGS.NAMES.BADGE_PRIDE = "Ranger Badge"
-
 local function OnEquip(inst, owner)
 	-- Mark of Pride
 	owner.components.combat:SetRange(TUNING.DEFAULT_ATTACK_RANGE + 1)
+	
+	inst:ListenForEvent("onattackother", inst.OnAttack, owner)
 end
 
 local function OnUnequip(inst, owner)
 	owner.components.combat:SetRange(TUNING.DEFAULT_ATTACK_RANGE)
+
+	inst:RemoveEventCallback("onattackother", inst.OnAttack, owner)
+end
+
+local function OnEmpty(inst)
+    if inst.components.inventoryitem ~= nil and inst.components.inventoryitem:GetGrandOwner() ~= nil then
+        inst.components.inventoryitem:GetGrandOwner():PushEvent("toolbroke", { tool = inst })
+    end
+
+    inst:Remove()
 end
 
 local function fn() 
@@ -56,8 +65,6 @@ local function fn()
  
 	-- Server components
 	inst:AddComponent("inventoryitem")
-	-- inst.components.inventoryitem.imagename = "kidpotion"
-    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/kidpotion.xml"
 
 	inst:AddComponent("inspectable")
 
@@ -68,6 +75,15 @@ local function fn()
     inst.components.equippable:SetOnUnequip( OnUnequip )
 
 	inst:AddComponent("badge")
+
+	inst:AddComponent("fueled")
+	inst.components.fueled.fueltype = FUELTYPE.MAGIC
+	inst.components.fueled:InitializeFuelLevel(100)
+	inst.components.fueled:SetDepletedFn(OnEmpty)
+
+	inst.OnAttack = function(owner, data)
+		inst.components.fueled:DoDelta(-1)
+	end
     return inst
 end
 

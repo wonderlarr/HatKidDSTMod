@@ -66,6 +66,11 @@ local PrefabFilesLocal = {
 	"badge_football",
 	"badge_fury",
 	"badge_pride",
+	"badge_onehit",
+	"badge_carefree",
+	"badge_heart",
+	"badge_strength",
+	"badge_greed",
 
 
 	"badgeseller",

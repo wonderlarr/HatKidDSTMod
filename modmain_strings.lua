@@ -157,16 +157,40 @@ STRINGS.RECIPE_DESC.HATPACK = "A little backpack for holding all your hats!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATPACK = "A little small for me..."
 
 STRINGS.NAMES.BADGE_FURY = "Comeback Badge"
-STRINGS.RECIPE_DESC.BADGE_FURY = "Greatly increases damage while at low health."
+STRINGS.RECIPE_DESC.BADGE_FURY = "Grants +50% Attack Damage while below 25% Health."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BADGE_FURY = "Quite useful!"
 
 STRINGS.NAMES.BADGE_FASTHATTER = "Fast Hatter Badge"
-STRINGS.RECIPE_DESC.BADGE_FASTHATTER = "Reduces the cooldown of hat abilities."
+STRINGS.RECIPE_DESC.BADGE_FASTHATTER = "Grants +40% Cooldown Reduction for hat abilities."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BADGE_FASTHATTER = "Quite useful!"
 
 STRINGS.NAMES.BADGE_FOOTBALL = "Protection Badge"
-STRINGS.RECIPE_DESC.BADGE_FOOTBALL = "Protects from some damage."
+STRINGS.RECIPE_DESC.BADGE_FOOTBALL = "Grants the benefits of a Football Helmet, in the form of a badge."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BADGE_FOOTBALL = "Quite useful!"
+
+STRINGS.NAMES.BADGE_PRIDE = "Longshot Badge"
+STRINGS.RECIPE_DESC.BADGE_PRIDE = "Grants +33% Attack Range."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BADGE_PRIDE = "Quite useful!"
+
+STRINGS.NAMES.BADGE_ONEHIT = "One Hit Hero Badge"
+STRINGS.RECIPE_DESC.BADGE_ONEHIT = "Causes you to die in one hit from any enemy. Quite a challenge!"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BADGE_ONEHIT = "Not very useful..."
+
+STRINGS.NAMES.BADGE_CAREFREE = "Carefree Badge"
+STRINGS.RECIPE_DESC.BADGE_CAREFREE = "Completely blocks all damage. Sometimes."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BADGE_CAREFREE = "Quite useful!"
+
+STRINGS.NAMES.BADGE_HEART = "Fragile Heart Badge"
+STRINGS.RECIPE_DESC.BADGE_HEART = "Grants +30% Max Health. This badge will break upon death."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BADGE_HEART = "Quite useful!"
+
+STRINGS.NAMES.BADGE_STRENGTH = "Fragile Strength Badge"
+STRINGS.RECIPE_DESC.BADGE_STRENGTH = "Grants +20% Attack Damage. This badge will break upon death."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BADGE_STRENGTH = "Quite useful!"
+
+STRINGS.NAMES.BADGE_GREED = "Fragile Greed Badge"
+STRINGS.RECIPE_DESC.BADGE_GREED = "Grants increased Pon drops. This badge will break upon death."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BADGE_GREED = "Quite useful!"
 
 STRINGS.NAMES.BADGE_PIN = "Badge Pin"
 STRINGS.RECIPE_DESC.BADGE_PIN = "Increases the number of badges that can be worn at one time."

@@ -163,6 +163,7 @@ AddCharacterRecipe("kidpotion_ammo",
 		numtogive = 2,
 	},
 	{ -- crafting filters
+		"MAGIC",
 		"MODS",
 	}
 )
@@ -217,7 +218,6 @@ AddCharacterRecipe("badge_football",
 	{ -- config
 		builder_tag = "hatkid",
 		-- nounlock = true,
-		-- manufactured = true,
 		actionstr = "PURCHASE_BADGE",
 		sg_state = "domediumaction",
 	},
@@ -237,13 +237,11 @@ AddCharacterRecipe("badge_fasthatter",
 	{ -- config
 		builder_tag = "hatkid",
 		-- nounlock = true,
-		-- manufactured = true,
 		actionstr = "PURCHASE_BADGE",
 		sg_state = "domediumaction",
 	},
 	{ -- crafting filters
 		"MODS",
-		"ARMOR",
 		"CRAFTING_STATION",
 		-- "CHARACTER"
 	}
@@ -257,14 +255,51 @@ AddCharacterRecipe("badge_fury",
 	{ -- config
 		builder_tag = "hatkid",
 		-- nounlock = true,
-		-- manufactured = true,
 		actionstr = "PURCHASE_BADGE",
 		sg_state = "domediumaction",
 	},
 	{ -- crafting filters
 		"MODS",
-		"ARMOR",
+		"WEAPONS",
 		"CRAFTING_STATION",
+		-- "CHARACTER"
+	}
+)
+
+AddCharacterRecipe("badge_pride",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 100),
+	},
+	TECH.BADGESELLER_ONE, -- tech level
+	{ -- config
+		builder_tag = "hatkid",
+		-- nounlock = true,
+		actionstr = "PURCHASE_BADGE",
+		sg_state = "domediumaction",
+	},
+	{ -- crafting filters
+		"MODS",
+		"CRAFTING_STATION",
+		"WEAPONS",
+		-- "CHARACTER"
+	}
+)
+
+AddCharacterRecipe("badge_onehit",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 25),
+	},
+	TECH.BADGESELLER_ONE, -- tech level
+	{ -- config
+		builder_tag = "hatkid",
+		-- nounlock = true,
+		actionstr = "PURCHASE_BADGE",
+		sg_state = "domediumaction",
+	},
+	{ -- crafting filters
+		"MODS",
+		"CRAFTING_STATION",
+		"MAGIC",
 		-- "CHARACTER"
 	}
 )

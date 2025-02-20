@@ -33,6 +33,7 @@ local function OnUse(inst)
 	
     local brella = SpawnPrefab("hatbrellaopen")
     
+    -- convert from finiteuses to fueled, if applicable
     if brella.components.fueled and inst.components.finiteuses then
         brella.components.fueled:SetPercent(inst.components.finiteuses:GetPercent())
     end
@@ -68,7 +69,7 @@ local function OnAttack(inst, attacker, target)
     if inst.attack_chain >= 3 then
         inst.attack_chain = 0
         inst:AddTag("strongatk")
-        inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE * 1.6)
+        inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE * 1.25)
     end
 end
 
@@ -79,11 +80,9 @@ local function fn()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
-	-- inst.entity:AddMiniMapEntity()
     inst.entity:AddSoundEmitter()
      
-    MakeInventoryPhysics(inst)   
-
+    MakeInventoryPhysics(inst)
       
     inst.AnimState:SetBank("hatbrella_ground")
     inst.AnimState:SetBuild("hatbrella_ground")
@@ -99,7 +98,7 @@ local function fn()
     end
 
     inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE * 1.5) -- * 1.6 to start with a strong attack on load
+    inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE * 1.25)
     inst.components.weapon:SetOnAttack(OnAttack)
 
     inst:AddTag("strongatk")
