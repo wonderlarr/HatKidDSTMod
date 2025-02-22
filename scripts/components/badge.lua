@@ -50,7 +50,7 @@ function Badge:Equip(owner)
 
             self.isequipped = true
         else
-            owner.components.talker:Say("I need another Badge Pin.")
+            owner.components.talker:Say("I need another Badge Pin.") -- TODO hardcoded string
         end
     end
 end

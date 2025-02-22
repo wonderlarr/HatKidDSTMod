@@ -59,7 +59,7 @@ end)
 
 AddStategraphActionHandler("wilson", GLOBAL.ActionHandler(GLOBAL.ACTIONS.ACTIVATE_INV_USEABLE,
 function(inst)
-	return "dolongaction"
+	return "domediumaction"
 end))
 
 --Equip badges

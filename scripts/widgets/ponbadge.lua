@@ -3,7 +3,7 @@ local UIAnim = require "widgets/uianim"
 
 local PonBadge = Class(Badge, function(self, owner)
     --         (self, anim, owner, tint, iconbuild, circular_meter, use_clear_bg, dont_update_while_paused)
-    Badge._ctor(self, nil, owner, { 18/255, 122/255, 17/255, 1 }, nil, true, true, true)
+    Badge._ctor(self, nil, owner, { 18/255, 122/255, 17/255, 1 }, nil, false, true, true) -- NO MORE CIRCLE METER!! GRAHHH!!!
 
     self.circleframe:GetAnimState():SetBank ("status_meter")
     self.circleframe:GetAnimState():SetBuild("status_meter")
