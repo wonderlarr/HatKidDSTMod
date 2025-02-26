@@ -8,11 +8,26 @@ local assets=
 RegisterInventoryItemAtlas("images/inventoryimages/badge_strength.xml","badge_strength.tex")
 
 local function OnEquip(inst, owner)
+	-- damagebonus doesn't use a SourceModifierList which concerns me somewhat, but as long as this isn't combined
+	-- with other mods we should be fine, as vanilla doesn't use them to my knowledge
+	-- Just in case, we'll check for damage bonuses and bail if we find any.
+	if not owner.components.combat.damagebonus then
+		owner.components.combat.damagebonus = 17
+		owner:AddTag("badge_strength_damagebonus")
+	else
+		owner.components.talker:Say("A mod may be conflicting with this badge.")
+	end
 
+	inst:ListenForEvent("healthdelta", inst.OnHealthDelta, owner)
 end
 
 local function OnUnequip(inst, owner)
+	-- Check with tag to ensure damagebonus is safe to remove
+	if owner:HasTag("badge_strength_damagebonus") then
+		owner.components.combat.damagebonus = nil
+	end
 
+	inst:RemoveEventCallback("healthdelta", inst.OnHealthDelta, owner)
 end
 
 local function fn() 
@@ -62,6 +77,13 @@ local function fn()
     inst.components.equippable:SetOnUnequip( OnUnequip )
 
 	inst:AddComponent("badge")
+
+	inst.OnHealthDelta = function(owner, data)
+		if data.newpercent < 0.25 then
+			owner:PushEvent("toolbroke", { tool = inst })
+			inst:Remove()
+		end
+	end
 
     return inst
 end

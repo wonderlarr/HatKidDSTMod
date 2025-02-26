@@ -56,7 +56,7 @@ end
 local function OnAttack(inst, attacker, target)
     -- If we're strong on this attack
     if inst:HasTag("strongatk") then
-        inst.SoundEmitter:PlaySound("dontstarve/creatures/together/klaus/lock_break")
+        inst.SoundEmitter:PlaySound("dontstarve/creatures/together/klaus/lock_break") -- TODO better sound
         
         inst:RemoveTag("strongatk")
         inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE)
@@ -69,7 +69,7 @@ local function OnAttack(inst, attacker, target)
     if inst.attack_chain >= 3 then
         inst.attack_chain = 0
         inst:AddTag("strongatk")
-        inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE * 1.25)
+        inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE + 17)
     end
 end
 
@@ -98,7 +98,7 @@ local function fn()
     end
 
     inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE * 1.25)
+    inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE + 17)
     inst.components.weapon:SetOnAttack(OnAttack)
 
     inst:AddTag("strongatk")

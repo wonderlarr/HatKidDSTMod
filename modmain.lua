@@ -800,7 +800,7 @@ State{
 
 		inst.SoundEmitter:PlaySound("icestomp/sound/activate")
 
-		inst:AddTag("alwaysblock")
+		inst:AddTag("alwaysblock") -- HACK TODO make this a combat damage taken modifier instead
 		
 		inst.sg:SetTimeout(20 * FRAMES)
 	end,
@@ -841,7 +841,7 @@ GLOBAL.FUELTYPE.EXPLOSIVE = "EXPLOSIVE"
 AddPrefabPostInit("ice", function(inst)
 	inst:AddComponent("fuel")
     inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL -- 180
-    inst.components.fuel.fueltype = GLOBAL.FUELTYPE.ICE -- do do do do do
+    inst.components.fuel.fueltype = GLOBAL.FUELTYPE.ICE
 end)
 
 AddPrefabPostInit("gunpowder", function(inst)

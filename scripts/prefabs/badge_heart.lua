@@ -8,11 +8,23 @@ local assets=
 RegisterInventoryItemAtlas("images/inventoryimages/badge_heart.xml","badge_heart.tex")
 
 local function OnEquip(inst, owner)
+	-- This is risky. As I understand, max health is not modified by default so it should be okay?
 
+	inst.oldmax = owner.components.health.maxhealth
+	inst.oldpercent = owner.components.health:GetPercent()
+	owner.components.health:SetMaxHealth(inst.oldmax + 50)
+	owner.components.health:SetPercent(inst.oldpercent)
+
+	inst:ListenForEvent("healthdelta", inst.OnHealthDelta, owner)
 end
 
 local function OnUnequip(inst, owner)
+	-- Remove event callback first since the following lines can cause problematic health delta events
+	inst:RemoveEventCallback("healthdelta", inst.OnHealthDelta, owner)
 
+	inst.oldpercent = owner.components.health:GetPercent()
+	owner.components.health:SetMaxHealth(inst.oldmax)
+	owner.components.health:SetPercent(inst.oldpercent)
 end
 
 local function fn() 
@@ -62,6 +74,13 @@ local function fn()
     inst.components.equippable:SetOnUnequip( OnUnequip )
 
 	inst:AddComponent("badge")
+
+	inst.OnHealthDelta = function(owner, data)
+		if data.newpercent < 0.25 then
+			owner:PushEvent("toolbroke", { tool = inst })
+			inst:Remove()
+		end
+	end
 
     return inst
 end

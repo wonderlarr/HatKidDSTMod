@@ -138,6 +138,11 @@ function MadHatter:DoDelta(delta)
 
     local old = self.val
 
+    -- greed badge hack
+    if delta > 0 and self.inst:HasTag("badge_greed_active") and math.random() <= 0.5 then
+        delta = delta * 2
+    end
+
     self:SetVal(self.val + delta)
 
     local actualDelta = self.val - old

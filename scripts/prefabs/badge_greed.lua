@@ -8,11 +8,13 @@ local assets=
 RegisterInventoryItemAtlas("images/inventoryimages/badge_greed.xml","badge_greed.tex")
 
 local function OnEquip(inst, owner)
-
+	owner:AddTag("badge_greed_active")
+	inst:ListenForEvent("healthdelta", inst.OnHealthDelta, owner)
 end
 
 local function OnUnequip(inst, owner)
-
+	owner:RemoveTag("badge_greed_active")
+	inst:RemoveEventCallback("healthdelta", inst.OnHealthDelta, owner)
 end
 
 local function fn() 
@@ -62,6 +64,13 @@ local function fn()
     inst.components.equippable:SetOnUnequip( OnUnequip )
 
 	inst:AddComponent("badge")
+
+	inst.OnHealthDelta = function(owner, data)
+		if data.newpercent < 0.25 then
+			owner:PushEvent("toolbroke", { tool = inst })
+			inst:Remove()
+		end
+	end
 
     return inst
 end
