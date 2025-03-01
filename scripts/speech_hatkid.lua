@@ -640,14 +640,14 @@ return{
 
 	ANNOUNCE_DAMP = "Splishy splashy.",
 	ANNOUNCE_WET = "I'm unpleasantly moist.",
-	ANNOUNCE_WETTER = "Wet as a bathtub I can't crawl out of.",
+	ANNOUNCE_WETTER = "Where did I put my raincoat?",
 	ANNOUNCE_SOAKED = "I'm drenched!",
 
-	ANNOUNCE_WASHED_ASHORE = "My fur is soaking wet!",
+	ANNOUNCE_WASHED_ASHORE = "I'm soaking wet!",
 
     ANNOUNCE_DESPAWN = "Everything's getting fuzzy!",
 	ANNOUNCE_BECOMEGHOST = "oOooOooO!!",
-	ANNOUNCE_GHOSTDRAIN = "I'm becoming... even more monstrous!",
+	ANNOUNCE_GHOSTDRAIN = "I'm gonna go mad!",
 	ANNOUNCE_PETRIFED_TREES = "The trees are yelling at me!!",
 	ANNOUNCE_KLAUS_ENRAGE = "Ah! I'm sorry I killed your deer!!",
 	ANNOUNCE_KLAUS_UNCHAINED = "Its belly looks hungry!",
@@ -1142,7 +1142,7 @@ return{
             GENERIC = "Hi %s! Have you been working out?",
             ATTACKER = "Hey %s, you look upset about something.",
             MURDERER = "You're just a big bully!",
-            REVIVER = "%s's nice! I wish he'd stop messing up my head fur, though.",
+            REVIVER = "%s's nice! I wish he'd stop messing up my hat, though.",
             GHOST = "I'm sure you're the strongest ghost, but a heart makes you STRONGER",
             FIRESTARTER = "%s, no!! Fire can hurt you!",
         },
@@ -2513,7 +2513,7 @@ return{
         POMEGRANATE = "I didn't expect this to grow.",
         POMEGRANATE_COOKED = "It's good for me!",
         POMEGRANATE_SEEDS = "I could grow something with these.",
-        POND = "Water doesn't go well with my fur.",
+        POND = "Water doesn't go well with my hats.",
         POOP = "Doodoo.",
         FERTILIZER = "Smells awful, but might make stuff grow!",
         PUMPKIN = "That's a huge pumpkin!",
@@ -2538,8 +2538,8 @@ return{
             GENERIC = "It must be powered by magic.",
             BURNT = "I don't think that's accurate.",
         },
-        RAINCOAT = "Dry fur is the best fur.",
-        RAINHAT = "It'll keep the water out of your fur.",
+        RAINCOAT = "Gotta keep dry.",
+        RAINHAT = "It'll keep the water out of your hair.",
         RATATOUILLE = "Do I have to eat my veggies?",
         RAZOR = "I watched my father use one of these.",
         REDGEM = "It feels warm, even on the coldest nights.",
@@ -5041,7 +5041,7 @@ return{
         LUNARPLANT_HUSK = "That was one mean plant. I'm glad it's gone!",
 
 		LUNAR_FORGE = "Can I use it to make crafts?",
-		LUNAR_FORGE_KIT = "I can build it, I have lots of free hands to spare!",
+		LUNAR_FORGE_KIT = "I can build it, with the power of my hats!",
 
 		LUNARPLANT_KIT = "I'm pretty good at this!",
 		ARMOR_LUNARPLANT = "I'm gonna look so tough!",
@@ -5225,7 +5225,7 @@ return{
         BATTLESONG_INSTANT_REVIVE = "I like singing songs!",
 
         WATHGRITHR_IMPROVEDHAT = "Can I wear it? Pleeeaaase?",
-        SPEAR_WATHGRITHR_LIGHTNING = "It gets my fur all full of static!",
+        SPEAR_WATHGRITHR_LIGHTNING = "It gets me all full of static!",
 
         BATTLESONG_CONTAINER = "Remember to put all the songs away when you're done!",
 

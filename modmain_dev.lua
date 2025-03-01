@@ -533,58 +533,19 @@ AddComponentPostInit("inventory", function(self)
         _Equip(self, item, old_to_active, no_animation, force_ui_anim)
     end
 end)
+AddPrefabPostInit("multiplayer_portal", function(inst)
+    inst:WatchWorldState("moonphase", function(inst, data)
+        if data and data == "full" then
+            -- seller already present
+            if GetClosestInstWithTag("badgeseller", inst, 1000) ~= nil then
+                
+            else
+                -- we need a seller
+                local seller = SpawnPrefab("badgeseller")
+                
+                seller.Physics:Teleport(inst.Transform:GetWorldPosition())
+            end
 
--- AddComponentPostInit("combat", function(self)
---     if not self.original_attack_period  then
---         self.original_attack_period = self.min_attack_period
---     end
--- end)
-
--- AddStategraphPostInit("wilson", function(sg) -- This will add some code to the server side stategraph
--- 	local _attack = sg.states["attack"]
--- 	local _onenter = _attack.onenter
--- 	_attack.onenter = function(inst,...)
--- 		_onenter(inst,...)
--- 		if inst:HasTag("fastattacker") then -- You'll want to change wilba to your own character's prefab
--- 			local speed = 1.3 -- Change this to whatever yoy want your speed multiplier to go to, careful when going over 5 though, it gets buggy.
--- 			inst.sg:SetTimeout(inst.sg.timeout/speed)
---       	    inst.components.combat:SetAttackPeriod(TUNING.WILSON_ATTACK_PERIOD / speed) -- Attack period is essentially like an attack cooldown, so we divide it by the speed. 
--- 			inst.AnimState:SetDeltaTimeMultiplier(speed) -- This is the time multiplier for animations, we multiply it by our speed to make the character punch fast and not have animation desyncs.
--- 			for k, v in pairs(_attack.timeline) do
--- 				v.time = v.time/speed
--- 			end
--- 		end
--- 	end
--- 	local _onexit = _attack.onexit
--- 	_attack.onexit = function(inst,...)
--- 		if inst:HasTag("fastattacker") then -- Make sure to change your prefab here too!
---             -- inst.components.combat:SetAttackPeriod(TUNING.WILSON_ATTACK_PERIOD)
--- 			inst.AnimState:SetDeltaTimeMultiplier(1) -- Here we'll only return out animation speed back to normal, since Attack Period being increased doesn't matter otherwise, and it might break things if we did return it after every attack.
--- 		end
--- 		return _onexit(inst,...)
--- 	end
--- end)
-
--- AddStategraphPostInit("wilson_client", function(sg) -- This adds code to the client side stategraph, but it's only used if the client has Movement Prediction enabled.
--- 	local _attack = sg.states["attack"]
--- 	local _onenter = _attack.onenter
--- 	_attack.onenter = function(inst,...)
--- 		_onenter(inst,...)
--- 		if inst:HasTag("fastattacker") then --Change it here again!
--- 			local speed = 1.3 -- Make sure to set your speed here as well, so the client knows.
--- 			inst.sg:SetTimeout(inst.sg.timeout/speed)
--- 			inst.AnimState:SetDeltaTimeMultiplier(speed)
--- 			for k, v in pairs(_attack.timeline) do
--- 				v.time = v.time/speed
--- 			end
--- 		end
--- 		return
--- 	end
--- 	local _onexit = _attack.onexit
--- 	_attack.onexit = function(inst,...)
--- 		if inst:HasTag("fastattacker") then  -- Final change here, to your characters prefab again.
--- 			inst.AnimState:SetDeltaTimeMultiplier(1)
--- 		end
--- 		return _onexit(inst,...)
--- 	end
--- end)
+        end
+    end)
+end)

@@ -323,10 +323,10 @@ local MasterPostInit = function(inst, data)
 		end)
 	end
 
-	inst:ListenForEvent("healthdelta", function(inst, data)
-		print("health")
-		dumptable(data)
-	end)
+	-- inst:ListenForEvent("healthdelta", function(inst, data)
+	-- 	print("health")
+	-- 	dumptable(data)
+	-- end)
 end
 
 return MakePlayerCharacter("hatkid", prefabs, assets, CommonPostInit, MasterPostInit, startInv)
