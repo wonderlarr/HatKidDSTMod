@@ -10,7 +10,7 @@ RegisterInventoryItemAtlas("images/inventoryimages/badge_pin.xml", "badge_pin.te
 
 local function OnUse(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
-	if owner then
+	if owner and owner.components.madhatter.badgeslots < owner.components.madhatter.badgeslotsmax then
 		owner.components.madhatter:DoBadgeDelta(1)
 		owner.SoundEmitter:PlaySound("dontstarve/wilson/equip_item_gold")
 		inst:Remove()

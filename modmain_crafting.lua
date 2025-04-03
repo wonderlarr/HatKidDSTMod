@@ -212,7 +212,7 @@ AddPrototyperDef("badgeseller", {
 
 AddCharacterRecipe("badge_football",
 	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 100),
+		Ingredient(CHARACTER_INGREDIENT.PON, 125),
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config
@@ -231,7 +231,7 @@ AddCharacterRecipe("badge_football",
 
 AddCharacterRecipe("badge_fasthatter",
 	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 100),
+		Ingredient(CHARACTER_INGREDIENT.PON, 150),
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config
@@ -268,7 +268,7 @@ AddCharacterRecipe("badge_fury",
 
 AddCharacterRecipe("badge_pride",
 	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 100),
+		Ingredient(CHARACTER_INGREDIENT.PON, 200),
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config
@@ -300,6 +300,65 @@ AddCharacterRecipe("badge_onehit",
 		"MODS",
 		"CRAFTING_STATION",
 		"MAGIC",
+		-- "CHARACTER"
+	}
+)
+
+AddCharacterRecipe("badge_heart",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 250),
+	},
+	TECH.BADGESELLER_ONE, -- tech level
+	{ -- config
+		builder_tag = "hatkid",
+		-- nounlock = true,
+		actionstr = "PURCHASE_BADGE",
+		sg_state = "domediumaction",
+	},
+	{ -- crafting filters
+		"MODS",
+		"CRAFTING_STATION",
+		-- "MAGIC",
+		-- "CHARACTER"
+		"ARMOR",
+	}
+)
+
+AddCharacterRecipe("badge_strength",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 300),
+	},
+	TECH.BADGESELLER_ONE, -- tech level
+	{ -- config
+		builder_tag = "hatkid",
+		-- nounlock = true,
+		actionstr = "PURCHASE_BADGE",
+		sg_state = "domediumaction",
+	},
+	{ -- crafting filters
+		"MODS",
+		"CRAFTING_STATION",
+		-- "MAGIC",
+		-- "CHARACTER"
+		"WEAPONS",
+	}
+)
+
+AddCharacterRecipe("badge_greed",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 200),
+	},
+	TECH.BADGESELLER_ONE, -- tech level
+	{ -- config
+		builder_tag = "hatkid",
+		-- nounlock = true,
+		actionstr = "PURCHASE_BADGE",
+		sg_state = "domediumaction",
+	},
+	{ -- crafting filters
+		"MODS",
+		"CRAFTING_STATION",
+		-- "MAGIC",
 		-- "CHARACTER"
 	}
 )

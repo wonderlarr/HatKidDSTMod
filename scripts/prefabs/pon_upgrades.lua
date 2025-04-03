@@ -75,8 +75,8 @@ local function fn1()
 
 	inst.components.invuseable:SetOnUse(function()
 		local owner = inst.components.inventoryitem:GetGrandOwner()
-		if owner and owner.components.madhatter and owner.components.madhatter.max < 1000 then
-			owner.components.madhatter:SetMax(1000)
+		if owner and owner.components.madhatter and owner.components.madhatter.max < 2500 then
+			owner.components.madhatter:SetMax(2500)
 			owner.SoundEmitter:PlaySound("dontstarve/wilson/equip_item_gold")
 			inst:Remove()
 		end
@@ -98,8 +98,8 @@ local function fn2()
 
 	inst.components.invuseable:SetOnUse(function()
 		local owner = inst.components.inventoryitem:GetGrandOwner()
-		if owner and owner.components.madhatter and owner.components.madhatter.max < 5000 then
-			owner.components.madhatter:SetMax(5000)
+		if owner and owner.components.madhatter and owner.components.madhatter.max < 10000 then
+			owner.components.madhatter:SetMax(10000)
 			owner.SoundEmitter:PlaySound("dontstarve/wilson/equip_item_gold")
 			inst:Remove()
 		end

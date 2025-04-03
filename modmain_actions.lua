@@ -46,13 +46,12 @@ local ACTIVATE_INV_USEABLE = AddAction("ACTIVATE_INV_USEABLE", "Use", function(a
     end
 end)
 
-ACTIVATE_INV_USEABLE.priority = 1.1
+ACTIVATE_INV_USEABLE.priority = 2
 -- ACTIVATE_INV_USEABLE.instant = true
 
 AddComponentAction("INVENTORY", "invuseable", function(inst, doer, actions, right)
     if doer.replica.inventory ~= nil and
-    doer.replica.inventory:IsOpenedBy(doer) and
-    doer.replica.madhatter:GetBadgeSlots() < 3 then
+    doer.replica.inventory:IsOpenedBy(doer) then
         table.insert(actions, GLOBAL.ACTIONS.ACTIVATE_INV_USEABLE)
     end
 end)

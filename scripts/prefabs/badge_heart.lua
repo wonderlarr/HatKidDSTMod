@@ -12,7 +12,7 @@ local function OnEquip(inst, owner)
 
 	inst.oldmax = owner.components.health.maxhealth
 	inst.oldpercent = owner.components.health:GetPercent()
-	owner.components.health:SetMaxHealth(inst.oldmax + 50)
+	owner.components.health:SetMaxHealth(inst.oldmax + 60)
 	owner.components.health:SetPercent(inst.oldpercent)
 
 	inst:ListenForEvent("healthdelta", inst.OnHealthDelta, owner)

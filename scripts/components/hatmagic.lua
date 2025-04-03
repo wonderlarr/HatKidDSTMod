@@ -86,7 +86,12 @@ end
 
 -- Returns true if able to activate magic.
 function HatMagic:CanActivate()
-    return self.useable and not self.isactive and not self.oncooldown and (self.fn_test ~= nil and self.fn_test(self.inst) == true)
+    print(self.useable)
+    print(not self.isactive)
+    print(not self.oncooldown)
+    print(self.fn_test)
+    return self.useable and not self.isactive and not self.oncooldown and (self.fn_test == nil or self.fn_test(self.inst) == true)
+    -- return self.useable and not self.isactive and not self.oncooldown
 end
 
 function HatMagic:Deactivate()

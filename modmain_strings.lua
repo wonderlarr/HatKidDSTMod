@@ -156,8 +156,8 @@ STRINGS.NAMES.HATPACK = "Hat Pack"
 STRINGS.RECIPE_DESC.HATPACK = "A little backpack for holding all your hats!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATPACK = "A little small for me..."
 
-STRINGS.NAMES.BADGE_FURY = "Comeback Badge"
-STRINGS.RECIPE_DESC.BADGE_FURY = "Grants +50% Attack Damage while below 25% Health."
+STRINGS.NAMES.BADGE_FURY = "Comeback Kid Badge"
+STRINGS.RECIPE_DESC.BADGE_FURY = "Grants +50 Attack Damage while below 25% Health."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BADGE_FURY = "Quite useful!"
 
 STRINGS.NAMES.BADGE_FASTHATTER = "Fast Hatter Badge"
@@ -181,15 +181,15 @@ STRINGS.RECIPE_DESC.BADGE_CAREFREE = "Completely blocks all damage. Sometimes."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BADGE_CAREFREE = "Quite useful!"
 
 STRINGS.NAMES.BADGE_HEART = "Fragile Heart Badge"
-STRINGS.RECIPE_DESC.BADGE_HEART = "Grants +30% Max Health. This badge will break upon death."
+STRINGS.RECIPE_DESC.BADGE_HEART = "Grants +60 Max Health. Falling below 25% health destroys this badge."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BADGE_HEART = "Quite useful!"
 
 STRINGS.NAMES.BADGE_STRENGTH = "Fragile Strength Badge"
-STRINGS.RECIPE_DESC.BADGE_STRENGTH = "Grants +20% Attack Damage. This badge will break upon death."
+STRINGS.RECIPE_DESC.BADGE_STRENGTH = "Grants +17 Attack Damage. Falling below 25% health destroys this badge."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BADGE_STRENGTH = "Quite useful!"
 
 STRINGS.NAMES.BADGE_GREED = "Fragile Greed Badge"
-STRINGS.RECIPE_DESC.BADGE_GREED = "Grants increased Pon drops. This badge will break upon death."
+STRINGS.RECIPE_DESC.BADGE_GREED = "Grants a 50% chance to double collected pons. Falling below 25% health destroys this badge."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BADGE_GREED = "Quite useful!"
 
 STRINGS.NAMES.BADGE_PIN = "Badge Pin"

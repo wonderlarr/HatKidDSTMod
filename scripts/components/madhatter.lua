@@ -23,6 +23,8 @@ end
 -- For entities with health
 -- And workable entities for now, as they share enough values
 local function OnAttack(inst, data)
+    if inst:HasTag("madhatter_maxpons") then return end
+    
     local target = data.target
     if target and target:IsValid() and not target:HasTag("madhatter_loot") then
 
@@ -44,6 +46,8 @@ end
 
 -- For pickable entities
 local function OnPick(inst, data)
+    if inst:HasTag("madhatter_maxpons") then return end
+
     local target = data.object
     if target and target:IsValid() and not target:HasTag("madhatter_loot") then
 
@@ -62,11 +66,13 @@ local function OnPick(inst, data)
 end
 
 local function OnUnlockRecipe(inst, data)
+    if inst:HasTag("madhatter_maxpons") then return end
+
     -- Players auto-learn recipes when they spawn. This prevents an award for that.
     if inst:GetTimeAlive() > 0.5 then
         local pon = SpawnPrefab("pon")
         pon.Transform:SetPosition(inst.Transform:GetWorldPosition())
-        pon.components.stackable.stacksize = 8
+        pon.award_count = 8
     end
 end
 
@@ -89,7 +95,7 @@ end
 local MadHatter = Class(function(self, inst)
     self.inst = inst
 
-    self.max = 200 -- 200, 1000, 5000
+    self.max = 500 -- 200, 1000, 5000
     self.val = 0
     
     -- Table of badges
@@ -154,11 +160,25 @@ end
 function MadHatter:SetVal(val)
     local newval = math.clamp(val, 0, self.max)
     self.val = newval
+
+    local percent = self:GetPercent()
+    if not self.inst:HasTag("madhatter_maxpons") and percent >= 1 then
+        self.inst:AddTag("madhatter_maxpons")
+    elseif self.inst:HasTag("madhatter_maxpons") and percent < 1 then
+        self.inst:RemoveTag("madhatter_maxpons")
+    end
 end
 
 function MadHatter:SetMax(max)
     local newmax = math.clamp(max, 0, 65535)
     self.max = newmax
+
+    local percent = self:GetPercent()
+    if not self.inst:HasTag("madhatter_maxpons") and percent >= 1 then
+        self.inst:AddTag("madhatter_maxpons")
+    elseif self.inst:HasTag("madhatter_maxpons") and percent < 1 then
+        self.inst:RemoveTag("madhatter_maxpons")
+    end
 end
 
 function MadHatter:GetPercent()

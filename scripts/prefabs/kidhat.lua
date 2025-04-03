@@ -70,7 +70,51 @@ local function OnUnequip(inst, owner)
 		inst.components.fueled:StopConsuming()
 	end
 end
- 
+
+--[[
+	"badgeseller_location_spawn",
+	"badgeseller_location_pigking",
+	"badgeseller_location_oasis",
+	"badgeseller_location_stage",
+	"badgeseller_location_moonstone",
+	"badgeseller_location_lunar",
+	"badgeseller_location_pearl",
+	"badgeseller_location_monkey",
+	"badgeseller_location_awesome",
+]]
+
+local function OnActivate(inst)
+	local owner = inst.components.inventoryitem:GetGrandOwner()
+	local seller = GetClosestInstWithTag("badgeseller", TheWorld, 1000)
+	local tag = seller and seller.location_tag ~= nil and seller.location_tag
+	local place
+
+	-- https://x.com/ExecutiveKrab/status/1589086689162858497
+	if tag == "badgeseller_location_spawn" then
+		place = "the Florid Postern"
+	elseif tag == "badgeseller_location_pigking" then
+		place = "the Pig King"
+	elseif tag == "badgeseller_location_oasis" then
+		place = "the Oasis"
+	elseif tag == "badgeseller_location_stage" then
+		place = "Charlie's Stage"
+	elseif tag == "badgeseller_location_moonstone" then
+		place = "the Moon Stone"
+	elseif tag == "badgeseller_location_lunar" then
+		place = "a Lunar Fissure"
+	elseif tag == "badgeseller_location_pearl" then
+		place = "the Crabby Hermit"
+	elseif tag == "badgeseller_location_monkey" then
+		place = "the Monkey Queen"
+	elseif tag == "badgeseller_location_awesome" then
+		place = "the Stage Hand"
+	else
+		owner.components.talker:Say("Nothing strange seems to be happening... yet.")
+		return
+	end
+	
+	owner.components.talker:Say("Strange things are afoot near " .. place .. "!")
+end
 
  
 local function OnEmpty(inst)
@@ -151,6 +195,14 @@ local function fn()
 		inst:AddComponent("waterproofer")
 		inst.components.waterproofer:SetEffectiveness(TUNING.KIDHAT_WATERPROOFNESS)
 	end
+
+	inst:AddComponent("hatmagic")
+	inst.components.hatmagic.instant = true
+	inst.components.hatmagic.cooldowntime = 10
+	-- inst.components.hatmagic.activetime = 2/3
+	inst.components.hatmagic:SetActivateFn(OnActivate)
+	-- inst.components.hatmagic:SetTestFn(TestFn)
+
 
     return inst
 end

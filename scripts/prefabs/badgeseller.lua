@@ -41,13 +41,15 @@ local function fn()
     inst.entity:AddDynamicShadow()
     inst.entity:AddNetwork()
 
-    MakeCharacterPhysics(inst, 50, .5)
+    -- MakeCharacterPhysics(inst, 50, .5)
+    MakeObstaclePhysics(inst, 0.5, .5)
 
     inst.DynamicShadow:SetSize(1.5, 1.25)
     inst.Transform:SetFourFaced()
 
     inst:AddTag("character")
     inst:AddTag("prototyper")
+    inst:AddTag("badgeseller")
 
     inst.AnimState:SetBank("wilson")
     inst.AnimState:SetBuild("badgeseller")
@@ -82,6 +84,23 @@ local function fn()
     inst:AddComponent("locomotor")
 
     inst:AddComponent("inspectable")
+
+    TheWorld:ListenForEvent("badgeseller_despawn", function()
+        -- inst.AnimState:PlayAnimation("emoteXL_waving1")
+        -- inst.AnimState:PushAnimation("jump_pre")
+        -- inst.AnimState:PushAnimation("jump")
+
+        -- local ct = 1
+
+        -- inst:ListenForEvent("animover", function()
+        --     if ct >= 3 then
+        --         inst:Remove()
+        --     else
+        --         ct = ct + 1
+        --     end
+        -- end)
+        inst:Remove()
+    end)
 
     return inst
 end

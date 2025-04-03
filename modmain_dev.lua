@@ -320,14 +320,14 @@ AddPrefabPostInitAny(function(inst)
             inst.gpons = 3
             inst.cpons = 2
         end
+    elseif inst.components.pickable then
+        inst.cpons = 1
+        inst.gpons = 1
     -- For workable entities, like rocks and trees
     elseif inst.components.workable then
         inst.gpons = 5
         inst.cpons = inst.components.workable.workleft or 0
     -- For pickable entities, like mushrooms and bushes
-    elseif inst.components.pickable then
-        inst.cpons = 1
-        inst.gpons = 1
     end
 end)
 
@@ -532,20 +532,118 @@ AddComponentPostInit("inventory", function(self)
         -- run vanilla function
         _Equip(self, item, old_to_active, no_animation, force_ui_anim)
     end
-end)
-AddPrefabPostInit("multiplayer_portal", function(inst)
-    inst:WatchWorldState("moonphase", function(inst, data)
-        if data and data == "full" then
-            -- seller already present
-            if GetClosestInstWithTag("badgeseller", inst, 1000) ~= nil then
+-- end)
+-- AddPrefabPostInit("multiplayer_portal", function(inst)
+--     inst:WatchWorldState("moonphase", function(inst, data)
+--         if data and data == "full" then
+--             -- seller already present
+--             if GetClosestInstWithTag("badgeseller", inst, 1000) ~= nil then
                 
-            else
-                -- we need a seller
-                local seller = SpawnPrefab("badgeseller")
+--             else
+--                 -- we need a seller
+--                 local seller = SpawnPrefab("badgeseller")
                 
-                seller.Physics:Teleport(inst.Transform:GetWorldPosition())
-            end
+--                 local pos = inst:GetPosition()
+--                 seller.Physics:Teleport(pos.x + 10 ,0 ,pos.z + 10)
+--             end
 
+--         end
+--     end)
+-- end)
+
+end)
+
+AddPrefabPostInit("multiplayer_portal", function(inst)
+    inst:WatchWorldState("cycles", function(inst, data)
+        -- This will despawn any active badgesellers
+        TheWorld:PushEvent("badgeseller_despawn")
+
+        local seller = GLOBAL.SpawnPrefab("badgeseller")
+
+        local location_tags = {
+            "badgeseller_location_spawn",
+            "badgeseller_location_pigking",
+            "badgeseller_location_oasis",
+            "badgeseller_location_stage",
+            "badgeseller_location_moonstone",
+            "badgeseller_location_lunar",
+            "badgeseller_location_pearl",
+            "badgeseller_location_monkey",
+            "badgeseller_location_awesome",
+        }
+
+        local tag = location_tags[math.random(1, 9)]
+        local location = GetRandomInstWithTag(tag, TheWorld, 1000)
+
+        seller.location_tag = tag
+
+        if location then
+            local pos = FindNearbyLand(location:GetPosition(), 25) or Vector3(0,0,0)
+            seller.Physics:Teleport(pos.x, 0, pos.z)
         end
+        
+
+        seller.AnimState:PlayAnimation("jumpout")
+        seller.AnimState:PushAnimation("emoteXL_waving1")
     end)
+end)
+
+-- Spawn
+AddPrefabPostInit("multiplayer_portal", function(inst)
+    inst:AddTag("badgeseller_location_spawn")
+end)
+AddPrefabPostInit("multiplayer_portal_moonrock", function(inst)
+    inst:AddTag("badgeseller_location_spawn")
+end)
+
+-- Pig King
+AddPrefabPostInit("pigking", function(inst)
+    inst:AddTag("badgeseller_location_pigking")
+end)
+
+-- Oasis
+AddPrefabPostInit("oasislake", function(inst)
+    inst:AddTag("badgeseller_location_oasis")
+end)
+
+-- Stage
+AddPrefabPostInit("charlie_stage", function(inst)
+    inst:AddTag("badgeseller_location_stage")
+end)
+AddPrefabPostInit("charlie_stage_post", function(inst)
+    inst:AddTag("badgeseller_location_stage")
+end)
+
+-- Moon Stone
+AddPrefabPostInit("moonbase", function(inst)
+    inst:AddTag("badgeseller_location_moonstone")
+end)
+
+-- Lunar
+AddPrefabPostInit("moon_fissure", function(inst)
+    inst:AddTag("badgeseller_location_lunar")
+end)
+AddPrefabPostInit("moon_fissure_plugged", function(inst)
+    inst:AddTag("badgeseller_location_lunar")
+end)
+
+-- Pearl
+AddPrefabPostInit("hermithouse_construction1", function(inst)
+    inst:AddTag("badgeseller_location_pearl")
+end)
+AddPrefabPostInit("hermithouse_construction2", function(inst)
+    inst:AddTag("badgeseller_location_pearl")
+end)
+AddPrefabPostInit("hermithouse_construction3", function(inst)
+    inst:AddTag("badgeseller_location_pearl")
+end)
+
+-- Monkey
+AddPrefabPostInit("monkeyqueen", function(inst)
+    inst:AddTag("badgeseller_location_monkey")
+end)
+
+-- Awesome
+AddPrefabPostInit("stagehand", function(inst)
+    inst:AddTag("badgeseller_location_awesome")
 end)

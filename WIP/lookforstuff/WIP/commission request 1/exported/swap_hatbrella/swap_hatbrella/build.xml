@@ -1,0 +1,5 @@
+<Build name="swap_hatbrella.scml">
+ <Symbol name="hatbrella">
+  <Frame framenum="0" duration="10" image="hatbrella" w="128" h="256" x="16.868225" y="-66.739197"/>
+ </Symbol>
+</Build>

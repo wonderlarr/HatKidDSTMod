@@ -183,14 +183,13 @@ modimport("modmain_tuning.lua")
 modimport("modmain_crafting.lua")
 modimport("modmain_actions.lua")
 modimport("modmain_insight.lua")
+modimport("modmain_strings.lua")
 
 modimport("modmain_dev.lua")
 
 -- If meme language or meme language server is enabled, we'll use our own meme strings, otherwise load the normal ones.
 if GLOBAL.KnownModIndex:IsModEnabled("workshop-1289272965") or GLOBAL.KnownModIndex:IsModEnabled("workshop-2926922407") then
 	modimport("modmain_strings_alt.lua")
-else
-	modimport("modmain_strings.lua")
 end
 
 modimport("scripts/keyhandler.lua") --Keyhandler (usually engine.lua)

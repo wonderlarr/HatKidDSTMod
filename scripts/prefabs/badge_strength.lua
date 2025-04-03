@@ -15,7 +15,7 @@ local function OnEquip(inst, owner)
 		owner.components.combat.damagebonus = 17
 		owner:AddTag("badge_strength_damagebonus")
 	else
-		owner.components.talker:Say("A mod may be conflicting with this badge.")
+		owner.components.talker:Say("MOD CONFLICT! Badge cannot function!")
 	end
 
 	inst:ListenForEvent("healthdelta", inst.OnHealthDelta, owner)
@@ -79,7 +79,7 @@ local function fn()
 	inst:AddComponent("badge")
 
 	inst.OnHealthDelta = function(owner, data)
-		if data.newpercent < 0.25 then
+		if data.newpercent < 0.25 and owner:HasTag("badge_strength_damagebonus") then
 			owner:PushEvent("toolbroke", { tool = inst })
 			inst:Remove()
 		end
