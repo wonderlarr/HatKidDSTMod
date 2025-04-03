@@ -24,8 +24,6 @@ local function MakeExplosion(data)
         inst.AnimState:PlayAnimation("implode")
 		inst.AnimState:SetDeltaTimeMultiplier(1.1)
 
-        -- inst.SoundEmitter:PlaySound("kidpotion/sound/explode")
-
         inst:ListenForEvent("animover", inst.Remove)
     end
 

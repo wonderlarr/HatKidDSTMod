@@ -3,7 +3,7 @@
 <guid>{1b04a51c-8f95-417b-a80a-067e449e059c}</guid>
 <version>4</version>
 <eventgroup_nextid>0</eventgroup_nextid>
-<soundbank_nextid>2</soundbank_nextid>
+<soundbank_nextid>3</soundbank_nextid>
 <sounddef_nextid>2</sounddef_nextid>
 <build_project>1</build_project>
 <build_headerfile>0</build_headerfile>
@@ -198,7 +198,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>sprinthat/mono_loop.ogg</filename>
+<filename>newsounds/sprinthat_loop.ogg</filename>
 <soundbankname>sprinthat</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -237,7 +237,7 @@
 <notes></notes>
 <entrylistmode>1</entrylistmode>
 <waveform>
-<filename>sprinthat/mono_release.ogg</filename>
+<filename>newsounds/sprinthat_release.ogg</filename>
 <soundbankname>sprinthat</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -298,7 +298,7 @@
 <car_rpmsmooth>0.075</car_rpmsmooth>
 <car_loadsmooth>0.05</car_loadsmooth>
 <car_loadscale>6</car_loadscale>
-<volume_db>-10</volume_db>
+<volume_db>-8</volume_db>
 <pitch>0</pitch>
 <pitch_units>Octaves</pitch_units>
 <pitch_randomization>0</pitch_randomization>
@@ -310,9 +310,9 @@
 <stealpriority>10000</stealpriority>
 <mode>x_3d</mode>
 <ignoregeometry>No</ignoregeometry>
-<rolloff>Logarithmic</rolloff>
-<mindistance>50</mindistance>
-<maxdistance>1000</maxdistance>
+<rolloff>Linear</rolloff>
+<mindistance>10</mindistance>
+<maxdistance>30</maxdistance>
 <auto_distance_filtering>Off</auto_distance_filtering>
 <distance_filter_centre_freq>1500</distance_filter_centre_freq>
 <headrelative>World_relative</headrelative>
@@ -440,6 +440,7 @@
 <_IOS_resamplemode>Off</_IOS_resamplemode>
 <_IOS_automaticsampleratepercentage>100</_IOS_automaticsampleratepercentage>
 <_IOS_fixedsamplerate>48000</_IOS_fixedsamplerate>
+<unmanagedwaveform>newsounds/sprinthat_loop.ogg</unmanagedwaveform>
 </simpleevent>
 <simpleevent>
 <event>
@@ -487,7 +488,7 @@
 <car_rpmsmooth>0.075</car_rpmsmooth>
 <car_loadsmooth>0.05</car_loadsmooth>
 <car_loadscale>6</car_loadscale>
-<volume_db>-10</volume_db>
+<volume_db>-8</volume_db>
 <pitch>0</pitch>
 <pitch_units>Octaves</pitch_units>
 <pitch_randomization>0.083333333333333328707</pitch_randomization>
@@ -499,9 +500,9 @@
 <stealpriority>10000</stealpriority>
 <mode>x_3d</mode>
 <ignoregeometry>No</ignoregeometry>
-<rolloff>Logarithmic</rolloff>
-<mindistance>50</mindistance>
-<maxdistance>1000</maxdistance>
+<rolloff>Linear</rolloff>
+<mindistance>10</mindistance>
+<maxdistance>30</maxdistance>
 <auto_distance_filtering>Off</auto_distance_filtering>
 <distance_filter_centre_freq>1500</distance_filter_centre_freq>
 <headrelative>World_relative</headrelative>
@@ -629,6 +630,7 @@
 <_IOS_resamplemode>Off</_IOS_resamplemode>
 <_IOS_automaticsampleratepercentage>100</_IOS_automaticsampleratepercentage>
 <_IOS_fixedsamplerate>48000</_IOS_fixedsamplerate>
+<unmanagedwaveform>newsounds/sprinthat_release.ogg</unmanagedwaveform>
 </simpleevent>
 </eventgroup>
 <default_soundbank_props>
@@ -694,7 +696,7 @@
 </default_soundbank_props>
 <soundbank>
 <name>sprinthat</name>
-<guid>{e8ee3593-2649-46d9-aa3e-b03d605d766e}</guid>
+<guid>{6af16cfe-b2f6-4c5f-89bd-1cb3954d6b30}</guid>
 <load_into_rsx>0</load_into_rsx>
 <disable_seeking>0</disable_seeking>
 <enable_syncpoints>1</enable_syncpoints>
@@ -711,8 +713,8 @@
 <_IOS_banktype>DecompressedSample</_IOS_banktype>
 <notes></notes>
 <waveform>
-<filename>sprinthat/mono_loop.ogg</filename>
-<guid>{7114f140-6295-4424-8062-da132ca29615}</guid>
+<filename>newsounds/sprinthat_loop.ogg</filename>
+<guid>{3e551955-3c19-4243-8cc2-335e6531a478}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>
@@ -756,8 +758,8 @@
 <notes></notes>
 </waveform>
 <waveform>
-<filename>sprinthat/mono_release.ogg</filename>
-<guid>{b5cae829-4f27-4024-b1cc-e74718c9136b}</guid>
+<filename>newsounds/sprinthat_release.ogg</filename>
+<guid>{480d17be-6b4a-4969-a8f5-6c800a7f3222}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>
 <deffreq>44100</deffreq>

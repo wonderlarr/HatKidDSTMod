@@ -798,7 +798,7 @@ State{
 		inst.AnimState:OverrideSymbol("swap_frozen", "frozen", "frozen")
 		inst.AnimState:PlayAnimation("frozen")
 
-		inst.SoundEmitter:PlaySound("icestomp/sound/activate")
+		inst.SoundEmitter:PlaySound("polarhat/sound/activate")
 
 		inst:AddTag("alwaysblock") -- HACK TODO make this a combat damage taken modifier instead
 		

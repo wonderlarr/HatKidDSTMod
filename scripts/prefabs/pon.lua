@@ -7,7 +7,7 @@ local assets =
     Asset("IMAGE", "images/inventoryimages/pon.tex"),
     
     Asset("SOUNDPACKAGE", "sound/pon.fev"),
-    Asset("SOUND", "sound/pon_bank01.fsb"),
+    Asset("SOUND", "sound/pon.fsb"),
 }
 
 RegisterInventoryItemAtlas("images/inventoryimages/pon.xml","pon.tex")
@@ -23,8 +23,6 @@ local function OnDrop(inst)
     inst:DoTaskInTime(1.5, function(inst)
         inst.Physics:CollidesWith(COLLISION.CHARACTERS)
     end)
-
-    -- inst.AnimState:SetMultColour(0.2,0.2,1,1)
 end
 
 local function DoSound(inst, owner)

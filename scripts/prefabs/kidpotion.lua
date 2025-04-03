@@ -4,10 +4,7 @@ local kidpotion_assets = {
 	
     Asset("ATLAS", "images/inventoryimages/kidpotion.xml"),
     Asset("IMAGE", "images/inventoryimages/kidpotion.tex"),
-
-    Asset("SOUNDPACKAGE", "sound/brewinghat.fev"),
-    Asset("SOUND", "sound/brewinghat.fsb"),
-
+    
     Asset("SOUNDPACKAGE", "sound/kidpotion.fev"),
     Asset("SOUND", "sound/kidpotion.fsb"),
 }
@@ -93,7 +90,7 @@ local function OnThrown(inst, attacker)
     inst.Physics:CollidesWith(COLLISION.ITEMS)
     inst.Physics:SetCapsule(.2, .2)
  
-    attacker.SoundEmitter:PlaySound("brewinghat/sound/throw")
+    attacker.SoundEmitter:PlaySound("kidpotion/sound/throw")
 
     if inst.sourceprefab then
         inst.sourceprefab:PushEvent("startcooling")

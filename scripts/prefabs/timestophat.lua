@@ -9,6 +9,9 @@ local assets=
 	
 	Asset("SOUNDPACKAGE", "sound/timestophat.fev"),
     Asset("SOUND", "sound/timestophat.fsb"),
+
+	Asset("SOUNDPACKAGE", "sound/dwellermask.fev"),
+    Asset("SOUND", "sound/dwellermask.fsb"),
 	
 	Asset( "ANIM", "anim/hatkid_timestop.zip" ),
 }
@@ -98,11 +101,9 @@ local function OnActivate(inst)
 	
 	--Sounds
 	if math.random() <= 0.01 then
-		-- ZA WARUDO
-		inst.SoundEmitter:PlaySound("timestophat/sound/activate_awesome")
+		inst.SoundEmitter:PlaySound("timestophat/sound/activate_alt")
 	else
-		-- normal sound
-		inst.SoundEmitter:PlaySound("timestophat/sound/activate")
+		inst.SoundEmitter:PlaySound("dwellermask/sound/activate")
 	end
 	
 	inst.SoundEmitter:PlaySound("timestophat/sound/loop", "timestoploop")
@@ -136,7 +137,7 @@ local function OnDeactivate(inst)
 	end
 	
 	--Sounds
-	inst.SoundEmitter:PlaySound("timestophat/sound/deactivate")
+	inst.SoundEmitter:PlaySound("dwellermask/sound/deactivate")
 	inst.SoundEmitter:KillSound("timestoploop")
 	
 	--Revert back to default skin (as above, move to hk prefab)

@@ -1,11 +1,11 @@
 local assets =
 {
-    Asset("ANIM", "anim/structure_collapse_fx.zip"),
-    Asset("ANIM", "anim/fx_boat_pop.zip"),
-    Asset("ANIM", "anim/sleepcloud.zip"),
+    -- Asset("ANIM", "anim/structure_collapse_fx.zip"),
+    -- Asset("ANIM", "anim/fx_boat_pop.zip"),
+    -- Asset("ANIM", "anim/sleepcloud.zip"),
 
-    Asset("SOUNDPACKAGE", "sound/icestomp.fev"),
-    Asset("SOUND", "sound/icestomp.fsb"), 
+    Asset("SOUNDPACKAGE", "sound/polarhat.fev"),
+    Asset("SOUND", "sound/polarhat.fsb"), 
 }
 
 local function MakeExplosion(data)
@@ -51,7 +51,7 @@ local function MakeExplosion(data)
         -- This code only runs on the client, so no need to do any stupid net vars, god i hate them
         -- Fade between orange a purple
 
-        inst.SoundEmitter:PlaySound("icestomp/sound/stomp")
+        inst.SoundEmitter:PlaySound("polarhat/sound/stomp")
 
         inst:ListenForEvent("animover", inst.Remove)
     end
