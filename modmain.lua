@@ -45,6 +45,7 @@ local PrefabFilesLocal = {
 
 	--collectables (disabled)
 	"pon",
+	"pon_boss",
 	-- "pon_heart",
 	-- "timepiece",
 	-- "relic_rift1",

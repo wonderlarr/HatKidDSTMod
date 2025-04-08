@@ -11,9 +11,9 @@ local function OnEquip(inst, owner)
 	-- This is risky. As I understand, max health is not modified by default so it should be okay?
 
 	inst.oldmax = owner.components.health.maxhealth
-	inst.oldpercent = owner.components.health:GetPercent()
-	owner.components.health:SetMaxHealth(inst.oldmax + 60)
-	owner.components.health:SetPercent(inst.oldpercent)
+	inst.oldval = owner.components.health.currenthealth
+	owner.components.health:SetMaxHealth(inst.oldmax + 30)
+	owner.components.health:SetCurrentHealth(inst.oldval)
 
 	inst:ListenForEvent("healthdelta", inst.OnHealthDelta, owner)
 end
@@ -22,9 +22,9 @@ local function OnUnequip(inst, owner)
 	-- Remove event callback first since the following lines can cause problematic health delta events
 	inst:RemoveEventCallback("healthdelta", inst.OnHealthDelta, owner)
 
-	inst.oldpercent = owner.components.health:GetPercent()
+	inst.oldval = owner.components.health.currenthealth
 	owner.components.health:SetMaxHealth(inst.oldmax)
-	owner.components.health:SetPercent(inst.oldpercent)
+	owner.components.health:SetCurrentHealth(math.min(inst.oldval, inst.oldmax)) -- clamps health if we unequip while above 120
 end
 
 local function fn() 

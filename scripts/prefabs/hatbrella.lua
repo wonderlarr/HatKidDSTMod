@@ -54,23 +54,42 @@ local function OnEmpty(inst)
 end
 
 local function OnAttack(inst, attacker, target)
-    -- If we're strong on this attack
-    if inst:HasTag("strongatk") then
-        inst.SoundEmitter:PlaySound("dontstarve/creatures/together/klaus/lock_break") -- TODO better sound
+    -- -- If we're strong on this attack
+    -- if inst:HasTag("strongatk") then
+    --     inst.SoundEmitter:PlaySound("dontstarve/creatures/together/klaus/lock_break") -- TODO better sound
         
-        inst:RemoveTag("strongatk")
-        inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE)
+    --     inst:RemoveTag("strongatk")
+    --     inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE)
+    -- end
+
+    -- -- Add one to the counter
+    -- inst.attack_chain = inst.attack_chain + 1
+
+    -- -- Set damage for next attack if we're ready
+    -- if inst.attack_chain >= 3 then
+    --     inst.attack_chain = 0
+    --     inst:AddTag("strongatk")
+    --     inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE + 25.5)
+    -- end
+
+    if target.components.combat then
+        if target.hatbrella_chain == nil then
+            target.hatbrella_chain = 0
+        end
+
+        target.hatbrella_chain = target.hatbrella_chain + 1
+
+        if target:HasTag("hatbrella_strongatk") then
+            target:RemoveTag("hatbrella_strongatk")
+            target.components.combat:GetAttacked(attacker, 25.5, inst)
+            target.hatbrella_chain = 0
+        elseif target.hatbrella_chain >= 2 then
+            target:AddTag("hatbrella_strongatk")
+        end
     end
 
-    -- Add one to the counter
-    inst.attack_chain = inst.attack_chain + 1
 
-    -- Set damage for next attack if we're ready
-    if inst.attack_chain >= 3 then
-        inst.attack_chain = 0
-        inst:AddTag("strongatk")
-        inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE + 17)
-    end
+
 end
 
 local function fn()
@@ -98,25 +117,31 @@ local function fn()
     end
 
     inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE + 17)
+    inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE) -- strong = +25.5
     inst.components.weapon:SetOnAttack(OnAttack)
 
-    inst:AddTag("strongatk")
-    inst.attack_chain = 0 
+    --[[
+    average damage per 3 hits for various weapons
+    spear = 102
+    battle spear = 127.5
+    tentaclespike = 153
+    hatbrella = 178.5 (possibly 205.5)
+    nightsword = 204
+    ]]
+
+    -- inst:AddTag("strongatk")
+    -- inst.attack_chain = 0 
   
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    -- inst.components.inventoryitem.imagename = "hatbrella"
-    -- inst.components.inventoryitem.atlasname = "images/inventoryimages/hatbrella.xml"
-	
+
     inst:AddComponent("equippable")
 	if TUNING.ITEMRESTRICTIONS then
 		inst.components.equippable.restrictedtag = "hatkid"
 	end
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
-    inst.components.equippable.walkspeedmult = 1.05
 
     if TUNING.HATBRELLA_DURABILITY then
         inst:AddComponent("finiteuses")

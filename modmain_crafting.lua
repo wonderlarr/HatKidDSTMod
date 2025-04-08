@@ -32,11 +32,11 @@ end
 
 AddCharacterRecipe("hatbrella",
 	{ -- ingredients. Formatted identically to the old AddRecipe()
-		GLOBAL.Ingredient("twigs", 2),
-		GLOBAL.Ingredient("beefalowool", 1),
-		GLOBAL.Ingredient("goldnugget", 2),
+		Ingredient("spear", 1),
+		Ingredient("tentaclespots", 1),
+		Ingredient(CHARACTER_INGREDIENT.PON, 50),
 	},
-	GLOBAL.TECH.SCIENCE_ONE, -- crafting station. Refer to other recipes in recipes.lua for other stations.
+	TECH.SCIENCE_ONE, -- crafting station. Refer to other recipes in recipes.lua for other stations.
 	{ -- config. Other options can be found in recipe.lua, under the Recipe class.
 		builder_tag = "hatkid"
 	}, 
@@ -52,9 +52,10 @@ AddCharacterRecipe("hatbrella",
 AddCharacterRecipe("kidhat",
 	{ -- ingredients
 		Ingredient("silk", 2),
-		Ingredient("goldnugget", 2),
+		Ingredient("goldnugget", 1),
+		Ingredient(CHARACTER_INGREDIENT.PON, 50),
 	},
-	TECH.SCIENCE_ONE, -- tech level
+	TECH.NONE, -- tech level
 	{ -- config
 		builder_tag = "hatkid"
 	},
@@ -69,6 +70,7 @@ AddCharacterRecipe("sprinthat",
 	{ -- ingredients
 		Ingredient("silk", 4),
 		Ingredient("feather_robin", 2),
+		Ingredient(CHARACTER_INGREDIENT.PON, 100),
 	},
 	TECH.SCIENCE_TWO, -- tech level
 	{ -- config
@@ -84,10 +86,10 @@ AddCharacterRecipe("sprinthat",
 AddCharacterRecipe("brewinghat",
 	{ -- ingredients
 		Ingredient("silk", 4),
-		Ingredient("slurtleslime", 2),
 		Ingredient("purplegem", 1),
+		Ingredient(CHARACTER_INGREDIENT.PON, 200),
 	},
-	TECH.MAGIC_TWO, -- tech level
+	TECH.MAGIC_ONE, -- tech level
 	{ -- config
 		builder_tag = "hatkid"
 	}, 
@@ -102,10 +104,10 @@ AddCharacterRecipe("brewinghat",
 AddCharacterRecipe("polarhat",
 	{ -- ingredients
 		Ingredient("winterhat", 1),
-		Ingredient("ice", 10),
 		Ingredient("bluegem", 1),
+		Ingredient(CHARACTER_INGREDIENT.PON, 200),
 	},
-	TECH.MAGIC_TWO, -- tech level
+	TECH.MAGIC_ONE, -- tech level
 	{ -- config
 		builder_tag = "hatkid"
 	}, 
@@ -119,11 +121,11 @@ AddCharacterRecipe("polarhat",
 
 AddCharacterRecipe("dwellermask",
 	{ -- ingredients
-		Ingredient("nightmarefuel", 6),
-		Ingredient("thulecite", 2),
-		Ingredient("greengem", 1)
+		Ingredient("nightmarefuel", 8),
+		Ingredient("thulecite", 1),
+		Ingredient(CHARACTER_INGREDIENT.PON, 250),
 	},
-	TECH.ANCIENT_TWO, -- tech level
+	TECH.MAGIC_TWO, -- tech level
 	{ -- config
 		builder_tag = "hatkid"
 	}, 
@@ -136,10 +138,9 @@ AddCharacterRecipe("dwellermask",
 
 AddCharacterRecipe("timestophat",
 	{ -- ingredients
-		Ingredient("ruinshat", 1),
-		Ingredient("moonglass", 9),
 		Ingredient("silk", 16),	
-		Ingredient("greengem", 1)
+		Ingredient("greengem", 1),
+		Ingredient(CHARACTER_INGREDIENT.PON, 500),
 	},
 	TECH.MOON_ALTAR_TWO, -- tech level
 	{ -- config
@@ -153,14 +154,12 @@ AddCharacterRecipe("timestophat",
 
 AddCharacterRecipe("kidpotion_ammo",
 	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 10),
-		Ingredient("nightmarefuel", 1),
-
+		Ingredient(CHARACTER_INGREDIENT.PON, 50),
 	},
 	TECH.SCIENCE_TWO, -- tech level
 	{ -- config
 		builder_tag = "hatkid",
-		numtogive = 2,
+		numtogive = 3,
 	},
 	{ -- crafting filters
 		"MAGIC",
@@ -173,10 +172,8 @@ AddCharacterRecipe("kidpotion_ammo",
 GLOBAL.STRINGS.ACTIONS.OPEN_CRAFTING.PURCHASE_BADGE = "Purchase from"
 GLOBAL.STRINGS.UI.CRAFTING.RECIPEACTION.PURCHASE_BADGE = "Purchase"
 GLOBAL.STRINGS.UI.CRAFTING.TABACTION.PURCHASE_BADGE = "Purchase"
-GLOBAL.STRINGS.UI.CRAFTING.NEEDSBADGESELLER_ONE = "Find the Badge Seller to purchase this item."
-GLOBAL.STRINGS.UI.CRAFTING.NEEDSBADGESELLER_TWO = "Find the Badge Seller to purchase this item."
-
--- references from ShoeTime (vaguely, i didnt know how to do this)
+GLOBAL.STRINGS.UI.CRAFTING.NEEDSBADGESELLER_ONE = "Find the Badge Seller to purchase this recipe."
+GLOBAL.STRINGS.UI.CRAFTING.NEEDSBADGESELLER_TWO = "Find the Badge Seller to purchase this recipe."
 
 table.insert(TechTree.AVAILABLE_TECH, "BADGESELLER")
 	
@@ -212,7 +209,7 @@ AddPrototyperDef("badgeseller", {
 
 AddCharacterRecipe("badge_football",
 	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 125),
+		Ingredient(CHARACTER_INGREDIENT.PON, 150),
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config
@@ -225,6 +222,7 @@ AddCharacterRecipe("badge_football",
 		"MODS",
 		"ARMOR",
 		"CRAFTING_STATION",
+		"MAGIC",
 		-- "CHARACTER"
 	}
 )
@@ -243,6 +241,7 @@ AddCharacterRecipe("badge_fasthatter",
 	{ -- crafting filters
 		"MODS",
 		"CRAFTING_STATION",
+		"MAGIC",
 		-- "CHARACTER"
 	}
 )
@@ -262,6 +261,7 @@ AddCharacterRecipe("badge_fury",
 		"MODS",
 		"WEAPONS",
 		"CRAFTING_STATION",
+		"MAGIC",
 		-- "CHARACTER"
 	}
 )
@@ -281,6 +281,7 @@ AddCharacterRecipe("badge_pride",
 		"MODS",
 		"CRAFTING_STATION",
 		"WEAPONS",
+		"MAGIC",
 		-- "CHARACTER"
 	}
 )
@@ -306,7 +307,7 @@ AddCharacterRecipe("badge_onehit",
 
 AddCharacterRecipe("badge_heart",
 	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 250),
+		Ingredient(CHARACTER_INGREDIENT.PON, 300),
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config
@@ -318,7 +319,7 @@ AddCharacterRecipe("badge_heart",
 	{ -- crafting filters
 		"MODS",
 		"CRAFTING_STATION",
-		-- "MAGIC",
+		"MAGIC",
 		-- "CHARACTER"
 		"ARMOR",
 	}
@@ -338,13 +339,32 @@ AddCharacterRecipe("badge_strength",
 	{ -- crafting filters
 		"MODS",
 		"CRAFTING_STATION",
-		-- "MAGIC",
+		"MAGIC",
 		-- "CHARACTER"
 		"WEAPONS",
 	}
 )
 
 AddCharacterRecipe("badge_greed",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 300),
+	},
+	TECH.BADGESELLER_ONE, -- tech level
+	{ -- config
+		builder_tag = "hatkid",
+		-- nounlock = true,
+		actionstr = "PURCHASE_BADGE",
+		sg_state = "domediumaction",
+	},
+	{ -- crafting filters
+		"MODS",
+		"CRAFTING_STATION",
+		"MAGIC",
+		-- "CHARACTER"
+	}
+)
+
+AddCharacterRecipe("badge_carefree",
 	{ -- ingredients
 		Ingredient(CHARACTER_INGREDIENT.PON, 200),
 	},
@@ -358,18 +378,18 @@ AddCharacterRecipe("badge_greed",
 	{ -- crafting filters
 		"MODS",
 		"CRAFTING_STATION",
-		-- "MAGIC",
+		"MAGIC",
 		-- "CHARACTER"
 	}
 )
 
 AddCharacterRecipe("hatpack",
 	{ -- ingredients
-		Ingredient("pigskin", 2),
+		Ingredient("pigskin", 1),
 		Ingredient("rope", 1),
 		Ingredient(CHARACTER_INGREDIENT.PON, 100),
 	},
-	TECH.BADGESELLER_ONE, -- tech level
+	TECH.SCIENCE_TWO, -- tech level
 	{ -- config
 		builder_tag = "hatkid"
 	},
@@ -383,7 +403,7 @@ AddCharacterRecipe("hatpack",
 
 AddCharacterRecipe("pon_upgrade1",
 	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 150),
+		Ingredient(CHARACTER_INGREDIENT.PON, 200),
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config
@@ -398,7 +418,7 @@ AddCharacterRecipe("pon_upgrade1",
 
 AddCharacterRecipe("pon_upgrade2",
 	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 300),
+		Ingredient(CHARACTER_INGREDIENT.PON, 1000),
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config
@@ -413,7 +433,7 @@ AddCharacterRecipe("pon_upgrade2",
 
 AddCharacterRecipe("badge_pin",
 	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 100),
+		Ingredient(CHARACTER_INGREDIENT.PON, 200),
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config

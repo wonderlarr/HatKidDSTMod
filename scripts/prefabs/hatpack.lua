@@ -15,7 +15,7 @@ end
 
 local function onunequip(inst, owner)
     inst.components.container:Close(owner)
-    inst.components.container:DropEverything() 
+    -- inst.components.container:DropEverything() 
 end
 
 local function OnAlien(inst)
@@ -23,7 +23,7 @@ local function OnAlien(inst)
 end
 
 local function OnDropped(inst)
-    inst.components.container:DropEverything()
+    -- inst.components.container:DropEverything()
 
     -- inst:Remove()
 end
@@ -60,8 +60,8 @@ local function fn_master(inst, widgetsetupname)
 
     inst:AddComponent("container")
     inst.components.container:WidgetSetup(widgetsetupname)
-    inst.components.container.skipopensnd = true
-    inst.components.container.skipclosesnd = true
+    -- inst.components.container.skipopensnd = true
+    -- inst.components.container.skipclosesnd = true
     inst.components.container.stay_open_on_hide = true
 
     MakeHauntableLaunchAndDropFirstItem(inst)

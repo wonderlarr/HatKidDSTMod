@@ -157,7 +157,7 @@ STRINGS.RECIPE_DESC.HATPACK = "A little backpack for holding all your hats!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATPACK = "A little small for me..."
 
 STRINGS.NAMES.BADGE_FURY = "Comeback Kid Badge"
-STRINGS.RECIPE_DESC.BADGE_FURY = "Grants +50 Attack Damage while below 25% Health."
+STRINGS.RECIPE_DESC.BADGE_FURY = "Grants +50% Attack Damage while below 25% Health."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BADGE_FURY = "Quite useful!"
 
 STRINGS.NAMES.BADGE_FASTHATTER = "Fast Hatter Badge"

@@ -62,120 +62,6 @@ function params.hatpack.widget.buttoninfo.fn(inst, doer)
     end
 end
 
--- params.hatpack_1 =
--- {
---     widget =
---     {
---         slotpos = { }, -- we have to make an empty table or the slot position function gets angry
---         slotbg =
---         {
---             { image = "slotbg_kidhat.tex", atlas = "images/gui/slotbg_kidhat.xml" },
---             { image = "slotbg_sprinthat.tex", atlas = "images/gui/slotbg_sprinthat.xml" },
---             { image = "slotbg_brewinghat.tex", atlas = "images/gui/slotbg_brewinghat.xml" },
---             { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
---             { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
---             { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
---             { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
---         },
---         animbank = "ui_hatpack_3x2",
---         animbuild = "ui_hatpack_3x2",
---         pos = Vector3(-82, 108, 0),
---         bottom_align_tip = -100,
---     },
---     type = "side_inv_behind",
---     acceptsstacks = false,
---     issidewidget = true,
--- }
-
--- for y = 1, -1, -1 do
---     for x = 0, 2 do
---         if y == -1 and x > 0 then break end
---         table.insert(params.hatpack_1.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
---     end
--- end
-
--- function params.hatpack_1.itemtestfn(container, item, slot)
---     return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot > 6 and item:HasTag("badge") -- and not container:HasItemWithTag(item.prefab, 1)
--- end
-
--- params.hatpack_2 =
--- {
---     widget =
---     {
---         slotpos = { }, -- we have to make an empty table or the slot position function gets angry
---         slotbg =
---         {
---             { image = "slotbg_kidhat.tex", atlas = "images/gui/slotbg_kidhat.xml" },
---             { image = "slotbg_sprinthat.tex", atlas = "images/gui/slotbg_sprinthat.xml" },
---             { image = "slotbg_brewinghat.tex", atlas = "images/gui/slotbg_brewinghat.xml" },
---             { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
---             { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
---             { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
---             { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
---             { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
---         },
---         animbank = "ui_hatpack_3x2",
---         animbuild = "ui_hatpack_3x2",
---         pos = Vector3(-82, 108, 0),
---         bottom_align_tip = -100,
---     },
---     type = "side_inv_behind",
---     acceptsstacks = false,
---     issidewidget = true,
--- }
-
--- for y = 1, -1, -1 do
---     for x = 0, 2 do
---         if y == -1 and x > 1 then break end
---         table.insert(params.hatpack_2.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
---     end
--- end
-
--- function params.hatpack_2.itemtestfn(container, item, slot)
---     return item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or slot > 6 and item:HasTag("badge") and not container:HasItemWithTag(item.prefab, 1)
--- end
-
--- params.hatpack_3 =
--- {
---     widget =
---     {
---         slotpos = { }, -- we have to make an empty table or the slot position function gets angry
---         slotbg =
---         {
---             { image = "slotbg_kidhat.tex", atlas = "images/gui/slotbg_kidhat.xml" },
---             { image = "slotbg_sprinthat.tex", atlas = "images/gui/slotbg_sprinthat.xml" },
---             { image = "slotbg_brewinghat.tex", atlas = "images/gui/slotbg_brewinghat.xml" },
---             { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
---             { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
---             { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
---             { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
---             { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
---             { image = "slotbg_badge.tex", atlas = "images/gui/slotbg_badge.xml"},
---         },
---         animbank = "ui_hatpack_3x3",
---         animbuild = "ui_hatpack_3x3",
---         pos = Vector3(-82, 108, 0),
---         bottom_align_tip = -100,
---     },
---     usespecificslotsforitems = true,
---     acceptsstacks = false,
---     type = "side_inv_behind",
---     issidewidget = true,
--- }
-
--- for y = 1, -1, -1 do
---     for x = 0, 2 do
---         table.insert(params.hatpack_3.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
---     end
--- end
-
--- function params.hatpack_3.itemtestfn(container, item, slot)
---     return slot == nil and (item:HasTag("hatkidhat") or item:HasTag("badge") and not container:HasItemWithTag(item.prefab, 1)) or 
---     item:HasTag("hatkidhat") and item.prefab == hatlist[slot] or 
---     slot and slot > 6 and item:HasTag("badge") and not container:HasItemWithTag(item.prefab, 1) -- this depends on each badge having its prefab name as a tag as well
--- end
-
-
 
 -- Mod compatibility checker by rezecib
 -- https://steamcommunity.com/profiles/76561198025931302
@@ -296,42 +182,46 @@ AddClassPostConstruct("widgets/healthbadge", function(self)
     end
 end)
 
--- Push "badgeseller" locally to trigger
--- local BadgeToast = require("widgets/badgetoast")
--- AddClassPostConstruct("widgets/controls", function(self)
---     if not self.owner or self.owner.prefab ~= "hatkid" then return end
-
---     self.badgetoast_notification = self.topleft_root:AddChild(BadgeToast(self.owner, self))
---     self.badgetoast_notification:SetPosition(315, 150, 0)
--- end)
-
 -- Reward pons for a lot of things
+-- This is here so pon counts can be precomputed
 AddPrefabPostInitAny(function(inst)
     -- For normal mobs, like hounds, rabbits, or bosses
     if inst.components.health then
+        inst.gpons = 0
+        inst.cpons = 1
+        inst.bpons = 0
         if inst:HasTag("epic") then
-            inst.gpons = 50 -- guarenteed pons
-            inst.cpons = 50 -- 50% pons
-        elseif inst:HasTag("smallcreature") then
-            inst.gpons = 1
-            inst.cpons = 2
+            inst.cpons = 0
+            for i = 0, inst.components.health.maxhealth or 0, 1000 do
+                inst.bpons = inst.bpons + 1
+            end
         else
-            -- not a boss, small, or hostile
-            inst.gpons = 3
-            inst.cpons = 2
+            for i = 0, inst.components.health.maxhealth or 0, 100 do
+                inst.gpons = inst.gpons + 1
+                inst.cpons = inst.cpons + 1
+            end
         end
+    -- For pickable entities, like mushrooms and bushes
     elseif inst.components.pickable then
+        if inst.prefab == "tumbleweed" then
+            inst:ListenForEvent("picked", function(inst, data)
+                if data.picker and data.picker:HasTag("madhatter") then
+                    local pon = GLOBAL.SpawnPrefab("pon")
+                    pon.award_count = math.random(1, 3)
+                    pon.Transform:SetPosition(data.picker.Transform:GetWorldPosition())
+                end
+            end)
+        end
+
         inst.cpons = 1
         inst.gpons = 1
+
     -- For workable entities, like rocks and trees
     elseif inst.components.workable then
-        inst.gpons = 5
+        inst.gpons = 2
         inst.cpons = inst.components.workable.workleft or 0
-    -- For pickable entities, like mushrooms and bushes
     end
 end)
-
--- For workable entities, like rocks and trees
 
 -- Console helper, spawns all hats under cursor
 GLOBAL.c_makehats = function()
@@ -363,7 +253,7 @@ AddPrefabPostInit("pocketwatch_heal", function(inst)
                 -- doer.components.oldager:StopDamageOverTime() -- Hat Kid doesn't have this component, the game gets mad if we call this
                 health:DoDelta(TUNING.POCKETWATCH_HEAL_HEALING, true, inst.prefab)
         
-                local fx = SpawnPrefab((doer.components.rider ~= nil and doer.components.rider:IsRiding()) and "pocketwatch_heal_fx_mount" or "pocketwatch_heal_fx")
+                local fx = GLOBAL.SpawnPrefab((doer.components.rider ~= nil and doer.components.rider:IsRiding()) and "pocketwatch_heal_fx_mount" or "pocketwatch_heal_fx")
                 fx.entity:SetParent(doer.entity)
         
                 inst.components.rechargeable:Discharge(TUNING.POCKETWATCH_HEAL_COOLDOWN)
@@ -434,7 +324,7 @@ EQUIPSLOTS.BADGE2 = "badge2"
 EQUIPSLOTS.BADGE3 = "badge3"
 
 AddClassPostConstruct("widgets/inventorybar", function(self)
-    -- Add functionality here so we can conveniently use it in madhatter.lua
+    -- Adding functionality here so we can conveniently use it in madhatter.lua
     -- You probably shouldn't use this to remove default slots
     function self:RemoveEquipSlot(slot)
         for k, v in pairs(self.equipslotinfo) do
@@ -506,10 +396,6 @@ AddClassPostConstruct("widgets/inventorybar", function(self)
         end
     end
 
-    -- if self.owner:HasTag("hatkid") then
-    --     self:AddEquipSlot(EQUIPSLOTS.BEARD, "images/hud.xml", "equip_slot.tex")
-    -- end
-
     self.inst:ListenForEvent("badgeslots_dirty", OnBadgeSlots, self.owner)
 end)
 
@@ -519,7 +405,7 @@ AddComponentPostInit("inventory", function(self)
     self.Equip = function(self, item, old_to_active, no_animation, force_ui_anim)
         -- find next free badge slot manually since we're loading
         -- this is a HACK but i really dont feel like doing this any better right now
-        if item:HasTag("badge") and item.components.badge.loading then
+        if item and item:HasTag("badge") and item.components.badge.loading then
             if not self.equipslots[GLOBAL.EQUIPSLOTS.BADGE1] then
                 item.components.equippable.equipslot = GLOBAL.EQUIPSLOTS.BADGE1
             elseif not self.equipslots[GLOBAL.EQUIPSLOTS.BADGE2] then
@@ -530,61 +416,56 @@ AddComponentPostInit("inventory", function(self)
         end
 
         -- run vanilla function
-        _Equip(self, item, old_to_active, no_animation, force_ui_anim)
+        return _Equip(self, item, old_to_active, no_animation, force_ui_anim)
     end
--- end)
--- AddPrefabPostInit("multiplayer_portal", function(inst)
---     inst:WatchWorldState("moonphase", function(inst, data)
---         if data and data == "full" then
---             -- seller already present
---             if GetClosestInstWithTag("badgeseller", inst, 1000) ~= nil then
-                
---             else
---                 -- we need a seller
---                 local seller = SpawnPrefab("badgeseller")
-                
---                 local pos = inst:GetPosition()
---                 seller.Physics:Teleport(pos.x + 10 ,0 ,pos.z + 10)
---             end
 
---         end
---     end)
--- end)
+    local _DropItem = self.DropItem
+
+    self.DropItem = function(self, item, wholestack, randomdir, pos, keepoverstacked)      
+        if item and item:IsValid() and item.components.badge then
+            item.components.badge:Unequip(self.inst)
+        end
+
+        return _DropItem(self, item, wholestack, randomdir, pos, keepoverstacked)
+    end
 
 end)
 
+-- TODO is this a good way to do this?
 AddPrefabPostInit("multiplayer_portal", function(inst)
-    inst:WatchWorldState("cycles", function(inst, data)
-        -- This will despawn any active badgesellers
-        TheWorld:PushEvent("badgeseller_despawn")
+    TheWorld:WatchWorldState("cycles", function(inst, data)
+        if TheWorld.ismastersim and not TheWorld:HasTag("cave") then
+            -- This will despawn any active badgesellers
+            TheWorld:PushEvent("badgeseller_despawn")
 
-        local seller = GLOBAL.SpawnPrefab("badgeseller")
+            local seller = GLOBAL.SpawnPrefab("badgeseller")
 
-        local location_tags = {
-            "badgeseller_location_spawn",
-            "badgeseller_location_pigking",
-            "badgeseller_location_oasis",
-            "badgeseller_location_stage",
-            "badgeseller_location_moonstone",
-            "badgeseller_location_lunar",
-            "badgeseller_location_pearl",
-            "badgeseller_location_monkey",
-            "badgeseller_location_awesome",
-        }
-
-        local tag = location_tags[math.random(1, 9)]
-        local location = GetRandomInstWithTag(tag, TheWorld, 1000)
-
-        seller.location_tag = tag
-
-        if location then
-            local pos = FindNearbyLand(location:GetPosition(), 25) or Vector3(0,0,0)
-            seller.Physics:Teleport(pos.x, 0, pos.z)
-        end
+            if seller then
+                local location_tags = {
+                    "badgeseller_location_spawn",
+                    "badgeseller_location_pigking",
+                    "badgeseller_location_oasis",
+                    "badgeseller_location_stage",
+                    "badgeseller_location_moonstone",
+                    "badgeseller_location_lunar",
+                    "badgeseller_location_pearl",
+                    "badgeseller_location_monkey",
+                    "badgeseller_location_awesome",
+                }
         
-
-        seller.AnimState:PlayAnimation("jumpout")
-        seller.AnimState:PushAnimation("emoteXL_waving1")
+                local tag = location_tags[math.random(1, 9)]
+                local location = GetRandomInstWithTag(tag, TheWorld, 1000)
+        
+                seller.location_tag = tag
+        
+                if location then
+                    local pos = FindNearbyLand(location:GetPosition(), 25) or Vector3(0,0,0)
+                    seller.Physics:Teleport(pos.x, 0, pos.z)
+                end
+                
+                seller.sg:GoToState("spawn")
+            end
+        end
     end)
 end)
 

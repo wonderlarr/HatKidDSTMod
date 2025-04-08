@@ -12,7 +12,7 @@ local function OnEquip(inst, owner)
 	-- with other mods we should be fine, as vanilla doesn't use them to my knowledge
 	-- Just in case, we'll check for damage bonuses and bail if we find any.
 	if not owner.components.combat.damagebonus then
-		owner.components.combat.damagebonus = 17
+		owner.components.combat.damagebonus = 9
 		owner:AddTag("badge_strength_damagebonus")
 	else
 		owner.components.talker:Say("MOD CONFLICT! Badge cannot function!")

@@ -40,6 +40,10 @@ local function OnAttack(inst, data)
             target.components.lootdropper:AddChanceLoot("pon", 0.5)
         end
 
+        for i = 1, target.bpons or 0, 1 do
+            target.components.lootdropper:AddChanceLoot("pon_boss", 1)
+        end
+
         target:AddTag("madhatter_loot")
     end
 end
@@ -50,7 +54,7 @@ local function OnPick(inst, data)
 
     local target = data.object
     if target and target:IsValid() and not target:HasTag("madhatter_loot") then
-
+        
         for i = 1, target.gpons or 0, 1 do
             SpawnPrefab("pon").Transform:SetPosition(inst.Transform:GetWorldPosition())
         end
@@ -60,7 +64,6 @@ local function OnPick(inst, data)
                 SpawnPrefab("pon").Transform:SetPosition(inst.Transform:GetWorldPosition())
             end
         end
-
         target:AddTag("madhatter_loot")
     end
 end
@@ -72,7 +75,7 @@ local function OnUnlockRecipe(inst, data)
     if inst:GetTimeAlive() > 0.5 then
         local pon = SpawnPrefab("pon")
         pon.Transform:SetPosition(inst.Transform:GetWorldPosition())
-        pon.award_count = 8
+        pon.award_count = 10
     end
 end
 
@@ -92,10 +95,16 @@ end
 --     end
 -- end
 
+local function OnDeath(inst, data)
+    if inst and inst:IsValid() and inst.components.madhatter then
+        inst.components.madhatter:SetVal(0)
+    end
+end
+
 local MadHatter = Class(function(self, inst)
     self.inst = inst
 
-    self.max = 500 -- 200, 1000, 5000
+    self.max = 200 -- 200, 1000, 5000
     self.val = 0
     
     -- Table of badges
@@ -121,6 +130,7 @@ local MadHatter = Class(function(self, inst)
 
     -- self.inst:ListenForEvent("magicactivated", OnMagicActivated)
     -- self.inst:ListenForEvent("magicdeactivated", OnMagicDeactivated)
+    self.inst:ListenForEvent("death", OnDeath)
 end,
 nil, 
 {

@@ -1555,17 +1555,17 @@ return{
         },
         SPORE_TALL =
         {
-            GENERIC = "Blue! That's my favorite color!",
+            GENERIC = "Blue huh? We'll see about that...",
             HELD = "If I eat it I'll turn to water!",
         },
         SPORE_MEDIUM =
         {
-            GENERIC = "My favorite color! Red!",
+            GENERIC = "Red huh? Seems evil...",
             HELD = "If I stare at it I'll turn to stone!",
         },
         SPORE_SMALL =
         {
-            GENERIC = "That's green, my favoritest color!",
+            GENERIC = "Greeeeeennnn.",
             HELD = "If I lick it I'll turn to wood!",
         },
         RABBITHOUSE =
@@ -2200,7 +2200,7 @@ return{
 
 		FISH = "It could stand to be fried.",
 		FISHINGROD = "I miss grandpa's fishing trips.",
-		FISHSTICKS = "One of my favorite foods! Just me though.",
+		FISHSTICKS = "Not the same fish from Mafia Town.",
 		FISHTACOS = "Taco Tuesday!",
 		FISH_COOKED = "Flaky and moist. Delicious.",
 		FLINT = "Oh, to feel a sharp edge against my skin.",
@@ -2588,7 +2588,7 @@ return{
         RESURRECTIONSTONE = "Some sort of religious monument maybe?",
         ROBIN =
         {
-            GENERIC = "Red is my favorite color!",
+            GENERIC = "Bad experiences...",
             HELD = "Held snug in my pockets.",
         },
         ROBIN_WINTER =

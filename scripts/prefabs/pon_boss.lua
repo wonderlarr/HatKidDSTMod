@@ -1,29 +1,7 @@
 local assets =
 {
-    Asset("ANIM", "anim/pon.zip"),
-    Asset("ANIM", "anim/pon_nocap.zip"),
 
-    Asset("ATLAS", "images/inventoryimages/pon.xml"),
-    Asset("IMAGE", "images/inventoryimages/pon.tex"),
-    
-    Asset("SOUNDPACKAGE", "sound/pon.fev"),
-    Asset("SOUND", "sound/pon.fsb"),
 }
-
-RegisterInventoryItemAtlas("images/inventoryimages/pon.xml","pon.tex")
-
--- local function OnPickup(inst, owner)
-
--- end
-
--- local function OnDrop(inst)
---     inst.Physics:ClearCollidesWith(COLLISION.CHARACTERS)
-
---     -- Make it possible to drop pons by clearing the pickup collision for 1.5 seconds on drop.
---     inst:DoTaskInTime(1.5, function(inst)
---         inst.Physics:CollidesWith(COLLISION.CHARACTERS)
---     end)
--- end
 
 local function DoSound(inst, owner)
     --define owner.ponchain if not defined. This shouldn't happen often.
@@ -31,7 +9,7 @@ local function DoSound(inst, owner)
         owner.ponchain = 1 
     end
 
-    -- Cancel 8 second timer if it's running already
+    -- Cancel 3 second timer if it's running already
     if owner.ponchaintracker ~= nil then 
         owner.ponchaintracker:Cancel()
         owner.ponchaintracker = nil
@@ -84,17 +62,18 @@ local function fn()
     inst.Physics:CollidesWith(COLLISION.OBSTACLES)
     -- inst.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-    inst.Physics:SetSphere(0.75)
+    inst.Physics:SetSphere(0.9)
 
-    inst.DynamicShadow:SetSize(0.4, 0.4)
+    inst.DynamicShadow:SetSize(0.6, 0.6)
     
     inst.AnimState:SetBank("pon")
     inst.AnimState:SetBuild("pon")
     inst.AnimState:PlayAnimation("bob", true)
     inst.AnimState:SetTime(math.random() * inst.AnimState:GetCurrentAnimationLength())
-    inst.AnimState:SetScale(1.5, 1.5)
+    inst.AnimState:SetScale(2, 2)
+    inst.AnimState:SetHaunted(true)
 
-    MakeInventoryFloatable(inst, "small", 0.1, 0.6) -- Makes items float on water, rather than just sitting there.
+    MakeInventoryFloatable(inst, "small", 0.1, 0.8) -- Makes items float on water, rather than just sitting there.
 
     inst:AddTag("pon")
     
@@ -113,11 +92,7 @@ local function fn()
   
     inst:AddComponent("inspectable")
 
-    -- inst:AddComponent("inventoryitem")
-    -- inst.components.inventoryitem.canbepickedup = false
-    -- inst.components.inventoryitem:SetSinks(false)
-
-    inst:DoTaskInTime(120, function()
+    inst:DoTaskInTime(240, function()
         inst.AnimState:PushAnimation("die", false)
         inst:ListenForEvent("animover", function()
             inst:Remove()
@@ -127,13 +102,12 @@ local function fn()
 	MakeHauntableLaunch(inst)
     inst.persists = false
 
-    inst.award_count = 1
+    inst.award_count = 50
 	
     return inst
 end
 
-STRINGS.NAMES.PON = "Pon"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PON = "Ooo, shiny!"
-STRINGS.RECIPE_DESC.PON = "A green collectable, used for... something?"
+STRINGS.NAMES.PON_BOSS = "Pon"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PON_BOSS = "Ooo, shiny!"
 
-return Prefab("pon", fn, assets)
+return Prefab("pon_boss", fn, assets)

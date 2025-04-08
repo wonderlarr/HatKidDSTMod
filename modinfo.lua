@@ -902,7 +902,7 @@ configuration_options =
 			{description = "90%", data = 0.9},
 			{description = "100%", data = 1},
 		},
-		default = 0.20,
+		default = 0.2,
 	},	
 
 	{
@@ -960,10 +960,10 @@ configuration_options =
 			{description = "0", data = 0},
 			{description = "1", data = 1},
 			{description = "2", data = 2},
-			{description = "3", data = 3},
+			{description = "3 (Default)", data = 3},
 			{description = "4", data = 4},
 			{description = "5", data = 5},
-			{description = "8 (Default)", data = 8},
+			{description = "8", data = 8},
 			{description = "10", data = 10},
 			{description = "15", data = 15},
 			{description = "20", data = 20},
@@ -972,7 +972,7 @@ configuration_options =
 			{description = "50", data = 50},
 			{description = "100", data = 100},
 		},
-		default = 8,
+		default = 3,
 	},
 	
 	{
@@ -1037,20 +1037,20 @@ configuration_options =
 			{description = "17", data = 17},
 			{description = "25.5", data = 25.5},
 			{description = "34", data = 34},
-			{description = "42.5", data = 42.5},
+			{description = "42.5 (Default)", data = 42.5},
 			{description = "51", data = 51},
 			{description = "59.5", data = 59.5},
 			{description = "68", data = 68},
 			{description = "76.5", data = 76.5},
 			{description = "89", data = 89},
-			{description = "102 (Default)", data = 102},
+			{description = "102", data = 102},
 			{description = "153", data = 153},
 			{description = "204", data = 204},
 			{description = "255", data = 255},
 			{description = "510", data = 510},
 			{description = "KILLER QUEEN!!!", data = 999999, hover = "999,999"},
 		},
-		default = 102,
+		default = 42.5,
 	},
 	
 	{
@@ -1910,8 +1910,8 @@ configuration_options =
 			{description = "125", data = 125},
 			{description = "150", data = 150},
 			{description = "175", data = 175},
-			{description = "180 (Default)", data = 180},
-			{description = "200", data = 200},
+			{description = "180", data = 180},
+			{description = "200 (Default)", data = 200},
 			{description = "250", data = 250},
 			{description = "300", data = 300},
 			{description = "400", data = 400},
@@ -1920,7 +1920,7 @@ configuration_options =
 			{description = "Infinite", data = false},
 
 		},
-		default = 180,
+		default = 200,
 	},
 	
 	{
@@ -2213,34 +2213,34 @@ configuration_options =
         default = 114,
     },
 
-	{
-		name = "funnymode",
-		label = "Funny Mode",
-		hover = "Causes some intentional glitches. You may not notice an effect.",
-		options =
-		{
-			{description = "Disabled (Default)", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = false,
-	},
+	-- {
+	-- 	name = "funnymode",
+	-- 	label = "Funny Mode",
+	-- 	hover = "Causes some intentional glitches. You may not notice an effect.",
+	-- 	options =
+	-- 	{
+	-- 		{description = "Disabled (Default)", data = false},
+	-- 		{description = "Enabled", data = true},
+	-- 	},
+	-- 	default = false,
+	-- },
 	
-	{
-		name = "Experimental",
-		options = null_options,
-		hover = "",
-		default = 0,
-	},	
+-- 	{
+-- 		name = "Experimental",
+-- 		options = null_options,
+-- 		hover = "",
+-- 		default = 0,
+-- 	},	
 
-	{
-		name = "itemrestrictions",
-		label = "Hat Kid Item Restrictions",
-		hover = "Restricts Hat Kid's custom items to be useable exclusively on her. The ability keybind is not available to other characters.",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled (Default)", data = true},
-		},
-		default = true,
-	},
+-- 	{
+-- 		name = "itemrestrictions",
+-- 		label = "Hat Kid Item Restrictions",
+-- 		hover = "Restricts Hat Kid's custom items to be useable exclusively on her. The ability keybind is not available to other characters.",
+-- 		options =
+-- 		{
+-- 			{description = "Disabled", data = false},
+-- 			{description = "Enabled (Default)", data = true},
+-- 		},
+-- 		default = true,
+-- 	},
 }

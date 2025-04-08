@@ -9,7 +9,7 @@ RegisterInventoryItemAtlas("images/inventoryimages/badge_fury.xml","badge_fury.t
 
 local function OnHealthDelta(owner, data)
 	if data.newpercent <= 0.25 then
-		owner.components.combat.externaldamagemultipliers:SetModifier(owner, 1.75, "badge_fury")
+		owner.components.combat.externaldamagemultipliers:SetModifier(owner, 1.50, "badge_fury")
 		owner:AddTag("fury_attacker")
 	else
 		owner.components.combat.externaldamagemultipliers:RemoveModifier(owner, "badge_fury")

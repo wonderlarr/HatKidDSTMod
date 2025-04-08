@@ -111,6 +111,20 @@ local function AddPrefabDescriptors()
 			}
 		end
 	}
+
+	_G.Insight.prefab_descriptors.hatbrella = {
+		Describe = function(inst, context)
+			local description = nil
+
+			description = "<color=AGE>Third-Hit Bonus</color>: <color=AGE>" .. "25.5" .. "</color>"
+
+			return {
+				name = "hatbrella",
+				priority = 0,
+				description = description
+			}
+		end
+	}
 end
 
 AddSimPostInit(AddPrefabDescriptors)
