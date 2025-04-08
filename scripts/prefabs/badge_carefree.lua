@@ -85,7 +85,6 @@ local function fn()
                 inst.blockchance = 0.75
             end
         end
-        print(inst.blockchance)
     end
 
     inst.OnBlocked = function(owner, data)

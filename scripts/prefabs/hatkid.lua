@@ -186,10 +186,6 @@ local function OnNewSpawn(inst)
     inst:ListenForEvent("ms_becameghost", OnGhost)
 
 	inst:ListenForEvent("SwitchKey", SimpleHatSwitch)
-
-	-- local hat = inst.components.inventory:FindItem(function(item)
-	-- 	return item.prefab == "kidhat"
-	-- end)
 end
 
 local function OnLoad(inst, data)
@@ -215,7 +211,6 @@ local CommonPostInit = function(inst)
 	-- inst.components.talker.font = TALKINGFONT_HATKID
 	inst.components.talker.fontsize = 32 -- 35 is default, decreased to help with longer sentences
 	inst:AddTag("hatkid") -- Unique character tag, used for various things
-	inst:AddTag("hatkidcrafter") -- Enables crafting of Hat Kid's hats
 
 	inst:AddTag("madhatter") -- from the MadHatter component
 	inst:AddTag("pocketwatchcaster") -- Enables usage of Wanda's clocks, but not crafting
@@ -279,17 +274,10 @@ local MasterPostInit = function(inst, data)
 
     inst.OnNewSpawn = OnNewSpawn
 	inst.OnLoad = OnLoad
-	
-	-- unused?
-	inst.CurrentHat = 0
 
-	inst:WatchWorldState("isnewmoon", function(inst, is_new)
-		if is_new then
-			
-		end
-	end)
+	-- These two blocks below were generated with ChatGPT
 
-	-- Check if HATKID_CRAFT_SANITY is nonzero (has a positive value)
+	-- Check if HATKID_CRAFT_SANITY is nonzero
 	if TUNING.HATKID_CRAFT_SANITY ~= 0 then
 		-- Listen for the "builditem" event
 		inst:ListenForEvent("builditem", function(inst, data)
@@ -322,11 +310,6 @@ local MasterPostInit = function(inst, data)
 			end
 		end)
 	end
-
-	-- inst:ListenForEvent("healthdelta", function(inst, data)
-	-- 	print("health")
-	-- 	dumptable(data)
-	-- end)
 end
 
 return MakePlayerCharacter("hatkid", prefabs, assets, CommonPostInit, MasterPostInit, startInv)

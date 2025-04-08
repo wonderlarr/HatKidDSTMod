@@ -64,7 +64,6 @@ local function fn()
 	inst:AddComponent("badge")
 
     inst.OnAttacked = function (owner, data)
-        dumptable(data)
         if data.damage > 0 then
             owner.components.health:DoDelta(-owner.components.health.currenthealth, nil, data.attacker.prefab or nil, nil, data.attacker)
         end

@@ -68,11 +68,11 @@ AddCharacterRecipe("kidhat",
 
 AddCharacterRecipe("sprinthat",
 	{ -- ingredients
-		Ingredient("silk", 4),
+		Ingredient("silk", 2),
 		Ingredient("feather_robin", 2),
-		Ingredient(CHARACTER_INGREDIENT.PON, 100),
+		Ingredient(CHARACTER_INGREDIENT.PON, 80),
 	},
-	TECH.SCIENCE_TWO, -- tech level
+	TECH.SCIENCE_ONE, -- tech level
 	{ -- config
 		builder_tag = "hatkid"
 	}, 
@@ -86,10 +86,10 @@ AddCharacterRecipe("sprinthat",
 AddCharacterRecipe("brewinghat",
 	{ -- ingredients
 		Ingredient("silk", 4),
-		Ingredient("purplegem", 1),
-		Ingredient(CHARACTER_INGREDIENT.PON, 200),
+		Ingredient("nightmarefuel", 8),
+		Ingredient(CHARACTER_INGREDIENT.PON, 120),
 	},
-	TECH.MAGIC_ONE, -- tech level
+	TECH.MAGIC_TWO, -- tech level
 	{ -- config
 		builder_tag = "hatkid"
 	}, 
@@ -105,9 +105,9 @@ AddCharacterRecipe("polarhat",
 	{ -- ingredients
 		Ingredient("winterhat", 1),
 		Ingredient("bluegem", 1),
-		Ingredient(CHARACTER_INGREDIENT.PON, 200),
+		Ingredient(CHARACTER_INGREDIENT.PON, 180),
 	},
-	TECH.MAGIC_ONE, -- tech level
+	TECH.MAGIC_TWO, -- tech level
 	{ -- config
 		builder_tag = "hatkid"
 	}, 
@@ -123,9 +123,9 @@ AddCharacterRecipe("dwellermask",
 	{ -- ingredients
 		Ingredient("nightmarefuel", 8),
 		Ingredient("thulecite", 1),
-		Ingredient(CHARACTER_INGREDIENT.PON, 250),
+		Ingredient(CHARACTER_INGREDIENT.PON, 240),
 	},
-	TECH.MAGIC_TWO, -- tech level
+	TECH.MAGIC_THREE, -- tech level
 	{ -- config
 		builder_tag = "hatkid"
 	}, 
@@ -139,8 +139,8 @@ AddCharacterRecipe("dwellermask",
 AddCharacterRecipe("timestophat",
 	{ -- ingredients
 		Ingredient("silk", 16),	
-		Ingredient("greengem", 1),
-		Ingredient(CHARACTER_INGREDIENT.PON, 500),
+		Ingredient("moonglass", 8),
+		Ingredient(CHARACTER_INGREDIENT.PON, 360),
 	},
 	TECH.MOON_ALTAR_TWO, -- tech level
 	{ -- config
@@ -209,40 +209,20 @@ AddPrototyperDef("badgeseller", {
 
 AddCharacterRecipe("badge_football",
 	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 150),
+		Ingredient(CHARACTER_INGREDIENT.PON, 100),
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config
-		builder_tag = "hatkid",
+		builder_tag = "badgecrafter_1",
 		-- nounlock = true,
 		actionstr = "PURCHASE_BADGE",
-		sg_state = "domediumaction",
+		-- sg_state = "domediumaction",
 	},
 	{ -- crafting filters
 		"MODS",
-		"ARMOR",
+		"ARMOUR",
 		"CRAFTING_STATION",
 		"MAGIC",
-		-- "CHARACTER"
-	}
-)
-
-AddCharacterRecipe("badge_fasthatter",
-	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 150),
-	},
-	TECH.BADGESELLER_ONE, -- tech level
-	{ -- config
-		builder_tag = "hatkid",
-		-- nounlock = true,
-		actionstr = "PURCHASE_BADGE",
-		sg_state = "domediumaction",
-	},
-	{ -- crafting filters
-		"MODS",
-		"CRAFTING_STATION",
-		"MAGIC",
-		-- "CHARACTER"
 	}
 )
 
@@ -252,37 +232,15 @@ AddCharacterRecipe("badge_fury",
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config
-		builder_tag = "hatkid",
-		-- nounlock = true,
+		builder_tag = "badgecrafter_1",
 		actionstr = "PURCHASE_BADGE",
-		sg_state = "domediumaction",
+		-- sg_state = "domediumaction",
 	},
 	{ -- crafting filters
 		"MODS",
 		"WEAPONS",
 		"CRAFTING_STATION",
 		"MAGIC",
-		-- "CHARACTER"
-	}
-)
-
-AddCharacterRecipe("badge_pride",
-	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 200),
-	},
-	TECH.BADGESELLER_ONE, -- tech level
-	{ -- config
-		builder_tag = "hatkid",
-		-- nounlock = true,
-		actionstr = "PURCHASE_BADGE",
-		sg_state = "domediumaction",
-	},
-	{ -- crafting filters
-		"MODS",
-		"CRAFTING_STATION",
-		"WEAPONS",
-		"MAGIC",
-		-- "CHARACTER"
 	}
 )
 
@@ -292,94 +250,119 @@ AddCharacterRecipe("badge_onehit",
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config
-		builder_tag = "hatkid",
-		-- nounlock = true,
+		builder_tag = "badgecrafter_1",
 		actionstr = "PURCHASE_BADGE",
-		sg_state = "domediumaction",
+		-- sg_state = "domediumaction",
 	},
 	{ -- crafting filters
 		"MODS",
 		"CRAFTING_STATION",
 		"MAGIC",
-		-- "CHARACTER"
+	}
+)
+
+AddCharacterRecipe("badge_fasthatter",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 250),
+	},
+	TECH.BADGESELLER_ONE, -- tech level
+	{ -- config
+		builder_tag = "badgecrafter_2",
+		actionstr = "PURCHASE_BADGE",
+		-- sg_state = "domediumaction",
+	},
+	{ -- crafting filters
+		"MODS",
+		"CRAFTING_STATION",
+		"MAGIC",
+	}
+)
+
+AddCharacterRecipe("badge_pride",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 250),
+	},
+	TECH.BADGESELLER_ONE, -- tech level
+	{ -- config
+		builder_tag = "badgecrafter_2",
+		actionstr = "PURCHASE_BADGE",
+		-- sg_state = "domediumaction",
+	},
+	{ -- crafting filters
+		"MODS",
+		"CRAFTING_STATION",
+		"WEAPONS",
+		"MAGIC",
 	}
 )
 
 AddCharacterRecipe("badge_heart",
 	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 300),
+		Ingredient(CHARACTER_INGREDIENT.PON, 400),
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config
-		builder_tag = "hatkid",
-		-- nounlock = true,
+		builder_tag = "badgecrafter_3",
 		actionstr = "PURCHASE_BADGE",
-		sg_state = "domediumaction",
+		-- sg_state = "domediumaction",
 	},
 	{ -- crafting filters
 		"MODS",
 		"CRAFTING_STATION",
 		"MAGIC",
-		-- "CHARACTER"
-		"ARMOR",
+		"ARMOUR",
 	}
 )
 
 AddCharacterRecipe("badge_strength",
 	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 300),
+		Ingredient(CHARACTER_INGREDIENT.PON, 400),
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config
-		builder_tag = "hatkid",
-		-- nounlock = true,
+		builder_tag = "badgecrafter_3",
 		actionstr = "PURCHASE_BADGE",
-		sg_state = "domediumaction",
+		-- sg_state = "domediumaction",
 	},
 	{ -- crafting filters
 		"MODS",
 		"CRAFTING_STATION",
 		"MAGIC",
-		-- "CHARACTER"
 		"WEAPONS",
 	}
 )
 
 AddCharacterRecipe("badge_greed",
 	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 300),
+		Ingredient(CHARACTER_INGREDIENT.PON, 400),
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config
-		builder_tag = "hatkid",
-		-- nounlock = true,
+		builder_tag = "badgecrafter_3",
 		actionstr = "PURCHASE_BADGE",
-		sg_state = "domediumaction",
+		-- sg_state = "domediumaction",
 	},
 	{ -- crafting filters
 		"MODS",
 		"CRAFTING_STATION",
 		"MAGIC",
-		-- "CHARACTER"
 	}
 )
 
 AddCharacterRecipe("badge_carefree",
 	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 200),
+		Ingredient(CHARACTER_INGREDIENT.PON, 400),
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config
-		builder_tag = "hatkid",
-		-- nounlock = true,
+		builder_tag = "badgecrafter_3",
 		actionstr = "PURCHASE_BADGE",
-		sg_state = "domediumaction",
+		-- sg_state = "domediumaction",
 	},
 	{ -- crafting filters
 		"MODS",
 		"CRAFTING_STATION",
 		"MAGIC",
-		-- "CHARACTER"
 	}
 )
 
@@ -399,15 +382,13 @@ AddCharacterRecipe("hatpack",
 	}
 )
 
--- TODO make these NOT items, instead directly upgrade the player
-
 AddCharacterRecipe("pon_upgrade1",
 	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 200),
+		Ingredient(CHARACTER_INGREDIENT.PON, 80),
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config
-		builder_tag = "hatkid",
+		builder_tag = "madhatter_wallet_0",
 		nounlock = true,
 	},
 	{ -- crafting filters
@@ -418,11 +399,11 @@ AddCharacterRecipe("pon_upgrade1",
 
 AddCharacterRecipe("pon_upgrade2",
 	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 1000),
+		Ingredient(CHARACTER_INGREDIENT.PON, 250),
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config
-		builder_tag = "hatkid",
+		builder_tag = "madhatter_wallet_1",
 		nounlock = true,
 	},
 	{ -- crafting filters
@@ -431,17 +412,601 @@ AddCharacterRecipe("pon_upgrade2",
 	}
 )
 
-AddCharacterRecipe("badge_pin",
+AddCharacterRecipe("badge_pin_1",
 	{ -- ingredients
-		Ingredient(CHARACTER_INGREDIENT.PON, 200),
+		Ingredient(CHARACTER_INGREDIENT.PON, 100),
 	},
 	TECH.BADGESELLER_ONE, -- tech level
 	{ -- config
-		builder_tag = "hatkid",
+		builder_tag = "badgeslots_0",
 		nounlock = true,
+		product = "badge_pin",
 	},
 	{ -- crafting filters
 		"MODS",
 		"CRAFTING_STATION",
 	}
 )
+
+AddCharacterRecipe("badge_pin_2",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 250),
+	},
+	TECH.BADGESELLER_ONE, -- tech level
+	{ -- config
+		builder_tag = "badgeslots_1",
+		nounlock = true,
+		product = "badge_pin",
+	},
+	{ -- crafting filters
+		"MODS",
+		"CRAFTING_STATION",
+	}
+)
+
+AddCharacterRecipe("badge_pin_3",
+	{ -- ingredients
+		Ingredient(CHARACTER_INGREDIENT.PON, 600),
+	},
+	TECH.BADGESELLER_ONE, -- tech level
+	{ -- config
+		builder_tag = "badgeslots_2",
+		nounlock = true,
+		product = "badge_pin",
+	},
+	{ -- crafting filters
+		"MODS",
+		"CRAFTING_STATION",
+	}
+)
+
+-- Cheaper hat recipes
+if TUNING.HATKID_FASTCRAFTING then
+	AddRecipe2("strawhat_hatkid",
+		{
+			Ingredient("cutgrass", 6)
+		},
+		TECH.NONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "strawhat",
+			sg_state = "domediumaction",
+			description = "strawhat",
+			no_deconstruction = true
+		},
+		{ -- crafting filters
+			"CLOTHING",
+			"SUMMER",
+			"RAIN"
+		}
+	)
+
+	AddRecipe2("tophat_hatkid",
+		{
+			Ingredient("silk", 3)
+		},
+		TECH.NONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "tophat",
+			sg_state = "domediumaction",
+			description = "tophat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+			"SUMMER",
+			"RAIN"
+		}
+	)
+
+	AddRecipe2("beefalohat_hatkid",
+		{
+			Ingredient("beefalowool", 4),
+			Ingredient("horn", 1)
+		},
+		TECH.NONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "beefalohat",
+			sg_state = "domediumaction",
+			description = "beefalohat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+			"WINTER"
+		}
+	)
+
+	AddRecipe2("featherhat_hatkid",
+		{
+			Ingredient("feather_crow", 2),
+			Ingredient("feather_robin", 1), 
+			Ingredient("tentaclespots", 1)
+		},
+		TECH.SCIENCE_ONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "featherhat",
+			sg_state = "domediumaction",
+			description = "featherhat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING"
+		}
+	)
+
+	AddRecipe2("beehat_hatkid",
+		{
+			Ingredient("silk", 4), 
+			Ingredient("rope", 1)
+		},
+		TECH.SCIENCE_ONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "beehat",
+			sg_state = "domediumaction",
+			description = "beehat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+			"RAIN",
+			"ARMOUR"
+		}
+	)
+
+	AddRecipe2("minerhat_hatkid",
+		{
+			Ingredient("strawhat", 1),
+			Ingredient("fireflies", 1)
+		},
+		TECH.SCIENCE_ONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "minerhat",
+			sg_state = "domediumaction",
+			description = "minerhat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"RAIN",
+			"LIGHT"
+		}
+	)
+
+	AddRecipe2("footballhat_hatkid",
+		{
+			Ingredient("pigskin", 1), 
+			Ingredient("cutgrass", 2)
+		},
+		TECH.SCIENCE_ONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "footballhat",
+			sg_state = "domediumaction",
+			description = "footballhat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"ARMOUR",
+		}
+	)
+
+	AddRecipe2("earmuffshat_hatkid",
+		{
+			Ingredient("rabbit", 1), 
+			Ingredient("twigs",1)
+		},
+		TECH.NONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "earmuffshat",
+			sg_state = "domediumaction",
+			description = "earmuffshat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+			"WINTER",
+		}
+	)
+
+	AddRecipe2("winterhat_hatkid",
+		{
+			Ingredient("beefalowool", 2),
+			Ingredient("silk", 2)
+		},
+		TECH.SCIENCE_ONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "winterhat",
+			sg_state = "domediumaction",
+			description = "winterhat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+			"WINTER",
+		}
+	)
+
+	AddRecipe2("bushhat_hatkid",
+		{
+			Ingredient("strawhat", 1),
+			Ingredient("dug_berrybush", 1)
+		},
+		TECH.SCIENCE_ONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "bushhat",
+			sg_state = "domediumaction",
+			description = "bushhat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+		}
+	)
+
+	AddRecipe2("flowerhat_hatkid",
+		{
+			Ingredient("petals", 6)
+		},
+		TECH.NONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "flowerhat",
+			sg_state = "domediumaction",
+			description = "flowerhat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+		}
+	)
+
+	AddRecipe2("molehat_hatkid",
+		{
+			Ingredient("mole", 1), 
+			Ingredient("transistor", 1), 
+			Ingredient("wormlight", 1)
+		},
+		TECH.SCIENCE_ONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "molehat",
+			sg_state = "domediumaction",
+			description = "molehat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"LIGHT",
+		}
+	)
+
+	AddRecipe2("icehat_hatkid",
+		{
+			Ingredient("transistor", 1), 
+			Ingredient("rope", 2), 
+			Ingredient("ice", 5)
+		},
+		TECH.SCIENCE_ONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "icehat",
+			sg_state = "domediumaction",
+			description = "icehat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+			"SUMMER",
+		}
+	)
+
+	AddRecipe2("rainhat_hatkid",
+		{
+			Ingredient("mole", 1), 
+			Ingredient("strawhat", 1), 
+		},
+		TECH.SCIENCE_ONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "rainhat",
+			sg_state = "domediumaction",
+			description = "rainhat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+			"RAIN",
+		}
+	)
+
+	AddRecipe2("catcoonhat_hatkid",
+		{
+			Ingredient("coontail", 1), 
+			Ingredient("silk", 2)
+		},
+		TECH.SCIENCE_ONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "catcoonhat",
+			sg_state = "domediumaction",
+			description = "catcoonhat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+			"WINTER",
+		}
+	)
+
+	AddRecipe2("watermelonhat_hatkid",
+		{
+			Ingredient("watermelon", 1), 
+			Ingredient("twigs", 1)
+		},
+		TECH.NONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "watermelonhat",
+			sg_state = "domediumaction",
+			description = "watermelonhat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+			"SUMMER",
+		}
+	)
+
+	AddRecipe2("eyebrellahat_hatkid",
+		{
+			Ingredient("deerclops_eyeball", 1), 
+			Ingredient("twigs", 8), 
+		},
+		TECH.SCIENCE_ONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "eyebrellahat",
+			sg_state = "domediumaction",
+			description = "eyebrellahat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+			"SUMMER",
+			"RAIN",
+		}
+	)
+
+	AddRecipe2("red_mushroomhat_hatkid",
+		{
+			Ingredient("red_cap", 6)
+		},
+		TECH.LOST, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "red_mushroomhat",
+			sg_state = "domediumaction",
+			description = "red_mushroomhat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+			"SUMMER",
+		}
+	)
+
+	AddRecipe2("green_mushroomhat_hatkid",
+		{
+			Ingredient("green_cap", 6)
+		},
+		TECH.LOST, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "green_mushroomhat",
+			sg_state = "domediumaction",
+			description = "green_mushroomhat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+			"SUMMER",
+		}
+	)
+
+	AddRecipe2("blue_mushroomhat_hatkid",
+		{
+			Ingredient("blue_cap", 6)
+		},
+		TECH.LOST, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "blue_mushroomhat",
+			sg_state = "domediumaction",
+			description = "blue_mushroomhat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+			"SUMMER",
+		}
+	)
+
+	AddRecipe2("deserthat_hatkid",
+		{
+			Ingredient("goggleshat", 1), 
+			Ingredient("pigskin", 1)
+		},
+		TECH.LOST, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "deserthat",
+			sg_state = "domediumaction",
+			description = "deserthat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+			"SUMMER",
+		}
+	)
+
+	AddRecipe2("goggleshat_hatkid",
+		{
+			Ingredient("goldnugget", 1), 
+			Ingredient("pigskin", 1)
+		},
+		TECH.NONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "goggleshat",
+			sg_state = "domediumaction",
+			description = "goggleshat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+		}
+	)
+
+	AddRecipe2("moonstorm_goggleshat_hatkid",
+		{
+			Ingredient("moonglass", 1),
+			Ingredient("potato", 1)
+		},
+		TECH.LOST, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "moonstorm_goggleshat",
+			sg_state = "domediumaction",
+			description = "moonstorm_goggleshat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+		}
+	)
+
+	AddRecipe2("kelphat_hatkid",
+		{
+			Ingredient("kelp", 3),
+		},
+		TECH.NONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "kelphat",
+			sg_state = "domediumaction",
+			description = "kelphat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+		}
+	)
+
+	AddRecipe2("cookiecutterhat_hatkid",
+		{
+			Ingredient("cookiecuttershell", 2), 
+			Ingredient("rope", 1)
+		},
+		TECH.SCIENCE_ONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "cookiecutterhat",
+			sg_state = "domediumaction",
+			description = "cookiecutterhat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"RAIN",
+			"ARMOUR",
+		}
+	)
+
+	AddRecipe2("nutrientsgoggleshat_hatkid",
+		{
+			Ingredient("plantregistryhat", 1), 
+			Ingredient("thulecite_pieces", 2), 
+			Ingredient("purplegem", 1)
+		},
+		TECH.ANCIENT_TWO, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "nutrientsgoggleshat",
+			sg_state = "domediumaction",
+			description = "nutrientsgoggleshat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CRAFTING_STATION",
+		}
+	)
+
+	AddRecipe2("plantregistryhat_hatkid",
+		{
+			Ingredient("fertilizer", 1), 
+			Ingredient("seeds", 2), 
+		},
+		TECH.SCIENCE_ONE, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "plantregistryhat",
+			sg_state = "domediumaction",
+			description = "plantregistryhat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"SUMMER",
+			"GARDENING"
+		}
+	)
+
+	AddRecipe2("polly_rogershat_hatkid",
+		{
+			Ingredient("monkey_mediumhat", 1),
+			Ingredient("feather_canary", 1),
+			Ingredient("blackflag",1)
+		},
+		TECH.LOST, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "polly_rogershat",
+			sg_state = "domediumaction",
+			description = "polly_rogershat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CLOTHING",
+		}
+	)
+
+	AddRecipe2("ruinshat_hatkid",
+		{
+			Ingredient("thulecite", 3), 
+			Ingredient("nightmarefuel", 3)
+		},
+		TECH.ANCIENT_FOUR, -- tech level
+		{ -- config
+			builder_tag = "hatkid",
+			product = "ruinshat",
+			sg_state = "domediumaction",
+			description = "ruinshat",
+			no_deconstruction = true,
+		},
+		{ -- crafting filters
+			"CRAFTING_STATION",
+		}
+	)
+
+	for k, v in ipairs(TUNING.HATKID_CHEAP_HATS) do
+		AddRecipePostInit(v, function(self)
+			self.no_builder_tag	= "hatkid"
+		end)
+	end
+end

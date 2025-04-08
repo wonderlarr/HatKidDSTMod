@@ -1025,8 +1025,8 @@ return{
 		GENERIC = "Blehh!",
 		PIG = "Die, pig!",
 		PREY = "I'll kill you!",
-		SPIDER = "Ahhhh!!",
-		SPIDER_WARRIOR = "Die!",
+		SPIDER = "Die, spider!",
+		SPIDER_WARRIOR = "Die, warrior!",
 		DEER = "Hopefully I can kill it!",
 	},
 	COMBAT_QUIT =

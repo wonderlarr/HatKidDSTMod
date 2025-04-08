@@ -25,7 +25,7 @@ local function fn()
 	-- Add internal components
 	inst.entity:AddTransform() -- position
 	inst.entity:AddAnimState() -- sprite and animation
-	inst.entity:AddSoundEmitter() -- sounds
+	-- inst.entity:AddSoundEmitter() -- sounds
     inst.entity:AddNetwork() -- networked from server to client
 
 	-- Setup AnimState
@@ -38,7 +38,7 @@ local function fn()
 	MakeInventoryFloatable(inst, "med", 0.1, 0.6) -- Makes items float on water, rather than just sitting there.
 
 	-- Component Tags
-	inst:AddTag("inspectable")
+	-- inst:AddTag("inspectable")
 
 	-- Set pristine
 	inst.entity:SetPristine()
@@ -56,12 +56,19 @@ local function fn()
 
 	-- Makes the item, well, an item
 	inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem:SetOnPutInInventoryFn(function(inst, owner)
+		if owner and owner.components.madhatter and owner.components.madhatter.badgeslots < 3 then
+			owner.components.madhatter:DoBadgeDelta(1)
+			owner.SoundEmitter:PlaySound("dontstarve/wilson/equip_item_gold")
+			inst:Remove()
+		end
+	end)
 
 	-- Allows inspecting of the item
-	inst:AddComponent("inspectable")
+	-- inst:AddComponent("inspectable")
 
-	inst:AddComponent("invuseable")
-	inst.components.invuseable:SetOnUse(OnUse)
+	-- inst:AddComponent("invuseable")
+	-- inst.components.invuseable:SetOnUse(OnUse)
 
     return inst
 end

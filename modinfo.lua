@@ -62,7 +62,7 @@ configuration_options =
 			{description = "50", data = 50},
 			{description = "75", data = 75},
 			{description = "100", data = 100},
-			{description = "120 (Default)", data = 120},
+			{description = "120 󰀛", data = 120},
 			{description = "125", data = 125},
 			{description = "130", data = 130},
 			{description = "150", data = 150},
@@ -85,7 +85,7 @@ configuration_options =
 			{description = "25", data = 25},
 			{description = "50", data = 50},
 			{description = "75", data = 75},
-			{description = "100 (Default)", data = 100},
+			{description = "100 󰀛", data = 100},
 			{description = "120", data = 120},
 			{description = "125", data = 125},
 			{description = "150", data = 150},
@@ -117,7 +117,7 @@ configuration_options =
 			{description = "130", data = 130},
 			{description = "135", data = 135},
 			{description = "140", data = 140},
-			{description = "150 (Default)", data = 150},
+			{description = "150 󰀛", data = 150},
 			{description = "175", data = 175},
 			{description = "200", data = 200},
 			{description = "225", data = 225},
@@ -146,7 +146,7 @@ configuration_options =
 			{description = "x0.7", data = 0.7},
 			{description = "x0.8", data = 0.8},
 			{description = "x0.9", data = 0.9},
-			{description = "x1 (Default)", data = 1},
+			{description = "x1 󰀛", data = 1},
 			{description = "x1.1", data = 1.1},
 			{description = "x1.2", data = 1.2},
 			{description = "x1.25", data = 1.25},
@@ -175,7 +175,7 @@ configuration_options =
 			{description = "x0.8", data = 0.8},
 			{description = "x0.85", data = 0.85},
 			{description = "x0.9", data = 0.9},
-			{description = "x1 (Default)", data = 1},
+			{description = "x1 󰀛", data = 1},
 			{description = "x1.25", data = 1.25},
 			{description = "x1.5", data = 1.5},
 			{description = "x1.75", data = 1.75},
@@ -210,7 +210,7 @@ configuration_options =
 			{description = "x0.8", data = 0.8},
 			{description = "x0.85", data = 0.85},
 			{description = "x0.9", data = 0.9},
-			{description = "x1 (Default)", data = 1},
+			{description = "x1 󰀛", data = 1},
 			{description = "x1.25", data = 1.25},
 			{description = "x1.5", data = 1.5},
 			{description = "x1.75", data = 1.75},
@@ -245,7 +245,7 @@ configuration_options =
 			{description = "x0.7", data = 0.7},
 			{description = "x0.8", data = 0.8},
 			{description = "x0.85", data = 0.85},
-			{description = "x0.9 (Default)", data = 0.9},
+			{description = "x0.9 󰀛", data = 0.9},
 			{description = "x1", data = 1},
 			{description = "x1.25", data = 1.25},
 			{description = "x1.5", data = 1.5},
@@ -280,7 +280,7 @@ configuration_options =
 			{description = "x0.7", data = 0.7},
 			{description = "x0.8", data = 0.8},
 			{description = "x0.9", data = 0.9},
-			{description = "x1 (Default)", data = 1},
+			{description = "x1 󰀛", data = 1},
 			{description = "x1.25", data = 1.25},
 			{description = "x1.5", data = 1.5},
 			{description = "x1.75", data = 1.75},
@@ -314,7 +314,7 @@ configuration_options =
 			{description = "x0.7", data = 0.7},
 			{description = "x0.8", data = 0.8},
 			{description = "x0.9", data = 0.9},
-			{description = "x1 (Default)", data = 1},
+			{description = "x1 󰀛", data = 1},
 			{description = "x1.25", data = 1.25},
 			{description = "x1.5", data = 1.5},
 			{description = "x1.75", data = 1.75},
@@ -348,7 +348,7 @@ configuration_options =
 			{description = "x0.7", data = 0.7},
 			{description = "x0.8", data = 0.8},
 			{description = "x0.9", data = 0.9},
-			{description = "x1 (Default)", data = 1},
+			{description = "x1 󰀛", data = 1},
 			{description = "x1.25", data = 1.25},
 			{description = "x1.5", data = 1.5},
 			{description = "x1.75", data = 1.75},
@@ -383,7 +383,7 @@ configuration_options =
 			{description = "x0.8", data = 0.8},
 			{description = "x0.9", data = 0.9},
 			{description = "x1", data = 1},
-			{description = "x1.1 (Default)", data = 1.1},
+			{description = "x1.1 󰀛", data = 1.1},
 			{description = "x1.25", data = 1.25},
 			{description = "x1.5", data = 1.5},
 			{description = "x1.75", data = 1.75},
@@ -421,7 +421,7 @@ configuration_options =
 			{description = "x1.25", data = 1.25},
 			{description = "x1.5", data = 1.5},
 			{description = "x1.75", data = 1.75},
-			{description = "x2 (Default)", data = 2},
+			{description = "x2 󰀛", data = 2},
 			{description = "x3", data = 3},
 			{description = "x4", data = 4},
 			{description = "x5", data = 5},
@@ -440,7 +440,7 @@ configuration_options =
 		hover = "Which sounds Hat Kid will make while talking.",
 		options =
 		{
-			{description = "Hat Kid (Default)", data = "hatkidvoice"},
+			{description = "Hat Kid 󰀛", data = "hatkidvoice"},
 			{description = "Willow", data = "willow"},
 			{description = "Wanda", data = "wanda"},
 			{description = "Wendy", data = "wendy"},
@@ -454,7 +454,7 @@ configuration_options =
 		hover = "Whether or not Hat Kid will craft hats faster than normal.",
 		options =
 		{
-			{description = "Yes (Default)", data = true},
+			{description = "Yes 󰀛", data = true},
 			{description = "No", data = false},
 		},
 		default = true,
@@ -473,7 +473,7 @@ configuration_options =
 			{description = "4", data = 4},
 			{description = "5", data = 5},
 			{description = "8", data = 8},
-			{description = "10 (Default)", data = 10},
+			{description = "10 󰀛", data = 10},
 			{description = "15", data = 15},
 			{description = "20", data = 20},
 			{description = "30", data = 30},
@@ -484,33 +484,6 @@ configuration_options =
 			{description = "None", data = false},
 		},
 		default = 10,
-	},	
-
-	{
-		name = "hatkid_discount",
-		label = "Hat Recipe Modifier",
-		hover = "How much what ingredient modifier is applied when Hat Kid crafts any hat.",
-		options =
-		{
-			{description = "Full Cost", data = false},
-			{description = "75% (Default)", data = 0.75},
-			{description = "50% (Amulet)", data = 0.5},
-			{description = "25%", data = 0.25},
-			{description = "0% (Free)", data = 0},
-		},
-		default = 0.75,
-	},	
-
-	{
-		name = "hatkid_discount_ruinshat",
-		label = "Thulecite Crown Modifier",
-		hover = "Whether or not the Thulecite Crown can be crafted cheaper by Hat Kid.",
-		options =
-		{
-			{description = "Yes", data = true},
-			{description = "No (Default)", data = false},
-		},
-		default = false,
 	},	
 
 	{
@@ -543,7 +516,7 @@ configuration_options =
 			{description = "4 days", data = 480 * 4},
 			{description = "5 days", data = 480 * 5},
 			{description = "6 days", data = 480 * 6},
-			{description = "8 days (Default)", data = 480 * 8},
+			{description = "8 days 󰀛", data = 480 * 8},
 			{description = "10 days", data = 480 * 10},
 			{description = "12 days", data = 480 * 12},
 			{description = "16 days", data = 480 * 16},
@@ -571,7 +544,7 @@ configuration_options =
 			{description = "-1.4/min", data = -1.4},
 			{description = "None", data = 0},
 			{description = "1.4/min", data = 1.4},
-			{description = "1.8/min (Default)", data = 1.8},
+			{description = "1.8/min 󰀛", data = 1.8},
 			{description = "2/min", data = 2},
 			{description = "2.3/min", data = 2},
 			{description = "3.4/min", data = 3.4},
@@ -591,7 +564,7 @@ configuration_options =
 		options =
 		{
 			{description = "None", data = false},
-			{description = "20% (Default)", data = 0.2},
+			{description = "20% 󰀛", data = 0.2},
 			{description = "35%", data = 0.35},
 			{description = "50%", data = 0.5},
 			{description = "70%", data = 0.7},
@@ -607,7 +580,7 @@ configuration_options =
 		hover = "How much freezing resistance the Kid's Hat provides while worn.",
 		options =
 		{
-			{description = "None (Default)", data = false},
+			{description = "None 󰀛", data = false},
 			{description = "30", data = 30},
 			{description = "60", data = 60},
 			{description = "90", data = 90},
@@ -629,7 +602,7 @@ configuration_options =
 	-- 		{description = "Smol", data = 16},
 	-- 		{description = "Small", data = 32},
 	-- 		{description = "Medium", data = 64},
-	-- 		{description = "Large (Default)", data = 128},
+	-- 		{description = "Large 󰀛", data = 128},
 	-- 		{description = "Huge! (seriously)", data = 512},
 			
 	-- 	},
@@ -644,7 +617,7 @@ configuration_options =
 	-- 	{
 	-- 		{description = "1", data = 0.0167},
 	-- 		{description = "1.5", data = 0.025},
-	-- 		{description = "3 (Default)", data = 0.05},
+	-- 		{description = "3 󰀛", data = 0.05},
 	-- 		{description = "6", data = 0.1},
 	-- 		{description = "15", data = 0.25},
 	-- 		{description = "20", data = 0.334},
@@ -686,7 +659,7 @@ configuration_options =
 			{description = "3 days", data = 480 * 3},
 			{description = "4 days", data = 480 * 4},
 			{description = "5 days", data = 480 * 5},
-			{description = "6 days (Default)", data = 480 * 6},
+			{description = "6 days 󰀛", data = 480 * 6},
 			{description = "8 days", data = 480 * 8},
 			{description = "10 days", data = 480 * 10},
 			{description = "12 days", data = 480 * 12},
@@ -705,7 +678,7 @@ configuration_options =
 		hover = "How much water resistance the Sprint Hat provides while worn.",
 		options =
 		{
-			{description = "None (Default)", data = false},
+			{description = "None 󰀛", data = false},
 			{description = "20%", data = 0.2},
 			{description = "35%", data = 0.35},
 			{description = "50%", data = 0.5},
@@ -724,7 +697,7 @@ configuration_options =
 		{
 			{description = "None", data = false},
 			{description = "30", data = 30},
-			{description = "60 (Default)", data = 60},
+			{description = "60 󰀛", data = 60},
 			{description = "90", data = 90},
 			{description = "120", data = 120},
 			{description = "180", data = 180},
@@ -753,7 +726,7 @@ configuration_options =
 			{description = "x1", data = 1},
 			{description = "x1.1", data = 1.1},
 			{description = "x1.25", data = 1.25},
-			{description = "x1.3 (Default)", data = 1.3},
+			{description = "x1.3 󰀛", data = 1.3},
 			{description = "x1.35", data = 1.35},
 			{description = "x1.5", data = 1.5},
 			{description = "x1.75", data = 1.75},
@@ -781,7 +754,8 @@ configuration_options =
 			{description = "x0.9", data = 0.9},
 			{description = "x1", data = 1},
 			{description = "x1.25", data = 1.25},
-			{description = "x1.33 (Default)", data = 1.33},
+			{description = "x1.3 󰀛", data = 1.3},
+			{description = "x1.33", data = 1.33},
 			{description = "x1.5", data = 1.5},
 			{description = "x1.67", data = 1.67},
 			{description = "x1.75", data = 1.75},
@@ -795,7 +769,7 @@ configuration_options =
 			{description = "x9", data = 9},
 			{description = "x10", data = 10},
 		},
-		default = 1.33,
+		default = 1.3,
 	},
 
 	{
@@ -805,7 +779,7 @@ configuration_options =
 		options =
 		{
 			{description = "Disabled", data = false},
-			{description = "Enabled (Default)", data = true},
+			{description = "Enabled 󰀛", data = true},
 		},
 		default = true,
 	},
@@ -817,7 +791,7 @@ configuration_options =
 		options =
 		{
 			{description = "Disabled", data = false},
-			{description = "Enabled (Default)", data = true},
+			{description = "Enabled 󰀛", data = true},
 		},
 		default = true,
 	},
@@ -845,7 +819,7 @@ configuration_options =
 			{description = "7", data = 7},
 			{description = "8", data = 8},
 			{description = "9", data = 9},
-			{description = "10 (Default)", data = 10},
+			{description = "10 󰀛", data = 10},
 			{description = "20", data = 20},
 			{description = "30", data = 30},
 			{description = "40", data = 40},
@@ -862,7 +836,7 @@ configuration_options =
 
 	{
 		name = "brewfuelmult",
-		label = "Uses Per Fuel",
+		label = "Fuel Efficiency",
 		hover = "How many uses the Brewing Hat gains per Slurtle Slime. Gunpowder grants double this amount.",
 		options =
 		{
@@ -874,7 +848,7 @@ configuration_options =
 			{description = "0.5", data = 0.5},
 			{description = "0.75", data = 0.75},
 			{description = "1", data = 1},
-			{description = "2 (Default)", data = 2},
+			{description = "2 󰀛", data = 2},
 			{description = "4", data = 4},
 			{description = "5", data = 5},
 			{description = "8", data = 8},
@@ -895,7 +869,7 @@ configuration_options =
 		options =
 		{
 			{description = "None", data = false},
-			{description = "20%", data = 0.2},
+			{description = "20% 󰀛", data = 0.2},
 			{description = "35%", data = 0.35},
 			{description = "50%", data = 0.5},
 			{description = "70%", data = 0.7},
@@ -912,7 +886,7 @@ configuration_options =
 		options =
 		{
 			{description = "None", data = false},
-			{description = "30 (Default)", data = 30},
+			{description = "30 󰀛", data = 30},
 			{description = "60", data = 60},
 			{description = "90", data = 90},
 			{description = "120", data = 120},
@@ -932,7 +906,7 @@ configuration_options =
 			{description = "2 Seconds", data = 2},
 			{description = "3 Seconds", data = 3},
 			{description = "4 Seconds", data = 4},
-			{description = "5 Seconds (Default)", data = 5},
+			{description = "5 Seconds 󰀛", data = 5},
 			{description = "10 Seconds", data = 10},
 			{description = "12 Seconds", data = 12},
 			{description = "15 Seconds", data = 15},
@@ -960,7 +934,7 @@ configuration_options =
 			{description = "0", data = 0},
 			{description = "1", data = 1},
 			{description = "2", data = 2},
-			{description = "3 (Default)", data = 3},
+			{description = "3 󰀛", data = 3},
 			{description = "4", data = 4},
 			{description = "5", data = 5},
 			{description = "8", data = 8},
@@ -985,7 +959,7 @@ configuration_options =
 			{description = "1/4 of a Second", data = 0.25},
 			{description = "1/2 of a Second", data = 0.5},
 			{description = "3/4 of a Second", data = 0.75},
-			{description = "1 Second (Default)", data = 1},
+			{description = "1 Second 󰀛", data = 1},
 			{description = "2 Seconds", data = 2},
 			{description = "3 Seconds", data = 3},
 			{description = "5 Seconds", data = 5},
@@ -1007,7 +981,7 @@ configuration_options =
 			{description = "-60%", data = 0.4},
 			{description = "-50%", data = 0.5},
 			{description = "-40%", data = 0.6},
-			{description = "-30% (Default)", data = 0.7},
+			{description = "-30% 󰀛", data = 0.7},
 			{description = "-25%", data = 0.75},
 			{description = "-20%", data = 0.8},
 			{description = "-10%", data = 0.9},
@@ -1037,7 +1011,7 @@ configuration_options =
 			{description = "17", data = 17},
 			{description = "25.5", data = 25.5},
 			{description = "34", data = 34},
-			{description = "42.5 (Default)", data = 42.5},
+			{description = "42.5 󰀛", data = 42.5},
 			{description = "51", data = 51},
 			{description = "59.5", data = 59.5},
 			{description = "68", data = 68},
@@ -1062,7 +1036,7 @@ configuration_options =
 			{description = "x0 (Disabled)", data = 0},
 			{description = "x1", data = 1},
 			{description = "x2", data = 2},
-			{description = "x3 (Default)", data = 3},
+			{description = "x3 󰀛", data = 3},
 			{description = "x4", data = 4},
 			{description = "x5", data = 5},
 			{description = "x6", data = 6},
@@ -1093,7 +1067,7 @@ configuration_options =
 			{description = "5", data = 5},
 			{description = "6", data = 6},
 			{description = "7", data = 7},
-			{description = "8 (Default)", data = 8},
+			{description = "8 󰀛", data = 8},
 			{description = "9", data = 9},
 			{description = "10", data = 10},
 			{description = "20", data = 20},
@@ -1112,14 +1086,14 @@ configuration_options =
 
 	{
 		name = "polarfuelmult",
-		label = "Uses Per Fuel",
+		label = "Fuel Efficiency",
 		hover = "How many uses the Ice Hat gains per Ice.",
 		options =
 		{
 			{description = "0.1", data = 0.1},
 			{description = "0.2", data = 0.2},
-			{description = "0.25 (Default)", data = 0.25},
-			{description = "0.5", data = 0.5},
+			{description = "0.25", data = 0.25},
+			{description = "0.5 󰀛", data = 0.5},
 			{description = "0.75", data = 0.75},
 			{description = "1", data = 1},
 			{description = "2", data = 2},
@@ -1133,7 +1107,7 @@ configuration_options =
 			{description = "50", data = 50},
 			{description = "100", data = 100},
 		},
-		default = 0.25,
+		default = 0.5,
 	},
 
 	{
@@ -1142,7 +1116,7 @@ configuration_options =
 		hover = "How much water resistance the Ice Hat provides while worn.",
 		options =
 		{
-			{description = "None (Default)", data = false},
+			{description = "None 󰀛", data = false},
 			{description = "20%", data = 0.2},
 			{description = "35%", data = 0.35},
 			{description = "50%", data = 0.5},
@@ -1163,7 +1137,7 @@ configuration_options =
 			{description = "30", data = 30},
 			{description = "60", data = 60},
 			{description = "90", data = 90},
-			{description = "120 (Default)", data = 120},
+			{description = "120 󰀛", data = 120},
 			{description = "180", data = 180},
 			{description = "240", data = 240},
 		},
@@ -1183,7 +1157,7 @@ configuration_options =
 			{description = "5 Seconds", data = 5},
 			{description = "10 Seconds", data = 10},
 			{description = "15 Seconds", data = 15},
-			{description = "20 Seconds (Default)", data = 20},
+			{description = "20 Seconds 󰀛", data = 20},
 			{description = "30 Seconds", data = 30},
 			{description = "45 Seconds", data = 45},
 			{description = "60 Seconds", data = 60},
@@ -1207,9 +1181,9 @@ configuration_options =
 			{description = "0", data = 0},
 			{description = "1", data = 1},
 			{description = "2", data = 2},
-			{description = "3", data = 3},
+			{description = "3 󰀛", data = 3},
 			{description = "4", data = 4},
-			{description = "5 (Default)", data = 5},
+			{description = "5", data = 5},
 			{description = "10", data = 10},
 			{description = "15", data = 15},
 			{description = "20", data = 20},
@@ -1218,7 +1192,7 @@ configuration_options =
 			{description = "50", data = 50},
 			{description = "100", data = 100},
 		},
-		default = 5,
+		default = 3,
 	},
 
 	{
@@ -1228,7 +1202,7 @@ configuration_options =
 		options =
 		{
 			{description = "1", data = 1},
-			{description = "2 (Default)", data = 2},
+			{description = "2 󰀛", data = 2},
 			{description = "3", data = 3},
 			{description = "4", data = 4},
 			{description = "5", data = 5},
@@ -1251,7 +1225,7 @@ configuration_options =
 			{description = "-2.5", data = 2.5},
 			{description = "-5", data = 5},
 			{description = "-10", data = 10},
-			{description = "-15 (Default)", data = 15},
+			{description = "-15 󰀛", data = 15},
 			{description = "-20", data = 20},
 			{description = "-25", data = 25},
 			{description = "-30", data = 30},
@@ -1277,11 +1251,11 @@ configuration_options =
 			{description = "10", data = 10},
 			{description = "17", data = 17},
 			{description = "25.5", data = 25.5},
-			{description = "34 (Default)", data = 34},
+			{description = "34", data = 34},
 			{description = "42.5", data = 42.5},
 			{description = "51", data = 51},
 			{description = "59.5", data = 59.5},
-			{description = "68", data = 68},
+			{description = "68 󰀛", data = 68},
 			{description = "76.5", data = 76.5},
 			{description = "89", data = 89},
 			{description = "102", data = 102},
@@ -1291,7 +1265,7 @@ configuration_options =
 			{description = "510", data = 510},
 			{description = "KILLER QUEEN!!!", data = 999999, hover = "999,999"},
 		},
-		default = 34,
+		default = 68,
 	},
 
 	{
@@ -1305,7 +1279,7 @@ configuration_options =
 			{description = "x3", data = 3},
 			{description = "x4", data = 4},
 			{description = "x5", data = 5},
-			{description = "x6 (Default)", data = 6},
+			{description = "x6 󰀛", data = 6},
 			{description = "x7", data = 7},
 			{description = "x8", data = 8},
 			{description = "x9", data = 9},
@@ -1344,7 +1318,7 @@ configuration_options =
 			{description = "1 segment", data = 30}, -- 1 segment = 30 seconds
 			{description = "2 segments", data = 30 * 2},
 			{description = "4 segments", data = 30 * 4},
-			{description = "6 segments (Default)", data = 30 * 6},
+			{description = "6 segments 󰀛", data = 30 * 6},
 			{description = "8 segments", data = 30 * 8},
 			{description = "1 day", data = 480}, -- 30 * 16, 1 day = 16 segments
 			{description = "2 days", data = 480 * 2},
@@ -1376,7 +1350,7 @@ configuration_options =
 			{description = "20", data = 20},
 			{description = "25", data = 25},
 			{description = "30", data = 30},
-			{description = "36 (Default)", data = 36},
+			{description = "36 󰀛", data = 36},
 			{description = "60", data = 60},
 			{description = "120", data = 120},
 			{description = "180", data = 180},
@@ -1395,7 +1369,7 @@ configuration_options =
 		hover = "How much water resistance the Dweller's Mask provides while worn.",
 		options =
 		{
-			{description = "None (Default)", data = false},
+			{description = "None 󰀛", data = false},
 			{description = "20%", data = 0.2},
 			{description = "35%", data = 0.35},
 			{description = "50%", data = 0.5},
@@ -1412,7 +1386,7 @@ configuration_options =
 		hover = "How much freezing resistance the Dweller's Mask provides while worn.",
 		options =
 		{
-			{description = "None (Default)", data = false},
+			{description = "None 󰀛", data = false},
 			{description = "30", data = 30},
 			{description = "60", data = 60},
 			{description = "90", data = 90},
@@ -1437,7 +1411,7 @@ configuration_options =
 			{description = "10 Seconds", data = 10},
 			{description = "15 Seconds", data = 15},
 			{description = "20 Seconds", data = 20},
-			{description = "30 Seconds (Default)", data = 30},
+			{description = "30 Seconds 󰀛", data = 30},
 			{description = "45 Seconds", data = 45},
 			{description = "60 Seconds", data = 60},
 			{description = "90 Seconds", data = 90},
@@ -1460,7 +1434,7 @@ configuration_options =
 			{description = "0", data = 0},
 			{description = "1", data = 1},
 			{description = "2", data = 2},
-			{description = "3 (Default)", data = 3},
+			{description = "3 󰀛", data = 3},
 			{description = "4", data = 4},
 			{description = "5", data = 5},
 			{description = "10", data = 10},
@@ -1483,8 +1457,8 @@ configuration_options =
 			{description = "1 Second", data = 1},
 			{description = "2 Seconds", data = 2},
 			{description = "3 Seconds", data = 3},
-			{description = "4 Seconds (Default)", data = 4},
-			{description = "5 Seconds", data = 5},
+			{description = "4 Seconds", data = 4},
+			{description = "5 Seconds 󰀛", data = 5},
 			{description = "10 Seconds", data = 10},
 			{description = "15 Seconds", data = 15},
 			{description = "20 Seconds", data = 20},
@@ -1492,7 +1466,7 @@ configuration_options =
 			{description = "45 Seconds", data = 45},
 			{description = "60 Seconds", data = 60},
 		},
-		default = 4,
+		default = 5,
 	},
 
 	{
@@ -1508,9 +1482,9 @@ configuration_options =
 			{description = "x5", data = 5},
 			{description = "x6", data = 6},
 			{description = "x7", data = 7},
-			{description = "x8 (Default)", data = 8},
+			{description = "x8", data = 8},
 			{description = "x9", data = 9},
-			{description = "x10", data = 10},
+			{description = "x10 󰀛", data = 10},
 			{description = "x11", data = 11},
 			{description = "x12", data = 12},
 			{description = "x13", data = 13},
@@ -1519,7 +1493,7 @@ configuration_options =
 			{description = "x16 (Very Large)", data = 16},
 
 		},
-		default = 8,
+		default = 10,
 	},
 
 	{
@@ -1531,9 +1505,9 @@ configuration_options =
 			{description = "-60/min", data = -60},
 			{description = "-20/min", data = -20},
 			{description = "-10/min", data = -10},
-			{description = "-6.7/min (Default)", data = -6.7},
+			{description = "-6.7/min", data = -6.7},
 			{description = "-4.5/min", data = -4.5},
-			{description = "-3.4/min", data = -3.4},
+			{description = "-3.4/min 󰀛", data = -3.4},
 			{description = "-2/min", data = -2},
 			{description = "-1.4/min", data = -1.4},
 			{description = "None", data = 0},
@@ -1546,7 +1520,7 @@ configuration_options =
 			{description = "20/min", data = 20},
 			{description = "60/min", data = 60},
 		},
-		default = -6.7,
+		default = -3.4,
 	},
 
 	{
@@ -1555,8 +1529,8 @@ configuration_options =
 		hover = "How much sanity is taken away when someone within a Dweller's Mask's radius is hit while at 1 hp.",
 		options =
 		{
-			{description = "None", data = 0},
-			{description = "-1 (Default)", data = 1},
+			{description = "None 󰀛", data = 0},
+			{description = "-1", data = 1},
 			{description = "-2", data = 2},
 			{description = "-3", data = 3},
 			{description = "-4", data = 4},
@@ -1569,7 +1543,7 @@ configuration_options =
 			{description = "-50", data = 50},
 			{description = "-100", data = 100},
 		},
-		default = 1,
+		default = 0,
 	},
 
 	{
@@ -1578,10 +1552,10 @@ configuration_options =
 		hover = "How much fuel is taken away when someone within a Dweller's Mask's radius is hit while at 1 hp.",
 		options =
 		{
-			{description = "None", data = 0},
+			{description = "None 󰀛", data = 0},
 			{description = "-1", data = 1},
 			{description = "-2", data = 2},
-			{description = "-3 (Default)", data = 3},
+			{description = "-3", data = 3},
 			{description = "-4", data = 4},
 			{description = "-5", data = 5},
 			{description = "-10", data = 10},
@@ -1592,7 +1566,7 @@ configuration_options =
 			{description = "-60", data = 60},
 			{description = "-120", data = 120},
 		},
-		default = 3,
+		default = 0,
 	},
 
 	{
@@ -1602,7 +1576,7 @@ configuration_options =
 		options =
 		{
 			{description = "x0.1", data = 0.1},
-			{description = "x0.25 (Default)", data = 0.25},
+			{description = "x0.25 󰀛", data = 0.25},
 			{description = "x0.5", data = 0.5},
 			{description = "x0.75", data = 0.75},
 			{description = "x1", data = 1},
@@ -1618,7 +1592,7 @@ configuration_options =
 		hover = "Whether or not players revived by the Dweller's Mask will have their sanity set to 30%, and max health decreased by 25%.",
 		options =
 		{
-			{description = "Enabled (Default)", data = true},
+			{description = "Enabled 󰀛", data = true},
 			{description = "Disabled", data = false},
 		},
 		default = true,
@@ -1633,7 +1607,7 @@ configuration_options =
 			{description = "None", data = 0},
 			{description = "5", data = 5},
 			{description = "10", data = 10},
-			{description = "20 (Default)", data = 20},
+			{description = "20 󰀛", data = 20},
 			{description = "30", data = 30},
 			{description = "40", data = 40},
 			{description = "80", data = 80},
@@ -1650,7 +1624,7 @@ configuration_options =
 		{
 			{description = "None", data = 0},
 			{description = "-30", data = 30},
-			{description = "-60 (Default)", data = 60},
+			{description = "-60 󰀛", data = 60},
 			{description = "-90", data = 90},
 			{description = "-120", data = 120},
 			{description = "-180", data = 180},
@@ -1664,7 +1638,7 @@ configuration_options =
 		hover = "Whether or not the Dweller's Mask will produce sounds.",
 		options =
 		{
-			{description = "Enabled (Default)", data = true},
+			{description = "Enabled 󰀛", data = true},
 			{description = "Disabled", data = false},
 		},
 		default = true,
@@ -1676,7 +1650,7 @@ configuration_options =
 		hover = "Whether or not the screen will turn green while under the influence of the Dweller's Mask's night vision.",
 		options =
 		{
-			{description = "Enabled (Default)", data = true},
+			{description = "Enabled 󰀛", data = true},
 			{description = "Disabled", data = false},
 		},
 		default = true,
@@ -1703,7 +1677,7 @@ configuration_options =
 			{description = "20 seconds", data = 20},
 			{description = "25 seconds", data = 25},
 			{description = "1 segment", data = 30}, -- 1 segment = 30 seconds
-			{description = "2 segments (Default)", data = 30 * 2},
+			{description = "2 segments 󰀛", data = 30 * 2},
 			{description = "4 segments", data = 30 * 4},
 			{description = "8 segments", data = 30 * 8},
 			{description = "1 day", data = 480}, -- 30 * 16, 1 day = 16 segments
@@ -1732,7 +1706,7 @@ configuration_options =
 		{
 			{description = "1", data = 1},
 			{description = "3", data = 3},
-			{description = "5 (Default)", data = 5},
+			{description = "5 󰀛", data = 5},
 			{description = "10", data = 10},
 			{description = "15", data = 15},
 			{description = "20", data = 20},
@@ -1756,7 +1730,7 @@ configuration_options =
 		hover = "How much water resistance the Time Stop hat provides while worn.",
 		options =
 		{
-			{description = "None (Default)", data = false},
+			{description = "None 󰀛", data = false},
 			{description = "20%", data = 0.2},
 			{description = "35%", data = 0.35},
 			{description = "50%", data = 0.5},
@@ -1775,7 +1749,7 @@ configuration_options =
 		{
 			{description = "None", data = false},
 			{description = "30", data = 30},
-			{description = "60 (Default)", data = 60},
+			{description = "60 󰀛", data = 60},
 			{description = "90", data = 90},
 			{description = "120", data = 120},
 			{description = "180", data = 180},
@@ -1801,15 +1775,15 @@ configuration_options =
 			{description = "30 Seconds", data = 30},
 			{description = "45 Seconds", data = 45},
 			{description = "60 Seconds", data = 60},
-			{description = "90 Seconds", data = 90},
+			{description = "90 Seconds 󰀛", data = 90},
 			{description = "2 Minutes", data = 120},
-			{description = "3 Minutes (Default)", data = 180},
+			{description = "3 Minutes", data = 180},
 			{description = "4 Minutes", data = 240},
 			{description = "5 Minutes", data = 300},
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 180,
+		default = 90,
 	},
 
 	{
@@ -1824,7 +1798,7 @@ configuration_options =
 			{description = "3", data = 3},
 			{description = "4", data = 4},
 			{description = "5", data = 5},
-			{description = "10 (Default)", data = 10},
+			{description = "10 󰀛", data = 10},
 			{description = "15", data = 15},
 			{description = "20", data = 20},
 			{description = "25", data = 25},
@@ -1846,7 +1820,7 @@ configuration_options =
 			{description = "10 Seconds", data = 10},
 			{description = "12 Seconds", data = 12},
 			{description = "15 Seconds", data = 15},
-			{description = "20 Seconds (Default)", data = 20},
+			{description = "20 Seconds 󰀛", data = 20},
 			{description = "30 Seconds", data = 30},
 			{description = "45 Seconds", data = 45},
 			{description = "60 Seconds", data = 60},
@@ -1869,12 +1843,13 @@ configuration_options =
 		{
 			-- {description = "x0.1 (Careful)", data = 0.1},
 			-- {description = "x0.2 (Careful)", data = 0.2},
+			-- Values below x0.3 aren't supported properly
 			{description = "x0.3", data = 0.3},
-			{description = "x0.34", data = 0.34},
+			{description = "x0.33 󰀛", data = 0.33},
 			{description = "x0.4", data = 0.4},
-			{description = "x0.5 (Default)", data = 0.5},
+			{description = "x0.5", data = 0.5},
 			{description = "x0.6", data = 0.6},
-			{description = "x0.67", data = 0.67},
+			{description = "x0.66", data = 0.66},
 			{description = "x0.7", data = 0.7},
 			{description = "x0.8", data = 0.8},
 			{description = "x0.9", data = 0.9},
@@ -1884,7 +1859,7 @@ configuration_options =
 			{description = "x1.75", data = 1.75},
 			{description = "x2", data = 2},
 		},
-		default = 0.5,
+		default = 0.33,
 	},
 	
 	{
@@ -1911,7 +1886,7 @@ configuration_options =
 			{description = "150", data = 150},
 			{description = "175", data = 175},
 			{description = "180", data = 180},
-			{description = "200 (Default)", data = 200},
+			{description = "200 󰀛", data = 200},
 			{description = "250", data = 250},
 			{description = "300", data = 300},
 			{description = "400", data = 400},
@@ -1925,7 +1900,7 @@ configuration_options =
 	
 	{
 		name = "hatbrelladamage",
-		label = "Closed Umbrella Damage",
+		label = "Umbrella Damage",
 		hover = "How much damage Hat Kid's umbrella deals.",
 		options =
 		{
@@ -1935,7 +1910,7 @@ configuration_options =
 			{description = "27", data = 27},
 			{description = "34", data = 34},
 			{description = "42.5", data = 42.5},
-			{description = "51 (Default)", data = 51},
+			{description = "51 󰀛", data = 51},
 			{description = "63", data = 63},
 			{description = "72", data = 72},
 			{description = "89", data = 89},
@@ -1945,6 +1920,31 @@ configuration_options =
 			{description = "KILLER QUEEN!!!", data = 999999, hover = "999,999"},
 		},
 		default = 51,
+	},
+
+	{
+		name = "hatbrellathreehit",
+		label = "Three-Hit Bonus Damage",
+		hover = "How much bonus damage is dealt every three hits with this item.",
+		options =
+		{
+			{description = "1", data = 1},
+			{description = "9", data = 9},
+			{description = "14", data = 14},
+			{description = "25.5 󰀛", data = 25.5},
+			{description = "27", data = 27},
+			{description = "34", data = 34},
+			{description = "42.5", data = 42.5},
+			{description = "51", data = 51},
+			{description = "63", data = 63},
+			{description = "72", data = 72},
+			{description = "89", data = 89},
+			{description = "100", data = 100},
+			{description = "200", data = 200},
+			{description = "500", data = 500},
+			{description = "KILLER QUEEN!!!", data = 999999, hover = "999,999"},
+		},
+		default = 25.5,
 	},
 
 	{
@@ -1969,7 +1969,7 @@ configuration_options =
 			{description = "3 days", data = 480 * 3},
 			{description = "4 days", data = 480 * 4},
 			{description = "5 days", data = 480 * 5},
-			{description = "6 days (Default)", data = 480 * 6},
+			{description = "6 days 󰀛", data = 480 * 6},
 			{description = "8 days", data = 480 * 8},
 			{description = "10 days", data = 480 * 10},
 			{description = "12 days", data = 480 * 12},
@@ -1994,7 +1994,7 @@ configuration_options =
 			{description = "35%", data = 0.35},
 			{description = "50%", data = 0.5},
 			{description = "70%", data = 0.7},
-			{description = "90% (Default)", data = 0.9},
+			{description = "90% 󰀛", data = 0.9},
 			{description = "100%", data = 1},
 		},
 		default = 0.9,
@@ -2075,7 +2075,7 @@ configuration_options =
             {description="W", data = 119},
             {description="X", data = 120},
             {description="Y", data = 121},
-            {description="Z (Default)", data = 122},
+            {description="Z 󰀛", data = 122},
             {description="F1", data = 282},
             {description="F2", data = 283},
             {description="F3", data = 284},
@@ -2170,7 +2170,7 @@ configuration_options =
             {description="O", data = 111},
             {description="P", data = 112},
             {description="Q", data = 113},
-            {description="R (Default)", data = 114},
+            {description="R 󰀛", data = 114},
             {description="S", data = 115},
             {description="T", data = 116},
             {description="U", data = 117},
@@ -2219,7 +2219,7 @@ configuration_options =
 	-- 	hover = "Causes some intentional glitches. You may not notice an effect.",
 	-- 	options =
 	-- 	{
-	-- 		{description = "Disabled (Default)", data = false},
+	-- 		{description = "Disabled 󰀛", data = false},
 	-- 		{description = "Enabled", data = true},
 	-- 	},
 	-- 	default = false,
@@ -2239,7 +2239,7 @@ configuration_options =
 -- 		options =
 -- 		{
 -- 			{description = "Disabled", data = false},
--- 			{description = "Enabled (Default)", data = true},
+-- 			{description = "Enabled 󰀛", data = true},
 -- 		},
 -- 		default = true,
 -- 	},

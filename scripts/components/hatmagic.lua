@@ -80,18 +80,13 @@ function HatMagic:Activate()
         end
     else
         local owner = self.inst.components.inventoryitem:GetGrandOwner()
-        owner.components.talker:Say("My hat won't work!") -- TODO fix hardcoded string
+        owner.components.talker:Say("My hat won't activate!") -- TODO fix hardcoded string
     end
 end
 
 -- Returns true if able to activate magic.
 function HatMagic:CanActivate()
-    print(self.useable)
-    print(not self.isactive)
-    print(not self.oncooldown)
-    print(self.fn_test)
     return self.useable and not self.isactive and not self.oncooldown and (self.fn_test == nil or self.fn_test(self.inst) == true)
-    -- return self.useable and not self.isactive and not self.oncooldown
 end
 
 function HatMagic:Deactivate()

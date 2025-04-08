@@ -54,24 +54,6 @@ local function OnEmpty(inst)
 end
 
 local function OnAttack(inst, attacker, target)
-    -- -- If we're strong on this attack
-    -- if inst:HasTag("strongatk") then
-    --     inst.SoundEmitter:PlaySound("dontstarve/creatures/together/klaus/lock_break") -- TODO better sound
-        
-    --     inst:RemoveTag("strongatk")
-    --     inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE)
-    -- end
-
-    -- -- Add one to the counter
-    -- inst.attack_chain = inst.attack_chain + 1
-
-    -- -- Set damage for next attack if we're ready
-    -- if inst.attack_chain >= 3 then
-    --     inst.attack_chain = 0
-    --     inst:AddTag("strongatk")
-    --     inst.components.weapon:SetDamage(TUNING.HATBRELLA_DAMAGE + 25.5)
-    -- end
-
     if target.components.combat then
         if target.hatbrella_chain == nil then
             target.hatbrella_chain = 0
@@ -80,16 +62,14 @@ local function OnAttack(inst, attacker, target)
         target.hatbrella_chain = target.hatbrella_chain + 1
 
         if target:HasTag("hatbrella_strongatk") then
+            -- TODO add visual feedback
             target:RemoveTag("hatbrella_strongatk")
-            target.components.combat:GetAttacked(attacker, 25.5, inst)
+            target.components.combat:GetAttacked(attacker, TUNING.HATBRELLA_BONUS, inst)
             target.hatbrella_chain = 0
         elseif target.hatbrella_chain >= 2 then
             target:AddTag("hatbrella_strongatk")
         end
     end
-
-
-
 end
 
 local function fn()
@@ -99,7 +79,6 @@ local function fn()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
-    inst.entity:AddSoundEmitter()
      
     MakeInventoryPhysics(inst)
       
@@ -128,9 +107,6 @@ local function fn()
     hatbrella = 178.5 (possibly 205.5)
     nightsword = 204
     ]]
-
-    -- inst:AddTag("strongatk")
-    -- inst.attack_chain = 0 
   
     inst:AddComponent("inspectable")
 

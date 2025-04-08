@@ -5,12 +5,6 @@ local assets=
 	
     Asset("ATLAS", "images/inventoryimages/kidhat.xml"),
     Asset("IMAGE", "images/inventoryimages/kidhat.tex"),
-
-	-- Asset("ATLAS", "images/inventoryimages/ms_kidhat_dye_bowkid.xml"),
-    -- Asset("IMAGE", "images/inventoryimages/ms_kidhat_dye_bowkid.tex"),
-
-	-- Asset("ATLAS", "images/inventoryimages/ms_kidhat_dye_groovy.xml"),
-    -- Asset("IMAGE", "images/inventoryimages/ms_kidhat_dye_groovy.tex"),
 }
 
 
@@ -71,18 +65,6 @@ local function OnUnequip(inst, owner)
 	end
 end
 
---[[
-	"badgeseller_location_spawn",
-	"badgeseller_location_pigking",
-	"badgeseller_location_oasis",
-	"badgeseller_location_stage",
-	"badgeseller_location_moonstone",
-	"badgeseller_location_lunar",
-	"badgeseller_location_pearl",
-	"badgeseller_location_monkey",
-	"badgeseller_location_awesome",
-]]
-
 local function OnActivate(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
 	local seller = GetClosestInstWithTag("badgeseller", TheWorld, 1000)
@@ -121,6 +103,10 @@ local function OnEmpty(inst)
 	inst:DoTaskInTime(0, inst.Remove)
 end
 
+local function KeybindUse(inst)
+	inst.components.hatmagic:Activate()
+end
+
 local function fn() 
     local inst = CreateEntity()
 
@@ -129,7 +115,6 @@ local function fn()
 	-- Add internal components
 	inst.entity:AddTransform() -- position
 	inst.entity:AddAnimState() -- sprite and animation
-	inst.entity:AddSoundEmitter() -- sounds
     inst.entity:AddNetwork() -- networked from server to client
 
 	-- Setup AnimState
@@ -199,39 +184,11 @@ local function fn()
 	inst:AddComponent("hatmagic")
 	inst.components.hatmagic.instant = true
 	inst.components.hatmagic.cooldowntime = 10
-	-- inst.components.hatmagic.activetime = 2/3
 	inst.components.hatmagic:SetActivateFn(OnActivate)
-	-- inst.components.hatmagic:SetTestFn(TestFn)
 
+	inst:ListenForEvent("AbilityKey", KeybindUse)
 
     return inst
 end
-
--- local function fn_dye_niko()
--- 	local inst = fn()
-
--- 	inst.AnimState:SetBuild("kidhat_dye_niko")
-
--- 	return inst
-
--- end
-
--- local function fn_dye_toonlink()
--- 	local inst = fn()
-
--- 	inst.AnimState:SetBuild("kidhat_dye_toonlink")
-
--- 	return inst
-
--- end
-
--- local function fn_dye_pinkdanger()
--- 	local inst = fn()
-
--- 	inst.AnimState:SetBuild("kidhat_dye_pinkdanger")
-
--- 	return inst
-
--- end
 
 return Prefab("kidhat", fn, assets, prefabs)

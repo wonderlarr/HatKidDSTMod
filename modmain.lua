@@ -25,7 +25,6 @@
 
 local PrefabFilesLocal = {
 	"hatkid",
-	-- replaced hatkid_none with skins, according to the new Skins API
 	"hatkid_skins",
 
 	--hats
@@ -41,14 +40,10 @@ local PrefabFilesLocal = {
 	"hatbrellaopen",
 	"kidpotion",
 	"kidpotion_ammo",
-	-- "kidpotion_throwable",
 
-	--collectables (disabled)
 	"pon",
 	"pon_boss",
 	-- "pon_heart",
-	-- "timepiece",
-	-- "relic_rift1",
 
 	--fx
 	"brewinghat_explode",
@@ -59,7 +54,6 @@ local PrefabFilesLocal = {
 	"hatshatter2",
 
 	--misc
-	-- "inv_pons",
 	"hatpack",
 
 	--badges
@@ -78,9 +72,6 @@ local PrefabFilesLocal = {
 	"badgesellercane",
 	"badge_pin",
 	"pon_upgrades",
-
-	--testing TODO (disable in final)
-	-- "cooltarget", -- This is a dummytarget prefab, but it only regens health when it is low.
 }
 
 PrefabFiles = PrefabFilesLocal
@@ -116,10 +107,6 @@ Assets = {
 
 	Asset( "IMAGE", "images/names_gold_hatkid.tex" ),
     Asset( "ATLAS", "images/names_gold_hatkid.xml" ),
-
-	-- Pon inventory (disabled)
-	-- Asset("ANIM", "anim/status_pons.zip"),
-	-- Asset("ANIM", "anim/pons_icon.zip"),
 
 	-- Skin bigportraits
     Asset( "IMAGE", "bigportraits/hatkid.tex" ), -- Base, not sure where this is used tbh.
@@ -186,8 +173,6 @@ modimport("modmain_actions.lua")
 modimport("modmain_insight.lua")
 modimport("modmain_strings.lua")
 
-modimport("modmain_dev.lua")
-
 -- If meme language or meme language server is enabled, we'll use our own meme strings, otherwise load the normal ones.
 if GLOBAL.KnownModIndex:IsModEnabled("workshop-1289272965") or GLOBAL.KnownModIndex:IsModEnabled("workshop-2926922407") then
 	modimport("modmain_strings_alt.lua")
@@ -205,30 +190,6 @@ AddModCharacter("hatkid", "FEMALE")
 AddMinimapAtlas("images/map_icons/hatkid.xml")
 
 local TheSim = GLOBAL.TheSim
-
-GLOBAL.TALKINGFONT_HATKID = "talkingfont_hatkid"
-
-local HATKID_FALLBACK_TABLE_OUTLINE = {
-	GLOBAL.TALKINGFONT,
-	"controllers",
-	"emoji",
-	GLOBAL.FALLBACK_FONT_OUTLINE,
-	GLOBAL.FALLBACK_FONT_FULL_OUTLINE,
-}
-
-AddSimPostInit(function()
-	TheSim:UnloadFont(GLOBAL.TALKINGFONT_HATKID)
-	TheSim:UnloadPrefabs({"hatkid_fonts"})
-
-	local Assets = {
-		Asset("FONT", GLOBAL.resolvefilepath("fonts/talkingfont_hatkid.zip")),
-	}
-	local FontsPrefab = GLOBAL.Prefab("hatkid_fonts", function() return GLOBAL.CreateEntity() end, Assets)
-	GLOBAL.RegisterPrefabs(FontsPrefab)
-	TheSim:LoadPrefabs({"hatkid_fonts"})
-	TheSim:LoadFont(GLOBAL.resolvefilepath("fonts/talkingfont_hatkid.zip"), GLOBAL.TALKINGFONT_HATKID)
-	TheSim:SetupFontFallbacks(GLOBAL.TALKINGFONT_HATKID, HATKID_FALLBACK_TABLE_OUTLINE)
-end)
 
 -- Thanks Kzisor/Ysovuka for the Key Handling code.
 -- Key Handling guide https://forums.kleientertainment.com/forums/topic/63754-tutorial-character-transformation/
@@ -446,327 +407,6 @@ if not afs_enabled then
 	end)
 end
 
--- I would have put this directly in the prefab but I just stole code from my other mod and I'm too lazy to do this properly
--- besides, using postinits on your own prefabs is funny.
-
--- if TUNING.BREWINGHAT_DURABILITY then
--- 	AddPrefabPostInit("brewinghat", function(inst)
--- 		local function OnTick(inst)
--- 			if inst.components.container and inst.components.container:GetItemInSlot(1) then
--- 				local owner = inst.components.inventoryitem:GetGrandOwner()
-
--- 				local fueltogive = inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue * inst.components.fueled.bonusmult
--- 				local currentfuel = inst.components.fueled.currentfuel
--- 				local maxfuel = inst.components.fueled.maxfuel
-
--- 				if (maxfuel - currentfuel) >= fueltogive then
--- 					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
--- 					inst.components.fueled.accepting = true
--- 					inst.components.fueled:TakeFuelItem(fuelitem, owner)
--- 					currentfuel = math.floor(currentfuel/fueltogive+0.5)*fueltogive
--- 					inst.components.fueled.accepting = false
--- 				end
--- 			end
--- 		end
-
--- 		local function OnEquip(inst, data)
--- 			local owner = data.owner
--- 			if inst.components.container ~= nil then
--- 				inst.components.container:Open(owner)
--- 			end
--- 		end
-
--- 		local function OnUnequip(inst, data)
--- 			local owner = data.owner
--- 			if inst.components.container ~= nil then
--- 				inst.components.container:Close(owner)
--- 			end
--- 		end
-		
--- 		-- Start Container stuff ---------
--- 		local containers = GLOBAL.require("containers")
--- 		params = containers.params
-
--- 		params.brewinghat_inv =
--- 		{
--- 			widget =
--- 			{
--- 				slotpos =
--- 				{
--- 					GLOBAL.Vector3(0,   32 + 4,  0),
--- 				},
--- 				animbank = "ui_cookpot_1x2",
--- 				animbuild = "ui_cookpot_1x2",
--- 				pos = GLOBAL.Vector3(0, 15, 0),
--- 			},
--- 			usespecificslotsforitems = true,
--- 			type = "head_inv",
--- 		}
-		
--- 		function params.brewinghat_inv.itemtestfn(container, item, slot)
--- 			return item.prefab == "slurtleslime" or item.prefab == "gunpowder"
--- 		end
--- 		-- End Container -------
-		
-
--- 		if not GLOBAL.TheWorld.ismastersim then
--- 			inst.OnEntityReplicated = function(inst) 
--- 				inst.replica.container:WidgetSetup("brewinghat_inv") 
--- 			end
-
--- 			return
--- 		end
-
--- 		inst:AddComponent("container")
--- 		inst.components.container:WidgetSetup("brewinghat_inv")
--- 		inst.components.container.canbeopened = false
-
--- 		-- inst.tick = inst:DoPeriodicTask(0.5, OnTick)
-
--- 		inst:ListenForEvent("equipped", OnEquip)
--- 		inst:ListenForEvent("unequipped", OnUnequip)
--- 		inst:ListenForEvent("itemget", OnTick)
--- 	end)
--- end
-
--- if TUNING.POLARHAT_DURABILITY then
--- 	AddPrefabPostInit("polarhat", function(inst)
--- 		local function OnTick(inst)
--- 			if inst.components.container and inst.components.container:GetItemInSlot(1) then
--- 				local owner = inst.components.inventoryitem:GetGrandOwner()
-
--- 				local fueltogive = inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue * inst.components.fueled.bonusmult
--- 				local currentfuel = inst.components.fueled.currentfuel
--- 				local maxfuel = inst.components.fueled.maxfuel
-
--- 				if (maxfuel - currentfuel) >= fueltogive then
--- 					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
--- 					inst.components.fueled.accepting = true
--- 					inst.components.fueled:TakeFuelItem(fuelitem, owner)
--- 					currentfuel = math.floor(currentfuel/fueltogive+0.5)*fueltogive
--- 					inst.components.fueled.accepting = false
--- 				end
--- 			end
--- 		end
-
--- 		local function OnEquip(inst, data)
--- 			local owner = data.owner
--- 			if inst.components.container ~= nil then
--- 				inst.components.container:Open(owner)
--- 			end
--- 		end
-
--- 		local function OnUnequip(inst, data)
--- 			local owner = data.owner
--- 			if inst.components.container ~= nil then
--- 				inst.components.container:Close(owner)
--- 			end
--- 		end
-		
--- 		-- Start Container stuff ---------
--- 		local containers = GLOBAL.require("containers")
--- 		params = containers.params
-
--- 		params.polarhat_inv =
--- 		{
--- 			widget =
--- 			{
--- 				slotpos =
--- 				{
--- 					GLOBAL.Vector3(0,   32 + 4,  0),
--- 				},
--- 				animbank = "ui_cookpot_1x2",
--- 				animbuild = "ui_cookpot_1x2",
--- 				pos = GLOBAL.Vector3(0, 15, 0),
--- 			},
--- 			usespecificslotsforitems = true,
--- 			type = "head_inv",
--- 		}
-		
--- 		function params.polarhat_inv.itemtestfn(container, item, slot)
--- 			return item.prefab == "ice"
--- 		end
--- 		-- End Container -------
-		
-
--- 		if not GLOBAL.TheWorld.ismastersim then
--- 			inst.OnEntityReplicated = function(inst) 
--- 				inst.replica.container:WidgetSetup("polarhat_inv") 
--- 			end
-
--- 			return
--- 		end
-
--- 		inst:AddComponent("container")
--- 		inst.components.container:WidgetSetup("polarhat_inv")
--- 		inst.components.container.canbeopened = false
-
--- 		inst.tick = inst:DoPeriodicTask(0.25, OnTick)
-
--- 		inst:ListenForEvent("equipped", OnEquip)
--- 		inst:ListenForEvent("unequipped", OnUnequip)
--- 		inst:ListenForEvent("itemget", OnTick)
--- 	end)
--- end
-
--- if TUNING.DWELLERMASK_DURABILITY then
--- 	AddPrefabPostInit("dwellermask", function(inst)
--- 		local function OnTick(inst)
--- 			if inst.components.container and inst.components.container:GetItemInSlot(1) then
--- 				local owner = inst.components.inventoryitem:GetGrandOwner()
-
--- 				local fueltogive = inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue * inst.components.fueled.bonusmult
--- 				local currentfuel = inst.components.fueled.currentfuel
--- 				local maxfuel = inst.components.fueled.maxfuel
-
--- 				if (maxfuel - currentfuel) >= fueltogive then
--- 					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
--- 					inst.components.fueled.accepting = true
--- 					inst.components.fueled:TakeFuelItem(fuelitem, owner)
--- 					inst.components.fueled.accepting = false
--- 				end
--- 			end
--- 		end
-
--- 		local function OnEquip(inst, data)
--- 			local owner = data.owner
--- 			if inst.components.container ~= nil then
--- 				inst.components.container:Open(owner)
--- 			end
--- 		end
-
--- 		local function OnUnequip(inst, data)
--- 			local owner = data.owner
--- 			if inst.components.container ~= nil then
--- 				inst.components.container:Close(owner)
--- 			end
--- 		end
-		
--- 		-- Start Container stuff ---------
--- 		local containers = GLOBAL.require("containers")
--- 		params = containers.params
-
--- 		params.dwellermask_inv =
--- 		{
--- 			widget =
--- 			{
--- 				slotpos =
--- 				{
--- 					GLOBAL.Vector3(0,   32 + 4,  0),
--- 				},
--- 				animbank = "ui_cookpot_1x2",
--- 				animbuild = "ui_cookpot_1x2",
--- 				pos = GLOBAL.Vector3(0, 15, 0),
--- 			},
--- 			usespecificslotsforitems = true,
--- 			type = "head_inv",
--- 		}
-		
--- 		function params.dwellermask_inv.itemtestfn(container, item, slot)
--- 			return item:HasTag("nightmarefuel") -- Tag added by this mod, not in vanilla.
--- 		end
--- 		-- End Container -------
-		
-
--- 		if not GLOBAL.TheWorld.ismastersim then
--- 			inst.OnEntityReplicated = function(inst) 
--- 				inst.replica.container:WidgetSetup("dwellermask_inv") 
--- 			end
-
--- 			return
--- 		end
-
--- 		inst:AddComponent("container")
--- 		inst.components.container:WidgetSetup("dwellermask_inv")
--- 		inst.components.container.canbeopened = false
-
--- 		inst.tick = inst:DoPeriodicTask(0.25, OnTick)
-
--- 		inst:ListenForEvent("equipped", OnEquip)
--- 		inst:ListenForEvent("unequipped", OnUnequip)
--- 		inst:ListenForEvent("itemget", OnTick)
--- 	end)
--- end
-
--- if TUNING.TIMESTOPHAT_DURABILITY then
--- 	AddPrefabPostInit("timestophat", function(inst)
--- 		local function OnTick(inst)
--- 			if inst.components.container and inst.components.container:GetItemInSlot(1) then
--- 				local owner = inst.components.inventoryitem:GetGrandOwner()
-
--- 				local fueltogive = inst.components.container:GetItemInSlot(1).components.fuel.fuelvalue * inst.components.fueled.bonusmult
--- 				local currentfuel = inst.components.fueled.currentfuel
--- 				local maxfuel = inst.components.fueled.maxfuel
-
--- 				if (maxfuel - currentfuel) >= fueltogive then
--- 					local fuelitem = inst.components.container:GetItemInSlot(1).components.stackable:Get(1)
--- 					inst.components.fueled.accepting = true
--- 					inst.components.fueled:TakeFuelItem(fuelitem, owner)
--- 					inst.components.fueled.accepting = false
--- 				end
--- 			end
--- 		end
-
--- 		local function OnEquip(inst, data)
--- 			local owner = data.owner
--- 			if inst.components.container ~= nil then
--- 				inst.components.container:Open(owner)
--- 			end
--- 		end
-
--- 		local function OnUnequip(inst, data)
--- 			local owner = data.owner
--- 			if inst.components.container ~= nil then
--- 				inst.components.container:Close(owner)
--- 			end
--- 		end
-		
--- 		-- Start Container stuff ---------
--- 		local containers = GLOBAL.require("containers")
--- 		params = containers.params
-
--- 		params.timestophat_inv =
--- 		{
--- 			widget =
--- 			{
--- 				slotpos =
--- 				{
--- 					GLOBAL.Vector3(0,   32 + 4,  0),
--- 				},
--- 				animbank = "ui_cookpot_1x2",
--- 				animbuild = "ui_cookpot_1x2",
--- 				pos = GLOBAL.Vector3(0, 15, 0),
--- 			},
--- 			usespecificslotsforitems = true,
--- 			type = "head_inv",
--- 		}
-		
--- 		function params.timestophat_inv.itemtestfn(container, item, slot)
--- 			return item:HasTag("nightmarefuel") -- Tag added by this mod, not in vanilla.
--- 		end
--- 		-- End Container -------
-		
-
--- 		if not GLOBAL.TheWorld.ismastersim then
--- 			inst.OnEntityReplicated = function(inst) 
--- 				inst.replica.container:WidgetSetup("timestophat_inv") 
--- 			end
-
--- 			return
--- 		end
-
--- 		inst:AddComponent("container")
--- 		inst.components.container:WidgetSetup("timestophat_inv")
--- 		inst.components.container.canbeopened = false
-
--- 		inst.tick = inst:DoPeriodicTask(0.25, OnTick)
-
--- 		inst:ListenForEvent("equipped", OnEquip)
--- 		inst:ListenForEvent("unequipped", OnUnequip)
--- 		inst:ListenForEvent("itemget", OnTick)
--- 	end)
--- end
-
 -- We need to make an entire pseudo-frozen state specifically for using the ice hat, as we don't want to go to the hit state after being unfrozen, we don't want extra sounds, and we want to show the hud.
 AddStategraphState("wilson",
 State{
@@ -800,7 +440,7 @@ State{
 
 		inst.SoundEmitter:PlaySound("polarhat/sound/activate")
 
-		inst:AddTag("alwaysblock") -- HACK TODO make this a combat damage taken modifier instead
+		inst:AddTag("alwaysblock")
 		
 		inst.sg:SetTimeout(20 * FRAMES)
 	end,
@@ -836,7 +476,6 @@ State{
 )
 
 GLOBAL.FUELTYPE.ICE = "ICE"
-GLOBAL.FUELTYPE.EXPLOSIVE = "EXPLOSIVE"	
 
 AddPrefabPostInit("ice", function(inst)
 	inst:AddComponent("fuel")
@@ -844,116 +483,466 @@ AddPrefabPostInit("ice", function(inst)
     inst.components.fuel.fueltype = GLOBAL.FUELTYPE.ICE
 end)
 
-AddPrefabPostInit("gunpowder", function(inst)
-	inst:AddComponent("fuel")
-    inst.components.fuel.fuelvalue = TUNING.MED_LARGE_FUEL -- 90
-    inst.components.fuel.fueltype = GLOBAL.FUELTYPE.EXPLOSIVE
-end)
+-- Mod compatibility checker by rezecib
+-- https://steamcommunity.com/profiles/76561198025931302
+local CHECK_MODS = {
+    ["workshop-376333686"] = "COMBINED_STATUS",
+    ["CombinedStatus"] = "COMBINED_STATUS",
+}
 
-if TUNING.HATKID_DISCOUNT ~= false then
-	if TUNING.HATKID_DISCOUNT_RUINSHAT then
-		table.insert(TUNING.HATKID_CHEAP_HATS, "ruinshat")
-	end
-
-	-- Client pin bar "fake" discount
-	AddClassPostConstruct("widgets/redux/craftingmenu_pinslot", function(self)
-		local _ShowRecipe = self.ShowRecipe
-		
-		self.ShowRecipe = function(self)
-			local product = self.recipe_name ~= nil and self.craftingmenu:GetRecipeState(self.recipe_name) ~= nil and self.craftingmenu:GetRecipeState(self.recipe_name).recipe.product
-
-			if self.owner:HasTag("hatkidcrafter") then
-				local hatdiscount = false
-				for k, v in pairs(TUNING.HATKID_CHEAP_HATS) do
-					if v == product then
-						hatdiscount = true
-						break
-					end
-				end
-
-				-- BIOHAZARD ZONE! DO NOT TOUCH INGREDIENTMOD IF A GREEN AMULET IS IN PLAY!!!!!
-				local body = self.owner.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BODY)
-				if (body and body.prefab ~= "greenamulet") or not body then
-					if hatdiscount then
-						self.owner.replica.builder:SetIngredientMod(TUNING.HATKID_DISCOUNT)
-					else
-						self.owner.replica.builder:SetIngredientMod(1)
-					end
-				end
-			end
-			_ShowRecipe(self)
-		end
-		
-	end)
-	
-	-- Client full menu "fake" discount
-	AddClassPostConstruct("widgets/redux/craftingmenu_details", function(self)
-		local _PopulateRecipeDetailPanel = self.PopulateRecipeDetailPanel
-
-		self.PopulateRecipeDetailPanel = function(self, data, skin_name)
-			if self.owner:HasTag("hatkidcrafter") then
-				local hatdiscount = false
-				for k, v in pairs(TUNING.HATKID_CHEAP_HATS) do
-					if data and v == data.recipe.product then
-						hatdiscount = true
-						break
-					end
-				end
-
-				-- BIOHAZARD ZONE! DO NOT TOUCH INGREDIENTMOD IF A GREEN AMULET IS IN PLAY!!!!!
-				local body = self.owner.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BODY)
-				if (body and body.prefab ~= "greenamulet") or not body then
-					if hatdiscount then
-						self.owner.replica.builder:SetIngredientMod(TUNING.HATKID_DISCOUNT)
-					else
-						self.owner.replica.builder:SetIngredientMod(1)
-					end
-				end
-			end
-
-			return _PopulateRecipeDetailPanel(self, data, skin_name)
-		end
-	end)
-
-	-- Server-side Discount
-	AddComponentPostInit("builder", function(self)
-		local _HasIngredients = self.HasIngredients
-
-		self.HasIngredients = function(self, recipe)
-			if self.inst:HasTag("hatkidcrafter") then
-				local hatdiscount = false
-				for k, v in pairs(TUNING.HATKID_CHEAP_HATS) do
-					if v == recipe.product then
-						hatdiscount = true
-						break
-					end
-				end
-
-				-- BIOHAZARD ZONE! DO NOT TOUCH INGREDIENTMOD IF A GREEN AMULET IS IN PLAY!!!!!
-				local body = self.inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BODY)
-				-- if we're wearing something that isn't the green amulet or we aren't wearing anything at all, go ahead with the discount
-				if (body and body.prefab ~= "greenamulet") or not body then
-					if hatdiscount then
-						self.ingredientmod = TUNING.HATKID_DISCOUNT
-					else
-						self.ingredientmod = 1
-					end
-				end
-			end
-
-			return _HasIngredients(self, recipe)
-		end
-	end)
+local HAS_MOD = {}
+--If the mod is already loaded at this point
+for mod_name, key in pairs(CHECK_MODS) do
+    HAS_MOD[key] = HAS_MOD[key] or (GLOBAL.KnownModIndex:IsModEnabled(mod_name) and mod_name)
 end
 
--- GLOBAL.ALL_CHARACTERS = {}
+--If the mod hasn't loaded yet
+for k, v in pairs(GLOBAL.KnownModIndex:GetModsToLoad()) do
+    local mod_type = CHECK_MODS[v]
+    if mod_type then
+        HAS_MOD[mod_type] = v
+    end
+end
 
--- -- Add default characters
--- for k, v in pairs(GLOBAL.DST_CHARACTERLIST) do 
---     table.insert(GLOBAL.ALL_CHARACTERS, v)
--- end
+-- Make PonBadge appear on the UI if we have the madhatter component
+local PonBadge = require("widgets/ponbadge")
+AddClassPostConstruct("widgets/statusdisplays", function(self)
+    if not self.owner or not self.owner:HasTag("madhatter") then return end
 
--- for k, v in pairs(GLOBAL.MODCHARACTERLIST) do
---     table.insert(GLOBAL.ALL_CHARACTERS, v)
--- end
+    self.ponbadge = self:AddChild(PonBadge(self.owner))
+    self.ponbadge:SetPosition(-120, 20)
+    self.ponbadge:SetPercent(0, 100)
 
+    if HAS_MOD.COMBINED_STATUS then
+        self.ponbadge:SetPosition(-62, -52)
+    end
+
+    local function OnPonDelta(owner, data) 
+        local repDelta = owner.replica.madhatter:GetPercent() - self.ponbadge.percent
+        self.ponbadge:SetPercent(owner.replica.madhatter:GetPercent(), owner.replica.madhatter:GetMax())
+
+        if repDelta > 0 and not owner.replica.madhatter:GetNoImage() then
+            local start_pos = Vector3(TheSim:GetScreenPos(owner:GetPosition():Get()))
+            local dest_pos = self.ponbadge:GetWorldPosition()
+
+            local PonImage = Image("images/inventoryimages/pon.xml", "pon.tex") 
+            PonImage:SetScale(0.8, 0.8)
+            PonImage:MoveTo(start_pos, dest_pos, .3, function() PonImage:Kill() end)
+        end
+    end 
+
+    self.inst:ListenForEvent("ponval_dirty", OnPonDelta, self.owner)
+    self.inst:ListenForEvent("ponmax_dirty", OnPonDelta, self.owner)
+
+    -- hook into setghostmode to enable and disable badge on death
+    local _SetGhostMode = self.SetGhostMode
+
+    self.SetGhostMode = function(self, ghostmode)
+        -- don't force boolean on self.ghostmode since we're hooking into the function
+        if ghostmode then
+            self.ponbadge:Hide()
+        else
+            self.ponbadge:Show()
+        end
+
+        return _SetGhostMode(self, ghostmode)
+    end
+end)
+
+-- Replace normal health widget with our custom one (for fun)
+local UIAnim = require "widgets/uianim"
+AddClassPostConstruct("widgets/healthbadge", function(self)
+    if self.owner and self.owner:HasTag("hatkid") then -- we must exist and be hat kid
+
+        -- use Angela's meter
+        self.anim:GetAnimState():SetBank("status_clockhealth")
+        self.anim:GetAnimState():SetBuild("status_clockhealth")
+        self.anim:GetAnimState():PlayAnimation("anim")
+        self.anim:GetAnimState():SetMultColour(1,1,1,1) -- Remove red tint
+
+        -- make a new health penalty meter so we can be circular
+        self.topperanim2 = self.underNumber:AddChild(UIAnim())
+        self.topperanim2:GetAnimState():SetBank( "status_meter_circle")
+        self.topperanim2:GetAnimState():SetBuild("status_meter_circle")
+        self.topperanim2:GetAnimState():PlayAnimation("meter")
+        self.topperanim2:GetAnimState():SetMultColour(0,0,0,1)
+        self.topperanim2:GetAnimState():AnimateWhilePaused(false)
+        self.topperanim2:SetClickable(false)
+
+        -- add years hand, it moves in SetPercent
+        self.year_hand = self.underNumber:AddChild(UIAnim())
+        self.year_hand:GetAnimState():SetBank("status_clockhealth")
+        self.year_hand:GetAnimState():SetBuild("status_clockhealth")
+        self.year_hand:GetAnimState():PlayAnimation("year")
+        self.year_hand:GetAnimState():AnimateWhilePaused(false)
+
+        -- hide heart icon
+        if self.circleframe then
+            self.circleframe:GetAnimState():ClearOverrideSymbol("icon")
+        end
+
+        -- hide default penalty
+        self.topperanim:Hide()
+
+        self.sanityarrow:MoveToFront()
+
+        -- hook into setpercent so year hand can move properly
+        -- WandaAgeBadge.lua has it's own SetPercent function, but we have to hook since we're not actually an age widget
+        local _SetPercent = self.SetPercent
+
+        self.SetPercent = function(self, val, max, penaltypercent)
+            self.year_hand:SetRotation( GLOBAL.Lerp(0, -360, val) )
+            penaltypercent = penaltypercent or 0
+            self.topperanim2:GetAnimState():SetPercent("meter", penaltypercent)
+
+            return _SetPercent(self, val, max, penaltypercent)
+        end
+    end
+end)
+
+-- Reward pons for a lot of things
+-- This is here so pon counts can be precomputed
+AddPrefabPostInitAny(function(inst)
+    -- For normal mobs, like hounds, rabbits, or bosses
+    if inst.components.health then
+        inst.gpons = 0
+        inst.cpons = 1
+        inst.bpons = 0
+        if inst:HasTag("epic") then
+            inst.cpons = 0
+            for i = 0, inst.components.health.maxhealth or 0, 1000 do
+                inst.bpons = inst.bpons + 1
+            end
+        else
+            for i = 0, inst.components.health.maxhealth or 0, 100 do
+                inst.gpons = inst.gpons + 1
+                inst.cpons = inst.cpons + 1
+            end
+        end
+    -- For pickable entities, like mushrooms and bushes
+    elseif inst.components.pickable then
+        if inst.prefab == "tumbleweed" then
+            inst:ListenForEvent("picked", function(inst, data)
+                if data.picker and data.picker:HasTag("madhatter") then
+                    local pon = GLOBAL.SpawnPrefab("pon")
+                    pon.award_count = math.random(1, 3)
+                    pon.Transform:SetPosition(data.picker.Transform:GetWorldPosition())
+                end
+            end)
+        end
+
+        inst.cpons = 1
+        inst.gpons = 1
+
+    -- For workable entities, like rocks and trees
+    elseif inst.components.workable then
+        inst.gpons = 2
+        inst.cpons = inst.components.workable.workleft or 0
+    end
+end)
+
+-- Change Ageless Watch if Hat Kid is using it
+AddPrefabPostInit("pocketwatch_heal", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then return end -- clients don't like this at all
+    local old_spell = inst.components.pocketwatch.DoCastSpell
+
+    inst.components.pocketwatch.DoCastSpell = function(inst, doer)
+        if doer.prefab == "hatkid" then
+            local health = doer.components.health
+            if health ~= nil and not health:IsDead() then
+                -- doer.components.oldager:StopDamageOverTime() -- Hat Kid doesn't have this component, the game gets mad if we call this
+                health:DoDelta(TUNING.POCKETWATCH_HEAL_HEALING, true, inst.prefab)
+        
+                local fx = GLOBAL.SpawnPrefab((doer.components.rider ~= nil and doer.components.rider:IsRiding()) and "pocketwatch_heal_fx_mount" or "pocketwatch_heal_fx")
+                fx.entity:SetParent(doer.entity)
+        
+                inst.components.rechargeable:Discharge(TUNING.POCKETWATCH_HEAL_COOLDOWN)
+                return true
+            end
+        else
+            old_spell(inst, doer)
+        end
+    end
+end)
+
+local CHARACTER_INGREDIENT = GLOBAL.CHARACTER_INGREDIENT
+
+AddClassPostConstruct("components/builder_replica", function(self)
+    local _HasCharacterIngredient = self.HasCharacterIngredient
+
+    self.HasCharacterIngredient = function(self, ingredient)
+        if self.inst.components.builder ~= nil then
+            return self.inst.components.builder:HasCharacterIngredient(ingredient)
+        elseif ingredient.type == CHARACTER_INGREDIENT.PON then
+            local madhatter = self.inst.replica.madhatter
+            if madhatter ~= nil then
+                -- no need to round, we should never be at decimal values under normal conditions
+                local current = madhatter:GetVal()
+                return current >= ingredient.amount, current
+            end
+        end
+
+        return _HasCharacterIngredient(self, ingredient)
+    end
+end)
+
+AddClassPostConstruct("components/builder", function(self)
+    -- RemoveIngredients
+    local _RemoveIngredients = self.RemoveIngredients
+
+    self.RemoveIngredients = function(self, ingredients, recname)
+        local recipe = GLOBAL.AllRecipes[recname]
+        if recipe then
+            for k,v in pairs(recipe.character_ingredients) do
+                if v.type == CHARACTER_INGREDIENT.PON then
+                    self.inst.components.madhatter:DoDelta(-v.amount)
+                end
+            end
+        end
+        return _RemoveIngredients(self, ingredients, recname)
+    end
+
+    -- HasCharacterIngredient
+    local _HasCharacterIngredient = self.HasCharacterIngredient
+
+    self.HasCharacterIngredient = function(self, ingredient)
+        if ingredient.type == CHARACTER_INGREDIENT.PON and self.inst.components.madhatter ~= nil then
+            local current = self.inst.components.madhatter.val
+            return current >= ingredient.amount, current
+        end
+
+        return _HasCharacterIngredient(self, ingredient)
+    end
+end)
+
+-- Add custom EQUIPSLOTS
+local EQUIPSLOTS = GLOBAL.EQUIPSLOTS
+EQUIPSLOTS.BADGE1 = "badge1"
+EQUIPSLOTS.BADGE2 = "badge2"
+EQUIPSLOTS.BADGE3 = "badge3"
+
+AddClassPostConstruct("widgets/inventorybar", function(self)
+    -- Adding functionality here so we can conveniently use it in madhatter.lua
+    -- You probably shouldn't use this to remove default slots
+    function self:RemoveEquipSlot(slot)
+        for k, v in pairs(self.equipslotinfo) do
+            if v.slot == slot then
+                self.equipslotinfo[k] = nil
+                self.rebuild_pending = true
+                break
+            end
+        end
+    end
+    
+    -- These should be compatible with most things that change scale, although I would prefer to 
+    -- not do it this way, as GetLooseScale is really weird
+
+    -- hijack Rebuild
+    local _Rebuild = self.Rebuild
+
+    self.Rebuild = function(self)
+        _Rebuild(self)
+        if not self.owner:HasTag("madhatter") then return end
+        
+        -- i truncate the return val here because it returns the x y z as one number value for some reason
+        local bg = math.floor(self.bg:GetLooseScale()*1000)/1000 
+        local bgcover = math.floor(self.bgcover:GetLooseScale()*1000)/1000
+
+        local badgeval = self.owner.replica.madhatter and self.owner.replica.madhatter:GetBadgeSlots() or 0
+        local slotscale = 0.06 -- helper number
+        self.bg:SetScale(bg + slotscale * badgeval, 1, 1)
+        self.bgcover:SetScale(bgcover + slotscale * badgeval, 1, 1)
+    end
+
+    local badge_equipslots = {
+        EQUIPSLOTS.BADGE1,
+        EQUIPSLOTS.BADGE2,
+        EQUIPSLOTS.BADGE3,
+    }
+
+    local function OnBadgeSlots(inst)
+        if not self.owner:HasTag("madhatter") then return end
+        local badgeval = self.owner.replica.madhatter:GetBadgeSlots()
+        local badgeslots_inv = 0
+        for k, v in pairs(self.equipslotinfo) do
+            if string.find(v.slot, "badge") then
+                badgeslots_inv = badgeslots_inv + 1
+            end
+        end
+
+        local delta = badgeval - badgeslots_inv
+        if delta > 0 then
+            for i = 1, delta do
+                if badgeslots_inv + i > 3 then break end -- prevent overflow
+                self:AddEquipSlot(badge_equipslots[badgeslots_inv + i], "images/gui/slotbg_badge.xml", "slotbg_badge.tex")
+            end
+        elseif delta < 0 then
+            for i = 1, -delta do
+                if badgeslots_inv - i < 0 then break end -- prevent underflow
+                self:RemoveEquipSlot(badge_equipslots[badgeslots_inv - (i - 1)])
+            end
+        elseif delta == 0 then
+            -- rebuild badge slots
+            for k, v in pairs(self.equipslotinfo) do
+                if string.find(v.slot, "badge") then
+                    self:RemoveEquipSlot(v.slot)
+                end
+            end
+            for i = 1, self.owner.replica.madhatter:GetBadgeSlots() do
+                self:AddEquipSlot(badge_equipslots[i], "images/gui/slotbg_badge.xml", "slotbg_badge.tex")
+            end
+        end
+    end
+
+    self.inst:ListenForEvent("badgeslots_dirty", OnBadgeSlots, self.owner)
+end)
+
+AddComponentPostInit("inventory", function(self)
+    local _Equip = self.Equip
+
+    self.Equip = function(self, item, old_to_active, no_animation, force_ui_anim)
+        -- find next free badge slot manually since we're loading
+        -- this is a HACK but i really dont feel like doing this any better right now
+        if item and item:HasTag("badge") and item.components.badge.loading then
+            if not self.equipslots[GLOBAL.EQUIPSLOTS.BADGE1] then
+                item.components.equippable.equipslot = GLOBAL.EQUIPSLOTS.BADGE1
+            elseif not self.equipslots[GLOBAL.EQUIPSLOTS.BADGE2] then
+                item.components.equippable.equipslot = GLOBAL.EQUIPSLOTS.BADGE2
+            elseif not self.equipslots[GLOBAL.EQUIPSLOTS.BADGE3] then
+                item.components.equippable.equipslot = GLOBAL.EQUIPSLOTS.BADGE3
+            end
+        end
+
+        -- run vanilla function
+        return _Equip(self, item, old_to_active, no_animation, force_ui_anim)
+    end
+
+    local _DropItem = self.DropItem
+
+    self.DropItem = function(self, item, wholestack, randomdir, pos, keepoverstacked)      
+        if item and item:IsValid() and item.components.badge then
+            item.components.badge:Unequip(self.inst)
+        end
+
+        return _DropItem(self, item, wholestack, randomdir, pos, keepoverstacked)
+    end
+
+end)
+
+-- TODO make this BETTER (works for now)
+AddPrefabPostInit("multiplayer_portal", function(inst)
+    TheWorld:WatchWorldState("cycles", function(inst, data)
+        if TheWorld.ismastersim and not TheWorld:HasTag("cave") then
+            -- This will despawn any active badgesellers
+            TheWorld:PushEvent("badgeseller_despawn")
+
+            local seller = GLOBAL.SpawnPrefab("badgeseller")
+
+            if seller then
+                local location_tags = {
+                    "badgeseller_location_spawn",
+                    "badgeseller_location_pigking",
+                    "badgeseller_location_oasis",
+                    "badgeseller_location_stage",
+                    "badgeseller_location_moonstone",
+                    "badgeseller_location_lunar",
+                    "badgeseller_location_pearl",
+                    "badgeseller_location_monkey",
+                    "badgeseller_location_awesome",
+                }
+        
+                local tag = location_tags[math.random(1, 9)]
+                local location = GetRandomInstWithTag(tag, TheWorld, 1000)
+        
+                seller.location_tag = tag
+        
+                if location then
+                    local pos = FindNearbyLand(location:GetPosition(), 25) or Vector3(0,0,0)
+                    seller.Physics:Teleport(pos.x, 0, pos.z)
+                end
+                
+                seller.sg:GoToState("spawn")
+            end
+        end
+    end)
+end)
+
+-- Spawn
+AddPrefabPostInit("multiplayer_portal", function(inst)
+    inst:AddTag("badgeseller_location_spawn")
+end)
+AddPrefabPostInit("multiplayer_portal_moonrock", function(inst)
+    inst:AddTag("badgeseller_location_spawn")
+end)
+
+-- Pig King
+AddPrefabPostInit("pigking", function(inst)
+    inst:AddTag("badgeseller_location_pigking")
+end)
+
+-- Oasis
+AddPrefabPostInit("oasislake", function(inst)
+    inst:AddTag("badgeseller_location_oasis")
+end)
+
+-- Stage
+AddPrefabPostInit("charlie_stage", function(inst)
+    inst:AddTag("badgeseller_location_stage")
+end)
+AddPrefabPostInit("charlie_stage_post", function(inst)
+    inst:AddTag("badgeseller_location_stage")
+end)
+
+-- Moon Stone
+AddPrefabPostInit("moonbase", function(inst)
+    inst:AddTag("badgeseller_location_moonstone")
+end)
+
+-- Lunar
+AddPrefabPostInit("moon_fissure", function(inst)
+    inst:AddTag("badgeseller_location_lunar")
+end)
+AddPrefabPostInit("moon_fissure_plugged", function(inst)
+    inst:AddTag("badgeseller_location_lunar")
+end)
+
+-- Pearl
+AddPrefabPostInit("hermithouse_construction1", function(inst)
+    inst:AddTag("badgeseller_location_pearl")
+end)
+AddPrefabPostInit("hermithouse_construction2", function(inst)
+    inst:AddTag("badgeseller_location_pearl")
+end)
+AddPrefabPostInit("hermithouse_construction3", function(inst)
+    inst:AddTag("badgeseller_location_pearl")
+end)
+
+-- Monkey
+AddPrefabPostInit("monkeyqueen", function(inst)
+    inst:AddTag("badgeseller_location_monkey")
+end)
+
+-- Awesome
+AddPrefabPostInit("stagehand", function(inst)
+    inst:AddTag("badgeseller_location_awesome")
+end)
+
+AddReplicableComponent("madhatter")
+
+-- Console helper, spawns all hats under cursor
+GLOBAL.c_makehats = function()
+    local x, y, z = GLOBAL.ConsoleWorldPosition():Get()
+
+	local inst = GLOBAL.SpawnPrefab("kidhat")
+	inst.Transform:SetPosition(x, y, z)
+    local inst = GLOBAL.SpawnPrefab("sprinthat")
+	inst.Transform:SetPosition(x, y, z)
+    local inst = GLOBAL.SpawnPrefab("brewinghat")
+	inst.Transform:SetPosition(x, y, z)
+    local inst = GLOBAL.SpawnPrefab("polarhat")
+	inst.Transform:SetPosition(x, y, z)
+    local inst = GLOBAL.SpawnPrefab("dwellermask")
+	inst.Transform:SetPosition(x, y, z)
+    local inst = GLOBAL.SpawnPrefab("timestophat")
+	inst.Transform:SetPosition(x, y, z)
+end

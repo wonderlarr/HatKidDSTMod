@@ -80,6 +80,7 @@ local function OnActivate(inst)
 
 	-- If Time Slow API isn't enabled
 	if not inst:HasTag("timebound") and not inst:HasTag("NoModError") then
+		-- TODO disable the whole hat instead of doing this message.
 		print("Hat Kid: ===============================================")
 		print("Hat Kid: Dependency '[API] Time Control' is not enabled, time slow can't function!")
 		print("Hat Kid: ===============================================")
@@ -201,6 +202,7 @@ local function fn()
     inst.AnimState:SetBank("timestophat")
     inst.AnimState:SetBuild("timestophat")
     inst.AnimState:PlayAnimation("idle")
+	inst.AnimState:SetScale(2,2)
 	
 	MakeHauntableLaunch(inst)
  

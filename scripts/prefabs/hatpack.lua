@@ -9,6 +9,69 @@ local assets =
 
 RegisterInventoryItemAtlas("images/inventoryimages/hatpack.xml", "hatpack.tex")
 
+local containers = require("containers")
+local params = containers.params
+
+-- controls the order hats are allowed in for the hatpack
+local hatlist = {
+    "kidhat",
+    "sprinthat",
+    "brewinghat",
+    "polarhat",
+    "dwellermask",
+    "timestophat"
+}
+
+local scale = 70
+
+params.hatpack =
+{
+    widget =
+    {
+        slotpos = { }, -- we have to make an empty table or the slot position function gets angry
+        slotbg =
+        {
+            { image = "slotbg_kidhat.tex", atlas = "images/gui/slotbg_kidhat.xml" },
+            { image = "slotbg_sprinthat.tex", atlas = "images/gui/slotbg_sprinthat.xml" },
+            { image = "slotbg_brewinghat.tex", atlas = "images/gui/slotbg_brewinghat.xml" },
+            { image = "slotbg_polarhat.tex", atlas = "images/gui/slotbg_polarhat.xml" },
+            { image = "slotbg_dwellermask.tex", atlas = "images/gui/slotbg_dwellermask.xml" },
+            { image = "slotbg_timestophat.tex", atlas = "images/gui/slotbg_timestophat.xml" },
+        },
+        animbank = "ui_hatpack_3x2",
+        animbuild = "ui_hatpack_3x2",
+        pos = Vector3(-82, 108, 0),
+        bottom_align_tip = -100,
+        buttoninfo =
+        {
+            text = "Unequip",
+            position = Vector3(0, -80, 0),
+        }
+    },
+    usespecificslotsforitems = true,
+    acceptsstacks = false,
+    type = "side_inv_behind",
+    issidewidget = true,
+}
+
+for y = 1, 0, -1 do
+    for x = 0, 2 do
+        table.insert(params.hatpack.widget.slotpos, Vector3(scale * x - scale * 2 + scale, scale * y - scale * 2 + 120, 0))
+    end
+end
+
+function params.hatpack.itemtestfn(container, item, slot)
+    return slot == nil and item:HasTag("hatkidhat") or item:HasTag("hatkidhat") and item.prefab == hatlist[slot]
+end
+
+function params.hatpack.widget.buttoninfo.fn(inst, doer)
+    if doer.components.inventory then
+        doer.components.inventory:DropItem(inst)
+    else
+        SendModRPCToServer(GetModRPC("HatKidRPC", "UnequipHatpack"), inst, doer)
+    end
+end
+
 local function onequip(inst, owner)
     inst.components.container:Open(owner)
 end

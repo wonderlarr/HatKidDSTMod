@@ -67,9 +67,6 @@ local function OnEquip(inst, owner)
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Hide("HEAD_HAT")
 	end
-
-	-- TODO is this supposed to be here???
-	inst.AnimState:SetHaunted(true)
 end
  
 local function OnUnequip(inst, owner)
@@ -207,39 +204,6 @@ end
 
 local function OnDeactivate(inst)
 	local owner = inst.components.inventoryitem:GetGrandOwner()
-
-	-- -- Ending effects (revive players) REMOVED IN OVERHAUL
-	-- local pt = owner:GetPosition()
-	-- local range = inst.Light:GetCalculatedRadius() 
-	-- local tags = { "playerghost" }
-	-- local nags = { "reviving" }
-	-- local targets = TheSim:FindEntities(pt.x,pt.y,pt.z, range, nil, nags, tags)
-	-- for _,ent in ipairs(targets) do
-	-- 	if (inst.components.fueled and inst.components.fueled.currentfuel >= TUNING.DWELLERMASK_REVIVE_FUEL) or not inst.components.fueled then -- If we have enough fuel to revive
-	-- 		ent:PushEvent("respawnfromghost", { source = inst, user = owner })
-	-- 		-- In order to apply stats differently than default, we have to do it AFTER the player respawns, and not during
-	-- 		-- This is a sorta gross way to do this imo but I don't feel like hooking into a function that would do this correctly at the moment.
-	-- 		local function PostPenalty(ent)
-	-- 			-- Should only be called if penalty is enabled
-	-- 			ent.components.sanity:SetPercent(0.3) -- Sanity 30% on respawn (norm 50%)
-	-- 			ent:RemoveEventCallback("ms_respawnedfromghost", PostPenalty)
-	-- 		end
-			
-	-- 		if TUNING.DWELLERMASK_REVIVE_PENALTIES then
-	-- 			-- Apply dweller revive penalties
-	-- 			ent.components.health:DeltaPenalty(TUNING.REVIVE_HEALTH_PENALTY) -- Max health -25%
-	-- 			ent:ListenForEvent("ms_respawnedfromghost", PostPenalty)
-	-- 		end
-
-	-- 		-- Grant owner sanity
-	-- 		owner.components.sanity:DoDelta(TUNING.DWELLERMASK_REVIVE_REWARD)
-
-	-- 		-- Finally, decrement the fuel
-	-- 		if inst.components.fueled then
-	-- 			inst.components.fueled:DoDelta(-TUNING.DWELLERMASK_REVIVE_FUEL)
-	-- 		end
-	-- 	end
-	-- end
 
 	-- Stop consuming
 	if inst.components.fueled then

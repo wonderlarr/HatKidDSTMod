@@ -10,10 +10,6 @@ local assets=
 RegisterInventoryItemAtlas("images/inventoryimages/pon_upgrade1.xml","pon_upgrade1.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/pon_upgrade2.xml","pon_upgrade2.tex")
 
-local function OnUse(inst)
-
-end
-
 local function fn_common()
     local inst = CreateEntity()
 
@@ -22,7 +18,7 @@ local function fn_common()
 	-- Add internal components
 	inst.entity:AddTransform() -- position
 	inst.entity:AddAnimState() -- sprite and animation
-	inst.entity:AddSoundEmitter() -- sounds
+	-- inst.entity:AddSoundEmitter() -- sounds
     inst.entity:AddNetwork() -- networked from server to client
 
 	-- Setup AnimState
@@ -55,9 +51,9 @@ local function fn_master(inst)
 	inst:AddComponent("inventoryitem")
 
 	-- Allows inspecting of the item
-	inst:AddComponent("inspectable")
+	-- inst:AddComponent("inspectable")
 
-	inst:AddComponent("invuseable")
+	-- inst:AddComponent("invuseable")
 
     return inst
 end
@@ -73,8 +69,7 @@ local function fn1()
 
     fn_master(inst)
 
-	inst.components.invuseable:SetOnUse(function()
-		local owner = inst.components.inventoryitem:GetGrandOwner()
+	inst.components.inventoryitem:SetOnPutInInventoryFn(function(inst, owner)
 		if owner and owner.components.madhatter and owner.components.madhatter.max < 1000 then
 			owner.components.madhatter:SetMax(1000)
 			owner.SoundEmitter:PlaySound("dontstarve/wilson/equip_item_gold")
@@ -96,8 +91,7 @@ local function fn2()
 
     fn_master(inst)
 
-	inst.components.invuseable:SetOnUse(function()
-		local owner = inst.components.inventoryitem:GetGrandOwner()
+	inst.components.inventoryitem:SetOnPutInInventoryFn(function(inst, owner)
 		if owner and owner.components.madhatter and owner.components.madhatter.max < 5000 then
 			owner.components.madhatter:SetMax(5000)
 			owner.SoundEmitter:PlaySound("dontstarve/wilson/equip_item_gold")

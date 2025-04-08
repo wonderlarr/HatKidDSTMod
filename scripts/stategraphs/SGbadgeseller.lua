@@ -74,14 +74,15 @@ local states =
             inst.components.locomotor:Stop()
 
             inst.AnimState:PushAnimation("idle_wanda")
-            inst.AnimState:PushAnimation("emoteXL_waving1")
             inst.AnimState:PushAnimation("jump_pre")
             inst.AnimState:PushAnimation("jump", false)
         end,
 
-        timeline =
+        events =
         {
-            TimeEvent(75*FRAMES, function(inst) inst:Remove() end),
+            EventHandler("animqueueover", function(inst)
+                inst:Remove()
+            end),
         },
     },
 }

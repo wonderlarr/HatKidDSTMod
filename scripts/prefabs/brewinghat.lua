@@ -1,6 +1,3 @@
--- Whooo boy, this is a rat's nest in need of an exterminator. Time to get at it!
-
--- (5/12/22) still a rat's nest, but manageable I guess.
 local assets=
 { 
     Asset("ANIM", "anim/brewinghat.zip"),
@@ -113,11 +110,6 @@ local function OnActivate(inst)
 		owner.components.sanity:DoDelta(-TUNING.BREWINGHAT_THRESHHOLD)
 	end
 
-	-- if inst.components.fueled then
-	-- 	inst.components.fueled:SetPercent(inst.components.fueled:GetPercent() - (1 / TUNING.BREWINGHAT_DURABILITY))
-	-- 	inst.components.fueled.currentfuel = math.floor(inst.components.fueled.currentfuel/(45 * inst.components.fueled.bonusmult)+0.5)* (45 * inst.components.fueled.bonusmult)
-	-- end
-
 	local ammo = inst.components.container:GetItemInSlot(1)
 	if ammo.components.stackable then
 		ammo.components.stackable:Get():Remove()
@@ -149,7 +141,6 @@ local function fn()
 
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 	
     MakeInventoryPhysics(inst)
@@ -193,16 +184,6 @@ local function fn()
 	inst.components.hatmagic:SetActivateFn(OnActivate)
 	inst.components.hatmagic:SetDeactivateFn(OnDeactivate)
 	inst.components.hatmagic:SetTestFn(TestFn)
-
-	-- if TUNING.BREWINGHAT_DURABILITY then
-	-- 	inst:AddComponent("fueled")
-	-- 	inst.components.fueled:InitializeFuelLevel( TUNING.BREWINGHAT_DURABILITY * 45 )
-	-- 	inst.components.fueled.fueltype = FUELTYPE.EXPLOSIVE -- gunpowder, 90
-	-- 	inst.components.fueled.secondaryfueltype = FUELTYPE.CAVE -- slurtle slime only, 45
-	-- 	inst.components.fueled.bonusmult = TUNING.BREWINGHAT_FUELMULT
-	-- 	inst.components.fueled.accepting = true
-	-- 	-- although technically lightbulbs and fireflies are included in CAVE fuel, we limit that using the container fuel approach
-	-- end
 
 	if TUNING.BREWINGHAT_INSULATION then
 		inst:AddComponent("insulator")

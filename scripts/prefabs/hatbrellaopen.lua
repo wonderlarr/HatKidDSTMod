@@ -68,7 +68,6 @@ local function fn()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
-	inst.entity:AddMiniMapEntity()
      
     MakeInventoryPhysics(inst)   
       
@@ -76,7 +75,6 @@ local function fn()
     inst.AnimState:SetBuild("hatbrellaopen_ground")
     inst.AnimState:PlayAnimation("idle")
     inst.AnimState:SetScale(0.6, 0.6)
-    inst.AnimState:SetFinalOffset(2)
 	
     inst:AddTag("nopunch")
     inst:AddTag("umbrella")

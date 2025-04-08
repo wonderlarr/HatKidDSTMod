@@ -22,7 +22,7 @@ RegisterInventoryItemAtlas("images/inventoryimages/ms_sprinthat_dye_toonlink.xml
 
 local prefabs = 
 {
-	-- "sprint_puff"
+	"sprint_puff"
 }
 
 local function PLoop(inst)
@@ -33,7 +33,7 @@ local function PLoop(inst)
 	ThePlayer.AnimState:IsCurrentAnimation("run_loop") then
 		if not inst.sprintfx then
 				
-			inst.sprintfx = inst:DoTaskInTime(0.25/2, function(inst)
+			inst.sprintfx = inst:DoTaskInTime(0.125, function(inst)
 				inst.sprintfx:Cancel()
 				inst.sprintfx = nil
 				local x, y, z = ThePlayer.Transform:GetWorldPosition()
@@ -186,9 +186,7 @@ local function fn(Sim)
 
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-	
 	
     MakeInventoryPhysics(inst)
 	MakeInventoryFloatable(inst, "med", 0.05, 0.6) -- Makes items float on water, rather than just sitting there.

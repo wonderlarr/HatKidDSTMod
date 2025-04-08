@@ -11,7 +11,7 @@ STRINGS.CHARACTERS.BADGESELLER = {
     "Hi there, young one. I've explored all around this constant.\nI can sell you tiny pieces of my discoveries." ,
     "You may call me the Badge Seller.\nI can sell you upgrades to your hats...",
     "Badges are... totally \"in\" right now.\nThat's what I've been told to say, anyway." ,
-    "Please disregard my twitchy behavior.\nI've been to places that've left a permanent mark." ,
+    "Please disregard my erratic behavior.\nI've been to places that've left a permanent mark." ,
     "I also sell terrible Badges...\nAnd yet people buy them anyway." ,
     "Welcome, young one.\nPlease make a purchase at my humble stall." ,
     "Have you come to make another purchase?" ,
@@ -45,11 +45,7 @@ local function onturnoff(inst)
 end
 
 local function StartSelling(inst, doer, recipe)
-    -- print(inst)
-    -- print(doer)
-    -- if recipe and type(recipe) == "table" then
-    --     dumptable(recipe)
-    -- end
+
 end
 
 local function MakePrototyper(inst)

@@ -25,11 +25,10 @@ TUNING.HATKID_DISCOUNT = GetModConfigData("hatkid_discount")
 TUNING.HATKID_DISCOUNT_RUINSHAT = GetModConfigData("hatkid_discount_ruinshat")
 
 
-
-
 --Hatbrella stuff
 TUNING.HATBRELLA_DURABILITY = GetModConfigData("hatbrelladurability")
 TUNING.HATBRELLA_DAMAGE = GetModConfigData("hatbrelladamage")
+TUNING.HATBRELLA_BONUS = GetModConfigData("hatbrellathreehit")
 TUNING.HATBRELLA_OPENDURABILITY = GetModConfigData("hatbrellaopendurability")
 TUNING.HATBRELLA_WATERPROOFNESS = GetModConfigData("hatbrellaopenwaterproofness")
 
@@ -146,9 +145,6 @@ TUNING.HATKID_FAST_HATS = {
     "green_mushroomhat",
     "blue_mushroomhat",
     -- "hivehat",
-    "dragonheadhat",
-    "dragonbodyhat",
-    "dragontailhat",
     "deserthat",
     "goggleshat",
     "moonstorm_goggleshat",
@@ -203,9 +199,6 @@ TUNING.HATKID_CHEAP_HATS = {
     "green_mushroomhat",
     "blue_mushroomhat",
     -- "hivehat",
-    "dragonheadhat",
-    "dragonbodyhat",
-    "dragontailhat",
     "deserthat",
     "goggleshat",
     "moonstorm_goggleshat",

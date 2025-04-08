@@ -61,10 +61,9 @@ local function OnEquip(inst, owner)
 	end
 
 	inst.freezefn = function(attacked, data)
-        if data and data.attacker and data.attacker.components.freezable and inst.components.fueled:GetPercent() >= 0.08 then
+        if data and data.attacker and data.attacker.components.freezable then
             data.attacker.components.freezable:AddColdness(1)
             data.attacker.components.freezable:SpawnShatterFX()
-            inst.components.fueled:DoDelta(-0.08 * inst.components.fueled.maxfuel)
         end
     end
 
@@ -226,7 +225,7 @@ local function fn(Sim)
 	inst:AddComponent("hatmagic")
 	inst.components.hatmagic.instant = false
 	-- inst.components.hatmagic.cooldowntime = TUNING.POLARHAT_COOLDOWN
-	inst.components.hatmagic.cooldowntime = 2
+	inst.components.hatmagic.cooldowntime = TUNING.POLARHAT_COOLDOWN
 	inst.components.hatmagic.activetime = 2/3
 	inst.components.hatmagic:SetActivateFn(OnActivate)
 	inst.components.hatmagic:SetTestFn(TestFn)
