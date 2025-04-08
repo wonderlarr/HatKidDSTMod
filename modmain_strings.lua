@@ -45,7 +45,7 @@ STRINGS.CHARACTERS.HATKID = require "speech_hatkid" -- speech file
 -- The character select screen lines
 STRINGS.CHARACTER_TITLES.hatkid = "The Little Haberdasher"
 STRINGS.CHARACTER_NAMES.hatkid = "Hat Kid"
-STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Is a grandmaster haberdasher\n*And is overreliant on headwear\n*Collects all sorts of things\n*Speaks an alien language"
+STRINGS.CHARACTER_DESCRIPTIONS.hatkid = "*Is a grandmaster haberdasher\n*Has her own collection of cool hats\n*Collects all sorts of things\n*Is overreliant on headwear"
 STRINGS.CHARACTER_QUOTES.hatkid = "\"Oh, hi there!\""
 STRINGS.CHARACTER_SURVIVABILITY.hatkid = "Grim"
 

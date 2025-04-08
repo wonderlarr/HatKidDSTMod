@@ -543,8 +543,8 @@ configuration_options =
 			{description = "-2/min", data = -2},
 			{description = "-1.4/min", data = -1.4},
 			{description = "None", data = 0},
-			{description = "1.4/min", data = 1.4},
-			{description = "1.8/min 󰀛", data = 1.8},
+			{description = "1.4/min 󰀛", data = 1.4},
+			{description = "1.8/min", data = 1.8},
 			{description = "2/min", data = 2},
 			{description = "2.3/min", data = 2},
 			{description = "3.4/min", data = 3.4},
@@ -554,7 +554,7 @@ configuration_options =
 			{description = "20/min", data = 20},
 			{description = "60/min", data = 60},
 		},
-		default = 1.8,
+		default = 1.4,
 	},	
 
 	{
@@ -804,65 +804,6 @@ configuration_options =
 	},	
 
 	{
-		name = "brewdurability",
-		label = "Max Uses",
-		hover = "How many uses the Brewing Hat can store.",
-		options =
-		{
-			{description = "Infinite", data = false},
-			{description = "1", data = 1},
-			{description = "2", data = 2},
-			{description = "3", data = 3},
-			{description = "4", data = 4},
-			{description = "5", data = 5},
-			{description = "6", data = 6},
-			{description = "7", data = 7},
-			{description = "8", data = 8},
-			{description = "9", data = 9},
-			{description = "10 󰀛", data = 10},
-			{description = "20", data = 20},
-			{description = "30", data = 30},
-			{description = "40", data = 40},
-			{description = "50", data = 50},
-			{description = "60", data = 60},
-			{description = "70", data = 70},
-			{description = "80", data = 80},
-			{description = "90", data = 90},
-			{description = "100", data = 100},
-			{description = "Infinite", data = false},
-		},
-		default = 10,
-	},
-
-	{
-		name = "brewfuelmult",
-		label = "Fuel Efficiency",
-		hover = "How many uses the Brewing Hat gains per Slurtle Slime. Gunpowder grants double this amount.",
-		options =
-		{
-			{description = "0.05", data = 0.05},
-			{description = "0.1", data = 0.1},
-			{description = "0.15", data = 0.15},
-			{description = "0.2", data = 0.2},
-			{description = "0.25", data = 0.25},
-			{description = "0.5", data = 0.5},
-			{description = "0.75", data = 0.75},
-			{description = "1", data = 1},
-			{description = "2 󰀛", data = 2},
-			{description = "4", data = 4},
-			{description = "5", data = 5},
-			{description = "8", data = 8},
-			{description = "10", data = 10},
-			{description = "20", data = 20},
-			{description = "30", data = 30},
-			{description = "40", data = 40},
-			{description = "50", data = 50},
-			{description = "100", data = 100},
-		},
-		default = 2,
-	},
-
-	{
 		name = "brewwaterproofness",
 		label = "Water Resistance",
 		hover = "How much water resistance the Brewing Hat provides while worn.",
@@ -899,14 +840,15 @@ configuration_options =
 	{
 		name = "brewcooldown",
 		label = "Cooldown",
-		hover = "How long the Brewing Hat takes to recharge once a potion has started brewing.",
+		hover = "How long the Brewing Hat takes to recharge once a potion has been thrown.",
 		options =
 		{
 			{description = "1 Second", data = 1},
 			{description = "2 Seconds", data = 2},
 			{description = "3 Seconds", data = 3},
 			{description = "4 Seconds", data = 4},
-			{description = "5 Seconds 󰀛", data = 5},
+			{description = "5 Seconds", data = 5},
+			{description = "6 Seconds 󰀛", data = 6},
 			{description = "10 Seconds", data = 10},
 			{description = "12 Seconds", data = 12},
 			{description = "15 Seconds", data = 15},
@@ -914,7 +856,7 @@ configuration_options =
 			{description = "30 Seconds", data = 30},
 			{description = "45 Seconds", data = 45},
 			{description = "60 Seconds", data = 60},
-			{description = "90 Seconds", data = 90},
+			{description = "90 Seconds", data = 90},	
 			{description = "2 Minutes", data = 120},
 			{description = "3 Minutes", data = 180},
 			{description = "4 Minutes", data = 240},
@@ -922,7 +864,7 @@ configuration_options =
 			{description = "10 Minutes", data = 600},
 			{description = "15 Minutes", data = 900},
 		},
-		default = 5,
+		default = 6,
 	},
 
 	{
@@ -1587,52 +1529,6 @@ configuration_options =
 	},
 
 	{
-		name = "dwellerrevivepenalties",
-		label = "Revive Stat Penalties",
-		hover = "Whether or not players revived by the Dweller's Mask will have their sanity set to 30%, and max health decreased by 25%.",
-		options =
-		{
-			{description = "Enabled 󰀛", data = true},
-			{description = "Disabled", data = false},
-		},
-		default = true,
-	},
-
-	{
-		name = "dwellerrevivereward",
-		label = "Revive Sanity Reward",
-		hover = "How much sanity will be restored to the reviver upon a successful revive by the Dweller's Mask",
-		options =
-		{
-			{description = "None", data = 0},
-			{description = "5", data = 5},
-			{description = "10", data = 10},
-			{description = "20 󰀛", data = 20},
-			{description = "30", data = 30},
-			{description = "40", data = 40},
-			{description = "80", data = 80},
-			{description = "120", data = 120},
-		},
-		default = 20,
-	},
-
-	{
-		name = "dwellerrevivefuel",
-		label = "Revive Fuel Cost",
-		hover = "How much fuel it costs to revive someone succesfully.",
-		options =
-		{
-			{description = "None", data = 0},
-			{description = "-30", data = 30},
-			{description = "-60 󰀛", data = 60},
-			{description = "-90", data = 90},
-			{description = "-120", data = 120},
-			{description = "-180", data = 180},
-		},
-		default = 60,
-	},
-
-	{
 		name = "dwellersfx",
 		label = "SFX",
 		hover = "Whether or not the Dweller's Mask will produce sounds.",
@@ -1700,7 +1596,7 @@ configuration_options =
 
 	{
 		name = "timestopfuelvalue",
-		label = "Seconds Per Fuel",
+		label = "Fuel Efficiency",
 		hover = "How many seconds of use time Nightmare Fuel grants once consumed.",
 		options =
 		{
